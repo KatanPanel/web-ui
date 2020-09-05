@@ -1,0 +1,28 @@
+.v--button {
+	text-decoration: none;
+	opacity: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	line-height: inherit;
+	font-size: 12px;
+	border-radius: 4px;
+	outline: none;
+	height: 36px;
+	vertical-align: middle;
+	background-color: map-get($colors, 'primary');
+	border: 1px solid map-get($colors, 'primary');
+	color: #FFF;
+	min-width: 72px;
+	user-select: none;
+	position: relative;
+	padding: 0 16px;
+	text-transform: uppercase;
+
+	&:hover {
+		color: map-get($colors, 'primary');
+		background-color: #FFF;
+		cursor: pointer;
+	}
+}

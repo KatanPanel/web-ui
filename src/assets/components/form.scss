@@ -1,0 +1,33 @@
+.v--form {
+	.v--input-group {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+
+		&:not(:last-child) {
+			margin-bottom: 24px;
+		}
+
+		.v--input {
+			display: flex;
+			appearance: none;
+			background-color: rgba(0, 0, 0, .06);
+			border: 2px solid transparent;
+			border-radius: 4px;
+			padding: 8px;
+			color: inherit;
+
+			&:focus, &:active, &:focus-within {
+				border-color: map-get($colors, 'primary') !important;
+			}
+		}
+	}
+
+	.v--label {
+		text-transform: uppercase;
+		font-size: 12px;
+		font-weight: 600;
+		margin-bottom: 2px;
+		opacity: .38;
+	}
+}

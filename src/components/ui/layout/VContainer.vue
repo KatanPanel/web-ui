@@ -1,16 +1,13 @@
 <template>
-	<div />
+	<div class="v--container">
+		<slot />
+	</div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
     
 @Component
-export default class Login extends Vue {
-    
+export default class VContainer extends Vue {
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>

@@ -22,7 +22,8 @@ module.exports = {
 		"vue/this-in-template": "error",
 		"vue/camelcase": "error",
 		"vue/comma-dangle": "error",
-		"vue/script-indent": ["error", "tab"]
+		"vue/script-indent": ["error", "tab"],
+		"vue/max-attributes-per-line": "off"
 	},
 	overrides: [
 		{
