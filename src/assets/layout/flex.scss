@@ -1,8 +1,25 @@
 .v--flex {
 	display: flex;
+	-ms-flex-align: center;
 	align-items: center;
 }
 
 .v--flex-child {
 	flex: 1 0 auto;
+	-ms-flex: 1 0 auto;
+	-webkit-flex: 1 0 auto;
+}
+
+.v--flex-wrap {
+	flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-webkit-flex-wrap: wrap;
+}
+
+.v--flex-justify-center {
+	justify-content: center;
+}
+
+.v--flex-justify-end {
+	justify-content: flex-end;
 }
