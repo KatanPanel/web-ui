@@ -1,6 +1,6 @@
 <template>
 	<div class="home">
-		Hello world
+		Welcome to Katan
 	</div>
 </template>
 
