@@ -1,3 +1,4 @@
+$default-font: Raleway, sans-serif;
 $base-url: '/assets/' !default;
 
 $breakpoints: (
@@ -10,5 +11,6 @@ $colors: (
 	'background': #5aa9e6,
 	'foreground': #F9F9F9,
 	'primary': #ff6392,
-	'accent': #7fc8f8
+	'accent': #7fc8f8,
+	'muted': #EEE
 );

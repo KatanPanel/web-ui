@@ -11,14 +11,23 @@
 		.v--input {
 			display: flex;
 			appearance: none;
-			background-color: rgba(0, 0, 0, .06);
+			-webkit-appearance: none;
+			outline: none;
+			box-shadow: none;
+			background-color: map-get($colors, 'muted');
 			border: 2px solid transparent;
 			border-radius: 4px;
 			padding: 8px;
 			color: inherit;
 
-			&:focus, &:active, &:focus-within {
-				border-color: map-get($colors, 'primary') !important;
+			&[type=number]::-webkit-inner-spin-button,
+			&[type=number]::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+			}
+
+			+ small {
+				font-weight: 500;
+				margin-top: 4px;
 			}
 		}
 	}
@@ -29,5 +38,11 @@
 		font-weight: 600;
 		margin-bottom: 2px;
 		opacity: .38;
+
+		+ small {
+			font-weight: 500;
+			margin-bottom: 4px;
+			opacity: .7;
+		}
 	}
 }

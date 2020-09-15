@@ -20,7 +20,7 @@ html {
 }
 
 body {
-	font-family: "Raleway", sans-serif;
+	font-family: $default-font;
 	display: flex;
 	display: -ms-flexbox;
 	flex-direction: column;
@@ -30,7 +30,7 @@ body {
 	color: #333;
 }
 
-html, body {
+html, body, #app {
 	height: 100%;
 	width: 100%;
 }

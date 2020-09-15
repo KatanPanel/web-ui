@@ -9,6 +9,9 @@
 	font-size: 12px;
 	border-radius: 4px;
 	outline: none;
+	appearance: none;
+	-webkit-appearance: none;
+	font-family: $default-font;
 	height: 36px;
 	vertical-align: middle;
 	background-color: map-get($colors, 'primary');
@@ -20,9 +23,11 @@
 	padding: 0 16px;
 	text-transform: uppercase;
 
-	&:hover {
-		color: map-get($colors, 'primary');
-		background-color: #FFF;
+	&:hover:not(:disabled) {
 		cursor: pointer;
+	}
+
+	&:disabled {
+		opacity: .54;
 	}
 }
