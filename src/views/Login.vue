@@ -5,18 +5,18 @@
 				<h4>Sign In</h4>
 			</v-box-header>
 			<v-box-body>
-				<v-form @submit.prevent="onFormSubmit">
+				<v-form @submit.native.prevent="onFormSubmit">
 					<v-input-group>
 						<v-label>Username</v-label>
-						<v-input type="text" minlength="4" maxlength="32" required v-model="username" />
+						<v-input type="text" maxlength="32" required v-model="username" />
 					</v-input-group>
 					<v-input-group>
 						<v-label>Password</v-label>
-						<v-input type="password" minlength="8" maxlength="32" required v-model="password" />
+						<v-input type="password" maxlength="32" value="" v-model="password" />
 					</v-input-group>
 					<v-input-group>
 						<v-flex-box class="v--flex-justify-end">
-							<v-button type="submit" :disabled="$helpers.voca.isBlank(username) || $helpers.voca.isBlank(password)">
+							<v-button type="submit" :disabled="$helpers.voca.isBlank(username)">
 								Continue
 							</v-button>
 						</v-flex-box>
@@ -41,6 +41,7 @@ import VLabel from "@/components/ui/form/VLabel.vue";
 import VInput from "@/components/ui/form/VInput.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import { MetaInfo } from "vue-meta";
+import {AxiosError, AxiosResponse} from "axios";
 
 @Component<Login>({
 	components: {
@@ -70,6 +71,19 @@ export default class Login extends Vue {
 	
 	onFormSubmit(e: Event): void {
 		e.preventDefault();
+		this.$axios({
+			url: "/auth/login",
+			method: "post",
+			withCredentials: true,
+			data: {
+				username: this.username,
+				password: this.password
+			}
+		}).then((res: AxiosResponse) => {
+			console.log(res);
+		}).catch((err: AxiosError) => {
+			console.log(err);
+		})
 	}
 	
 }
