@@ -3,20 +3,37 @@
 		<v-box class="v--box-fit">
 			<v-box-header>
 				<h4>Sign In</h4>
+				<p class="v-text--error" v-if="error" v-text="error" />
 			</v-box-header>
 			<v-box-body>
 				<v-form @submit.native.prevent="onFormSubmit">
 					<v-input-group>
 						<v-label>Username</v-label>
-						<v-input type="text" maxlength="32" required v-model="username" />
+						<v-input
+							type="text"
+							minlength="2"
+							maxlength="32"
+							required
+							v-model="username"
+						/>
 					</v-input-group>
 					<v-input-group>
 						<v-label>Password</v-label>
-						<v-input type="password" maxlength="32" value="" v-model="password" />
+						<v-input
+							type="password"
+							maxlength="32"
+							value=""
+							v-model="password"
+						/>
 					</v-input-group>
 					<v-input-group>
 						<v-flex-box class="v--flex-justify-end">
-							<v-button type="submit" :disabled="$helpers.voca.isBlank(username)">
+							<v-button
+								type="submit"
+								:disabled="
+									$helpers.voca.isBlank(username) || isLocked
+								"
+							>
 								Continue
 							</v-button>
 						</v-flex-box>
@@ -41,7 +58,11 @@ import VLabel from "@/components/ui/form/VLabel.vue";
 import VInput from "@/components/ui/form/VInput.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import { MetaInfo } from "vue-meta";
-import {AxiosError, AxiosResponse} from "axios";
+import { AUTH_TOKEN_KEY } from "@/store/auth";
+import { AUTH_MODULE } from "@/store";
+import { AUTH_LOGIN, AUTH_VERIFY } from "@/store/auth/actions";
+import { HOME_ROUTE } from "@/router";
+import {AxiosError} from "axios";
 
 @Component<Login>({
 	components: {
@@ -65,26 +86,59 @@ import {AxiosError, AxiosResponse} from "axios";
 	}
 })
 export default class Login extends Vue {
-	
 	username = "";
 	password = "";
-	
+	isLocked = false;
+
+	// must be null due to reactivity
+	error: string | null = null;
+
 	onFormSubmit(e: Event): void {
 		e.preventDefault();
-		this.$axios({
-			url: "/auth/login",
-			method: "post",
-			withCredentials: true,
-			data: {
+		this.isLocked = true;
+		this.$store
+			.dispatch(AUTH_MODULE.concat("/", AUTH_LOGIN), {
 				username: this.username,
 				password: this.password
-			}
-		}).then((res: AxiosResponse) => {
-			console.log(res);
-		}).catch((err: AxiosError) => {
-			console.log(err);
-		})
+			})
+			.then(async (token: string) => {
+				/*
+				starting the login process from here, the authorization token is received and now it is mandatory
+				that the verification be done using the token, there is no self-validation due to a possible fast
+				invalidation of the token for any reason on the part of the server.
+			 */
+				this.$storage.set(AUTH_TOKEN_KEY, token);
+
+				// eslint-disable-next-line no-useless-catch
+				try {
+					await this.$store.dispatch(
+						AUTH_MODULE.concat("/", AUTH_VERIFY)
+					);
+					// this.$router.redirect(HOME_ROUTE);
+				} catch (e) {
+					throw e;
+				}
+			})
+			.catch((err: AxiosError) => {
+				let message: string
+				const data = err.response?.data
+
+				// filters some error codes due to the convention and for future translations.
+				switch (data.code) {
+					case 2002:
+					case 2004: {
+						message = "Invalid username or password.";
+						break;
+					}
+					default: {
+						console.warn("Unhandled error code:", data.code);
+						message = data.message;
+					}
+				}
+
+				this.error = message;
+			})
+			.then(() => this.isLocked = false);
 	}
-	
 }
 </script>

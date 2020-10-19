@@ -10,8 +10,8 @@ import { MetaInfo } from "vue-meta";
 @Component<App>({
 	metaInfo(): MetaInfo {
 		return {
-			title: "Homepage",
-			titleTemplate: `%s • ${process.env.VUE_APP_NAME} v${process.env.VUE_APP_VERSION}`
+			title: "Home",
+			titleTemplate: `%s | ${process.env.VUE_APP_NAME} ${process.env.VUE_APP_VERSION}`
 		};
 	}
 })
