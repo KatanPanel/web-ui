@@ -14,7 +14,7 @@
 			-webkit-appearance: none;
 			outline: none;
 			box-shadow: none;
-			background-color: map-get($colors, 'muted');
+			background-color: map-get($colors, 'surface-2');
 			border: 2px solid transparent;
 			border-radius: 4px;
 			padding: 8px;
@@ -33,16 +33,10 @@
 	}
 
 	.v--label {
+		color: map-get($colors, 'label');
 		text-transform: uppercase;
 		font-size: 12px;
 		font-weight: 600;
 		margin-bottom: 2px;
-		opacity: .38;
-
-		+ small {
-			font-weight: 500;
-			margin-bottom: 4px;
-			opacity: .7;
-		}
 	}
 }

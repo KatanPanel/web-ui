@@ -8,9 +8,12 @@ $breakpoints: (
 ) !default;
 
 $colors: (
-	'background': #5aa9e6,
-	'foreground': #F9F9F9,
-	'primary': #ff6392,
-	'accent': #7fc8f8,
-	'muted': #EEE
+	// 'background': #5aa9e6,
+	'surface': #121212, // 93%
+	'surface-1': #242424, // 86%
+	'surface-2': #363636, // 79%
+	'label': #7F7F7F, // 50%
+	'primary': #4b7bec,
+	'secondary': #a55eea,
+	'error': #eb3b5a
 );

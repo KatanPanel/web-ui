@@ -26,8 +26,8 @@ body {
 	flex-direction: column;
 	line-height: 1.2;
 	font-size: 1.5em;
-	background-color: map_get($colors, 'background');
-	color: #333;
+	background-color: map_get($colors, 'surface');
+	color: #FAFAFA;
 }
 
 html, body, #app {
