@@ -8,6 +8,5 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class VButton extends Vue {
-}
+export default class VButton extends Vue {}
 </script>

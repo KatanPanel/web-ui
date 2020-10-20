@@ -1,10 +1,14 @@
 import { GetterTree } from "vuex";
-import { AppState, AppStateWebsocket } from "@/store/state";
+import { AppLanguage, AppState, AppStateWebsocket } from "@/store/state";
 
 export const GET_SOCKET = "getSocket";
+export const GET_LANGUAGE = "getLanguage";
 
 export default {
 	[GET_SOCKET](state: AppState): AppStateWebsocket {
 		return state.socket;
-	}
-} as GetterTree<AppState, AppState>
+	},
+	[GET_LANGUAGE](state: AppState): AppLanguage {
+		return state.language!;
+	},
+} as GetterTree<AppState, AppState>;

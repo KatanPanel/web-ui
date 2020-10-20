@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700,900');
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,500,700,900");
 
 * {
 	margin: 0;
@@ -26,11 +26,13 @@ body {
 	flex-direction: column;
 	line-height: 1.2;
 	font-size: 1.5em;
-	background-color: map_get($colors, 'surface');
-	color: #FAFAFA;
+	background-color: var(--app-background);
+	color: var(--app-text-color);
 }
 
-html, body, #app {
+html,
+body,
+#app {
 	height: 100%;
 	width: 100%;
 }

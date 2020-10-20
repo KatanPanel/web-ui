@@ -1,5 +1,6 @@
 export class AuthState {
-	token?: string
+	token?: string;
+	account?: any;
 }
 
-export default {} as AuthState
+export default {} as AuthState;

@@ -1,0 +1,33 @@
+{
+	"home": {
+		"welcome": "Welcome to Katan",
+		"please-auth": "You must be logged in to access the panel"
+	},
+	"footer": {
+		"version": "Current version: {version}",
+		"credits": {
+			"icons": "Icons made by {0} from {1}."
+		}
+	},
+	"errors": {
+		"2002": "Invalid username or wrong password.",
+		"2004": "Invalid username or wrong password."
+	},
+	"navigation": {
+		"home": "Home",
+		"servers": "Server List",
+		"login": "Log In",
+		"docs": "Documentation",
+		"support": "Support",
+		"community": "Community",
+		"devs": "Developers API"
+	},
+	"login": {
+		"title": "Sign In",
+		"fields": {
+			"username": "Username",
+			"password": "Password",
+			"confirm": "Continue"
+		}
+	}
+}

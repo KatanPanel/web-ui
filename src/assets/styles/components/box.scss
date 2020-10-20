@@ -1,8 +1,8 @@
 .v--box {
 	position: relative;
 	padding: 24px;
-	background-color: map-get($colors, 'surface-1');
-	border-bottom: 5px solid rgba(0, 0, 0, .1);
+	background-color: var(--box-background);
+	border-bottom: 5px solid rgba(0, 0, 0, 0.1);
 	border-radius: 4px;
 
 	&.v--box-fit {
@@ -14,7 +14,15 @@
 		position: relative;
 		margin-bottom: 6px;
 
-		h1, h2, h3, h4 {
+		h1,
+		h2,
+		h3,
+		h4 {
+			margin-bottom: 24px;
+		}
+
+		p {
+			margin-top: -18px;
 			margin-bottom: 24px;
 		}
 	}

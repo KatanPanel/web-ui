@@ -8,6 +8,5 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class VInputGroup extends Vue {
-}
+export default class VInputGroup extends Vue {}
 </script>

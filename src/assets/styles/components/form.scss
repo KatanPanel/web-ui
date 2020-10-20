@@ -14,14 +14,14 @@
 			-webkit-appearance: none;
 			outline: none;
 			box-shadow: none;
-			background-color: map-get($colors, 'surface-2');
+			background-color: var(--form-input-background);
 			border: 2px solid transparent;
 			border-radius: 4px;
 			padding: 8px;
 			color: inherit;
 
-			&[type=number]::-webkit-inner-spin-button,
-			&[type=number]::-webkit-outer-spin-button {
+			&[type="number"]::-webkit-inner-spin-button,
+			&[type="number"]::-webkit-outer-spin-button {
 				-webkit-appearance: none;
 			}
 
@@ -33,7 +33,7 @@
 	}
 
 	.v--label {
-		color: map-get($colors, 'label');
+		color: map-get($colors, "label");
 		text-transform: uppercase;
 		font-size: 12px;
 		font-weight: 600;

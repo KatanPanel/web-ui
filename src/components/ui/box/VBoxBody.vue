@@ -8,6 +8,5 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class VBoxBody extends Vue {
-}
+export default class VBoxBody extends Vue {}
 </script>

@@ -1,6 +1,6 @@
 <template>
-	<div class="v--row">
-		<slot />
+	<div class="panel">
+		<router-view />
 	</div>
 </template>
 
@@ -8,5 +8,5 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class VRow extends Vue {}
+export default class Panel extends Vue {}
 </script>

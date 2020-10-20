@@ -1,0 +1,33 @@
+{
+	"home": {
+		"welcome": "Bem-Vindo(a) ao Katan",
+		"please-auth": "É necessário fazer log-in para acessar o painel"
+	},
+	"footer": {
+		"version": "Versão atual: {version}",
+		"credits": {
+			"icons": "Ícones feitos por {0} de {1}."
+		}
+	},
+	"errors": {
+		"2002": "Nome de usuário ou senha incorretos.",
+		"2004": "Nome de usuário ou senha incorretos."
+	},
+	"navigation": {
+		"home": "Página inicial",
+		"servers": "Servidores",
+		"login": "Fazer login",
+		"docs": "Documentação",
+		"support": "Suporte",
+		"community": "Comunidade",
+		"devs": "API"
+	},
+	"login": {
+		"title": "Fazer login",
+		"fields": {
+			"username": "Nome de usuário",
+			"password": "Senha",
+			"confirm": "Entrar"
+		}
+	}
+}

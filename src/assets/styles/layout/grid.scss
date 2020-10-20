@@ -20,7 +20,7 @@
 	}
 }
 
-@media (min-width: map-get($breakpoints, 'small')) {
+@media (min-width: map-get($breakpoints, "small")) {
 	.v--container {
 		width: 95%;
 		padding: 0;
@@ -85,7 +85,10 @@
 		width: 100%;
 		margin-left: 0;
 	}
-	.v--col-2:nth-of-type(6n + 1), .v--col-3:nth-of-type(4n + 1), .v--col-4:nth-of-type(3n + 1), .v--col-6:nth-of-type(2n + 1) {
+	.v--col-2:nth-of-type(6n + 1),
+	.v--col-3:nth-of-type(4n + 1),
+	.v--col-4:nth-of-type(3n + 1),
+	.v--col-6:nth-of-type(2n + 1) {
 		margin-left: 0;
 		clear: both;
 	}

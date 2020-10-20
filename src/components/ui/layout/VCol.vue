@@ -9,8 +9,6 @@ import { Vue, Component, Prop } from "vue-property-decorator";
 
 @Component
 export default class VCol extends Vue {
-	
-	@Prop({ type: Number, required: true }) private readonly size!: number
-	
+	@Prop({ type: Number, required: true }) private readonly size!: number;
 }
 </script>

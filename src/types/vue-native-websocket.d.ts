@@ -1,1 +1,1 @@
-declare module 'vue-native-websocket'
+declare module "vue-native-websocket";

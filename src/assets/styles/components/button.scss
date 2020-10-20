@@ -14,9 +14,9 @@
 	font-family: $default-font;
 	height: 36px;
 	vertical-align: middle;
-	background-color: map-get($colors, 'primary');
-	border: 1px solid map-get($colors, 'primary');
-	color: #FFF;
+	background-color: var(--button-background);
+	border: var(--button-background);
+	color: #fff;
 	min-width: 72px;
 	user-select: none;
 	position: relative;
@@ -28,6 +28,6 @@
 	}
 
 	&:disabled {
-		opacity: .54;
+		opacity: 0.54;
 	}
 }
