@@ -1,41 +1,29 @@
-# daemon
+# Katan Panel
 
-## Project setup
-
+## Installation
+This is Katan's client, for it to work you need your Web Server.\
+Follow the [installation tutorial](https://github.com/KatanPanel/Katan) for the Katan Web Server before start installing it.\
+### Cloning
+In order to run Katan, first you need to clone this repository.
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-npm run serve
+$ git clone https://github.com/KatanPanel/panel
 ```
 
-### Compiles and minifies for production
-
+### Building
+After cloning, install the dependencies and build.
 ```
-npm run build
-```
-
-### Run your unit tests
-
-```
-npm run test:unit
+$ npm install
 ```
 
-### Run your end-to-end tests
-
+**For production:**
 ```
-npm run test:e2e
-```
-
-### Lints and fixes files
-
-```
-npm run lint
+$ npm run build
 ```
 
-### Customize configuration
+**For development:**
+```
+$ npm run serve
+```
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Then, access the address where Katan is and voilá:
+<img src="https://i.imgur.com/J31Pe63.png" alt="Katan Panel" align="center">
