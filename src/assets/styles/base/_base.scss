@@ -4,8 +4,19 @@
 	--app-text-color: #333;
 	--box-background: #f5f5f5;
 	--form-input-background: #eee;
-	--button-background: #b19cd9;
+	--button-background: #9c88ff;
 	--text-danger-color: #ff6961;
 	--text-inverse-color: #fff;
+	--nav-text-color: #fff;
+}
+
+[data-theme="dark"] {
+	--app-background: #121212;
+	--app-text-color: #fff;
+	--box-background: #242424;
+	--form-input-background: #363636;
+	--button-background: #9c88ff;
+	--text-danger-color: #ff6961;
+	--text-inverse-color: #333;
 	--nav-text-color: #fff;
 }

@@ -1,7 +1,9 @@
 <template>
 	<div id="app">
 		<the-navbar />
-		<router-view />
+		<transition name="fade" mode="out-in">
+			<router-view />
+		</transition>
 		<the-footer />
 	</div>
 </template>
@@ -12,6 +14,7 @@ import TheFooter from "@/components/TheFooter.vue";
 import { MetaInfo } from "vue-meta";
 import { loadLanguage } from "@/i18n";
 import { Dictionary } from "vue-router/types/router";
+import { SET_THEME } from "@/store/actions";
 
 @Component({
 	components: { TheFooter, TheNavbar },
@@ -22,6 +25,12 @@ import { Dictionary } from "vue-router/types/router";
 		};
 	},
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+	mounted() {
+		if (this.$storage.has("theme")) {
+			this.$store.dispatch(SET_THEME, this.$storage.get("theme"));
+		}
+	}
+}
 </script>
 <style lang="scss" src="./assets/styles/main.scss"></style>
