@@ -2,9 +2,9 @@
 	<v-container>
 		<div class="v--navbar">
 			<div class="v--navbar-logo">
-				<a href="/">
+				<router-link tag="li" :to="{ name: HOME_ROUTE }">
 					<img src="/img/katan-logo.png" alt="Katan Logo" >
-				</a>
+				</router-link>
 			</div>
 			<ul class="v--navbar-content">
 				<router-link tag="li" :to="{ name: HOME_ROUTE }">
@@ -48,8 +48,11 @@
 					test
 				</router-link>
 				<li class="v--navbar-divider">|</li>
-				<li class="v--navbar-theme">
-					<a href="#">🌞</a>
+				<li class="v--navbar-theme" @click="switchTheme">
+					<a href="#" v-if="currentTheme !== 'dark'" key="light-theme"
+						>🌞</a
+					>
+					<a href="#" v-else key="dark-theme">🌛</a>
 				</li>
 				<li>
 					<img
@@ -64,15 +67,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import { HOME_ROUTE, LOGIN_ROUTE } from "@/router";
 import { AUTH_MODULE } from "@/store";
 import { IS_AUTHENTICATED } from "@/store/auth/getters";
-import { GET_LANGUAGE } from "@/store/getters";
-import { AppLanguage, AppState } from "@/store/state";
-import { MutationPayload } from "vuex";
-import { LANGUAGE_CHANGE } from "@/store/mutations";
+import { GET_LANGUAGE, GET_THEME } from "@/store/getters";
+import { AppLanguage } from "@/store/state";
+import { SWITCH_THEME } from "@/store/actions";
 
 @Component({
 	components: { VContainer },
@@ -87,6 +89,14 @@ export default class TheNavbar extends Vue {
 
 	get currentLanguage(): AppLanguage {
 		return this.$store.getters[GET_LANGUAGE];
+	}
+
+	get currentTheme(): string {
+		return this.$store.getters[GET_THEME];
+	}
+
+	private switchTheme(): void {
+		this.$store.dispatch(SWITCH_THEME);
 	}
 }
 </script>
