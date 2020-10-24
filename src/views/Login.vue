@@ -105,9 +105,9 @@ export default class Login extends Vue {
 				this.$storage.set(AUTH_TOKEN_KEY, token);
 
 				await this.$store.dispatch(
-					AUTH_MODULE.concat("/", AUTH_VERIFY),
-					token
-				);
+					AUTH_MODULE.concat("/", AUTH_VERIFY),{
+					token: token
+				});
 				this.$router.redirect(HOME_ROUTE);
 			})
 			.catch((err: AxiosError) => {
