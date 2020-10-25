@@ -80,7 +80,7 @@ import { HOME_ROUTE } from "@/router";
 	},
 	metaInfo(): MetaInfo {
 		return {
-			title: (this as Vue).$i18n.t("login.title")! as string,
+			title: (this as Vue).$i18n.t("pages-title.login")! as string,
 		};
 	},
 })
@@ -105,9 +105,11 @@ export default class Login extends Vue {
 				this.$storage.set(AUTH_TOKEN_KEY, token);
 
 				await this.$store.dispatch(
-					AUTH_MODULE.concat("/", AUTH_VERIFY),{
-					token: token
-				});
+					AUTH_MODULE.concat("/", AUTH_VERIFY),
+					{
+						token: token,
+					}
+				);
 				this.$router.redirect(HOME_ROUTE);
 			})
 			.catch((err: AxiosError) => {

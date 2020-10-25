@@ -12,24 +12,23 @@ import { Component, Vue } from "vue-property-decorator";
 import TheNavbar from "@/components/TheNavbar.vue";
 import TheFooter from "@/components/TheFooter.vue";
 import { MetaInfo } from "vue-meta";
-import { loadLanguage } from "@/i18n";
-import { Dictionary } from "vue-router/types/router";
 import { SET_THEME } from "@/store/actions";
+import { THEME_STORAGE_KEY } from "@/store/mutations";
 
 @Component({
 	components: { TheFooter, TheNavbar },
 	metaInfo(): MetaInfo {
 		return {
-			title: "Home",
+			title: (this as Vue).$i18n.t("pages-title.home")! as string,
 			titleTemplate: `%s | ${process.env.VUE_APP_NAME} ${process.env.VUE_APP_VERSION}`,
 		};
 	},
 })
 export default class App extends Vue {
-	mounted() {
-		if (this.$storage.has("theme")) {
-			this.$store.dispatch(SET_THEME, this.$storage.get("theme"));
-		}
+	mounted(): void {
+		const cache = this.$storage;
+		if (cache.has(THEME_STORAGE_KEY))
+			this.$store.dispatch(SET_THEME, cache.get(THEME_STORAGE_KEY));
 	}
 }
 </script>

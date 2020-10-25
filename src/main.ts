@@ -6,14 +6,14 @@ import store from "./store";
 import VueMeta from "vue-meta";
 import VueNativeSock from "vue-native-websocket";
 import {
-	SOCKET_ONCLOSE,
-	SOCKET_ONERROR,
-	SOCKET_ONOPEN,
+	ON_SOCKET_CLOSE,
+	ON_SOCKET_ERROR,
+	ON_SOCKET_OPEN,
 } from "@/store/mutations";
 import Axios from "axios";
 import { Vue2Storage } from "vue2-storage";
-import i18n, { loadLanguage } from "@/i18n";
-import supportedLanguages from "./supportedLanguages.json";
+import i18n from "@/i18n";
+import "./directives";
 
 Vue.use(Vue2Storage, {
 	prefix: "katan_",
@@ -27,15 +27,16 @@ Vue.use(VueNativeSock, process.env.VUE_APP_GATEWAY_URL, {
 	reconnection: true,
 	format: "json",
 	mutations: {
-		SOCKET_ONOPEN,
-		SOCKET_ONCLOSE,
-		SOCKET_ONERROR,
+		SOCKET_ONOPEN: ON_SOCKET_OPEN,
+		SOCKET_ONCLOSE: ON_SOCKET_CLOSE,
+		SOCKET_ONERROR: ON_SOCKET_ERROR,
 	},
 	store,
 });
 
 const isDevelopmentMode = process.env.NODE_ENV === "development";
 Vue.config.devtools = isDevelopmentMode;
+Vue.config.performance = isDevelopmentMode;
 Vue.config.productionTip = !isDevelopmentMode;
 
 const vm: Vue = Vue.prototype;
@@ -46,11 +47,9 @@ vm.$http = Axios.create({
 	timeout: 5000,
 });
 
-loadLanguage(navigator.language, navigator.languages).then(() => {
-	new Vue({
-		router,
-		store,
-		i18n,
-		render: (h) => h(App),
-	}).$mount("#app");
-});
+new Vue({
+	router,
+	store,
+	i18n,
+	render: (h) => h(App),
+}).$mount("#app");

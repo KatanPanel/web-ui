@@ -19,15 +19,19 @@ const i18n = new VueI18n({
 	},
 });
 
-function setLanguage(language: string) {
-	i18n.locale = language;
+const vm: Vue = Vue.prototype;
+export function updateLanguage(language: string) {
+	(vm.$i18n || i18n).locale = language;
+	document.querySelector("html")!.setAttribute("lang", language);
+}
 
+export function setLanguage(language: string) {
+	updateLanguage(language);
 	store.dispatch(SET_LANGUAGE, {
 		language: supportedLanguages.find(
 			(supported) => language === supported.tag
 		)!,
 	});
-	document.querySelector("html")!.setAttribute("lang", language);
 }
 
 export async function loadLanguage(
@@ -40,7 +44,7 @@ export async function loadLanguage(
 		/* webpackChunkName: "lang-[request]" */ `@/lang/${language}.json`
 	)
 		.then((messages) => {
-			i18n.setLocaleMessage(language, messages);
+			(vm.$i18n || i18n).setLocaleMessage(language, messages);
 			loaded.push(language);
 			setLanguage(language);
 		})

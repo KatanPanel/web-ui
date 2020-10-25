@@ -28,6 +28,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import VContainer from "@/components/ui/layout/VContainer.vue";
+
 @Component({
 	components: { VContainer },
 })
@@ -44,6 +45,7 @@ export default class TheFooter extends Vue {
 	color: var(--nav-text-color);
 	width: 100%;
 	opacity: 0.7;
+	user-select: none;
 
 	p {
 		margin-bottom: 4px;

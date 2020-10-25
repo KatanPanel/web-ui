@@ -1,4 +1,17 @@
 {
+	"navigation": {
+		"home": "Home",
+		"servers": "Server List",
+		"login": "Log In",
+		"docs": "Documentation",
+		"support": "Support",
+		"community": "Community",
+		"devs": "Developers API"
+	},
+	"pages-title": {
+		"home": "Home",
+		"login": "Sign In"
+	},
 	"home": {
 		"welcome": "Welcome to Katan",
 		"please-auth": "You must be logged in to access the panel"
@@ -13,21 +26,12 @@
 		"2002": "Invalid username or wrong password.",
 		"2004": "Invalid username or wrong password."
 	},
-	"navigation": {
-		"home": "Home",
-		"servers": "Server List",
-		"login": "Log In",
-		"docs": "Documentation",
-		"support": "Support",
-		"community": "Community",
-		"devs": "Developers API"
-	},
 	"login": {
 		"title": "Sign In",
 		"fields": {
 			"username": "Username",
 			"password": "Password",
-			"confirm": "Continue"
+			"confirm": "Login"
 		}
 	}
 }

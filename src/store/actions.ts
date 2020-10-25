@@ -5,7 +5,7 @@ import {
 	DARK_THEME,
 	DEFAULT_THEME,
 } from "@/store/state";
-import { LANGUAGE_CHANGE, THEME_CHANGE } from "@/store/mutations";
+import { ON_LANGUAGE_CHANGE, ON_THEME_CHANGE } from "@/store/mutations";
 
 export const SET_LANGUAGE = "setLanguage";
 export const SET_THEME = "setTheme";
@@ -16,19 +16,17 @@ export default {
 		ctx: ActionContext<AppState, AppState>,
 		payload: { language: AppLanguage }
 	) {
-		ctx.commit(LANGUAGE_CHANGE, payload);
+		ctx.commit(ON_LANGUAGE_CHANGE, payload);
 	},
 	[SET_THEME](
 		ctx: ActionContext<AppState, AppState>,
-		payload: {
-			theme: string;
-		}
+		payload: { theme: string }
 	) {
-		ctx.commit(THEME_CHANGE, payload);
+		ctx.commit(ON_THEME_CHANGE, payload);
 	},
 	[SWITCH_THEME](ctx: ActionContext<AppState, AppState>) {
 		const current = ctx.state.theme;
-		ctx.commit(THEME_CHANGE, {
+		ctx.commit(ON_THEME_CHANGE, {
 			theme: current !== DARK_THEME ? DARK_THEME : DEFAULT_THEME,
 		});
 	},

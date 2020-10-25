@@ -1,7 +1,8 @@
 .v--box {
 	position: relative;
 	padding: 24px;
-	background-color: var(--box-background);
+	color: var(--app-text-color);
+	background-color: var(--app-foreground);
 	border-bottom: 5px solid rgba(0, 0, 0, 0.1);
 	border-radius: 4px;
 

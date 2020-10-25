@@ -28,6 +28,7 @@ body {
 	font-size: 1.5em;
 	background-color: var(--app-background);
 	color: var(--app-text-color);
+	transition: background-color .3s linear;
 }
 
 html,
