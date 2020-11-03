@@ -1,9 +1,9 @@
 import Vue from "vue";
-import { ActionContext, ActionTree, Store } from "vuex";
+import { ActionContext, ActionTree } from "vuex";
 import { AuthState } from "@/store/auth/state";
 import { AppState } from "@/store/state";
 import { AxiosError, AxiosResponse } from "axios";
-import { ON_AUTH_LOGIN } from "@/store/auth/mutations";
+import { ON_AUTH_COMPLETE, ON_AUTH_LOGIN } from "@/store/auth/mutations";
 
 export const AUTH_LOGIN = "login";
 export const AUTH_VERIFY = "verify";
@@ -51,8 +51,11 @@ export default {
 				},
 			})
 			.then((res: AxiosResponse) => {
-				console.log("bearer token: " + payload.token);
-				console.log(AUTH_VERIFY, res.data);
+				ctx.commit(ON_AUTH_COMPLETE, {
+					account: res.data.data.account,
+				});
+				vm.$http.defaults.headers["Authorization"] =
+					"Bearer " + payload.token;
 			});
 	},
 } as ActionTree<AuthState, AppState>;

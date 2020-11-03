@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Raleway:400,500,700,900");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap');
 
 * {
 	margin: 0;
@@ -24,16 +24,37 @@ body {
 	display: flex;
 	display: -ms-flexbox;
 	flex-direction: column;
-	line-height: 1.2;
+	line-height: 1.6;
 	font-size: 1.5em;
-	background-color: var(--app-background);
-	color: var(--app-text-color);
-	transition: background-color .3s linear;
+	transition: background-color 0.3s linear;
+}
+
+#app {
+	display: flex;
+	flex-direction: column;
 }
 
 html,
 body,
+main,
 #app {
 	height: 100%;
 	width: 100%;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	font-weight: 400;
+
+	&:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+}
+
+hr {
+	margin: 16px 0;
+	border-top: 2px solid rgba(0, 0, 0, 1);
+	opacity: 0.06;
 }

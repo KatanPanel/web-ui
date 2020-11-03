@@ -5,23 +5,22 @@
 	align-items: center;
 	justify-content: center;
 	font-weight: 600;
-	line-height: inherit;
-	font-size: 12px;
+	font-size: 14px;
 	border-radius: 4px;
 	outline: none;
 	appearance: none;
 	-webkit-appearance: none;
 	font-family: $default-font;
 	height: 36px;
+	line-height: 32px;
 	vertical-align: middle;
-	background-color: var(--button-background);
-	border: var(--button-background);
+	background-color: var(--primary-color);
+	border: var(--primary-color);
 	color: #fff;
 	min-width: 72px;
 	user-select: none;
 	position: relative;
 	padding: 0 16px;
-	text-transform: uppercase;
 
 	&:hover:not(:disabled) {
 		cursor: pointer;

@@ -1,5 +1,17 @@
 .v--flex {
 	display: flex;
+	flex-direction: row;
+}
+
+.v--flex-row {
+	flex-direction: row !important;
+}
+
+.v--flex-column {
+	flex-direction: column;
+}
+
+.v--flex-align-center {
 	-ms-flex-align: center;
 	align-items: center;
 }
@@ -16,14 +28,14 @@
 	-webkit-flex-wrap: wrap;
 }
 
+.v--flex-justify-start {
+	justify-content: flex-start;
+}
+
 .v--flex-justify-center {
 	justify-content: center;
 }
 
 .v--flex-justify-end {
 	justify-content: flex-end;
-}
-
-.v--flex-column {
-	flex-direction: column;
 }

@@ -22,12 +22,16 @@ export default {
 		ctx: ActionContext<AppState, AppState>,
 		payload: { theme: string }
 	) {
-		ctx.commit(ON_THEME_CHANGE, payload);
+		ctx.commit(ON_THEME_CHANGE, {
+			theme: payload.theme,
+		});
 	},
 	[SWITCH_THEME](ctx: ActionContext<AppState, AppState>) {
-		const current = ctx.state.theme;
+		let theme = ctx.state.theme;
+		if (theme === DEFAULT_THEME) theme = DARK_THEME;
+		else theme = DEFAULT_THEME;
 		ctx.commit(ON_THEME_CHANGE, {
-			theme: current !== DARK_THEME ? DARK_THEME : DEFAULT_THEME,
+			theme: theme,
 		});
 	},
 } as ActionTree<AppState, AppState>;

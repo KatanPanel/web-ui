@@ -3,7 +3,7 @@
 		<v-container>
 			<p
 				v-t="{
-					path: 'footer.version',
+					path: 'footer.client-version',
 					args: { version: currentVersion }
 				}"
 			/>
@@ -38,16 +38,19 @@ export default class TheFooter extends Vue {
 </script>
 <style lang="scss" scoped>
 .v--footer {
-	position: absolute;
-	bottom: 16px;
+	position: relative;
+	margin-bottom: 8px;
 	font-size: 14px;
 	text-align: center;
-	color: var(--nav-text-color);
+	color: var(--app-text-color);
 	width: 100%;
+	height: 48px;
+	min-height: 48px;
 	opacity: 0.7;
 	user-select: none;
 
 	p {
+		font-size: 14px;
 		margin-bottom: 4px;
 	}
 }

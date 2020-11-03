@@ -1,0 +1,14 @@
+$base: 6;
+
+@mixin padding($size, $direction) {
+	.v--p-#{$direction}-#{$size} {
+		padding-#{$direction}: calc(#{$base} * #{$size}px) !important;
+	}
+}
+
+@for $i from 1 through 5 {
+	@include padding($i, "top");
+	@include padding($i, "bottom");
+	@include padding($i, "left");
+	@include padding($i, "right");
+}

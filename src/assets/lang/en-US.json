@@ -1,0 +1,58 @@
+{
+	"titles": {
+		"home": "Home",
+		"login": "Log In",
+		"account": "My account",
+		"server": "{0} server"
+	},
+	"header": {
+		"home": "Home",
+		"docs": "Documentation",
+		"support": "Support",
+		"community": "Community",
+		"api": "Developers API",
+		"login": "Log In",
+		"account": "My account"
+	},
+	"footer": {
+		"versions":{
+			"client": "Client version: {version}",
+			"server": "Server version: {version}"
+		},
+		"credits": {
+			"icons": "Icons made by {0} from {1}."
+		}
+	},
+	"errors": {
+		"ECONNABORTED": "Response timeout exceeded.",
+		"0": "Unknown error.",
+		"500": "Could not connect to the server.",
+		"2002": "Invalid username or wrong password.",
+		"2004": "Invalid username or wrong password."
+	},
+	"modules": {
+		"home": {
+			"welcome": "Welcome to Katan",
+			"please-auth": "You must be logged in to access the panel",
+			"server-list": "Server list — {0}"
+		},
+		"login": {
+			"title": "Sign In",
+			"credentials-needed": "Enter your account credentials to access the panel.",
+			"forgot-password": "Forgot your password?",
+			"fields": {
+				"username": "Username",
+				"password": "Password",
+				"confirm": "Continue"
+			}
+		},
+		"panel": {
+			"error": {
+				"title": "Could not connect to the server.",
+				"description": "Check if the server is started and configured correctly.",
+				"persistence": "If the problem persists, {0} to learn how to install and configure the Katan web server.",
+				"click-here": "click here"
+			}
+		}
+	}
+}

@@ -1,24 +1,31 @@
 :root,
 [data-theme="default"] {
-	--app-background: #4788d8;
-	--app-text-color: #FFF;
-	--app-foreground: #f5f5f5;
-	--form-input-background: #eee;
-	--button-background: #9c88ff;
+	--app-background: #FFF;
+	--app-text-color: #333;
+	--app-text-inverse-color: #fff;
+	--app-foreground: #FFF;
+	--app-foreground-overlay: #f5f5f5;
+	--primary-color: #1273eb;
+	--muted-color: gray;
 	--text-danger-color: #ff6961;
 	--text-inverse-color: #fff;
+	--box-text-color: #333;
+	--box-background: #fff;
 	--nav-text-color: #fff;
 	--nav-dropdown-text-color: #333;
 }
 
 [data-theme="dark"] {
 	--app-background: #121212;
-	--app-text-color: #FFF;
+	--app-text-color: #fff;
+	--app-text-inverse-color: #333;
 	--app-foreground: #242424;
-	--form-input-background: #363636;
-	--button-background: #9c88ff;
+	--app-foreground-overlay: #363636;
+	--button-background: #4788d8;
 	--text-danger-color: #ff6961;
 	--text-inverse-color: #333;
+	--box-text-color: #fff;
+	--box-background: #242424;
 	--nav-text-color: #fff;
 	--nav-dropdown-text-color: #fff;
 }

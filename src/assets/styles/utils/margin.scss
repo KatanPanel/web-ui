@@ -1,0 +1,14 @@
+$base: 6;
+
+@mixin margin($size, $direction) {
+	.v--m-#{$direction}-#{$size} {
+		margin-#{$direction}: calc(#{$base} * #{$size}px) !important;
+	}
+}
+
+@for $i from 0 through 5 {
+	@include margin($i, "top");
+	@include margin($i, "bottom");
+	@include margin($i, "left");
+	@include margin($i, "right");
+}

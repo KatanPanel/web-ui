@@ -3,22 +3,43 @@
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
+		background-color: var(--app-foreground-overlay);
+		border: 2px solid var(--app-foreground-overlay);
+		border-radius: 4px;
 
 		&:not(:last-child) {
-			margin-bottom: 24px;
+			margin-bottom: 6px;
+		}
+
+
+		.v--input-icon {
+			@extend .v--flex;
+			@extend .v--flex-align-center;
+			@extend .v--flex-justify-center;
+			padding: 0 12px;
+		}
+
+		.v--label {
+			padding: 8px;
+			padding-bottom: 0;
+			text-transform: none;
+			color: var(--muted-color);
+			font-weight: 400;
 		}
 
 		.v--input {
+			background-color: var(--app-foreground-overlay);
 			display: flex;
 			appearance: none;
 			-webkit-appearance: none;
 			outline: none;
 			box-shadow: none;
-			background-color: var(--form-input-background);
-			border: 2px solid transparent;
-			border-radius: 4px;
 			padding: 8px;
-			color: inherit;
+			padding-top: 0;
+			color: var(--app-text-color);
+			font-family: $default-font;
+			font-weight: 600;
+			width: 100%;
 
 			&[type="number"]::-webkit-inner-spin-button,
 			&[type="number"]::-webkit-outer-spin-button {
@@ -33,7 +54,6 @@
 	}
 
 	.v--label {
-		color: map-get($colors, "label");
 		text-transform: uppercase;
 		font-size: 12px;
 		font-weight: 600;

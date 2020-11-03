@@ -1,6 +1,9 @@
-export class AuthState {
+export interface AuthState {
 	token?: string;
-	account?: any;
+
+	account: any | null;
 }
 
-export default {} as AuthState;
+export default {
+	account: null,
+} as AuthState;

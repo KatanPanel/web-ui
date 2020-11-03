@@ -31,7 +31,11 @@ export default {
 	},
 	[ON_THEME_CHANGE](state: AppState, payload: { theme: string }) {
 		state.theme = payload.theme;
-		vm.$storage.set(THEME_STORAGE_KEY, payload);
-		document.querySelector("body")!.setAttribute("data-theme", state.theme);
+		vm.$storage.set(THEME_STORAGE_KEY, {
+			theme: payload.theme,
+		});
+		document
+			.querySelector("body")!
+			.setAttribute("data-theme", payload.theme);
 	},
 } as MutationTree<AppState>;

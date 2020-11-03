@@ -3,17 +3,16 @@ import { AxiosInstance } from "axios";
 
 declare module "vue/types/vue" {
 	interface Vue {
+		beforeCreate(): void;
+		created(): void;
+		beforeMount(): void;
+		mounted(): void;
 		$isDevelopmentMode: boolean;
 		$helpers: { voca: VocaStatic };
 		$socket: WebSocket;
 		$http: AxiosInstance;
-
-		// start: Vue Native Websocket
 		$connect(): void;
-
 		$disconnect(): void;
-
-		// end: Vue Native Websocket
 	}
 }
 

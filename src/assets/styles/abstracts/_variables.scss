@@ -1,4 +1,4 @@
-$default-font: Raleway, sans-serif;
+$default-font: 'Nunito Sans', sans-serif;
 $base-url: "/assets/" !default;
 
 $breakpoints: (
@@ -6,18 +6,3 @@ $breakpoints: (
 	"medium": 768px,
 	"large": 1024px
 ) !default;
-
-$colors: (
-	"background": #4788d8,
-	"surface": #121212,
-	// 93%
-		"surface-1": #242424,
-	// 86%
-		"surface-2": #363636,
-	// 79%
-		"label": #7f7f7f,
-	// 50%
-		"primary": #4b7bec,
-	"secondary": #a55eea,
-	"error": #eb3b5a
-);

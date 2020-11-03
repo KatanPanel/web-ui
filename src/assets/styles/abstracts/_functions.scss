@@ -3,7 +3,7 @@
 }
 
 @function image($path, $base: $base-url) {
-	@return asset($base, "images/", $path);
+	@return asset($base, "img/", $path);
 }
 
 @function font($path, $base: $base-url) {

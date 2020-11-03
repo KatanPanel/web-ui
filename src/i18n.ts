@@ -1,21 +1,21 @@
 import Vue from "vue";
 import VueI18n from "vue-i18n";
-import supportedLanguages from "./supportedLanguages.json";
-import defaultMessages from "./lang/en.json";
+import defaultMessages from "@/assets/lang/en-US.json";
 import { SET_LANGUAGE } from "@/store/actions";
-import store from "./store";
+import store from "@/store";
+import supportedLanguages from "./assets/lang/supported-languages";
 
 Vue.use(VueI18n);
 
-const FALLBACK = "en";
+export const FALLBACK_LANGUAGE = "en";
 const fallbackMessages = defaultMessages;
 
 const loaded: string[] = [];
 const i18n = new VueI18n({
-	locale: FALLBACK,
-	fallbackLocale: FALLBACK,
+	locale: FALLBACK_LANGUAGE,
+	fallbackLocale: FALLBACK_LANGUAGE,
 	messages: {
-		[FALLBACK]: fallbackMessages,
+		[FALLBACK_LANGUAGE]: fallbackMessages,
 	},
 });
 
@@ -41,7 +41,7 @@ export async function loadLanguage(
 	if (loaded.includes(language)) return setLanguage(language);
 
 	return import(
-		/* webpackChunkName: "lang-[request]" */ `@/lang/${language}.json`
+		/* webpackChunkName: "lang-[request]" */ `@/assets/lang/${language}.json`
 	)
 		.then((messages) => {
 			(vm.$i18n || i18n).setLocaleMessage(language, messages);
@@ -52,7 +52,7 @@ export async function loadLanguage(
 			console.warn(`Unable to load language "${language}".`);
 
 			if (fallback.length === 0) {
-				await loadLanguage(FALLBACK);
+				await loadLanguage(FALLBACK_LANGUAGE);
 				return;
 			}
 

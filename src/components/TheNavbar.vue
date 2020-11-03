@@ -1,47 +1,46 @@
 <template>
-	<v-container>
-		<div class="v--navbar">
-			<ul class="v--navbar-content v--navbar-logo">
+	<header class="v--navbar v--scoped-nav">
+		<v-container class="v--flex">
+			<v-navbar-content class="v--navbar-logo">
 				<li v-router-href="{ name: HOME_ROUTE }">
-					<img src="/img/katan-logo.png" alt="Katan Logo" >
+					<img src="/img/katan-icon-white.png" alt="Katan Logo" >
 				</li>
-			</ul>
-			<ul class="v--navbar-content">
+			</v-navbar-content>
+			<v-navbar-content>
 				<li v-router-href="{ name: HOME_ROUTE }">
-					<a v-t="'navigation.home'" />
+					<a v-t="'header.home'" />
 				</li>
 				<li>
 					<a
-						v-t="'navigation.docs'"
+						v-t="'header.docs'"
 						href="https://github.com/KatanPanel/Katan"
 					/>
 				</li>
 				<li>
 					<a
-						v-t="'navigation.support'"
+						v-t="'header.support'"
 						href="https://github.com/KatanPanel/Katan/issues"
 					/>
 				</li>
 				<li>
 					<a
-						v-t="'navigation.community'"
+						v-t="'header.community'"
 						href="https://discord.gg/ey8dwsv"
 					/>
 				</li>
 				<li>
 					<a
-						v-t="'navigation.devs'"
+						v-t="'header.api'"
 						href="https://github.com/KatanPanel/Katan/wiki"
 					/>
 				</li>
-			</ul>
-			<ul class="v--navbar-content">
+			</v-navbar-content>
+			<v-navbar-content>
 				<li v-router-href="{ name: LOGIN_ROUTE }" v-if="!isLoggedIn">
-					<a v-t="'navigation.login'" />
+					<a v-t="'header.login'" />
 				</li>
-				<router-link v-else :to="{ name: '' }" tag="li">
-					<a v-t="'navigation.account'" />
-					test
+				<router-link v-else :to="{ name: ACCOUNT_ROUTE }" tag="li">
+					<a href="#">{{ $t("header.account") }}</a>
 				</router-link>
 				<li class="v--navbar-divider">|</li>
 				<li class="v--navbar-theme" @click="switchTheme">
@@ -59,9 +58,9 @@
 						>
 						<template v-slot:items>
 							<v-dropdown-item
-								v-for="language in supportedLanguages"
+								v-for="language in getSupportedLanguages"
 								:key="language.tag"
-								@click.native="setLanguage(language)"
+								@click.native="currentLanguage = language"
 							>
 								<img
 									:src="`/img/flags/${language.tag}.png`"
@@ -73,165 +72,30 @@
 						</template>
 					</v-dropdown>
 				</li>
-			</ul>
-		</div>
-	</v-container>
+			</v-navbar-content>
+		</v-container>
+	</header>
 </template>
-
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import VContainer from "@/components/ui/layout/VContainer.vue";
-import { HOME_ROUTE, LOGIN_ROUTE } from "@/router";
-import { AUTH_MODULE } from "@/store";
-import { IS_AUTHENTICATED } from "@/store/auth/getters";
-import { GET_LANGUAGE, GET_THEME } from "@/store/getters";
-import { AppLanguage } from "@/store/state";
-import { SWITCH_THEME } from "@/store/actions";
+import { ACCOUNT_ROUTE, HOME_ROUTE, LOGIN_ROUTE } from "@/router";
 import VDropdown from "@/components/ui/dropdown/VDropdown.vue";
 import VDropdownItem from "@/components/ui/dropdown/VDropdownItem.vue";
-import supportedLanguages from "@/supportedLanguages.json";
-import { loadLanguage } from "@/i18n";
+import VNavbarContent from "@/components/ui/navbar/VNavbarContent.vue";
+import { mixins } from "vue-class-component";
+import { AppMixin } from "@/mixins/app";
+import { AuthMixin } from "@/mixins/auth";
 
 @Component({
-	components: { VDropdownItem, VDropdown, VContainer },
+	components: { VNavbarContent, VDropdownItem, VDropdown, VContainer },
 })
-export default class TheNavbar extends Vue {
+export default class TheNavbar extends mixins<AppMixin, AuthMixin>(
+	AppMixin,
+	AuthMixin
+) {
 	private readonly HOME_ROUTE = HOME_ROUTE;
 	private readonly LOGIN_ROUTE = LOGIN_ROUTE;
-
-	get supportedLanguages(): Array<AppLanguage> {
-		return supportedLanguages.filter(
-			(value: AppLanguage) => value !== this.currentLanguage
-		);
-	}
-
-	get isLoggedIn(): boolean {
-		return this.$store.getters[AUTH_MODULE.concat("/", IS_AUTHENTICATED)];
-	}
-
-	get currentLanguage(): AppLanguage {
-		return this.$store.getters[GET_LANGUAGE];
-	}
-
-	get currentTheme(): string {
-		return this.$store.getters[GET_THEME];
-	}
-
-	private switchTheme(): void {
-		this.$store.dispatch(SWITCH_THEME);
-	}
-
-	private setLanguage(language: AppLanguage): void {
-		loadLanguage(language.tag);
-	}
+	private readonly ACCOUNT_ROUTE = ACCOUNT_ROUTE;
 }
 </script>
-<style lang="scss">
-.v--navbar {
-	position: absolute;
-	top: 8px;
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-	z-index: 1001;
-
-	&.v--navbar-vertical {
-		left: 0;
-		top: 0;
-
-		.v--navbar-content {
-			margin-left: 0;
-
-			&:last-child {
-				justify-content: initial;
-			}
-		}
-	}
-
-	.v--navbar-logo,
-	.v--navbar-logo img {
-		position: relative;
-		width: 96px;
-		height: 96px;
-	}
-
-	.v--navbar-content {
-		position: relative;
-		display: flex;
-		flex: 1 0 auto;
-		align-items: center;
-		list-style-type: none;
-
-		&:first-child {
-			justify-content: flex-start;
-		}
-
-		&:nth-child(2) {
-			justify-content: center;
-		}
-
-		&:last-child {
-			justify-content: flex-end;
-		}
-
-		li {
-			display: inline-block;
-			position: relative;
-			font-size: 16px;
-			margin-left: 32px;
-
-			&:first-child {
-				margin-left: 0;
-			}
-
-			a {
-				&:hover {
-					cursor: pointer;
-				}
-
-				font-weight: 500;
-				color: var(--nav-text-color);
-				vertical-align: middle;
-			}
-		}
-	}
-
-	.v--navbar-flag {
-		width: 40px;
-		height: 40px;
-		vertical-align: middle;
-		margin-right: 8px;
-		border-radius: 4px;
-	}
-
-	.v--navbar-theme a {
-		font-size: 36px;
-		margin-right: -12px;
-		text-decoration: none;
-	}
-
-	.v--navbar-divider {
-		color: #fff;
-		opacity: 0.18;
-	}
-
-	.v--dropdown {
-		.v--dropdown-item-list {
-			min-width: 120px;
-		}
-
-		.v--dropdown-item {
-			.v--navbar-flag {
-				width: 24px;
-				height: 24px;
-				margin-right: 8px;
-			}
-
-			span {
-				font-size: 14px;
-				font-weight: 400;
-			}
-		}
-	}
-}
-</style>
