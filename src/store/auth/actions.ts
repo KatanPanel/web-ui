@@ -51,11 +51,11 @@ export default {
 				},
 			})
 			.then((res: AxiosResponse) => {
+				vm.$http.defaults.headers["Authorization"] =
+					"Bearer " + payload.token;
 				ctx.commit(ON_AUTH_COMPLETE, {
 					account: res.data.data.account,
 				});
-				vm.$http.defaults.headers["Authorization"] =
-					"Bearer " + payload.token;
 			});
 	},
 } as ActionTree<AuthState, AppState>;

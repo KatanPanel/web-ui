@@ -1,24 +1,33 @@
-.v--transition-fade-enter-active, .v--transition-fade-leave-active {
-	transition: opacity .5s;
+.v--transition-fade-enter-active,
+.v--transition-fade-leave-active {
+	transition: opacity 0.5s;
 }
-.v--transition-fade-enter, .v--transition-fade-leave-to {
+
+.v--transition-fade-enter,
+.v--transition-fade-leave-to {
 	opacity: 0;
 }
 
-.v--transition-slow-fade-enter-active, .v--transition-slow-fade-leave-active {
+.v--transition-slow-fade-enter-active,
+.v--transition-slow-fade-leave-active {
 	transition: opacity 3s;
 }
-.v--transition-slow-fade-enter, .v--transition-slow-fade-leave-to {
+
+.v--transition-slow-fade-enter,
+.v--transition-slow-fade-leave-to {
 	opacity: 0;
 }
 
 .v--transition-slide-lr-enter-active {
-	transition: all .1s linear;
+	transition: all 0.1s linear;
 }
+
 .v--transition-slide-lr-leave-active {
-	transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.v--transition-slide-lr-enter, .v--transition-slide-lr-leave-to {
+
+.v--transition-slide-lr-enter,
+.v--transition-slide-lr-leave-to {
 	transform: translateX(-10px);
 	opacity: 0;
 }

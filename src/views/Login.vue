@@ -6,7 +6,7 @@
 			<div
 				class="wallpaper"
 				:style="{
-					'background-image': `url(/img/games/wallpapers/${currentWallpaperIndex}.jpg)`
+					'background-image': `url(/img/games/wallpapers/${currentWallpaperIndex}.jpg)`,
 				}"
 			/>
 		</transition>
@@ -14,17 +14,14 @@
 			<div
 				class="login-left"
 				:style="{
-					'background-image': `url(/img/games/wallpapers/${currentWallpaperIndex}.jpg)`
+					'background-image': `url(/img/games/wallpapers/${currentWallpaperIndex}.jpg)`,
 				}"
 			>
 				<div class="overlay" />
 				<div class="content">
-					<a href="/"
-						><img
-							src="/img/katan-icon-white.png"
-							alt="Katan logo"
-							class="logo"
-					></a>
+					<a href="/">
+						<the-logo color="white" />
+					</a>
 				</div>
 			</div>
 			<div class="login-right v--flex-child">
@@ -43,9 +40,9 @@
 							<v-icon name="user" />
 						</v-input-icon>
 						<div class="v--flex-child">
-							<v-label>{{
-								$t("modules.login.fields.username")
-							}}</v-label>
+							<v-label
+								>{{ $t("modules.login.fields.username") }}
+							</v-label>
 							<v-input
 								type="text"
 								minlength="2"
@@ -60,9 +57,9 @@
 							<v-icon name="password" />
 						</v-input-icon>
 						<div class="v--flex-child">
-							<v-label>{{
-								$t("modules.login.fields.password")
-							}}</v-label>
+							<v-label
+								>{{ $t("modules.login.fields.password") }}
+							</v-label>
 							<v-input
 								type="password"
 								maxlength="32"
@@ -108,17 +105,17 @@ import { AUTH_TOKEN_KEY } from "@/store/auth";
 import { AUTH_MODULE } from "@/store";
 import { AUTH_LOGIN, AUTH_VERIFY } from "@/store/auth/actions";
 import { AxiosError } from "axios";
-import { HOME_ROUTE } from "@/router";
+import { PANEL_ROUTE } from "@/router";
 import Loading from "@/components/Loading.vue";
 import { mixins } from "vue-class-component";
 import { AppMixin } from "@/mixins/app";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
-
-const MAX_WALLPAPERS = 5;
+import TheLogo from "@/components/TheLogo.vue";
 
 @Component<Login>({
 	components: {
+		TheLogo,
 		VInputIcon,
 		VIcon,
 		Loading,
@@ -137,11 +134,11 @@ const MAX_WALLPAPERS = 5;
 	},
 	metaInfo(): MetaInfo {
 		return {
-			title: (this as Vue).$i18n.t("pages-title.login")! as string,
+			title: (this as Vue).$i18n.t("titles.login")! as string,
 		};
 	},
 })
-export default class Login extends mixins<AppMixin>(AppMixin) {
+export default class Login extends mixins(AppMixin) {
 	private username = "";
 	private password = "";
 	private isLocked = false;
@@ -149,7 +146,7 @@ export default class Login extends mixins<AppMixin>(AppMixin) {
 	private currentWallpaperIndex!: number;
 
 	beforeCreate(): void {
-		this.currentWallpaperIndex = Math.floor(Math.random() * MAX_WALLPAPERS);
+		this.currentWallpaperIndex = Math.floor(Math.random() * 5);
 	}
 
 	private performLogin(): void {
@@ -173,14 +170,21 @@ export default class Login extends mixins<AppMixin>(AppMixin) {
 						token: token,
 					}
 				);
-				this.$router.redirect(HOME_ROUTE);
+				this.$router.redirect(PANEL_ROUTE);
 			})
 			.catch((err: AxiosError) => {
 				const data = err.response?.data;
-				if (this.$isDevelopmentMode) console.log(err);
+				const code =
+					data?.code ||
+					err.response?.status ||
+					err?.code ||
+					(err.toJSON() as any).message ||
+					"0";
+				if (this.$isDevelopmentMode) {
+					console.error(err.toJSON());
+				}
 
-				this.error =
-					data?.code || err.response?.status || err.code || 0;
+				this.error = code;
 			})
 			.then(() => (this.isLocked = false));
 	}
@@ -228,7 +232,7 @@ export default class Login extends mixins<AppMixin>(AppMixin) {
 			z-index: 1;
 		}
 
-		.logo {
+		.v--katan-logo {
 			position: relative;
 			top: 50%;
 			left: 50%;

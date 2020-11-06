@@ -1,5 +1,5 @@
 <template>
-	<transition name="v--transition-fade" mode="out-in">
+	<div class="panel">
 		<v-container
 			v-if="loading"
 			class="v--flex v--flex-justify-center v--flex-column v--full-height"
@@ -21,7 +21,7 @@
 			</i18n>
 		</v-container>
 		<router-view v-else />
-	</transition>
+	</div>
 </template>
 
 <script lang="ts">

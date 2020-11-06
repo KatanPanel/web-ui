@@ -2,9 +2,9 @@
 	<img
 		v-svg-inline
 		:alt="`${name} icon`"
-		:src="`img/icons/${name}.svg`"
+		:src="`/img/icons/${name}.svg`"
 		class="v--icon"
-	>
+	/>
 </template>
 
 <script lang="ts">
@@ -20,5 +20,6 @@ export default class VIcon extends Vue {
 	width: 24px;
 	height: 24px;
 	fill: var(--app-text-color);
+	vertical-align: middle;
 }
 </style>

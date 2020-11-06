@@ -1,9 +1,14 @@
 {
 	"titles": {
 		"home": "Home",
-		"login": "Log In",
+		"login": "Sign In",
 		"account": "My account",
-		"server": "{0} server"
+		"panel": {
+			"home": "Control Panel",
+			"account": "My account",
+			"server": "{0} server",
+			"plugins": "Plugins"
+		}
 	},
 	"header": {
 		"home": "Home",
@@ -12,10 +17,14 @@
 		"community": "Community",
 		"api": "Developers API",
 		"login": "Log In",
-		"account": "My account"
+		"account": "My account",
+		"panel": {
+			"plugins": "Installed plugins",
+			"account": "Account details"
+		}
 	},
 	"footer": {
-		"versions":{
+		"versions": {
 			"client": "Client version: {version}",
 			"server": "Server version: {version}"
 		},
@@ -25,6 +34,7 @@
 	},
 	"errors": {
 		"ECONNABORTED": "Response timeout exceeded.",
+		"Network Error": "Could not connect to the server.",
 		"0": "Unknown error.",
 		"500": "Could not connect to the server.",
 		"2002": "Invalid username or wrong password.",

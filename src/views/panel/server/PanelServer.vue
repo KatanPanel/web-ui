@@ -19,15 +19,15 @@ import { Route } from "vue-router";
 import { PANEL_MODULE } from "@/store";
 import { PANEL_SET_SERVER } from "@/store/panel/actions";
 
-@Component<Server>({
+@Component({
 	components: { VContainer },
 	metaInfo(): MetaInfo {
 		return {
-			title: this.getServer?.name || "...",
+			title: (this as PanelMixin).getServer?.name || "...",
 		};
 	},
 })
-export default class Server extends mixins(PanelMixin) {
+export default class PanelServer extends mixins(PanelMixin) {
 	@Prop({ type: String, required: true }) private readonly serverId!: string;
 
 	@Watch("$route")

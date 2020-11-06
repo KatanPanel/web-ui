@@ -1,6 +1,46 @@
 <template>
 	<main class="v--layout-panel">
-		<the-navbar />
+		<div class="sidebar">
+			<div class="sidebar-inner">
+				<div class="sidebar-logo">
+					<the-logo />
+				</div>
+				<ul class="sidebar-items">
+					<router-link :to="{ name: PANEL_HOME_ROUTE }" tag="li">
+						<a>
+							<v-icon name="home" />
+						</a>
+					</router-link>
+					<router-link :to="{ name: PANEL_HOME_ROUTE }" tag="li">
+						<a>
+							<v-icon name="fingerprint" />
+						</a>
+					</router-link>
+					<router-link :to="{ name: PANEL_PLUGINS_ROUTE }" tag="li">
+						<a>
+							<v-icon name="3d-modeling" />
+						</a>
+					</router-link>
+					<router-link :to="{ name: PANEL_HOME_ROUTE }" tag="li">
+						<a>
+							<v-icon name="server-storage" />
+						</a>
+					</router-link>
+					<router-link :to="{ name: PANEL_HOME_ROUTE }" tag="li">
+						<a>
+							<v-icon name="cogwheel" />
+						</a>
+					</router-link>
+				</ul>
+				<ul class="sidebar-items">
+					<router-link :to="{ name: PANEL_ACCOUNT_ROUTE }" tag="li">
+						<a>
+							<v-icon name="user" />
+						</a>
+					</router-link>
+				</ul>
+			</div>
+		</div>
 		<!-- <div class="server-selector">
 			<v-label>Server list ({{ getServerList.length }})</v-label>
 			<ul>
@@ -17,7 +57,9 @@
 				</router-link>
 			</ul>
 		</div> -->
-		<slot />
+		<div class="v--layout-panel-content">
+			<slot />
+		</div>
 	</main>
 </template>
 <script lang="ts">
@@ -29,22 +71,110 @@ import TheNavbarItems from "@/components/TheNavbarItems.vue";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import { AuthMixin } from "@/mixins/auth";
 import VLabel from "@/components/ui/form/VLabel.vue";
+import TheLogo from "@/components/TheLogo.vue";
+import VIcon from "@/components/ui/icon/VIcon.vue";
+import {
+	PANEL_ACCOUNT_ROUTE,
+	PANEL_PLUGINS_ROUTE,
+	PANEL_ROUTE,
+} from "@/router";
 
 @Component({
-	components: { TheNavbar, VLabel, VContainer, TheNavbarItems },
+	components: {
+		VIcon,
+		TheLogo,
+		TheNavbar,
+		VLabel,
+		VContainer,
+		TheNavbarItems,
+	},
 })
-export default class PanelLayout extends mixins(PanelMixin, AuthMixin) {}
+export default class PanelLayout extends mixins(PanelMixin, AuthMixin) {
+	private readonly PANEL_HOME_ROUTE = PANEL_ROUTE;
+	private readonly PANEL_PLUGINS_ROUTE = PANEL_PLUGINS_ROUTE;
+	private readonly PANEL_ACCOUNT_ROUTE = PANEL_ACCOUNT_ROUTE;
+}
 </script>
 <style lang="scss">
 .v--layout-panel {
 	display: flex;
-	flex-direction: column !important;
-	background-color: var(--app-background);
+	flex-direction: row !important;
+	background-color: var(--layout-panel-background-color);
 	color: var(--app-text-color);
 
-	.v--navbar {
-		background-color: #0fb9b1;
-		color: #ffffff;
+	.v--layout-panel-content {
+		padding: 48px;
+		flex: 1 0 auto;
+	}
+
+	.sidebar {
+		position: relative;
+		height: 100vh;
+		width: 140px;
+
+		.v--katan-logo {
+			width: 50px;
+			height: 50px;
+		}
+
+		.sidebar-inner {
+			max-width: 140px;
+			padding: 64px 48px;
+			background-color: var(--app-foreground);
+			position: fixed;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.sidebar-items {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			flex: 1 0 auto;
+
+			&:last-child {
+				justify-content: flex-end;
+			}
+
+			li {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				list-style-type: none;
+				border-radius: 16px;
+				box-shadow: rgba(0, 0, 0, 0.12) 0 0 4px 0;
+
+				a {
+					padding: 12px;
+				}
+
+				svg {
+					vertical-align: middle;
+					fill: var(--muted-color);
+				}
+
+				&:not(:last-child) {
+					margin-bottom: 48px;
+				}
+
+				&:hover:not(.router-link-exact-active) {
+					background-color: var(--app-foreground-overlay);
+				}
+
+				&.router-link-exact-active.router-link-active {
+					background-color: var(--primary-color);
+					box-shadow: rgba(0, 0, 0, 0.12) 0 0 4px 4px;
+
+					svg {
+						fill: #fff;
+					}
+				}
+			}
+		}
 	}
 
 	.server-selector {

@@ -22,6 +22,10 @@
 	position: relative;
 	padding: 0 16px;
 
+	.v--loader-spinner {
+		box-shadow: 0 2px 0 0 #fff !important;
+	}
+
 	&:hover:not(:disabled) {
 		cursor: pointer;
 	}

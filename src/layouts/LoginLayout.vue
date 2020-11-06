@@ -17,3 +17,8 @@ import { AppMixin } from "@/mixins/app";
 })
 export default class LoginLayout extends mixins(AppMixin) {}
 </script>
+<style lang="scss">
+.v--layout-login {
+	height: 100%;
+}
+</style>

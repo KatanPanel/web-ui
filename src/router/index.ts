@@ -1,42 +1,30 @@
 import Vue from "vue";
 import VueRouter, { NavigationGuardNext, Route, RouteConfig } from "vue-router";
-import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import Panel from "@/views/panel/Panel.vue";
 import { loadLanguage } from "@/i18n";
 import { Dictionary } from "vue-router/types/router";
-import { AUTH_TOKEN_KEY } from "@/store/auth";
-import store, { AUTH_MODULE, PANEL_MODULE } from "@/store";
-import { AUTH_VERIFY } from "@/store/auth/actions";
+import store, { PANEL_MODULE } from "@/store";
 import { LANGUAGE_STORAGE_KEY } from "@/store/mutations";
-import Account from "@/views/panel/account/Account.vue";
-import { IS_AUTHENTICATED } from "@/store/auth/getters";
-import Server from "@/views/panel/server/Server.vue";
-import { HOME_LAYOUT, LOGIN_LAYOUT, PANEL_LAYOUT } from "@/layouts";
-import { JOIN_PANEL, PANEL_SET_SERVER } from "@/store/panel/actions";
+import { LOGIN_LAYOUT, PANEL_LAYOUT } from "@/layouts";
+import { PANEL_SET_SERVER } from "@/store/panel/actions";
 import PanelHome from "@/views/panel/PanelHome.vue";
+import PanelAccount from "@/views/panel/account/PanelAccount.vue";
+import PanelServer from "@/views/panel/server/PanelServer.vue";
+import PanelPlugins from "@/views/panel/plugins/PanelPlugins.vue";
+import { SecureGuard } from "@/guards/secure.guard";
 
 export const HOME_ROUTE = "home";
 export const LOGIN_ROUTE = "login";
 export const PANEL_ROUTE = "panel";
-export const ACCOUNT_ROUTE = "account";
-export const SERVER_ROUTE = "server";
+export const PANEL_ACCOUNT_ROUTE = "panel.account";
+export const PANEL_SERVER_ROUTE = "panel.server";
+export const PANEL_PLUGINS_ROUTE = "panel.plugins";
 
 Vue.use(VueRouter);
 
 const vm: Vue = Vue.prototype;
 const routes: Array<RouteConfig> = [
-	{
-		path: "/",
-		name: HOME_ROUTE,
-		component: Home,
-		meta: { layout: HOME_LAYOUT },
-		beforeEnter(to: Route, from: Route, next: NavigationGuardNext) {
-			if (!store.getters[AUTH_MODULE.concat("/", IS_AUTHENTICATED)])
-				return next();
-			else return next({ name: LOGIN_ROUTE });
-		},
-	},
 	{
 		path: "/login",
 		name: LOGIN_ROUTE,
@@ -44,23 +32,10 @@ const routes: Array<RouteConfig> = [
 		meta: { layout: LOGIN_LAYOUT },
 	},
 	{
-		path: "/panel",
+		path: "/",
 		component: Panel,
 		meta: { layout: PANEL_LAYOUT },
-		beforeEnter(to: Route, from: Route, next: NavigationGuardNext) {
-			if (store.getters[AUTH_MODULE.concat("/", IS_AUTHENTICATED)])
-				return next();
-
-			store
-				.dispatch(AUTH_MODULE.concat("/", AUTH_VERIFY), {
-					token: vm.$storage.get(AUTH_TOKEN_KEY),
-				})
-				.then(() =>
-					store.dispatch(PANEL_MODULE.concat("/", JOIN_PANEL))
-				)
-				.then(next)
-				.catch(() => next({ name: LOGIN_ROUTE }));
-		},
+		beforeEnter: SecureGuard,
 		children: [
 			{
 				path: "",
@@ -69,15 +44,14 @@ const routes: Array<RouteConfig> = [
 			},
 			{
 				path: "account",
-				name: ACCOUNT_ROUTE,
-				component: Account,
+				name: PANEL_ACCOUNT_ROUTE,
+				component: PanelAccount,
 			},
 			{
 				path: "server/:serverId",
-				name: SERVER_ROUTE,
-				component: Server,
+				name: PANEL_SERVER_ROUTE,
+				component: PanelServer,
 				props: true,
-				alias: "servidor",
 				beforeEnter(to: Route, from: Route, next: NavigationGuardNext) {
 					store
 						.dispatch(PANEL_MODULE.concat("/", PANEL_SET_SERVER), {
@@ -85,6 +59,11 @@ const routes: Array<RouteConfig> = [
 						})
 						.then(next);
 				},
+			},
+			{
+				path: "plugins",
+				name: PANEL_PLUGINS_ROUTE,
+				component: PanelPlugins,
 			},
 		],
 	},

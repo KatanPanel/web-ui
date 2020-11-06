@@ -4,7 +4,7 @@
 			<p
 				v-t="{
 					path: 'footer.client-version',
-					args: { version: currentVersion }
+					args: { version: currentVersion },
 				}"
 			/>
 			<i18n path="footer.credits.icons" tag="p">

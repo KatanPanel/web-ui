@@ -13,7 +13,6 @@ import { SET_THEME } from "@/store/actions";
 @Component({
 	metaInfo(): MetaInfo {
 		return {
-			title: (this as Vue).$i18n.t("pages-title.home")! as string,
 			titleTemplate: `%s | ${process.env.VUE_APP_NAME}`,
 		};
 	},

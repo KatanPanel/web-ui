@@ -3,7 +3,7 @@
 		<v-container class="v--flex">
 			<v-navbar-content class="v--navbar-logo">
 				<li v-router-href="{ name: HOME_ROUTE }">
-					<img src="/img/katan-icon-white.png" alt="Katan Logo" >
+					<img alt="Katan Logo" src="/img/katan-icon-white.png" />
 				</li>
 			</v-navbar-content>
 			<v-navbar-content>
@@ -55,7 +55,7 @@
 							:src="`/img/flags/${currentLanguage.tag}.png`"
 							:alt="`${currentLanguage.name} Flag`"
 							class="v--navbar-flag"
-						>
+						/>
 						<template v-slot:items>
 							<v-dropdown-item
 								v-for="language in getSupportedLanguages"
@@ -66,7 +66,7 @@
 									:src="`/img/flags/${language.tag}.png`"
 									:alt="`${language.name} Flag`"
 									class="v--navbar-flag"
-								>
+								/>
 								<span>{{ language.name }}</span>
 							</v-dropdown-item>
 						</template>
@@ -79,7 +79,7 @@
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import VContainer from "@/components/ui/layout/VContainer.vue";
-import { ACCOUNT_ROUTE, HOME_ROUTE, LOGIN_ROUTE } from "@/router";
+import { HOME_ROUTE, LOGIN_ROUTE, PANEL_ACCOUNT_ROUTE } from "@/router";
 import VDropdown from "@/components/ui/dropdown/VDropdown.vue";
 import VDropdownItem from "@/components/ui/dropdown/VDropdownItem.vue";
 import VNavbarContent from "@/components/ui/navbar/VNavbarContent.vue";
@@ -96,6 +96,6 @@ export default class TheNavbar extends mixins<AppMixin, AuthMixin>(
 ) {
 	private readonly HOME_ROUTE = HOME_ROUTE;
 	private readonly LOGIN_ROUTE = LOGIN_ROUTE;
-	private readonly ACCOUNT_ROUTE = ACCOUNT_ROUTE;
+	private readonly ACCOUNT_ROUTE = PANEL_ACCOUNT_ROUTE;
 }
 </script>
