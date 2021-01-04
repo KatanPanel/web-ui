@@ -1,0 +1,97 @@
+{
+	"titles": {
+		"login": "Fazer login",
+		"panel": {
+			"home": "Painel de Controle",
+			"account": "Minha conta",
+			"server": "Servidor {server}",
+			"server-console": "Console - {server}",
+			"plugins": "Plug-ins",
+			"nodes": "Nós",
+			"settings": "Ajustes"
+		}
+	},
+	"header": {
+		"home": "Página inicial",
+		"docs": "Documentação",
+		"support": "Suporte",
+		"community": "Comunidade",
+		"api": "API",
+		"login": "Entrar",
+		"panel": {
+			"plugins": "Plug-ins",
+			"account": "Minha conta",
+			"nodes": "Nós"
+		}
+	},
+	"footer": {
+		"versions": {
+			"client": "Versão do cliente: {version}",
+			"server": "Versão do servidor: {version}"
+		},
+		"credits": {
+			"icons": "Ícones feitos por {0} de {1}."
+		}
+	},
+	"errors": {
+		"ECONNABORTED": "Tempo limite de resposta excedido.",
+		"Network Error": "Não foi possível estabelecer conexão com o servidor.",
+		"Unsupported": "Sua versão do servidor não suporta essa funcionalidade.",
+		"0": "Erro desconhecido ({0}), tente novamente mais tarde.",
+		"500": "Ocorreu um erro por parte do servidor durante a requisição.",
+		"2002": "Nome de usuário ou senha incorretos.",
+		"2004": "Nome de usuário ou senha incorretos."
+	},
+	"modules": {
+		"login": {
+			"title": "Fazer login",
+			"credentials-needed": "É necessário entrar na sua conta para acessar o painel",
+			"forgot-password": "Esqueceu sua senha?",
+			"fields": {
+				"username": "Nome de usuário",
+				"password": "Senha",
+				"confirm": "Continuar"
+			}
+		},
+		"panel": {
+			"error": {
+				"title": "Não foi possível conectar-se com o servidor",
+				"description": "Verifique se o servidor está ligado e configurado corretamente.",
+				"persistence": "Caso o problema persista, {0} para saber como instalar e configurar o web servidor do Katan.",
+				"click-here": "clique aqui"
+			},
+			"nodes": {
+				"description": "Nodes fazem parte da ferramenta nativa orquestração do Katan, permitindo que múltiplas instâncias sejam distribuídas em um cluster, controlando a quantidade, registro, deploy e atualização de servidores."
+			}
+		}
+	},
+	"settings": {
+		"title": "Configurações do site",
+		"description": "Customize o painel a seu gosto e configure o servidor remotamente.",
+		"language": "Idioma",
+		"language-contribute": "Você pode contribuir para que o Katan suporte mais idiomas, acesse nossa documentação para saber mais.",
+		"theme": "Tema",
+		"panel-settings": "Configurações do painel"
+	},
+	"permissions": {
+		"1": "Gerenciar nós do cl."
+	},
+	"routes": {
+		"/": "Pagina Inicial",
+		"panel": {
+			"account": "Minha conta",
+			"server": "Servidor",
+			"plugins": "Plug-Ins",
+			"nodes": "Nós",
+			"settings": "Ajustes"
+		}
+	},
+	"windows": {
+		"panel-server-console": "Console",
+		"panel-server-fs": "Gerenciador de Arquivos"
+	},
+	"themes": {
+		"light": "Claro",
+		"dark": "Escuro"
+	}
+}

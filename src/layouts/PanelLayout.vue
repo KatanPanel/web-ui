@@ -1,9 +1,9 @@
 <template>
 	<main class="v--layout-panel">
-		<div class="sidebar">
+		<div class="v--layout-panel-sidebar" id="v--layout-panel-sidebar">
 			<div class="sidebar-inner">
 				<div class="sidebar-logo">
-					<the-logo />
+					<the-logo color="white" />
 				</div>
 				<ul class="sidebar-items">
 					<router-link :to="{ name: PANEL_HOME_ROUTE }" tag="li">
@@ -11,22 +11,22 @@
 							<v-icon name="home" />
 						</a>
 					</router-link>
-					<router-link :to="{ name: PANEL_HOME_ROUTE }" tag="li">
+					<!-- <router-link :to="{ name: PANEL_HOME_ROUTE }" tag="li">
 						<a>
 							<v-icon name="fingerprint" />
 						</a>
-					</router-link>
+					</router-link> -->
 					<router-link :to="{ name: PANEL_PLUGINS_ROUTE }" tag="li">
 						<a>
 							<v-icon name="3d-modeling" />
 						</a>
 					</router-link>
-					<router-link :to="{ name: PANEL_HOME_ROUTE }" tag="li">
+					<router-link :to="{ name: PANEL_NODES_ROUTE }" tag="li">
 						<a>
-							<v-icon name="server-storage" />
+							<v-icon name="cloud-storage" />
 						</a>
 					</router-link>
-					<router-link :to="{ name: PANEL_HOME_ROUTE }" tag="li">
+					<router-link :to="{ name: PANEL_SETTINGS_ROUTE }" tag="li">
 						<a>
 							<v-icon name="cogwheel" />
 						</a>
@@ -41,35 +41,14 @@
 				</ul>
 			</div>
 		</div>
-		<!-- <div class="server-selector">
-			<v-label>Server list ({{ getServerList.length }})</v-label>
-			<ul>
-				<router-link tag="li" :to="{ name: 'server', params: { serverId: server.id.toString() } }" v-for="server in getServerList" :key="server.id" exact>
-					<a href="#" :title="server.name">
-						<div class="server-icon" :class="{ selected: getServer && getServer.id === server.id }">
-							<img :src="`/img/games/icons/${server.game.type.name.toLowerCase()}.png`" :alt="`${server.game.type.name} icon`">
-						</div>
-						<div class="server-info">
-							<div class="server-name" v-text="server.name"/>
-							<span class="server-ip">{{ server.host }}:{{ server.port }}</span>
-						</div>
-					</a>
-				</router-link>
-			</ul>
-		</div> -->
 		<div class="v--layout-panel-content">
 			<slot />
 		</div>
 	</main>
 </template>
 <script lang="ts">
-import { Component } from "vue-property-decorator";
-import TheNavbar from "@/components/TheNavbar.vue";
-import { mixins } from "vue-class-component";
-import { PanelMixin } from "@/mixins/panel";
-import TheNavbarItems from "@/components/TheNavbarItems.vue";
+import { Component, Vue } from "vue-property-decorator";
 import VContainer from "@/components/ui/layout/VContainer.vue";
-import { AuthMixin } from "@/mixins/auth";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import TheLogo from "@/components/TheLogo.vue";
 import VIcon from "@/components/ui/icon/VIcon.vue";
@@ -77,51 +56,65 @@ import {
 	PANEL_ACCOUNT_ROUTE,
 	PANEL_PLUGINS_ROUTE,
 	PANEL_ROUTE,
+	PANEL_NODES_ROUTE,
+	PANEL_SETTINGS_ROUTE,
 } from "@/router";
 
 @Component({
 	components: {
 		VIcon,
 		TheLogo,
-		TheNavbar,
 		VLabel,
 		VContainer,
-		TheNavbarItems,
 	},
 })
-export default class PanelLayout extends mixins(PanelMixin, AuthMixin) {
+export default class PanelLayout extends Vue {
 	private readonly PANEL_HOME_ROUTE = PANEL_ROUTE;
 	private readonly PANEL_PLUGINS_ROUTE = PANEL_PLUGINS_ROUTE;
 	private readonly PANEL_ACCOUNT_ROUTE = PANEL_ACCOUNT_ROUTE;
+	private readonly PANEL_NODES_ROUTE = PANEL_NODES_ROUTE;
+	private readonly PANEL_SETTINGS_ROUTE = PANEL_SETTINGS_ROUTE;
 }
 </script>
 <style lang="scss">
+$sidebar-width: 140px;
+
 .v--layout-panel {
 	display: flex;
-	flex-direction: row !important;
-	background-color: var(--layout-panel-background-color);
+	flex-direction: row !important; // override #app
+	background-color: var(--app-background);
 	color: var(--app-text-color);
+	position: relative;
 
 	.v--layout-panel-content {
-		padding: 48px;
+		position: relative;
 		flex: 1 0 auto;
+		padding: 48px;
 	}
 
-	.sidebar {
+	.v--layout-panel-sidebar {
 		position: relative;
 		height: 100vh;
-		width: 140px;
+		opacity: 1;
+		min-width: $sidebar-width;
+		box-shadow: rgba(0, 0, 0, 0.12) 4px 0 8px 0;
 
 		.v--katan-logo {
-			width: 50px;
-			height: 50px;
+			width: 64px;
+			height: 64px;
+		}
+
+		&[disabled] {
+			opacity: 0;
+			display: none;
 		}
 
 		.sidebar-inner {
-			max-width: 140px;
-			padding: 64px 48px;
-			background-color: var(--app-foreground);
+			max-width: $sidebar-width;
+			padding: 48px 0;
+			background-color: var(--layout-panel-sidebar-color);
 			position: fixed;
+			width: 100%;
 			height: 100%;
 			display: flex;
 			flex-direction: column;
@@ -154,7 +147,8 @@ export default class PanelLayout extends mixins(PanelMixin, AuthMixin) {
 
 				svg {
 					vertical-align: middle;
-					fill: var(--muted-color);
+					fill: #fff;
+					user-select: none;
 				}
 
 				&:not(:last-child) {
@@ -162,16 +156,15 @@ export default class PanelLayout extends mixins(PanelMixin, AuthMixin) {
 				}
 
 				&:hover:not(.router-link-exact-active) {
-					background-color: var(--app-foreground-overlay);
+					background-color: rgba(255, 255, 255, 0.12);
 				}
 
 				&.router-link-exact-active.router-link-active {
-					background-color: var(--primary-color);
-					box-shadow: rgba(0, 0, 0, 0.12) 0 0 4px 4px;
-
+					background-color: var(--app-foreground-overlay);
 					svg {
-						fill: #fff;
+						fill: var(--primary-color);
 					}
+					box-shadow: rgba(0, 0, 0, 0.12) 0 0 4px 4px;
 				}
 			}
 		}

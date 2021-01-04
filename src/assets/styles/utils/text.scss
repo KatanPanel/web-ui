@@ -1,11 +1,61 @@
+/*!
+ * Copyright (c) 2020-present Katan
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 .v--text-error {
 	color: var(--danger-color);
 }
 
-.v--text-inverse {
-	color: var(--text-inverse-color);
+.v--text-primary {
+	color: var(--primary-color);
+}
+
+.v--text-muted {
+	color: var(--muted-color);
 }
 
 .v--text-align-center {
 	text-align: center;
+}
+
+.v--text-uppercase {
+	text-transform: uppercase;
+}
+
+.v--text-fw-400 {
+	font-weight: 400;
+}
+
+.v--text-fw-500 {
+	font-weight: 500;
+}
+
+.v--text-fw-600 {
+	font-weight: 600;
+}
+
+.v--text-fw-700 {
+	font-weight: 700;
+}
+
+.v--text-fw-800 {
+	font-weight: 800;
 }

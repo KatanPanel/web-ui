@@ -1,0 +1,79 @@
+{
+	"titles": {
+		"login": "Sign In",
+		"panel": {
+			"home": "Control Panel",
+			"account": "My account",
+			"server": "{server} server",
+			"server-console": "Console - {server}",
+			"plugins": "Plugins",
+			"nodes": "Nodes",
+			"settings": "Settings"
+		}
+	},
+	"header": {
+		"home": "Home",
+		"docs": "Documentation",
+		"support": "Support",
+		"community": "Community",
+		"api": "Developers API",
+		"login": "Log In",
+		"panel": {
+			"plugins": "Plugins",
+			"account": "My account",
+			"nodes": "Nodes",
+			"settings": "Settings"
+		}
+	},
+	"footer": {
+		"versions": {
+			"client": "Client version: {version}",
+			"server": "Server version: {version}"
+		},
+		"credits": {
+			"icons": "Icons made by {0} from {1}."
+		}
+	},
+	"errors": {
+		"ECONNABORTED": "Response timeout exceeded.",
+		"Network Error": "Could not connect to the server.",
+		"Unsupported": "Your version of the server does not support this functionality.",
+		"0": "Unknown error.",
+		"500": "Could not connect to the server.",
+		"2002": "Invalid username or wrong password.",
+		"2004": "Invalid username or wrong password."
+	},
+	"modules": {
+		"login": {
+			"title": "Sign In",
+			"credentials-needed": "Enter your account credentials to access the panel.",
+			"forgot-password": "Forgot your password?",
+			"fields": {
+				"username": "Username",
+				"password": "Password",
+				"confirm": "Continue"
+			}
+		},
+		"panel": {
+			"error": {
+				"title": "Could not connect to the server",
+				"description": "Check if the server is started and configured correctly.",
+				"persistence": "If the problem persists, {0} to learn how to install and configure the Katan web server.",
+				"click-here": "click here"
+			},
+			"nodes": {
+				"description": "Nodes are part of Katan's native orchestration tool, allowing multiple instances to be distributed in a cluster, controlling the number, registration, deploy and update of servers."
+			},
+			"settings": {
+				"title": "Settings",
+				"description": "Customize the panel as you like and configure the server remotely.",
+				"language": "Language",
+				"language-contribute": "You can help Katan support more languages, visit our documentation to learn more.",
+				"theme": "Theme",
+				"default-theme": "Light",
+				"dark-theme": "Dark",
+				"panel-settings": "Panel settings"
+			}
+		}
+	}
+}

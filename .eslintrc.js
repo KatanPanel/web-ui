@@ -24,6 +24,7 @@ module.exports = {
 		"vue/comma-dangle": "warn",
 		"vue/script-indent": ["error", "tab"],
 		"vue/max-attributes-per-line": "off",
+		"@typescript-eslint/no-explicit-any": "off",
 	},
 	overrides: [
 		{
