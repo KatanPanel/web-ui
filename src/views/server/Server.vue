@@ -1,5 +1,6 @@
 <template>
 	<div class="server">
+		<div class="server-info">AAA</div>
 		<div class="server-header">
 			<h1 class="v--text-primary v--text-fw-800">
 				{{ getWindow.data.id }}. {{ getWindow.data.name }}
@@ -80,5 +81,8 @@ export default class Server extends mixins(AppMixin, WindowMixin) {
 <style lang="scss" scoped>
 .server {
 	position: relative;
+
+	.server-info {
+	}
 }
 </style>
