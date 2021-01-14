@@ -47,14 +47,16 @@ export class RootWebSocketState {
 	public isConnected = false;
 	public readonly listeners: Map<string, Function[]> = new Map();
 
-	private ensureConnected(): void {
-		if (!this.isConnected) throw new Error("Not yet connected");
+	public sendMessage(object: any): void {
+		if (this.isConnected) this.sendMessageImmediate(object);
+		else
+			this.on("connect", () => {
+				this.sendMessageImmediate(object);
+			});
 	}
 
-	public sendMessage(object: any): void {
-		this.on("connect", () => {
-			this.native?.send(JSON.stringify(object));
-		});
+	private sendMessageImmediate(object: any): void {
+		this.native?.send(JSON.stringify(object));
 	}
 
 	public sendOp(op: number, data: any): void {
