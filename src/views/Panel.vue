@@ -226,6 +226,7 @@ export default class Panel extends mixins(AppMixin, AuthMixin) {
 		z-index: 1001;
 		box-shadow: var(--primary-color) -2px 0 8px 0;
 		min-width: 30%;
+		max-width: 30%;
 
 		.window-item {
 			list-style: none;
