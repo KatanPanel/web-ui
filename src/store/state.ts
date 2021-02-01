@@ -33,8 +33,7 @@ export interface RootState {
 	socket: RootWebSocketState;
 	language: Language | null;
 	theme: string;
-	serverList: any[] | null;
-	serverInfo: any;
+	serverInfo: any | null;
 	allWindows: Array<Window>;
 	navigationHistory: Array<Route>;
 }
@@ -69,9 +68,16 @@ export class RootWebSocketState {
 	}
 
 	public on(event: string, listener: Function): void {
-		if (this.isConnected) return listener();
-
+		if (event === "connect" && this.isConnected) return listener();
 		commit(ROOT_MODULE, ON_SOCKET_LISTENER_ADD, { event, listener });
+	}
+
+	public onOp(op: number, listener: Function): void {
+		this.on("message", (data: any) => {
+			if (!data.op) return;
+
+			listener(data.d);
+		});
 	}
 
 	public callListeners(type: string, ...parameters: any[]): void {
