@@ -28,8 +28,7 @@ import {
 	GET_STORED_ACCOUNTS,
 	IS_LOGGED_IN,
 } from "@/store/auth/getters";
-import { joinBySlash } from "@/utils/text";
-import { dispatch, get } from "@/utils/vuex";
+import { dispatch, get } from "@/common/utils/vuex";
 import { AUTH_LOGOUT } from "@/store/auth/actions";
 
 /**

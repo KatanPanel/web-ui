@@ -20,10 +20,23 @@
  * SOFTWARE.
  */
 
-export function debug(message: string) {
-	console.log("[DEBUG] " + message);
+export function easeInOutQuad(
+	currentTime: number,
+	start: number,
+	change: number,
+	duration: number
+): number {
+	let newCurrentTime = currentTime;
+	newCurrentTime /= duration / 2;
+
+	if (newCurrentTime < 1) {
+		return (change / 2) * newCurrentTime * newCurrentTime + start;
+	}
+
+	newCurrentTime -= 1;
+	return (-change / 2) * (newCurrentTime * (newCurrentTime - 2) - 1) + start;
 }
 
-export function warn(message: string, ...parameters: any[]) {
-	console.warn(`[WARN] ${message}`, parameters);
+export function percentage(from: number, to: number): number {
+	return (100 * from) / to;
 }

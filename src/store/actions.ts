@@ -22,38 +22,23 @@
 
 import { ActionContext, ActionTree } from "vuex";
 import { Language, RootState } from "@/store/state";
-import { SET_LANGUAGE, SET_THEME } from "@/store/mutations";
+import {
+	SET_LANGUAGE,
+	SET_THEME,
+	UPDATE_NAVIGATION_HISTORY,
+} from "@/store/mutations";
 import { AxiosError, AxiosResponse } from "axios";
-import { ON_JOIN } from "@/store/mutations";
 import Vue from "vue";
+import { Route } from "vue-router";
 
 export const UPDATE_THEME = "updateTheme";
 export const UPDATE_LANGUAGE = "updateLanguage";
-export const JOIN_PANEL = "joinPanel";
 export const LOAD_SERVER = "loadServer";
+export const RECORD_NAVIGATION = "recordNavigation";
 
 const vm: Vue = Vue.prototype;
 
 export default {
-	/**
-	 * Enter the panel and automatically send an HTTP request to the
-	 * server requesting the entire list of available servers.
-	 * @param {ActionContext} ctx
-	 */
-	[JOIN_PANEL](ctx: ActionContext<RootState, RootState>): Promise<void> {
-		return vm
-			.$http({
-				url: `/servers`,
-				method: "get",
-				withCredentials: true,
-			})
-			.then((res: AxiosResponse) => {
-				ctx.commit(ON_JOIN, {
-					serverList: res.data.data,
-				});
-			});
-	},
-
 	/**
 	 * Send an HTTP request to the server requesting information
 	 * from the server with the id specified by the {@param payload}.
@@ -84,7 +69,7 @@ export default {
 			theme: string;
 		}
 	): void {
-		ctx.commit(SET_THEME, payload);
+		ctx.commit(SET_THEME, { theme: payload.theme });
 	},
 	[UPDATE_LANGUAGE](
 		ctx: ActionContext<RootState, RootState>,
@@ -92,6 +77,14 @@ export default {
 			language: Language;
 		}
 	): void {
-		ctx.commit(SET_LANGUAGE, payload);
+		ctx.commit(SET_LANGUAGE, { language: payload.language });
+	},
+	[RECORD_NAVIGATION](
+		ctx: ActionContext<RootState, RootState>,
+		payload: {
+			to: Route;
+		}
+	): void {
+		ctx.commit(UPDATE_NAVIGATION_HISTORY, { to: payload.to });
 	},
 } as ActionTree<RootState, RootState>;

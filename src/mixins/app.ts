@@ -25,16 +25,8 @@ import Component from "vue-class-component";
 import { DARK_THEME, Language, LIGHT_THEME, Window } from "@/store/state";
 import { GET_ALL_WINDOWS, GET_LANGUAGE, GET_THEME } from "@/store/getters";
 import { loadLanguage } from "@/i18n";
-import { dispatch, get } from "@/utils/vuex";
-import {
-	ROOT_MODULE,
-	getOpenWindows,
-	getServerList,
-	THEME_CACHE_KEY,
-	getWindow,
-	openWindow,
-	closeWindow,
-} from "@/store";
+import { dispatch, get } from "@/common/utils/vuex";
+import { ROOT_MODULE, THEME_CACHE_KEY } from "@/store";
 import { supportedLanguages } from "@/supported-languages";
 import { UPDATE_THEME } from "@/store/actions";
 

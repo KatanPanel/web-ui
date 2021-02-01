@@ -26,7 +26,7 @@ import actions, { AUTH_VERIFY } from "@/store/auth/actions";
 import mutations from "@/store/auth/mutations";
 import getters, { IS_LOGGED_IN } from "@/store/auth/getters";
 import { RootState } from "@/store/state";
-import { dispatch, get } from "@/utils/vuex";
+import { dispatch, get } from "@/common/utils/vuex";
 import { AUTH_MODULE } from "@/store";
 import Vue from "vue";
 

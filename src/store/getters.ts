@@ -22,15 +22,16 @@
 
 import { GetterTree } from "vuex";
 import { Language, RootState, RootWebSocketState } from "@/store/state";
-import { Window } from "@/store/state";
+import { Window } from "@/common/navigation/window";
+import { Route } from "vue-router";
 
 export const GET_SOCKET = "getSocket";
 export const GET_LANGUAGE = "getLanguage";
 export const GET_THEME = "getTheme";
-export const GET_PANEL_SERVER_LIST = "getServerList";
 export const GET_BACKEND_INFO = "getBackendInfo";
 export const GET_WINDOW = "getWindow";
 export const GET_ALL_WINDOWS = "getAllWindows";
+export const GET_NAVIGATION_HISTORY = "getNavigationHistory";
 
 export default {
 	[GET_SOCKET](state: RootState): RootWebSocketState {
@@ -42,22 +43,22 @@ export default {
 	[GET_THEME](state: RootState): string {
 		return state.theme;
 	},
-	[GET_PANEL_SERVER_LIST](state: RootState): any[] | null {
-		return state.serverList;
-	},
-	[GET_BACKEND_INFO](state: RootState): any {
+	[GET_BACKEND_INFO](state: RootState): any | null {
 		return state.serverInfo;
 	},
 	[GET_ALL_WINDOWS](state: RootState): Array<Window> {
 		return state.allWindows;
 	},
-	[GET_WINDOW](state: RootState) {
+	[GET_WINDOW](state: RootState): (windowId: number) => Window | null {
 		return (windowId: number) => {
 			return (
 				state.allWindows.find(
-					(window: Window) => window.windowId === windowId
+					(window: Window) => window.id === windowId
 				) || null
 			);
 		};
+	},
+	[GET_NAVIGATION_HISTORY](state: RootState): Array<Route> {
+		return state.navigationHistory;
 	},
 } as GetterTree<RootState, RootState>;

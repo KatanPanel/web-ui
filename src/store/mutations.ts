@@ -21,11 +21,24 @@
  */
 
 import { MutationTree } from "vuex";
-import { Language, RootState, Window } from "@/store/state";
+import { Language, RootState } from "@/store/state";
 import Vue from "vue";
-import { getWindow, LANGUAGE_CACHE_KEY } from "@/store";
-import { debug } from "@/utils/log";
-import { WEB_SOCKET_LOG_TAG, WINDOWS_LOG_TAG } from "@/logging";
+import { LANGUAGE_CACHE_KEY } from "@/store";
+import {
+	ROUTER_NAVIGATION_LOG_TAG,
+	WEB_SOCKET_LOG_TAG,
+	WINDOWS_LOG_TAG,
+} from "@/logging";
+import {
+	getWindow,
+	getWindows,
+	MinimizedWindowState,
+	OpenWindowState,
+	updateWindow,
+	updateWindowState,
+	Window,
+} from "@/common/navigation/window";
+import { Route } from "vue-router";
 
 export const ON_SOCKET_OPEN = "onSocketConnect";
 export const ON_SOCKET_CLOSE = "onSocketDisconnect";
@@ -34,19 +47,19 @@ export const ON_SOCKET_MESSAGE = "onSocketMessage";
 export const ON_SOCKET_LISTENER_ADD = "onSocketListenerAdd";
 export const SET_LANGUAGE = "setLanguage";
 export const SET_THEME = "setTheme";
-export const ON_JOIN = "onJoin";
-export const ON_WINDOW_OPEN = "onWindowOpen";
-export const ON_WINDOW_CLOSE = "onWindowClose";
-export const ON_WINDOW_REMOVE = "onWindowRemove";
-export const ON_WINDOW_ROUTE_UPDATE = "onWindowRouteUpdate";
-export const ON_WINDOW_TITLE_UPDATE = "onWindowTitleUpdate";
-export const ON_WINDOW_VISIBILITY_UPDATE = "onWindowVisibilityUpdate";
-export const ON_BACKEND_INFO_UPDATE = "onBackendInfoUpdate";
+export const OPEN_WINDOW = "openWindow";
+export const MINIMIZE_WINDOW = "minimizeWIndow";
+export const UPDATE_WINDOW = "updateWindow";
+export const UPDATE_BACKEND_INFO = "updateBackendInfo";
+export const UPDATE_NAVIGATION_HISTORY = "updateNavigationHistory";
 
 const vm: Vue = Vue.prototype;
 
-function updateDocumentTheme(theme: string): void {
-	document.querySelector("body")!.setAttribute("data-theme", theme);
+function catchWindowNotFound(window: any): void {
+	vm.$consola.info({
+		tag: WINDOWS_LOG_TAG,
+		message: `Window ${window} not found`,
+	});
 }
 
 export default {
@@ -72,11 +85,7 @@ export default {
 		state.socket.callListeners("error");
 	},
 	[ON_SOCKET_MESSAGE](state: RootState, message) {
-		/* vm.$consola.info({
-			tag: WS_LOG_TAG,
-			message: message,
-		}); */
-
+		console.log("message:", message);
 		state.socket.callListeners("message", message);
 	},
 	[ON_SOCKET_LISTENER_ADD](
@@ -102,12 +111,11 @@ export default {
 		}
 	) {
 		state.theme = payload.theme;
-		updateDocumentTheme(payload.theme);
+		document
+			.querySelector("body")!
+			.setAttribute("data-theme", payload.theme);
 	},
-	[ON_JOIN](state: RootState, payload: { serverList: any[] | null }) {
-		state.serverList = payload.serverList;
-	},
-	[ON_WINDOW_OPEN](state: RootState, payload: { window: Window }) {
+	[OPEN_WINDOW](state: RootState, payload: { window: Window }) {
 		const openWindows = state.allWindows;
 		if (
 			openWindows.findIndex(
@@ -116,23 +124,23 @@ export default {
 		)
 			openWindows.push(payload.window);
 
-		payload.window.isOpen = true;
+		updateWindowState(payload.window, OpenWindowState);
 		vm.$consola.success({
 			tag: WINDOWS_LOG_TAG,
-			message: `Window ${payload.window.windowId} opened`,
+			message: `Window ${payload.window.id} opened`,
 		});
 	},
-	[ON_WINDOW_CLOSE](state: RootState, payload: { window: number }) {
-		const window = getWindow(payload.window);
-		if (!window) {
-			vm.$consola.info({
-				tag: WINDOWS_LOG_TAG,
-				message: `Window ${payload.window} not found`,
-			});
+	[MINIMIZE_WINDOW](state: RootState, payload: { window?: number }) {
+		if (!payload || !payload.window) {
+			for (const window of getWindows())
+				updateWindowState(window, MinimizedWindowState);
 			return;
 		}
 
-		window.isOpen = false;
+		const window = getWindow(payload.window);
+		if (!window) return catchWindowNotFound(payload.window);
+
+		updateWindowState(window, MinimizedWindowState);
 
 		/* const remaining = state.allWindows.filter(
 			(window: Window) => window.isOpen
@@ -145,91 +153,52 @@ export default {
 				router.push(fallback.getLocation());
 		} */
 	},
-	[ON_WINDOW_REMOVE](state: RootState, payload: { windowId: number }) {
-		debug(`Closing window ${payload.windowId}...`);
-		/* const openWindows = state.allWindows;
-		if (
-			openWindows.splice(
-				openWindows.findIndex(
-					(window: Window) => window.windowId === payload.windowId
-				)!,
-				1
-			).length === 0
-		) {
-			warn(`Couldn't delete window ${payload.windowId}.`);
-			return;
-		}
-
-		const currentWindow = state.currentOpenWindow;
-		if (!currentWindow) return;
-
-		debug(`Updating current window`);
-		if (currentWindow.windowId !== payload.windowId) return;
-
-		state.currentOpenWindow = null;
-		if (openWindows.length === 0) {
-			debug("No windows are open, closing.");
-			// router.push({ name: PANEL_ROUTE });
-			return;
-		}
-
-		debug("Trying to switch from closed window.");
-		router.push(openWindows[openWindows.length - 1].route, () => {
-			debug("Switched from closed window.");
-		}); */
-	},
-	[ON_WINDOW_ROUTE_UPDATE](
+	[UPDATE_WINDOW](
 		state: RootState,
-		payload: { window: number; route: string }
+		payload: { window: Window; payload: any }
 	) {
-		const window = getWindow(payload.window);
-		if (!window) {
-			vm.$consola.info({
-				tag: WINDOWS_LOG_TAG,
-				message: `Window ${payload.window} not found`,
-			});
-			return;
-		}
-
-		window.route = payload.route;
+		Object.assign(payload.window, payload.payload);
 		vm.$consola.info({
 			tag: WINDOWS_LOG_TAG,
-			message: `Window ${payload.window} route changed: ${payload.route}`,
+			message: `Window "${payload.window.name}" updated.`,
+			args: [payload.payload],
 		});
 	},
-	[ON_WINDOW_TITLE_UPDATE](
-		state: RootState,
-		payload: { window: number; title: string }
-	) {
-		const window = getWindow(payload.window);
-		if (!window) {
-			vm.$consola.info({
-				tag: WINDOWS_LOG_TAG,
-				message: `Window ${payload.window} not found`,
-			});
-			return;
-		}
-
-		window.title = payload.title;
-		vm.$consola.info({
-			tag: WINDOWS_LOG_TAG,
-			message: `Window ${payload.window} title changed: ${payload.title}`,
-		});
-	},
-	[ON_WINDOW_VISIBILITY_UPDATE](
-		state: RootState,
-		payload: {
-			window: Window;
-			isOpen: boolean;
-		}
-	) {
-		payload.window.isOpen = payload.isOpen;
-		vm.$consola.info({
-			tag: WINDOWS_LOG_TAG,
-			message: `Window ${payload.window.windowId} visibility changed: ${payload.isOpen}`,
-		});
-	},
-	[ON_BACKEND_INFO_UPDATE](state: RootState, payload: any) {
+	[UPDATE_BACKEND_INFO](state: RootState, payload: any) {
 		state.serverInfo = payload;
+	},
+	[UPDATE_NAVIGATION_HISTORY](state: RootState, { to }: { to: Route }) {
+		const history = state.navigationHistory;
+
+		// page reload
+		if (history.length > 0 && history[history.length - 1].name == to.name) {
+			history.pop();
+			history.push(to);
+			vm.$consola.info({
+				message: "[~] Route page reloaded.",
+				tag: ROUTER_NAVIGATION_LOG_TAG,
+				args: [to],
+			});
+			return;
+		}
+
+		// page update (previous)
+		if (history.length > 1 && history[history.length - 2].name == to.name) {
+			vm.$consola.info({
+				message: "[<] Route switched to previous page.",
+				tag: ROUTER_NAVIGATION_LOG_TAG,
+				args: [to],
+			});
+			history.pop();
+			return;
+		}
+
+		// page update (next)
+		history.push(to);
+		vm.$consola.info({
+			message: "[>] Route switched to next page.",
+			tag: ROUTER_NAVIGATION_LOG_TAG,
+			args: [to],
+		});
 	},
 } as MutationTree<RootState>;

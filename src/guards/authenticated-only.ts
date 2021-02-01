@@ -21,12 +21,9 @@
  */
 
 import { NavigationGuard, NavigationGuardNext, Route } from "vue-router";
-import { ROOT_MODULE } from "@/store";
-import { AUTH_TOKEN_KEY, isLoggedIn, verifyAuth } from "@/store/auth";
-import { JOIN_PANEL } from "@/store/actions";
+import { AUTH_TOKEN_KEY, verifyAuth } from "@/store/auth";
 import { LOGIN_ROUTE } from "@/router";
 import Vue from "vue";
-import { dispatch } from "@/utils/vuex";
 
 const vm: Vue = Vue.prototype;
 export const AuthenticatedOnlyGuard: NavigationGuard = (
@@ -38,7 +35,7 @@ export const AuthenticatedOnlyGuard: NavigationGuard = (
 
 	return verifyAuth()
 		.then(() => {
-			dispatch(ROOT_MODULE, JOIN_PANEL).then(() => next());
+			next();
 		})
 		.catch(() => {
 			next({ name: LOGIN_ROUTE });

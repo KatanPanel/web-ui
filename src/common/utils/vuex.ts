@@ -21,11 +21,10 @@
  */
 
 import store from "@/store";
-import { joinBySlash } from "@/utils/text";
-import { Mutation, Action, Getter, Store } from "vuex";
+import { joinBySlash } from "@/common/utils/text";
 
 /**
- * Returns the result of a {@link Getter} in the {@link Store}.
+ * Returns the result of a getter.
  * @param {string} module - getter's module name.
  * @param {string} getter - getter's name.
  * @param {...*} parameters - optional parameters to call the getter.
@@ -42,7 +41,7 @@ export function get<T = any>(
 }
 
 /**
- * Commit a {@link Mutation} to the {@link Store}.
+ * Commits a mutation to the {@link Store}.
  * @param {string} module - mutation's module name.
  * @param {string} mutation - mutation's name.
  * @param {*} payload - optional mutation data.
@@ -52,7 +51,7 @@ export function commit<T = any>(module: string, mutation: string, payload?: T) {
 }
 
 /**
- * Dispatches an {@link Action} to the {@link Store}.
+ * Dispatches an action to the {@link Store}.
  * @param {string} module - action's module name.
  * @param {string} action - action's name.
  * @param {T} payload - optional action data.

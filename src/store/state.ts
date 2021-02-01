@@ -20,10 +20,11 @@
  * SOFTWARE.
  */
 
-import { Location, Route } from "vue-router";
-import { commit } from "@/utils/vuex";
+import { commit } from "@/common/utils/vuex";
 import { ROOT_MODULE } from "@/store/index";
 import { ON_SOCKET_LISTENER_ADD } from "@/store/mutations";
+import { Window } from "@/common/navigation/window";
+import { Route } from "vue-router";
 
 export const LIGHT_THEME = "light";
 export const DARK_THEME = "dark";
@@ -35,6 +36,7 @@ export interface RootState {
 	serverList: any[] | null;
 	serverInfo: any;
 	allWindows: Array<Window>;
+	navigationHistory: Array<Route>;
 }
 
 export type Language = {
@@ -81,54 +83,6 @@ export class RootWebSocketState {
 	}
 }
 
-/**
- * Through the control panel it is possible to open multiple server tabs at the same time,
- * these tabs are called windows and each one is represented by this interface.
- */
-export interface Window {
-	/**
-	 * Returns the window identification number, the default being its opening order.
-	 */
-	windowId: number;
-
-	/**
-	 * Returns the name of the window, this property is immutable.
-	 */
-	windowName: string;
-
-	/**
-	 * Returns data from the server being accessed in that window.
-	 */
-	data: any;
-
-	/**
-	 * Returns the current route on which the window is active.
-	 */
-	route: string;
-
-	title: string;
-
-	tasks: WindowTask[];
-
-	isOpen: boolean;
-
-	getLocation(): Location;
-
-	matchesLocation(route: Route): boolean;
-}
-
-export interface WindowTask {
-	type: number;
-
-	style: number;
-
-	title: string;
-
-	progress: number;
-}
-
-export const PROGRESS_TASK_STYLE = 1;
-
 export default {
 	socket: new RootWebSocketState(),
 	language: null,
@@ -136,4 +90,5 @@ export default {
 	serverList: null,
 	serverInfo: null,
 	allWindows: [],
+	navigationHistory: [],
 } as RootState;

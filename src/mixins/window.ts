@@ -28,8 +28,9 @@ import {
 	PANEL_SERVER_ROUTE,
 } from "@/router";
 import { GET_WINDOW } from "@/store/getters";
-import { Window } from "@/store/state";
-import { get } from "@/utils/vuex";
+import { get } from "@/common/utils/vuex";
+import { Dictionary } from "vue-router/types/router";
+import { Window } from "@/common/navigation/window";
 
 /**
  * This mixin is used in the child components of the server route, it serves as a short path
