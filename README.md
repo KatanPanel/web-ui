@@ -6,8 +6,10 @@ Katan is built in a modularly independent way, one thing depends on the other bu
 The UI has several features such as visualization of data in real time such as use of resources and logs, handling of users, roles and servers.
 
 ## Installation
+Before starting, you will need to set up some environment variables, use the [.env.example](https://github.com/KatanPanel/katan-ui/blob/dev/.env.example) file as an example to define them.
+
 ### Docker
-It is recommended that you install the UI using Docker, it will make your life much easier and the installation will be very fast.\
+It is recommended that you install the UI using Docker, it will make your life much easier.\
 Follow the tutorial for installing the UI using Docker through the [Official Documentation](https://github.com/KatanPanel/katan-website).
 
 ### Self-Hosted
@@ -23,11 +25,13 @@ After cloning, install the dependencies and build.
 $ npm install
 ```
 
+For production optimized builds
 ```
-// production build
 $ npm run build
+```
 
-// serve for development
+Serve for development
+```
 $ npm run serve
 ```
 
