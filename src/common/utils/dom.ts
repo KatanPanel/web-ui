@@ -30,7 +30,7 @@ export function isChildNode(
 	if (element == node) return true;
 	if (element.contains(node)) return true;
 
-	// tailrec
+	// tail rec -- opt
 	return isChildNode(element.childNodes[0], node);
 }
 
