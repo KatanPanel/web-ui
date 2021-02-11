@@ -21,27 +21,6 @@
  */
 
 /**
- * Returns `true` if the {@param value} is `undefined` or `false` otherwise.
- * @param {*} value - the value.
+ * Message's operation code is invalid.
  */
-export function isUndefined(value: any): boolean {
-	return typeof value === "undefined";
-}
-
-/**
- * Returns `true` if the {@param value} is a number or `false` otherwise.
- * @param {*} value - the value.
- */
-export function isNumber(value: any): boolean {
-	return typeof value === "number";
-}
-
-/**
- * Returns `null` if the {@param value} is `undefined` or the value itself otherwise.
- * @param {T | null | undefined} value - the value.
- */
-export function undefinedToNull<T = any>(
-	value: T | null | undefined
-): T | null {
-	return value || null;
-}
+export const INVALID_OP = -1;
