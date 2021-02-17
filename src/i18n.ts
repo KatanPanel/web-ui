@@ -24,10 +24,9 @@ import Vue from "vue";
 import VueI18n from "vue-i18n";
 import { ROOT_MODULE } from "@/store";
 import { supportedLanguages } from "./supported-languages";
-import { dispatch } from "@/utils/vuex";
+import { dispatch } from "@/common/utils/vuex";
 import { UPDATE_LANGUAGE } from "@/store/actions";
-import dayjs from "dayjs";
-import { Language } from "@/store/state";
+import * as dayjs from "dayjs";
 
 Vue.use(VueI18n);
 
@@ -43,35 +42,49 @@ const i18n = new VueI18n({
 });
 
 const vm: Vue = Vue.prototype;
-export function updateLanguage(language: string) {
+
+async function importDayJSLocale(code: string) {
+	return import(
+		/* webpackChunkName: "dayjs-locale-[request]" */ `dayjs/locale/${code}`
+	);
+}
+
+export async function updateLanguage(language: string) {
 	(vm.$i18n || i18n).locale = language;
 
 	const lower = language.toLowerCase();
-	import(/* webpackChunkName: "locale-[request]" */ `dayjs/locale/${lower}`)
-		.then(() => {
-			dayjs.locale(lower);
-		})
-		.catch(() => {
-			vm.$consola.error({
+	let locale;
+	try {
+		locale = await importDayJSLocale(lower);
+	} catch (e) {
+		// try to load simplified locale name, ex: en_US -> en
+		const separator = lower.indexOf("-");
+		if (separator)
+			locale = await importDayJSLocale(lower.substr(0, separator));
+		else {
+			vm.$log.error({
 				tag: I18N_LOG_TAG,
 				message: `Cannot load the translations for ${language} date and time.`,
 			});
-		});
+			return;
+		}
+	}
 
-	vm.$consola.info({
+	dayjs.locale(locale);
+	vm.$log.info({
 		tag: I18N_LOG_TAG,
 		message: `Document language updated to ${language}.`,
 	});
 	document.querySelector("html")!.setAttribute("lang", language);
 }
 
-export function setLanguage(language: string) {
+export async function setLanguage(language: string) {
 	const supported = supportedLanguages.find(
 		(value) => language === value.tag
 	);
 
 	if (!supported) {
-		vm.$consola.error({
+		vm.$log.error({
 			tag: I18N_LOG_TAG,
 			message: `Unsupported language: ${language}.`,
 		});
@@ -85,41 +98,42 @@ export function setLanguage(language: string) {
 
 	dispatch(ROOT_MODULE, UPDATE_LANGUAGE, {
 		language: supported,
-	}).then(() => {
-		updateLanguage(language);
-	});
+	}).then(async () => updateLanguage(language));
 }
 
 export async function loadLanguage(
 	language: string,
 	fallback: ReadonlyArray<string> = []
 ) {
+	if (i18n.locale === language) return;
+
 	if (loaded.includes(language)) {
-		vm.$consola.info({
+		vm.$log.info({
 			tag: I18N_LOG_TAG,
 			message: `Reloading language "${language}"...`,
 		});
 		return setLanguage(language);
 	}
 
-	vm.$consola.info({
+	vm.$log.info({
 		tag: I18N_LOG_TAG,
 		message: `Loading language "${language}"...`,
 	});
 	return import(
 		/* webpackChunkName: "lang-[request]" */ `./lang/${language}.json`
 	)
-		.then((messages) => {
+		.then(async (messages) => {
 			(vm.$i18n || i18n).setLocaleMessage(language, messages);
 			loaded.push(language);
-			vm.$consola.info({
+			vm.$log.info({
 				tag: I18N_LOG_TAG,
 				message: `Language "${language}" loaded.`,
 			});
-			setLanguage(language);
+
+			await setLanguage(language);
 		})
 		.catch(async (e) => {
-			vm.$consola.info({
+			vm.$log.info({
 				tag: I18N_LOG_TAG,
 				message: `Cannot load language ${language}.`,
 			});
