@@ -21,7 +21,7 @@
  */
 
 import Vue from "vue";
-import Axios from "axios";
+import Axios, { AxiosResponse } from "axios";
 import Consola, {
 	ConsolaReporter,
 	ConsolaReporterArgs,
@@ -30,6 +30,7 @@ import Consola, {
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import { ERROR_HANDLER_LOG_TAG } from "@/logging";
 
 const vm: Vue = Vue.prototype;
 vm.$isDevelopmentMode = process.env.NODE_ENV === "development";
@@ -41,15 +42,24 @@ vm.$http = Axios.create({
 	baseURL: process.env.VUE_APP_API_URL,
 	timeout: 5000,
 });
+vm.$http.interceptors.response.use(
+	(response: AxiosResponse) => response,
+	(error: any) => {
+		vm.$log.error({
+			tag: ERROR_HANDLER_LOG_TAG,
+			args: [error],
+		});
+
+		throw error;
+	}
+);
 
 dayjs.extend(advancedFormat);
 dayjs.extend(localizedFormat);
 vm.$time = dayjs;
 
 class KatanBrowserReporter implements ConsolaReporter {
-	private readonly COLOR = "#8854d0";
-
-	log(logObj: ConsolaReporterLogObject, args: ConsolaReporterArgs): void {
+	log(logObj: ConsolaReporterLogObject, _args: ConsolaReporterArgs): void {
 		const consoleLogFn =
 			logObj.level < 1
 				? console.error
@@ -57,18 +67,18 @@ class KatanBrowserReporter implements ConsolaReporter {
 				? console.warn
 				: console.log;
 
-		const tag = logObj.tag ? logObj.tag : "";
+		const tag = logObj.tag || "";
 		const style = `
-      		color: ${this.COLOR};
+      		color: #8854d0;
       		border-radius: 0;
       		font-weight: bold;
       		text-transform: capitalize;
     	`;
 
-		const badge = "%c[" + tag + "]";
+		const badge = tag.length === 0 ? "%c" : "%c[" + tag + "] ";
 		if (typeof logObj.args[0] === "string") {
 			consoleLogFn(
-				`${badge} %c${logObj.args[0]}`,
+				`${badge}%c${logObj.args[0]}`,
 				style,
 				// Empty string as style resets to default console style
 				"",
@@ -80,6 +90,6 @@ class KatanBrowserReporter implements ConsolaReporter {
 	}
 }
 
-vm.$consola = Consola.create({
+vm.$log = Consola.create({
 	reporters: [new KatanBrowserReporter()],
 });
