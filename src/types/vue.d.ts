@@ -24,16 +24,20 @@ import { VocaStatic } from "voca";
 import { AxiosInstance } from "axios";
 import { Consola } from "consola";
 import dayjs from "dayjs";
+import { Filesize } from "filesize";
 
 declare module "vue/types/vue" {
 	interface Vue {
 		$isDevelopmentMode: boolean;
-		$helpers: { voca: VocaStatic };
+		$helpers: { voca: VocaStatic; filesize: Filesize };
 		$socket: WebSocket;
 		$http: AxiosInstance;
+
 		$connect(): void;
+
 		$disconnect(): void;
-		$consola: Consola;
+
+		$log: Consola;
 		$time: dayjs;
 	}
 }

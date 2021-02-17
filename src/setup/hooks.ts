@@ -33,7 +33,10 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 
 const vm: Vue = Vue.prototype;
 vm.$isDevelopmentMode = process.env.NODE_ENV === "development";
-vm.$helpers = { voca: require("voca") };
+vm.$helpers = {
+	voca: require("voca"),
+	filesize: require("filesize"),
+};
 vm.$http = Axios.create({
 	baseURL: process.env.VUE_APP_API_URL,
 	timeout: 5000,

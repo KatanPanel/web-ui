@@ -17,6 +17,7 @@
 		"convert-units": "^2.3.4",
 		"core-js": "^3.6.5",
 		"dayjs": "^1.9.8",
+		"filesize": "^6.1.0",
 		"register-service-worker": "^1.7.1",
 		"v-tooltip": "^2.0.3",
 		"voca": "^1.4.0",
