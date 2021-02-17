@@ -22,6 +22,7 @@
 
 import store from "@/store";
 import { joinBySlash } from "@/common/utils/text";
+import { isFunction } from "@/common/utils/any";
 
 /**
  * Returns the result of a getter.
@@ -35,7 +36,7 @@ export function get<T = any>(
 	...parameters: any[]
 ): T {
 	const getter0 = store.getters[joinBySlash(module, getter)];
-	if (typeof getter0 === "function") return getter0(...parameters);
+	if (isFunction(getter0)) return getter0(...parameters);
 
 	return getter0;
 }
@@ -55,7 +56,7 @@ export function commit<T = any>(module: string, mutation: string, payload?: T) {
  * @param {string} module - action's module name.
  * @param {string} action - action's name.
  * @param {T} payload - optional action data.
- * @returns {Promise<R>}
+ * @returns {Promise<T>}
  */
 export async function dispatch<T>(
 	module: string,

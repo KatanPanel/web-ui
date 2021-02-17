@@ -37,6 +37,14 @@ export function isNumber(value: any): boolean {
 }
 
 /**
+ * Returns `true` if the {@param value} is a function or `false` otherwise.
+ * @param {*} value - the value.
+ */
+export function isFunction(value: any): boolean {
+	return typeof value === "function";
+}
+
+/**
  * Returns `null` if the {@param value} is `undefined` or the value itself otherwise.
  * @param {T | null | undefined} value - the value.
  */
