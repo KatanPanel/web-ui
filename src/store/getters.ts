@@ -21,27 +21,21 @@
  */
 
 import { GetterTree } from "vuex";
-import { Language, RootState, RootWebSocketState } from "@/store/state";
+import { RootState } from "@/store/state";
 import { Window } from "@/common/navigation/window";
 import { Route } from "vue-router";
+import { RawWebSocket } from "@/common/websocket/websocket";
 
 export const GET_SOCKET = "getSocket";
-export const GET_LANGUAGE = "getLanguage";
-export const GET_THEME = "getTheme";
 export const GET_BACKEND_INFO = "getBackendInfo";
 export const GET_WINDOW = "getWindow";
 export const GET_ALL_WINDOWS = "getAllWindows";
 export const GET_NAVIGATION_HISTORY = "getNavigationHistory";
+export const GET_SERVER_LIST = "getServerList";
 
 export default {
-	[GET_SOCKET](state: RootState): RootWebSocketState {
+	[GET_SOCKET](state: RootState): RawWebSocket {
 		return state.socket!;
-	},
-	[GET_LANGUAGE](state: RootState): Language {
-		return state.language as Language;
-	},
-	[GET_THEME](state: RootState): string {
-		return state.theme;
 	},
 	[GET_BACKEND_INFO](state: RootState): any | null {
 		return state.serverInfo;
@@ -60,5 +54,8 @@ export default {
 	},
 	[GET_NAVIGATION_HISTORY](state: RootState): Array<Route> {
 		return state.navigationHistory;
+	},
+	[GET_SERVER_LIST](state: RootState): any[] {
+		return state.serverList;
 	},
 } as GetterTree<RootState, RootState>;

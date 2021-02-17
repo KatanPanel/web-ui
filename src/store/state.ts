@@ -20,30 +20,23 @@
  * SOFTWARE.
  */
 
-import { commit } from "@/common/utils/vuex";
-import { ROOT_MODULE } from "@/store/index";
-import { ON_SOCKET_LISTENER_ADD } from "@/store/mutations";
 import { Window } from "@/common/navigation/window";
 import { Route } from "vue-router";
-
-export const LIGHT_THEME = "light";
-export const DARK_THEME = "dark";
+import { ClientSettings } from "@/common/client-settings";
+import { RawWebSocket } from "@/common/websocket/websocket";
 
 export interface RootState {
-	socket: RootWebSocketState;
-	language: Language | null;
-	theme: string;
+	socket: RawWebSocket;
 	serverInfo: any | null;
+	serverList: any[];
 	allWindows: Array<Window>;
 	navigationHistory: Array<Route>;
 	clientSettings: ClientSettings;
 }
 
 export default {
-	socket: new RootWebSocketState(),
-	language: null,
-	theme: LIGHT_THEME,
-	serverList: null,
+	socket: new RawWebSocket(),
+	serverList: [],
 	serverInfo: null,
 	allWindows: [],
 	navigationHistory: [],

@@ -21,11 +21,12 @@
  */
 
 import { ActionContext, ActionTree } from "vuex";
-import { Language, RootState } from "@/store/state";
+import { RootState } from "@/store/state";
 import {
 	SET_LANGUAGE,
 	SET_THEME,
 	UPDATE_NAVIGATION_HISTORY,
+	UPDATE_SERVER_LIST,
 } from "@/store/mutations";
 import { AxiosError, AxiosResponse } from "axios";
 import Vue from "vue";
@@ -34,6 +35,7 @@ import { Route } from "vue-router";
 export const UPDATE_THEME = "updateTheme";
 export const UPDATE_LANGUAGE = "updateLanguage";
 export const LOAD_SERVER = "loadServer";
+export const LOAD_SERVER_LIST = "loadServerList";
 export const RECORD_NAVIGATION = "recordNavigation";
 
 const vm: Vue = Vue.prototype;
@@ -63,6 +65,22 @@ export default {
 				throw err;
 			});
 	},
+	async [LOAD_SERVER_LIST](
+		ctx: ActionContext<RootState, RootState>
+	): Promise<any[]> {
+		return vm
+			.$http({
+				url: `/servers`,
+				method: "get",
+				withCredentials: true,
+			})
+			.then((res: AxiosResponse) => {
+				const servers = res.data.data;
+				ctx.commit(UPDATE_SERVER_LIST, { serverList: servers });
+				return servers;
+			});
+	},
+	// TODO: use client settings
 	[UPDATE_THEME](
 		ctx: ActionContext<RootState, RootState>,
 		payload: {
@@ -71,10 +89,11 @@ export default {
 	): void {
 		ctx.commit(SET_THEME, { theme: payload.theme });
 	},
+	// TODO: use client settings
 	[UPDATE_LANGUAGE](
 		ctx: ActionContext<RootState, RootState>,
 		payload: {
-			language: Language;
+			language: any;
 		}
 	): void {
 		ctx.commit(SET_LANGUAGE, { language: payload.language });

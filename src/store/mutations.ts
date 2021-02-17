@@ -49,6 +49,7 @@ import {
 import { INVALID_OP } from "@/common/websocket/operation-codes";
 import { ClientSettings } from "@/common/client-settings";
 
+/* start: vue raw web socket */
 export const ON_SOCKET_OPEN = "onSocketConnect";
 export const ON_SOCKET_CLOSE = "onSocketDisconnect";
 export const ON_SOCKET_ERROR = "onSocketError";
@@ -64,11 +65,12 @@ export const MINIMIZE_WINDOW = "minimizeWIndow";
 export const UPDATE_WINDOW = "updateWindow";
 export const UPDATE_BACKEND_INFO = "updateBackendInfo";
 export const UPDATE_NAVIGATION_HISTORY = "updateNavigationHistory";
+export const UPDATE_SERVER_LIST = "updateServerList";
 
 const vm: Vue = Vue.prototype;
 
 function catchWindowNotFound(window: any): void {
-	vm.$consola.info({
+	vm.$log.info({
 		tag: WINDOWS_LOG_TAG,
 		message: `Window ${window} not found`,
 	});
@@ -105,56 +107,35 @@ export default {
 		});
 	},
 	[ON_SOCKET_OPEN](state: RootState, event: Event) {
-		const client = event.currentTarget as WebSocket;
-		if (state.socket.isConnected) return;
-
-		state.socket.native = client;
-		state.socket.isConnected = true;
-		vm.$consola.log({
+		state.socket.native = event.currentTarget as WebSocket;
+		vm.$log.log({
 			tag: WEB_SOCKET_LOG_TAG,
 			message: "Connected successfully.",
 		});
 
-		state.socket.callListeners("connect");
+		state.socket.on(INVALID_OP, (message: any) => {
+			vm.$log.error({
+				tag: WEB_SOCKET_LOG_TAG,
+				message: "Invalid operation code",
+				args: [message.code],
+			});
+		});
+
+		state.socket.call(WEBSOCKET_OPEN);
 	},
 	[ON_SOCKET_CLOSE](state: RootState) {
-		state.socket!.isConnected = false;
-		state.socket.callListeners("disconnect");
+		state.socket.call(WEBSOCKET_CLOSE);
 	},
-	[ON_SOCKET_ERROR](state: RootState, event: Event) {
-		console.error(state, event);
-		state.socket.callListeners("error");
+	[ON_SOCKET_ERROR](state: RootState) {
+		state.socket.call(WEBSOCKET_ERROR);
 	},
 	[ON_SOCKET_MESSAGE](state: RootState, message) {
-		console.log("message:", message);
-		state.socket.callListeners("message", message);
+		state.socket.call(WEBSOCKET_MESSAGE, message);
 	},
-	[ON_SOCKET_LISTENER_ADD](
-		state: RootState,
-		payload: { event: string; listener: Function }
-	) {
-		const listeners = state.socket.listeners;
-		if (listeners.has(payload.event)) {
-			listeners.get(payload.event)?.push(payload.listener);
-			return;
-		}
-
-		listeners.set(payload.event, [payload.listener]);
-	},
-	[SET_LANGUAGE](state: RootState, payload: { language: Language }) {
-		state.language = payload.language;
+	// TODO: use client settings
+	[SET_LANGUAGE](state: RootState, payload: { language: any }) {
+		// state.language = payload.language;
 		vm.$storage.set(LANGUAGE_CACHE_KEY, payload.language.tag);
-	},
-	[SET_THEME](
-		state: RootState,
-		payload: {
-			theme: string;
-		}
-	) {
-		state.theme = payload.theme;
-		document
-			.querySelector("body")!
-			.setAttribute("data-theme", payload.theme);
 	},
 	[OPEN_WINDOW](state: RootState, payload: { window: Window }) {
 		const openWindows = state.allWindows;
@@ -166,7 +147,7 @@ export default {
 			openWindows.push(payload.window);
 
 		updateWindowState(payload.window, OpenWindowState);
-		vm.$consola.success({
+		vm.$log.success({
 			tag: WINDOWS_LOG_TAG,
 			message: `Window ${payload.window.id} opened`,
 		});
@@ -182,24 +163,13 @@ export default {
 		if (!window) return catchWindowNotFound(payload.window);
 
 		updateWindowState(window, MinimizedWindowState);
-
-		/* const remaining = state.allWindows.filter(
-			(window: Window) => window.isOpen
-		);
-
-		if (remaining.length === 0) router.push("/");
-		else {
-			const fallback = remaining[remaining.length - 1];
-			if (!fallback.matchesLocation(router.currentRoute))
-				router.push(fallback.getLocation());
-		} */
 	},
 	[UPDATE_WINDOW](
 		state: RootState,
 		payload: { window: Window; payload: any }
 	) {
 		Object.assign(payload.window, payload.payload);
-		vm.$consola.info({
+		vm.$log.info({
 			tag: WINDOWS_LOG_TAG,
 			message: `Window "${payload.window.name}" updated.`,
 			args: [payload.payload],
@@ -215,7 +185,7 @@ export default {
 		if (history.length > 0 && history[history.length - 1].name == to.name) {
 			history.pop();
 			history.push(to);
-			vm.$consola.info({
+			vm.$log.info({
 				message: "[~] Route page reloaded.",
 				tag: ROUTER_NAVIGATION_LOG_TAG,
 				args: [to],
@@ -225,7 +195,7 @@ export default {
 
 		// page update (previous)
 		if (history.length > 1 && history[history.length - 2].name == to.name) {
-			vm.$consola.info({
+			vm.$log.info({
 				message: "[<] Route switched to previous page.",
 				tag: ROUTER_NAVIGATION_LOG_TAG,
 				args: [to],
@@ -236,10 +206,13 @@ export default {
 
 		// page update (next)
 		history.push(to);
-		vm.$consola.info({
+		vm.$log.info({
 			message: "[>] Route switched to next page.",
 			tag: ROUTER_NAVIGATION_LOG_TAG,
 			args: [to],
 		});
+	},
+	[UPDATE_SERVER_LIST](state: RootState, payload: { serverList: any[] }) {
+		state.serverList = payload.serverList;
 	},
 } as MutationTree<RootState>;

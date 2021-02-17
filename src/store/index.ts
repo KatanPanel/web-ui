@@ -23,21 +23,24 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import AuthModule from "@/store/auth";
-import state, { RootState, RootWebSocketState } from "@/store/state";
+import state, { RootState } from "@/store/state";
 import { dispatch, get } from "@/common/utils/vuex";
 import getters, { GET_SOCKET } from "@/store/getters";
 import actions, { LOAD_SERVER } from "@/store/actions";
 import mutations from "@/store/mutations";
+import { RawWebSocket } from "@/common/websocket/websocket";
 
 Vue.use(Vuex);
 
 export const ROOT_MODULE = "";
 export const AUTH_MODULE = "auth";
 
+export const CLIENT_SETTINGS_CACHE_KEY = "client-settings";
+
 export const LANGUAGE_CACHE_KEY = "language";
 export const THEME_CACHE_KEY = "theme";
 
-export function getWebSocket(): RootWebSocketState {
+export function getWebSocket(): RawWebSocket {
 	return get(ROOT_MODULE, GET_SOCKET);
 }
 

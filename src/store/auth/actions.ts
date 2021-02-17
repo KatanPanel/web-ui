@@ -44,7 +44,7 @@ export default {
 			password: string;
 		}
 	): Promise<{ token: string }> {
-		vm.$consola.info({
+		vm.$log.info({
 			tag: AUTH_LOG_TAG,
 			message: "Logging in...",
 		});
@@ -73,7 +73,7 @@ export default {
 			token: string;
 		}
 	): Promise<void> {
-		vm.$consola.log({
+		vm.$log.log({
 			tag: AUTH_LOG_TAG,
 			message: "Identifying...",
 		});
@@ -95,7 +95,7 @@ export default {
 				ctx.commit(UPDATE_ACCOUNT, { account });
 			})
 			.catch((res: AxiosError) => {
-				vm.$consola.log({
+				vm.$log.log({
 					tag: AUTH_LOG_TAG,
 					message: "Invalid token.",
 				});
