@@ -34,35 +34,35 @@ import { LOGIN_LAYOUT, PANEL_LAYOUT } from "@/layouts";
 import Home from "@/views/Home.vue";
 import Account from "@/views/account/Account.vue";
 import Server from "@/views/server/Server.vue";
-import Plugins from "@/views/plugins/Plugins.vue";
-import { AuthenticatedOnlyGuard } from "@/guards/authenticated-only";
-import Nodes from "@/views/nodes/Nodes.vue";
-import Settings from "@/views/settings/Settings.vue";
+import { AuthenticatedOnlyGuard } from "@/common/internal/guards/authenticated-only";
 import ServerConsole from "@/views/server/ServerConsole.vue";
 import ServerInfo from "@/views/server/ServerInfo.vue";
 import ServerFS from "@/views/server/ServerFS.vue";
-import {
-	closeWindow,
-	getOpenWindows,
-	LANGUAGE_CACHE_KEY,
-	resolveWindowWithFastPath,
-	updateWindowRoute,
-	updateWindowVisibility,
-} from "@/store";
-import { Window } from "@/store/state";
 import { verifyAuth } from "@/store/auth";
 import Auth from "@/views/Auth.vue";
+import ServerFSDisk from "@/views/server/fs/ServerFSDisk.vue";
+import { LANGUAGE_CACHE_KEY, ROOT_MODULE } from "@/store";
+import {
+	getOpenWindows,
+	MinimizedWindowState,
+	safeResolveWindow,
+	updateWindowLocation,
+	updateWindowState,
+	Window,
+} from "@/common/navigation/window";
+import { dispatch } from "@/common/utils/vuex";
+import { RECORD_NAVIGATION } from "@/store/actions";
+import { ROUTER_NAVIGATION_LOG_TAG } from "@/logging";
 
 export const HOME_ROUTE = "home";
 export const LOGIN_ROUTE = "login";
-export const PANEL_ROUTE = "panel";
-export const PANEL_ACCOUNT_ROUTE = "panel.account";
-export const PANEL_SERVER_ROUTE = "panel.server";
-export const PANEL_SERVER_CONSOLE_ROUTE = "panel.server.console";
-export const PANEL_SERVER_FS_ROUTE = "panel.server.fs";
-export const PANEL_PLUGINS_ROUTE = "panel.plugins";
-export const PANEL_NODES_ROUTE = "panel.nodes";
-export const PANEL_SETTINGS_ROUTE = "panel.settings";
+export const MY_ACCOUNT_ROUTE = "my-account";
+export const SERVER_ROUTE = "server";
+export const SERVER_CONSOLE_ROUTE = "server.console";
+export const SERVER_FS_ROUTE = "server.fs";
+export const SERVER_FS_DISK_ROUTE = "server.fs.disk";
+export const SYSTEM_GAMES_ROUTE = "system.games";
+export const ADVANCED_SETTINGS_ROUTE = "advanced.settings";
 
 Vue.use(VueRouter);
 
@@ -85,12 +85,12 @@ const routes: Array<RouteConfig> = [
 		children: [
 			{
 				path: "",
-				name: PANEL_ROUTE,
+				name: HOME_ROUTE,
 				component: Home,
 			},
 			{
 				path: "account",
-				name: PANEL_ACCOUNT_ROUTE,
+				name: MY_ACCOUNT_ROUTE,
 				component: Account,
 			},
 			{
@@ -101,43 +101,45 @@ const routes: Array<RouteConfig> = [
 					{
 						path: "",
 						component: ServerInfo,
-						name: PANEL_SERVER_ROUTE,
+						name: SERVER_ROUTE,
 					},
 					{
 						path: "console",
-						name: PANEL_SERVER_CONSOLE_ROUTE,
+						name: SERVER_CONSOLE_ROUTE,
 						component: ServerConsole,
 					},
 					{
 						path: "fs",
-						name: PANEL_SERVER_FS_ROUTE,
+						name: SERVER_FS_ROUTE,
 						component: ServerFS,
+						children: [
+							{
+								path: "disk/:disk",
+								name: SERVER_FS_DISK_ROUTE,
+								component: ServerFSDisk,
+							},
+						],
 					},
 				],
 			},
 			{
-				path: "plugins",
-				name: PANEL_PLUGINS_ROUTE,
-				component: Plugins,
+				path: "system/games",
+				name: SYSTEM_GAMES_ROUTE,
+				component: () => import("@/views/system/SystemGames.vue"),
 			},
 			{
-				path: "nodes",
-				name: PANEL_NODES_ROUTE,
-				component: Nodes,
-			},
-			{
-				path: "settings",
-				name: PANEL_SETTINGS_ROUTE,
-				component: Settings,
+				path: "advanced/settings",
+				name: ADVANCED_SETTINGS_ROUTE,
+				component: () =>
+					import("@/views/advanced/AdvancedSettings.vue"),
 			},
 		],
 	},
+	{
+		path: "*",
+		component: Home,
+	},
 ];
-
-VueRouter.prototype.redirect = function (to: string) {
-	// avoid arrow-function to be able to use explicit `this`
-	window.location.href = this.resolve({ name: to }).href;
-};
 
 const router = new VueRouter({
 	mode: "history",
@@ -157,39 +159,45 @@ router.beforeEach((to: Route, from: Route, next: NavigationGuardNext) => {
 				(route: RouteRecord) => route.components["default"] === Server
 			) !== -1;
 
-		vm.$consola.debug("Matched", to.matched);
-		vm.$consola.debug("Server route?", isServerRoute);
+		const openWindows = getOpenWindows();
 		if (isServerRoute) {
-			const openWindows = getOpenWindows();
 			if (to.params.serverId === from.params.serverId) {
-				const window = openWindows.find(
-					(window: Window) =>
-						window.data.id === parseInt(from.params.serverId)
-				)!;
-
-				updateWindowRoute(window.windowId, to.name as string);
+				updateWindowLocation(
+					openWindows.find(
+						(window: Window) =>
+							window.data.id === parseInt(from.params.serverId)
+					)!,
+					to
+				);
 				return next();
 			} else {
 				if (openWindows.length == 0)
 					return next(() =>
-						resolveWindowWithFastPath(
-							to.params.serverId,
-							to.name as string
-						)
+						safeResolveWindow(to.params.serverId, to)
 					);
-				else
-					return resolveWindowWithFastPath(
-						to.params.serverId,
-						to.name as string
-					).then(() => next());
+				else {
+					return safeResolveWindow(to.params.serverId, to).then(() =>
+						next()
+					);
+				}
 			}
 		}
 
 		// ensure that all windows are no longer visible when exiting the server route.
-		for (const window of getOpenWindows())
-			updateWindowVisibility(window, false);
+		for (const window of openWindows)
+			updateWindowState(window, MinimizedWindowState);
 
 		return next();
+	});
+});
+
+router.afterEach((to: Route, from: Route) => {
+	dispatch(ROOT_MODULE, RECORD_NAVIGATION, { to }).then(() => {
+		vm.$log.debug({
+			message: "Route switch.",
+			tag: ROUTER_NAVIGATION_LOG_TAG,
+			args: [from, to],
+		});
 	});
 });
 
