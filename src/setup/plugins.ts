@@ -33,7 +33,7 @@ import {
 	ON_SOCKET_OPEN,
 } from "@/store/mutations";
 import store, { ROOT_MODULE } from "@/store";
-import { joinBySlash } from "@/utils/text";
+import { joinBySlash } from "@/common/utils/text";
 
 Vue.use(VueSvgInlinePlugin);
 Vue.use(Vue2Storage, {
@@ -61,4 +61,4 @@ Vue.use(VTooltip, {
 });
 
 // disable tooltips on mobile devices
-(VTooltip as any).enabled = window.innerWidth > 768;
+(VTooltip as any).enabled = window.innerWidth < 768;
