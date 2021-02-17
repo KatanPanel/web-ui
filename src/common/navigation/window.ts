@@ -29,57 +29,96 @@ import router from "@/router";
 import { loadServer, ROOT_MODULE } from "@/store";
 import { routeToLocation } from "@/common/utils/navigation";
 
+/**
+ * Windows are components whose state has been preserved after
+ * being inactive and may or may not be restored at any point in time.
+ *
+ * Currently, windows are used to open multiple server views without
+ * the previously opened servers ceasing to allow manipulation of multiple
+ * servers simultaneously.
+ */
 export interface Window {
-	id: number;
+	/**
+	 * The identification number of the window.
+	 */
+	readonly id: number;
 
-	name: string;
+	/**
+	 * The name of the window.
+	 */
+	readonly name: string;
 
-	data: any;
-
+	/**
+	 * The window title.
+	 */
 	title: string;
 
+	/**
+	 * The data contained in that window, can be anything.
+	 */
+	data: any;
+
+	/**
+	 * The current state of the window, when the window is opened,
+	 * is set to the {@link OpenWindowState} state, it has no foreground.
+	 *
+	 * When minimized, the status changes to {@link MinimizedWindowState}.
+	 * When closed or before being opened during the transition state from
+	 * creation to opening, the state is {@link ClosedWindowState}.
+	 *
+	 * If there is more than one window open simultaneously, both will
+	 * have the status {@link OpenWindowState} without any differentiation.
+	 */
 	state: WindowState;
 
+	/**
+	 * The current location of the window.
+	 */
 	location: Location;
 }
 
 export const ClosedWindowState = "closed";
 export const OpenWindowState = "open";
 export const MinimizedWindowState = "minimized";
+
 export type WindowState =
 	| typeof OpenWindowState
 	| typeof ClosedWindowState
 	| typeof MinimizedWindowState;
 
 /**
- * @todo
+ * Returns all windows regardless of state.
  */
-export function getWindows(): Array<Window> {
-	return get<Window[]>(ROOT_MODULE, GET_ALL_WINDOWS);
+export function getWindows(): Window[] {
+	return get(ROOT_MODULE, GET_ALL_WINDOWS);
 }
 
 /**
- * @todo
- * @param state
+ * Returns all windows by filtering only those windows with the specified state.
+ * @param {WindowState} state - the desired state.
  */
-export function getWindowsBy(state: WindowState): Array<Window> {
-	return get<Window[]>(ROOT_MODULE, GET_ALL_WINDOWS).filter(
-		(window: Window) => window.state === state
-	);
+export function getWindowsBy(state: WindowState): Window[] {
+	return getWindows().filter((window: Window) => window.state === state);
 }
 
 /**
- * @todo
+ * Returns all windows with the status {@link OpenWindowState}.
  */
-export function getOpenWindows(): Array<Window> {
+export function getOpenWindows(): Window[] {
 	return getWindowsBy(OpenWindowState);
 }
 
 /**
- * @todo
+ * Returns all windows with the status {@link MinimizedWindowState}.
  */
-export function getMinimizedWindows(): Array<Window> {
+export function getMinimizedWindows(): Window[] {
 	return getWindowsBy(MinimizedWindowState);
+}
+
+export function matchesWindow(
+	predicate: (window: Window) => boolean
+): Window | null {
+	return undefinedToNull(getWindows().find(predicate));
 }
 
 /**
@@ -87,11 +126,7 @@ export function getMinimizedWindows(): Array<Window> {
  * @param id
  */
 export function getWindow(id: number): Window | null {
-	return undefinedToNull(
-		get<Window[]>(ROOT_MODULE, GET_ALL_WINDOWS).find(
-			(window: Window) => window.id === id
-		)
-	);
+	return matchesWindow((window: Window) => window.id === id);
 }
 
 /**
@@ -99,7 +134,7 @@ export function getWindow(id: number): Window | null {
  * @param window
  * @param state
  */
-export function checkWindowState(window: Window, state: WindowState): boolean {
+export function testWindow(window: Window, state: WindowState): boolean {
 	return window.state === state;
 }
 
@@ -199,10 +234,8 @@ export async function resolveWindow(
 			router.push(resolvedWindow.location).then(() => {
 				updateWindowState(resolvedWindow, OpenWindowState);
 			});
-			return resolvedWindow;
-		}
+		} else updateWindowState(resolvedWindow, OpenWindowState);
 
-		updateWindowState(resolvedWindow, OpenWindowState);
 		return resolvedWindow;
 	}
 
