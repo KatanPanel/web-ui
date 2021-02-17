@@ -30,7 +30,7 @@ export function isChildNode(
 	if (element == node) return true;
 	if (element.contains(node)) return true;
 
-	// tail rec -- opt
+	// perf -- tail recursive
 	return isChildNode(element.childNodes[0], node);
 }
 
@@ -41,25 +41,22 @@ export function hasTabKeyPressed(e: KeyboardEvent) {
 
 export function smoothScroll(
 	duration: number,
-	element: HTMLElement,
+	el: HTMLElement,
 	to: number,
 	property: "scrollTop" | "scrollLeft"
 ): void {
-	const start = element[property];
-	const change = to - start;
-	const startDate = new Date().getTime();
+	const start = el[property];
+	const diff = to - start;
+	const startTime = new Date().getTime();
 
 	const animateScroll = () => {
-		const currentDate = new Date().getTime();
-		const currentTime = currentDate - startDate;
+		const currentTime = new Date().getTime();
+		const diffTime = currentTime - startTime;
 
-		element[property] = easeInOutQuad(currentTime, start, change, duration);
+		el[property] = easeInOutQuad(diffTime, start, diff, duration);
 
-		if (currentTime < duration) {
-			requestAnimationFrame(animateScroll);
-		} else {
-			element[property] = to;
-		}
+		if (diffTime < duration) requestAnimationFrame(animateScroll);
+		else el[property] = to;
 	};
 
 	animateScroll();
