@@ -23,32 +23,45 @@
 import Vue from "vue";
 import App from "./App.vue";
 import "./registerServiceWorker";
-import store from "./store";
+import store, { CLIENT_SETTINGS_CACHE_KEY } from "./store";
 import router from "./router";
 import i18n from "@/i18n";
-import "./directives";
 import "./setup/config";
 import "./setup/hooks";
 import "./setup/plugins";
 import "./setup/layouts";
-import Server from "@/views/server/Server.vue";
+import "./setup/directives";
+import { DARK_THEME, updateClientSettings } from "@/common/client-settings";
+import { ERROR_HANDLER_LOG_TAG } from "@/logging";
 
-Vue.config.errorHandler = function (err: Error, vm: Vue, info: string) {
-	vm.$consola.error({
-		tag: "Global",
+Vue.config.errorHandler = (err: Error, vm: Vue, info: string) => {
+	vm.$log.error({
+		tag: ERROR_HANDLER_LOG_TAG,
 		message: info,
 		args: [err],
 	});
 };
-
-// Register the server component globally here, for some reason Vue
-// is not detecting it as registered even though it is being used on a route.
-// It will be used to display windows dynamically without losing its state.
-Vue.component("window", Server);
 
 export const vm = new Vue({
 	store,
 	router,
 	i18n,
 	render: (h) => h(App),
-}).$mount("#app");
+});
+
+// preload client settings if defined before
+if (vm.$storage.has(CLIENT_SETTINGS_CACHE_KEY))
+	updateClientSettings(vm.$storage.get(CLIENT_SETTINGS_CACHE_KEY));
+
+// sets the default dark theme if it is set as a preference
+if (
+	window.matchMedia &&
+	window.matchMedia("(prefers-color-scheme: dark)").matches
+) {
+	updateClientSettings({
+		theme: DARK_THEME,
+	});
+}
+
+// mount app
+vm.$mount("#app");

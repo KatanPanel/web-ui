@@ -20,6 +20,14 @@
  * SOFTWARE.
  */
 
+import { Language } from "@/common/language";
+import { commit } from "@/common/utils/vuex";
+import { ROOT_MODULE } from "@/store";
+import { UPDATE_CLIENT_SETTINGS } from "@/store/mutations";
+
+export const LIGHT_THEME = "light";
+export const DARK_THEME = "dark";
+
 /**
  * Represents all possible configurations of who is currently using the application.
  * These settings are per browser and are saved to the client's local storage.
@@ -39,12 +47,12 @@ export interface ClientSettings {
 	 * The current language of the website for the client,
 	 * the possible values are all supported languages and is never null or undefined.
 	 */
-	language?: string;
+	language?: Language;
 
 	/**
 	 * Configuration related to servers.
 	 */
-	serverSettings: ClientServerSettings;
+	readonly serverSettings: ClientServerSettings;
 }
 
 /**
@@ -63,4 +71,12 @@ export interface ClientServerSettings {
 	 * Time is measured in milliseconds.
 	 */
 	resourceUpdateTime?: number;
+}
+
+/**
+ * Updates client settings using partial data.
+ * @param {Partial<ClientSettings>} settings - new keys and values to be applied.
+ */
+export function updateClientSettings(settings: Partial<ClientSettings>): void {
+	commit(ROOT_MODULE, UPDATE_CLIENT_SETTINGS, settings);
 }

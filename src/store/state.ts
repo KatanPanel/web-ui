@@ -36,57 +36,7 @@ export interface RootState {
 	serverInfo: any | null;
 	allWindows: Array<Window>;
 	navigationHistory: Array<Route>;
-}
-
-export type Language = {
-	name: string;
-	tag: string;
-};
-
-export class RootWebSocketState {
-	public native!: WebSocket;
-	public isConnected = false;
-	public readonly listeners: Map<string, Function[]> = new Map();
-
-	public sendMessage(object: any): void {
-		if (this.isConnected) this.sendMessageImmediate(object);
-		else
-			this.on("connect", () => {
-				this.sendMessageImmediate(object);
-			});
-	}
-
-	private sendMessageImmediate(object: any): void {
-		this.native?.send(JSON.stringify(object));
-	}
-
-	public sendOp(op: number, data: any): void {
-		this.sendMessage({
-			op,
-			d: data,
-		});
-	}
-
-	public on(event: string, listener: Function): void {
-		if (event === "connect" && this.isConnected) return listener();
-		commit(ROOT_MODULE, ON_SOCKET_LISTENER_ADD, { event, listener });
-	}
-
-	public onOp(op: number, listener: Function): void {
-		this.on("message", (data: any) => {
-			if (!data.op) return;
-
-			listener(data.d);
-		});
-	}
-
-	public callListeners(type: string, ...parameters: any[]): void {
-		if (!this.listeners.has(type)) return;
-
-		for (const fn of this.listeners.get(type) as Function[]) {
-			fn(...parameters);
-		}
-	}
+	clientSettings: ClientSettings;
 }
 
 export default {
@@ -97,4 +47,7 @@ export default {
 	serverInfo: null,
 	allWindows: [],
 	navigationHistory: [],
+	clientSettings: {
+		serverSettings: {},
+	},
 } as RootState;

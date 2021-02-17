@@ -21,11 +21,12 @@
  */
 
 import { MutationTree } from "vuex";
-import { Language, RootState } from "@/store/state";
+import { RootState } from "@/store/state";
 import Vue from "vue";
 import { LANGUAGE_CACHE_KEY } from "@/store";
 import {
 	ROUTER_NAVIGATION_LOG_TAG,
+	VUEX_LOG_TAG,
 	WEB_SOCKET_LOG_TAG,
 	WINDOWS_LOG_TAG,
 } from "@/logging";
@@ -39,12 +40,23 @@ import {
 	Window,
 } from "@/common/navigation/window";
 import { Route } from "vue-router";
+import {
+	WEBSOCKET_CLOSE,
+	WEBSOCKET_ERROR,
+	WEBSOCKET_MESSAGE,
+	WEBSOCKET_OPEN,
+} from "@/common/websocket/websocket";
+import { INVALID_OP } from "@/common/websocket/operation-codes";
+import { ClientSettings } from "@/common/client-settings";
 
 export const ON_SOCKET_OPEN = "onSocketConnect";
 export const ON_SOCKET_CLOSE = "onSocketDisconnect";
 export const ON_SOCKET_ERROR = "onSocketError";
 export const ON_SOCKET_MESSAGE = "onSocketMessage";
-export const ON_SOCKET_LISTENER_ADD = "onSocketListenerAdd";
+/* end: vue raw web socket */
+
+export const UPDATE_CLIENT_SETTINGS = "updateClientSettings";
+
 export const SET_LANGUAGE = "setLanguage";
 export const SET_THEME = "setTheme";
 export const OPEN_WINDOW = "openWindow";
@@ -63,6 +75,35 @@ function catchWindowNotFound(window: any): void {
 }
 
 export default {
+	/**
+	 * Updates the client settings.
+	 * @param {RootState} state
+	 * @param {ClientSettings} clientSettings - the client settings.
+	 */
+	[UPDATE_CLIENT_SETTINGS](
+		state: RootState,
+		clientSettings: Partial<ClientSettings>
+	): void {
+		// handle theme update
+		if (
+			clientSettings.theme &&
+			state.clientSettings.theme !== clientSettings.theme
+		) {
+			document
+				.querySelector("body")!
+				.setAttribute("data-theme", clientSettings.theme);
+		}
+
+		state.clientSettings = Object.assign(
+			state.clientSettings,
+			clientSettings
+		);
+		vm.$log.log({
+			tag: VUEX_LOG_TAG,
+			message: "Client settings updated.",
+			args: [clientSettings],
+		});
+	},
 	[ON_SOCKET_OPEN](state: RootState, event: Event) {
 		const client = event.currentTarget as WebSocket;
 		if (state.socket.isConnected) return;
