@@ -20,12 +20,13 @@
  * SOFTWARE.
  */
 
-import { ROOT_MODULE, updateWindowTitle } from "@/store";
+import { ROOT_MODULE } from "@/store";
 import { Component, Prop, Vue } from "vue-property-decorator";
 import {
-	PANEL_SERVER_CONSOLE_ROUTE,
-	PANEL_SERVER_FS_ROUTE,
-	PANEL_SERVER_ROUTE,
+	SERVER_CONSOLE_ROUTE,
+	SERVER_FS_DISK_ROUTE,
+	SERVER_FS_ROUTE,
+	SERVER_ROUTE,
 } from "@/router";
 import { GET_WINDOW } from "@/store/getters";
 import { get } from "@/common/utils/vuex";
@@ -40,9 +41,10 @@ import { Window } from "@/common/navigation/window";
  */
 @Component
 export default class WindowMixin extends Vue {
-	protected readonly DEFAULT_TAB = PANEL_SERVER_ROUTE;
-	protected readonly CONSOLE_TAB = PANEL_SERVER_CONSOLE_ROUTE;
-	protected readonly FS_TAB = PANEL_SERVER_FS_ROUTE;
+	public readonly DEFAULT_TAB = SERVER_ROUTE;
+	public readonly CONSOLE_TAB = SERVER_CONSOLE_ROUTE;
+	public readonly FS_TAB = SERVER_FS_ROUTE;
+	public readonly FS_DISK_TAB = SERVER_FS_DISK_ROUTE;
 
 	/**
 	 * Represents the identification number of this {@link Window}.
@@ -62,11 +64,11 @@ export default class WindowMixin extends Vue {
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	public set getWindow(_window: Window) {}
 
-	public get getServer(): any {
+	protected get getServer(): any {
 		return this.getWindow.data;
 	}
 
-	protected updateWindowTitle(title: string): void {
-		updateWindowTitle(this.window, title);
+	public getWindowParameter(key: string): string {
+		return (this.getWindow.location.params as Dictionary<string>)[key];
 	}
 }

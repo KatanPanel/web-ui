@@ -21,17 +21,17 @@
   -->
 
 <template>
-	<div class="panel-nodes">
-		<v-row>
-			<v-col :size="8">
-				<h1>
-					<b>{{ $t("header.panel.nodes") }}</b>
-				</h1>
-				<p>{{ $t("modules.panel.nodes.description") }}</p>
-			</v-col>
-		</v-row>
-		<hr />
-		<p class="v--text-error">{{ $t("errors.Unsupported") }}</p>
+	<div>
+		<h1 class="v--m-bottom-4">
+			<b>{{ $t("system.games.title") }}</b>
+		</h1>
+		<ul v-if="getBackendInfo" class="game-list">
+			showing
+			<li v-for="game in getBackendInfo.games" :key="game.name">
+				<hr />
+			</li>
+		</ul>
+		<div class="v-else">nada</div>
 	</div>
 </template>
 
@@ -41,14 +41,16 @@ import { MetaInfo } from "vue-meta";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
+import { mixins } from "vue-class-component";
+import { AppMixin } from "@/common/internal/mixins/app";
 
 @Component({
 	components: { VCol, VRow, VContainer },
 	metaInfo(): MetaInfo {
 		return {
-			title: (this as Vue).$i18n.t("titles.panel.nodes") as string,
+			title: (this as Vue).$i18n.t("titles.system.games") as string,
 		};
 	},
 })
-export default class Nodes extends Vue {}
+export default class SystemGames extends mixins(AppMixin) {}
 </script>

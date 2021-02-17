@@ -22,16 +22,18 @@
 
 <template>
 	<div class="panel-settings">
-		<h1 class="v--m-bottom-4">
-			<b>{{ $t("settings.title") }}</b>
-		</h1>
+		<div class="v--m-bottom-4">
+			<h1>
+				<b>{{ $t("advanced.settings.title") }}</b>
+			</h1>
+		</div>
 		<v-row>
+			<h6 class="v--text-primary v--text-uppercase v--text-fw-600">
+				{{ $t("advanced.settings.appearence") }}
+			</h6>
 			<v-col :size="6">
 				<section id="theme">
-					<h6 class="v--text-uppercase v--text-primary">
-						<b>Aparência</b>
-					</h6>
-					<h4>{{ $t("settings.theme") }}</h4>
+					<h4>{{ $t("advanced.settings.theme") }}</h4>
 					<v-field-list>
 						<v-field
 							v-for="theme in getAvailableThemes"
@@ -45,17 +47,14 @@
 						</v-field>
 					</v-field-list>
 					<small class="v--text-muted v--m-top-2">
-						Caso você não defina um tema de preferência, o padrão do
-						sistema será utilizado.
+						{{ $t("advanced.settings.theme-system-default") }}
 					</small>
 				</section>
-				<hr />
-				<section id="language">
-					<h4>{{ $t("settings.language") }}</h4>
+				<section id="language" class="v--m-top-5">
+					<h4>{{ $t("advanced.settings.language") }}</h4>
 					<v-label
-						>Selecione um idioma:
-						{{ JSON.stringify(getCurrentLanguage) }}</v-label
-					>
+						>{{ $t("advanced.settings.select-a-language") }}
+					</v-label>
 					<v-field-list class="v--m-top-1">
 						<v-field
 							v-for="language in getSupportedLanguages"
@@ -81,21 +80,27 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import { MetaInfo } from "vue-meta";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import { mixins } from "vue-class-component";
-import { AppMixin } from "@/mixins/app";
+import { AppMixin } from "@/common/internal/mixins/app";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VFieldList from "@/components/ui/field/VFieldList.vue";
 import VField from "@/components/ui/field/VField.vue";
 import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
+import VTabs from "@/components/ui/tab/VTabs.vue";
+import VTab from "@/components/ui/tab/VTab.vue";
+import VTabView from "@/components/ui/tab/VTabView.vue";
 
-@Component<Settings>({
+@Component({
 	components: {
+		VTabView,
+		VTab,
+		VTabs,
 		VFieldRadio,
 		VField,
 		VFieldList,
@@ -107,9 +112,9 @@ import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
 	},
 	metaInfo(): MetaInfo {
 		return {
-			title: this.$i18n.t("titles.panel.settings") as string,
+			title: this.$i18n.t("titles.advanced.settings") as string,
 		};
 	},
 })
-export default class Settings extends mixins(AppMixin) {}
+export default class AdvancedSettings extends mixins(AppMixin) {}
 </script>

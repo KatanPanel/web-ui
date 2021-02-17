@@ -79,6 +79,6 @@ function bind(el: HTMLElement, binding: DirectiveBinding, node: VNode): void {
  */
 export const RouterHrefDirective: DirectiveOptions = {
 	bind,
-	update: update,
+	update,
 	inserted: update,
 };
