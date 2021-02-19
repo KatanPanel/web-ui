@@ -75,6 +75,14 @@ export interface Window {
 	 * The current location of the window.
 	 */
 	location: Location;
+
+	/**
+	 * Returns `true` if the current {@link location} of the window matches
+	 * the specified  route or` false` otherwise. Vue components can use
+	 * {@link Vue.$route} for checking.
+	 * @param {Route} route - the route to be checked.
+	 */
+	isActive(route: Route): boolean;
 }
 
 export const ClosedWindowState = "closed";
@@ -138,6 +146,13 @@ export function testWindow(window: Window, state: WindowState): boolean {
 	return window.state === state;
 }
 
+export function matchesWindowLocation(window: Window, route: Route): boolean {
+	return (
+		route.name === window.location.name &&
+		parseInt(route.params.serverId) === window.data.id
+	);
+}
+
 /**
  * @todo
  * @param id
@@ -152,6 +167,9 @@ export function newWindow(id: number, data: any, location: Route): Window {
 		location: routeToLocation(location),
 		title: data.name,
 		state: ClosedWindowState,
+		isActive(route: Route): boolean {
+			return matchesWindowLocation(this, route);
+		},
 	};
 }
 
@@ -263,11 +281,4 @@ export async function safeResolveWindow(
 	if (window.location.name != route.name) updateWindowLocation(window, route);
 
 	return window;
-}
-
-export function matchesWindowLocation(window: Window, route: Route): boolean {
-	return (
-		route.name === window.location.name &&
-		parseInt(route.params.serverId) === window.data.id
-	);
 }
