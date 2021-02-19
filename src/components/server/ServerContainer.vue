@@ -21,48 +21,48 @@
   -->
 
 <template>
-	<transition-group
-		name="v--transition-list"
-		tag="div"
-		class="window-container"
-	>
+	<div class="window-container">
 		<div
-			v-for="window in getAllWindows"
-			:key="window.windowId"
-			v-show="window.isOpen"
-			:active="window.matchesLocation(currentRoute)"
-			class="window v--transition-list-item"
+			v-for="window in openWindows"
+			:key="window.id"
+			:active="window.isActive(this.$route)"
 			@click="switchWindowFocus(window)"
+			class="window"
 		>
-			<component
-				:is="'window'"
+			<Server
 				:server-id="window.data.id.toString()"
-				:window="window.windowId"
+				:window="window.id"
 			/>
 		</div>
-	</transition-group>
+	</div>
 </template>
 
 <script lang="ts">
 import { Component } from "vue-property-decorator";
-import { Route } from "vue-router";
-import { Window } from "@/store/state";
 import { mixins } from "vue-class-component";
-import { AppMixin } from "@/mixins/app";
+import { AppMixin } from "@/common/internal/mixins/app";
+import {
+	getOpenWindows,
+	matchesWindowLocation,
+	Window,
+} from "@/common/navigation/window";
+import Server from "@/views/server/Server.vue";
 
-@Component
+@Component({
+	components: { Server },
+})
 export default class ServerContainer extends mixins(AppMixin) {
-	private get currentRoute(): Route {
-		return this.$route;
+	get openWindows(): Window[] {
+		return getOpenWindows();
 	}
 
-	private switchWindowFocus(window: Window): void {
-		// we checked before if there is more than one window open at the same time
+	switchWindowFocus(window: Window): void {
+		// checked before if there is more than one window open at the same time
 		// with just one window, it tends to fail resulting in "NavigationDuplicated".
-		if (this.getOpenWindows.length === 1) return;
+		if (getOpenWindows().length === 1) return;
 
-		if (!window.matchesLocation(this.currentRoute))
-			this.$router.push(window.getLocation());
+		if (!matchesWindowLocation(window, this.$route))
+			this.$router.push(window.location);
 	}
 }
 </script>
