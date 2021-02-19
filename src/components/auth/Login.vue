@@ -73,7 +73,7 @@ import { AUTH_TOKEN_KEY } from "@/store/auth";
 import { AUTH_MODULE } from "@/store";
 import { AUTH_LOGIN, AUTH_VERIFY } from "@/store/auth/actions";
 import { AxiosError } from "axios";
-import { PANEL_ROUTE } from "@/router";
+import { HOME_ROUTE } from "@/router";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
 
@@ -117,7 +117,7 @@ export default class Login extends Vue {
 					}
 				);
 
-				this.$router.redirect(PANEL_ROUTE);
+				this.$router.redirect(HOME_ROUTE);
 			})
 			.catch((err: AxiosError) => {
 				const data = err.response?.data;
