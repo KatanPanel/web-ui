@@ -1,15 +1,42 @@
 {
 	"titles": {
 		"login": "Fazer login",
-		"panel": {
-			"home": "Painel de Controle",
-			"account": "Minha conta",
-			"server": "Servidor {server}",
-			"server-console": "Console - {server}",
-			"plugins": "Plug-ins",
-			"nodes": "Nós",
+		"server": {
+			"index": "{server}",
+			"overview": "Visão Geral – {server}",
+			"console": "Console – {server}",
+			"fs": {
+				"index": "Gerenciador de Arquivos – {server}",
+				"disk": "Disco {disk} - Gerenciador de Arquivos – {server}"
+			}
+		},
+		"system": {
+			"games": "Jogos"
+		},
+		"advanced": {
 			"settings": "Ajustes"
 		}
+	},
+	"windows": {
+		"server": {
+			"console": {
+				"empty": "Console",
+				"typing": "Console – Digitando \"{input}\"..."
+			},
+			"fs": {
+				"index": "Gerenciador de Arquivos",
+				"disk": "Disco {disk} – Gerenciador de Arquivos"
+			}
+		}
+	},
+	"routes": {
+		"home": "Página Inicial",
+		"server": "Visão Geral do servidor",
+		"server_console": "Console do servidor",
+		"server_fs": "Gerenciador de Arquivos",
+		"server_fs_disk": "FTP: Disco de Armazenamento",
+		"system_games": "Jogos",
+		"advanced_settings": "Configurações do site"
 	},
 	"header": {
 		"home": "Página inicial",
@@ -65,33 +92,58 @@
 			}
 		}
 	},
-	"settings": {
-		"title": "Configurações do site",
-		"description": "Customize o painel a seu gosto e configure o servidor remotamente.",
-		"language": "Idioma",
-		"language-contribute": "Você pode contribuir para que o Katan suporte mais idiomas, acesse nossa documentação para saber mais.",
-		"theme": "Tema",
-		"panel-settings": "Configurações do painel"
-	},
 	"permissions": {
 		"1": "Gerenciar nós do cl."
-	},
-	"routes": {
-		"/": "Pagina Inicial",
-		"panel": {
-			"account": "Minha conta",
-			"server": "Servidor",
-			"plugins": "Plug-Ins",
-			"nodes": "Nós",
-			"settings": "Ajustes"
-		}
-	},
-	"windows": {
-		"panel-server-console": "Console",
-		"panel-server-fs": "Gerenciador de Arquivos"
 	},
 	"themes": {
 		"light": "Claro",
 		"dark": "Escuro"
+	},
+	"home": {
+		"welcome": "Bem-Vindo(a), {0}."
+	},
+	"system": {
+		"games": {
+			"title": "Jogos"
+		}
+	},
+	"advanced": {
+		"settings": {
+			"title": "Configurações do site",
+			"language": "Idioma",
+			"select-a-language": "Selecione um idioma",
+			"theme": "Tema",
+			"appearence": "Aparência",
+			"theme-system-default": "Caso você não defina um tema de preferência, o padrão do sistema será utilizado."
+		}
+	},
+	"sidebar": {
+		"labels": {
+			"system": "Sistema",
+			"advanced": "Avançado",
+			"server": "Servidor – {server}"
+		},
+		"links": {
+			"home": "Página Inicial",
+			"server": {
+				"overview": "Visão Geral",
+				"console": "Console",
+				"fs": "Gerenciador de Arquivos"
+			},
+			"system": {
+				"games": "Jogos"
+			},
+			"advanced": {
+				"settings": "Ajustes"
+			}
+		}
+	},
+	"server-state": {
+		"dead": "Morto",
+		"paused": "Pausado",
+		"restarting": "Reiniciando",
+		"running": "Em execução",
+		"unloaded": "Descarregado",
+		"unknown": "Offline"
 	}
 }

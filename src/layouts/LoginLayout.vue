@@ -6,7 +6,7 @@
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import { AppMixin } from "@/mixins/app";
+import { AppMixin } from "@/common/internal/mixins/app";
 
 @Component
 export default class LoginLayout extends mixins(AppMixin) {}

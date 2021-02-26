@@ -24,24 +24,22 @@
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
+	margin-bottom: 18px;
 }
 
 .v--tab {
 	list-style: none;
-	border-bottom: 2px solid transparent;
-	margin-bottom: 12px;
-	font-weight: 600;
-	font-size: 16px;
-	color: var(--muted-color);
+	font-weight: 500;
+	color: var(--kt-muted-color);
 
 	&[active],
 	&.router-link-exact-active {
-		color: var(--primary-color);
-		// border-bottom-color: var(--primary-color);
+		color: var(--kt-primary-color);
 		opacity: 1;
+		font-weight: 600;
 
 		svg {
-			fill: var(--primary-color);
+			fill: var(--kt-primary-color);
 		}
 	}
 
@@ -52,25 +50,30 @@
 	&[active]:hover,
 	&.router-link-exact-active:hover {
 		cursor: pointer;
-		color: var(--primary-color);
-
-		a {
-			text-decoration: none;
-		}
 	}
 
 	&:not(:last-child) {
 		margin-right: 36px;
 	}
 
-	&:hover {
+	&:hover a {
+		text-decoration: none !important;
+	}
+
+	&:not([active]):hover {
 		cursor: pointer;
-		color: var(--muted-darker-color);
+		color: var(--kt-muted-darker-color);
+
+		svg {
+			fill: var(--kt-muted-darker-color);
+		}
 	}
 
 	svg {
-		margin-right: 8px;
-		fill: var(--muted-color);
+		margin-right: 4px;
+		fill: var(--kt-muted-color);
 		vertical-align: text-bottom;
+		width: 20px;
+		height: 20px;
 	}
 }

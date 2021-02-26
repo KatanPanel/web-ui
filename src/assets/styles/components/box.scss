@@ -23,8 +23,8 @@
 .v--box {
 	position: relative;
 	padding: 24px;
-	background-color: var(--app-foreground);
-	border: 1px solid var(--app-foreground);
+	background-color: var(--kt-foreground);
+	border: 1px solid var(--kt-foreground);
 	box-shadow: rgba(0, 0, 0, 0.12) 0 0 10px 5px;
 	border-radius: 8px;
 
@@ -36,6 +36,7 @@
 	&.v--box-outlined {
 		box-shadow: none;
 		border-color: var(--app-border-color);
+		background-color: transparent;
 	}
 
 	.v--box-header {

@@ -41,9 +41,7 @@
 			>
 				<div class="overlay" />
 				<div class="content">
-					<a href="/">
-						<the-logo color="white" />
-					</a>
+					<the-logo color="white" />
 				</div>
 			</div>
 			<div class="login-right v--flex-child">
@@ -60,11 +58,8 @@ import { MetaInfo } from "vue-meta";
 import TheLogo from "@/components/TheLogo.vue";
 import Login from "@/components/auth/Login.vue";
 import { mixins } from "vue-class-component";
-import { AuthMixin } from "@/mixins/auth";
+import { AuthMixin } from "@/common/internal/mixins/auth";
 import SwitchAccount from "@/components/auth/SwitchAccount.vue";
-import { IS_LOGGED_IN } from "@/store/auth/getters";
-import { AUTH_MODULE } from "@/store";
-import { get } from "@/utils/vuex";
 import OAuth from "@/components/auth/OAuth.vue";
 import VTabs from "@/components/ui/tab/VTabs.vue";
 import VTab from "@/components/ui/tab/VTab.vue";
@@ -117,7 +112,7 @@ export default class Auth extends mixins(AuthMixin) {
 </style>
 <style lang="scss">
 .login-box {
-	background-color: var(--app-foreground);
+	background-color: var(--kt-foreground);
 	min-height: 35.4%;
 	min-width: 75%;
 	align-items: normal;
@@ -162,16 +157,14 @@ export default class Auth extends mixins(AuthMixin) {
 		.header {
 			align-items: baseline;
 			margin-bottom: 18px;
-			margin-top: 6px;
-			line-height: 1.2;
 
 			h2 {
-				color: var(--app-text-color);
+				color: var(--kt-text-color);
 				margin-bottom: 0;
 			}
 
 			p {
-				color: var(--muted-color);
+				color: var(--kt-muted-color);
 				font-size: 16px;
 			}
 		}
@@ -194,7 +187,7 @@ export default class Auth extends mixins(AuthMixin) {
 		.submit {
 			.forgot-password {
 				font-size: 14px;
-				color: var(--muted-color);
+				color: var(--kt-muted-color);
 			}
 
 			.v--button[type="submit"] {

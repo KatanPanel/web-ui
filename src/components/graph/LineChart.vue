@@ -20,34 +20,16 @@
   - SOFTWARE.
   -->
 
-<template>
-	<div class="panel-plugins">
-		<v-row>
-			<v-col :size="8">
-				<h1>
-					<b>{{ $t("header.panel.plugins") }}</b>
-				</h1>
-			</v-col>
-		</v-row>
-		<hr />
-		Coisas aq
-	</div>
-</template>
-
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { MetaInfo } from "vue-meta";
-import VContainer from "@/components/ui/layout/VContainer.vue";
-import VRow from "@/components/ui/layout/VRow.vue";
-import VCol from "@/components/ui/layout/VCol.vue";
+import { Component } from "vue-property-decorator";
+import { Line, mixins as Mix } from "vue-chartjs";
+import { mixins } from "vue-class-component";
 
-@Component({
-	components: { VCol, VRow, VContainer },
-	metaInfo(): MetaInfo {
-		return {
-			title: (this as Vue).$i18n.t("titles.panel.plugins") as string,
-		};
+@Component<LineChart>({
+	extends: Line,
+	mounted(): void {
+		(this as Line).renderChart(this.chartData, {});
 	},
 })
-export default class Plugins extends Vue {}
+export default class LineChart extends mixins(Mix.reactiveProp) {}
 </script>

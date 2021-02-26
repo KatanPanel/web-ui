@@ -20,22 +20,27 @@
  * SOFTWARE.
  */
 
-import { Language } from "@/store/state";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
-/**
- * The list of languages that are currently supported by Katan.
- * This is the list that is displayed to the client.
- * Adding a new language to the language directory will not make it exist, it is necessary to add it here.
- *
- * The language name must be in the UpperCamelCase format and the tag in the kebab-case format, lowercase.
- */
-export const supportedLanguages: Array<Language> = [
-	{
-		name: "English",
-		tag: "en",
-	},
-	{
-		name: "Português (Brasil)",
-		tag: "pt-BR",
-	},
-];
+@Component
+export class Toggleable extends Vue {
+	// preset
+	@Prop({ type: Boolean, default: false, required: false })
+	protected readonly active!: boolean;
+
+	private _active = this.active;
+
+	@Watch("_active")
+	private onToggle(value: boolean): void {
+		this.$emit("toggle", value);
+	}
+
+	/**
+	 * Defines the current state of the component for the specified parameter
+	 * or inverts the current state value if no parameter is specified.
+	 * @param {boolean?} value - the new state value.
+	 */
+	public toggle(value?: boolean): void {
+		this._active = value || !this._active;
+	}
+}

@@ -22,16 +22,14 @@
 
 import Vue from "vue";
 import VueI18n from "vue-i18n";
-import { ROOT_MODULE } from "@/store";
-import { supportedLanguages } from "./supported-languages";
-import { dispatch } from "@/common/utils/vuex";
-import { UPDATE_LANGUAGE } from "@/store/actions";
 import * as dayjs from "dayjs";
+import { supportedLanguages } from "./common/language";
+import { I18N_LOG_TAG } from "@/logging";
+import { updateClientSettings } from "@/common/client-settings";
 
 Vue.use(VueI18n);
 
 export const FALLBACK_LANGUAGE = "en";
-export const I18N_LOG_TAG = "I18N";
 
 const loaded: string[] = [];
 const i18n = new VueI18n({
@@ -49,6 +47,11 @@ async function importDayJSLocale(code: string) {
 	);
 }
 
+/**
+ * Updates the document language to the specified language and
+ * loads the date and time translation settings for that language.
+ * @param {string} language - the new language.
+ */
 export async function updateLanguage(language: string) {
 	(vm.$i18n || i18n).locale = language;
 
@@ -78,6 +81,10 @@ export async function updateLanguage(language: string) {
 	document.querySelector("html")!.setAttribute("lang", language);
 }
 
+/**
+ * Sets the client's current language to the specified language if supported.
+ * @param {string} language - the new language.
+ */
 export async function setLanguage(language: string) {
 	const supported = supportedLanguages.find(
 		(value) => language === value.tag
@@ -96,29 +103,30 @@ export async function setLanguage(language: string) {
 		return;
 	}
 
-	dispatch(ROOT_MODULE, UPDATE_LANGUAGE, {
-		language: supported,
-	}).then(async () => updateLanguage(language));
+	updateClientSettings({ language: supported });
+	return await updateLanguage(language);
 }
 
+/**
+ * Attempts to load messages into the specified language
+ * and tries to set it as the client's current language.
+ * @param {string} language - the language to be loaded.
+ * @param {ReadonlyArray<string>} fallback - other languages to load if the specified language fails to load.
+ */
 export async function loadLanguage(
 	language: string,
 	fallback: ReadonlyArray<string> = []
-) {
+): Promise<any> {
 	if (i18n.locale === language) return;
 
 	if (loaded.includes(language)) {
 		vm.$log.info({
 			tag: I18N_LOG_TAG,
-			message: `Reloading language "${language}"...`,
+			message: `Language "${language}" reloaded.`,
 		});
-		return setLanguage(language);
+		return await setLanguage(language);
 	}
 
-	vm.$log.info({
-		tag: I18N_LOG_TAG,
-		message: `Loading language "${language}"...`,
-	});
 	return import(
 		/* webpackChunkName: "lang-[request]" */ `./lang/${language}.json`
 	)
@@ -130,21 +138,18 @@ export async function loadLanguage(
 				message: `Language "${language}" loaded.`,
 			});
 
-			await setLanguage(language);
+			return await setLanguage(language);
 		})
 		.catch(async (e) => {
-			vm.$log.info({
+			vm.$log.error({
 				tag: I18N_LOG_TAG,
 				message: `Cannot load language ${language}.`,
+				args: [e],
 			});
-			console.error(e);
 
-			if (fallback.length === 0) {
-				await loadLanguage(FALLBACK_LANGUAGE);
-				return;
-			}
-
-			await loadLanguage(fallback[0], fallback.slice(1));
+			if (fallback.length === 0)
+				return await loadLanguage(FALLBACK_LANGUAGE);
+			else return await loadLanguage(fallback[0], fallback.slice(1));
 		});
 }
 

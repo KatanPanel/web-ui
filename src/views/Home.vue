@@ -21,56 +21,53 @@
   -->
 
 <template>
-	<div>
-		<section id="top">
-			<h1 class="v--m-bottom-0">
-				<b>Bem-Vindo(a), {{ getAccount.username }}.</b>
-			</h1>
-			<p class="v--text-muted last-active-session">
-				Sua última sessão de log-in foi em
-				{{ $time(getAccount.lastLogin).format("LLLL") }}.
-			</p>
-			<v-tabs class="tabs">
-				<v-tab :tab="'server-list'"> Página Inicial </v-tab>
-			</v-tabs>
-		</section>
-		<hr />
-		<section id="view" class="v--m-top-5">
-			<v-tab-view :tab="'server-list'">
-				<HomeServerListView />
-			</v-tab-view>
-		</section>
-	</div>
+	<v-row>
+		<v-col :size="6">
+			<v-flex-box>
+				<h4 class="v--flex-child">Lista de servidores</h4>
+				<!-- <v-button :flat="true">Atualizar</v-button> -->
+			</v-flex-box>
+			<HomeServerList />
+		</v-col>
+	</v-row>
 </template>
 
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import { AuthMixin } from "@/mixins/auth";
+import { AuthMixin } from "@/common/internal/mixins/auth";
 import { AxiosResponse } from "axios";
-import VTabs from "@/components/ui/tab/VTabs.vue";
-import VTab from "@/components/ui/tab/VTab.vue";
-import VTabView from "@/components/ui/tab/VTabView.vue";
-import { commit } from "@/utils/vuex";
-import { ON_BACKEND_INFO_UPDATE } from "@/store/mutations";
-import HomeServerListView from "@/components/home/HomeServerListView.vue";
+import { commit } from "@/common/utils/vuex";
+import { UPDATE_BACKEND_INFO } from "@/store/mutations";
+import HomeServerList from "@/components/home/HomeServerList.vue";
 import { ROOT_MODULE } from "@/store";
+import { MetaInfo } from "vue-meta";
+import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
+import VButton from "@/components/ui/button/VButton.vue";
+import VRow from "@/components/ui/layout/VRow.vue";
+import VCol from "@/components/ui/layout/VCol.vue";
 
 @Component({
 	components: {
-		HomeServerListView,
-		VTabView,
-		VTab,
-		VTabs,
+		HomeServerList,
+		VCol,
+		VRow,
+		VButton,
+		VFlexBox,
 	},
-})
-export default class Home extends mixins(AuthMixin) {
+	metaInfo(): MetaInfo {
+		return {
+			title: process.env.VUE_APP_NAME,
+			titleTemplate: undefined,
+		};
+	},
 	mounted(): void {
 		this.$http("/info").then((res: AxiosResponse) => {
-			commit(ROOT_MODULE, ON_BACKEND_INFO_UPDATE, res.data.data);
+			commit(ROOT_MODULE, UPDATE_BACKEND_INFO, res.data.data);
 		});
-	}
-}
+	},
+})
+export default class Home extends mixins(AuthMixin) {}
 </script>
 <style lang="scss" scoped>
 .last-active-session {
@@ -104,7 +101,7 @@ export default class Home extends mixins(AuthMixin) {
 		.server-state {
 			width: 32px;
 			height: 32px;
-			background-color: var(--app-foreground);
+			background-color: var(--kt-foreground);
 			border-radius: 50%;
 		}
 

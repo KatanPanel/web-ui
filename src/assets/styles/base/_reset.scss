@@ -64,12 +64,13 @@ body {
 }
 
 a {
-	text-decoration: none;
+	text-decoration-style: dotted;
+	text-decoration-line: underline;
 	color: inherit;
 
 	&:hover {
 		cursor: pointer;
-		text-decoration: underline;
+		text-decoration-style: solid;
 	}
 }
 
@@ -77,8 +78,4 @@ hr {
 	margin: 12px 0 24px;
 	border-top: 1px solid var(--app-border-color);
 	opacity: 0.38;
-}
-
-small {
-	display: block;
 }

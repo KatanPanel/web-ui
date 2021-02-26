@@ -20,37 +20,36 @@
  * SOFTWARE.
  */
 
-:root,
-[data-theme="default"] {
-	--app-background: whitesmoke;
-	--app-text-color: #333;
-	--app-foreground: #fafafa;
-	--app-foreground-overlay: #f5f5f5;
-	--app-border-color: #ddd;
+:root {
+	--kt-success-color: #4cd137;
+	--kt-success-darker-color: #44bd32;
+	--kt-danger-color: #eb3b5a;
+	--kt-danger-darker-color: #e92c4d;
+	--kt-warning-color: #fed330;
+	--kt-warning-darker-color: #fed330;
+	--kt-muted-color: #aaaaaa;
+	--kt-muted-darker-color: #888888;
+
+	--primary-darker-color: #3c70ea;
+}
+
+[data-theme="light"] {
+	--kt-text-color: #4f5660;
+	--kt-background: #ffffff;
+	--kt-foreground: #fafafa;
+	--app-foreground-overlay: #f7f7f7;
+	--app-border-color: #dddddd;
 
 	--inverse-color: #ffffff;
-	--primary-color: #4b7bec;
-	--primary-darker-color: #3c70ea;
-	--primary-012-color: rgba(75, 123, 236, 0.12);
-
-	--danger-color: #eb3b5a;
-	--danger-darker-color: #e92c4d;
-	--warning-color: #fed330;
-	--muted-color: #aaaaaa;
-	--muted-darker-color: #888888;
-
-	--layout-panel-sidebar-color: var(--primary-color);
+	--kt-primary-color: #4b7bec;
 }
 
 [data-theme="dark"] {
-	--app-background: #2e3134;
-	--app-text-color: #fff;
-	--app-foreground: #202124;
+	--kt-text-color: #fff;
+	--kt-background: #232931;
+	--kt-foreground: #202124;
 	--app-foreground-overlay: #28292d;
 	--app-border-color: #1f2024;
 
-	--primary-color: #4b7bec;
-	--muted-darker-color: #cccccc;
-
-	--layout-panel-sidebar-color: #202124;
+	--kt-primary-color: #4788d8;
 }

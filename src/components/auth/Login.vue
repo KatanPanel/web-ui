@@ -4,7 +4,7 @@
 			<h2>
 				<b>{{ $t("modules.login.title") }}</b>
 			</h2>
-			<p>{{ $t("modules.login.credentials-needed") }}</p>
+			<!-- <p>{{ $t("modules.login.credentials-needed") }}</p> -->
 		</div>
 		<p class="error v--text-error" v-if="error">
 			{{ $t(`errors.${error}`) }}
@@ -25,6 +25,7 @@
 							maxlength="32"
 							required
 							v-model="username"
+							placeholder="John Doe"
 						/>
 					</div>
 				</v-input-group>
@@ -46,9 +47,6 @@
 				</v-input-group>
 			</div>
 			<v-flex-box class="v--flex-align-center submit">
-				<a href="#" target="_blank" class="forgot-password"
-					>Outros métodos de log-in</a
-				>
 				<div class="v--flex-child">
 					<v-button type="submit" :disabled="isLocked">
 						<span v-if="!isLocked" key="config">{{

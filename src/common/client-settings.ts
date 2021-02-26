@@ -21,9 +21,10 @@
  */
 
 import { Language } from "@/common/language";
-import { commit } from "@/common/utils/vuex";
+import { commit, get } from "@/common/utils/vuex";
 import { ROOT_MODULE } from "@/store";
 import { UPDATE_CLIENT_SETTINGS } from "@/store/mutations";
+import { GET_CLIENT_SETTINGS } from "@/store/getters";
 
 export const LIGHT_THEME = "light";
 export const DARK_THEME = "dark";
@@ -38,8 +39,8 @@ export const DARK_THEME = "dark";
  */
 export interface ClientSettings {
 	/**
-	 * Current client theme, `null` value means that the defined
-	 * theme will be the default theme of the client's machine.
+	 * Current client theme, when `undefined` the theme
+	 * will be set to the default theme of the client's machine.
 	 */
 	theme?: string;
 
@@ -79,4 +80,12 @@ export interface ClientServerSettings {
  */
 export function updateClientSettings(settings: Partial<ClientSettings>): void {
 	commit(ROOT_MODULE, UPDATE_CLIENT_SETTINGS, settings);
+}
+
+/**
+ * Returns the current client settings.
+ * @return ClientSettings
+ */
+export function getClientSettings(): ClientSettings {
+	return get(ROOT_MODULE, GET_CLIENT_SETTINGS);
 }

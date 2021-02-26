@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import Vue from "vue";
+/* import Vue from "vue";
 import Component from "vue-class-component";
 import { DARK_THEME, Language, LIGHT_THEME } from "@/store/state";
 import { GET_BACKEND_INFO, GET_LANGUAGE, GET_THEME } from "@/store/getters";
@@ -86,4 +86,4 @@ export class AppMixin extends Vue {
 	protected get getAvailableThemes(): Array<string> {
 		return [LIGHT_THEME, DARK_THEME];
 	}
-}
+} */

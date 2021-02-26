@@ -46,10 +46,11 @@
 	</div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import { AuthMixin } from "@/mixins/auth";
+import { AuthMixin } from "@/common/internal/mixins/auth";
 import VButton from "@/components/ui/button/VButton.vue";
+
 @Component({
 	components: { VButton },
 })

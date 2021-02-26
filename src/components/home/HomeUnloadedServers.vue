@@ -21,41 +21,51 @@
   -->
 
 <template>
-	<div>
-		<h1 class="v--m-bottom-4">
-			<b>{{ $t("system.games.title") }}</b>
-		</h1>
-		<ul v-if="getBackendInfo" class="game-list">
-			showing
-			<li v-for="game in getBackendInfo.games" :key="game.name">
-				<hr />
-			</li>
-		</ul>
-		<div class="v-else">nada</div>
-	</div>
+	<section id="unloaded-servers" v-if="getUnloadedServers.length > 0">
+		<small
+			class="v--text-muted v--text-uppercase v--text-fw-700 v--m-bottom-1"
+			>Descarregados — {{ getUnloadedServers.length }}</small
+		>
+		<br >
+		<p class="v--text-muted-darker">
+			Servidores descarregados obtiveram falha durante seu carregamento.
+			Encontre o motivo da falha no arquivo de logs do servidor ou na
+			interface de linha de comandos. <a>Saiba mais</a>.
+		</p>
+		<div class="server-list">
+			<div
+				v-for="server in getUnloadedServers"
+				:key="server.id"
+				class="server"
+				disabled="true"
+			>
+				<div class="server-info">
+					<div class="server-header">
+						<div class="server-name">
+							<div class="server-state server-state-unloaded" />
+							{{ server.name }}
+						</div>
+						<div class="server-ip">
+							{{ server.host }}:{{ server.port }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 </template>
-
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { MetaInfo } from "vue-meta";
-import VContainer from "@/components/ui/layout/VContainer.vue";
-import VRow from "@/components/ui/layout/VRow.vue";
-import VCol from "@/components/ui/layout/VCol.vue";
 import { get } from "@/common/utils/vuex";
 import { ROOT_MODULE } from "@/store";
-import { GET_BACKEND_INFO } from "@/store/getters";
+import { GET_SERVER_LIST } from "@/store/getters";
 
-@Component({
-	components: { VCol, VRow, VContainer },
-	metaInfo(): MetaInfo {
-		return {
-			title: (this as Vue).$i18n.t("titles.system.games") as string,
-		};
-	},
-})
-export default class SystemGames extends Vue {
-	get getBackendInfo(): any | null {
-		return get(ROOT_MODULE, GET_BACKEND_INFO);
+@Component
+export default class HomeUnloadedServers extends Vue {
+	get getUnloadedServers(): Array<any> {
+		return get(ROOT_MODULE, GET_SERVER_LIST).filter(
+			(server: any) => server.state === "UNLOADED"
+		);
 	}
 }
 </script>

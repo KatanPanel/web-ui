@@ -21,29 +21,55 @@
   -->
 
 <template>
-	<div class="v--field" :active="active" :disabled="disabled">
-		<v-field-radio v-if="active" key="active-state" active>
-			<v-icon name="check" />
-		</v-field-radio>
-		<v-field-radio v-else-if="disabled" key="blocked-state" disabled>
-			&times;
-		</v-field-radio>
-		<v-field-radio v-else key="unknown-state" />
-		<slot />
-	</div>
+	<router-link
+		v-if="window"
+		:tag="tag"
+		:to="{
+			name: loc.name,
+			params: { ...window.location.params, ...loc.params },
+		}"
+	>
+		<a v-if="tag !== 'a'"><slot /></a>
+		<slot v-else />
+	</router-link>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import VIcon from "@/components/ui/icon/VIcon.vue";
-import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
+import { Location } from "vue-router";
+import { getWindow, Window } from "@/common/navigation/window";
 
-@Component({
-	components: { VFieldRadio, VIcon },
+@Component<WindowLink>({
+	mounted(): void {
+		// window id have been passed as prop
+		if (this.check) {
+			this.window = getWindow(this.check);
+			if (!this.to) this.loc = this.window?.location!;
+			return;
+		}
+
+		let parent: any = this.$parent;
+
+		// considering that the component can be used in a `VTabs`
+		// block we need to find the closest window parent to it.
+		while (!parent.window) parent = parent.$parent;
+
+		this.window = parent.getWindow;
+	},
 })
-export default class VField extends Vue {
-	@Prop({ type: Boolean, default: false }) private readonly active!: boolean;
-	@Prop({ type: Boolean, default: false })
-	private readonly disabled!: boolean;
+export default class WindowLink extends Vue {
+	@Prop({ type: String, required: false, default: "li" })
+	private readonly tag!: string;
+
+	@Prop({ type: Object, required: false })
+	private to!: Location;
+
+	// avoid direct prop "to" mutation
+	private loc: Location = this.to;
+
+	@Prop({ type: Number, required: false })
+	private readonly check!: number;
+
+	window: Window | number | null = null;
 }
 </script>

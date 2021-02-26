@@ -19,7 +19,7 @@ export default class VIcon extends Vue {
 .v--icon {
 	width: 24px;
 	height: 24px;
-	fill: currentColor;
+	fill: var(--kt-text-color);
 	vertical-align: middle;
 }
 </style>

@@ -22,13 +22,22 @@
 
 <template>
 	<span class="v--hotkey">
-		<slot />
+		{{ resultKey }}
 	</span>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
+import { mixins } from "vue-class-component";
+import { Toggleable } from "@/common/internal/mixins/ui/toggleable";
 
-@Component
-export default class VHotKey extends Vue {}
+@Component({
+	beforeMount(): void {
+		// TODO: handle platform specific hotkeys
+	},
+})
+export default class VHotKey extends mixins(Toggleable) {
+	@Prop({ type: String, required: true }) private readonly hotkey!: string;
+	private resultKey = this.hotkey;
+}
 </script>

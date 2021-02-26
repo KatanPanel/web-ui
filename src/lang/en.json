@@ -1,14 +1,39 @@
 {
 	"titles": {
 		"login": "Sign In",
-		"panel": {
-			"home": "Control Panel",
-			"account": "My account",
-			"server": "{server} server",
-			"server-console": "Console - {server}",
-			"plugins": "Plugins",
-			"nodes": "Nodes",
+		"server": {
+			"index": "{server}",
+			"overview": "Overview – {server}",
+			"console": "Console – {server}",
+			"fs": {
+				"index": "File Management – {server}",
+				"disk": "Disk {disk} - Gerenciador de Arquivos – {server}"
+			}
+		},
+		"system": {
+			"games": "Games"
+		},
+		"advanced": {
 			"settings": "Settings"
+		}
+	},
+	"windows": {
+		"server": {
+			"console": {
+				"empty": "Console",
+				"typing": "\"{input}\" – Console..."
+			},
+			"fs": {
+				"index": "File Management",
+				"disk": "Disk {disk} – File Management"
+			}
+		}
+	},
+	"tabs": {
+		"server": {
+			"overview": "Overview",
+			"console": "Console",
+			"fs": "File Management"
 		}
 	},
 	"header": {
@@ -73,6 +98,48 @@
 				"default-theme": "Light",
 				"dark-theme": "Dark",
 				"panel-settings": "Panel settings"
+			}
+		}
+	},
+	"themes": {
+		"light": "Light",
+		"dark": "Dark"
+	},
+	"home": {
+		"welcome": "Welcome, {0}."
+	},
+	"system": {
+		"games": {
+			"title": "Games"
+		}
+	},
+	"advanced": {
+		"settings": {
+			"title": "Settings",
+			"language": "Language",
+			"select-a-language": "Select a language",
+			"theme": "Theme",
+			"appearence": "Appearence",
+			"theme-system-default": "If you do not define a preferred theme, the system default will be used."
+		}
+	},
+	"sidebar": {
+		"labels": {
+			"system": "System",
+			"advanced": "Advanced"
+		},
+		"links": {
+			"home": "Homepage",
+			"server": {
+				"overview": "Overview",
+				"console": "Console",
+				"fs": "File Management"
+			},
+			"system": {
+				"games": "Games"
+			},
+			"advanced": {
+				"settings": "Settings"
 			}
 		}
 	}

@@ -59,8 +59,8 @@
 						<v-field
 							v-for="language in getSupportedLanguages"
 							:key="language.tag"
-							:active="getCurrentLanguage === language"
-							@click.native="setCurrentLanguage(language)"
+							:active="currentLanguage === language"
+							@click.native="currentLanguage = language"
 						>
 							<div class="v--flex-child">
 								{{ language.name }}
@@ -80,14 +80,11 @@
 </template>
 
 <script lang="ts">
-import { Component } from "vue-property-decorator";
-import { MetaInfo } from "vue-meta";
+import { Component, Vue } from "vue-property-decorator";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
-import { mixins } from "vue-class-component";
-import { AppMixin } from "@/common/internal/mixins/app";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VFieldList from "@/components/ui/field/VFieldList.vue";
 import VField from "@/components/ui/field/VField.vue";
@@ -95,8 +92,18 @@ import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
 import VTabs from "@/components/ui/tab/VTabs.vue";
 import VTab from "@/components/ui/tab/VTab.vue";
 import VTabView from "@/components/ui/tab/VTabView.vue";
+import { generateMetaInfo } from "@/common/navigation/translation";
+import { Language, supportedLanguages } from "@/common/language";
+import {
+	ClientSettings,
+	DARK_THEME,
+	getClientSettings,
+	LIGHT_THEME,
+	updateClientSettings,
+} from "@/common/client-settings";
+import { loadLanguage } from "@/i18n";
 
-@Component({
+@Component<AdvancedSettings>({
 	components: {
 		VTabView,
 		VTab,
@@ -110,11 +117,52 @@ import VTabView from "@/components/ui/tab/VTabView.vue";
 		VRow,
 		VContainer,
 	},
-	metaInfo(): MetaInfo {
-		return {
-			title: this.$i18n.t("titles.advanced.settings") as string,
-		};
-	},
+	metaInfo: () => generateMetaInfo("advanced.settings"),
 })
-export default class AdvancedSettings extends mixins(AppMixin) {}
+export default class AdvancedSettings extends Vue {
+	/**
+	 * Returns all currently supported languages.
+	 */
+	get getSupportedLanguages(): Language[] {
+		return supportedLanguages;
+	}
+
+	/**
+	 * Returns all themes available for selection.
+	 */
+	get getAvailableThemes(): string[] {
+		return [LIGHT_THEME, DARK_THEME];
+	}
+
+	/**
+	 * Returns the current language defined in the {@link ClientSettings}.
+	 * @return Language
+	 */
+	get currentLanguage(): Language {
+		return getClientSettings().language as Language;
+	}
+
+	/**
+	 * Asynchronously sets the client's current language.
+	 * @param {Language} language - the new language.
+	 */
+	set currentLanguage(language: Language) {
+		loadLanguage(language.tag).then();
+	}
+
+	/**
+	 * Returns the current client theme defined in the {@link ClientSettings}.
+	 */
+	get currentTheme(): strin {
+		return getClientSettings().theme as string;
+	}
+
+	/**
+	 * Asynchronously sets the client's current theme.
+	 * @param {string} theme - the new theme.
+	 */
+	set applicationTheme(theme: string) {
+		updateClientSettings({ theme });
+	}
+}
 </script>

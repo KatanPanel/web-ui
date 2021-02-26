@@ -25,6 +25,7 @@ import { RootState } from "@/store/state";
 import { Window } from "@/common/navigation/window";
 import { Route } from "vue-router";
 import { RawWebSocket } from "@/common/websocket/websocket";
+import { ClientSettings } from "@/common/client-settings";
 
 export const GET_SOCKET = "getSocket";
 export const GET_BACKEND_INFO = "getBackendInfo";
@@ -32,6 +33,7 @@ export const GET_WINDOW = "getWindow";
 export const GET_ALL_WINDOWS = "getAllWindows";
 export const GET_NAVIGATION_HISTORY = "getNavigationHistory";
 export const GET_SERVER_LIST = "getServerList";
+export const GET_CLIENT_SETTINGS = "getClientSettings";
 
 export default {
 	[GET_SOCKET](state: RootState): RawWebSocket {
@@ -57,5 +59,8 @@ export default {
 	},
 	[GET_SERVER_LIST](state: RootState): any[] {
 		return state.serverList;
+	},
+	[GET_CLIENT_SETTINGS](state: RootState): ClientSettings {
+		return state.clientSettings;
 	},
 } as GetterTree<RootState, RootState>;

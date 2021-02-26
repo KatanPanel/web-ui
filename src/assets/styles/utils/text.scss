@@ -21,15 +21,19 @@
  */
 
 .v--text-error {
-	color: var(--danger-color);
+	color: var(--kt-danger-color);
 }
 
 .v--text-primary {
-	color: var(--primary-color);
+	color: var(--kt-primary-color);
 }
 
 .v--text-muted {
-	color: var(--muted-color);
+	color: var(--kt-muted-color);
+}
+
+.v--text-muted-darker {
+	color: var(--kt-muted-darker-color);
 }
 
 .v--text-align-center {

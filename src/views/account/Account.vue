@@ -89,7 +89,7 @@ import VContainer from "@/components/ui/layout/VContainer.vue";
 import VBox from "@/components/ui/box/VBox.vue";
 import VBoxHeader from "@/components/ui/box/VBoxHeader.vue";
 import { mixins } from "vue-class-component";
-import { AuthMixin } from "@/mixins/auth";
+import { AuthMixin } from "@/common/internal/mixins/auth";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import VBoxBody from "@/components/ui/box/VBoxBody.vue";
 import VRow from "@/components/ui/layout/VRow.vue";

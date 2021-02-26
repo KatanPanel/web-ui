@@ -39,7 +39,7 @@ export default class Loading extends Vue {
 		top: 20px;
 		left: 20px;
 		border-radius: 50%;
-		box-shadow: 0 2px 0 0 var(--app-text-color);
+		box-shadow: 0 2px 0 0 var(--kt-text-color);
 	}
 }
 </style>

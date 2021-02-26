@@ -24,13 +24,13 @@
 	<div class="window">
 		<div class="window-icon">
 			<img
-				:src="`/img/games/icons/${getWindow.data.game.name.toLowerCase()}.png`"
-				:alt="getWindow.windowName"
+				:src="`/img/games/icons/${getServer.game.name.toLowerCase()}.png`"
+				:alt="getWindow.name"
 			/>
 		</div>
 		<div class="window-info">
 			<div class="window-title">
-				{{ getWindow.windowName }}
+				{{ getWindow.name }}
 			</div>
 			<div class="window-description">
 				{{ getWindow.title }}
@@ -42,7 +42,7 @@
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import WindowMixin from "@/mixins/window";
+import WindowMixin from "@/common/internal/mixins/window";
 
 @Component
 export default class ServerWindow extends mixins(WindowMixin) {}

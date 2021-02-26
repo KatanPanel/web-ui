@@ -24,3 +24,19 @@ export type Language = {
 	name: string;
 	tag: string;
 };
+
+/**
+ * The list of languages that are currently supported by Katan. This
+ * is the list that is displayed to the client. Adding a new language
+ * to the language directory will not make it exist, it is necessary to add it here.
+ */
+export const supportedLanguages: Array<Language> = [
+	{
+		name: "English",
+		tag: "en",
+	},
+	{
+		name: "Português (Brasil)",
+		tag: "pt-BR",
+	},
+];

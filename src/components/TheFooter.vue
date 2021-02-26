@@ -42,7 +42,7 @@ export default class TheFooter extends Vue {
 	margin-bottom: 8px;
 	font-size: 14px;
 	text-align: center;
-	color: var(--app-text-color);
+	color: var(--kt-text-color);
 	width: 100%;
 	height: 48px;
 	min-height: 48px;

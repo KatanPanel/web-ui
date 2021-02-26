@@ -3,49 +3,70 @@
 		<div class="v--layout-panel-sidebar" id="v--layout-panel-sidebar">
 			<div class="sidebar-inner">
 				<div class="sidebar-logo">
-					<the-logo color="white" />
+					<router-link :to="{ name: HOME_ROUTE }" tag="a">
+						<the-logo color="blue" />
+					</router-link>
 				</div>
 				<ul class="sidebar-items">
-					<router-link :to="{ name: PANEL_HOME_ROUTE }" tag="li">
+					<router-link :to="{ path: '/' }" tag="li">
 						<a>
 							<v-icon name="home" />
 							<span>Página Inicial</span>
 						</a>
 					</router-link>
 				</ul>
+				<div
+					v-for="window in getWindows"
+					:key="window.id"
+					:disabled="window.state === 'minimized'"
+					class="sidebar-window"
+				>
+					<span class="sidebar-label">{{ window.data.name }}</span>
+					<ul class="sidebar-items">
+						<window-link
+							:to="{ name: SERVER_OVERVIEW_ROUTE }"
+							:check="window.id"
+							tag="li"
+						>
+							<v-icon name="hashtag" />
+							<span>Visão geral</span>
+						</window-link>
+						<window-link
+							:to="{ name: SERVER_CONSOLE_ROUTE }"
+							:check="window.id"
+							tag="li"
+						>
+							<v-icon name="terminal" />
+							<span>Console</span>
+						</window-link>
+						<window-link
+							:to="{ name: SERVER_FS_ROUTE }"
+							:check="window.id"
+							tag="li"
+						>
+							<v-icon name="ftp-folder" />
+							<span>Explorador de Arquivos</span>
+						</window-link>
+					</ul>
+				</div>
 				<span class="sidebar-label">Sistema</span>
 				<ul class="sidebar-items">
-					<router-link :to="{ name: PANEL_NODES_ROUTE }" tag="li">
+					<router-link :to="{ name: SYSTEM_GAMES_ROUTE }" tag="li">
 						<a>
 							<v-icon name="games" />
 							<span>Jogos</span>
 						</a>
 					</router-link>
-					<router-link :to="{ name: PANEL_PLUGINS_ROUTE }" tag="li">
-						<a>
-							<v-icon name="3d-cube" />
-							<span>Plug-ins</span>
-						</a>
-					</router-link>
-					<router-link :to="{ name: PANEL_NODES_ROUTE }" tag="li">
-						<a>
-							<v-icon name="location" />
-							<span>Nós</span>
-						</a>
-					</router-link>
-					<router-link :to="{ name: PANEL_NODES_ROUTE }" tag="li">
-						<a>
-							<v-icon name="boxes" />
-							<span>Backups</span>
-						</a>
-					</router-link>
 				</ul>
 				<span class="sidebar-label">Avançado</span>
 				<ul class="sidebar-items">
-					<router-link :to="{ name: PANEL_SETTINGS_ROUTE }" tag="li">
+					<router-link
+						:to="{ name: ADVANCED_SETTINGS_ROUTE }"
+						tag="li"
+					>
 						<a>
 							<v-icon name="double-cog" />
-							<span>Ajustes</span>
+							<span>Configurações</span>
 						</a>
 					</router-link>
 				</ul>
@@ -57,33 +78,29 @@
 	</main>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import TheLogo from "@/components/TheLogo.vue";
 import VIcon from "@/components/ui/icon/VIcon.vue";
-import {
-	PANEL_ACCOUNT_ROUTE,
-	PANEL_PLUGINS_ROUTE,
-	PANEL_ROUTE,
-	PANEL_NODES_ROUTE,
-	PANEL_SETTINGS_ROUTE,
-} from "@/router";
+import { mixins } from "vue-class-component";
+import { AppMixin } from "@/common/internal/mixins/app";
+import { getOpenWindows } from "@/common/navigation/window";
+import WindowLink from "@/components/navigation/WindowLink.vue";
 
 @Component({
 	components: {
+		WindowLink,
 		VIcon,
 		TheLogo,
 		VLabel,
 		VContainer,
 	},
 })
-export default class PanelLayout extends Vue {
-	private readonly PANEL_HOME_ROUTE = PANEL_ROUTE;
-	private readonly PANEL_PLUGINS_ROUTE = PANEL_PLUGINS_ROUTE;
-	private readonly PANEL_ACCOUNT_ROUTE = PANEL_ACCOUNT_ROUTE;
-	private readonly PANEL_NODES_ROUTE = PANEL_NODES_ROUTE;
-	private readonly PANEL_SETTINGS_ROUTE = PANEL_SETTINGS_ROUTE;
+export default class PanelLayout extends mixins(AppMixin) {
+	private get getWindows(): any[] {
+		return getOpenWindows();
+	}
 }
 </script>
 <style lang="scss">
@@ -93,30 +110,37 @@ $border-radius: 64px;
 .v--layout-panel {
 	display: flex;
 	flex-direction: row !important; // override #app
-	background-color: var(--app-background);
-	color: var(--app-text-color);
+	background-color: var(--kt-background);
+	color: var(--kt-text-color);
 	position: relative;
 
 	.v--layout-panel-content {
 		position: relative;
 		flex: 1 0 auto;
 		padding: 48px;
+		max-width: 100%;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
 	.v--layout-panel-sidebar {
 		position: relative;
+		margin-right: 24px;
 		height: 100vh;
 		opacity: 1;
 		min-width: $sidebar-width;
-		border-top-right-radius: $border-radius;
-		border-bottom-right-radius: $border-radius;
+		max-width: $sidebar-width;
+		// border-top-right-radius: $border-radius;
+		// border-bottom-right-radius: $border-radius;
 
 		.sidebar-logo {
 			margin-bottom: 36px;
+			margin-left: 36px;
+			border-left: 2px solid transparent;
 
 			.v--katan-logo {
-				width: 64px;
-				height: 64px;
+				width: 54px;
+				height: 54px;
 			}
 		}
 
@@ -126,30 +150,36 @@ $border-radius: 64px;
 		}
 
 		.sidebar-inner {
-			max-width: max-content;
-			padding: 48px;
-			background-color: var(--layout-panel-sidebar-color);
+			padding: 48px 0;
+			// background-color: var(--layout-panel-sidebar-color);
 			position: fixed;
-			width: 100%;
+			min-width: $sidebar-width;
+			max-width: $sidebar-width;
 			height: 100%;
 			display: flex;
 			flex-direction: column;
-			border-top-right-radius: $border-radius;
-			border-bottom-right-radius: $border-radius;
-			box-shadow: var(--layout-panel-sidebar-color) 1px 0 8px 0;
+			// box-shadow: rgba(0, 0, 0, 0.12) 1px 0 8px 2px;
+			// border-right: 1px solid var(--app-border-color);
+			// align-items: center;
+		}
+
+		.sidebar-window[disabled] {
+			opacity: 0.38;
 		}
 
 		.sidebar-label {
+			display: block;
 			font-size: 12px;
 			font-weight: 800;
-			color: var(--inverse-color);
 			text-transform: uppercase;
-			margin-bottom: 6px;
 			user-select: none;
+			margin-top: 36px;
+			margin-left: 36px;
+			margin-bottom: 4px;
+			opacity: 0.54;
 		}
 
 		.sidebar-items {
-			margin-bottom: 48px;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -161,39 +191,51 @@ $border-radius: 64px;
 			li {
 				list-style-type: none;
 				font-weight: 600;
-				color: var(--inverse-color);
+				// color: var(--inverse-color);
 				border-left: 2px solid transparent;
-				margin-left: -48px;
-				padding-left: 48px;
-				opacity: 0.7;
+				width: $sidebar-width;
+				border-top-right-radius: 24px;
+				border-bottom-right-radius: 24px;
 
-				&:hover {
-					opacity: 1;
+				&:not(.router-link-exact-active):hover {
+					opacity: 0.7;
 				}
 
-				&:not(:last-child) {
-					margin-bottom: 18px;
-				}
+				&.router-link-exact-active {
+					background-color: rgba(75, 123, 236, 0.12);
+					a {
+						span {
+							color: var(--kt-primary-color);
+						}
 
-				&.router-link-exact-active.router-link-active {
-					border-left-color: #ffffff;
-					opacity: 1;
+						svg {
+							fill: var(--kt-primary-color);
+						}
+					}
 				}
 
 				a {
-					display: block;
+					text-decoration: none;
+					display: flex;
+					padding: 12px 36px;
 
 					span {
-						margin-left: 18px;
-						display: inline-block;
+						margin-left: 24px;
 						vertical-align: middle;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow: hidden;
+						display: block;
 					}
 				}
 
 				svg {
+					flex: 1 0 auto;
 					vertical-align: middle;
 					user-select: none;
-					fill: var(--inverse-color);
+					// fill: var(--inverse-color);
+					max-width: 24px;
+					max-height: 24px;
 				}
 			}
 		}
@@ -235,7 +277,7 @@ $border-radius: 64px;
 
 						.server-ip {
 							font-size: 12px;
-							color: var(--muted-color);
+							color: var(--kt-muted-color);
 						}
 					}
 				}

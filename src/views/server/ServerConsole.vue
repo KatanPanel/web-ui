@@ -1,31 +1,41 @@
 <template>
-	<div class="panel-console">
-		<h1 v-if="fetchingState === 0" key="waiting-response">Connecting...</h1>
-		<h2 v-else-if="fetchingState === 1" key="logs-started">
-			Retrieving logs...
-		</h2>
-		<div v-else key="logs" class="logs" :ref="`logs-container-${window}`">
-			<p v-for="(log, i) in logs" :key="i">
-				<code
-					v-tooltip="{
-						content: $time(log.t).format('LLLL'),
-						placement: 'right'
-					}"
-					>{{ log.c }}</code
-				>
-			</p>
+	<div class="server-console">
+		<h2>Console</h2>
+		<div class="panel-console">
+			<h1 v-if="fetchingState === 0" key="waiting-response">
+				<div class="loading-state">Connecting...</div>
+			</h1>
+			<h2 v-else-if="fetchingState === 1" key="logs-started">
+				<div class="loading-state">Retrieving logs...</div>
+			</h2>
+			<div
+				v-else
+				key="logs"
+				class="logs"
+				:ref="`logs-container-${window}`"
+			>
+				<p v-for="(log, i) in logs" :key="i">
+					<code
+						v-tooltip="{
+							content: $time(log.t).format('LLLL'),
+							placement: 'right'
+						}"
+						>{{ log.c }}</code
+					>
+				</p>
+			</div>
+			<v-form>
+				<v-input-group class="v--flex v--flex-row input">
+					<v-input-icon>
+						<code class="v--text-fw-700">$</code>
+					</v-input-icon>
+					<v-input
+						class="v--flex-child v--flex-basis-0"
+						v-model="consoleInput"
+					/>
+				</v-input-group>
+			</v-form>
 		</div>
-		<v-form>
-			<v-input-group class="v--flex v--flex-row input">
-				<v-input-icon>
-					<code class="v--text-fw-700">$</code>
-				</v-input-icon>
-				<v-input
-					class="v--flex-child v--flex-basis-0"
-					v-model="consoleInput"
-				/>
-			</v-input-group>
-		</v-form>
 	</div>
 </template>
 
@@ -34,21 +44,33 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import VForm from "@/components/ui/form/VForm.vue";
 import VInput from "@/components/ui/form/VInput.vue";
 import { mixins } from "vue-class-component";
-import WindowMixin from "@/mixins/window";
+import WindowMixin from "@/common/internal/mixins/window";
 import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
 import { getWebSocket } from "@/store";
-import { smoothScroll } from "@/utils/animations";
+import { MetaInfo } from "vue-meta";
+import { updateWindowTitle } from "@/common/navigation/window";
+import { smoothScroll } from "@/common/utils/dom";
 
 @Component<ServerConsole>({
 	components: { VInputIcon, VInputGroup, VInput, VForm },
+	metaInfo(): MetaInfo {
+		return {
+			title: (this as Vue).$i18n.t("titles.server.console", {
+				server: this.getWindow.data.name,
+			}) as string,
+		};
+	},
 	activated(): void {
-		this.updateWindowTitle("Console");
-
+		updateWindowTitle(
+			this.getWindow,
+			this.$i18n.t("windows.server.console.empty") as string
+		);
 		if (this.fetchingState === 3) this.forceLogsContainerScroll();
 	},
 	mounted(): void {
 		const socket = getWebSocket();
+
 		socket.on("message", (message: any) => {
 			if (
 				!message.d["server-id"] ||
@@ -58,11 +80,11 @@ import { smoothScroll } from "@/utils/animations";
 
 			switch (message.op) {
 				// logs started
-				case 3:
+				case 1002:
 					return (this.fetchingState = 1);
 
 				// logging
-				case 4: {
+				case 1003: {
 					if (this.fetchingState !== 2) this.fetchingState = 2;
 
 					const log = message.d.log;
@@ -75,7 +97,7 @@ import { smoothScroll } from "@/utils/animations";
 				}
 
 				// logs finished
-				case 5: {
+				case 1004: {
 					this.updateLogsContainerScroll();
 					return (this.fetchingState = 3);
 				}
@@ -83,7 +105,7 @@ import { smoothScroll } from "@/utils/animations";
 		});
 
 		// request server logs
-		socket.sendOp(4, {
+		socket.sendOp(1003, {
 			"server-id": this.getServer.id,
 		});
 	},
@@ -99,12 +121,18 @@ export default class ServerConsole extends mixins(WindowMixin) {
 
 	@Watch("consoleInput")
 	private onConsoleInputChange(value: string): void {
-		this.updateWindowTitle(
-			value.length === 0 ? "Console" : `Typing "${value}"...`
+		updateWindowTitle(
+			this.getWindow,
+			this.$i18n.t(
+				value.length === 0
+					? "windows.server.console.empty"
+					: "windows.server.console.typing",
+				{ input: value }
+			) as string
 		);
 	}
 
-	private updateLogsContainerScroll(): void {
+	updateLogsContainerScroll(): void {
 		const el = this.logsContainer;
 
 		// already scrolled to bottom
@@ -113,7 +141,7 @@ export default class ServerConsole extends mixins(WindowMixin) {
 		smoothScroll(2500, el, el.scrollHeight, "scrollTop");
 	}
 
-	private forceLogsContainerScroll() {
+	forceLogsContainerScroll() {
 		this.logsContainer.scrollTop =
 			this.logsContainer.scrollHeight - this.logsContainer.clientHeight;
 	}
@@ -121,12 +149,21 @@ export default class ServerConsole extends mixins(WindowMixin) {
 </script>
 <style lang="scss" scoped>
 .panel-console {
-	background-color: var(--app-foreground);
+	background-color: var(--kt-foreground);
 	border-radius: 8px;
 	max-height: calc(100vh - (170px + 48px + 48px));
 	overflow-y: auto;
 	display: flex;
 	flex-direction: column;
+
+	.loading-state {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 5%;
+		opacity: 0.38;
+		user-select: none;
+	}
 
 	.logs {
 		flex: 1 auto;
@@ -137,17 +174,17 @@ export default class ServerConsole extends mixins(WindowMixin) {
 		p {
 			font-size: 14px;
 			font-family: monospace;
-			color: var(--muted-darker-color);
+			color: var(--kt-muted-darker-color);
 		}
 
 		&::-webkit-scrollbar-track {
 			border-radius: 8px;
-			background-color: var(--app-foreground);
+			background-color: var(--kt-foreground);
 		}
 
 		&::-webkit-scrollbar {
 			width: 8px;
-			background-color: var(--app-foreground-overlay);
+			background-color: var(--kt-foreground);
 		}
 
 		&::-webkit-scrollbar-thumb {

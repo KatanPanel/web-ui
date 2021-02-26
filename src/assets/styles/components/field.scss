@@ -41,14 +41,14 @@
 
 	&:hover {
 		cursor: pointer;
-		background-color: var(--app-foreground);
+		background-color: var(--kt-foreground);
 	}
 
 	&[active] {
-		background-color: var(--app-foreground);
+		background-color: var(--kt-foreground);
 
 		.v--field-radio {
-			background-color: var(--primary-color);
+			background-color: var(--kt-primary-color);
 			box-shadow: none;
 
 			svg {
@@ -75,7 +75,7 @@
 	svg {
 		width: 14px;
 		height: 14px;
-		fill: var(--primary-color);
+		fill: var(--kt-primary-color);
 		vertical-align: middle;
 	}
 }
