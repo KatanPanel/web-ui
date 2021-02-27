@@ -153,7 +153,7 @@ export default class AdvancedSettings extends Vue {
 	/**
 	 * Returns the current client theme defined in the {@link ClientSettings}.
 	 */
-	get currentTheme(): strin {
+	get currentTheme(): string {
 		return getClientSettings().theme as string;
 	}
 
