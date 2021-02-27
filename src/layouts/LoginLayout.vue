@@ -4,12 +4,10 @@
 	</main>
 </template>
 <script lang="ts">
-import { Component } from "vue-property-decorator";
-import { mixins } from "vue-class-component";
-import { AppMixin } from "@/common/internal/mixins/app";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class LoginLayout extends mixins(AppMixin) {}
+export default class LoginLayout extends Vue {}
 </script>
 <style lang="scss">
 .v--layout-login {
