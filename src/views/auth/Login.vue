@@ -74,8 +74,11 @@ import { AxiosError } from "axios";
 import { HOME_ROUTE } from "@/router";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
+import { generateMetaInfo } from "@/common/navigation/translation";
+import { AUTH_LOG_TAG } from "@/logging";
+import { dispatch } from "@/common/utils/vuex";
 
-@Component({
+@Component<Login>({
 	components: {
 		VInputIcon,
 		VIcon,
@@ -86,6 +89,7 @@ import VInputIcon from "@/components/ui/form/VInputIcon.vue";
 		VForm,
 		VButton,
 	},
+	metaInfo: () => generateMetaInfo("login"),
 })
 export default class Login extends Vue {
 	private username = "";
@@ -98,23 +102,17 @@ export default class Login extends Vue {
 
 		this.isLocked = true;
 		this.error = null;
-		this.$store
-			.dispatch(AUTH_MODULE.concat("/", AUTH_LOGIN), {
-				username: this.username,
-				password: this.password,
-			})
+
+		dispatch(AUTH_MODULE, AUTH_LOGIN, {
+			username: this.username,
+			password: this.password,
+		})
 			.then(async (token: string) => {
-				// there is no self-validation due to a possible fast
-				// invalidation for any reason by the server.
+				// there is no self-validation due to a possible
+				// fast invalidation for any reason by the server
 				this.$storage.set(AUTH_TOKEN_KEY, token);
 
-				await this.$store.dispatch(
-					AUTH_MODULE.concat("/", AUTH_VERIFY),
-					{
-						token: token,
-					}
-				);
-
+				await dispatch(AUTH_MODULE, AUTH_VERIFY, { token });
 				this.$router.redirect(HOME_ROUTE);
 			})
 			.catch((err: AxiosError) => {
@@ -126,7 +124,11 @@ export default class Login extends Vue {
 					(err?.toJSON() as any | never)?.message ||
 					"0";
 				if (this.$isDevelopmentMode) {
-					console.error(err.toJSON());
+					this.$log.error({
+						tag: AUTH_LOG_TAG,
+						message: `Authentication error: ${code}`,
+						args: [err],
+					});
 				}
 
 				this.error = code;
