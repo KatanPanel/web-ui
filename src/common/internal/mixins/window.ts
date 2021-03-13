@@ -22,12 +22,6 @@
 
 import { ROOT_MODULE } from "@/store";
 import { Component, Prop, Vue } from "vue-property-decorator";
-import {
-	SERVER_CONSOLE_ROUTE,
-	SERVER_FS_DISK_ROUTE,
-	SERVER_FS_ROUTE,
-	SERVER_ROUTE,
-} from "@/router";
 import { GET_WINDOW } from "@/store/getters";
 import { get } from "@/common/utils/vuex";
 import { Dictionary } from "vue-router/types/router";
@@ -37,15 +31,10 @@ import { Window } from "@/common/navigation/window";
  * This mixin is used in the child components of the server route, it serves as a short path
  * for mapping functions based on its `window` property.
  *
- * The functions will map to the {@link Vue.$store} that will obtain or define results for that specific window.
+ * Functions will be mapped from {@link Vue.$store} that will obtain or define results for that specific window.
  */
 @Component
 export default class WindowMixin extends Vue {
-	public readonly DEFAULT_TAB = SERVER_ROUTE;
-	public readonly CONSOLE_TAB = SERVER_CONSOLE_ROUTE;
-	public readonly FS_TAB = SERVER_FS_ROUTE;
-	public readonly FS_DISK_TAB = SERVER_FS_DISK_ROUTE;
-
 	/**
 	 * Represents the identification number of this {@link Window}.
 	 * @protected
