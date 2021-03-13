@@ -78,13 +78,11 @@
 	</main>
 </template>
 <script lang="ts">
-import { Component } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import TheLogo from "@/components/TheLogo.vue";
 import VIcon from "@/components/ui/icon/VIcon.vue";
-import { mixins } from "vue-class-component";
-import { AppMixin } from "@/common/internal/mixins/app";
 import { getOpenWindows } from "@/common/navigation/window";
 import WindowLink from "@/components/navigation/WindowLink.vue";
 
@@ -97,7 +95,7 @@ import WindowLink from "@/components/navigation/WindowLink.vue";
 		VContainer,
 	},
 })
-export default class PanelLayout extends mixins(AppMixin) {
+export default class PanelLayout extends Vue {
 	private get getWindows(): any[] {
 		return getOpenWindows();
 	}
