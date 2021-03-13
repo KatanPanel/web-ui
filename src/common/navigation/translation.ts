@@ -29,11 +29,11 @@ import { MetaInfo } from "vue-meta";
  * @param {...*} args - arguments for translating the title.
  */
 export function generateMetaInfo(
-	this: Vue,
+	this: any,
 	title: string,
 	...args: any[]
 ): MetaInfo {
 	return {
-		title: this.$i18n.t(`titles.${title}`, args) as string,
+		title: (this as Vue).$i18n.t(`titles.${title}`, args) as string,
 	};
 }

@@ -28,7 +28,7 @@ import { mixins } from "vue-class-component";
 @Component<LineChart>({
 	extends: Line,
 	mounted(): void {
-		(this as Line).renderChart(this.chartData, {});
+		((this as unknown) as Line).renderChart(this.chartData, {});
 	},
 })
 export default class LineChart extends mixins(Mix.reactiveProp) {}

@@ -31,7 +31,7 @@
 				:key="server.id"
 				:to="{
 					name: 'server',
-					params: { serverId: server.id.toString() }
+					params: { serverId: server.id.toString() },
 				}"
 				tag="div"
 				class="server"

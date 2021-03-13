@@ -26,7 +26,7 @@
 			class="v--text-muted v--text-uppercase v--text-fw-700 v--m-bottom-1"
 			>Descarregados — {{ getUnloadedServers.length }}</small
 		>
-		<br >
+		<br />
 		<p class="v--text-muted-darker">
 			Servidores descarregados obtiveram falha durante seu carregamento.
 			Encontre o motivo da falha no arquivo de logs do servidor ou na

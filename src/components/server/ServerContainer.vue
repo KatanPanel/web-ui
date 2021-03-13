@@ -38,9 +38,7 @@
 </template>
 
 <script lang="ts">
-import { Component } from "vue-property-decorator";
-import { mixins } from "vue-class-component";
-import { AppMixin } from "@/common/internal/mixins/app";
+import { Component, Vue } from "vue-property-decorator";
 import {
 	getOpenWindows,
 	matchesWindowLocation,
@@ -51,7 +49,7 @@ import Server from "@/views/server/Server.vue";
 @Component({
 	components: { Server },
 })
-export default class ServerContainer extends mixins(AppMixin) {
+export default class ServerContainer extends Vue {
 	get openWindows(): Window[] {
 		return getOpenWindows();
 	}

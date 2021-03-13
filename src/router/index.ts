@@ -39,7 +39,6 @@ import ServerConsole from "@/views/server/ServerConsole.vue";
 import ServerInfo from "@/views/server/ServerInfo.vue";
 import ServerFS from "@/views/server/ServerFS.vue";
 import { verifyAuth } from "@/store/auth";
-import Auth from "@/views/Auth.vue";
 import ServerFSDisk from "@/views/server/fs/ServerFSDisk.vue";
 import { LANGUAGE_CACHE_KEY, ROOT_MODULE } from "@/store";
 import {
@@ -53,6 +52,7 @@ import {
 import { dispatch } from "@/common/utils/vuex";
 import { RECORD_NAVIGATION } from "@/store/actions";
 import { ROUTER_NAVIGATION_LOG_TAG } from "@/logging";
+import Login from "@/views/auth/Login.vue";
 
 export const HOME_ROUTE = "home";
 export const LOGIN_ROUTE = "login";
@@ -71,7 +71,7 @@ const routes: Array<RouteConfig> = [
 	{
 		path: "/login",
 		name: LOGIN_ROUTE,
-		component: Auth,
+		component: Login,
 		meta: { layout: LOGIN_LAYOUT },
 		beforeEnter: (to: Route, from: Route, next: NavigationGuardNext) => {
 			return verifyAuth().finally(() => next());

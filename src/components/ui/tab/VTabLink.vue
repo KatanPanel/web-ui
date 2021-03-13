@@ -32,9 +32,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import WindowMixin from "@/mixins/window";
+import WindowMixin from "@/common/internal/mixins/window";
 
 @Component
 export default class VTabLink extends mixins(WindowMixin) {

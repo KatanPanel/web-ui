@@ -4,7 +4,7 @@
 		:class="{
 			'v--button-flat': flat,
 			'v--button-primary': primary,
-			'v--button-danger': danger
+			'v--button-danger': danger,
 		}"
 	>
 		<slot />
