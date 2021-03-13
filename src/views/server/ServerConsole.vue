@@ -18,7 +18,7 @@
 					<code
 						v-tooltip="{
 							content: $time(log.t).format('LLLL'),
-							placement: 'right'
+							placement: 'right',
 						}"
 						>{{ log.c }}</code
 					>
@@ -105,7 +105,7 @@ import { smoothScroll } from "@/common/utils/dom";
 		});
 
 		// request server logs
-		socket.sendOp(1003, {
+		socket.send(1003, {
 			"server-id": this.getServer.id,
 		});
 	},
