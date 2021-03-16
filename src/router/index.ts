@@ -54,23 +54,13 @@ import { RECORD_NAVIGATION } from "@/store/actions";
 import { ROUTER_NAVIGATION_LOG_TAG } from "@/logging";
 import Login from "@/views/auth/Login.vue";
 
-export const HOME_ROUTE = "home";
-export const LOGIN_ROUTE = "login";
-export const MY_ACCOUNT_ROUTE = "my-account";
-export const SERVER_ROUTE = "server";
-export const SERVER_CONSOLE_ROUTE = "server.console";
-export const SERVER_FS_ROUTE = "server.fs";
-export const SERVER_FS_DISK_ROUTE = "server.fs.disk";
-export const SYSTEM_GAMES_ROUTE = "system.games";
-export const ADVANCED_SETTINGS_ROUTE = "advanced.settings";
-
 Vue.use(VueRouter);
 
 const vm: Vue = Vue.prototype;
 const routes: Array<RouteConfig> = [
 	{
 		path: "/login",
-		name: LOGIN_ROUTE,
+		name: "login",
 		component: Login,
 		meta: { layout: LOGIN_LAYOUT },
 		beforeEnter: (to: Route, from: Route, next: NavigationGuardNext) => {
@@ -85,12 +75,12 @@ const routes: Array<RouteConfig> = [
 		children: [
 			{
 				path: "",
-				name: HOME_ROUTE,
+				name: "home",
 				component: Home,
 			},
 			{
 				path: "account",
-				name: MY_ACCOUNT_ROUTE,
+				name: "account",
 				component: Account,
 			},
 			{
@@ -101,21 +91,21 @@ const routes: Array<RouteConfig> = [
 					{
 						path: "",
 						component: ServerInfo,
-						name: SERVER_ROUTE,
+						name: "server",
 					},
 					{
 						path: "console",
-						name: SERVER_CONSOLE_ROUTE,
+						name: "server.console",
 						component: ServerConsole,
 					},
 					{
 						path: "fs",
-						name: SERVER_FS_ROUTE,
+						name: "server.fs",
 						component: ServerFS,
 						children: [
 							{
 								path: "disk/:disk",
-								name: SERVER_FS_DISK_ROUTE,
+								name: "server.fs.disk",
 								component: ServerFSDisk,
 							},
 						],
@@ -124,12 +114,12 @@ const routes: Array<RouteConfig> = [
 			},
 			{
 				path: "system/games",
-				name: SYSTEM_GAMES_ROUTE,
+				name: "system.games",
 				component: () => import("@/views/system/SystemGames.vue"),
 			},
 			{
 				path: "advanced/settings",
-				name: ADVANCED_SETTINGS_ROUTE,
+				name: "advanced.settings",
 				component: () =>
 					import("@/views/advanced/AdvancedSettings.vue"),
 			},

@@ -31,12 +31,6 @@ import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { ERROR_HANDLER_LOG_TAG } from "@/logging";
-import {
-	SERVER_CONSOLE_ROUTE,
-	SERVER_FS_DISK_ROUTE,
-	SERVER_FS_ROUTE,
-	SERVER_ROUTE,
-} from "@/router";
 
 const vm: Vue = Vue.prototype;
 vm.$isDevelopmentMode = process.env.NODE_ENV === "development";
@@ -44,14 +38,11 @@ vm.$helpers = {
 	voca: require("voca"),
 	filesize: require("filesize"),
 
-	// this route mapping is for the window navigation system
 	routeMappings: {
-		[SERVER_ROUTE]: () => require("@/views/server/Server.vue"),
-		[SERVER_CONSOLE_ROUTE]: () =>
-			require("@/views/server/ServerConsole.vue"),
-		[SERVER_FS_ROUTE]: () => require("@/views/server/ServerFS.vue"),
-		[SERVER_FS_DISK_ROUTE]: () =>
-			require("@/views/server/fs/ServerFSDisk.vue"),
+		server: () => require("@/views/server/Server.vue"),
+		"server.console": () => require("@/views/server/ServerConsole.vue"),
+		"server.fs": () => require("@/views/server/ServerFS.vue"),
+		"server.fs.disk": () => require("@/views/server/fs/ServerFSDisk.vue"),
 	},
 };
 vm.$http = Axios.create({
