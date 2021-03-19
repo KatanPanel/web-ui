@@ -1,5 +1,5 @@
 {
-	"titles": {
+	"page-titles": {
 		"login": "Sign In",
 		"server": {
 			"index": "{server}",
@@ -14,133 +14,125 @@
 			"games": "Games"
 		},
 		"advanced": {
-			"settings": "Settings"
-		}
-	},
-	"windows": {
-		"server": {
-			"console": {
-				"empty": "Console",
-				"typing": "\"{input}\" – Console..."
-			},
-			"fs": {
-				"index": "File Management",
-				"disk": "Disk {disk} – File Management"
+			"settings": {
+				"index": "Settings",
+				"appearence": "Appearence - Settings",
+				"language": "Language - Settings",
+				"performance": "Performance - Settings"
 			}
 		}
 	},
-	"tabs": {
-		"server": {
-			"overview": "Overview",
-			"console": "Console",
-			"fs": "File Management"
-		}
-	},
-	"header": {
-		"home": "Home",
-		"docs": "Documentation",
-		"support": "Support",
-		"community": "Community",
-		"api": "Developers API",
-		"login": "Log In",
-		"panel": {
-			"plugins": "Plugins",
-			"account": "My account",
-			"nodes": "Nodes",
-			"settings": "Settings"
-		}
-	},
-	"footer": {
-		"versions": {
-			"client": "Client version: {version}",
-			"server": "Server version: {version}"
+	"navigation": {
+		"sidebar": {
+			"labels": {
+				"system": "System",
+				"advanced": "Advanced",
+				"servr": "Server – {server}"
+			},
+			"links": {
+				"home": "Homepage",
+				"server": {
+					"overview": "Overview",
+					"console": "Console",
+					"fs": "File Management"
+				},
+				"system": {
+					"games": "My Games"
+				},
+				"advanced": {
+					"settings": {
+						"index": "Settings",
+						"appearence": "Appearence",
+						"language": "Language",
+						"performance": "Performance"
+					}
+				}
+			}
 		},
-		"credits": {
-			"icons": "Icons made by {0} from {1}."
+		"windows": {
+			"server": {
+				"console": {
+					"empty": "Console",
+					"typing": "\"{input}\" – Console..."
+				},
+				"fs": {
+					"index": "File Management",
+					"disk": "Disk {disk} – File Management"
+				}
+			}
 		}
 	},
-	"errors": {
-		"ECONNABORTED": "Response timeout exceeded.",
-		"Network Error": "Could not connect to the server.",
-		"Unsupported": "Your version of the server does not support this functionality.",
-		"0": "Unknown error.",
-		"500": "Could not connect to the server.",
-		"2002": "Invalid username or wrong password.",
-		"2004": "Invalid username or wrong password."
-	},
-	"modules": {
+	"views": {
+		"home": {
+			"welcome": "Welcome, {0}."
+		},
 		"login": {
 			"title": "Sign In",
-			"credentials-needed": "Enter your account credentials to access the panel.",
-			"forgot-password": "Forgot your password?",
 			"fields": {
 				"username": "Username",
 				"password": "Password",
-				"confirm": "Continue"
+				"confirm": "Log In",
+				"confirm-logged-in": "Continue as {username}"
 			}
 		},
-		"panel": {
-			"error": {
-				"title": "Could not connect to the server",
-				"description": "Check if the server is started and configured correctly.",
-				"persistence": "If the problem persists, {0} to learn how to install and configure the Katan web server.",
-				"click-here": "click here"
-			},
-			"nodes": {
-				"description": "Nodes are part of Katan's native orchestration tool, allowing multiple instances to be distributed in a cluster, controlling the number, registration, deploy and update of servers."
-			},
+		"server": {
+			"state": {
+				"dead": "Dead",
+				"paused": "Paused",
+				"restarting": "Restarting",
+				"running": "Running",
+				"unloaded": "Unloaded",
+				"unknown": "Offline"
+			}
+		},
+		"advanced": {
 			"settings": {
-				"title": "Settings",
-				"description": "Customize the panel as you like and configure the server remotely.",
-				"language": "Language",
-				"language-contribute": "You can help Katan support more languages, visit our documentation to learn more.",
-				"theme": "Theme",
-				"default-theme": "Light",
-				"dark-theme": "Dark",
-				"panel-settings": "Panel settings"
+				"recommended-option": "Recommended option",
+				"title": "Website Settings",
+				"appearence": {
+					"title": "Look and Feel",
+					"theme-label": "Theme",
+					"theme": {
+						"light": "Light",
+						"dark": "Dark",
+						"system-default": "System default"
+					},
+					"theme-system-default": "If you don't define a preferred theme, the system default will be used."
+				},
+				"language": {
+					"select": "Select a preferred language."
+				},
+				"performance": {
+					"levels": {
+						"low": "Low performance impact",
+						"medium": "Medium performance impact",
+						"high": "High performance impact"
+					},
+					"server-resources-update-rate": {
+						"title": "Server resources update rate",
+						"description": "Intervalo de tempo que o cliente pedirá informações ao servidor informações da utilização de CPU, memória RAM e estatísticas de rede de uma aplicação.",
+						"values": {
+							"real-time": "Real time",
+							"every-3-seconds": "Every 3 seconds"
+						}
+					}
+				}
 			}
 		}
 	},
-	"themes": {
-		"light": "Light",
-		"dark": "Dark"
-	},
-	"home": {
-		"welcome": "Welcome, {0}."
-	},
-	"system": {
-		"games": {
-			"title": "Games"
-		}
-	},
-	"advanced": {
-		"settings": {
-			"title": "Settings",
-			"language": "Language",
-			"select-a-language": "Select a language",
-			"theme": "Theme",
-			"appearence": "Appearence",
-			"theme-system-default": "If you do not define a preferred theme, the system default will be used."
-		}
-	},
-	"sidebar": {
-		"labels": {
-			"system": "System",
-			"advanced": "Advanced"
-		},
-		"links": {
-			"home": "Homepage",
-			"server": {
-				"overview": "Overview",
-				"console": "Console",
-				"fs": "File Management"
-			},
-			"system": {
-				"games": "Games"
-			},
-			"advanced": {
-				"settings": "Settings"
-			}
+	"errors": {
+		"0": "Unknown error.",
+		"500": "Could not connect to the server.",
+		"2002": "Invalid username or wrong password.",
+		"2004": "Invalid username or wrong password.",
+		"ECONNABORTED": "Response timeout exceeded.",
+		"Network Error": "Could not connect to the server.",
+		"Unsupported": "Your version of the server does not support this functionality.",
+		"Server Error": {
+			"title": "Could not connect to the server",
+			"description": "Check if the server is started and configured correctly.",
+			"persistence": "If the problem persists, {0} to learn how to install and configure the Katan web server.",
+			"click-here": "click here"
 		}
 	}
 }

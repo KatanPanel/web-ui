@@ -1,5 +1,5 @@
 {
-	"titles": {
+	"page-titles": {
 		"login": "Fazer login",
 		"server": {
 			"index": "{server}",
@@ -14,11 +14,42 @@
 			"games": "Jogos"
 		},
 		"advanced": {
-			"settings": "Ajustes"
+			"settings": {
+				"index": "Preferências",
+				"appearence": "Aparência - Preferências",
+				"language": "Idioma - Preferências",
+				"performance": "Performance - Preferências"
+			}
 		}
 	},
-	"windows": {
-		"server": {
+	"navigation": {
+		"sidebar": {
+			"labels": {
+				"system": "Sistema",
+				"advanced": "Avançado",
+				"server": "Servidor – {server}"
+			},
+			"links": {
+				"home": "Página Inicial",
+				"server": {
+					"overview": "Visão Geral",
+					"console": "Console",
+					"fs": "Gerenciador de Arquivos"
+				},
+				"system": {
+					"games": "Meus Jogos"
+				},
+				"advanced": {
+					"settings": {
+						"index": "Preferências",
+						"appearence": "Aparência",
+						"language": "Idioma",
+						"performance": "Performance"
+					}
+				}
+			}
+		},
+		"windows": {
 			"console": {
 				"empty": "Console",
 				"typing": "Console – Digitando \"{input}\"..."
@@ -29,121 +60,78 @@
 			}
 		}
 	},
-	"routes": {
-		"home": "Página Inicial",
-		"server": "Visão Geral do servidor",
-		"server_console": "Console do servidor",
-		"server_fs": "Gerenciador de Arquivos",
-		"server_fs_disk": "FTP: Disco de Armazenamento",
-		"system_games": "Jogos",
-		"advanced_settings": "Configurações do site"
-	},
-	"header": {
-		"home": "Página inicial",
-		"docs": "Documentação",
-		"support": "Suporte",
-		"community": "Comunidade",
-		"api": "API",
-		"login": "Entrar",
-		"panel": {
-			"plugins": "Plug-ins",
-			"account": "Minha conta",
-			"nodes": "Nós"
-		}
-	},
-	"footer": {
-		"versions": {
-			"client": "Versão do cliente: {version}",
-			"server": "Versão do servidor: {version}"
+	"views": {
+		"home": {
+			"welcome": "Bem-Vindo(a), {username}."
 		},
-		"credits": {
-			"icons": "Ícones feitos por {0} de {1}."
-		}
-	},
-	"errors": {
-		"ECONNABORTED": "Tempo limite de resposta excedido.",
-		"Network Error": "Não foi possível estabelecer conexão com o servidor.",
-		"Unsupported": "Sua versão do servidor não suporta essa funcionalidade.",
-		"0": "Erro desconhecido ({0}), tente novamente mais tarde.",
-		"500": "Ocorreu um erro por parte do servidor durante a requisição.",
-		"2002": "Nome de usuário ou senha incorretos.",
-		"2004": "Nome de usuário ou senha incorretos."
-	},
-	"modules": {
 		"login": {
 			"title": "Fazer login",
-			"credentials-needed": "É necessário entrar na sua conta para acessar o painel",
-			"forgot-password": "Esqueceu sua senha?",
 			"fields": {
 				"username": "Nome de usuário",
 				"password": "Senha",
-				"confirm": "Continuar"
+				"confirm": "Entrar",
+				"confirm-logged-in": "Continuar como {username}"
 			}
 		},
-		"panel": {
-			"error": {
-				"title": "Não foi possível conectar-se com o servidor",
-				"description": "Verifique se o servidor está ligado e configurado corretamente.",
-				"persistence": "Caso o problema persista, {0} para saber como instalar e configurar o web servidor do Katan.",
-				"click-here": "clique aqui"
-			},
-			"nodes": {
-				"description": "Nodes fazem parte da ferramenta nativa orquestração do Katan, permitindo que múltiplas instâncias sejam distribuídas em um cluster, controlando a quantidade, registro, deploy e atualização de servidores."
+		"server": {
+			"state": {
+				"dead": "Morto",
+				"paused": "Pausado",
+				"restarting": "Reiniciando",
+				"running": "Em execução",
+				"unloaded": "Descarregado",
+				"unknown": "Offline"
 			}
-		}
-	},
-	"permissions": {
-		"1": "Gerenciar nós do cl."
-	},
-	"themes": {
-		"light": "Claro",
-		"dark": "Escuro"
-	},
-	"home": {
-		"welcome": "Bem-Vindo(a), {0}."
-	},
-	"system": {
-		"games": {
-			"title": "Jogos"
-		}
-	},
-	"advanced": {
-		"settings": {
-			"title": "Configurações do site",
-			"language": "Idioma",
-			"select-a-language": "Selecione um idioma",
-			"theme": "Tema",
-			"appearence": "Aparência",
-			"theme-system-default": "Caso você não defina um tema de preferência, o padrão do sistema será utilizado."
-		}
-	},
-	"sidebar": {
-		"labels": {
-			"system": "Sistema",
-			"advanced": "Avançado",
-			"server": "Servidor – {server}"
 		},
-		"links": {
-			"home": "Página Inicial",
-			"server": {
-				"overview": "Visão Geral",
-				"console": "Console",
-				"fs": "Gerenciador de Arquivos"
-			},
-			"system": {
-				"games": "Jogos"
-			},
-			"advanced": {
-				"settings": "Ajustes"
+		"advanced": {
+			"settings": {
+				"recommended-option": "Opção recomendada",
+				"title": "Preferências",
+				"appearence": {
+					"title": "Aparência",
+					"theme-label": "Tema",
+					"theme": {
+						"light": "Claro",
+						"dark": "Escuro",
+						"system-default": "Padrão do sistema"
+					},
+					"theme-system-default": "Caso você não defina um tema de preferência, o padrão do sistema será utilizado."
+				},
+				"language": {
+					"select": "Clique para selecionar um idioma de preferência."
+				},
+				"performance": {
+					"levels": {
+						"low": "Baixo impacto na performance",
+						"medium": "Médio impacto na performance",
+						"high": "Alto impacto na performance"
+					},
+					"server-resources-update-rate": {
+						"title": "Taxa de atualização de recursos do servidor",
+						"description": "Intervalo de tempo que seu navegador pedirá informações ao servidor dados da utilização de CPU, memória RAM e tráfego de rede de um servidor.",
+						"define-x-seconds": "Defina o intervalo de tempo em segundos (max: {max}).",
+						"values": {
+							"real-time": "Em tempo real",
+							"every-x-seconds": "Intervalos de tempo"
+						}
+					}
+				}
 			}
 		}
 	},
-	"server-state": {
-		"dead": "Morto",
-		"paused": "Pausado",
-		"restarting": "Reiniciando",
-		"running": "Em execução",
-		"unloaded": "Descarregado",
-		"unknown": "Offline"
+	"errors": {
+		"0": "Erro desconhecido ({0}), tente novamente mais tarde.",
+		"500": "Ocorreu um erro por parte do servidor durante a requisição.",
+		"2002": "Nome de usuário ou senha incorretos.",
+		"2004": "Nome de usuário ou senha incorretos.",
+		"ECONNABORTED": "Tempo limite de resposta excedido.",
+		"Network Error": "Não foi possível estabelecer conexão com o servidor.",
+		"Unsupported": "Sua versão do servidor não suporta essa funcionalidade.",
+		"Server Error": {
+			"title": "Não foi possível estabelecer conexão.",
+			"description": "Verifique se o servidor está ligado e configurado corretamente.",
+			"persistence": "Se o problema persistir, {0} e acompanhe os passos de instalação do web servidor do Katan.",
+			"click-here": "clique aqui"
+		}
 	}
 }
