@@ -20,12 +20,115 @@
  * SOFTWARE.
  */
 
-.v--label {
-	user-select: none;
-	text-transform: uppercase;
-	font-size: 12px;
-	font-weight: 700;
-	margin-bottom: 6px;
+.v--select {
+	font-size: 16px;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+	display: inline-flex !important;
+	margin-right: 1px;
+
+	&[active] {
+		border-color: var(--kt-border-color);
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+
+		.v--select-option-list {
+			display: block;
+			border-top-right-radius: 0;
+			border-top-left-radius: 0;
+			width: calc(100% + 2px);
+			margin: 0 -1px;
+		}
+	}
+
+	.v--select-option-list {
+		display: none;
+		position: absolute;
+		bottom: 0;
+		transform: translateY(100%);
+		background-color: var(--kt-background-tertiary);
+		border: 1px solid var(--kt-border-color);
+		border-radius: 4px;
+		left: 0;
+		z-index: 1;
+	}
+
+	.v--select-option-unselected {
+		color: var(--kt-muted-darker-color);
+	}
+
+	.v--select-option {
+		padding: 8px;
+
+		&:hover {
+			cursor: pointer;
+			background-color: var(--kt-background-secondary);
+		}
+
+		&[active] {
+			background-color: var(--kt-background-accent);
+		}
+	}
+
+	.v--select-caret {
+		margin-left: 24px;
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		svg {
+			width: 12px;
+			height: 12px;
+		}
+	}
+}
+
+.v--input {
+	background-color: var(--kt-background-tertiary);
+	display: flex;
+	appearance: none;
+	-webkit-appearance: none;
+	outline: none;
+	box-shadow: none;
+	padding: 0 8px;
+	height: 37px;
+	color: var(--kt-text-color);
+	font-family: $default-font;
+	font-weight: 500;
+	font-size: 14px;
+	border: 1px solid var(--kt-background-tertiary);
+	border-radius: 4px;
+	width: 100%;
+
+	&[type="number"]::-webkit-inner-spin-button,
+	&[type="number"]::-webkit-outer-spin-button {
+		// -webkit-appearance: none;
+		background-color: black;
+		border-color: red;
+	}
+
+	::placeholder,
+	::-moz-placeholder,
+	::-webkit-input-placeholder,
+	::-ms-input-placeholder {
+		color: var(--kt-text-color) !important;
+		opacity: 0.38;
+		font-weight: 500;
+	}
+
+	&:focus {
+		border-color: var(--kt-primary-color);
+	}
+
+	&:not(:focus):hover {
+		border-color: var(--kt-border-color);
+	}
+
+	&:disabled {
+		border-color: var(--kt-danger-color);
+	}
 }
 
 .v--form {
@@ -33,11 +136,10 @@
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
-		background-color: var(--app-foreground-overlay);
 		border-radius: 4px;
 
 		&:not(:last-child) {
-			margin-bottom: 6px;
+			margin-bottom: 12px;
 		}
 
 		&:focus {
@@ -51,48 +153,6 @@
 			@extend .v--flex-align-center;
 			@extend .v--flex-justify-center;
 			padding: 0 12px;
-		}
-
-		.v--label {
-			padding: 6px;
-			padding-bottom: 0;
-			text-transform: none;
-			color: var(--kt-muted-color);
-			font-weight: 400;
-		}
-	}
-
-	.v--input {
-		background-color: var(--app-foreground-overlay);
-		display: flex;
-		appearance: none;
-		-webkit-appearance: none;
-		outline: none;
-		box-shadow: none;
-		padding: 6px;
-		padding-top: 0;
-		color: var(--kt-text-color);
-		font-family: $default-font;
-		font-weight: 600;
-		width: 100%;
-
-		&[type="number"]::-webkit-inner-spin-button,
-		&[type="number"]::-webkit-outer-spin-button {
-			-webkit-appearance: none;
-		}
-
-		+ small {
-			font-weight: 500;
-			margin-top: 4px;
-		}
-
-		::placeholder,
-		::-moz-placeholder,
-		::-webkit-input-placeholder,
-		::-ms-input-placeholder {
-			color: var(--kt-text-color) !important;
-			opacity: 0.38;
-			font-weight: 500;
 		}
 	}
 }
