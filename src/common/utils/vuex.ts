@@ -56,12 +56,12 @@ export function commit<T = any>(module: string, mutation: string, payload?: T) {
  * @param {string} module - action's module name.
  * @param {string} action - action's name.
  * @param {T} payload - optional action data.
- * @returns {Promise<T>}
+ * @returns {Promise<R>}
  */
-export async function dispatch<T>(
+export async function dispatch<T, R = any>(
 	module: string,
 	action: string,
 	payload?: T
-): Promise<T> {
+): Promise<R> {
 	return store.dispatch(joinBySlash(module, action), payload);
 }
