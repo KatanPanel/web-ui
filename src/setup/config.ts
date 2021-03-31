@@ -26,3 +26,9 @@ const isDevelopmentMode = process.env.NODE_ENV === "development";
 Vue.config.devtools = isDevelopmentMode;
 Vue.config.performance = isDevelopmentMode;
 Vue.config.productionTip = isDevelopmentMode;
+
+(Vue.prototype as Vue).$website = {
+	name: process.env.VUE_APP_NAME,
+	version: process.env.VUE_APP_VERSION,
+	url: process.env.VUE_APP_KATAN_WEBSITE,
+};

@@ -28,23 +28,27 @@ import Consola, {
 	ConsolaReporterLogObject,
 } from "consola";
 import dayjs from "dayjs";
-import advancedFormat from "dayjs/plugin/advancedFormat";
-import localizedFormat from "dayjs/plugin/localizedFormat";
+import dayJsAdvancedFormat from "dayjs/plugin/advancedFormat";
+import dayJsLocalizedFormat from "dayjs/plugin/localizedFormat";
 import { ERROR_HANDLER_LOG_TAG } from "@/logging";
+import { requireVM } from "@/common/internal";
 
 const vm: Vue = Vue.prototype;
 vm.$isDevelopmentMode = process.env.NODE_ENV === "development";
+
 vm.$helpers = {
 	voca: require("voca"),
 	filesize: require("filesize"),
 
 	routeMappings: {
-		server: () => require("@/views/server/Server.vue"),
-		"server.console": () => require("@/views/server/ServerConsole.vue"),
-		"server.fs": () => require("@/views/server/ServerFS.vue"),
-		"server.fs.disk": () => require("@/views/server/fs/ServerFSDisk.vue"),
+		"server.overview": requireVM("server/ServerOverview"),
+		"server.console": requireVM("server/ServerConsole"),
+		"server.fs": requireVM("server/ServerFS"),
+		"server.fs.disk": requireVM("server/fs/ServerFSDisk"),
+		"server.settings": requireVM("server/ServerSettings"),
 	},
 };
+
 vm.$http = Axios.create({
 	baseURL: process.env.VUE_APP_API_URL,
 	timeout: 5000,
@@ -61,8 +65,8 @@ vm.$http.interceptors.response.use(
 	}
 );
 
-dayjs.extend(advancedFormat);
-dayjs.extend(localizedFormat);
+dayjs.extend(dayJsAdvancedFormat);
+dayjs.extend(dayJsLocalizedFormat);
 vm.$time = dayjs;
 
 class KatanBrowserReporter implements ConsolaReporter {
