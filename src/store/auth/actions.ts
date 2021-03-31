@@ -29,8 +29,8 @@ import {
 	UPDATE_TOKEN,
 } from "@/store/auth/mutations";
 import { AUTH_LOG_TAG } from "@/logging";
-import { vm } from "@/main";
 import { AUTH_TOKEN_KEY } from "@/store/auth/index";
+import { vm } from "@/main";
 
 export const AUTH_LOGIN = "login";
 export const AUTH_VERIFY = "verify";
@@ -104,8 +104,8 @@ export default {
 			});
 	},
 	async [AUTH_LOGOUT](ctx: ActionContext<AuthState, never>): Promise<void> {
-		delete vm.$http.defaults.headers["Authorization"];
 		vm.$storage.remove(AUTH_TOKEN_KEY);
+		delete vm.$http.defaults.headers["Authorization"];
 		ctx.commit(UPDATE_ACCOUNT, { account: null });
 		ctx.commit(UPDATE_TOKEN, { token: null });
 	},

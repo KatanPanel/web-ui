@@ -22,7 +22,10 @@
 
 import { Window } from "@/common/navigation/window";
 import { Route } from "vue-router";
-import { ClientSettings } from "@/common/client-settings";
+import {
+	ClientSettings,
+	defaultClientSettings,
+} from "@/common/client-settings";
 import { RawWebSocket } from "@/common/websocket/websocket";
 
 export interface RootState {
@@ -40,7 +43,5 @@ export default {
 	serverInfo: null,
 	allWindows: [],
 	navigationHistory: [],
-	clientSettings: {
-		serverSettings: {},
-	},
+	clientSettings: defaultClientSettings,
 } as RootState;

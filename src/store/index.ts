@@ -37,9 +37,6 @@ export const AUTH_MODULE = "auth";
 
 export const CLIENT_SETTINGS_CACHE_KEY = "client-settings";
 
-export const LANGUAGE_CACHE_KEY = "language";
-export const THEME_CACHE_KEY = "theme";
-
 export function getWebSocket(): RawWebSocket {
 	return get(ROOT_MODULE, GET_SOCKET);
 }

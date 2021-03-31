@@ -23,7 +23,7 @@
 import { MutationTree } from "vuex";
 import { RootState } from "@/store/state";
 import Vue from "vue";
-import { LANGUAGE_CACHE_KEY } from "@/store";
+import { CLIENT_SETTINGS_CACHE_KEY } from "@/store";
 import {
 	ROUTER_NAVIGATION_LOG_TAG,
 	VUEX_LOG_TAG,
@@ -47,7 +47,12 @@ import {
 	WEBSOCKET_OPEN,
 } from "@/common/websocket/websocket";
 import { INVALID_OP } from "@/common/websocket/operation-codes";
-import { ClientSettings } from "@/common/client-settings";
+import {
+	ClientSettings,
+	DARK_THEME,
+	LIGHT_THEME,
+} from "@/common/client-settings";
+import { isUndefined } from "@/common/utils/any";
 
 /* start: vue raw web socket */
 export const ON_SOCKET_OPEN = "onSocketConnect";
@@ -57,6 +62,7 @@ export const ON_SOCKET_MESSAGE = "onSocketMessage";
 /* end: vue raw web socket */
 
 export const UPDATE_CLIENT_SETTINGS = "updateClientSettings";
+export const SAVE_CLIENT_SETTINGS = "saveClientSettings";
 
 export const SET_LANGUAGE = "setLanguage";
 export const SET_THEME = "setTheme";
@@ -80,31 +86,55 @@ export default {
 	/**
 	 * Updates the client settings.
 	 * @param {RootState} state
-	 * @param {ClientSettings} clientSettings - the client settings.
+	 * @param payload
 	 */
 	[UPDATE_CLIENT_SETTINGS](
 		state: RootState,
-		clientSettings: Partial<ClientSettings>
+		payload: {
+			clientSettings: Partial<ClientSettings>;
+			applyChanges: boolean;
+		}
 	): void {
-		// handle theme update
-		if (
-			clientSettings.theme &&
-			state.clientSettings.theme !== clientSettings.theme
-		) {
-			document
-				.querySelector("body")!
-				.setAttribute("data-theme", clientSettings.theme);
+		if (!isUndefined(payload.clientSettings.theme)) {
+			// set to machine default
+			if (payload.clientSettings.theme == null) {
+				document
+					.querySelector("body")!
+					.setAttribute(
+						"data-theme",
+						window.matchMedia &&
+							window.matchMedia("(prefers-color-scheme: dark)")
+								.matches
+							? DARK_THEME
+							: LIGHT_THEME
+					);
+			} else if (
+				state.clientSettings.theme !== payload.clientSettings.theme
+			) {
+				document
+					.querySelector("body")!
+					.setAttribute(
+						"data-theme",
+						payload.clientSettings.theme as string
+					);
+			}
 		}
 
-		state.clientSettings = Object.assign(
-			state.clientSettings,
-			clientSettings
-		);
-		vm.$log.log({
-			tag: VUEX_LOG_TAG,
-			message: "Client settings updated.",
-			args: [clientSettings],
-		});
+		if (payload.applyChanges) {
+			state.clientSettings = Object.assign(
+				state.clientSettings,
+				payload.clientSettings
+			);
+
+			vm.$log.log({
+				tag: VUEX_LOG_TAG,
+				message: "Client settings updated.",
+				args: [payload.clientSettings],
+			});
+		}
+	},
+	[SAVE_CLIENT_SETTINGS](state: RootState): void {
+		vm.$storage.set(CLIENT_SETTINGS_CACHE_KEY, state.clientSettings);
 	},
 	[ON_SOCKET_OPEN](state: RootState, event: Event) {
 		state.socket.native = event.currentTarget as WebSocket;
@@ -131,11 +161,6 @@ export default {
 	},
 	[ON_SOCKET_MESSAGE](state: RootState, message) {
 		state.socket.call(WEBSOCKET_MESSAGE, message);
-	},
-	// TODO: use client settings
-	[SET_LANGUAGE](state: RootState, payload: { language: any }) {
-		// state.language = payload.language;
-		vm.$storage.set(LANGUAGE_CACHE_KEY, payload.language.tag);
 	},
 	[OPEN_WINDOW](state: RootState, payload: { window: Window }) {
 		const openWindows = state.allWindows;
