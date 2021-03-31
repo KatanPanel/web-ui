@@ -61,4 +61,4 @@ Vue.use(VTooltip, {
 });
 
 // disable tooltips on mobile devices
-(VTooltip as any).enabled = window.innerWidth < 768;
+(VTooltip as any).enabled = window.innerWidth >= 768;
