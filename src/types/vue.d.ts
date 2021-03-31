@@ -23,9 +23,8 @@
 import { VocaStatic } from "voca";
 import { AxiosInstance } from "axios";
 import { Consola } from "consola";
-import dayjs from "dayjs";
 import { Filesize } from "filesize";
-import Vue from "vue";
+import { ClientSettings } from "@/common/client-settings";
 
 declare module "vue/types/vue" {
 	interface Vue {
@@ -33,19 +32,22 @@ declare module "vue/types/vue" {
 		$helpers: {
 			voca: VocaStatic;
 			filesize: Filesize;
-			routeMappings: { [key: string]: () => typeof Vue };
+			routeMappings: { [key: string]: () => any };
 		};
 		$socket: WebSocket;
 		$http: AxiosInstance;
-		$connect(): void;
-		$disconnect(): void;
-		$log: Consola;
-		$time: dayjs;
-	}
-}
 
-declare module "vue-router/types/router" {
-	interface VueRouter {
-		redirect(to: string): void;
+		$connect(): void;
+
+		$disconnect(): void;
+
+		$log: Consola;
+		$time: (() => any) | any;
+		$website: {
+			name: string;
+			version: string;
+			url: string;
+		};
+		$clientSettings: () => ClientSettings;
 	}
 }
