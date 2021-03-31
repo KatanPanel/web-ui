@@ -31,7 +31,12 @@ import "./setup/hooks";
 import "./setup/plugins";
 import "./setup/layouts";
 import "./setup/directives";
-import { DARK_THEME, updateClientSettings } from "@/common/client-settings";
+import {
+	ClientSettings,
+	DARK_THEME,
+	getClientSettings,
+	updateClientSettings,
+} from "@/common/client-settings";
 import { ERROR_HANDLER_LOG_TAG } from "@/logging";
 
 Vue.config.errorHandler = (err: Error, vm: Vue, info: string) => {
@@ -42,26 +47,34 @@ Vue.config.errorHandler = (err: Error, vm: Vue, info: string) => {
 	});
 };
 
-export const vm = new Vue({
+export const vm: Vue = Vue.prototype;
+let clientSettings: ClientSettings | undefined = undefined;
+
+// preload client settings if defined before
+if (vm.$storage.has(CLIENT_SETTINGS_CACHE_KEY))
+	updateClientSettings(
+		(clientSettings = vm.$storage.get(CLIENT_SETTINGS_CACHE_KEY))
+	);
+
+// sets the default dark theme if it is set as a preference
+if (
+	!clientSettings?.theme &&
+	window.matchMedia &&
+	window.matchMedia("(prefers-color-scheme: dark)").matches
+) {
+	updateClientSettings(
+		{
+			theme: DARK_THEME,
+		},
+		false
+	);
+}
+
+vm.$clientSettings = () => getClientSettings();
+
+new Vue({
 	store,
 	router,
 	i18n,
 	render: (h) => h(App),
-});
-
-// preload client settings if defined before
-if (vm.$storage.has(CLIENT_SETTINGS_CACHE_KEY))
-	updateClientSettings(vm.$storage.get(CLIENT_SETTINGS_CACHE_KEY));
-
-// sets the default dark theme if it is set as a preference
-if (
-	window.matchMedia &&
-	window.matchMedia("(prefers-color-scheme: dark)").matches
-) {
-	updateClientSettings({
-		theme: DARK_THEME,
-	});
-}
-
-// mount app
-vm.$mount("#app");
+}).$mount("#app");
