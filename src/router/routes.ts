@@ -102,6 +102,11 @@ export default [
 				component: importVM("system/SystemAccounts"),
 			},
 			{
+				path: "system/accounts/:accountId",
+				name: "system.accounts.account",
+				component: importVM("system/accounts/SystemAccountsAccount"),
+			},
+			{
 				path: "advanced/settings",
 				component: importVM("advanced/AdvancedSettings"),
 				children: [
