@@ -21,20 +21,24 @@
   -->
 
 <template>
-	<div class="advanced-settings">
-		<router-view />
-	</div>
+	<span class="recommended-option">
+		{{ $t("views.advanced.settings.recommended-option") }}
+		<slot />
+	</span>
 </template>
-
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { generateMetaInfo } from "@/common/navigation/translation";
-import { MetaInfo } from "vue-meta";
 
-@Component({
-	metaInfo(): MetaInfo {
-		return generateMetaInfo("advanced.settings.index");
-	},
-})
-export default class AdvancedSettings extends Vue {}
+@Component
+export default class RecommendedOption extends Vue {}
 </script>
+<style lang="scss" scoped>
+.recommended-option {
+	text-transform: lowercase;
+	flex: auto;
+	text-align: right;
+	font-style: italic;
+	font-size: 12px;
+	opacity: 0.38;
+}
+</style>

@@ -21,41 +21,13 @@
   -->
 
 <template>
-	<div>
-		<h1 class="v--m-bottom-4">
-			<b>{{ $t("system.games.title") }}</b>
-		</h1>
-		<ul v-if="getBackendInfo" class="game-list">
-			showing
-			<li v-for="game in getBackendInfo.games" :key="game.name">
-				<hr />
-			</li>
-		</ul>
-		<div class="v-else">nada</div>
-	</div>
+	<span class="v--text-error v--display-block">
+		{{ $t("views.advanced.settings.performance.levels.high") }}
+	</span>
 </template>
-
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { MetaInfo } from "vue-meta";
-import VContainer from "@/components/ui/layout/VContainer.vue";
-import VRow from "@/components/ui/layout/VRow.vue";
-import VCol from "@/components/ui/layout/VCol.vue";
-import { get } from "@/common/utils/vuex";
-import { ROOT_MODULE } from "@/store";
-import { GET_BACKEND_INFO } from "@/store/getters";
 
-@Component({
-	components: { VCol, VRow, VContainer },
-	metaInfo(): MetaInfo {
-		return {
-			title: (this as Vue).$i18n.t("titles.system.games") as string,
-		};
-	},
-})
-export default class SystemGames extends Vue {
-	get getBackendInfo(): any | null {
-		return get(ROOT_MODULE, GET_BACKEND_INFO);
-	}
-}
+@Component
+export default class HighPerformanceImpact extends Vue {}
 </script>

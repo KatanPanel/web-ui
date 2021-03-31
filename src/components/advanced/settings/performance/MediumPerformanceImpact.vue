@@ -21,14 +21,13 @@
   -->
 
 <template>
-	<div class="v--wall-text">
-		<slot />
-	</div>
+	<span class="v--text-warning v--display-block">
+		{{ $t("views.advanced.settings.performance.levels.medium") }}
+	</span>
 </template>
-
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class VWallText extends Vue {}
+export default class MediumPerformanceImpact extends Vue {}
 </script>

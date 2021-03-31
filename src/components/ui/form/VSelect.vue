@@ -1,16 +1,22 @@
 <template>
 	<div v-cloak :active="isOpen" class="v--input v--select" @click="toggle">
-		<div v-if="selected" key="selected-option">
+		<div
+			v-if="selected"
+			key="selected-option"
+			:class="selected.classes || []"
+			class="v--select-current-value"
+		>
 			{{ selected.value }}
 		</div>
 		<div v-else key="no-value-selected" class="v--select-option-unselected">
-			Selecionar
+			{{ $t("ui.form.select") }}
 		</div>
 		<div ref="list" class="v--select-option-list">
 			<v-select-option
 				v-for="option in options"
 				:key="option.id"
-				:active="selected === option"
+				:active="selected !== null && selected.id === option.id"
+				:class="option.classes || []"
 				@click.native="select(option)"
 				>{{ option.value }}
 			</v-select-option>
@@ -33,6 +39,8 @@ interface Option {
 	readonly value: string;
 
 	active?: boolean;
+
+	classes?: string[];
 }
 
 @Component<VSelect>({
@@ -43,6 +51,9 @@ interface Option {
 		);
 
 		if (defaultOption) this.select(defaultOption);
+	},
+	mounted(): void {
+		if (this.selected !== null) this.$emit("change", this.selected);
 	},
 })
 export default class VSelect extends Vue {

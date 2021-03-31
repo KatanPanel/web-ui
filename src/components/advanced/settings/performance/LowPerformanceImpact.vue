@@ -21,20 +21,13 @@
   -->
 
 <template>
-	<div class="advanced-settings">
-		<router-view />
-	</div>
+	<span class="v--display-block">
+		{{ $t("views.advanced.settings.performance.levels.low") }}
+	</span>
 </template>
-
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { generateMetaInfo } from "@/common/navigation/translation";
-import { MetaInfo } from "vue-meta";
 
-@Component({
-	metaInfo(): MetaInfo {
-		return generateMetaInfo("advanced.settings.index");
-	},
-})
-export default class AdvancedSettings extends Vue {}
+@Component
+export default class LowPerformanceImpact extends Vue {}
 </script>

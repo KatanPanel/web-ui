@@ -21,15 +21,47 @@
   -->
 
 <template>
-	<div class="v--field" :active="active" :disabled="disabled">
-		<v-field-radio v-if="active" key="active-state" active>
-			<v-icon name="check" />
+	<div
+		:active="active"
+		:class="{ 'v--field-selected': selected }"
+		:disabled="disabled"
+		class="v--field"
+		@click="onSelect"
+		@mouseenter="onMouseIn"
+		@mouseleave="onMouseOut"
+	>
+		<v-field-radio
+			v-if="active"
+			key="active-state"
+			ref="radio"
+			active="true"
+		>
+			<slot name="radio">
+				<v-icon name="check" />
+			</slot>
 		</v-field-radio>
-		<v-field-radio v-else-if="disabled" key="blocked-state" disabled>
-			&times;
+		<v-field-radio
+			v-else-if="disabled"
+			key="disabled-state"
+			ref="radio"
+			disabled="true"
+		>
+			<slot name="radio">&times;</slot>
 		</v-field-radio>
-		<v-field-radio v-else key="unknown-state" />
-		<slot />
+		<v-field-radio v-else-if="selected" key="selected-state" ref="radio">
+			<slot name="radio" />
+		</v-field-radio>
+		<v-field-radio v-else key="unknown-state" ref="radio">
+			<slot name="radio" />
+		</v-field-radio>
+		<v-flex-box class="v--flex-align-center v--full-width v--flex-column">
+			<div v-show="!contentVisible" class="v--field-body">
+				<slot />
+			</div>
+			<v-field-content v-show="contentVisible" ref="content">
+				<slot name="content" />
+			</v-field-content>
+		</v-flex-box>
 	</div>
 </template>
 
@@ -37,13 +69,62 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
+import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
+import VFieldContent from "@/components/ui/field/VFieldContent.vue";
+import { mixins } from "vue-class-component";
+import { Toggleable } from "@/common/internal/mixins/ui/toggleable";
 
 @Component({
-	components: { VFieldRadio, VIcon },
+	components: { VFieldContent, VFlexBox, VFieldRadio, VIcon },
 })
-export default class VField extends Vue {
-	@Prop({ type: Boolean, default: false }) private readonly active!: boolean;
+export default class VField extends mixins(Toggleable) {
 	@Prop({ type: Boolean, default: false })
 	private readonly disabled!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly hiddenRadio!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly selectOnClick!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly selectedByDefault!: boolean;
+	private selected = this.selectedByDefault;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly withContent!: boolean;
+	private contentVisible = false;
+
+	private onMouseIn(): void {
+		if (!this.withContent) return;
+
+		if (this.contentVisible) return;
+
+		this.contentVisible = true;
+	}
+
+	private onMouseOut(): void {
+		if (!this.withContent) return;
+
+		if (!this.contentVisible) return;
+
+		this.contentVisible = false;
+	}
+
+	private onSelect(e: Event): void {
+		if (this.withContent) {
+			if (
+				e.target !== this.$el &&
+				e.target !== (this.$refs["content"] as Vue).$el &&
+				e.target !== (this.$refs["radio"] as Vue).$el
+			) {
+				return;
+			}
+		}
+		if (!this.selectOnClick) return;
+
+		this.selected = !this.selected;
+		this.$emit("select", this.selected);
+	}
 }
 </script>

@@ -21,7 +21,7 @@
   -->
 
 <template>
-	<div class="v--wall-title">
+	<div class="v--field-content">
 		<slot />
 	</div>
 </template>
@@ -30,5 +30,5 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class VWallTitle extends Vue {}
+export default class VFieldContent extends Vue {}
 </script>
