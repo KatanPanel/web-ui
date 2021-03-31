@@ -27,8 +27,8 @@ export type Language = {
 
 /**
  * The list of languages that are currently supported by Katan. This
- * is the list that is displayed to the client. Adding a new language
- * to the language directory will not make it exist, it is necessary to add it here.
+ * is the list that is displayed to the client and adding a new language
+ * to the languages directory will not make it available, it is necessary to add it here.
  */
 export const supportedLanguages: Array<Language> = [
 	{
@@ -37,6 +37,6 @@ export const supportedLanguages: Array<Language> = [
 	},
 	{
 		name: "Português (Brasil)",
-		tag: "pt-BR",
+		tag: "pt-br",
 	},
 ];

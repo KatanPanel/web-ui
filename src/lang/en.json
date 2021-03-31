@@ -8,17 +8,19 @@
 			"fs": {
 				"index": "File Management – {server}",
 				"disk": "Disk {disk} - Gerenciador de Arquivos – {server}"
-			}
+			},
+			"settings": "Settings – {server}"
 		},
+		"game-library": "Game Library",
 		"system": {
-			"games": "Games"
+			"accounts": "Accounts — System"
 		},
 		"advanced": {
 			"settings": {
-				"index": "Settings",
-				"appearence": "Appearence - Settings",
-				"language": "Language - Settings",
-				"performance": "Performance - Settings"
+				"index": "User Settings",
+				"appearence": "Appearence - User Settings",
+				"language": "Language - User Settings",
+				"performance": "Performance - User Settings"
 			}
 		}
 	},
@@ -27,30 +29,35 @@
 			"labels": {
 				"system": "System",
 				"advanced": "Advanced",
-				"servr": "Server – {server}"
+				"server": "Server – {server}"
 			},
 			"links": {
 				"home": "Homepage",
+				"game-library": "Game Library",
 				"server": {
 					"overview": "Overview",
 					"console": "Console",
-					"fs": "File Management"
+					"fs": "File Management",
+					"settings": "Settings"
 				},
 				"system": {
-					"games": "My Games"
+					"accounts": "Accounts"
 				},
 				"advanced": {
 					"settings": {
-						"index": "Settings",
+						"index": "User Settings",
 						"appearence": "Appearence",
 						"language": "Language",
 						"performance": "Performance"
 					}
-				}
+				},
+				"logout": "Log out",
+				"development-mode": "Development mode"
 			}
 		},
 		"windows": {
 			"server": {
+				"overview": "Overview",
 				"console": {
 					"empty": "Console",
 					"typing": "\"{input}\" – Console..."
@@ -58,20 +65,43 @@
 				"fs": {
 					"index": "File Management",
 					"disk": "Disk {disk} – File Management"
-				}
+				},
+				"settings": "Settings"
 			}
 		}
 	},
 	"views": {
 		"home": {
-			"welcome": "Welcome, {0}."
+			"welcome": "Howdy, {username} \uD83D\uDC4B",
+			"description": "Welcome, we are happy to see you again.",
+			"safe-place": "You are in a safe place, if you are unable to go where you want, you need permissions to see some things. Check your {permissions} to see what you have access to.",
+			"permissions": "account permissions",
+			"server-list": "Server list",
+			"search": "Search",
+			"fields": {
+				"order-by": "Order by"
+			},
+			"sorting": {
+				"a-z": "Sort A-Z",
+				"z-a": "Sort Z-A",
+				"server-state": "Server state"
+			},
+			"labels": {
+				"active-servers": "Open in the background — {count}",
+				"available-servers": "Available — {count}",
+				"unloaded-servers": "Unloaded — {count}"
+			},
+			"active-servers-info": "You can run tasks on multiple servers simultaneously, such as uploading files. Open a server, go back to that page and open another one together.",
+			"active-servers-click-top-right": "Click the in the {icon} icon in the upper right corner to see more.",
+			"server-list-fetch-error": "Unable to load the server list."
 		},
 		"login": {
 			"title": "Sign In",
+			"please-identify": "Please identify yourself to proceed.",
 			"fields": {
 				"username": "Username",
 				"password": "Password",
-				"confirm": "Log In",
+				"confirm": "Continue",
 				"confirm-logged-in": "Continue as {username}"
 			}
 		},
@@ -85,10 +115,54 @@
 				"unknown": "Offline"
 			}
 		},
+		"game-library": {
+			"title": "Games",
+			"new-games": "You can add more games created by the community to your library. Learn more about creating and registering games in the Katan {docs}.",
+			"docs": "official documentation",
+			"sorting": {
+				"a-z": "Sort A-Z",
+				"z-a": "Sort Z-A"
+			}
+		},
+		"system": {
+			"accounts": {
+				"title": "Users",
+				"description": "Users (or accounts) have strictly defined permissions and roles that can be changed here. You can only change users with roles below yours or with unassigned roles.",
+				"server-permissions": "Server permissions",
+				"server-description": "Server-specific permissions are on the settings page for the respective servers. Here you will find only permissions linked to general account access to the panel areas.",
+				"all-accounts": "All users — {count}",
+				"searching": "Searching \"{value}\"...",
+				"permissions": "Permissions",
+				"no-role": "No role assigned.",
+				"results-found": "{value} users found.",
+				"sorting": {
+					"a-z": "Sort A-Z",
+					"z-a": "Sort Z-A"
+				},
+				"field": {
+					"username": "Username",
+					"role": "Role",
+					"registration_date": "Registration date",
+					"last_seen": "Last login",
+					"unknown_last_seen": "Unknown"
+				}
+			}
+		},
 		"advanced": {
 			"settings": {
 				"recommended-option": "Recommended option",
-				"title": "Website Settings",
+				"title": "User Settings",
+				"description": "Depending on the version of your client ({version}), some configurations may be in the testing phase or badly of the legs, therefore, they may not work as they should or as you expect.",
+				"description-detail": "If you are the Bigfoot or notice something strange happening, contact the site administrators.",
+				"current-version": "Current version of your client",
+				"options": {
+					"developer-mode": "Developer mode",
+					"reset-settings": {
+						"title": "Turn over all settings",
+						"description": "Reset your settings to the navigator's default if you are not satisfied with them, this will cause all adjustments made by you previously to be undone. Like a new born.",
+						"button": "Reset settings"
+					}
+				},
 				"appearence": {
 					"title": "Look and Feel",
 					"theme-label": "Theme",
@@ -100,20 +174,34 @@
 					"theme-system-default": "If you don't define a preferred theme, the system default will be used."
 				},
 				"language": {
+					"title": "Language",
 					"select": "Select a preferred language."
 				},
 				"performance": {
+					"title": "Performance",
+					"description": "Adjust small details in the performance of the Katan in relation to the use of resources so that it does not impact the use of your machine or browser.",
+					"fields": {
+						"performance-impact": "Performance impact level",
+						"category": "Category"
+					},
 					"levels": {
+						"all": "All",
 						"low": "Low performance impact",
 						"medium": "Medium performance impact",
 						"high": "High performance impact"
 					},
+					"categories": {
+						"all": "All",
+						"server": "Servers",
+						"app": "Application (Katan)"
+					},
 					"server-resources-update-rate": {
 						"title": "Server resources update rate",
-						"description": "Intervalo de tempo que o cliente pedirá informações ao servidor informações da utilização de CPU, memória RAM e estatísticas de rede de uma aplicação.",
+						"description": "Time interval the client (you) will ask the server for information about an server's CPU usage, RAM memory and network statistics.",
+						"define-x-seconds": "Set the time interval (up to {max} seconds).",
 						"values": {
 							"real-time": "Real time",
-							"every-3-seconds": "Every 3 seconds"
+							"every-x-seconds": "Time intervals"
 						}
 					}
 				}
@@ -133,6 +221,20 @@
 			"description": "Check if the server is started and configured correctly.",
 			"persistence": "If the problem persists, {0} to learn how to install and configure the Katan web server.",
 			"click-here": "click here"
+		}
+	},
+	"time-unit": {
+		"seconds": "seconds"
+	},
+	"ui": {
+		"form": {
+			"select": "Select"
+		},
+		"copyable": {
+			"click-to-copy": "Click to copy",
+			"copied": "Copied to your clipboad!",
+			"already-copied": "Already copied",
+			"unable-to-copy": "Unable to copy"
 		}
 	}
 }

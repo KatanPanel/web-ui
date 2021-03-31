@@ -1,0 +1,243 @@
+{
+	"page-titles": {
+		"login": "Entrar",
+		"server": {
+			"index": "{server}",
+			"overview": "Visão Geral – {server}",
+			"console": "Console – {server}",
+			"fs": {
+				"index": "Gerenciador de Arquivos – {server}",
+				"disk": "Disco {disk} - Gerenciador de Arquivos – {server}"
+			},
+			"settings": "Config. do servidor — {server}"
+		},
+		"game-library": "Biblioteca de Jogos",
+		"system": {
+			"accounts": "Contas — Sistema"
+		},
+		"advanced": {
+			"settings": {
+				"index": "Preferências",
+				"appearence": "Aparência - Preferências",
+				"language": "Idioma - Preferências",
+				"performance": "Performance - Preferências"
+			}
+		}
+	},
+	"navigation": {
+		"sidebar": {
+			"labels": {
+				"system": "Sistema",
+				"advanced": "Avançado",
+				"server": "Servidor – {server}"
+			},
+			"links": {
+				"home": "Página Inicial",
+				"game-library": "Biblioteca",
+				"server": {
+					"overview": "Visão Geral",
+					"console": "Console",
+					"fs": "Gerenciador de Arquivos",
+					"settings": "Config. do servidor"
+				},
+				"system": {
+					"accounts": "Contas"
+				},
+				"advanced": {
+					"settings": {
+						"index": "Preferências",
+						"appearence": "Aparência",
+						"language": "Idioma",
+						"performance": "Performance"
+					}
+				},
+				"logout": "Sair",
+				"development-mode": "Ambiente de desenvolvimento"
+			}
+		},
+		"windows": {
+			"server": {
+				"overview": "Vista Geral",
+				"console": {
+					"empty": "Console",
+					"typing": "Console – Digitando \"{input}\"..."
+				},
+				"fs": {
+					"index": "Gerenciador de Arquivos",
+					"disk": "Disco {disk} – Gerenciador de Arquivos"
+				},
+				"settings": "Config. do servidor"
+			}
+		}
+	},
+	"views": {
+		"home": {
+			"welcome": "Olá, {username} \uD83D\uDC4B",
+			"description": "Seja bem-vindo(a), estamos felizes em vê-lo novamente.",
+			"safe-place": "Você está em um lugar seguro, é necessário permissões específicas para ver algumas coisas. Verifique sua {permissions} para ver a que você tem acesso.",
+			"permissions": "lista de permissões",
+			"server-list": "Lista de servidores",
+			"search": "Pesquisar",
+			"fields": {
+				"order-by": "Ordenar por"
+			},
+			"sorting": {
+				"a-z": "Ordem alfabética A-Z",
+				"z-a": "Ordem alfabética Z-A",
+				"server-state": "Estado do servidor"
+			},
+			"labels": {
+				"active-servers": "Abertos em segundo plano — {count}",
+				"available-servers": "Disponíveis — {count}",
+				"unloaded-servers": "Descarregados — {count}"
+			},
+			"active-servers-info": "É possível executar tarefas em vários servidores simultâneamente, como upload de arquivos. Abra um servidor, volte à essa página e abra outro em conjunto.",
+			"active-servers-click-top-right": "Clique no ícone {icon} no canto superior direito para ver mais.",
+			"server-list-fetch-error": "Não foi possível carregar a lista de servidores."
+		},
+		"login": {
+			"title": "Entrar",
+			"please-identify": "É necessário que você se identifique para prosseguir.",
+			"fields": {
+				"username": "Nome de usuário",
+				"password": "Senha",
+				"confirm": "Continuar",
+				"confirm-logged-in": "Continuar como {username}"
+			}
+		},
+		"server": {
+			"state": {
+				"dead": "Morto",
+				"paused": "Pausado",
+				"restarting": "Reiniciando",
+				"running": "Em execução",
+				"unloaded": "Descarregado",
+				"unknown": "Offline"
+			}
+		},
+		"game-library": {
+			"title": "Biblioteca de Jogos",
+			"new-games": "Você pode adicionar novos jogos criados pela comunidade à sua biblioteca. Saiba mais sobre a criação e registro de jogos na {docs} do Katan.",
+			"docs": "documentação oficial",
+			"sorting": {
+				"a-z": "Ordem alfabética A-Z",
+				"z-a": "Ordem alfabética Z-A"
+			}
+		},
+		"system": {
+			"accounts": {
+				"title": "Contas",
+				"description": "Usuários (ou contas) tem permissões e cargos estritamente definidos e que podem ser alterados por aqui. É possível alterar somente contas com cargos abaixo do seu ou com cargos não-atribuidos.",
+				"server-permissions": "Permissões para servidores",
+				"server-description": "Permissões específicas para servidores ficam na página de configurações dos respectivos servidores. Aqui você irá encontrar somente permissões ligadas ao acesso geral de contas à areas do painel.",
+				"all-accounts": "Todas as contas — {count}",
+				"searching": "Procurando por \"{value}\"...",
+				"permissions": "Permissões",
+				"no-role": "Nenhuma função atribuida.",
+				"results-found": "{value} contas encontradas.",
+				"sorting": {
+					"a-z": "Ordem alfabética A-Z",
+					"z-a": "Ordem alfabética Z-A"
+				},
+				"field": {
+					"username": "Nome de usuário",
+					"role": "Função",
+					"registration_date": "Data de criação de conta",
+					"last_seen": "Último log-in",
+					"unknown_last_seen": "Desconhecido"
+				}
+			}
+		},
+		"advanced": {
+			"settings": {
+				"recommended-option": "Opção recomendada",
+				"title": "Preferências",
+				"description": "Dependendo da versão do seu cliente ({version}), algumas configurações podem estar em fase de testes ou mal das pernas, logo, podem não funcionar como deveriam ou como você espera.",
+				"description-detail": "Caso você seja o Pé Grande ou note alguma coisa estranha acontecendo, entre em contato com os administradores do site.",
+				"current-version": "Atual versão do seu cliente",
+				"options": {
+					"developer-mode": "Modo desenvolvedor",
+					"reset-settings": {
+						"title": "Restauração completa",
+						"description": "Redefina suas configurações ao padrão do cliente caso não esteja satisfeito com elas, isso fará com que todos os ajustes feitos por você anteriormente sejam desfeitos.",
+						"button": "Redefinir configurações"
+					}
+				},
+				"appearence": {
+					"title": "Aparência",
+					"theme-label": "Tema",
+					"theme": {
+						"light": "Claro",
+						"dark": "Escuro",
+						"system-default": "Padrão do sistema"
+					},
+					"theme-system-default": "Caso você não defina um tema de preferência, o padrão do sistema será utilizado."
+				},
+				"language": {
+					"title": "Idioma",
+					"select": "Clique para selecionar um idioma de preferência."
+				},
+				"performance": {
+					"title": "Performance",
+					"description": "Ajuste pequenos detalhes na performance do Katan em relação à utilização de recursos para que ele não impacte no uso da sua máquina ou navegador.",
+					"fields": {
+						"performance-impact": "Nível de impacto na performance",
+						"category": "Categoria"
+					},
+					"levels": {
+						"all": "Todos",
+						"low": "Baixo impacto",
+						"medium": "Médio impacto",
+						"high": "Alto impacto"
+					},
+					"categories": {
+						"all": "Todas",
+						"server": "Servidores",
+						"app": "Aplicação (Katan)"
+					},
+					"server-resources-update-rate": {
+						"title": "Taxa de atualização de recursos do servidor",
+						"description": "Intervalo de tempo que seu navegador pedirá informações ao servidor dados da utilização de CPU, memória RAM e tráfego de rede de um servidor.",
+						"define-x-seconds": "Defina o intervalo de tempo (max: {max} segundos).",
+						"values": {
+							"real-time": "Em tempo real",
+							"every-x-seconds": "Intervalos de tempo"
+						}
+					}
+				}
+			}
+		}
+	},
+	"errors": {
+		"0": "Erro desconhecido ({0}), tente novamente mais tarde.",
+		"500": "Ocorreu um erro por parte do servidor durante a requisição.",
+		"2002": "Nome de usuário ou senha incorretos.",
+		"2004": "Nome de usuário ou senha incorretos.",
+		"ECONNABORTED": "Tempo limite de resposta excedido.",
+		"Network Error": "Não foi possível estabelecer conexão com o servidor.",
+		"Unsupported": "Sua versão do servidor não suporta essa funcionalidade.",
+		"Server Error": {
+			"title": "Não foi possível estabelecer conexão.",
+			"description": "Verifique se o servidor está ligado e configurado corretamente.",
+			"persistence": "Se o problema persistir, {0} e acompanhe os passos de instalação do web servidor do Katan.",
+			"click-here": "clique aqui"
+		}
+	},
+	"time-unit": {
+		"seconds": "segundos"
+	},
+	"permissions": {
+		"access-server-fs": "Acessar o Gerenciador de Arquivos do servidor."
+	},
+	"ui": {
+		"form": {
+			"select": "Selecionar"
+		},
+		"copyable": {
+			"click-to-copy": "Clique para copiar",
+			"copied": "Copiado!",
+			"already-copied": "Já copiado",
+			"unable-to-copy": "Não foi possível copiar"
+		}
+	}
+}

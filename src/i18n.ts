@@ -25,7 +25,10 @@ import VueI18n from "vue-i18n";
 import * as dayjs from "dayjs";
 import { supportedLanguages } from "./common/language";
 import { I18N_LOG_TAG } from "@/logging";
-import { updateClientSettings } from "@/common/client-settings";
+import {
+	getClientSettings,
+	updateClientSettings,
+} from "@/common/client-settings";
 
 Vue.use(VueI18n);
 
@@ -52,7 +55,7 @@ async function importDayJSLocale(code: string) {
  * loads the date and time translation settings for that language.
  * @param {string} language - the new language.
  */
-export async function updateLanguage(language: string) {
+export async function updateLanguage(language: string): Promise<string> {
 	(vm.$i18n || i18n).locale = language;
 
 	const lower = language.toLowerCase();
@@ -69,7 +72,7 @@ export async function updateLanguage(language: string) {
 				tag: I18N_LOG_TAG,
 				message: `Cannot load the translations for ${language} date and time.`,
 			});
-			return;
+			return language;
 		}
 	}
 
@@ -79,13 +82,14 @@ export async function updateLanguage(language: string) {
 		message: `Document language updated to ${language}.`,
 	});
 	document.querySelector("html")!.setAttribute("lang", language);
+	return language;
 }
 
 /**
  * Sets the client's current language to the specified language if supported.
  * @param {string} language - the new language.
  */
-export async function setLanguage(language: string) {
+export async function setLanguage(language: string): Promise<string> {
 	const supported = supportedLanguages.find(
 		(value) => language === value.tag
 	);
@@ -95,15 +99,17 @@ export async function setLanguage(language: string) {
 			tag: I18N_LOG_TAG,
 			message: `Unsupported language: ${language}.`,
 		});
-		return;
+		return language;
 	}
 
 	if ((vm.$i18n || i18n).locale === language) {
 		// avoid language redefinition
-		return;
+		return language;
 	}
 
-	updateClientSettings({ language: supported });
+	if (!getClientSettings().language)
+		updateClientSettings({ language: supported });
+
 	return await updateLanguage(language);
 }
 
@@ -117,7 +123,7 @@ export async function loadLanguage(
 	language: string,
 	fallback: ReadonlyArray<string> = []
 ): Promise<any> {
-	if (i18n.locale === language) return;
+	if (i18n.locale === language) return language;
 
 	if (loaded.includes(language)) {
 		vm.$log.info({
