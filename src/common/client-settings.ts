@@ -23,11 +23,23 @@
 import { Language } from "@/common/language";
 import { commit, get } from "@/common/utils/vuex";
 import { ROOT_MODULE } from "@/store";
-import { UPDATE_CLIENT_SETTINGS } from "@/store/mutations";
+import {
+	SAVE_CLIENT_SETTINGS,
+	UPDATE_CLIENT_SETTINGS,
+} from "@/store/mutations";
 import { GET_CLIENT_SETTINGS } from "@/store/getters";
 
 export const LIGHT_THEME = "light";
 export const DARK_THEME = "dark";
+
+export const defaultClientSettings: ClientSettings = {
+	theme: null,
+	language: null,
+	developerMode: false,
+	serverSettings: {
+		resourceUpdateTime: 1,
+	},
+};
 
 /**
  * Represents all possible configurations of who is currently using the application.
@@ -42,13 +54,15 @@ export interface ClientSettings {
 	 * Current client theme, when `undefined` the theme
 	 * will be set to the default theme of the client's machine.
 	 */
-	theme?: string;
+	theme: string | null;
 
 	/**
 	 * The current language of the website for the client,
 	 * the possible values are all supported languages and is never null or undefined.
 	 */
-	language?: Language;
+	language: Language | null;
+
+	developerMode: boolean;
 
 	/**
 	 * Configuration related to servers.
@@ -71,15 +85,29 @@ export interface ClientServerSettings {
 	 * `undefined` or `null` value means that the customer will hear the resources in real time.
 	 * Time is measured in milliseconds.
 	 */
-	resourceUpdateTime?: number;
+	resourceUpdateTime: number | null;
 }
 
 /**
  * Updates client settings using partial data.
  * @param {Partial<ClientSettings>} settings - new keys and values to be applied.
+ * @param applyChanges
  */
-export function updateClientSettings(settings: Partial<ClientSettings>): void {
-	commit(ROOT_MODULE, UPDATE_CLIENT_SETTINGS, settings);
+export function updateClientSettings(
+	settings: Partial<ClientSettings>,
+	applyChanges = true
+): void {
+	commit(ROOT_MODULE, UPDATE_CLIENT_SETTINGS, {
+		clientSettings: settings,
+		applyChanges,
+	});
+}
+
+/**
+ * Saves the current client settings.
+ */
+export function saveClientSettings(): void {
+	commit(ROOT_MODULE, SAVE_CLIENT_SETTINGS);
 }
 
 /**
