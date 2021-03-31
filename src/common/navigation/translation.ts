@@ -20,20 +20,21 @@
  * SOFTWARE.
  */
 
-import Vue from "vue";
 import { MetaInfo } from "vue-meta";
+import i18n from "@/i18n";
+import VueI18n from "vue-i18n";
 
 /**
  * Generates metadata information using the specified title key.
+ * @param {Vue} holder - the Vue component.
  * @param {string} title - title key.
  * @param {...*} args - arguments for translating the title.
  */
 export function generateMetaInfo(
-	this: any,
 	title: string,
-	...args: any[]
+	args: VueI18n.Values
 ): MetaInfo {
 	return {
-		title: (this as Vue).$i18n.t(`titles.${title}`, args) as string,
+		title: i18n.t(`page-titles.${title}`, args) as string,
 	};
 }
