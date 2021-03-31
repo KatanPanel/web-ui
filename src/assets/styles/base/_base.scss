@@ -23,33 +23,41 @@
 :root {
 	--kt-success-color: #4cd137;
 	--kt-success-darker-color: #44bd32;
-	--kt-danger-color: #eb3b5a;
-	--kt-danger-darker-color: #e92c4d;
+	--kt-danger-color: #fc5c65;
+	--kt-danger-darker-color: #eb3b5a;
 	--kt-warning-color: #fed330;
-	--kt-warning-darker-color: #fed330;
-	--kt-muted-color: #aaaaaa;
-	--kt-muted-darker-color: #888888;
-
-	--primary-darker-color: #3c70ea;
+	--kt-warning-darker-color: #f7b731;
+	--kt-primary-darker-color: #3c70ea;
+	--kt-primary-color: #4b7bec;
+	--kt-primary-text-color: #ffffff;
 }
 
 [data-theme="light"] {
 	--kt-text-color: #4f5660;
-	--kt-background: #ffffff;
-	--kt-foreground: #fafafa;
-	--app-foreground-overlay: #f7f7f7;
-	--app-border-color: #dddddd;
-
-	--inverse-color: #ffffff;
-	--kt-primary-color: #4b7bec;
+	--kt-background: #fafafa;
+	--kt-background-secondary: #ffffff;
+	--kt-background-tertiary: rgba(0, 0, 0, 0.01);
+	--kt-background-accent: rgba(0, 0, 0, 0.06);
+	--kt-panel-sidebar: #ffffff;
+	--kt-border-color: #f6f6f6;
+	--kt-muted-color: gray;
+	--kt-muted-darker-color: darkgray;
+	--kt-shadow: rgba(0, 0, 0, 0.12);
+	--kt-scrollbar: #fafafa;
+	--kt-scrollbar-thumb: #e5e5e5;
 }
 
 [data-theme="dark"] {
-	--kt-text-color: #fff;
+	--kt-text-color: #ffffff;
 	--kt-background: #232931;
-	--kt-foreground: #202124;
-	--app-foreground-overlay: #28292d;
-	--app-border-color: #1f2024;
-
-	--kt-primary-color: #4788d8;
+	--kt-background-secondary: #29303a;
+	--kt-background-tertiary: #252b33;
+	--kt-background-accent: #1e2329;
+	--kt-panel-sidebar: #252b33;
+	--kt-border-color: #333b47;
+	--kt-muted-color: #bbb;
+	--kt-muted-darker-color: #888;
+	--kt-shadow: rgba(255, 255, 255, 0.06);
+	--kt-scrollbar: #29303a;
+	--kt-scrollbar-thumb: #1e2329;
 }

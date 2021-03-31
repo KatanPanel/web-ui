@@ -24,18 +24,38 @@ $base-margin: 8px;
 
 .v--tooltip {
 	display: block !important;
-	z-index: 10000;
+	z-index: 1001;
 	font-size: 14px;
+
+	&.v--tooltip-error {
+		.tooltip-inner {
+			background: var(--kt-danger-color);
+		}
+
+		.tooltip-arrow {
+			border-color: var(--kt-danger-color);
+		}
+	}
 
 	.tooltip-inner {
 		background: var(--kt-primary-color);
-		color: white;
+		color: var(--kt-primary-text-color);
 		border-radius: 8px;
 		padding: 3px 12px;
 	}
 
+	.tooltip-arrow {
+		width: 0;
+		height: 0;
+		border-style: solid;
+		position: absolute;
+		margin: 5px;
+		border-color: var(--kt-primary-color);
+		z-index: 1;
+	}
+
 	&[x-placement^="top"] {
-		margin-bottom: $base-margin;
+		margin-bottom: $base-margin + 6px;
 
 		.tooltip-arrow {
 			border-width: $base-margin $base-margin 0 $base-margin;
@@ -50,7 +70,7 @@ $base-margin: 8px;
 	}
 
 	&[x-placement^="bottom"] {
-		margin-top: $base-margin;
+		margin-top: $base-margin + 6px;
 
 		.tooltip-arrow {
 			border-width: 0 $base-margin $base-margin $base-margin;
@@ -64,7 +84,7 @@ $base-margin: 8px;
 		}
 	}
 	&[x-placement^="right"] {
-		margin-left: $base-margin;
+		margin-left: $base-margin + 6px;
 
 		.tooltip-arrow {
 			border-width: $base-margin $base-margin $base-margin 0;
@@ -78,7 +98,8 @@ $base-margin: 8px;
 		}
 	}
 	&[x-placement^="left"] {
-		margin-right: $base-margin;
+		margin-right: $base-margin + 6px;
+
 		.tooltip-arrow {
 			border-width: $base-margin 0 $base-margin $base-margin;
 			border-top-color: transparent !important;

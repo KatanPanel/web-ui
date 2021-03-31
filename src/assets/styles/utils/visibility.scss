@@ -20,10 +20,14 @@
  * SOFTWARE.
  */
 
-.v--wall {
-	border-radius: 8px;
-	padding: 16px;
-	background-color: var(--kt-background-tertiary);
-	color: var(--kt-muted-darker-color);
-	font-size: 14px;
+.v--display-block {
+	display: block;
+}
+
+.v--user-no-select {
+	user-select: none;
+}
+
+.v--cursor-default {
+	cursor: default;
 }

@@ -20,8 +20,20 @@
  * SOFTWARE.
  */
 
+.v--text-default {
+	color: var(--kt-text-color);
+}
+
+.v--text-success {
+	color: var(--kt-success-color);
+}
+
 .v--text-error {
 	color: var(--kt-danger-color);
+}
+
+.v--text-warning {
+	color: var(--kt-warning-color);
 }
 
 .v--text-primary {
@@ -36,12 +48,20 @@
 	color: var(--kt-muted-darker-color);
 }
 
+.v--text-default-color {
+	color: var(--kt-text-color);
+}
+
 .v--text-align-center {
 	text-align: center;
 }
 
 .v--text-uppercase {
 	text-transform: uppercase;
+}
+
+.v--text-fw-300 {
+	font-weight: 300;
 }
 
 .v--text-fw-400 {
@@ -62,4 +82,11 @@
 
 .v--text-fw-800 {
 	font-weight: 800;
+}
+
+.v--text-cute {
+	font-weight: 700;
+	text-transform: uppercase;
+	display: block;
+	margin-bottom: 6px;
 }

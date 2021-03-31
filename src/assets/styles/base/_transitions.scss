@@ -20,6 +20,22 @@
  * SOFTWARE.
  */
 
+/// Fast Linear Slide Bottom to Top
+.v--transition-fast-linear-slide-bt-enter-active {
+	transition: opacity 0.3s ease;
+}
+
+.v--transition-fast-linear-slide-bt-leave-active {
+	transition: all 0.3s ease;
+}
+
+.v--transition-fast-linear-slide-bt-enter,
+.v--transition-fast-linear-slide-bt-leave-to {
+	transform: translateY(10%);
+	opacity: 0;
+}
+
+// Fast Fade
 .v--transition-fast-fade-enter-active,
 .v--transition-fast-fade-leave-active {
 	transition: opacity 0.15s;
@@ -65,6 +81,36 @@
 	opacity: 0;
 }
 
+// Slide Top to Bottom
+.v--transition-slide-tb-enter-active {
+	transition: all 0.1s linear;
+}
+
+.v--transition-slide-tb-leave-active {
+	transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.v--transition-slide-tb-enter,
+.v--transition-slide-tb-leave-to {
+	transform: translateY(-10px);
+	opacity: 0;
+}
+
+// Slide Right to Left
+.v--transition-slide-rl-enter-active {
+	transition: all 0.1s linear;
+}
+
+.v--transition-slide-rl-leave-active {
+	transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.v--transition-slide-rl-enter,
+.v--transition-slide-rl-leave-to {
+	transform: translateX(10px);
+	opacity: 0;
+}
+
 // Fast Linear Slide Right to Left
 .v--transition-linear-slide-rl-enter-active {
 	transition: opacity 0.3s ease;
@@ -95,16 +141,39 @@
 	opacity: 0;
 }
 
-.v--transition-list-item {
-	transition: all 1s;
-	display: inline-block;
-	margin-right: 10px;
-}
+// List Transition
 .v--transition-list-enter,
 .v--transition-list-leave-to {
 	opacity: 0;
-	transform: translateY(10px);
+	transform: translateY(30px);
 }
+
 .v--transition-list-leave-active {
 	position: absolute;
+}
+
+.v--transition-list-item {
+	transition: all 1s;
+	display: inline-block;
+}
+
+// Fast List Transition
+.v--transition-fast-list-item {
+	transition: all 1s;
+	display: inline-block;
+}
+
+.v--transition-fast-list-enter,
+.v--transition-fast-list-leave-to {
+	opacity: 0;
+	transform: translateY(30px);
+}
+
+.v--transition-fast-list-leave-active {
+	position: relative;
+}
+
+.v--transition-fast-list-item {
+	transition: all 500ms;
+	display: inline-block;
 }

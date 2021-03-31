@@ -23,8 +23,8 @@
 .v--box {
 	position: relative;
 	padding: 24px;
-	background-color: var(--kt-foreground);
-	border: 1px solid var(--kt-foreground);
+	background-color: var(--kt-background-secondary);
+	border: 1px solid var(--kt-background-secondary);
 	box-shadow: rgba(0, 0, 0, 0.12) 0 0 10px 5px;
 	border-radius: 8px;
 
@@ -35,8 +35,16 @@
 
 	&.v--box-outlined {
 		box-shadow: none;
-		border-color: var(--app-border-color);
+		border-color: var(--kt-border-color);
 		background-color: transparent;
+
+		&.v--coloured-danger {
+			border-color: var(--kt-danger-color);
+		}
+	}
+
+	&.v--box-no-shadow {
+		box-shadow: none;
 	}
 
 	.v--box-header {
@@ -53,5 +61,10 @@
 
 	.v--box-body {
 		position: relative;
+	}
+
+	.v--field,
+	.v--input {
+		background-color: var(--kt-background-tertiary);
 	}
 }

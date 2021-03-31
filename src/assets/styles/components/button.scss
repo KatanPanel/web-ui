@@ -37,6 +37,7 @@
 	line-height: 36px;
 	vertical-align: middle;
 	background-color: var(--kt-primary-color);
+	border: 1px solid var(--kt-primary-color);
 	color: #fff;
 	min-width: 72px;
 	user-select: none;
@@ -45,21 +46,58 @@
 
 	&:hover:not(:disabled) {
 		cursor: pointer;
-		background-color: var(--primary-darker-color);
+		background-color: var(--kt-primary-darker-color);
 	}
 
 	&[disabled] {
 		opacity: 0.54;
 	}
 
+	&.v--button-fw {
+		width: 100%;
+	}
+
+	// START - colors
 	&.v--button-danger {
 		background-color: var(--kt-danger-color);
+		border-color: var(--kt-danger-color);
 
 		&:hover {
 			background-color: var(--kt-danger-darker-color);
+			border-color: var(--kt-danger-darker-color);
 		}
 	}
 
+	/****************************
+	   start: outlined
+	****************************/
+	&.v--button-outlined,
+	&.v--button-outlined:hover {
+		background-color: transparent;
+		color: var(--kt-primary-color);
+
+		&.v--button-outlined:hover {
+			background-color: transparent;
+			color: var(--kt-primary-color);
+			text-decoration: underline;
+		}
+	}
+
+	&.v--button-outlined {
+		&.v--button-danger,
+		&.v--button-danger:hover {
+			color: var(--kt-danger-color) !important;
+			border-color: var(--kt-danger-color);
+		}
+	}
+
+	/****************************
+	   end: outlined
+	****************************/
+
+	/****************************
+	   start: FLAT
+	****************************/
 	&.v--button-flat {
 		color: var(--kt-primary-color);
 		background-color: transparent;
@@ -72,7 +110,7 @@
 
 		&:hover {
 			background-color: transparent;
-			color: var(--primary-darker-color);
+			color: var(--kt-primary-darker-color);
 		}
 
 		&.v--button-danger {
@@ -83,4 +121,8 @@
 			}
 		}
 	}
+
+	/****************************
+	   end: FLAT
+	****************************/
 }
