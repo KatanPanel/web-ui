@@ -2,6 +2,9 @@
 	<component id="app" v-if="!!layout" :is="layout">
 		<router-view />
 	</component>
+	<div v-else>
+		<router-view />
+	</div>
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
