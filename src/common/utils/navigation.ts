@@ -46,3 +46,17 @@ export function redirect(this: Vue, to: Location | string): void {
 		to instanceof Location ? to : { name: to as string }
 	).href;
 }
+
+/**
+ * Performs a simple equality check between a {@link Route} and a {@link Location}.
+ * @param {Route} route - the route
+ * @param {Location} location - the location.
+ * @returns `true` if the parameters are identical.
+ */
+export function locationMatches(route: Route, location: Location): boolean {
+	return (
+		route.name === location.name &&
+		route.hash === location.hash &&
+		route.path === location.path
+	);
+}

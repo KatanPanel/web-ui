@@ -146,11 +146,15 @@ export function testWindow(window: Window, state: WindowState): boolean {
 	return window.state === state;
 }
 
+/**
+ * Checks whether the current location of a {@link Window} is
+ * identical to the specified {@param route}.
+ * @param {Window} window - the window
+ * @param {Route} route - the route
+ * @returns `true` if location matches.
+ */
 export function matchesWindowLocation(window: Window, route: Route): boolean {
-	return (
-		route.name === window.location.name &&
-		parseInt(route.params.serverId) === window.data.id
-	);
+	return locationMatches(route, window.location);
 }
 
 /**

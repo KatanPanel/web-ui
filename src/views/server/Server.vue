@@ -50,8 +50,8 @@ import { resolveWindow } from "@/common/navigation/window";
 		this.$connect();
 	},
 })
-export default class Server extends mixins(AppMixin, WindowMixin) {
-	@Prop({ type: String, required: true }) private readonly serverId!: string;
+export default class Server extends mixins(WindowMixin) {
+	@Prop({ type: Number, required: true }) private readonly serverId!: number;
 
 	/**
 	 * Returns the corresponding Vue component for the specified tab.
