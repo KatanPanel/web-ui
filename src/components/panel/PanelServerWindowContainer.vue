@@ -42,7 +42,9 @@
 			:active="window.isActive(currentRoute)"
 			class="window"
 		>
-			<Server :server-id="window.data.id" :window="window.id" />
+			<keep-alive>
+				<Server :server-id="window.data.id" :window="window.id" />
+			</keep-alive>
 		</div>
 	</div>
 </template>

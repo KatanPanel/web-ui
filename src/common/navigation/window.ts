@@ -27,7 +27,7 @@ import { undefinedToNull } from "@/common/utils/any";
 import { MINIMIZE_WINDOW, OPEN_WINDOW, UPDATE_WINDOW } from "@/store/mutations";
 import router from "@/router";
 import { loadServer, ROOT_MODULE } from "@/store";
-import { routeToLocation } from "@/common/utils/navigation";
+import { locationMatches, routeToLocation } from "@/common/utils/navigation";
 
 /**
  * Windows are components whose state has been preserved after
@@ -83,6 +83,8 @@ export interface Window {
 	 * @param {Route} route - the route to be checked.
 	 */
 	isActive(route: Route): boolean;
+
+	properties: any;
 }
 
 export const ClosedWindowState = "closed";
@@ -121,6 +123,17 @@ export function getOpenWindows(): Window[] {
  */
 export function getMinimizedWindows(): Window[] {
 	return getWindowsBy(MinimizedWindowState);
+}
+
+/**
+ * Returns all windows with the status {@link OpenWindowState} or {@link MinimizedWindowState}.
+ */
+export function getActiveWindows(): Window[] {
+	return getWindows().filter(
+		(window: Window) =>
+			window.state === OpenWindowState ||
+			window.state === MinimizedWindowState
+	);
 }
 
 export function matchesWindow(
@@ -171,6 +184,7 @@ export function newWindow(id: number, data: any, location: Route): Window {
 		location: routeToLocation(location),
 		title: data.name,
 		state: ClosedWindowState,
+		properties: {},
 		isActive(route: Route): boolean {
 			return matchesWindowLocation(this, route);
 		},
@@ -220,7 +234,9 @@ export function updateWindowLocation(window: Window, route: Route): void {
  * @param title
  */
 export function updateWindowTitle(window: Window, title: string): void {
-	updateWindow(window, { title });
+	updateWindow(window, {
+		title,
+	});
 }
 
 /**
