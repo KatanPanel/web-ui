@@ -15,11 +15,3 @@ export default class VIcon extends Vue {
 	@Prop({ type: String, required: true }) private readonly name!: string;
 }
 </script>
-<style lang="scss">
-.v--icon {
-	width: 24px;
-	height: 24px;
-	fill: var(--kt-text-color);
-	vertical-align: middle;
-}
-</style>
