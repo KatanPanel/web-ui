@@ -1,18 +1,30 @@
 <template>
-	<button v-if="!link" :class="classProps" class="v--button">
+	<button v-if="!link" :class="classProps" class="v--button" @click.stop>
 		<slot />
 	</button>
-	<a v-else key="as-link" :class="classProps" class="v--button">
+	<router-link
+		v-else-if="to"
+		:class="classProps"
+		:to="to"
+		class="v--button"
+		tag="a"
+		@click.stop
+	>
+		<slot />
+	</router-link>
+	<a v-else key="as-link" :class="classProps" class="v--button" @click.stop>
 		<slot />
 	</a>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { RawLocation } from "vue-router";
 
 @Component
 export default class VButton extends Vue {
 	@Prop({ type: Boolean, default: false }) private readonly link!: boolean;
+	@Prop({ type: Object }) private readonly to!: RawLocation;
 	@Prop({ type: Boolean, default: false }) private readonly flat!: boolean;
 	@Prop({ type: Boolean, default: false }) private readonly primary!: boolean;
 	@Prop({ type: Boolean, default: false }) private readonly danger!: boolean;
