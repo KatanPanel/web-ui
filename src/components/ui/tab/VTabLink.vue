@@ -24,17 +24,19 @@
 	<router-link
 		tag="li"
 		:to="{ name: to.name, params: { serverId: getWindow.data.id } }"
-		:active="to.name === getWindow.route"
+		:active="to.name === getWindow.location.name"
 		class="v--tab"
 	>
-		<a><slot /></a>
+		<a>
+			<slot />
+		</a>
 	</router-link>
 </template>
 
 <script lang="ts">
 import { Component, Prop } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import WindowMixin from "@/common/internal/mixins/window";
+import WindowMixin from "@/mixins/window";
 
 @Component
 export default class VTabLink extends mixins(WindowMixin) {
