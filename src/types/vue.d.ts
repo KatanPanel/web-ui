@@ -20,10 +20,10 @@
  * SOFTWARE.
  */
 
-import { VocaStatic } from "voca";
-import { AxiosInstance } from "axios";
-import { Consola } from "consola";
-import { Filesize } from "filesize";
+import {VocaStatic} from "voca";
+import {AxiosInstance} from "axios";
+import {Consola} from "consola";
+import {Filesize} from "filesize";
 
 declare module "vue/types/vue" {
 	interface Vue {

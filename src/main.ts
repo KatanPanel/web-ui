@@ -37,8 +37,7 @@ import {
 	updateClientSettings,
 } from "@/common/client-settings";
 import { ERROR_HANDLER_LOG_TAG } from "@/logging";
-import servers from "@/api/servers";
-import auth from "@/api/auth";
+import api from "@/api";
 
 Vue.config.errorHandler = (err: Error, vm: Vue, info: string) => {
 	vm.$log.error({
@@ -71,7 +70,7 @@ if (
 	);
 }
 
-proto.$api = { auth, servers } as API;
+proto.$api = api;
 
 export const vm = new Vue({
 	store,

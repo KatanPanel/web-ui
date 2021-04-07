@@ -1,216 +1,90 @@
 <template>
-	<div class="server-console">
+	<div>
 		<h2>Console</h2>
-		<div class="panel-console">
-			<h1 v-if="fetchingState === 0" key="waiting-response">
-				<div class="loading-state">Connecting...</div>
-			</h1>
-			<h2 v-else-if="fetchingState === 1" key="logs-started">
-				<div class="loading-state">Retrieving logs...</div>
-			</h2>
-			<div
-				v-else
-				key="logs"
-				class="logs"
-				:ref="`logs-container-${window}`"
-			>
-				<p v-for="(log, i) in logs" :key="i">
-					<code
-						v-tooltip="{
-							content: $time(log.t).format('LLLL'),
-							placement: 'right',
-						}"
-						>{{ log.c }}</code
-					>
-				</p>
-			</div>
-			<v-form>
-				<v-input-group class="v--flex v--flex-row input">
-					<v-input-icon>
-						<code class="v--text-fw-700">$</code>
-					</v-input-icon>
-					<v-input
-						class="v--flex-child v--flex-basis-0"
-						v-model="consoleInput"
-					/>
-				</v-input-group>
-			</v-form>
-		</div>
+		<v-button @click.native="updateConsoleMode('fullscreen')">
+			Fullscreen
+		</v-button>
+		<ServerConsoleContent
+			ref="content"
+			:mode="consoleMode"
+			:server-id="getServer.id"
+			@input="onConsoleInputChange"
+		/>
 	</div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
+import {Component} from "vue-property-decorator";
 import VForm from "@/components/ui/form/VForm.vue";
 import VInput from "@/components/ui/form/VInput.vue";
-import { mixins } from "vue-class-component";
-import WindowMixin from "@/common/internal/mixins/window";
+import {mixins} from "vue-class-component";
+import WindowMixin from "@/mixins/window";
 import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
-import { getWebSocket } from "@/store";
-import { MetaInfo } from "vue-meta";
-import { updateWindowTitle } from "@/common/navigation/window";
-import { smoothScroll } from "@/common/utils/dom";
+import VButton from "@/components/ui/button/VButton.vue";
+import ServerConsoleContent from "@/components/server/ServerConsoleContent.vue";
+import {get} from "@/utils/vuex";
+import {GET_NAVIGATION_HISTORY} from "@/store/getters";
+import {ROOT_MODULE} from "@/store";
+import {Location, Route} from "vue-router";
+import {routeToLocation} from "@/utils/navigation";
+import {updateWindowTitle} from "@/common/navigation/window";
 
 @Component<ServerConsole>({
-	components: { VInputIcon, VInputGroup, VInput, VForm },
-	metaInfo(): MetaInfo {
-		return {
-			title: (this as Vue).$i18n.t("titles.server.console", {
-				server: this.getWindow.data.name,
-			}) as string,
-		};
-	},
-	activated(): void {
-		updateWindowTitle(
-			this.getWindow,
-			this.$i18n.t("windows.server.console.empty") as string
-		);
-		if (this.fetchingState === 3) this.forceLogsContainerScroll();
-	},
-	mounted(): void {
-		const socket = getWebSocket();
-
-		socket.on("message", (message: any) => {
-			if (
-				!message.d["server-id"] ||
-				message.d["server-id"] !== this.getServer.id
-			)
-				return;
-
-			switch (message.op) {
-				// logs started
-				case 1002:
-					return (this.fetchingState = 1);
-
-				// logging
-				case 1003: {
-					if (this.fetchingState !== 2) this.fetchingState = 2;
-
-					const log = message.d.log;
-					const whitespace = log.indexOf(" ");
-					this.logs.push({
-						t: log.substr(0, whitespace),
-						c: log.substr(whitespace, log.length),
-					});
-					break;
-				}
-
-				// logs finished
-				case 1004: {
-					this.updateLogsContainerScroll();
-					return (this.fetchingState = 3);
-				}
-			}
-		});
-
-		// request server logs
-		socket.send(1003, {
-			"server-id": this.getServer.id,
-		});
+	components: {
+		ServerConsoleContent,
+		VButton,
+		VInputIcon,
+		VInputGroup,
+		VInput,
+		VForm,
 	},
 })
 export default class ServerConsole extends mixins(WindowMixin) {
-	private consoleInput = "";
-	private fetchingState = 0;
-	private logs: any[] = [];
-
-	private get logsContainer(): HTMLElement {
-		return this.$refs[`logs-container-${this.window}`] as HTMLElement;
+	get consoleMode(): string | null {
+		return this.getWindowProperty("console-mode") || null;
 	}
 
-	@Watch("consoleInput")
-	private onConsoleInputChange(value: string): void {
+	updateConsoleMode(value: string) {
+		this.setReactiveWindowProperty("console-mode", value);
+	}
+
+	pinConsole() {
+		const navigationHistory = get(
+			ROOT_MODULE,
+			GET_NAVIGATION_HISTORY
+		) as Route[];
+
+		// 0 index is the console itself
+		if (navigationHistory.length <= 1) {
+			return this.pinConsoleAndGoTo();
+		}
+
+		const last = navigationHistory[navigationHistory.length - 2];
+		if (last.name && last.name === "server.console")
+			return this.pinConsoleAndGoTo();
+
+		this.pinConsoleAndGoTo(routeToLocation(last));
+	}
+
+	pinConsoleAndGoTo(location?: Location) {
+		this.$router
+			.replace(location || {name: "server.overview"})
+			.then(() => {
+				this.$emit("pin-console");
+			});
+	}
+
+	onConsoleInputChange(value: string): void {
 		updateWindowTitle(
 			this.getWindow,
 			this.$i18n.t(
 				value.length === 0
 					? "windows.server.console.empty"
 					: "windows.server.console.typing",
-				{ input: value }
+				{input: value}
 			) as string
 		);
 	}
-
-	updateLogsContainerScroll(): void {
-		const el = this.logsContainer;
-
-		// already scrolled to bottom
-		if (el.scrollHeight - el.clientHeight <= el.scrollTop + 1) return;
-
-		smoothScroll(2500, el, el.scrollHeight, "scrollTop");
-	}
-
-	forceLogsContainerScroll() {
-		this.logsContainer.scrollTop =
-			this.logsContainer.scrollHeight - this.logsContainer.clientHeight;
-	}
 }
 </script>
-<style lang="scss" scoped>
-.panel-console {
-	background-color: var(--kt-foreground);
-	border-radius: 8px;
-	max-height: calc(100vh - (170px + 48px + 48px));
-	overflow-y: auto;
-	display: flex;
-	flex-direction: column;
-
-	.loading-state {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 5%;
-		opacity: 0.38;
-		user-select: none;
-	}
-
-	.logs {
-		flex: 1 auto;
-		position: relative;
-		overflow-y: auto;
-		padding: 12px;
-
-		p {
-			font-size: 14px;
-			font-family: monospace;
-			color: var(--kt-muted-darker-color);
-		}
-
-		&::-webkit-scrollbar-track {
-			border-radius: 8px;
-			background-color: var(--kt-foreground);
-		}
-
-		&::-webkit-scrollbar {
-			width: 8px;
-			background-color: var(--kt-foreground);
-		}
-
-		&::-webkit-scrollbar-thumb {
-			border-radius: 8px;
-			background-color: rgba(0, 0, 0, 0.12);
-		}
-	}
-
-	.input {
-		padding: 6px !important;
-		background-color: var(--app-foreground-overlay);
-
-		code {
-			user-select: none;
-		}
-
-		.v--input {
-			padding: 0;
-			background-color: transparent;
-			font-weight: 700;
-		}
-
-		.v--input-icon {
-			padding: 0 6px;
-			margin-right: 6px;
-		}
-	}
-}
-</style>

@@ -1,26 +1,24 @@
 <template>
 	<div class="server-fs">
-		<h4>Gerenciador de Arquivos</h4>
+		<h2>Gerenciador de Arquivos</h2>
+		<p class="v--text-muted">
+			Selecione um disco de armazenamento para explorar sua árvore de
+			arquivos.
+		</p>
 		<section id="storage">
 			<p class="v--text-muted v--m-bottom-3">
 				Selecione um disco de armazenamento para explorar sua árvore de
 				arquivos.
 			</p>
 			<div class="disks">
-				<v-tab-link
-					:to="{ name: FS_DISK_TAB, params: { disk: disk.id } }"
-					:window="window"
-					tag="a"
+				<WindowLink
 					v-for="disk in disks"
 					:key="disk.id"
+					:to="{ name: 'server.fs.disk', params: { disk: disk.id } }"
+					:window="window"
+					tag="a"
 					class="disk"
 				>
-					<div class="disk-icon">
-						<img
-							:src="`/img/games/icons/${getServer.game.name.toLowerCase()}.png`"
-							:alt="getServer.game.name"
-						/>
-					</div>
 					<div class="disk-info">
 						<div class="disk-data">
 							<h6 class="disk-name">{{ disk.name }}</h6>
@@ -30,7 +28,7 @@
 							</p> -->
 						</div>
 					</div>
-				</v-tab-link>
+				</WindowLink>
 			</div>
 			<hr />
 		</section>
@@ -38,36 +36,20 @@
 </template>
 
 <script lang="ts">
-import { Component } from "vue-property-decorator";
-import { mixins } from "vue-class-component";
-import WindowMixin from "@/common/internal/mixins/window";
-import { MetaInfo } from "vue-meta";
+import {Component} from "vue-property-decorator";
+import {mixins} from "vue-class-component";
+import WindowMixin from "@/mixins/window";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import WindowLink from "@/components/navigation/WindowLink.vue";
-import { updateWindowTitle } from "@/common/navigation/window";
-import { AxiosError, AxiosResponse } from "axios";
+import {AxiosError, AxiosResponse} from "axios";
 
 @Component<ServerFS>({
-	components: { VTabLink: WindowLink, VIcon },
-	metaInfo(): MetaInfo {
-		return {
-			title: this.$i18n.t("titles.server.fs.index", {
-				server: this.getServer.name,
-			}) as string,
-		};
-	},
-	activated(): void {
-		updateWindowTitle(
-			this.getWindow,
-			this.$i18n.t("windows.server.fs.index", {
-				server: this.getServer.name,
-			}) as string
-		);
-	},
+	components: {WindowLink, VIcon},
 	mounted(): void {
 		this.$http
 			.get(`servers/${this.getServer.id}/fs`)
 			.then((res: AxiosResponse) => {
+				console.log("Res;", res.data);
 				this.disks = res.data.data.disks;
 			})
 			.catch((err: AxiosError) => {
@@ -86,14 +68,14 @@ export default class ServerFS extends mixins(WindowMixin) {
 
 	.disk {
 		list-style: none;
-		background-color: var(--kt-foreground);
+		background-color: var(--kt-background-secondary);
 		border-radius: 20px;
 		padding: 24px;
 		min-width: 25%;
 
 		&:hover {
 			text-decoration: none;
-			background-color: var(--app-foreground-overlay);
+			background-color: var(--kt-background-tertiary);
 		}
 
 		&:not(:last-child) {
@@ -101,12 +83,12 @@ export default class ServerFS extends mixins(WindowMixin) {
 		}
 
 		&[active] {
-			color: var(--inverse-color);
+			color: var(--kt-primary-text-color);
 			background-color: var(--kt-primary-color);
 			box-shadow: var(--kt-primary-color) 0 0 8px 0;
 
 			.disk-icon {
-				background-color: var(--inverse-color);
+				background-color: var(--kt-primary-text-color);
 			}
 		}
 

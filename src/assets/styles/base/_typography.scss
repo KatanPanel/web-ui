@@ -70,6 +70,7 @@ h2,
 h3,
 h4 {
 	margin-bottom: 8px;
+	user-select: none;
 }
 
 p {
@@ -78,16 +79,4 @@ p {
 
 small {
 	font-size: 12px;
-	user-select: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-small {
-	user-select: auto;
 }

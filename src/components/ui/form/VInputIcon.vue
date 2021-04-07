@@ -5,7 +5,7 @@
 	</div>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 
 @Component({

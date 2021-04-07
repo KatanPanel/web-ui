@@ -58,12 +58,12 @@
 </template>
 
 <script lang="ts">
-import { Component } from "vue-property-decorator";
-import { mixins } from "vue-class-component";
-import WindowMixin from "@/common/internal/mixins/window";
-import { updateWindowTitle } from "@/common/navigation/window";
-import { MetaInfo } from "vue-meta";
-import { AxiosError, AxiosResponse } from "axios";
+import {Component} from "vue-property-decorator";
+import {mixins} from "vue-class-component";
+import WindowMixin from "@/mixins/window";
+import {updateWindowTitle} from "@/common/navigation/window";
+import {MetaInfo} from "vue-meta";
+import {AxiosError, AxiosResponse} from "axios";
 import VForm from "@/components/ui/form/VForm.vue";
 import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
@@ -71,7 +71,7 @@ import VIcon from "@/components/ui/icon/VIcon.vue";
 import VInput from "@/components/ui/form/VInput.vue";
 
 @Component<ServerFSDisk>({
-	components: { VInput, VIcon, VInputIcon, VInputGroup, VForm },
+	components: {VInput, VIcon, VInputIcon, VInputGroup, VForm},
 	metaInfo(): MetaInfo {
 		return {
 			title: this.$i18n.t("titles.server.fs.disk", {
@@ -142,13 +142,13 @@ export default class ServerFSDisk extends mixins(WindowMixin) {
 
 	.disk-search {
 		padding: 8px 0;
-		background-color: var(--kt-foreground) !important;
-		border: 1px solid var(--app-foreground-overlay);
+		background-color: var(--kt-background-secondary) !important;
+		border: 1px solid var(--kt-background-tertiary);
 		margin-bottom: 24px;
 
 		input {
 			padding: 0 !important;
-			background-color: var(--kt-foreground) !important;
+			background-color: var(--kt-background-secondary) !important;
 			flex: 1;
 			font-size: 16px;
 			margin-left: 8px;
@@ -172,12 +172,12 @@ export default class ServerFSDisk extends mixins(WindowMixin) {
 
 		&::-webkit-scrollbar-track {
 			border-radius: 8px;
-			background-color: var(--kt-foreground);
+			background-color: var(--kt-background-secondary);
 		}
 
 		&::-webkit-scrollbar {
 			height: 6px;
-			background-color: var(--kt-foreground);
+			background-color: var(--kt-background-secondary);
 		}
 
 		&::-webkit-scrollbar-thumb {
@@ -187,7 +187,7 @@ export default class ServerFSDisk extends mixins(WindowMixin) {
 
 		.directory {
 			list-style: none;
-			background-color: var(--kt-foreground);
+			background-color: var(--kt-background-secondary);
 			border-radius: 8px;
 			padding: 18px;
 			max-width: 200px;

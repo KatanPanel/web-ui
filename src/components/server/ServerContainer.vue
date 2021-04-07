@@ -38,16 +38,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import {
-	getOpenWindows,
-	matchesWindowLocation,
-	Window,
-} from "@/common/navigation/window";
+import {Component, Vue} from "vue-property-decorator";
+import {getOpenWindows, matchesWindowLocation, Window,} from "@/common/navigation/window";
 import Server from "@/views/server/Server.vue";
 
 @Component({
-	components: { Server },
+	components: {Server},
 })
 export default class ServerContainer extends Vue {
 	get openWindows(): Window[] {

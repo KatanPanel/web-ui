@@ -50,7 +50,6 @@ body {
 	font-size: 16px;
 	font-weight: 500;
 	color: var(--kt-text-color);
-	user-select: none;
 }
 
 #app {
@@ -65,13 +64,12 @@ body {
 }
 
 a {
-	text-decoration-style: dotted;
-	text-decoration-line: underline;
 	color: inherit;
+	text-decoration: none;
 
 	&:not([disabled]):hover {
 		cursor: pointer;
-		text-decoration-style: solid;
+		text-decoration: underline;
 	}
 }
 
@@ -86,17 +84,6 @@ hr {
 	border-top: 1px solid var(--kt-border-color);
 }
 
-::-webkit-scrollbar {
-	width: 6px;
-	background-color: var(--kt-scrollbar);
-}
-
-::-webkit-scrollbar-track {
-	border-radius: 8px;
-	background-color: var(--kt-scrollbar);
-}
-
-::-webkit-scrollbar-thumb {
-	border-radius: 8px;
-	background-color: var(--kt-scrollbar-thumb);
+ul {
+	list-style: none;
 }

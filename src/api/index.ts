@@ -20,7 +20,8 @@
  * SOFTWARE.
  */
 
+import info from "@/api/info";
 import auth from "@/api/auth";
 import servers from "@/api/servers";
 
-export default { auth, servers } as API;
+export default { info, auth, servers } as API;

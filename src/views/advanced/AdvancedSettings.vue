@@ -27,14 +27,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { generateMetaInfo } from "@/common/navigation/translation";
-import { MetaInfo } from "vue-meta";
+import {Component, Vue} from "vue-property-decorator";
+import {generateMetaInfo} from "@/utils/component";
+import {MetaInfo} from "vue-meta";
 
 @Component({
 	metaInfo(): MetaInfo {
 		return generateMetaInfo("advanced.settings.index");
 	},
 })
-export default class AdvancedSettings extends Vue {}
+export default class AdvancedSettings extends Vue {
+}
 </script>

@@ -1,82 +1,87 @@
 <template>
-	<div class="login">
-		<div class="header">
-			<h2>
-				<b>{{ $t("modules.login.title") }}</b>
-			</h2>
-			<!-- <p>{{ $t("modules.login.credentials-needed") }}</p> -->
-		</div>
+	<div>
+		<h2 class="v--text-align-center">
+			<b>{{ $t("views.login.title") }}</b>
+		</h2>
+		<p
+			class="v--text-align-center v--text-muted"
+			style="margin-top: -12px; margin-bottom: 12px"
+		>
+			{{ $t("views.login.please-identify") }}
+		</p>
 		<p class="error v--text-error" v-if="error">
 			{{ $t(`errors.${error}`) }}
 		</p>
 		<v-form @submit.native.prevent="performLogin">
-			<div class="body">
-				<v-input-group class="v--flex v--flex-row">
-					<v-input-icon>
-						<v-icon name="user" />
-					</v-input-icon>
-					<div class="v--flex-child">
-						<v-label
-							>{{ $t("modules.login.fields.username") }}
-						</v-label>
-						<v-input
-							type="text"
-							minlength="2"
-							maxlength="32"
-							required
-							v-model="username"
-							placeholder="John Doe"
-						/>
-					</div>
-				</v-input-group>
-				<v-input-group class="v--flex v--flex-row">
-					<v-input-icon>
-						<v-icon name="password" />
-					</v-input-icon>
-					<div class="v--flex-child">
-						<v-label
-							>{{ $t("modules.login.fields.password") }}
-						</v-label>
-						<v-input
-							type="password"
-							maxlength="32"
-							value=""
-							v-model="password"
-						/>
-					</div>
-				</v-input-group>
-			</div>
-			<v-flex-box class="v--flex-align-center submit">
-				<div class="v--flex-child">
-					<v-button type="submit" :disabled="isLocked">
-						<span v-if="!isLocked" key="config">{{
-							$t("modules.login.fields.confirm")
-						}}</span>
-						<span v-else key="loading"> ... </span>
-					</v-button>
-				</div>
+			<v-input-group>
+				<v-label>{{ $t("views.login.fields.username") }}</v-label>
+				<v-input
+					v-model="username"
+					autocomplete="username"
+					maxlength="32"
+					minlength="2"
+					required
+					type="text"
+				/>
+			</v-input-group>
+			<v-input-group class="v--m-top-1">
+				<v-label>{{ $t("views.login.fields.password") }}</v-label>
+				<v-input
+					v-model="password"
+					autocomplete="current-password"
+					maxlength="32"
+					type="password"
+					value=""
+				/>
+			</v-input-group>
+			<v-flex-box class="v--m-top-4 v--flex-justify-end v--flex-column">
+				<v-button
+					:disabled="isLocked"
+					:full-width="true"
+					:primary="true"
+					type="submit"
+				>
+					{{ $t("views.login.fields.confirm") }}
+				</v-button>
+				<v-button
+					v-if="isLoggedIn"
+					:disabled="isLocked"
+					:full-width="true"
+					:outlined="true"
+					:primary="true"
+					class="v--m-top-1"
+					type="button"
+					@click.native="continueAs"
+				>
+					{{
+						$t("views.login.fields.confirm-logged-in", {
+							username: getAccountUsername,
+						})
+					}}
+				</v-button>
 			</v-flex-box>
 		</v-form>
 	</div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import VButton from "@/components/ui/button/VButton.vue";
 import VForm from "@/components/ui/form/VForm.vue";
 import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import VInput from "@/components/ui/form/VInput.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
-import { AUTH_TOKEN_KEY } from "@/store/auth";
-import { AUTH_MODULE } from "@/store";
-import { AUTH_LOGIN, AUTH_VERIFY } from "@/store/auth/actions";
-import { AxiosError } from "axios";
-import { HOME_ROUTE } from "@/router";
+import {AUTH_MODULE} from "@/store";
+import {AUTH_LOGIN, AUTH_VERIFY} from "@/store/modules/auth/actions";
+import {AxiosError} from "axios";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
-import { generateMetaInfo } from "@/common/navigation/translation";
-import { AUTH_LOG_TAG } from "@/logging";
-import { dispatch } from "@/common/utils/vuex";
+import {generateMetaInfo} from "@/utils/component";
+import {AUTH_LOG_TAG} from "@/logging";
+import {dispatch, get} from "@/utils/vuex";
+import {MetaInfo} from "vue-meta";
+import {GET_ACCOUNT, IS_LOGGED_IN} from "@/store/modules/auth/getters";
+import {AUTH_TOKEN_KEY} from "@/api/auth";
 
 @Component<Login>({
 	components: {
@@ -89,13 +94,23 @@ import { dispatch } from "@/common/utils/vuex";
 		VForm,
 		VButton,
 	},
-	metaInfo: () => generateMetaInfo("login"),
+	metaInfo(): MetaInfo {
+		return generateMetaInfo("login");
+	},
 })
 export default class Login extends Vue {
 	private username = "";
 	private password = "";
 	private isLocked = false;
 	private error: string | null = null;
+
+	private get getAccountUsername(): string {
+		return get(AUTH_MODULE, GET_ACCOUNT).username;
+	}
+
+	private get isLoggedIn(): boolean {
+		return get(AUTH_MODULE, IS_LOGGED_IN);
+	}
 
 	private performLogin(): void {
 		if (this.isLocked) return;
@@ -112,11 +127,13 @@ export default class Login extends Vue {
 				// fast invalidation for any reason by the server
 				this.$storage.set(AUTH_TOKEN_KEY, token);
 
-				await dispatch(AUTH_MODULE, AUTH_VERIFY, { token });
-				this.$router.redirect(HOME_ROUTE);
+				await dispatch(AUTH_MODULE, AUTH_VERIFY, {token});
+
+				if (!this.$isDevelopmentMode) window.location.href = "/";
 			})
 			.catch((err: AxiosError) => {
 				const data = err.response?.data;
+
 				const code =
 					data?.code ||
 					err.response?.status ||
@@ -134,6 +151,15 @@ export default class Login extends Vue {
 				this.error = code;
 			})
 			.then(() => (this.isLocked = false));
+	}
+
+	private continueAs() {
+		if (this.isLocked) return;
+
+		this.isLocked = true;
+		this.$router.replace({name: "home"}).finally(() => {
+			this.isLocked = false;
+		});
 	}
 }
 </script>

@@ -21,10 +21,10 @@
  */
 
 import Vue from "vue";
-import VueRouter, { NavigationGuardNext, Route, RouteRecord } from "vue-router";
-import { loadLanguage } from "@/i18n";
+import VueRouter, {NavigationGuardNext, Route, RouteRecord} from "vue-router";
+import {loadLanguage} from "@/i18n";
 import Server from "@/views/server/Server.vue";
-import { ROOT_MODULE } from "@/store";
+import {ROOT_MODULE} from "@/store";
 import {
 	getOpenWindows,
 	MinimizedWindowState,
@@ -33,10 +33,10 @@ import {
 	updateWindowState,
 	Window,
 } from "@/common/navigation/window";
-import { commit } from "@/utils/vuex";
-import { getClientSettings } from "@/common/client-settings";
-import { isUndefined } from "@/utils/any";
-import { UPDATE_NAVIGATION_HISTORY } from "@/store/mutations";
+import {commit} from "@/utils/vuex";
+import {getClientSettings} from "@/common/client-settings";
+import {isUndefined} from "@/utils/any";
+import {UPDATE_NAVIGATION_HISTORY} from "@/store/mutations";
 import routes from "@/router/routes";
 
 Vue.use(VueRouter);

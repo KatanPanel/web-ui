@@ -22,7 +22,7 @@
 
 <template>
 	<v-row>
-		<v-col :size="8">
+		<v-col :size="9">
 			<h1>{{ $t("views.advanced.settings.title") }}</h1>
 			<section id="testing-adjustments">
 				<i18n
@@ -36,13 +36,13 @@
 								$t('views.advanced.settings.current-version')
 							"
 							class="v--text-primary"
-							><span class="v--cursor-default"
-								>v{{ $website.version }}</span
-							></code
+						><span class="v--cursor-default"
+						>v{{ $website.version }}</span
+						></code
 						>
 					</template>
 				</i18n>
-				<br >
+				<br/>
 				<p class="v--text-muted v--m-bottom-4">
 					{{ $t("views.advanced.settings.description-detail") }}
 				</p>
@@ -51,9 +51,9 @@
 				<v-field
 					:active="developerMode"
 					@click.native="developerMode = !developerMode"
-					>{{ $t("views.advanced.settings.options.developer-mode") }}
+				>{{ $t("views.advanced.settings.options.developer-mode") }}
 				</v-field>
-				<hr >
+				<hr/>
 			</section>
 			<section id="reset-config">
 				<v-box :outlined="true">
@@ -92,7 +92,7 @@
 	</v-row>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
 import VWall from "@/components/ui/wall/VWall.vue";
@@ -103,7 +103,7 @@ import {
 	saveClientSettings,
 	updateClientSettings,
 } from "@/common/client-settings";
-import { CLIENT_SETTINGS_CACHE_KEY } from "@/store";
+import {CLIENT_SETTINGS_CACHE_KEY} from "@/store";
 import VBox from "@/components/ui/box/VBox.vue";
 import VBoxBody from "@/components/ui/box/VBoxBody.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";

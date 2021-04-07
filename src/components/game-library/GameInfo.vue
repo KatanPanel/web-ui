@@ -38,10 +38,10 @@
 									class="game-name v--text-primary"
 									v-text="game.name"
 								/>
-								<small class="game-image" v-text="game.image" />
+								<small class="game-image" v-text="game.image"/>
 							</div>
 						</v-flex-box>
-						<hr >
+						<hr/>
 						<p class="v--text-cute">
 							Versões — {{ game.versions.length }}
 						</p>
@@ -122,12 +122,12 @@
 								{{ key }}
 							</p>
 							<code :class="handleEnvVarValueTypes(value)">{{
-								value
-							}}</code>
+									value
+								}}</code>
 						</v-flex-box>
-						<hr >
+						<hr/>
 						<small class="v--text-cute v--m-top-4"
-							>Valores indeterminados</small
+						>Valores indeterminados</small
 						>
 						<p class="v--text-muted-darker v--m-bottom-3">
 							Os valores das seguintes chaves só ficam disponíveis
@@ -149,7 +149,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
 import VBox from "@/components/ui/box/VBox.vue";

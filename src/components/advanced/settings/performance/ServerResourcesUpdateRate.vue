@@ -58,7 +58,7 @@
 						$t(
 							"views.advanced.settings.performance.server-resources-update-rate.define-x-seconds",
 							{
-								max: MAX_RESOURCE_UPDATE_TIME_VALUE
+								max: MAX_RESOURCE_UPDATE_TIME_VALUE,
 							}
 						)
 					}}
@@ -78,7 +78,12 @@
 							}%`"
 							class="floating-value"
 						>
-							{{ $t("time-unit.seconds") }}
+							{{
+								$tc(
+									"time-unit.seconds",
+									serverResurceUpdateTime
+								)
+							}}
 						</span>
 					</v-input-group>
 				</v-form>
@@ -87,7 +92,7 @@
 	</div>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import VField from "@/components/ui/field/VField.vue";
 import VFieldList from "@/components/ui/field/VFieldList.vue";
 import VBoxHeader from "@/components/ui/box/VBoxHeader.vue";
@@ -103,6 +108,7 @@ import {
 	updateClientSettings,
 } from "@/common/client-settings";
 import RecommendedOption from "@/components/advanced/settings/performance/RecommendedOption.vue";
+import {nullToUndefined, undefinedToNull} from "@/utils/any";
 
 @Component({
 	components: {
@@ -122,7 +128,9 @@ export default class ServerResourcesUpdateRate extends Vue {
 	private readonly MAX_RESOURCE_UPDATE_TIME_VALUE = 60;
 
 	get serverResurceUpdateTime(): number | null {
-		return getClientSettings().serverSettings.resourceUpdateTime;
+		return undefinedToNull(
+			getClientSettings().serverSettings.resourceUpdateTime
+		);
 	}
 
 	set serverResurceUpdateTime(value: number | null) {
@@ -131,7 +139,7 @@ export default class ServerResourcesUpdateRate extends Vue {
 
 		updateClientSettings({
 			serverSettings: {
-				resourceUpdateTime: value,
+				resourceUpdateTime: nullToUndefined(value),
 			},
 		});
 

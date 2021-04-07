@@ -50,17 +50,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import {
-	getMinimizedWindows,
-	getOpenWindows,
-	Window,
-} from "@/common/navigation/window";
+import {Component, Vue} from "vue-property-decorator";
+import {getMinimizedWindows, getOpenWindows, Window,} from "@/common/navigation/window";
 import Server from "@/views/server/Server.vue";
-import { Route } from "vue-router";
+import {Route} from "vue-router";
 
 @Component({
-	components: { Server },
+	components: {Server},
 })
 export default class PanelServerWindowContainer extends Vue {
 	get currentRoute(): Route {

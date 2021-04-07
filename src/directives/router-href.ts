@@ -20,8 +20,8 @@
  * SOFTWARE.
  */
 
-import { DirectiveOptions, VNode } from "vue";
-import { DirectiveBinding } from "vue/types/options";
+import {DirectiveOptions, VNode} from "vue";
+import {DirectiveBinding} from "vue/types/options";
 
 /**
  * Updates the current element by adding the `active` class if the route

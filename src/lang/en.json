@@ -5,10 +5,8 @@
 			"index": "{server}",
 			"overview": "Overview – {server}",
 			"console": "Console – {server}",
-			"fs": {
-				"index": "File Management – {server}",
-				"disk": "Disk {disk} - Gerenciador de Arquivos – {server}"
-			},
+			"fs": "File Management – {server}",
+			"fs.disk": "Disk {disk} - Gerenciador de Arquivos – {server}",
 			"settings": "Settings – {server}"
 		},
 		"game-library": "Game Library",
@@ -58,14 +56,10 @@
 		"windows": {
 			"server": {
 				"overview": "Overview",
-				"console": {
-					"empty": "Console",
-					"typing": "\"{input}\" – Console..."
-				},
-				"fs": {
-					"index": "File Management",
-					"disk": "Disk {disk} – File Management"
-				},
+				"console": "Console",
+				"console.typing": "\"{input}\" – Console...",
+				"fs": "File Management",
+				"fs.disk": "Disk {disk} – File Management",
 				"settings": "Settings"
 			}
 		}
@@ -113,6 +107,44 @@
 				"running": "Running",
 				"unloaded": "Unloaded",
 				"unknown": "Offline"
+			},
+			"settings": {
+				"title": "Server Settings",
+				"tabs": {
+					"details": "Details",
+					"users": "Users",
+					"advanced": "Advanced",
+					"audit-log": "Activity History"
+				},
+				"details": {
+					"labels": {
+						"server-icon": "Server Icon",
+						"server-name": "Server Name"
+					},
+					"network": {
+						"title": "Network",
+						"description": "Editing the network settings requires the server to be restarted.",
+						"labels": {
+							"host": "Host address",
+							"port": "Port"
+						}
+					}
+				},
+				"users": {
+					"info": "You can assign and revoke permissions for users that apply only to {server} here.",
+					"click-to-modify": "Click on a user or role to change their permissions.",
+					"more-tooltip": "More",
+					"users-count": "Users — {count}",
+					"roles-count": "Roles — {count}",
+					"copy-id": "Copy ID"
+				},
+				"advanced": {
+					"delete-server": {
+						"title": "Server deletion",
+						"description": "If you want to delete the server, be aware that this is an irreversible action.",
+						"button": "Delete server"
+					}
+				}
 			}
 		},
 		"game-library": {
@@ -148,6 +180,7 @@
 				"permissions": "Permissions",
 				"no-role": "No role assigned.",
 				"results-found": "{value} users found.",
+				"search": "Search",
 				"sorting": {
 					"a-z": "Sort A-Z",
 					"z-a": "Sort Z-A"
@@ -177,14 +210,24 @@
 					}
 				},
 				"appearence": {
-					"title": "Look and Feel",
+					"title": "Appearence",
 					"theme-label": "Theme",
 					"theme": {
 						"light": "Light",
 						"dark": "Dark",
 						"system-default": "System default"
 					},
-					"theme-system-default": "If you don't define a preferred theme, the system default will be used."
+					"server": {
+						"console-log-date": {
+							"title": "Server console log date time",
+							"description": "Display the date and time of a log on the server console.",
+							"options": {
+								"click": "When clicked",
+								"hover": "When hovered",
+								"never": "Never"
+							}
+						}
+					}
 				},
 				"language": {
 					"title": "Language",
@@ -223,6 +266,7 @@
 	},
 	"errors": {
 		"0": "Unknown error.",
+		"401": "Unauthorized.",
 		"500": "Could not connect to the server.",
 		"2002": "Invalid username or wrong password.",
 		"2004": "Invalid username or wrong password.",
@@ -237,7 +281,7 @@
 		}
 	},
 	"time-unit": {
-		"seconds": "seconds"
+		"seconds": "second | seconds"
 	},
 	"ui": {
 		"form": {

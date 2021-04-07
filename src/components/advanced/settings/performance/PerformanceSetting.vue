@@ -25,9 +25,9 @@
 		<v-box :no-shadow="true">
 			<v-box-header class="v--m-bottom-4">
 				<small class="v--text-cute">{{
-					$t(`views.advanced.settings.performance.${name}.title`)
-				}}</small>
-				<p class="v--text-muted-darker">
+						$t(`views.advanced.settings.performance.${name}.title`)
+					}}</small>
+				<p class="v--text-muted">
 					{{
 						$t(
 							`views.advanced.settings.performance.${name}.description`
@@ -36,13 +36,13 @@
 				</p>
 				<v-row class="v--m-top-3">
 					<v-col :size="6">
-						<v-label
-							>{{
+						<small class="v--text-cute v--text-muted v--m-bottom-0">
+							{{
 								$t(
 									"views.advanced.settings.performance.fields.performance-impact"
 								)
 							}}
-						</v-label>
+						</small>
 						<LowPerformanceImpact
 							v-if="level === 0"
 							key="low-performance-impact"
@@ -57,13 +57,13 @@
 						/>
 					</v-col>
 					<v-col :size="6">
-						<v-label
-							>{{
+						<small class="v--text-cute v--text-muted v--m-bottom-0">
+							{{
 								$t(
 									"views.advanced.settings.performance.fields.category"
 								)
 							}}
-						</v-label>
+						</small>
 						<p
 							v-text="
 								filters
@@ -79,17 +79,20 @@
 				</v-row>
 			</v-box-header>
 			<v-box-body>
-				<slot />
+				<slot/>
 			</v-box-body>
 		</v-box>
-		<hr >
+		<hr/>
 	</section>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import HighPerformanceImpact from "@/components/advanced/settings/performance/HighPerformanceImpact.vue";
-import MediumPerformanceImpact from "@/components/advanced/settings/performance/MediumPerformanceImpact.vue";
-import LowPerformanceImpact from "@/components/advanced/settings/performance/LowPerformanceImpact.vue";
+import {Component, Prop, Vue} from "vue-property-decorator";
+import HighPerformanceImpact
+	from "@/components/advanced/settings/performance/HighPerformanceImpact.vue";
+import MediumPerformanceImpact
+	from "@/components/advanced/settings/performance/MediumPerformanceImpact.vue";
+import LowPerformanceImpact
+	from "@/components/advanced/settings/performance/LowPerformanceImpact.vue";
 import VBox from "@/components/ui/box/VBox.vue";
 import VBoxHeader from "@/components/ui/box/VBoxHeader.vue";
 import VBoxBody from "@/components/ui/box/VBoxBody.vue";

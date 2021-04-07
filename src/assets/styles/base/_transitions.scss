@@ -35,6 +35,21 @@
 	opacity: 0;
 }
 
+// Fast Linear Slide Top to Bottom
+.v--transition-fast-linear-slide-tb-enter-active {
+	transition: opacity 0.3s ease;
+}
+
+.v--transition-fast-linear-slide-tb-leave-active {
+	transition: all 0.3s ease;
+}
+
+.v--transition-fast-linear-slide-tb-enter,
+.v--transition-fast-linear-slide-tb-leave-to {
+	transform: translateY(-10%);
+	opacity: 0;
+}
+
 // Fast Fade
 .v--transition-fast-fade-enter-active,
 .v--transition-fast-fade-leave-active {

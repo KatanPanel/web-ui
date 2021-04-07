@@ -22,16 +22,16 @@
 
 <template>
 	<v-row>
-		<v-col :size="8">
+		<v-col :size="9">
 			<h2>{{ $t("views.advanced.settings.performance.title") }}</h2>
 			<p class="v--text-muted">
 				{{ $t("views.advanced.settings.performance.description") }}
 			</p>
-			<hr >
+			<hr/>
 			<v-row>
 				<v-col :size="8">
 					<v-label
-						>{{
+					>{{
 							$t(
 								"views.advanced.settings.performance.fields.performance-impact"
 							)
@@ -44,7 +44,7 @@
 								value: $t(
 									'views.advanced.settings.performance.levels.all'
 								),
-								active: true
+								active: true,
 							},
 							{
 								id: 'level-low',
@@ -63,7 +63,7 @@
 								value: $t(
 									'views.advanced.settings.performance.levels.high'
 								),
-							}
+							},
 						]"
 						@change="sortByLevel"
 					/>
@@ -83,7 +83,7 @@
 								value: $t(
 									'views.advanced.settings.performance.categories.all'
 								),
-								active: true
+								active: true,
 							},
 							{
 								id: 'category-server',
@@ -118,12 +118,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import VRow from "@/components/ui/layout/VRow.vue";
-import { MetaInfo } from "vue-meta";
-import { generateMetaInfo } from "@/common/navigation/translation";
+import {MetaInfo} from "vue-meta";
+import {generateMetaInfo} from "@/utils/component";
 import VCol from "@/components/ui/layout/VCol.vue";
-import ServerResourcesUpdateRate from "@/components/advanced/settings/performance/ServerResourcesUpdateRate.vue";
+import ServerResourcesUpdateRate
+	from "@/components/advanced/settings/performance/ServerResourcesUpdateRate.vue";
 import VSelect from "@/components/ui/form/VSelect.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import PerformanceSetting from "@/components/advanced/settings/performance/PerformanceSetting.vue";
@@ -145,7 +146,7 @@ export default class AdvancedSettingsPerformance extends Vue {
 	// sorting
 	category: string | null = null;
 	level: number | null = null;
-	private readonly defaultSettings = Object.freeze([
+	private readonly defaultSettings: any[] = Object.freeze([
 		{
 			name: "server-resources-update-rate",
 			level: 1,
@@ -156,7 +157,7 @@ export default class AdvancedSettingsPerformance extends Vue {
 	// reactive settings
 	settings = this.defaultSettings;
 
-	get currentSettings(): [] {
+	get currentSettings(): any[] {
 		if (this.category === null && this.level === null) {
 			this.settings = this.defaultSettings;
 		} else {

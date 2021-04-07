@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { isNumber } from "@/common/utils/any";
+import { isNumber, isUndefined } from "@/utils/any";
 
 export const WEBSOCKET_OPEN = "open";
 export const WEBSOCKET_CLOSE = "close";
@@ -40,9 +40,13 @@ export class RawWebSocket {
 	public send(op: number, data: any): void {
 		const payload = { op, d: data };
 
+		if (!this.native)
+			return this.on(WEBSOCKET_OPEN, () => this.sendImmediately(payload));
+
 		// send immediately if already connected
 		if (this.native.readyState === WebSocket.OPEN)
 			return this.sendImmediately(payload);
+
 		this.on(WEBSOCKET_OPEN, () => this.sendImmediately(payload));
 	}
 
@@ -64,6 +68,7 @@ export class RawWebSocket {
 
 		// fast path -- the event is the WEBSOCKET_OPEN event and the connection is already open
 		if (
+			!isUndefined(this.native) &&
 			eventOrOp === WEBSOCKET_OPEN &&
 			this.native.readyState === WebSocket.OPEN
 		)

@@ -34,12 +34,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop } from "vue-property-decorator";
-import { mixins } from "vue-class-component";
+import {Component, Prop} from "vue-property-decorator";
+import {mixins} from "vue-class-component";
 import WindowMixin from "@/mixins/window";
 
 @Component
 export default class VTabLink extends mixins(WindowMixin) {
-	@Prop({ type: Object, required: true }) private readonly to!: Location;
+	@Prop({type: Object, required: true}) private readonly to!: Location;
 }
 </script>

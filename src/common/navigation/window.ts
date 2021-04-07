@@ -20,14 +20,14 @@
  * SOFTWARE.
  */
 
-import { GET_ALL_WINDOWS } from "@/store/getters";
-import { commit, get } from "@/common/utils/vuex";
-import { Location, Route } from "vue-router";
-import { undefinedToNull } from "@/common/utils/any";
-import { MINIMIZE_WINDOW, OPEN_WINDOW, UPDATE_WINDOW } from "@/store/mutations";
+import {GET_ALL_WINDOWS} from "@/store/getters";
+import {commit, get} from "@/utils/vuex";
+import {Location, Route} from "vue-router";
+import {undefinedToNull} from "@/utils/any";
+import {MINIMIZE_WINDOW, OPEN_WINDOW, UPDATE_WINDOW} from "@/store/mutations";
 import router from "@/router";
-import { loadServer, ROOT_MODULE } from "@/store";
-import { locationMatches, routeToLocation } from "@/common/utils/navigation";
+import {loadServer, ROOT_MODULE} from "@/store";
+import {locationMatches, routeToLocation} from "@/utils/navigation";
 
 /**
  * Windows are components whose state has been preserved after

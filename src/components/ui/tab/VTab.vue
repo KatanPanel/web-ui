@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import {Component, Prop, Vue, Watch} from "vue-property-decorator";
 import VTabs from "@/components/ui/tab/VTabs.vue";
 import VTabView from "@/components/ui/tab/VTabView.vue";
 

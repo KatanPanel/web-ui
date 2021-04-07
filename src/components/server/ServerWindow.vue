@@ -40,12 +40,13 @@
 </template>
 
 <script lang="ts">
-import { Component } from "vue-property-decorator";
-import { mixins } from "vue-class-component";
-import WindowMixin from "@/common/internal/mixins/window";
+import {Component} from "vue-property-decorator";
+import {mixins} from "vue-class-component";
+import WindowMixin from "@/mixins/window";
 
 @Component
-export default class ServerWindow extends mixins(WindowMixin) {}
+export default class ServerWindow extends mixins(WindowMixin) {
+}
 </script>
 <style lang="scss" scoped>
 .window {

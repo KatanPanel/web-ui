@@ -21,17 +21,27 @@
  */
 
 declare namespace API {
+	interface Info {
+		getInfo(): Promise<any>;
+
+		getGames(): Promise<any[]>;
+	}
+
 	interface Auth {
 		login(username: string, password: string): Promise<string>;
+
 		verify(token: string): Promise<any>;
 	}
+
 	interface Servers {
 		getAllServers(): Promise<any[]>;
+
 		getServer(id: string): Promise<any>;
 	}
 }
 
 declare interface API {
+	info: API.Info;
 	auth: API.Auth;
 	servers: API.Servers;
 }

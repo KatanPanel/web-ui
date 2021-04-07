@@ -33,7 +33,7 @@
 	display: flex;
 	flex-direction: row;
 	list-style-type: none;
-	min-height: 40px;
+	// min-height: 40px;
 	background-color: var(--kt-background-secondary);
 	border-radius: 4px;
 	font-size: 14px;
@@ -50,7 +50,7 @@
 		background-color: var(--kt-background-tertiary);
 	}
 
-	&[active] {
+	&.v--field-selected {
 		background-color: var(--kt-background-accent);
 
 		.v--field-radio {
@@ -63,14 +63,16 @@
 		}
 	}
 
-	&.v--field-selected {
+	&[active] {
+		background-color: var(--kt-background-accent);
+
 		.v--field-radio::after {
 			content: "";
 			width: 12px;
 			height: 12px;
 			background-color: var(--kt-primary-color);
-			box-shadow: var(--kt-primary-color) 0 0 8px 0px;
-			border-radius: 50%;
+			box-shadow: var(--kt-primary-color) 0 0 12px 0;
+			border-radius: 4px;
 		}
 	}
 

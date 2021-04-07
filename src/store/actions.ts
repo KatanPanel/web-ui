@@ -20,10 +20,10 @@
  * SOFTWARE.
  */
 
-import { ActionContext, ActionTree } from "vuex";
-import { RootState } from "@/store/state";
-import { UPDATE_SERVER_LIST } from "@/store/mutations";
-import { vm } from "@/main";
+import {ActionContext, ActionTree} from "vuex";
+import {RootState} from "@/store/state";
+import {UPDATE_SERVER_LIST} from "@/store/mutations";
+import {vm} from "@/main";
 
 export const LOAD_SERVER = "loadServer";
 export const LOAD_SERVER_LIST = "loadServerList";

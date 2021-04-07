@@ -1,93 +1,195 @@
 <template>
-	<main class="v--layout-panel">
-		<div class="v--layout-panel-sidebar" id="v--layout-panel-sidebar">
+	<main class="panel-layout">
+		<div id="panel-sidebar" class="panel-sidebar">
 			<div class="sidebar-inner">
 				<div class="sidebar-logo">
-					<router-link :to="{ name: HOME_ROUTE }" tag="a">
-						<the-logo color="blue" />
+					<router-link :to="{ name: 'home' }" tag="a">
+						<the-logo color="blue"/>
 					</router-link>
 				</div>
-				<ul class="sidebar-items">
-					<router-link :to="{ path: '/' }" tag="li">
-						<a>
-							<v-icon name="home" />
-							<span>Página Inicial</span>
-						</a>
-					</router-link>
-				</ul>
-				<div
-					v-for="window in getWindows"
-					:key="window.id"
-					:disabled="window.state === 'minimized'"
-					class="sidebar-window"
-				>
-					<span class="sidebar-label">{{ window.data.name }}</span>
-					<ul class="sidebar-items">
-						<window-link
-							:to="{ name: SERVER_OVERVIEW_ROUTE }"
-							:check="window.id"
-							tag="li"
-						>
-							<v-icon name="hashtag" />
-							<span>Visão geral</span>
-						</window-link>
-						<window-link
-							:to="{ name: SERVER_CONSOLE_ROUTE }"
-							:check="window.id"
-							tag="li"
-						>
-							<v-icon name="terminal" />
-							<span>Console</span>
-						</window-link>
-						<window-link
-							:to="{ name: SERVER_FS_ROUTE }"
-							:check="window.id"
-							tag="li"
-						>
-							<v-icon name="ftp-folder" />
-							<span>Explorador de Arquivos</span>
-						</window-link>
-					</ul>
-				</div>
-				<span class="sidebar-label">Sistema</span>
-				<ul class="sidebar-items">
-					<router-link :to="{ name: SYSTEM_GAMES_ROUTE }" tag="li">
-						<a>
-							<v-icon name="games" />
-							<span>Jogos</span>
-						</a>
-					</router-link>
-				</ul>
-				<span class="sidebar-label">Avançado</span>
 				<ul class="sidebar-items">
 					<router-link
-						:to="{ name: ADVANCED_SETTINGS_ROUTE }"
+						:to="{ name: 'home' }"
+						class="ignore-route"
 						tag="li"
 					>
 						<a>
-							<v-icon name="double-cog" />
-							<span>Configurações</span>
+							<v-icon name="home"/>
+							<span>{{
+									$t("navigation.sidebar.links.home")
+								}}</span>
+						</a>
+					</router-link>
+					<router-link :to="{ name: 'games' }" tag="li">
+						<a>
+							<v-icon name="gamepad"/>
+							<span>{{
+									$t("navigation.sidebar.links.game-library")
+								}}</span>
 						</a>
 					</router-link>
 				</ul>
+				<div v-for="window in getWindows" :key="window.id">
+					<span class="sidebar-label">
+						Servidor — {{ window.name }}
+					</span>
+					<ul class="sidebar-items">
+						<window-link
+							:check="window.id"
+							:to="{ name: 'server.overview' }"
+							tag="li"
+						>
+							<a>
+								<v-icon name="control-panel"/>
+								<span>{{
+										$t(
+											"navigation.sidebar.links.server.overview"
+										)
+									}}</span>
+							</a>
+						</window-link>
+						<window-link
+							:to="{ name: 'server.console' }"
+							:check="window.id"
+							tag="li"
+						>
+							<a>
+								<v-icon name="keyboard"/>
+								<span>{{
+										$t(
+											"navigation.sidebar.links.server.console"
+										)
+									}}</span>
+							</a>
+						</window-link>
+						<window-link
+							:to="{ name: 'server.fs' }"
+							:check="window.id"
+							tag="li"
+						>
+							<a>
+								<v-icon name="ftp-cloud"/>
+								<span>{{
+										$t("navigation.sidebar.links.server.fs")
+									}}</span>
+							</a>
+						</window-link>
+						<window-link
+							:to="{ name: 'server.settings' }"
+							:check="window.id"
+							tag="li"
+						>
+							<a>
+								<v-icon name="cog"/>
+								<span>{{
+										$t(
+											"navigation.sidebar.links.server.settings"
+										)
+									}}</span>
+							</a>
+						</window-link>
+					</ul>
+				</div>
+				<div class="sidebar-label">
+					{{ $t("navigation.sidebar.labels.system") }}
+				</div>
+				<ul class="sidebar-items">
+					<router-link :to="{ name: 'system.accounts' }" tag="li">
+						<a>
+							<v-icon name="users"/>
+							<span>{{
+									$t("navigation.sidebar.links.system.accounts")
+								}}</span>
+						</a>
+					</router-link>
+				</ul>
+				<div class="sidebar-label">
+					{{ $t("navigation.sidebar.labels.advanced") }}
+				</div>
+				<ul class="sidebar-items">
+					<router-link :to="{ name: 'advanced.settings' }" tag="li">
+						<a>
+							<v-icon name="user-preferences"/>
+							<span>{{
+									$t(
+										"navigation.sidebar.links.advanced.settings.index"
+									)
+								}}</span>
+						</a>
+						<ul class="sidebar-sub-items">
+							<router-link
+								:to="{ name: 'advanced.settings.language' }"
+								tag="li"
+							>
+								<a>{{
+										$t(
+											"navigation.sidebar.links.advanced.settings.language"
+										)
+									}}</a>
+							</router-link>
+							<router-link
+								:to="{ name: 'advanced.settings.appearence' }"
+								tag="li"
+							>
+								<a>{{
+										$t(
+											"navigation.sidebar.links.advanced.settings.appearence"
+										)
+									}}</a>
+							</router-link>
+							<router-link
+								:to="{ name: 'advanced.settings.performance' }"
+								tag="li"
+							>
+								<a>{{
+										$t(
+											"navigation.sidebar.links.advanced.settings.performance"
+										)
+									}}</a>
+							</router-link>
+						</ul>
+					</router-link>
+				</ul>
+				<ul class="sidebar-items v--m-top-5">
+					<li class="logout" @click="performLogout">
+						<a href="javascript:void(0)">
+							<v-icon name="logout"/>
+							<span>{{
+									$t("navigation.sidebar.links.logout")
+								}}</span>
+						</a>
+					</li>
+					<li v-if="$isDevelopmentMode" class="v--text-muted-darker">
+						<a href="javascript:void(0)">
+							<small>{{
+									$t("navigation.sidebar.links.development-mode")
+								}}</small>
+						</a>
+					</li>
+				</ul>
 			</div>
 		</div>
-		<div class="v--layout-panel-content">
-			<slot />
+		<div class="panel-content">
+			<slot/>
 		</div>
 	</main>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import TheLogo from "@/components/TheLogo.vue";
 import VIcon from "@/components/ui/icon/VIcon.vue";
-import { getOpenWindows } from "@/common/navigation/window";
+import {getOpenWindows} from "@/common/navigation/window";
 import WindowLink from "@/components/navigation/WindowLink.vue";
+import VTab from "@/components/ui/tab/VTab.vue";
+import {dispatch} from "@/utils/vuex";
+import {AUTH_MODULE} from "@/store";
+import {AUTH_LOGOUT} from "@/store/modules/auth/actions";
 
 @Component({
 	components: {
+		VTab,
 		WindowLink,
 		VIcon,
 		TheLogo,
@@ -96,8 +198,14 @@ import WindowLink from "@/components/navigation/WindowLink.vue";
 	},
 })
 export default class PanelLayout extends Vue {
-	private get getWindows(): any[] {
+	get getWindows(): any[] {
 		return getOpenWindows();
+	}
+
+	performLogout(): void {
+		dispatch(AUTH_MODULE, AUTH_LOGOUT).then(() => {
+			this.$router.replace({name: "login"});
+		});
 	}
 }
 </script>
@@ -105,31 +213,32 @@ export default class PanelLayout extends Vue {
 $sidebar-width: 240px;
 $border-radius: 64px;
 
-.v--layout-panel {
+.panel-layout {
 	display: flex;
 	flex-direction: row !important; // override #app
 	background-color: var(--kt-background);
 	color: var(--kt-text-color);
 	position: relative;
 
-	.v--layout-panel-content {
+	.panel-content {
 		position: relative;
-		flex: 1 0 auto;
+		flex: 1;
 		padding: 48px;
 		max-width: 100%;
 		word-wrap: break-word;
 		overflow-wrap: break-word;
 	}
 
-	.v--layout-panel-sidebar {
+	.panel-sidebar {
 		position: relative;
 		margin-right: 24px;
 		height: 100vh;
 		opacity: 1;
 		min-width: $sidebar-width;
 		max-width: $sidebar-width;
-		// border-top-right-radius: $border-radius;
-		// border-bottom-right-radius: $border-radius;
+
+		// above window selection
+		z-index: 2;
 
 		.sidebar-logo {
 			margin-bottom: 36px;
@@ -149,16 +258,31 @@ $border-radius: 64px;
 
 		.sidebar-inner {
 			padding: 48px 0;
-			// background-color: var(--layout-panel-sidebar-color);
 			position: fixed;
 			min-width: $sidebar-width;
 			max-width: $sidebar-width;
 			height: 100%;
 			display: flex;
 			flex-direction: column;
-			// box-shadow: rgba(0, 0, 0, 0.12) 1px 0 8px 2px;
-			// border-right: 1px solid var(--app-border-color);
-			// align-items: center;
+			overflow-x: hidden;
+			overflow-y: auto;
+			box-shadow: var(--kt-shadow) 0 0 3px 0;
+			background-color: var(--kt-panel-sidebar);
+
+			&::-webkit-scrollbar {
+				width: 6px;
+				background-color: var(--kt-scrollbar);
+			}
+
+			&::-webkit-scrollbar-track {
+				border-radius: 8px;
+				background-color: var(--kt-scrollbar);
+			}
+
+			&::-webkit-scrollbar-thumb {
+				border-radius: 8px;
+				background-color: var(--kt-scrollbar-thumb);
+			}
 		}
 
 		.sidebar-window[disabled] {
@@ -189,36 +313,51 @@ $border-radius: 64px;
 			li {
 				list-style-type: none;
 				font-weight: 600;
-				// color: var(--inverse-color);
-				border-left: 2px solid transparent;
-				width: $sidebar-width;
-				border-top-right-radius: 24px;
-				border-bottom-right-radius: 24px;
+				padding: 4px 0;
+				margin: -4px 0;
 
-				&:not(.router-link-exact-active):hover {
-					opacity: 0.7;
+				&.router-link-active:not(.ignore-route) {
+					a {
+						opacity: 1;
+						border-left-color: var(--kt-primary-color);
+					}
+
+					.sidebar-sub-items a {
+						color: inherit;
+						border-left: none;
+					}
 				}
 
-				&.router-link-exact-active {
-					background-color: rgba(75, 123, 236, 0.12);
-					a {
-						span {
-							color: var(--kt-primary-color);
-						}
+				&:not(.router-link-active) .sidebar-sub-items {
+					display: none;
+				}
 
-						svg {
-							fill: var(--kt-primary-color);
-						}
+				&:not(.router-link-exact-active) a:hover {
+					color: currentColor;
+					opacity: 1;
+					border-left-color: currentColor;
+
+					svg {
+						fill: currentColor;
+					}
+				}
+
+				&.logout {
+					color: var(--kt-danger-color);
+
+					svg {
+						fill: var(--kt-danger-color);
 					}
 				}
 
 				a {
 					text-decoration: none;
 					display: flex;
-					padding: 12px 36px;
+					padding: 8px 12px 8px 36px;
+					border-left: 2px solid transparent;
+					opacity: 0.7;
 
 					span {
-						margin-left: 24px;
 						vertical-align: middle;
 						text-overflow: ellipsis;
 						white-space: nowrap;
@@ -234,6 +373,35 @@ $border-radius: 64px;
 					// fill: var(--inverse-color);
 					max-width: 24px;
 					max-height: 24px;
+					margin-right: 24px;
+				}
+			}
+
+			.sidebar-sub-items {
+				font-size: 14px;
+				margin-left: calc((12px * 7) + 3px);
+
+				li {
+					padding: 0;
+					margin: 0;
+					opacity: 0.7;
+
+					&.router-link-active {
+						opacity: 1;
+					}
+
+					&:hover {
+						opacity: 1;
+					}
+
+					a {
+						opacity: 0.7;
+						padding: 2px 0;
+
+						&:hover {
+							opacity: 1;
+						}
+					}
 				}
 			}
 		}
@@ -255,7 +423,7 @@ $border-radius: 64px;
 
 			li {
 				&:not(:last-child) {
-					border-bottom: 2px solid var(--app-foreground-overlay);
+					border-bottom: 2px solid var(--kt-background-tertiary);
 				}
 
 				a {
@@ -266,7 +434,7 @@ $border-radius: 64px;
 					padding: 24px;
 
 					&:hover {
-						background-color: var(--app-foreground-overlay);
+						background-color: var(--kt-background-tertiary);
 					}
 
 					.server-info {

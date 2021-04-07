@@ -29,15 +29,14 @@
 			params: { ...window.location.params, ...loc.params },
 		}"
 	>
-		<a v-if="tag !== 'a'"><slot /></a>
-		<slot v-else />
+		<slot/>
 	</router-link>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { Location } from "vue-router";
-import { getWindow, Window } from "@/common/navigation/window";
+import {Component, Prop, Vue} from "vue-property-decorator";
+import {Location} from "vue-router";
+import {getWindow, Window} from "@/common/navigation/window";
 
 @Component<WindowLink>({
 	mounted(): void {

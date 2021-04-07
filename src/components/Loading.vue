@@ -4,7 +4,7 @@
 	</div>
 </template>
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
 
 @Component
 export default class Loading extends Vue {
@@ -28,7 +28,8 @@ export default class Loading extends Vue {
 
 .v--loader {
 	position: relative;
-	transform: translateZ(0) scale(1);
+	transform: translateZ(0) scale(1) translateX(-50%);
+	left: 50%;
 	backface-visibility: hidden;
 
 	.v--loader-spinner {

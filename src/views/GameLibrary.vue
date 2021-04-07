@@ -171,12 +171,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { MetaInfo } from "vue-meta";
+import {Component, Vue} from "vue-property-decorator";
+import {MetaInfo} from "vue-meta";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
-import { generateMetaInfo } from "@/utils/component";
+import {generateMetaInfo} from "@/utils/component";
 import VWall from "@/components/ui/wall/VWall.vue";
 import VBox from "@/components/ui/box/VBox.vue";
 import VBoxBody from "@/components/ui/box/VBoxBody.vue";
@@ -195,7 +195,7 @@ import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import VInput from "@/components/ui/form/VInput.vue";
 import VSelect from "@/components/ui/form/VSelect.vue";
 import VSelectOption from "@/components/ui/form/VSelectOption.vue";
-import { sortAlphabetically, sortAlphabeticallyInversed } from "@/utils/arrays";
+import {sortAlphabetically, sortAlphabeticallyInversed} from "@/utils/arrays";
 
 type Game = {
 	id: string;

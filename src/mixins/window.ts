@@ -20,14 +20,14 @@
  * SOFTWARE.
  */
 
-import { ROOT_MODULE } from "@/store";
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { GET_WINDOW } from "@/store/getters";
-import { get } from "@/utils/vuex";
-import { Dictionary } from "vue-router/types/router";
-import { updateWindowTitle, Window } from "@/common/navigation/window";
-import { MetaInfo } from "vue-meta";
-import { generateMetaInfo } from "@/utils/component";
+import {ROOT_MODULE} from "@/store";
+import {Component, Prop, Vue} from "vue-property-decorator";
+import {GET_WINDOW} from "@/store/getters";
+import {get} from "@/utils/vuex";
+import {Dictionary} from "vue-router/types/router";
+import {updateWindowTitle, Window} from "@/common/navigation/window";
+import {MetaInfo} from "vue-meta";
+import {generateMetaInfo} from "@/utils/component";
 
 /**
  * This mixin can be applied to any route that is necessarily

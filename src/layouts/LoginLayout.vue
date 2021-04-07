@@ -11,27 +11,27 @@
 					class="wallpaper"
 				/>
 			</transition>
-		</v-container>
-		<v-flex-box class="login-box">
-			<div
-				:style="{
-					'background-image': `url(${currentWallpaper})`,
-				}"
-				class="login-left"
-			>
-				<div class="overlay" />
-				<div class="content">
-					<the-logo color="white" />
+			<v-flex-box class="login-box">
+				<div
+					:style="{
+						'background-image': `url(${currentWallpaper})`,
+					}"
+					class="login-left"
+				>
+					<div class="overlay"/>
+					<div class="content">
+						<the-logo color="white"/>
+					</div>
 				</div>
-			</div>
-			<div class="login-right v--flex-child">
-				<slot />
-			</div>
-		</v-flex-box>
+				<div class="login-right v--flex-child">
+					<slot/>
+				</div>
+			</v-flex-box>
+		</v-container>
 	</main>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import TheLogo from "@/components/TheLogo.vue";
@@ -71,9 +71,9 @@ export default class LoginLayout extends Vue {
 	}
 
 	.login-box {
-		background-color: var(--kt-foreground);
+		background-color: var(--kt-background);
 		min-height: 35.4%;
-		min-width: 75%;
+		min-width: 65%;
 		align-items: normal;
 		box-shadow: rgba(0, 0, 0, 0.12) 0 0 10px 5px;
 		z-index: 1;

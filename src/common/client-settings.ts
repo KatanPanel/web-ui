@@ -20,14 +20,10 @@
  * SOFTWARE.
  */
 
-import { Language } from "@/common/language";
-import { commit, get } from "@/common/utils/vuex";
-import { ROOT_MODULE } from "@/store";
-import {
-	SAVE_CLIENT_SETTINGS,
-	UPDATE_CLIENT_SETTINGS,
-} from "@/store/mutations";
-import { GET_CLIENT_SETTINGS } from "@/store/getters";
+import {commit, get} from "@/utils/vuex";
+import {ROOT_MODULE} from "@/store";
+import {SAVE_CLIENT_SETTINGS, UPDATE_CLIENT_SETTINGS,} from "@/store/mutations";
+import {GET_CLIENT_SETTINGS} from "@/store/getters";
 
 export const LIGHT_THEME = "light";
 export const DARK_THEME = "dark";
@@ -38,16 +34,17 @@ export const defaultClientSettings: ClientSettings = {
 	developerMode: false,
 	serverSettings: {
 		resourceUpdateTime: 1,
+		showConsoleLogDate: "hover",
 	},
 };
 
 /**
- * Represents all possible configurations of who is currently using the application.
- * These settings are per browser and are saved to the client's local storage.
+ * Represents all possible configurations of who is currently using the application. These
+ * settings are per browser and are saved to the client's local storage.
  *
- * `undefined` values mean that the client has not yet touched that configuration
- * and null values were explicitly defined by the developer to represent some imaginary,
- * fictitious value, however, defined for some reason and its `null` value will later be used for comparison.
+ * A `undefined` values mean that the client has not yet touched that configuration and null
+ * values were explicitly defined by the developer to represent some imaginary, be used for
+ * comparison.
  */
 export interface ClientSettings {
 	/**
@@ -73,19 +70,24 @@ export interface ClientSettings {
 /**
  * This configuration is an important part of Katan's performance, varying from client to client.
  *
- * Due to the nature of the Katan it keeps the **state of the servers always active** regardless of whether
- * they are being accessed or not, so changing specific settings that pause, remove or change states
- * so that they are inactive, the choice of the client, is important.
+ * Due to the nature of the Katan it keeps the **state of the servers always active** regardless
+ * of whether they are being accessed or not, so changing specific settings that pause, remove
+ * or change states so that they are inactive, the choice of the client, is important.
  */
 export interface ClientServerSettings {
 	/**
 	 * It is the time when the client will send a request to the server asking for data
 	 * from the server resource, the data from the `katan stats`, in the CLI, basically.
 	 *
-	 * `undefined` or `null` value means that the customer will hear the resources in real time.
+	 * `undefined` value means that the client will hear the resources in real time.
 	 * Time is measured in milliseconds.
 	 */
-	resourceUpdateTime: number | null;
+	resourceUpdateTime?: number;
+
+	/**
+	 * Should the date and time be displayed on the server console output when hovering or clicking?
+	 */
+	showConsoleLogDate?: "hover" | "click";
 }
 
 /**

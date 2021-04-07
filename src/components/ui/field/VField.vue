@@ -66,32 +66,32 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import VFieldContent from "@/components/ui/field/VFieldContent.vue";
-import { mixins } from "vue-class-component";
-import { Activable } from "@/mixins/ui/activable";
+import {mixins} from "vue-class-component";
+import {Activable} from "@/mixins/ui/activable";
 
 @Component({
-	components: { VFieldContent, VFlexBox, VFieldRadio, VIcon },
+	components: {VFieldContent, VFlexBox, VFieldRadio, VIcon},
 })
 export default class VField extends mixins(Activable) {
-	@Prop({ type: Boolean, default: false })
+	@Prop({type: Boolean, default: false})
 	private readonly disabled!: boolean;
 
-	@Prop({ type: Boolean, default: false })
+	@Prop({type: Boolean, default: false})
 	private readonly hiddenRadio!: boolean;
 
-	@Prop({ type: Boolean, default: false })
+	@Prop({type: Boolean, default: false})
 	private readonly selectOnClick!: boolean;
 
-	@Prop({ type: Boolean, default: false })
+	@Prop({type: Boolean, default: false})
 	private readonly selectedByDefault!: boolean;
 	private selected = this.selectedByDefault;
 
-	@Prop({ type: Boolean, default: false })
+	@Prop({type: Boolean, default: false})
 	private readonly withContent!: boolean;
 	private contentVisible = false;
 

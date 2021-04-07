@@ -20,8 +20,8 @@
  * SOFTWARE.
  */
 
-import { AxiosResponse } from "axios";
-import { vm } from "@/main";
+import {AxiosResponse} from "axios";
+import {vm} from "@/main";
 
 async function getAllServers(): Promise<any[]> {
 	return vm

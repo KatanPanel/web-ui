@@ -36,17 +36,17 @@
 	height: 36px;
 	line-height: 36px;
 	vertical-align: middle;
-	background-color: var(--kt-primary-color);
-	border: 1px solid var(--kt-primary-color);
-	color: #fff;
+	border: 1px solid transparent;
 	min-width: 72px;
 	user-select: none;
 	position: relative;
 	padding: 0 18px;
+	background-color: transparent;
+	color: var(--kt-text-color);
 
-	&:hover:not(:disabled) {
+	&:not([disabled]):hover {
 		cursor: pointer;
-		background-color: var(--kt-primary-darker-color);
+		text-decoration: underline;
 	}
 
 	&[disabled] {
@@ -58,11 +58,25 @@
 	}
 
 	// START - colors
+	&.v--button-primary {
+		background-color: var(--kt-primary-color);
+		border-color: var(--kt-primary-color);
+		color: var(--kt-primary-text-color);
+
+		&:not([disabled]):hover {
+			text-decoration: none;
+			background-color: var(--kt-primary-darker-color);
+			border-color: var(--kt-primary-darker-color);
+		}
+	}
+
 	&.v--button-danger {
 		background-color: var(--kt-danger-color);
 		border-color: var(--kt-danger-color);
+		color: var(--kt-primary-text-color);
 
-		&:hover {
+		&:not([disabled]):hover {
+			text-decoration: none;
 			background-color: var(--kt-danger-darker-color);
 			border-color: var(--kt-danger-darker-color);
 		}

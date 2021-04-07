@@ -22,7 +22,7 @@
 
 <template>
 	<v-row>
-		<v-col :size="8">
+		<v-col :size="9">
 			<h2>{{ $t("views.advanced.settings.language.title") }}</h2>
 			<p class="v--text-muted-darker">
 				{{ $t("views.advanced.settings.language.select") }}
@@ -40,7 +40,7 @@
 						</div>
 						<div
 							:style="{
-								backgroundImage: `url(/img/flags/${language.tag}.png)`
+								backgroundImage: `url(/img/flags/${language.tag}.png)`,
 							}"
 							class="field-flag"
 						/>
@@ -52,22 +52,22 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import VFieldList from "@/components/ui/field/VFieldList.vue";
 import VField from "@/components/ui/field/VField.vue";
 import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
-import { Language, supportedLanguages } from "@/common/language";
 import {
 	getClientSettings,
 	saveClientSettings,
 	updateClientSettings,
 } from "@/common/client-settings";
-import { loadLanguage } from "@/i18n";
-import { generateMetaInfo } from "@/common/navigation/translation";
-import { MetaInfo } from "vue-meta";
+import {loadLanguage} from "@/i18n";
+import {generateMetaInfo} from "@/utils/component";
+import {MetaInfo} from "vue-meta";
+import {supportedLanguages} from "@/supportedLanguages";
 
 @Component({
 	components: {

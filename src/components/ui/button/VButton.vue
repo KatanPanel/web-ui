@@ -18,19 +18,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { RawLocation } from "vue-router";
+import {Component, Prop, Vue} from "vue-property-decorator";
+import {RawLocation} from "vue-router";
 
 @Component
 export default class VButton extends Vue {
-	@Prop({ type: Boolean, default: false }) private readonly link!: boolean;
-	@Prop({ type: Object }) private readonly to!: RawLocation;
-	@Prop({ type: Boolean, default: false }) private readonly flat!: boolean;
-	@Prop({ type: Boolean, default: false }) private readonly primary!: boolean;
-	@Prop({ type: Boolean, default: false }) private readonly danger!: boolean;
-	@Prop({ type: Boolean, default: false })
+	@Prop({type: Boolean, default: false}) private readonly link!: boolean;
+	@Prop({type: Object}) private readonly to!: RawLocation;
+	@Prop({type: Boolean, default: false}) private readonly flat!: boolean;
+	@Prop({type: Boolean, default: false}) private readonly primary!: boolean;
+	@Prop({type: Boolean, default: false}) private readonly danger!: boolean;
+	@Prop({type: Boolean, default: false})
 	private readonly outlined!: boolean;
-	@Prop({ type: Boolean, default: false })
+	@Prop({type: Boolean, default: false})
 	private readonly fullWidth!: boolean;
 
 	private get classProps() {

@@ -5,15 +5,13 @@
 			"index": "{server}",
 			"overview": "Visão Geral – {server}",
 			"console": "Console – {server}",
-			"fs": {
-				"index": "Gerenciador de Arquivos – {server}",
-				"disk": "Disco {disk} - Gerenciador de Arquivos – {server}"
-			},
+			"fs": "Gerenciador de Arquivos – {server}",
+			"fs.disk": "Disco {disk} - Gerenciador de Arquivos – {server}",
 			"settings": "Config. do servidor — {server}"
 		},
 		"game-library": "Biblioteca de Jogos",
 		"system": {
-			"accounts": "Contas — Sistema"
+			"accounts": "Usuários — Sistema"
 		},
 		"advanced": {
 			"settings": {
@@ -37,11 +35,11 @@
 				"server": {
 					"overview": "Visão Geral",
 					"console": "Console",
-					"fs": "Gerenciador de Arquivos",
+					"fs": "FTP",
 					"settings": "Config. do servidor"
 				},
 				"system": {
-					"accounts": "Contas"
+					"accounts": "Usuários"
 				},
 				"advanced": {
 					"settings": {
@@ -58,14 +56,10 @@
 		"windows": {
 			"server": {
 				"overview": "Vista Geral",
-				"console": {
-					"empty": "Console",
-					"typing": "Console – Digitando \"{input}\"..."
-				},
-				"fs": {
-					"index": "Gerenciador de Arquivos",
-					"disk": "Disco {disk} – Gerenciador de Arquivos"
-				},
+				"console": "Console",
+				"typing": "Console – Digitando \"{input}\"...",
+				"fs": "Gerenciador de Arquivos",
+				"fs.disk": "Disco {disk} – Gerenciador de Arquivos",
 				"settings": "Config. do servidor"
 			}
 		}
@@ -113,6 +107,44 @@
 				"running": "Em execução",
 				"unloaded": "Descarregado",
 				"unknown": "Offline"
+			},
+			"settings": {
+				"title": "Config. do servidor",
+				"tabs": {
+					"details": "Detalhes",
+					"users": "Usuários",
+					"advanced": "Avançado",
+					"audit-log": "Registro de Atividades"
+				},
+				"details": {
+					"labels": {
+						"server-icon": "Ícone do servidor",
+						"server-name": "Nome do servidor"
+					},
+					"network": {
+						"title": "Rede",
+						"description": "Alterar configurações de rede requerem que o servidor seja reinicializado.",
+						"labels": {
+							"host": "Endereço IP",
+							"port": "Porta"
+						}
+					}
+				},
+				"users": {
+					"info": "Você pode atribuir e revogar permissões de usuários que se aplicam somente a {server} por aqui.",
+					"click-to-modify": "Clique em um usuário ou cargo para alterar suas permissões.",
+					"more-tooltip": "Mais",
+					"users-count": "Usuários — {count}",
+					"roles-count": "Cargos — {count}",
+					"copy-id": "Copiar ID"
+				},
+				"advanced": {
+					"delete-server": {
+						"title": "Deletar servidor",
+						"description": "Se você quer deletar o servidor, tenha em mente que essa é uma ação irreversível.",
+						"button": "Deletar servidor"
+					}
+				}
 			}
 		},
 		"game-library": {
@@ -139,8 +171,8 @@
 		},
 		"system": {
 			"accounts": {
-				"title": "Contas",
-				"description": "Usuários (ou contas) tem permissões e cargos estritamente definidos e que podem ser alterados por aqui. É possível alterar somente contas com cargos abaixo do seu ou com cargos não-atribuidos.",
+				"title": "Usuários",
+				"description": "Contas (ou usários) tem permissões e cargos estritamente definidos e que podem ser alterados por aqui. É possível alterar somente contas com cargos abaixo do seu ou com cargos não-atribuidos.",
 				"server-permissions": "Permissões para servidores",
 				"server-description": "Permissões específicas para servidores ficam na página de configurações dos respectivos servidores. Aqui você irá encontrar somente permissões ligadas ao acesso geral de contas à areas do painel.",
 				"all-accounts": "Todas as contas — {count}",
@@ -148,6 +180,7 @@
 				"permissions": "Permissões",
 				"no-role": "Nenhuma função atribuida.",
 				"results-found": "{value} contas encontradas.",
+				"search": "Procurar",
 				"sorting": {
 					"a-z": "Ordem alfabética A-Z",
 					"z-a": "Ordem alfabética Z-A"
@@ -184,7 +217,22 @@
 						"dark": "Escuro",
 						"system-default": "Padrão do sistema"
 					},
-					"theme-system-default": "Caso você não defina um tema de preferência, o padrão do sistema será utilizado."
+					"server": {
+						"console-log-date": {
+							"title": "Data e hora no console do servidor",
+							"description": "Exibir a data e hora de um registro no console do servidor.",
+							"options": {
+								"click": "Quando clicar",
+								"hover": "Quando passar o mouse sobre",
+								"never": "Nunca"
+							},
+							"when": {
+								"click": "quando clicar",
+								"hover": "ao passar o mouse em cima",
+								"never": "nunca"
+							}
+						}
+					}
 				},
 				"language": {
 					"title": "Idioma",
@@ -223,6 +271,7 @@
 	},
 	"errors": {
 		"0": "Erro desconhecido ({0}), tente novamente mais tarde.",
+		"401": "Não autorizado.",
 		"500": "Ocorreu um erro por parte do servidor durante a requisição.",
 		"2002": "Nome de usuário ou senha incorretos.",
 		"2004": "Nome de usuário ou senha incorretos.",
@@ -237,7 +286,7 @@
 		}
 	},
 	"time-unit": {
-		"seconds": "segundos"
+		"seconds": "segundo | segundos"
 	},
 	"permissions": {
 		"access-server-fs": "Acessar o Gerenciador de Arquivos do servidor."

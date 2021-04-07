@@ -22,12 +22,12 @@
 
 import Vue from "vue";
 import Vuex from "vuex";
-import state, { RootState } from "@/store/state";
-import { dispatch, get } from "@/utils/vuex";
-import getters, { GET_SOCKET } from "@/store/getters";
-import actions, { LOAD_SERVER } from "@/store/actions";
+import state, {RootState} from "@/store/state";
+import {dispatch, get} from "@/utils/vuex";
+import getters, {GET_SOCKET} from "@/store/getters";
+import actions, {LOAD_SERVER} from "@/store/actions";
 import mutations from "@/store/mutations";
-import { RawWebSocket } from "@/common/websocket/websocket";
+import {RawWebSocket} from "@/common/websocket/websocket";
 import auth from "@/store/modules/auth";
 
 Vue.use(Vuex);

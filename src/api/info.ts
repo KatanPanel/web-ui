@@ -20,27 +20,31 @@
  * SOFTWARE.
  */
 
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { vm } from "@/main";
+import { AxiosResponse } from "axios";
 
-@Component
-export class Toggleable extends Vue {
-	// preset
-	@Prop({ type: Boolean, default: false, required: false })
-	protected readonly active!: boolean;
-
-	private _active = this.active;
-
-	@Watch("_active")
-	private onToggle(value: boolean): void {
-		this.$emit("toggle", value);
-	}
-
-	/**
-	 * Defines the current state of the component for the specified parameter
-	 * or inverts the current state value if no parameter is specified.
-	 * @param {boolean?} value - the new state value.
-	 */
-	public toggle(value?: boolean): void {
-		this._active = value || !this._active;
-	}
+async function getInfo(): Promise<any> {
+	return vm
+		.$http({
+			url: "/info",
+			method: "get",
+			withCredentials: true,
+		})
+		.then((res: AxiosResponse) => {
+			return res.data.data;
+		});
 }
+
+async function getGames(): Promise<any[]> {
+	return vm
+		.$http({
+			url: "/info/games",
+			method: "get",
+			withCredentials: true,
+		})
+		.then((res: AxiosResponse) => {
+			return res.data.data.games;
+		});
+}
+
+export default { getInfo, getGames } as API.Info;

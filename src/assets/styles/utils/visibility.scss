@@ -24,10 +24,7 @@
 	display: block;
 }
 
-.v--user-no-select {
-	user-select: none;
-}
-
 .v--cursor-default {
 	cursor: default;
+	user-select: auto;
 }
