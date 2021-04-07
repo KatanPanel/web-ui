@@ -79,21 +79,20 @@
 											"
 										>
 											Iniciar
-										</v-button
-										>
+										</v-button>
 										<v-button
 											v-if="getServer.state === 'running'"
 											:disabled="
 												getServer.state !== 'running'
 											"
-										>Parar
+											>Parar
 										</v-button>
 									</div>
 								</div>
 							</v-flex-box>
 						</v-box-body>
 					</v-box>
-					<hr/>
+					<hr >
 					<div
 						v-if="getServer.state === 'running'"
 						class="server-resources"
@@ -151,8 +150,8 @@
 </template>
 
 <script lang="ts">
-import {Component} from "vue-property-decorator";
-import {mixins} from "vue-class-component";
+import { Component } from "vue-property-decorator";
+import { mixins } from "vue-class-component";
 import WindowMixin from "@/mixins/window";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
@@ -160,11 +159,9 @@ import VBox from "@/components/ui/box/VBox.vue";
 import VBoxHeader from "@/components/ui/box/VBoxHeader.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import VWall from "@/components/ui/wall/VWall.vue";
-import VWallTitle from "@/components/ui/wall/VWallTitle.vue";
 import VTabs from "@/components/ui/tab/VTabs.vue";
 import VTab from "@/components/ui/tab/VTab.vue";
 import VTabView from "@/components/ui/tab/VTabView.vue";
-import VWallText from "@/components/ui/wall/VWallText.vue";
 import VBoxBody from "@/components/ui/box/VBoxBody.vue";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
@@ -180,11 +177,9 @@ import Avatar from "@/components/Avatar.vue";
 		VFlexBox,
 		VIcon,
 		VBoxBody,
-		VWallText,
 		VTabView,
 		VTab,
 		VTabs,
-		VWallTitle,
 		VWall,
 		VLabel,
 		VBoxHeader,
@@ -223,7 +218,7 @@ export default class ServerOverview extends mixins(WindowMixin) {
 		};
 	}
 
-	/* get chartData() {
+/* get chartData() {
 		const datasets = [];
 		for (let i = 0; i < this.cpus; i++) {
 			datasets.push({

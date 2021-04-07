@@ -29,14 +29,14 @@
 			<p class="v--text-muted">
 				{{ $t("views.system.accounts.description") }}
 			</p>
-			<br/>
+			<br >
 			<small class="v--text-cute v--text-primary">
 				{{ $t("views.system.accounts.server-permissions") }}
 			</small>
 			<p class="v--text-muted">
 				{{ $t("views.system.accounts.server-description") }}
 			</p>
-			<hr/>
+			<hr >
 			<section id="filtering">
 				<v-row>
 					<v-col :size="4">
@@ -61,7 +61,7 @@
 					</v-col>
 					<v-col :size="8">
 						<v-input-group :inlined="true">
-							<v-input-icon name="search"/>
+							<v-input-icon name="search" />
 							<v-input
 								v-model.trim="search"
 								:placeholder="
@@ -116,7 +116,7 @@
 								:key="account.id"
 								class="v--transition-fast-list-item account-item"
 							>
-								<SystemAccount :account="account"/>
+								<SystemAccount :account="account" />
 							</div>
 						</transition-group>
 					</div>
@@ -127,12 +127,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
-import {MetaInfo} from "vue-meta";
-import {generateMetaInfo} from "@/utils/component";
-import {AxiosResponse} from "axios";
+import { MetaInfo } from "vue-meta";
+import { generateMetaInfo } from "@/utils/component";
+import { AxiosResponse } from "axios";
 import VFieldList from "@/components/ui/field/VFieldList.vue";
 import VField from "@/components/ui/field/VField.vue";
 import VForm from "@/components/ui/form/VForm.vue";
@@ -147,7 +147,6 @@ import Copyable from "@/components/Copyable.vue";
 import VBox from "@/components/ui/box/VBox.vue";
 import VBoxBody from "@/components/ui/box/VBoxBody.vue";
 import VWall from "@/components/ui/wall/VWall.vue";
-import VWallText from "@/components/ui/wall/VWallText.vue";
 import VBoxHeader from "@/components/ui/box/VBoxHeader.vue";
 import PermissionList from "@/components/PermissionList.vue";
 import SystemAccount from "@/components/system/SystemAccount.vue";
@@ -157,7 +156,6 @@ import SystemAccount from "@/components/system/SystemAccount.vue";
 		SystemAccount,
 		PermissionList,
 		VBoxHeader,
-		VWallText,
 		VWall,
 		VBoxBody,
 		VBox,
