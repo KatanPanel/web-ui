@@ -20,46 +20,11 @@
  * SOFTWARE.
  */
 
-import Vue from "vue";
-import Component from "vue-class-component";
-import { AUTH_MODULE } from "@/store";
-import {
-	GET_ACCOUNT,
-	GET_STORED_ACCOUNTS,
-	IS_LOGGED_IN,
-} from "@/store/auth/getters";
-import { dispatch, get } from "@/common/utils/vuex";
-import { AUTH_LOGOUT } from "@/store/auth/actions";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-/**
- * This mixin is used when the component needs to have information about the account that is currently logged on.
- */
 @Component
-export class AuthMixin extends Vue {
-	/**
-	 * Returns the account that is currently logged in.
-	 *
-	 * @throws if no account is logged.
-	 * @returns {*} - the account that is logged in.
-	 */
-	public get getAccount() {
-		return get(AUTH_MODULE, GET_ACCOUNT);
-	}
-
-	/**
-	 * Returns `true` if an account is logged in or` false` otherwise.
-	 */
-	public get isLoggedIn(): boolean {
-		return get<boolean>(AUTH_MODULE, IS_LOGGED_IN);
-	}
-
-	public performLogout(): void {
-		dispatch(AUTH_MODULE, AUTH_LOGOUT).then(() => {
-			/* ignored */
-		});
-	}
-
-	public get getStoredAccounts(): string[] {
-		return get<string[]>(AUTH_MODULE, GET_STORED_ACCOUNTS);
-	}
+export class Activable extends Vue {
+	@Prop({ type: Boolean, default: false }) private readonly active!: boolean;
+	@Prop({ type: Boolean, default: false })
+	private readonly disabled!: boolean;
 }
