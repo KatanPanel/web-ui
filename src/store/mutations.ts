@@ -52,7 +52,7 @@ import {
 	DARK_THEME,
 	LIGHT_THEME,
 } from "@/common/client-settings";
-import { isUndefined } from "@/common/utils/any";
+import { isUndefined } from "@/utils/any";
 
 /* start: vue raw web socket */
 export const ON_SOCKET_OPEN = "onSocketConnect";

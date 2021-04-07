@@ -23,52 +23,24 @@
 import { ActionContext, ActionTree } from "vuex";
 import { RootState } from "@/store/state";
 import { UPDATE_SERVER_LIST } from "@/store/mutations";
-import { AxiosError, AxiosResponse } from "axios";
-import Vue from "vue";
+import { vm } from "@/main";
 
 export const LOAD_SERVER = "loadServer";
 export const LOAD_SERVER_LIST = "loadServerList";
 
-const vm: Vue = Vue.prototype;
-
 export default {
-	/**
-	 * Send an HTTP request to the server requesting information
-	 * from the server with the id specified by the {@param payload}.
-	 * @param {ActionContext} ctx
-	 * @param payload
-	 */
 	async [LOAD_SERVER](
 		ctx: ActionContext<RootState, RootState>,
 		payload: { serverId: string }
 	): Promise<any> {
-		return vm
-			.$http({
-				url: `/servers/${payload.serverId}`,
-				method: "get",
-				withCredentials: true,
-			})
-			.then((res: AxiosResponse) => {
-				return res.data.data.server;
-			})
-			.catch((err: AxiosError) => {
-				console.log(err.response);
-				throw err;
-			});
+		return vm.$api.servers.getServer(payload.serverId);
 	},
 	async [LOAD_SERVER_LIST](
 		ctx: ActionContext<RootState, RootState>
 	): Promise<any[]> {
-		return vm
-			.$http({
-				url: `/servers`,
-				method: "get",
-				withCredentials: true,
-			})
-			.then((res: AxiosResponse) => {
-				const servers = res.data.data.servers;
-				ctx.commit(UPDATE_SERVER_LIST, { serverList: servers });
-				return servers;
-			});
+		return vm.$api.servers.getAllServers().then((serverList) => {
+			ctx.commit(UPDATE_SERVER_LIST, { serverList });
+			return serverList;
+		});
 	},
 } as ActionTree<RootState, RootState>;

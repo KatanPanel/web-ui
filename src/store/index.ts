@@ -22,13 +22,13 @@
 
 import Vue from "vue";
 import Vuex from "vuex";
-import AuthModule from "@/store/auth";
 import state, { RootState } from "@/store/state";
-import { dispatch, get } from "@/common/utils/vuex";
+import { dispatch, get } from "@/utils/vuex";
 import getters, { GET_SOCKET } from "@/store/getters";
 import actions, { LOAD_SERVER } from "@/store/actions";
 import mutations from "@/store/mutations";
 import { RawWebSocket } from "@/common/websocket/websocket";
+import auth from "@/store/modules/auth";
 
 Vue.use(Vuex);
 
@@ -51,7 +51,7 @@ export default new Vuex.Store<RootState>({
 	state,
 	getters,
 	modules: {
-		[AUTH_MODULE]: AuthModule,
+		[AUTH_MODULE]: auth,
 	},
 	strict: process.env.NODE_ENV !== "production",
 });

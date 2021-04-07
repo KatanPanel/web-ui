@@ -20,34 +20,29 @@
  * SOFTWARE.
  */
 
-import { Module } from "vuex";
-import state, { AuthState } from "@/store/auth/state";
-import actions, { AUTH_VERIFY } from "@/store/auth/actions";
-import mutations from "@/store/auth/mutations";
-import getters, { IS_LOGGED_IN } from "@/store/auth/getters";
-import { RootState } from "@/store/state";
-import { dispatch, get } from "@/common/utils/vuex";
-import { AUTH_MODULE } from "@/store";
-import Vue from "vue";
+import { AuthState } from "@/store/modules/auth/state";
+import { MutationTree } from "vuex";
 
-export const AUTH_TOKEN_KEY = "token";
-
-const vm: Vue = Vue.prototype;
-
-export async function verifyAuth(): Promise<{ token: string }> {
-	return dispatch(AUTH_MODULE, AUTH_VERIFY, {
-		token: vm.$storage.get(AUTH_TOKEN_KEY),
-	});
-}
-
-export function isLoggedIn(): boolean {
-	return get<boolean>(AUTH_MODULE, IS_LOGGED_IN);
-}
+export const UPDATE_TOKEN = "updateToken";
+export const UPDATE_ACCOUNT = "updateAccount";
+export const ADD_STORED_ACCOUNT = "addStoredAccount";
+export const REMOVE_STORED_ACCOUNT = "removeStoredAccount";
 
 export default {
-	actions,
-	mutations,
-	state,
-	getters,
-	namespaced: true,
-} as Module<AuthState, RootState>;
+	[UPDATE_TOKEN](state: AuthState, payload: { token?: string }) {
+		state.token = payload.token;
+	},
+	[UPDATE_ACCOUNT](state: AuthState, payload: { account: any | null }) {
+		state.account = payload.account;
+	},
+	[ADD_STORED_ACCOUNT](state: AuthState, payload: { account: string }) {
+		if (!state.storedAccounts.includes(payload.account))
+			state.storedAccounts.push(payload.account);
+	},
+	[REMOVE_STORED_ACCOUNT](state: AuthState, payload: { account: string }) {
+		state.storedAccounts.splice(
+			state.storedAccounts.indexOf(payload.account),
+			1
+		);
+	},
+} as MutationTree<AuthState>;

@@ -21,7 +21,7 @@
  */
 
 import { GetterTree } from "vuex";
-import { AuthState } from "@/store/auth/state";
+import { AuthState } from "@/store/modules/auth/state";
 
 export const IS_LOGGED_IN = "isAuthenticated";
 export const GET_ACCOUNT = "getAccount";

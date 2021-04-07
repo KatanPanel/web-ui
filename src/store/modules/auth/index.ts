@@ -20,29 +20,17 @@
  * SOFTWARE.
  */
 
-import { AuthState } from "@/store/auth/state";
-import { MutationTree } from "vuex";
-
-export const UPDATE_TOKEN = "updateToken";
-export const UPDATE_ACCOUNT = "updateAccount";
-export const ADD_STORED_ACCOUNT = "addStoredAccount";
-export const REMOVE_STORED_ACCOUNT = "removeStoredAccount";
+import { Module } from "vuex";
+import state, { AuthState } from "@/store/modules/auth/state";
+import actions from "@/store/modules/auth/actions";
+import mutations from "@/store/modules/auth/mutations";
+import getters from "@/store/modules/auth/getters";
+import { RootState } from "@/store/state";
 
 export default {
-	[UPDATE_TOKEN](state: AuthState, payload: { token?: string }) {
-		state.token = payload.token;
-	},
-	[UPDATE_ACCOUNT](state: AuthState, payload: { account: any | null }) {
-		state.account = payload.account;
-	},
-	[ADD_STORED_ACCOUNT](state: AuthState, payload: { account: string }) {
-		if (!state.storedAccounts.includes(payload.account))
-			state.storedAccounts.push(payload.account);
-	},
-	[REMOVE_STORED_ACCOUNT](state: AuthState, payload: { account: string }) {
-		state.storedAccounts.splice(
-			state.storedAccounts.indexOf(payload.account),
-			1
-		);
-	},
-} as MutationTree<AuthState>;
+	actions,
+	mutations,
+	state,
+	getters,
+	namespaced: true,
+} as Module<AuthState, RootState>;

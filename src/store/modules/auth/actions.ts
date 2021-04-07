@@ -21,16 +21,10 @@
  */
 
 import { ActionContext, ActionTree } from "vuex";
-import { AuthState } from "@/store/auth/state";
-import { AxiosError, AxiosResponse } from "axios";
-import {
-	ADD_STORED_ACCOUNT,
-	UPDATE_ACCOUNT,
-	UPDATE_TOKEN,
-} from "@/store/auth/mutations";
-import { AUTH_LOG_TAG } from "@/logging";
-import { AUTH_TOKEN_KEY } from "@/store/auth/index";
+import { AuthState } from "@/store/modules/auth/state";
+import { UPDATE_ACCOUNT, UPDATE_TOKEN } from "@/store/modules/auth/mutations";
 import { vm } from "@/main";
+import { AUTH_TOKEN_KEY } from "@/api/auth";
 
 export const AUTH_LOGIN = "login";
 export const AUTH_VERIFY = "verify";
@@ -43,28 +37,12 @@ export default {
 			username: string;
 			password: string;
 		}
-	): Promise<{ token: string }> {
-		vm.$log.info({
-			tag: AUTH_LOG_TAG,
-			message: "Logging in...",
-		});
-		return vm
-			.$http({
-				url: "/auth/login",
-				method: "post",
-				withCredentials: true,
-				data: payload,
-			})
-			.then((res: AxiosResponse) => {
-				const token = res.data.data.token;
+	): Promise<any> {
+		return vm.$api.auth
+			.login(payload.username, payload.password)
+			.then((token: string) => {
 				ctx.commit(UPDATE_TOKEN, { token });
 				return token;
-			})
-			.catch((err: AxiosError) => {
-				// undefined response, it can happen in case of CORS
-				if (typeof err.response === "undefined") return;
-
-				throw err;
 			});
 	},
 	[AUTH_VERIFY](
@@ -72,36 +50,14 @@ export default {
 		payload: {
 			token: string;
 		}
-	): Promise<void> {
-		vm.$log.log({
-			tag: AUTH_LOG_TAG,
-			message: "Identifying...",
+	): Promise<any> {
+		return vm.$api.auth.verify(payload.token).then((account: any) => {
+			// ctx.commit(ADD_STORED_ACCOUNT, { account: account.id });
+			vm.$http.defaults.headers[
+				"Authorization"
+			] = `Bearer ${payload.token}`;
+			ctx.commit(UPDATE_ACCOUNT, { account });
 		});
-
-		return vm
-			.$http({
-				url: "/auth/verify",
-				method: "get",
-				headers: {
-					Authorization: `Bearer ${payload.token}`,
-				},
-			})
-			.then((res: AxiosResponse) => {
-				vm.$http.defaults.headers["Authorization"] =
-					"Bearer " + payload.token;
-
-				const account = res.data.data.account;
-				ctx.commit(ADD_STORED_ACCOUNT, { account: account.id });
-				ctx.commit(UPDATE_ACCOUNT, { account });
-			})
-			.catch((res: AxiosError) => {
-				vm.$log.log({
-					tag: AUTH_LOG_TAG,
-					message: "Invalid token.",
-				});
-
-				throw res;
-			});
 	},
 	async [AUTH_LOGOUT](ctx: ActionContext<AuthState, never>): Promise<void> {
 		vm.$storage.remove(AUTH_TOKEN_KEY);
