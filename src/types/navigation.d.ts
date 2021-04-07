@@ -20,33 +20,26 @@
  * SOFTWARE.
  */
 
-import { VocaStatic } from "voca";
-import { AxiosInstance } from "axios";
-import { Consola } from "consola";
-import { Filesize } from "filesize";
+import { Location, Route } from "vue-router";
+import { WindowState } from "@/common/navigation/window";
 
-declare module "vue/types/vue" {
-	interface Vue {
-		$isDevelopmentMode: boolean;
-		$helpers: {
-			voca: VocaStatic;
-			filesize: Filesize;
-			routeMappings: { [key: string]: () => any };
-		};
-		$socket: WebSocket;
-		$http: AxiosInstance;
+declare const ClosedWindowState = "closed";
+declare const OpenWindowState = "open";
+declare const MinimizedWindowState = "minimized";
 
-		$connect(): void;
+declare type WindowState =
+	| typeof OpenWindowState
+	| typeof ClosedWindowState
+	| typeof MinimizedWindowState;
 
-		$disconnect(): void;
+declare interface Window {
+	readonly id: number;
+	readonly name: string;
+	title: string;
+	data: any;
+	state: WindowState;
+	location: Location;
+	properties: any;
 
-		$log: Consola;
-		$time: (() => any) | any;
-		$website: {
-			name: string;
-			version: string;
-			url: string;
-		};
-		$api: API;
-	}
+	isActive(route: Route): boolean;
 }
