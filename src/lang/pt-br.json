@@ -117,8 +117,21 @@
 		},
 		"game-library": {
 			"title": "Biblioteca de Jogos",
+			"description": "Jogos da sua biblioteca podem ser usado na criação de novos servidores. É possível configurar manualmente jogos editando seus respectivos arquivos, presentes na pasta {path} no diretório raiz.",
 			"new-games": "Você pode adicionar novos jogos criados pela comunidade à sua biblioteca. Saiba mais sobre a criação e registro de jogos na {docs} do Katan.",
+			"click-to-see-game-details": "Clique em um jogo para exibir detalhes da sua configuração.",
+			"looking-for-more": "Procurando por mais?",
 			"docs": "documentação oficial",
+			"fields": {
+				"filters": "Filtros ({count})"
+			},
+			"labels": {
+				"show-only": "Visualizar apenas",
+				"order-by": "Ordenar por"
+			},
+			"options": {
+				"my-games": "Meus Jogos"
+			},
 			"sorting": {
 				"a-z": "Ordem alfabética A-Z",
 				"z-a": "Ordem alfabética Z-A"

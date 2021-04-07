@@ -26,15 +26,16 @@
 			<h1 class="v--m-bottom-2">
 				<b>{{ $t("views.game-library.title") }}</b>
 			</h1>
-			<p class="v--text-muted">
-				Jogos da sua biblioteca podem ser usado na criação de novos
-				servidores.<br >
-				É possível configurar manualmente jogos editando seus
-				respectivos arquivos, presentes na pasta
-				<span class="v--text-primary"><code>games</code></span>
-				no diretório raiz.
-			</p>
-			<hr >
+			<i18n
+				class="v--text-muted"
+				path="views.game-library.description"
+				tag="p"
+			>
+				<template #path>
+					<span class="v--text-primary"><code>games</code></span>
+				</template>
+			</i18n>
+			<hr />
 			<transition
 				:name="
 					activeGame === null
@@ -52,18 +53,32 @@
 						<v-col :size="6">
 							<v-box :no-shadow="true">
 								<v-box-body>
-									<p class="v--text-cute">Filtros (2)</p>
+									<p class="v--text-cute">
+										{{
+											$t(
+												"views.game-library.fields.filters",
+												{ count: 2 }
+											)
+										}}
+									</p>
 									<v-flex-box class="v--flex-align-center">
 										<v-label
 											:style="{ flex: '1 0 auto' }"
 											class="v--m-right-2"
-											>Visualizar apenas
+										>
+											{{
+												$t(
+													"views.game-library.labels.show-only"
+												)
+											}}
 										</v-label>
 										<v-select
 											:options="[
 												{
-													id: 'all-games',
-													value: 'Meus jogos',
+													id: 'my-games',
+													value: this.$i18n.t(
+														'views.game-library.options.my-games'
+													),
 													active: true,
 												},
 											]"
@@ -76,7 +91,11 @@
 										<v-label
 											:style="{ flex: '1 0 auto' }"
 											class="v--m-right-2"
-											>Ordenar por
+											>{{
+												$t(
+													"views.game-library.labels.order-by"
+												)
+											}}
 										</v-label>
 										<v-select
 											:options="[
@@ -100,35 +119,15 @@
 								</v-box-body>
 							</v-box>
 						</v-col>
-						<v-col :size="6">
-							<v-box :no-shadow="true">
-								<v-box-body>
-									<p class="v--text-cute">Cluster</p>
-									<div>
-										<small
-											class="v--text-cute v--text-muted-darker v--m-bottom-0"
-											>Jogos de outros nós</small
-										>
-										<p class="v--text-muted">
-											Incluir jogos de outros nós na
-											biblioteca.
-										</p>
-										<v-field
-											:select-on-click="true"
-											class="v--m-top-1"
-										>
-											Exibir jogos de outros nós
-										</v-field>
-									</div>
-								</v-box-body>
-							</v-box>
-						</v-col>
 					</v-row>
 					<v-box :no-shadow="true" class="v--m-top-2">
 						<v-box-body>
 							<p class="v--text-muted v--m-bottom-2">
-								Clique em um jogo para exibir detalhes da sua
-								configuração.
+								{{
+									$t(
+										"views.game-library.click-to-see-game-details"
+									)
+								}}
 							</p>
 							<transition-group
 								class="game-list"
@@ -145,7 +144,9 @@
 							</transition-group>
 						</v-box-body>
 					</v-box>
-					<h4 class="v--m-top-5">Procurando por mais?</h4>
+					<h4 class="v--m-top-5">
+						{{ $t("views.game-library.looking-for-more") }}
+					</h4>
 					<i18n
 						class="v--text-muted"
 						path="views.game-library.new-games"
@@ -175,8 +176,7 @@ import { MetaInfo } from "vue-meta";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
-import { generateMetaInfo } from "@/common/navigation/translation";
-import { AxiosResponse } from "axios";
+import { generateMetaInfo } from "@/utils/component";
 import VWall from "@/components/ui/wall/VWall.vue";
 import VBox from "@/components/ui/box/VBox.vue";
 import VBoxBody from "@/components/ui/box/VBoxBody.vue";
@@ -195,8 +195,7 @@ import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import VInput from "@/components/ui/form/VInput.vue";
 import VSelect from "@/components/ui/form/VSelect.vue";
 import VSelectOption from "@/components/ui/form/VSelectOption.vue";
-import VDropdown from "@/components/ui/dropdown/VDropdown.vue";
-import VDropdownItem from "@/components/ui/dropdown/VDropdownItem.vue";
+import { sortAlphabetically, sortAlphabeticallyInversed } from "@/utils/arrays";
 
 type Game = {
 	id: string;
@@ -205,8 +204,6 @@ type Game = {
 
 @Component<GameLibrary>({
 	components: {
-		VDropdownItem,
-		VDropdown,
 		VSelectOption,
 		VSelect,
 		VInput,
@@ -232,23 +229,14 @@ type Game = {
 	metaInfo(): MetaInfo {
 		return generateMetaInfo("game-library");
 	},
-	mounted(): void {
-		this.$http("/info/games").then((res: AxiosResponse) => {
-			// this.games = res.data.data.games;
+	created(): void {
+		this.$api.info.getGames().then((games: any[]) => {
+			this.games = games;
 		});
 	},
 })
 export default class GameLibrary extends Vue {
-	private games: Game[] = [
-		{
-			id: "minecraft",
-			name: "Minecraft",
-		},
-		{
-			id: "gtav",
-			name: "Grand Theft Auto V",
-		},
-	];
+	private games: Game[] = [];
 	private activeGame: Game | null = null;
 
 	switchActiveGame(game: any): void {
@@ -263,18 +251,18 @@ export default class GameLibrary extends Vue {
 	updateOrder(value: any) {
 		switch (value.id) {
 			case "sort-az": {
-				this.games.sort((a, b) => a.name.localeCompare(b.name));
+				sortAlphabetically(this.games, "name");
 				break;
 			}
 			case "sort-za": {
-				this.games.sort((a, b) => b.name.localeCompare(a.name));
+				sortAlphabeticallyInversed(this.games, "name");
 				break;
 			}
 		}
 	}
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .games-library .game-list {
 	list-style: none;
 	display: flex;

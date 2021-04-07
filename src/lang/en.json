@@ -116,9 +116,22 @@
 			}
 		},
 		"game-library": {
-			"title": "Games",
+			"title": "Game Library",
+			"description": "Games from your library can be used to create new servers. It is possible to manually configure games by editing their respective files, present in the {path} folder in the root directory.",
 			"new-games": "You can add more games created by the community to your library. Learn more about creating and registering games in the Katan {docs}.",
+			"click-to-see-game-details": "Click on a game to view details of its configuration.",
+			"looking-for-more": "Looking for more?",
 			"docs": "official documentation",
+			"fields": {
+				"filters": "Filters ({count})"
+			},
+			"labels": {
+				"show-only": "Show only",
+				"order-by": "Order by"
+			},
+			"options": {
+				"my-games": "My Games"
+			},
 			"sorting": {
 				"a-z": "Sort A-Z",
 				"z-a": "Sort Z-A"
