@@ -36,9 +36,7 @@
 			ref="radio"
 			active="true"
 		>
-			<slot name="radio">
-				<v-icon name="check" />
-			</slot>
+			<slot name="radio" />
 		</v-field-radio>
 		<v-field-radio
 			v-else-if="disabled"
@@ -49,7 +47,9 @@
 			<slot name="radio">&times;</slot>
 		</v-field-radio>
 		<v-field-radio v-else-if="selected" key="selected-state" ref="radio">
-			<slot name="radio" />
+			<slot name="radio">
+				<v-icon name="check" />
+			</slot>
 		</v-field-radio>
 		<v-field-radio v-else key="unknown-state" ref="radio">
 			<slot name="radio" />
@@ -72,12 +72,12 @@ import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import VFieldContent from "@/components/ui/field/VFieldContent.vue";
 import { mixins } from "vue-class-component";
-import { Toggleable } from "@/common/internal/mixins/ui/toggleable";
+import { Activable } from "@/mixins/ui/activable";
 
 @Component({
 	components: { VFieldContent, VFlexBox, VFieldRadio, VIcon },
 })
-export default class VField extends mixins(Toggleable) {
+export default class VField extends mixins(Activable) {
 	@Prop({ type: Boolean, default: false })
 	private readonly disabled!: boolean;
 
@@ -112,6 +112,7 @@ export default class VField extends mixins(Toggleable) {
 	}
 
 	private onSelect(e: Event): void {
+		e.stopPropagation();
 		if (this.withContent) {
 			if (
 				e.target !== this.$el &&
