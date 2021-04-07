@@ -27,11 +27,11 @@
 			<p class="v--text-muted">
 				{{ $t("views.advanced.settings.performance.description") }}
 			</p>
-			<hr/>
+			<hr >
 			<v-row>
 				<v-col :size="8">
 					<v-label
-					>{{
+						>{{
 							$t(
 								"views.advanced.settings.performance.fields.performance-impact"
 							)
@@ -118,13 +118,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import VRow from "@/components/ui/layout/VRow.vue";
-import {MetaInfo} from "vue-meta";
-import {generateMetaInfo} from "@/utils/component";
+import { MetaInfo } from "vue-meta";
+import { generateMetaInfo } from "@/utils/component";
 import VCol from "@/components/ui/layout/VCol.vue";
-import ServerResourcesUpdateRate
-	from "@/components/advanced/settings/performance/ServerResourcesUpdateRate.vue";
+import ServerResourcesUpdateRate from "@/components/advanced/settings/performance/ServerResourcesUpdateRate.vue";
 import VSelect from "@/components/ui/form/VSelect.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import PerformanceSetting from "@/components/advanced/settings/performance/PerformanceSetting.vue";
@@ -146,7 +145,7 @@ export default class AdvancedSettingsPerformance extends Vue {
 	// sorting
 	category: string | null = null;
 	level: number | null = null;
-	private readonly defaultSettings: any[] = Object.freeze([
+	private readonly defaultSettings: readonly any[] = Object.freeze([
 		{
 			name: "server-resources-update-rate",
 			level: 1,
@@ -157,7 +156,7 @@ export default class AdvancedSettingsPerformance extends Vue {
 	// reactive settings
 	settings = this.defaultSettings;
 
-	get currentSettings(): any[] {
+	get currentSettings(): readonly any[] {
 		if (this.category === null && this.level === null) {
 			this.settings = this.defaultSettings;
 		} else {
@@ -170,13 +169,16 @@ export default class AdvancedSettingsPerformance extends Vue {
 				this.settings = (this.category === null
 					? this.defaultSettings
 					: this.settings
-				).filter((value) => value.level <= this.level);
+				).filter(
+					(value: any) =>
+						(value.level as number) <= (this.level as number)
+				);
 		}
 
 		return this.settings;
 	}
 
-	sortByLevel({ id }: string) {
+	sortByLevel(id: string) {
 		switch (id) {
 			case "level-low": {
 				this.level = 0;
@@ -196,7 +198,7 @@ export default class AdvancedSettingsPerformance extends Vue {
 		}
 	}
 
-	sortByCategory({ id }: string) {
+	sortByCategory(id: string) {
 		switch (id) {
 			case "category-server": {
 				this.category = "server";
