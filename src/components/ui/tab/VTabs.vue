@@ -21,17 +21,20 @@
   -->
 
 <template>
-	<ul class="v--tabs">
+	<ul :class="{ 'align-with-hr': alignWithHr }" class="v--tabs">
 		<slot />
 	</ul>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import VTab from "@/components/ui/tab/VTab.vue";
 
 @Component
 export default class VTabs extends Vue {
+	@Prop({ type: Boolean, default: false })
+	private readonly alignWithHr!: boolean;
+
 	private currentTab: VTab | null = null;
 
 	mounted(): void {

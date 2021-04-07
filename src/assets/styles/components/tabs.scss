@@ -25,6 +25,10 @@
 	flex-wrap: wrap;
 	flex-direction: row;
 	margin-bottom: 18px;
+
+	&.align-with-hr {
+		margin-bottom: -2.4rem;
+	}
 }
 
 .v--tab {
