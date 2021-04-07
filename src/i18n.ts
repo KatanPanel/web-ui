@@ -23,12 +23,12 @@
 import Vue from "vue";
 import VueI18n from "vue-i18n";
 import * as dayjs from "dayjs";
-import { supportedLanguages } from "./common/language";
 import { I18N_LOG_TAG } from "@/logging";
 import {
 	getClientSettings,
 	updateClientSettings,
 } from "@/common/client-settings";
+import { supportedLanguages } from "@/supportedLanguages";
 
 Vue.use(VueI18n);
 

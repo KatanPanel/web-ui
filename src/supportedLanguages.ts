@@ -20,17 +20,12 @@
  * SOFTWARE.
  */
 
-export type Language = {
-	name: string;
-	tag: string;
-};
-
 /**
  * The list of languages that are currently supported by Katan. This
  * is the list that is displayed to the client and adding a new language
  * to the languages directory will not make it available, it is necessary to add it here.
  */
-export const supportedLanguages: Array<Language> = [
+export const supportedLanguages: Language[] = [
 	{
 		name: "English",
 		tag: "en",
