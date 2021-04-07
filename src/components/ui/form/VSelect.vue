@@ -28,10 +28,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VSelectOption from "@/components/ui/form/VSelectOption.vue";
-import {undefinedToNull} from "@/utils/any";
+import { undefinedToNull } from "@/utils/any";
 
 export interface SelectOption {
 	readonly id: string;
@@ -71,7 +71,7 @@ export default class VSelect extends Vue {
 
 		const old = this.selected;
 		this.selected = option;
-		this.$emit("change", option, old);
+		this.$emit("change", option.id, option, old);
 	}
 }
 </script>
