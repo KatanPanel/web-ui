@@ -1,5 +1,5 @@
 <template>
-	<li class="v--dropdown-item">
+	<li class="v--dropdown-item" @click="$emit('click', $event)">
 		<slot />
 	</li>
 </template>

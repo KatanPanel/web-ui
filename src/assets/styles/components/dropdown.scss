@@ -21,55 +21,71 @@
  */
 
 .v--dropdown {
-	&:not(.v--dropdown-active):after {
-		content: "";
-		display: inline-block;
-		vertical-align: middle;
-		margin-right: 10px;
-		width: 0;
-		height: 0;
-		border-left: 5px solid transparent;
-		border-right: 5px solid transparent;
-		border-top: 5px solid var(--app-text-inverse-color);
-	}
+	position: relative;
+	z-index: 1001;
 
-	&.v--dropdown-active:after {
-		content: "";
-		display: inline-block;
-		vertical-align: middle;
-		margin-right: 10px;
-		width: 0;
-		height: 0;
-		border-left: 5px solid transparent;
-		border-right: 5px solid transparent;
-		border-bottom: 5px solid var(--app-text-inverse-color);
+	.v--dropdown-with-caret {
+		&:not([active]):after {
+			content: "";
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 10px;
+			width: 0;
+			height: 0;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 5px solid var(--app-text-inverse-color);
+		}
+
+		&[active]:after {
+			content: "";
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 10px;
+			width: 0;
+			height: 0;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-bottom: 5px solid var(--app-text-inverse-color);
+		}
 	}
 
 	.v--dropdown-item-list {
 		position: absolute;
 		display: flex;
 		flex-direction: column;
-		color: var(--nav-dropdown-text-color);
 		background: var(--kt-background-secondary);
-		border-radius: 8px;
-		box-shadow: rgba(0, 0, 0, 0.06) 2px 2px 0 0;
+		box-shadow: var(--kt-background-accent) 0 0 20px 4px;
+		border-radius: 4px;
 		width: max-content;
-		transition: all 0.4s ease;
-		transform: translateY(20%);
+		transform: translateY(30%);
+		list-style: none;
+		z-index: 1001;
 
 		.v--dropdown-item {
 			margin: 0 !important;
-			padding: 8px;
+			padding: 8px 12px;
+			display: flex;
+
+			&:first-child {
+				border-top-right-radius: 4px;
+				border-top-left-radius: 4px;
+			}
+
+			&:last-child {
+				border-bottom-right-radius: 4px;
+				border-bottom-left-radius: 4px;
+			}
 
 			&:hover {
-				background-color: rgba(0, 0, 0, 0.06);
+				background-color: var(--kt-background-tertiary);
+				cursor: pointer;
+			}
+
+			.v--icon {
+				margin-left: -4px;
+				margin-right: 12px;
 			}
 		}
-	}
-
-	.v--dropdown-transition-enter,
-	.v--dropdown-transition-leave-to {
-		opacity: 0;
-		transform: translateY(20px);
 	}
 }
