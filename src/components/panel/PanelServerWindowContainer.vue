@@ -38,6 +38,7 @@
 		<div
 			v-for="window in refOpenWindows"
 			v-cloak
+			@click="switchWindowFocus(window)"
 			:key="window.id"
 			:active="window.isActive(currentRoute)"
 			class="window"
@@ -50,13 +51,17 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
-import {getMinimizedWindows, getOpenWindows, Window,} from "@/common/navigation/window";
+import { Component, Vue } from "vue-property-decorator";
+import {
+	getMinimizedWindows,
+	getOpenWindows,
+	Window,
+} from "@/common/navigation/window";
 import Server from "@/views/server/Server.vue";
-import {Route} from "vue-router";
+import { Route } from "vue-router";
 
 @Component({
-	components: {Server},
+	components: { Server },
 })
 export default class PanelServerWindowContainer extends Vue {
 	get currentRoute(): Route {
@@ -74,7 +79,7 @@ export default class PanelServerWindowContainer extends Vue {
 	switchWindowFocus(window: Window): void {
 		// checked before if there is more than one window open at the same time
 		// with just one window, it tends to fail resulting in "NavigationDuplicated".
-		if (this.openWindows.length === 1) return;
+		if (this.refOpenWindows.length === 1) return;
 
 		if (!window.isActive(this.currentRoute))
 			this.$router.push(window.location);
