@@ -21,8 +21,8 @@
   -->
 
 <template>
-	<div class="v--tab-view" :id="`tab-view-${tab}`">
-		<slot v-if="active" />
+	<div v-show="active" :id="`tab-view-${tab}`" class="v--tab-view">
+		<slot />
 	</div>
 </template>
 
