@@ -20,21 +20,42 @@
  * SOFTWARE.
  */
 
-import { MetaInfo } from "vue-meta";
-import i18n from "@/i18n";
-import VueI18n from "vue-i18n";
+/**
+ * Returns `true` if the {@param value} is `undefined` or `false` otherwise.
+ * @param {*} value - the value.
+ */
+export function isUndefined(value: any): boolean {
+	return typeof value === "undefined";
+}
 
 /**
- * Generates metadata information using the specified title key.
- * @param {Vue} holder - the Vue component.
- * @param {string} title - title key.
- * @param {...*} args - arguments for translating the title.
+ * Returns `true` if the {@param value} is a number or `false` otherwise.
+ * @param {*} value - the value.
  */
-export function generateMetaInfo(
-	title: string,
-	args: VueI18n.Values
-): MetaInfo {
-	return {
-		title: i18n.t(`page-titles.${title}`, args) as string,
-	};
+export function isNumber(value: any): boolean {
+	return typeof value === "number";
+}
+
+/**
+ * Returns `true` if the {@param value} is a function or `false` otherwise.
+ * @param {*} value - the value.
+ */
+export function isFunction(value: any): boolean {
+	return typeof value === "function";
+}
+
+/**
+ * Returns `null` if the {@param value} is `undefined` or the value itself otherwise.
+ * @param {T | undefined} value - the value.
+ */
+export function undefinedToNull<T = any>(value: T | undefined): T | null {
+	return value || null;
+}
+
+/**
+ * Returns `undefined` if the {@param value} is `null` or the value itself otherwise.
+ * @param {T | null} value - the value.
+ */
+export function nullToUndefined<T = any>(value: T | null): T | undefined {
+	return value || undefined;
 }

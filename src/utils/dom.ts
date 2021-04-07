@@ -20,7 +20,8 @@
  * SOFTWARE.
  */
 
-import { easeInOutQuad } from "@/common/utils/math";
+import { easeInOutQuad } from "@/utils/math";
+import Vue from "vue";
 
 export function isChildNode(
 	element: Node | null | undefined,
@@ -60,4 +61,25 @@ export function smoothScroll(
 	};
 
 	animateScroll();
+}
+
+export function findVueClosestParent(el: Vue, target: string): Vue {
+	const parent = el.$parent;
+	const vmName = (parent as any)._name;
+	if (vmName !== `<${target}>`) return findVueClosestParent(parent, target);
+
+	return parent;
+}
+
+export function copyValue(value: string): Promise<any> {
+	return (
+		navigator.permissions
+			// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+			// @ts-ignore
+			.query({ name: "clipboard-write" })
+			.then((result) => {
+				if (result.state == "granted" || result.state == "prompt")
+					return navigator.clipboard.writeText(value);
+			})
+	);
 }

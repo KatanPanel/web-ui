@@ -20,36 +20,20 @@
  * SOFTWARE.
  */
 
-/**
- * Returns `true` if the {@param value} is `undefined` or `false` otherwise.
- * @param {*} value - the value.
- */
-export function isUndefined(value: any): boolean {
-	return typeof value === "undefined";
-}
+import { MetaInfo } from "vue-meta";
+import i18n from "@/i18n";
+import VueI18n from "vue-i18n";
 
 /**
- * Returns `true` if the {@param value} is a number or `false` otherwise.
- * @param {*} value - the value.
+ * Generates metadata information using the specified title key.
+ * @param {string} title - title key.
+ * @param {...*} args - arguments for translating the title.
  */
-export function isNumber(value: any): boolean {
-	return typeof value === "number";
-}
-
-/**
- * Returns `true` if the {@param value} is a function or `false` otherwise.
- * @param {*} value - the value.
- */
-export function isFunction(value: any): boolean {
-	return typeof value === "function";
-}
-
-/**
- * Returns `null` if the {@param value} is `undefined` or the value itself otherwise.
- * @param {T | null | undefined} value - the value.
- */
-export function undefinedToNull<T = any>(
-	value: T | null | undefined
-): T | null {
-	return value || null;
+export function generateMetaInfo(
+	title: string,
+	args?: VueI18n.Values
+): MetaInfo {
+	return {
+		title: i18n.t(`page-titles.${title}`, args) as string,
+	};
 }

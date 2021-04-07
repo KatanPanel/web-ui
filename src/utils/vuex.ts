@@ -21,8 +21,8 @@
  */
 
 import store from "@/store";
-import { joinBySlash } from "@/common/utils/text";
-import { isFunction } from "@/common/utils/any";
+import { joinBySlash } from "@/utils/text";
+import { isFunction } from "@/utils/any";
 
 /**
  * Returns the result of a getter.
