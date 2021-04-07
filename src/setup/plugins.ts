@@ -33,7 +33,7 @@ import {
 	ON_SOCKET_OPEN,
 } from "@/store/mutations";
 import store, { ROOT_MODULE } from "@/store";
-import { joinBySlash } from "@/common/utils/text";
+import { joinBySlash } from "@/utils/text";
 
 Vue.use(VueSvgInlinePlugin);
 Vue.use(Vue2Storage, {

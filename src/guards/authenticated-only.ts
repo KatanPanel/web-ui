@@ -21,9 +21,12 @@
  */
 
 import { NavigationGuard, NavigationGuardNext, Route } from "vue-router";
-import { AUTH_TOKEN_KEY, verifyAuth } from "@/store/auth";
-import { LOGIN_ROUTE } from "@/router";
 import Vue from "vue";
+import { AUTH_TOKEN_KEY } from "@/api/auth";
+import { dispatch, get } from "@/utils/vuex";
+import { AUTH_MODULE } from "@/store";
+import { AUTH_VERIFY } from "@/store/modules/auth/actions";
+import { IS_LOGGED_IN } from "@/store/modules/auth/getters";
 
 const vm: Vue = Vue.prototype;
 export const AuthenticatedOnlyGuard: NavigationGuard = (
@@ -31,13 +34,16 @@ export const AuthenticatedOnlyGuard: NavigationGuard = (
 	from: Route,
 	next: NavigationGuardNext
 ) => {
-	if (!vm.$storage.has(AUTH_TOKEN_KEY)) return next({ name: LOGIN_ROUTE });
+	if (!vm.$storage.has(AUTH_TOKEN_KEY)) return next({ name: "login" });
+	if (get(AUTH_MODULE, IS_LOGGED_IN) === true) return next();
 
-	return verifyAuth()
+	return dispatch(AUTH_MODULE, AUTH_VERIFY, {
+		token: vm.$storage.get(AUTH_TOKEN_KEY),
+	})
 		.then(() => {
 			next();
 		})
 		.catch(() => {
-			next({ name: LOGIN_ROUTE });
+			next({ name: "login" });
 		});
 };

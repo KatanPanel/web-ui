@@ -33,9 +33,9 @@ import {
 	updateWindowState,
 	Window,
 } from "@/common/navigation/window";
-import { commit } from "@/common/utils/vuex";
+import { commit } from "@/utils/vuex";
 import { getClientSettings } from "@/common/client-settings";
-import { isUndefined } from "@/common/utils/any";
+import { isUndefined } from "@/utils/any";
 import { UPDATE_NAVIGATION_HISTORY } from "@/store/mutations";
 import routes from "@/router/routes";
 

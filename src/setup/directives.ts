@@ -21,6 +21,6 @@
  */
 
 import Vue from "vue";
-import { RouterHrefDirective } from "@/common/internal/directives/router-href";
+import { RouterHrefDirective } from "@/directives/router-href";
 
 Vue.directive("router-href", RouterHrefDirective);

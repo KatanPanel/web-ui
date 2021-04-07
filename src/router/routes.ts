@@ -22,13 +22,14 @@
 
 import { NavigationGuardNext, Route, RouteConfig } from "vue-router";
 import { LOGIN_LAYOUT, PANEL_LAYOUT } from "@/layouts";
-import { verifyAuth } from "@/store/auth";
 import Panel from "@/views/Panel.vue";
-import { AuthenticatedOnlyGuard } from "@/common/internal/guards/authenticated-only";
+import { AuthenticatedOnlyGuard } from "@/guards/authenticated-only";
 import Home from "@/views/Home.vue";
 import Account from "@/views/account/Account.vue";
 import Login from "@/views/auth/Login.vue";
-import { importVM } from "@/common/internal";
+import { vm } from "@/main";
+import { AUTH_TOKEN_KEY } from "@/api/auth";
+import { importVM } from "@/utils/build";
 
 export default [
 	{
@@ -37,7 +38,9 @@ export default [
 		component: Login,
 		meta: { layout: LOGIN_LAYOUT },
 		beforeEnter: (to: Route, from: Route, next: NavigationGuardNext) => {
-			return verifyAuth().finally(() => next());
+			vm.$api.auth
+				.verify(vm.$storage.get(AUTH_TOKEN_KEY))
+				.finally(() => next());
 		},
 	},
 	{
