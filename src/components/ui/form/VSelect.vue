@@ -31,9 +31,9 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VSelectOption from "@/components/ui/form/VSelectOption.vue";
-import { undefinedToNull } from "@/common/utils/any";
+import { undefinedToNull } from "@/utils/any";
 
-interface Option {
+export interface SelectOption {
 	readonly id: string;
 
 	readonly value: string;
@@ -47,7 +47,7 @@ interface Option {
 	components: { VSelectOption, VIcon },
 	beforeMount(): void {
 		const defaultOption = undefinedToNull(
-			this.options.find((option: Option) => option.active)
+			this.options.find((option: SelectOption) => option.active)
 		);
 
 		if (defaultOption) this.select(defaultOption);
@@ -57,15 +57,16 @@ interface Option {
 	},
 })
 export default class VSelect extends Vue {
-	@Prop({ type: Array, default: [] }) private readonly options!: Option[];
-	private selected: Option | null = null;
+	@Prop({ type: Array, default: [] })
+	private readonly options!: SelectOption[];
+	private selected: SelectOption | null = null;
 	private isOpen = false;
 
 	toggle(): void {
 		this.isOpen = !this.isOpen;
 	}
 
-	select(option: Option): void {
+	select(option: SelectOption): void {
 		if (this.selected === option) return;
 
 		const old = this.selected;

@@ -2,7 +2,7 @@
 	<input
 		@input="$emit('input', $event.target.value, $event)"
 		class="v--input"
-	>
+	/>
 </template>
 
 <script lang="ts">
