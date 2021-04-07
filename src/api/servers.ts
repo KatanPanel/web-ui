@@ -20,34 +20,31 @@
  * SOFTWARE.
  */
 
-import { VocaStatic } from "voca";
-import { AxiosInstance } from "axios";
-import { Consola } from "consola";
-import { Filesize } from "filesize";
-import { ClientSettings } from "@/common/client-settings";
+import { AxiosResponse } from "axios";
+import { vm } from "@/main";
 
-declare module "vue/types/vue" {
-	interface Vue {
-		$isDevelopmentMode: boolean;
-		$helpers: {
-			voca: VocaStatic;
-			filesize: Filesize;
-			routeMappings: { [key: string]: () => any };
-		};
-		$socket: WebSocket;
-		$http: AxiosInstance;
-
-		$connect(): void;
-
-		$disconnect(): void;
-
-		$log: Consola;
-		$time: (() => any) | any;
-		$website: {
-			name: string;
-			version: string;
-			url: string;
-		};
-		$api: API;
-	}
+async function getAllServers(): Promise<any[]> {
+	return vm
+		.$http({
+			url: `/servers`,
+			method: "get",
+			withCredentials: true,
+		})
+		.then((res: AxiosResponse) => {
+			return res.data.data.servers;
+		});
 }
+
+async function getServer(serverId: string): Promise<any> {
+	return vm
+		.$http({
+			url: `/servers/${serverId}`,
+			method: "get",
+			withCredentials: true,
+		})
+		.then((res: AxiosResponse) => {
+			return res.data.data.server;
+		});
+}
+
+export default { getAllServers, getServer } as API.Servers;

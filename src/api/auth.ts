@@ -20,34 +20,37 @@
  * SOFTWARE.
  */
 
-import { VocaStatic } from "voca";
-import { AxiosInstance } from "axios";
-import { Consola } from "consola";
-import { Filesize } from "filesize";
-import { ClientSettings } from "@/common/client-settings";
+import { vm } from "@/main";
+import { AxiosResponse } from "axios";
 
-declare module "vue/types/vue" {
-	interface Vue {
-		$isDevelopmentMode: boolean;
-		$helpers: {
-			voca: VocaStatic;
-			filesize: Filesize;
-			routeMappings: { [key: string]: () => any };
-		};
-		$socket: WebSocket;
-		$http: AxiosInstance;
+export const AUTH_TOKEN_KEY = "token";
 
-		$connect(): void;
-
-		$disconnect(): void;
-
-		$log: Consola;
-		$time: (() => any) | any;
-		$website: {
-			name: string;
-			version: string;
-			url: string;
-		};
-		$api: API;
-	}
+async function login(username: string, password: string): Promise<string> {
+	return vm
+		.$http({
+			url: "/auth/login",
+			method: "post",
+			withCredentials: true,
+			data: { username, password },
+		})
+		.then((res: AxiosResponse) => {
+			return res.data.data.token;
+		});
 }
+
+async function verify(token: string): Promise<any> {
+	return vm
+		.$http({
+			url: "/auth/verify",
+			method: "get",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		})
+		.then((res: AxiosResponse) => {
+			// vm.$http.defaults.headers["Authorization"] = `Bearer ${token}`;
+			return res.data.data.account;
+		});
+}
+
+export default { login, verify } as API.Auth;

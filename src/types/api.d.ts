@@ -20,34 +20,18 @@
  * SOFTWARE.
  */
 
-import { VocaStatic } from "voca";
-import { AxiosInstance } from "axios";
-import { Consola } from "consola";
-import { Filesize } from "filesize";
-import { ClientSettings } from "@/common/client-settings";
-
-declare module "vue/types/vue" {
-	interface Vue {
-		$isDevelopmentMode: boolean;
-		$helpers: {
-			voca: VocaStatic;
-			filesize: Filesize;
-			routeMappings: { [key: string]: () => any };
-		};
-		$socket: WebSocket;
-		$http: AxiosInstance;
-
-		$connect(): void;
-
-		$disconnect(): void;
-
-		$log: Consola;
-		$time: (() => any) | any;
-		$website: {
-			name: string;
-			version: string;
-			url: string;
-		};
-		$api: API;
+declare namespace API {
+	interface Auth {
+		login(username: string, password: string): Promise<string>;
+		verify(token: string): Promise<any>;
 	}
+	interface Servers {
+		getAllServers(): Promise<any[]>;
+		getServer(id: string): Promise<any>;
+	}
+}
+
+declare interface API {
+	auth: API.Auth;
+	servers: API.Servers;
 }

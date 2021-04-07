@@ -34,10 +34,11 @@ import "./setup/directives";
 import {
 	ClientSettings,
 	DARK_THEME,
-	getClientSettings,
 	updateClientSettings,
 } from "@/common/client-settings";
 import { ERROR_HANDLER_LOG_TAG } from "@/logging";
+import servers from "@/api/servers";
+import auth from "@/api/auth";
 
 Vue.config.errorHandler = (err: Error, vm: Vue, info: string) => {
 	vm.$log.error({
@@ -47,13 +48,13 @@ Vue.config.errorHandler = (err: Error, vm: Vue, info: string) => {
 	});
 };
 
-export const vm: Vue = Vue.prototype;
+const proto: Vue = Vue.prototype;
 let clientSettings: ClientSettings | undefined = undefined;
 
 // preload client settings if defined before
-if (vm.$storage.has(CLIENT_SETTINGS_CACHE_KEY))
+if (proto.$storage.has(CLIENT_SETTINGS_CACHE_KEY))
 	updateClientSettings(
-		(clientSettings = vm.$storage.get(CLIENT_SETTINGS_CACHE_KEY))
+		(clientSettings = proto.$storage.get(CLIENT_SETTINGS_CACHE_KEY))
 	);
 
 // sets the default dark theme if it is set as a preference
@@ -70,9 +71,9 @@ if (
 	);
 }
 
-vm.$clientSettings = () => getClientSettings();
+proto.$api = { auth, servers } as API;
 
-new Vue({
+export const vm = new Vue({
 	store,
 	router,
 	i18n,
