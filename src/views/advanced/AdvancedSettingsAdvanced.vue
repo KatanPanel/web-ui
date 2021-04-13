@@ -120,7 +120,7 @@ import VField from "@/components/ui/field/VField.vue";
 		VRow,
 	},
 })
-export default class AdvancedSettingsIndex extends Vue {
+export default class AdvancedSettingsAdvanced extends Vue {
 	get developerMode(): boolean {
 		return getClientSettings().developerMode;
 	}

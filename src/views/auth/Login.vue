@@ -64,24 +64,24 @@
 	</div>
 </template>
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import VButton from "@/components/ui/button/VButton.vue";
 import VForm from "@/components/ui/form/VForm.vue";
 import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import VInput from "@/components/ui/form/VInput.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
-import {AUTH_MODULE} from "@/store";
-import {AUTH_LOGIN, AUTH_VERIFY} from "@/store/modules/auth/actions";
-import {AxiosError} from "axios";
+import { AUTH_MODULE } from "@/store";
+import { AUTH_LOGIN, AUTH_VERIFY } from "@/store/modules/auth/actions";
+import { AxiosError } from "axios";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
-import {generateMetaInfo} from "@/utils/component";
-import {AUTH_LOG_TAG} from "@/logging";
-import {dispatch, get} from "@/utils/vuex";
-import {MetaInfo} from "vue-meta";
-import {GET_ACCOUNT, IS_LOGGED_IN} from "@/store/modules/auth/getters";
-import {AUTH_TOKEN_KEY} from "@/api/auth";
+import { generateMetaInfo } from "@/utils/component";
+import { AUTH_LOG_TAG } from "@/logging";
+import { dispatch, get } from "@/utils/vuex";
+import { MetaInfo } from "vue-meta";
+import { GET_ACCOUNT, IS_LOGGED_IN } from "@/store/modules/auth/getters";
+import { AUTH_TOKEN_KEY } from "@/api/auth";
 
 @Component<Login>({
 	components: {
@@ -104,11 +104,11 @@ export default class Login extends Vue {
 	private isLocked = false;
 	private error: string | null = null;
 
-	private get getAccountUsername(): string {
+	get getAccountUsername(): string {
 		return get(AUTH_MODULE, GET_ACCOUNT).username;
 	}
 
-	private get isLoggedIn(): boolean {
+	get isLoggedIn(): boolean {
 		return get(AUTH_MODULE, IS_LOGGED_IN);
 	}
 
@@ -123,13 +123,10 @@ export default class Login extends Vue {
 			password: this.password,
 		})
 			.then(async (token: string) => {
-				// there is no self-validation due to a possible
-				// fast invalidation for any reason by the server
 				this.$storage.set(AUTH_TOKEN_KEY, token);
 
-				await dispatch(AUTH_MODULE, AUTH_VERIFY, {token});
-
-				if (!this.$isDevelopmentMode) window.location.href = "/";
+				await dispatch(AUTH_MODULE, AUTH_VERIFY, { token });
+				await this.$router.replace({ name: "home" });
 			})
 			.catch((err: AxiosError) => {
 				const data = err.response?.data;
@@ -150,14 +147,14 @@ export default class Login extends Vue {
 
 				this.error = code;
 			})
-			.then(() => (this.isLocked = false));
+			.finally(() => (this.isLocked = false));
 	}
 
 	private continueAs() {
 		if (this.isLocked) return;
 
 		this.isLocked = true;
-		this.$router.replace({name: "home"}).finally(() => {
+		this.$router.replace({ name: "home" }).finally(() => {
 			this.isLocked = false;
 		});
 	}

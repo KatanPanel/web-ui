@@ -22,20 +22,36 @@
 
 <template>
 	<div class="advanced-settings">
+		<v-tabs>
+			<v-tab-link :to="{ name: 'advanced.settings' }"
+				>Appearence</v-tab-link
+			>
+			<v-tab-link :to="{ name: 'advanced.settings.language' }"
+				>Language</v-tab-link
+			>
+			<v-tab-link :to="{ name: 'advanced.settings.performance' }"
+				>Performance</v-tab-link
+			>
+			<v-tab-link :to="{ name: 'advanced.settings.advanced' }"
+				>Advanced</v-tab-link
+			>
+		</v-tabs>
 		<router-view />
 	</div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
-import {generateMetaInfo} from "@/utils/component";
-import {MetaInfo} from "vue-meta";
+import { Component, Vue } from "vue-property-decorator";
+import { generateMetaInfo } from "@/utils/component";
+import { MetaInfo } from "vue-meta";
+import VTabs from "@/components/ui/tab/VTabs.vue";
+import VTabLink from "@/components/ui/tab/VTabLink.vue";
 
 @Component({
+	components: { VTabLink, VTabs },
 	metaInfo(): MetaInfo {
 		return generateMetaInfo("advanced.settings.index");
 	},
 })
-export default class AdvancedSettings extends Vue {
-}
+export default class AdvancedSettings extends Vue {}
 </script>

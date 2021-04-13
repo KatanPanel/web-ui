@@ -21,99 +21,18 @@
   -->
 
 <template>
-	<div class="panel-account">
-		<h1>
-			<b>{{ $t("header.panel.account") }}</b>
-		</h1>
-		<section id="details">
-			<v-row>
-				<v-col :size="6">
-					<v-box class="v--box-outlined">
-						<v-box-body>
-							<v-row>
-								<v-col :size="6">
-									<v-label>Nome de usuário</v-label>
-									<p>{{ getAccount.username }}</p>
-								</v-col>
-								<v-col :size="6">
-									<v-label>Cargo</v-label>
-									<p v-if="getAccount.role" key="role">
-										{{ getAccount.role.name }}
-									</p>
-									<p
-										v-else
-										key="no-role"
-										class="v--text-muted"
-									>
-										<i
-											>Nenhum cargo foi definido para sua
-											conta.</i
-										>
-									</p>
-								</v-col>
-							</v-row>
-							<v-row class="v--m-top-4">
-								<v-col :size="6">
-									<v-label>Código de Identificação</v-label>
-									<p>
-										<code>{{
-											getAccount.id.replaceAll("-", "")
-										}}</code>
-									</p>
-								</v-col>
-								<v-col :size="6">
-									<v-label>Data de registro</v-label>
-									<p>{{ getAccount["registered_at"] }}</p>
-								</v-col>
-							</v-row>
-							<v-row class="v--m-top-4">
-								<v-col :size="12">
-									<v-button
-										class="v--button-danger v--button-flat"
-										>Editar informações</v-button
-									>
-								</v-col>
-							</v-row>
-						</v-box-body>
-					</v-box>
-					<hr />
-				</v-col>
-			</v-row>
-		</section>
-	</div>
+	<div class="account">Ok</div>
 </template>
+
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
-import {MetaInfo} from "vue-meta";
-import VContainer from "@/components/ui/layout/VContainer.vue";
-import VBox from "@/components/ui/box/VBox.vue";
-import VBoxHeader from "@/components/ui/box/VBoxHeader.vue";
-import {mixins} from "vue-class-component";
-import {AuthMixin} from "@/mixins/auth";
-import VLabel from "@/components/ui/form/VLabel.vue";
-import VBoxBody from "@/components/ui/box/VBoxBody.vue";
-import VRow from "@/components/ui/layout/VRow.vue";
-import VCol from "@/components/ui/layout/VCol.vue";
-import VIcon from "@/components/ui/icon/VIcon.vue";
-import VButton from "@/components/ui/button/VButton.vue";
+import { Component, Vue } from "vue-property-decorator";
+import { MetaInfo } from "vue-meta";
+import { generateMetaInfo } from "@/utils/component";
 
 @Component({
-	components: {
-		VButton,
-		VIcon,
-		VCol,
-		VRow,
-		VBoxBody,
-		VLabel,
-		VBoxHeader,
-		VBox,
-		VContainer,
-	},
 	metaInfo(): MetaInfo {
-		return {
-			title: (this as Vue).$i18n.t("titles.panel.account") as string,
-		};
+		return generateMetaInfo("account");
 	},
 })
-export default class Account extends mixins(AuthMixin) {}
+export default class Account extends Vue {}
 </script>

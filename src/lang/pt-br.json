@@ -199,7 +199,8 @@
 					"registration_date": "Data de criação de conta",
 					"last_seen": "Último log-in",
 					"unknown_last_seen": "Desconhecido"
-				}
+				},
+				"see-more": "Mais detalhes de {username}"
 			}
 		},
 		"advanced": {

@@ -116,11 +116,6 @@ export default [
 					{
 						path: "",
 						name: "advanced.settings",
-						component: importVM("advanced/AdvancedSettingsIndex"),
-					},
-					{
-						path: "apparence",
-						name: "advanced.settings.appearence",
 						component: importVM(
 							"advanced/AdvancedSettingsAppearence"
 						),
@@ -137,6 +132,13 @@ export default [
 						name: "advanced.settings.performance",
 						component: importVM(
 							"advanced/AdvancedSettingsPerformance"
+						),
+					},
+					{
+						path: "advanced",
+						name: "advanced.settings.advanced",
+						component: importVM(
+							"advanced/AdvancedSettingsAdvanced"
 						),
 					},
 				],

@@ -199,7 +199,8 @@
 					"registration_date": "Registration date",
 					"last_seen": "Last login",
 					"unknown_last_seen": "Unknown"
-				}
+				},
+				"see-more": "See more details about {username}"
 			}
 		},
 		"advanced": {
