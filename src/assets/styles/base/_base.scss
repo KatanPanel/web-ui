@@ -53,7 +53,7 @@
 	--kt-background-secondary: #29303a;
 	--kt-background-tertiary: #252b33;
 	--kt-background-accent: #1e2329;
-	--kt-panel-sidebar: #252b33;
+	--kt-panel-sidebar: var(--kt-background-accent);
 	--kt-border-color: #333b47;
 	--kt-muted-color: #bbb;
 	--kt-muted-darker-color: #999;

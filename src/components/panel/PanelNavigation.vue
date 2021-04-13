@@ -22,32 +22,22 @@
 
 <template>
 	<ul class="panel-navigation">
-		<v-popover
-			:disabled="overlayVisibility"
-			placement="bottom"
-			trigger="hover"
-		>
-			<li
-				v-close-popover
-				:active="overlayVisibility"
-				@click="$emit('update:switch')"
+		<li @click="$emit('update:switch')">
+			<v-popover
+				:disabled="overlayVisibility"
+				placement="bottom"
+				trigger="hover"
 			>
-				<span v-if="!overlayVisibility" key="active-windows">
-					<v-icon name="algorithm" />
-				</span>
-				<span v-else key="hidden-windows">
-					<v-icon name="close-circle" />
-				</span>
-			</li>
-			<template #popover> Janelas </template>
-		</v-popover>
-		<li class="account">
-			<div class="info">
-				<span class="username">{{ account.username }}</span>
-			</div>
-			<a href="#">
+				<a href="#">
+					<v-icon name="layers" />
+				</a>
+				<template #popover> Janelas</template>
+			</v-popover>
+		</li>
+		<li v-tooltip="account.username" class="account">
+			<router-link :to="{ name: 'account' }">
 				<Avatar :src="account.avatar" />
-			</a>
+			</router-link>
 		</li>
 	</ul>
 </template>
@@ -83,58 +73,20 @@ export default class PanelNavigation extends Vue {
 		position: relative;
 		z-index: 0;
 		list-style: none;
-		width: 48px;
-		height: 48px;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-
-		&:not(:last-child) {
-			margin-right: 24px;
-		}
+		margin-left: 24px;
 
 		svg {
-			fill: var(--kt-primary-color);
-		}
-
-		&[active] {
-			svg {
-				fill: var(--kt-danger-color);
-			}
-
-			&::before {
-				background-color: var(--kt-danger-color);
-			}
-		}
-
-		&:hover {
-			cursor: pointer;
-
-			&::before {
-				opacity: 0.18;
-			}
-		}
-
-		&:not(.account)::before {
-			content: "";
-			position: absolute;
-			background-color: var(--kt-primary-color);
-			opacity: 0.12;
-			width: 48px;
-			height: 48px;
-			z-index: -1;
-			border-radius: 25%;
-			margin: 0;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+			opacity: 0.54;
 		}
 	}
 
 	.account {
 		.avatar {
-			width: 48px;
-			height: 48px;
+			width: 40px;
+			height: 40px;
 		}
 	}
 }
