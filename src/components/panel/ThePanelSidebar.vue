@@ -93,7 +93,7 @@
 					"
 					@click="performLogout"
 				>
-					<a href="javascript:void(0)">
+					<a>
 						<v-icon name="logout" />
 					</a>
 				</li>
@@ -151,10 +151,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import VIcon from "@/components/ui/icon/VIcon.vue";
-import { AUTH_MODULE } from "@/store";
-import { dispatch } from "@/utils/vuex";
 import TheLogo from "@/components/TheLogo.vue";
-import { AUTH_LOGOUT } from "@/store/modules/auth/actions";
+import LogoutModal from "@/components/auth/LogoutModal.vue";
 
 @Component({
 	components: { VIcon, TheLogo },
@@ -169,9 +167,10 @@ export default class ThePanelSidebar extends Vue {
 	}
 
 	performLogout(): void {
-		dispatch(AUTH_MODULE, AUTH_LOGOUT).then(() => {
+		/* dispatch(AUTH_MODULE, AUTH_LOGOUT).then(() => {
 			this.$router.replace({ name: "login" });
-		});
+		}); */
+		this.$modal.show(LogoutModal, {}, { height: "auto", width: "30%" });
 	}
 }
 </script>

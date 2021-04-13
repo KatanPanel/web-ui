@@ -34,7 +34,12 @@ import {
 } from "@/store/mutations";
 import store, { ROOT_MODULE } from "@/store";
 import { joinBySlash } from "@/utils/text";
+import VModal from "vue-js-modal/dist/index.nocss.js";
+import { VueJSModalOptions } from "vue-js-modal";
 
+Vue.use<VueJSModalOptions>(VModal, {
+	dialog: false,
+});
 Vue.use(VueSvgInlinePlugin);
 Vue.use(Vue2Storage, {
 	prefix: "katan_",

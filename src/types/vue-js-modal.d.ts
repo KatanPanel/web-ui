@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright (c) 2020-present Katan
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,11 +20,4 @@
  * SOFTWARE.
  */
 
-@import "abstracts/variables", "abstracts/functions";
-@import "base/base", "base/reset", "base/typography", "base/transitions";
-@import "layout/grid", "layout/flexbox";
-@import "components/box", "components/button", "components/dropdown",
-"components/field", "components/form", "components/hotkey",
-"components/icon", "components/label", "components/modal", "components/tabs",
-"components/tooltip", "components/wall";
-@import "utils/text", "utils/margin", "utils/padding", "utils/visibility";
+declare module "vue-js-modal/dist/index.nocss.js";

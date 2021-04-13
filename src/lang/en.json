@@ -99,6 +99,14 @@
 				"confirm-logged-in": "Continue as {username}"
 			}
 		},
+		"logout": {
+			"title": "Log out",
+			"description": "Do you really want to sign out of your account?",
+			"buttons": {
+				"cancel": "Cancel",
+				"confirm": "Log out"
+			}
+		},
 		"server": {
 			"state": {
 				"dead": "Dead",

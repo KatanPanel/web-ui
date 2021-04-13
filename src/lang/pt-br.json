@@ -99,6 +99,14 @@
 				"confirm-logged-in": "Continuar como {username}"
 			}
 		},
+		"logout": {
+			"title": "Terminar sessão",
+			"description": "Realmente deseja sair da sua conta?",
+			"buttons": {
+				"cancel": "Cancelar",
+				"confirm": "Sair"
+			}
+		},
 		"server": {
 			"state": {
 				"dead": "Morto",
