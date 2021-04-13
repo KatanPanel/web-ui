@@ -36,7 +36,7 @@
 					{{ server.name }}
 				</div>
 				<div class="server-description">
-					<slot name="description"/>
+					<slot name="description" />
 					<div
 						v-if="showStatus"
 						:class="`server-state ${server.state}`"
@@ -54,16 +54,16 @@
 	</div>
 </template>
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import Copyable from "@/components/Copyable.vue";
 
 @Component({
-	components: {Copyable},
+	components: { Copyable },
 })
 export default class ServerInfoItem extends Vue {
-	@Prop({type: Object, required: true}) private readonly server!: any;
-	@Prop({type: Boolean, default: true}) private readonly showIp!: boolean;
-	@Prop({type: Boolean, default: true})
+	@Prop({ type: Object, required: true }) private readonly server!: any;
+	@Prop({ type: Boolean, default: true }) private readonly showIp!: boolean;
+	@Prop({ type: Boolean, default: true })
 	private readonly showStatus!: boolean;
 }
 </script>
@@ -130,7 +130,6 @@ export default class ServerInfoItem extends Vue {
 		.server-ip {
 			font-size: 12px;
 			color: var(--kt-muted-darker-color);
-			z-index: 1001;
 		}
 	}
 
