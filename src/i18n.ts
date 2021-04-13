@@ -22,13 +22,13 @@
 
 import Vue from "vue";
 import VueI18n from "vue-i18n";
-import * as dayjs from "dayjs";
 import { I18N_LOG_TAG } from "@/logging";
 import {
 	getClientSettings,
 	updateClientSettings,
 } from "@/common/client-settings";
-import { supportedLanguages } from "@/supportedLanguages";
+import supportedLanguages from "@/supported-languages.json";
+import dayjs from "dayjs";
 
 Vue.use(VueI18n);
 
@@ -46,7 +46,7 @@ const vm: Vue = Vue.prototype;
 
 async function importDayJSLocale(code: string) {
 	return import(
-		/* webpackChunkName: "dayjs-locale-[request]" */ `dayjs/locale/${code}`
+		/* webpackChunkName: "dayjs-locales-[request]" */ `dayjs/locale/${code}`
 	);
 }
 

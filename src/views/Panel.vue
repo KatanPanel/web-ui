@@ -39,8 +39,8 @@
 		<p>{{ $t("errors.Server Error.description") }}</p>
 		<i18n path="errors.Server Error.persistence" tag="p">
 			<a :href="$website.url">{{
-					$t("errors.Server Error.click-here")
-				}}</a>
+				$t("errors.Server Error.click-here")
+			}}</a>
 		</i18n>
 	</v-container>
 	<div v-else key="loaded" class="panel">
@@ -53,10 +53,10 @@
 		</transition>
 		<PanelNavigation
 			:overlay-visibility="isWindowsOverlayVisible"
-			@k-switch="toggleWindowsOverlay"
+			@update:switch="toggleWindowsOverlay"
 		/>
 		<div :disabled="isWindowsOverlayVisible" class="panel-view">
-			<router-view v-if="getOpenWindows.length === 0" key="panel-view"/>
+			<router-view v-if="getOpenWindows.length === 0" key="panel-view" />
 			<PanelServerWindowContainer
 				v-show="getOpenWindows.length > 0"
 				key="windows-view"
@@ -66,18 +66,22 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
-import {ROOT_MODULE} from "@/store";
+import { Component, Vue } from "vue-property-decorator";
+import { ROOT_MODULE } from "@/store";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import Loading from "@/components/Loading.vue";
-import {commit} from "@/utils/vuex";
-import {AxiosResponse} from "axios";
-import {UPDATE_BACKEND_INFO} from "@/store/mutations";
-import {hasTabKeyPressed} from "@/utils/dom";
-import {NavigationGuardNext, Route} from "vue-router";
+import { commit } from "@/utils/vuex";
+import { AxiosResponse } from "axios";
+import { UPDATE_BACKEND_INFO } from "@/store/mutations";
+import { hasTabKeyPressed } from "@/utils/dom";
+import { NavigationGuardNext, Route } from "vue-router";
 import PanelWindowsOverlay from "@/components/panel/PanelWindowsOverlay.vue";
 import PanelNavigation from "@/components/panel/PanelNavigation.vue";
-import {getWindowsBy, OpenWindowState, Window,} from "@/common/navigation/window";
+import {
+	getWindowsBy,
+	OpenWindowState,
+	Window,
+} from "@/common/navigation/window";
 import PanelServerWindowContainer from "@/components/panel/PanelServerWindowContainer.vue";
 
 @Component<Panel>({

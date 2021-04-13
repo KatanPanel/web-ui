@@ -22,7 +22,7 @@
 
 <template>
 	<div class="home-server-list">
-		<Loading v-if="loading"/>
+		<Loading v-if="loading" />
 		<div v-else-if="error">
 			<small class="v--text-cute">
 				{{ error.code }}
@@ -37,9 +37,8 @@
 					</div>
 					<v-row class="v--m-bottom-4">
 						<v-col :size="4">
-							<v-label>{{
-									$t("views.home.fields.order-by")
-								}}
+							<v-label
+								>{{ $t("views.home.fields.order-by") }}
 							</v-label>
 							<v-select
 								:options="[
@@ -62,7 +61,7 @@
 						</v-col>
 						<v-col :size="8">
 							<v-input-group :inlined="true" class="v--m-top-4">
-								<v-input-icon name="search"/>
+								<v-input-icon name="search" />
 								<v-input
 									:placeholder="$t('views.home.search')"
 									maxlength="64"
@@ -93,7 +92,7 @@
 							tag="p"
 						>
 							<template v-slot:icon>
-								<v-icon name="algorithm"/>
+								<v-icon name="algorithm" />
 							</template>
 						</i18n>
 						<ul>
@@ -137,7 +136,7 @@
 										},
 									}"
 								>
-									<ServerInfoItem :server="server"/>
+									<ServerInfoItem :server="server" />
 								</router-link>
 							</li>
 						</ul>
@@ -172,20 +171,20 @@
 	</div>
 </template>
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
-import {dispatch} from "@/utils/vuex";
-import {ROOT_MODULE} from "@/store";
-import {LOAD_SERVER_LIST} from "@/store/actions";
+import { dispatch } from "@/utils/vuex";
+import { ROOT_MODULE } from "@/store";
+import { LOAD_SERVER_LIST } from "@/store/actions";
 import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import VInput from "@/components/ui/form/VInput.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
 import VSelect from "@/components/ui/form/VSelect.vue";
-import {AxiosError} from "axios";
+import { AxiosError } from "axios";
 import Loading from "@/components/Loading.vue";
-import {undefinedToNull} from "@/utils/any";
-import {getWindows, Window} from "@/common/navigation/window";
+import { undefinedToNull } from "@/utils/any";
+import { getWindows, Window } from "@/common/navigation/window";
 import WindowLink from "@/components/navigation/WindowLink.vue";
 import ServerInfoItem from "@/components/server/ServerInfoItem.vue";
 import VBox from "@/components/ui/box/VBox.vue";

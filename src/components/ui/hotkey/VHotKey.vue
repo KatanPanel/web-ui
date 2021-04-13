@@ -21,15 +21,13 @@
   -->
 
 <template>
-	<span class="v--hotkey">
-		{{ resultKey }}
-	</span>
+	<span class="v--hotkey">{{ resultKey }}</span>
 </template>
 
 <script lang="ts">
-import {Component, Prop} from "vue-property-decorator";
-import {mixins} from "vue-class-component";
-import {Activable} from "@/mixins/ui/activable";
+import { Component, Prop } from "vue-property-decorator";
+import { mixins } from "vue-class-component";
+import { Activable } from "@/mixins/ui/activable";
 
 @Component({
 	beforeMount(): void {
@@ -37,7 +35,8 @@ import {Activable} from "@/mixins/ui/activable";
 	},
 })
 export default class VHotKey extends mixins(Activable) {
-	@Prop({type: String, required: true}) private readonly hotkey!: string;
+	@Prop({ type: String, required: true }) private readonly hotkey!: string;
+
 	private resultKey = this.hotkey;
 }
 </script>

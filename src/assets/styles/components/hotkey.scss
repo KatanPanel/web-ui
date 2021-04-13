@@ -24,9 +24,10 @@
 	box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 1px 0;
 	background-color: var(--kt-background-secondary);
 	border: 1px solid var(--kt-border-color);
-	margin: 0 3px;
-	padding: 0px 8px;
+	padding: 0 4px;
 	cursor: default;
 	text-align: center;
 	font-weight: 700;
+	position: relative;
+	display: inline-block;
 }

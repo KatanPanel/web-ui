@@ -48,6 +48,7 @@ Vue.config.errorHandler = (err: Error, vm: Vue, info: string) => {
 };
 
 const proto: Vue = Vue.prototype;
+proto.$api = api;
 let clientSettings: ClientSettings | undefined = undefined;
 
 // preload client settings if defined before
@@ -69,8 +70,6 @@ if (
 		false
 	);
 }
-
-proto.$api = api;
 
 export const vm = new Vue({
 	store,

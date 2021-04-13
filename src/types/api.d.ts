@@ -36,7 +36,11 @@ declare namespace API {
 	interface Servers {
 		getAllServers(): Promise<any[]>;
 
-		getServer(id: string): Promise<any>;
+		getServer(serverId: string): Promise<any>;
+
+		startServer(serverId: string): Promise<any>;
+
+		stopServer(serverId: string): Promise<any>;
 	}
 }
 

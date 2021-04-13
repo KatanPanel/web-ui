@@ -24,7 +24,7 @@
 	<div class="account" @click="visible = !visible">
 		<div class="account-info">
 			<div class="account-basics">
-				<Avatar :src="account.avatar" class="account-avatar"/>
+				<Avatar :src="account.avatar" class="account-avatar" />
 				<div class="account-name">
 					{{ account.username }}
 					<div>
@@ -35,8 +35,8 @@
 							<small>
 								<Copyable :copy-value="account.id">
 									<code class="v--text-muted-darker">{{
-											account.id
-										}}</code>
+										account.id
+									}}</code>
 								</Copyable>
 							</small>
 						</div>
@@ -52,7 +52,7 @@
 								<span
 									v-if="account['last_login']"
 									key="known-last-login"
-								>{{
+									>{{
 										$time(account["last_login"]).format(
 											"LLLL"
 										)
@@ -62,7 +62,7 @@
 									v-else
 									key="unknown-last-login"
 									class="v--text-muted"
-								>{{
+									>{{
 										$t(
 											"views.system.accounts.field.unknown_last_seen"
 										)
@@ -73,7 +73,7 @@
 								v-else
 								key="account-with-role"
 								class="v--cursor-default"
-							>{{ account.role.name }}</span
+								>{{ account.role.name }}</span
 							>
 						</small>
 					</div>
@@ -81,10 +81,10 @@
 			</div>
 			<div class="account-caret">
 				<div v-if="visible" key="hide">
-					<v-icon name="caret-up"/>
+					<v-icon name="caret-up" />
 				</div>
 				<div v-else key="show">
-					<v-icon name="caret-down"/>
+					<v-icon name="caret-down" />
 				</div>
 			</div>
 		</div>
@@ -93,7 +93,8 @@
 				<v-box-body>
 					<v-row>
 						<v-col :size="6">
-							<v-label>{{
+							<v-label
+								>{{
 									$t("views.system.accounts.field.username")
 								}}
 							</v-label>
@@ -102,9 +103,8 @@
 							</p>
 						</v-col>
 						<v-col :size="6">
-							<v-label>{{
-									$t("views.system.accounts.field.role")
-								}}
+							<v-label
+								>{{ $t("views.system.accounts.field.role") }}
 							</v-label>
 							<p>
 								<span
@@ -113,21 +113,22 @@
 									class="v--text-muted"
 								>
 									<i>{{
-											$t("views.system.accounts.no-role")
-										}}</i>
+										$t("views.system.accounts.no-role")
+									}}</i>
 								</span>
 								<span
 									v-else
 									key="account-with-role"
 									class="v--user-select-text"
-								>{{ account.role.name }}</span
+									>{{ account.role.name }}</span
 								>
 							</p>
 						</v-col>
 					</v-row>
 					<v-row class="v--m-top-3">
 						<v-col :size="6">
-							<v-label>{{
+							<v-label
+								>{{
 									$t(
 										"views.system.accounts.field.registration_date"
 									)
@@ -142,7 +143,8 @@
 							/>
 						</v-col>
 						<v-col :size="6">
-							<v-label>{{
+							<v-label
+								>{{
 									$t("views.system.accounts.field.last_seen")
 								}}
 							</v-label>
@@ -150,7 +152,7 @@
 								<span
 									v-if="account['last_login']"
 									key="known-last-login"
-								>{{
+									>{{
 										$time(account["last_login"]).format(
 											"LLLL"
 										)
@@ -160,7 +162,7 @@
 									v-else
 									key="unknown-last-login"
 									class="v--text-muted"
-								>{{
+									>{{
 										$t(
 											"views.system.accounts.field.unknown_last_seen"
 										)
@@ -190,7 +192,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import Copyable from "@/components/Copyable.vue";
 import PermissionList from "@/components/PermissionList.vue";
 import VRow from "@/components/ui/layout/VRow.vue";
@@ -221,7 +223,7 @@ import Avatar from "@/components/Avatar.vue";
 	},
 })
 export default class SystemAccount extends Vue {
-	@Prop({type: Object, required: true}) private readonly account!: any;
+	@Prop({ type: Object, required: true }) private readonly account!: any;
 	private visible = false;
 }
 </script>

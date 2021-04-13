@@ -1,0 +1,272 @@
+<!--
+  - Copyright (c) 2020-present Katan
+  -
+  - Permission is hereby granted, free of charge, to any person obtaining a copy
+  - of this software and associated documentation files (the "Software"), to deal
+  - in the Software without restriction, including without limitation the rights
+  - to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  - copies of the Software, and to permit persons to whom the Software is
+  - furnished to do so, subject to the following conditions:
+  -
+  - The above copyright notice and this permission notice shall be included in all
+  - copies or substantial portions of the Software.
+  -
+  - THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  - IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  - FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  - AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  - LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  - OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  - SOFTWARE.
+  -->
+
+<template>
+	<div id="panel-sidebar" class="panel-sidebar">
+		<div class="sidebar-inner">
+			<ul class="sidebar-items">
+				<router-link
+					:to="{ name: 'home' }"
+					class="sidebar-logo"
+					tag="li"
+				>
+					<a>
+						<TheLogo :color="'white'" />
+					</a>
+				</router-link>
+			</ul>
+			<ul class="sidebar-items">
+				<router-link
+					:to="{ name: 'home' }"
+					class="ignore-route"
+					tag="li"
+				>
+					<a
+						v-tooltip="
+							sidebarTooltip($t('navigation.sidebar.links.home'))
+						"
+					>
+						<v-icon name="home" />
+					</a>
+				</router-link>
+				<router-link :to="{ name: 'games' }" tag="li">
+					<a
+						v-tooltip="
+							sidebarTooltip(
+								$t('navigation.sidebar.links.game-library')
+							)
+						"
+					>
+						<v-icon name="gamepad" />
+					</a>
+				</router-link>
+				<router-link :to="{ name: 'system.accounts' }" tag="li">
+					<a
+						v-tooltip="
+							sidebarTooltip(
+								$t('navigation.sidebar.links.system.accounts')
+							)
+						"
+					>
+						<v-icon name="id-card" />
+					</a>
+				</router-link>
+				<router-link
+					v-tooltip="
+						sidebarTooltip(
+							$t(
+								'navigation.sidebar.links.advanced.settings.index'
+							)
+						)
+					"
+					:to="{ name: 'advanced.settings' }"
+					tag="li"
+				>
+					<a>
+						<v-icon name="controls" />
+					</a>
+				</router-link>
+			</ul>
+			<ul class="sidebar-items">
+				<li
+					v-tooltip="
+						sidebarTooltip($t('navigation.sidebar.links.logout'))
+					"
+					@click="performLogout"
+				>
+					<a href="javascript:void(0)">
+						<v-icon name="logout" />
+					</a>
+				</li>
+				<!-- <li v-if="$isDevelopmentMode" class="v--text-muted-darker">
+					<a href="javascript:void(0)">
+						<small>{{
+								$t("navigation.sidebar.links.development-mode")
+							}}</small>
+					</a>
+				</li> -->
+			</ul>
+			<!-- <ul class="sidebar-items">
+				<router-link :to="{ name: 'advanced.settings' }" tag="li">
+					<a v-tooltip="$t('navigation.sidebar.links.advanced.settings.index')">
+						<v-icon name="user-preferences" />
+					</a>
+					<ul class="sidebar-sub-items">
+						<router-link
+							:to="{ name: 'advanced.settings.language' }"
+							tag="li"
+						>
+							<a>{{
+									$t(
+										"navigation.sidebar.links.advanced.settings.language"
+									)
+								}}</a>
+						</router-link>
+						<router-link
+							:to="{ name: 'advanced.settings.appearence' }"
+							tag="li"
+						>
+							<a>{{
+									$t(
+										"navigation.sidebar.links.advanced.settings.appearence"
+									)
+								}}</a>
+						</router-link>
+						<router-link
+							:to="{ name: 'advanced.settings.performance' }"
+							tag="li"
+						>
+							<a>{{
+									$t(
+										"navigation.sidebar.links.advanced.settings.performance"
+									)
+								}}</a>
+						</router-link>
+					</ul>
+				</router-link>
+			</ul> -->
+		</div>
+	</div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import VIcon from "@/components/ui/icon/VIcon.vue";
+import { AUTH_MODULE } from "@/store";
+import { dispatch } from "@/utils/vuex";
+import TheLogo from "@/components/TheLogo.vue";
+import { AUTH_LOGOUT } from "@/store/modules/auth/actions";
+
+@Component({
+	components: { VIcon, TheLogo },
+})
+export default class ThePanelSidebar extends Vue {
+	sidebarTooltip(content: any): any {
+		/* return {
+			content,
+			classes: ["v--tooltip", "sidebar-tooltip"],
+		}; */
+		return {};
+	}
+
+	performLogout(): void {
+		dispatch(AUTH_MODULE, AUTH_LOGOUT).then(() => {
+			this.$router.replace({ name: "login" });
+		});
+	}
+}
+</script>
+<style lang="scss">
+$sidebar-width: 100px;
+$border-radius: 64px;
+
+.sidebar-tooltip {
+	.tooltip-arrow {
+		border-color: var(--kt-primary-text-color) !important;
+	}
+
+	.tooltip-inner {
+		background: var(--kt-primary-text-color) !important;
+		color: var(--kt-primary-color) !important;
+	}
+}
+
+.panel-sidebar {
+	position: relative;
+	margin-right: 24px;
+	opacity: 1;
+	width: $sidebar-width;
+	z-index: 2;
+
+	.sidebar-inner {
+		padding: 12px 0;
+		position: fixed;
+		min-width: $sidebar-width;
+		max-width: $sidebar-width;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		overflow-x: hidden;
+		overflow-y: auto;
+		box-shadow: rgba(0, 0, 0, 0.12) 0 0 6px 0;
+		background-color: var(--kt-panel-sidebar);
+
+		&::-webkit-scrollbar {
+			width: 6px;
+			background-color: var(--kt-scrollbar);
+		}
+
+		&::-webkit-scrollbar-track {
+			border-radius: 8px;
+			background-color: var(--kt-scrollbar);
+		}
+
+		&::-webkit-scrollbar-thumb {
+			border-radius: 8px;
+			background-color: var(--kt-scrollbar-thumb);
+		}
+
+		.sidebar-items {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: relative;
+			margin: 24px 0;
+
+			&:last-child {
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				left: 0;
+			}
+
+			li {
+				list-style-type: none;
+				margin: 24px 0;
+
+				a {
+					padding: 12px;
+					border-radius: 8px;
+
+					svg {
+						width: 24px;
+						height: 24px;
+						fill: var(--kt-primary-text-color);
+					}
+				}
+
+				&:not(.sidebar-logo).router-link-exact-active a {
+					background-color: var(--kt-primary-darker-color);
+				}
+			}
+
+			.sidebar-logo {
+				margin: 0 0 48px 0;
+
+				img {
+					max-width: 48px;
+				}
+			}
+		}
+	}
+}
+</style>

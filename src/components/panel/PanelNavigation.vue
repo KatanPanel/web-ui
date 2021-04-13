@@ -21,58 +21,55 @@
   -->
 
 <template>
-	<div class="panel-navigation">
-		<ul class="context-switcher">
+	<ul class="panel-navigation">
+		<v-popover
+			:disabled="overlayVisibility"
+			placement="bottom"
+			trigger="hover"
+		>
 			<li
-				v-tooltip="{
-					content: overlayVisibility ? '' : '[TAB] Tarefas',
-					placement: 'bottom',
-				}"
+				v-close-popover
 				:active="overlayVisibility"
-				@click="$emit('k-switch')"
+				@click="$emit('update:switch')"
 			>
 				<span v-if="!overlayVisibility" key="active-windows">
-					<v-icon name="algorithm"/>
+					<v-icon name="algorithm" />
 				</span>
 				<span v-else key="hidden-windows">
-					<v-icon name="close-circle"/>
+					<v-icon name="close-circle" />
 				</span>
 			</li>
-			<!-- <router-link
-				:to="{ name: 'panel.account' }"
-				tag="li"
-				class="account"
-			>
-				<a
-					class="account"
-					v-tooltip="{
-					content: getAccount.username,
-					placement: 'bottom',
-				}"
-				>
-					<div
-						class="account-avatar"
-						:style="{
-						'background-image':
-							'url(https://images-ext-2.discordapp.net/external/Bhe4P3WRPvIUt2ct3c8Nl2LsswWVdUk5qC4O8PgY_28/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/730099264335773797/82767c6e44e631bae8bf1b98355cd3d8.png?width=590&height=590)',
-					}"
-					/>
-				</a>
-			</router-link> -->
-		</ul>
-	</div>
+			<template #popover> Janelas </template>
+		</v-popover>
+		<li class="account">
+			<div class="info">
+				<span class="username">{{ account.username }}</span>
+			</div>
+			<a href="#">
+				<Avatar :src="account.avatar" />
+			</a>
+		</li>
+	</ul>
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import VIcon from "@/components/ui/icon/VIcon.vue";
+import { AUTH_MODULE } from "@/store";
+import { GET_ACCOUNT } from "@/store/modules/auth/getters";
+import { get } from "@/utils/vuex";
+import Avatar from "@/components/Avatar.vue";
 
 @Component({
-	components: {VIcon},
+	components: { Avatar, VIcon },
 })
 export default class PanelNavigation extends Vue {
-	@Prop({type: Boolean, required: true})
+	@Prop({ type: Boolean, required: true })
 	private readonly overlayVisibility!: boolean;
+
+	get account(): any {
+		return get(AUTH_MODULE, GET_ACCOUNT);
+	}
 }
 </script>
 <style lang="scss" scoped>
@@ -82,80 +79,62 @@ export default class PanelNavigation extends Vue {
 	align-items: center;
 	z-index: 1;
 
-	.context-switcher {
-		display: flex;
+	li {
+		position: relative;
+		z-index: 0;
+		list-style: none;
+		width: 48px;
+		height: 48px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 
-		li {
-			position: relative;
-			z-index: 0;
-			list-style: none;
+		&:not(:last-child) {
+			margin-right: 24px;
+		}
 
-			&:not(:last-child) {
-				margin-right: 24px;
+		svg {
+			fill: var(--kt-primary-color);
+		}
+
+		&[active] {
+			svg {
+				fill: var(--kt-danger-color);
 			}
 
-			&:not(.account) {
-				position: relative;
-				width: 48px;
-				height: 48px;
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-
-				svg {
-					fill: var(--kt-primary-color);
-				}
-
-				&[active] {
-					svg {
-						fill: var(--kt-danger-color);
-					}
-
-					&::before {
-						background-color: var(--kt-danger-color);
-					}
-				}
-
-				&:hover {
-					cursor: pointer;
-
-					&::before {
-						opacity: 0.18;
-					}
-				}
-
-				&::before {
-					content: "";
-					position: absolute;
-					background-color: var(--kt-primary-color);
-					opacity: 0.12;
-					width: 48px;
-					height: 48px;
-					z-index: -1;
-					border-radius: 25%;
-					margin: 0;
-					top: 50%;
-					left: 50%;
-					transform: translate(-50%, -50%);
-				}
+			&::before {
+				background-color: var(--kt-danger-color);
 			}
 		}
 
-		.account {
-			display: flex;
+		&:hover {
+			cursor: pointer;
 
-			&:hover .account-avatar {
-				border-color: var(--kt-primary-color);
+			&::before {
+				opacity: 0.18;
 			}
+		}
 
-			.account-avatar {
-				width: 48px;
-				height: 48px;
-				border-radius: 50%;
-				background-size: cover;
-				background-position: center;
-				background-repeat: no-repeat;
-			}
+		&:not(.account)::before {
+			content: "";
+			position: absolute;
+			background-color: var(--kt-primary-color);
+			opacity: 0.12;
+			width: 48px;
+			height: 48px;
+			z-index: -1;
+			border-radius: 25%;
+			margin: 0;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	.account {
+		.avatar {
+			width: 48px;
+			height: 48px;
 		}
 	}
 }

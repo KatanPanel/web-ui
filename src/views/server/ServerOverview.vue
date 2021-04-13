@@ -217,20 +217,6 @@ export default class ServerOverview extends mixins(WindowMixin) {
 			],
 		};
 	}
-
-/* get chartData() {
-		const datasets = [];
-		for (let i = 0; i < this.cpus; i++) {
-			datasets.push({
-				label: `CPU #${i + 1}`,
-				backgroundColor: "rgba(165, 94, 234, 0.2)",
-				borderColor: "rgba(165, 94, 234, 1.0)",
-				data: this.cpuUsage[i] || []
-			})
-		}
-
-		return { datasets: datasets };
-	} */
 }
 </script>
 <style lang="scss">

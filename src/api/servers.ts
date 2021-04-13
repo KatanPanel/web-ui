@@ -20,8 +20,8 @@
  * SOFTWARE.
  */
 
-import {AxiosResponse} from "axios";
-import {vm} from "@/main";
+import { AxiosResponse } from "axios";
+import { vm } from "@/main";
 
 async function getAllServers(): Promise<any[]> {
 	return vm
@@ -47,4 +47,25 @@ async function getServer(serverId: string): Promise<any> {
 		});
 }
 
-export default { getAllServers, getServer } as API.Servers;
+async function startServer(serverId: string): Promise<any> {
+	return vm.$http({
+		url: `/servers/${serverId}/start`,
+		method: "get",
+		withCredentials: true,
+	});
+}
+
+async function stopServer(serverId: string): Promise<any> {
+	return vm.$http({
+		url: `/servers/${serverId}/stop`,
+		method: "get",
+		withCredentials: true,
+	});
+}
+
+export default {
+	getAllServers,
+	getServer,
+	startServer,
+	stopServer,
+} as API.Servers;

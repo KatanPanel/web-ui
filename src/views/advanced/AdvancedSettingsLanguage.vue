@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
@@ -64,10 +64,10 @@ import {
 	saveClientSettings,
 	updateClientSettings,
 } from "@/common/client-settings";
-import {loadLanguage} from "@/i18n";
-import {generateMetaInfo} from "@/utils/component";
-import {MetaInfo} from "vue-meta";
-import {supportedLanguages} from "@/supportedLanguages";
+import { loadLanguage } from "@/i18n";
+import { generateMetaInfo } from "@/utils/component";
+import { MetaInfo } from "vue-meta";
+import supportedLanguages from "@/supported-languages.json";
 
 @Component({
 	components: {

@@ -20,10 +20,10 @@
  * SOFTWARE.
  */
 
-import {MutationTree} from "vuex";
-import {RootState} from "@/store/state";
+import { MutationTree } from "vuex";
+import { RootState } from "@/store/state";
 import Vue from "vue";
-import {CLIENT_SETTINGS_CACHE_KEY} from "@/store";
+import { CLIENT_SETTINGS_CACHE_KEY } from "@/store";
 import {
 	ROUTER_NAVIGATION_LOG_TAG,
 	VUEX_LOG_TAG,
@@ -39,16 +39,20 @@ import {
 	updateWindowState,
 	Window,
 } from "@/common/navigation/window";
-import {Route} from "vue-router";
+import { Route } from "vue-router";
 import {
 	WEBSOCKET_CLOSE,
 	WEBSOCKET_ERROR,
 	WEBSOCKET_MESSAGE,
 	WEBSOCKET_OPEN,
 } from "@/common/websocket/websocket";
-import {INVALID_OP} from "@/common/websocket/operation-codes";
-import {ClientSettings, DARK_THEME, LIGHT_THEME,} from "@/common/client-settings";
-import {isUndefined} from "@/utils/any";
+import { INVALID_OP } from "@/common/websocket/operation-codes";
+import {
+	ClientSettings,
+	DARK_THEME,
+	LIGHT_THEME,
+} from "@/common/client-settings";
+import { isUndefined } from "@/utils/any";
 
 /* start: vue raw web socket */
 export const ON_SOCKET_OPEN = "onSocketConnect";
@@ -156,6 +160,7 @@ export default {
 		state.socket.call(WEBSOCKET_ERROR);
 	},
 	[ON_SOCKET_MESSAGE](state: RootState, message) {
+		console.log("[WS Message]", message);
 		state.socket.call(WEBSOCKET_MESSAGE, message);
 	},
 	[OPEN_WINDOW](state: RootState, payload: { window: Window }) {

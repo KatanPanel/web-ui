@@ -24,7 +24,8 @@
 	<v-row class="server-settings-details">
 		<v-col :size="4">
 			<div class="details">
-				<v-label>{{
+				<v-label
+					>{{
 						$t("views.server.settings.details.labels.server-icon")
 					}}
 				</v-label>
@@ -38,8 +39,11 @@
 		<v-col :size="8">
 			<v-form>
 				<v-input-group>
-					<v-label>{{
-							$t("views.server.settings.details.labels.server-name")
+					<v-label
+						>{{
+							$t(
+								"views.server.settings.details.labels.server-name"
+							)
 						}}
 					</v-label>
 					<v-input
@@ -67,7 +71,7 @@
 									)
 								}}
 							</v-label>
-							<v-input :value="server.host"/>
+							<v-input :value="server.host" />
 						</v-col>
 						<v-col :size="4">
 							<v-label>
@@ -77,7 +81,7 @@
 									)
 								}}
 							</v-label>
-							<v-input :value="server.port" type="number"/>
+							<v-input :value="server.port" type="number" />
 						</v-col>
 					</v-row>
 				</v-input-group>
@@ -87,7 +91,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
@@ -97,10 +101,10 @@ import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import Avatar from "@/components/Avatar.vue";
 
 @Component({
-	components: {Avatar, VInputGroup, VInput, VForm, VLabel, VCol, VRow},
+	components: { Avatar, VInputGroup, VInput, VForm, VLabel, VCol, VRow },
 })
 export default class ServerSettingsDetails extends Vue {
-	@Prop({type: Object, required: true}) private readonly server!: any;
+	@Prop({ type: Object, required: true }) private readonly server!: any;
 }
 </script>
 <style lang="scss" scoped>

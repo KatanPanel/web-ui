@@ -24,58 +24,43 @@
 	<div class="home">
 		<v-row>
 			<v-col :size="9">
-				<v-box
-					:no-shadow="true"
-					class="v--background-3rd v--m-bottom-2"
+				<i18n class="v--text-fw-300" path="views.home.welcome" tag="h1">
+					<template #username>
+						<b class="v--text-default" v-text="account.username" />
+					</template>
+				</i18n>
+				<p class="v--text-muted">
+					{{ $t("views.home.description") }}
+				</p>
+				<br >
+				<i18n
+					class="v--text-muted"
+					path="views.home.safe-place"
+					tag="p"
 				>
-					<v-box-body>
-						<i18n
-							class="v--text-fw-300"
-							path="views.home.welcome"
-							tag="h1"
-						>
-							<template #username>
-								<b
-									class="v--text-default"
-									v-text="account.username"
-								/>
-							</template>
-						</i18n>
-						<p class="v--text-muted">
-							{{ $t("views.home.description") }}
-						</p>
-						<br/>
-						<i18n
-							class="v--text-muted"
-							path="views.home.safe-place"
-							tag="p"
-						>
-							<template #permissions>
-								<a href="#">{{
-										$t("views.home.permissions")
-									}}</a>
-							</template>
-						</i18n>
-					</v-box-body>
-				</v-box>
-				<HomeServerList/>
+					<template #permissions>
+						<a href="#">{{ $t("views.home.permissions") }}</a>
+					</template>
+				</i18n>
+				<hr >
+				<HomeServerList />
 			</v-col>
 		</v-row>
 	</div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
-import {commit, get} from "@/utils/vuex";
-import {UPDATE_BACKEND_INFO} from "@/store/mutations";
+import { Component, Vue } from "vue-property-decorator";
+import { commit, get } from "@/utils/vuex";
+import { UPDATE_BACKEND_INFO } from "@/store/mutations";
 import HomeServerList from "@/components/home/HomeServerList.vue";
-import {AUTH_MODULE, ROOT_MODULE} from "@/store";
-import {MetaInfo} from "vue-meta";
+import { AUTH_MODULE, ROOT_MODULE } from "@/store";
+import { MetaInfo } from "vue-meta";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import VButton from "@/components/ui/button/VButton.vue";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
-import {GET_ACCOUNT} from "@/store/modules/auth/getters";
+import { GET_ACCOUNT } from "@/store/modules/auth/getters";
 import VBox from "@/components/ui/box/VBox.vue";
 import VBoxHeader from "@/components/ui/box/VBoxHeader.vue";
 import VBoxBody from "@/components/ui/box/VBoxBody.vue";

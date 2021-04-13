@@ -60,7 +60,9 @@ export class RawWebSocket {
 	public on(eventOrOp: string | number, handler: Function): void {
 		// fast path -- operation code handling
 		if (isNumber(eventOrOp)) {
+			console.log("[OP]", eventOrOp);
 			return this.on(WEBSOCKET_MESSAGE, (message: any) => {
+				console.log("[PACKET]", message);
 				if (!message.op || message.op !== eventOrOp) return;
 				handler(message.d);
 			});
@@ -71,12 +73,15 @@ export class RawWebSocket {
 			!isUndefined(this.native) &&
 			eventOrOp === WEBSOCKET_OPEN &&
 			this.native.readyState === WebSocket.OPEN
-		)
+		) {
+			console.log("[FAST PATH]", eventOrOp);
 			return handler();
+		}
 
 		const event = eventOrOp as string;
 		if (this.listeners.has(event)) this.listeners.get(event)?.push(handler);
 		else this.listeners.set(event, [handler]);
+		console.log("[CRON]", eventOrOp);
 	}
 
 	/**
@@ -97,6 +102,7 @@ export class RawWebSocket {
 	 * @private
 	 */
 	private sendImmediately(data: any): void {
-		this.native?.send(JSON.stringify(data));
+		this.native!!.send(JSON.stringify(data));
+		console.log("[WS Sent]", data);
 	}
 }

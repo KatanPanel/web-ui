@@ -1,6 +1,6 @@
 <template>
 	<div class="server">
-		<ServerLastInfo v-show="$route.name !== 'server.overview'"/>
+		<ServerLastInfo v-show="$route.name !== 'server.overview'" />
 		<keep-alive :max="5">
 			<component
 				:window="window"
@@ -12,14 +12,15 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop} from "vue-property-decorator";
-import {NavigationGuardNext, Route} from "vue-router";
-import {mixins} from "vue-class-component";
+import { Component, Prop } from "vue-property-decorator";
+import { NavigationGuardNext, Route } from "vue-router";
+import { mixins } from "vue-class-component";
 import WindowMixin from "@/mixins/window";
-import {resolveWindow} from "@/common/navigation/window";
-import {MetaInfo} from "vue-meta";
+import { resolveWindow } from "@/common/navigation/window";
+import { MetaInfo } from "vue-meta";
 import ServerLastInfo from "@/components/server/ServerLastInfo.vue";
 import ServerConsoleContent from "@/components/server/ServerConsoleContent.vue";
+import { getWebSocket } from "@/store";
 
 @Component<Server>({
 	components: {
@@ -27,20 +28,26 @@ import ServerConsoleContent from "@/components/server/ServerConsoleContent.vue";
 		ServerLastInfo,
 	},
 	metaInfo(): MetaInfo {
-		return {title: this.getServer.name};
+		return { title: this.getServer.name };
 	},
 	beforeRouteEnter(to: Route, from: Route, next: NavigationGuardNext): void {
-		// We have to update the current window to the next server he is going to join.
+		// update the current window to the next server that's going to join
 		resolveWindow(to.params.serverId, to).then(() => next());
 	},
-	mounted(): void {
+	created(): void {
+		const socket = getWebSocket();
+
+		socket.on(1000, (payload: any) => {
+			console.log("Updated", payload);
+		});
+
 		this.$connect();
 	},
 })
 export default class Server extends mixins(WindowMixin) {
-	@Prop({type: Boolean, default: false})
+	@Prop({ type: Boolean, default: false })
 	protected readonly useWindowHooks!: boolean;
-	@Prop({type: Number, required: true}) private readonly serverId!: number;
+	@Prop({ type: Number, required: true }) private readonly serverId!: number;
 
 	/**
 	 * Returns the corresponding Vue component for the current Window location.
@@ -48,7 +55,7 @@ export default class Server extends mixins(WindowMixin) {
 	private get getWindowComponent(): any {
 		return this.$helpers.routeMappings[
 			this.getWindow.location.name as string
-			]();
+		]();
 	}
 }
 </script>

@@ -22,7 +22,8 @@
 
 $base-margin: 8px;
 
-.v--tooltip {
+.v--tooltip,
+.popover {
 	display: block !important;
 	z-index: 1001;
 	font-size: 14px;

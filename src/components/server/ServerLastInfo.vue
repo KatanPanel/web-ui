@@ -25,15 +25,14 @@
 		<transition mode="out-in" name="v--transition-fast-linear-slide-tb">
 			<div v-if="visible" key="visible" class="server-last-info">
 				<router-link :to="{ name: 'server.overview' }">
-					<Avatar :src="server.icon" class="server-icon"/>
+					<Avatar :src="server.icon" class="server-icon" />
 				</router-link>
 				<div class="server-data">
 					<router-link
 						:to="{ name: 'server.overview' }"
 						class="server-name"
-					>{{ server.name }}
-					</router-link
-					>
+						>{{ server.name }}
+					</router-link>
 					<div class="server-description">
 						<Copyable
 							:copy-value="`${server.host}:${server.port}`"
@@ -56,19 +55,27 @@
 						<v-dropdown-item
 							v-if="server.state === 'running'"
 							key="turn-off"
+							@click="stopServer"
 						>
-							Stop server
+							Stop
 						</v-dropdown-item>
-						<v-dropdown-item v-else key="turn-on">
-							Start server
+						<v-dropdown-item
+							v-else
+							key="turn-on"
+							@click="startServer"
+						>
+							Start
 						</v-dropdown-item>
-						<v-dropdown-item v-if="$clientSettings().developerMode">
+						<v-dropdown-item
+							v-if="isDeveloperMode"
+							@click="copyServerId"
+						>
 							Copy ID
 						</v-dropdown-item>
 					</template>
 				</v-dropdown>
 				<div class="toggler" @click="visible = !visible">
-					<v-icon name="caret-up"/>
+					<v-icon name="caret-up" />
 				</div>
 			</div>
 			<div
@@ -77,24 +84,25 @@
 				class="server-last-info-toggle"
 				@click="visible = !visible"
 			>
-				<v-icon name="caret-down"/>
+				<v-icon name="caret-down" />
 			</div>
 		</transition>
 	</div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import Server from "@/views/server/Server.vue";
-import {findVueClosestParent} from "@/utils/dom";
+import { copyValue, findVueClosestParent } from "@/utils/dom";
 import Copyable from "@/components/Copyable.vue";
 import Avatar from "@/components/Avatar.vue";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VDropdown from "@/components/ui/dropdown/VDropdown.vue";
 import VDropdownItem from "@/components/ui/dropdown/VDropdownItem.vue";
+import { getClientSettings } from "@/common/client-settings";
 
 @Component<ServerLastInfo>({
-	components: {VDropdownItem, VDropdown, VIcon, Avatar, Copyable, Server},
+	components: { VDropdownItem, VDropdown, VIcon, Avatar, Copyable, Server },
 	created(): void {
 		this.parent = findVueClosestParent(this, "Server") as Server;
 	},
@@ -105,6 +113,26 @@ export default class ServerLastInfo extends Vue {
 
 	private get server(): any {
 		return this.parent.getServer;
+	}
+
+	get isDeveloperMode(): boolean {
+		return getClientSettings().developerMode;
+	}
+
+	startServer(): void {
+		this.$api.servers.startServer(this.server.id).then(() => {
+			console.log("start");
+		});
+	}
+
+	stopServer(): void {
+		this.$api.servers.stopServer(this.server.id).then(() => {
+			console.log("stop");
+		});
+	}
+
+	copyServerId(): void {
+		copyValue(this.server.id);
 	}
 }
 </script>
