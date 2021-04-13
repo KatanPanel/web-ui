@@ -218,6 +218,12 @@
 						"button": "Redefinir configurações"
 					}
 				},
+				"tabs": {
+					"appearence": "Aparência",
+					"language": "Idioma",
+					"performance": "Performance",
+					"advanced": "Avançado"
+				},
 				"appearence": {
 					"title": "Aparência",
 					"theme-label": "Tema",

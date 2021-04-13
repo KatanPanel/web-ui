@@ -23,18 +23,18 @@
 <template>
 	<div class="advanced-settings">
 		<v-tabs>
-			<v-tab-link :to="{ name: 'advanced.settings' }"
-				>Appearence</v-tab-link
-			>
-			<v-tab-link :to="{ name: 'advanced.settings.language' }"
-				>Language</v-tab-link
-			>
-			<v-tab-link :to="{ name: 'advanced.settings.performance' }"
-				>Performance</v-tab-link
-			>
-			<v-tab-link :to="{ name: 'advanced.settings.advanced' }"
-				>Advanced</v-tab-link
-			>
+			<v-tab-link :to="{ name: 'advanced.settings' }">
+				{{ $t("views.advanced.settings.tabs.appearence") }}
+			</v-tab-link>
+			<v-tab-link :to="{ name: 'advanced.settings.language' }">
+				{{ $t("views.advanced.settings.tabs.language") }}
+			</v-tab-link>
+			<v-tab-link :to="{ name: 'advanced.settings.performance' }">
+				{{ $t("views.advanced.settings.tabs.performance") }}
+			</v-tab-link>
+			<v-tab-link :to="{ name: 'advanced.settings.advanced' }">
+				{{ $t("views.advanced.settings.tabs.advanced") }}
+			</v-tab-link>
 		</v-tabs>
 		<router-view />
 	</div>

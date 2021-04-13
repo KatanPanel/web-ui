@@ -218,6 +218,12 @@
 						"button": "Reset settings"
 					}
 				},
+				"tabs": {
+					"appearence": "Appearence",
+					"language": "Language",
+					"performance": "Performance",
+					"advanced": "Advanced"
+				},
 				"appearence": {
 					"title": "Appearence",
 					"theme-label": "Theme",
