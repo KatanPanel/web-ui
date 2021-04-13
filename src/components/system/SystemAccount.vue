@@ -28,10 +28,7 @@
 				<div class="account-name">
 					{{ account.username }}
 					<div>
-						<div
-							v-if="$clientSettings().developerMode"
-							class="v--m-right-2"
-						>
+						<div v-if="isDeveloperModeEnabled" class="v--m-right-2">
 							<small>
 								<Copyable :copy-value="account.id">
 									<code class="v--text-muted-darker">{{
@@ -182,7 +179,11 @@
 								},
 							}"
 						>
-							Ver mais detalhes
+							{{
+								$t("views.system.accounts.see-more", {
+									username: account.username
+								})
+							}}
 						</v-button>
 					</v-flex-box>
 				</v-box-body>
@@ -205,6 +206,7 @@ import VBoxBody from "@/components/ui/box/VBoxBody.vue";
 import VButton from "@/components/ui/button/VButton.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import Avatar from "@/components/Avatar.vue";
+import { getClientSettings } from "@/common/client-settings";
 
 @Component<SystemAccount>({
 	components: {
@@ -225,6 +227,10 @@ import Avatar from "@/components/Avatar.vue";
 export default class SystemAccount extends Vue {
 	@Prop({ type: Object, required: true }) private readonly account!: any;
 	private visible = false;
+
+	get isDeveloperModeEnabled(): boolean {
+		return getClientSettings().developerMode;
+	}
 }
 </script>
 <style lang="scss" scoped>
