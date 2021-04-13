@@ -35,43 +35,45 @@
 	list-style: none;
 	font-weight: 500;
 	font-size: 14px;
-	color: var(--kt-muted-darker-color);
-	border-bottom: 2px solid transparent;
-	padding: 0 18px 8px 18px;
+	opacity: 0.54;
+
+	a {
+		padding: 8px 16px 8px 16px;
+		border-bottom: 2px solid transparent;
+		display: inline-block;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
 
 	&[active],
 	&.router-link-exact-active {
 		color: var(--kt-text-color);
-		border-bottom-color: var(--kt-primary-color);
 		opacity: 1;
 		font-weight: 600;
+
+		a {
+			border-bottom-color: var(--kt-primary-color);
+		}
 
 		svg {
 			fill: var(--kt-primary-color);
 		}
 	}
 
+	&:not([active]):not(.router-link-exact-active):hover {
+		cursor: pointer;
+		border-bottom-color: var(--kt-shadow);
+		opacity: 1;
+	}
+
+	&:not([disabled]):hover {
+		cursor: pointer;
+	}
+
 	&[disabled] {
 		opacity: 0.38;
-	}
-
-	&[active]:hover,
-	&.router-link-exact-active:hover {
-		cursor: pointer;
-	}
-
-	&:hover a {
-		text-decoration: none !important;
-	}
-
-	&:not([active]):hover {
-		cursor: pointer;
-		color: var(--kt-muted-color);
-		border-bottom-color: var(--kt-muted-darker-color);
-
-		svg {
-			fill: var(--kt-muted-darker-color);
-		}
 	}
 
 	svg {
