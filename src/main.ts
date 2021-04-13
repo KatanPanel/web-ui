@@ -38,6 +38,7 @@ import {
 } from "@/common/client-settings";
 import { ERROR_HANDLER_LOG_TAG } from "@/logging";
 import api from "@/api";
+import { isUndefined } from "@/utils/any";
 
 console.log("API: ", process.env.VUE_APP_API_URL);
 console.log("Gateway: ", process.env.VUE_APP_GATEWAY_URL);
@@ -61,14 +62,16 @@ if (proto.$storage.has(CLIENT_SETTINGS_CACHE_KEY))
 	);
 
 // sets the default dark theme if it is set as a preference
-if (
-	!clientSettings?.theme &&
-	window.matchMedia &&
-	window.matchMedia("(prefers-color-scheme: dark)").matches
-) {
+if (isUndefined(clientSettings?.theme)) {
+	const useDarkTheme =
+		window.matchMedia &&
+		window.matchMedia("(prefers-color-scheme: dark)").matches;
+
 	updateClientSettings(
 		{
-			theme: DARK_THEME,
+			theme: useDarkTheme
+				? DARK_THEME
+				: null /* null = machine default */,
 		},
 		false
 	);
