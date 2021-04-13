@@ -35,7 +35,7 @@
 	list-style: none;
 	font-weight: 500;
 	font-size: 14px;
-	opacity: 0.54;
+	color: var(--kt-muted-darker-color);
 
 	a {
 		padding: 8px 16px 8px 16px;
@@ -50,7 +50,6 @@
 	&[active],
 	&.router-link-exact-active {
 		color: var(--kt-text-color);
-		opacity: 1;
 		font-weight: 600;
 
 		a {
@@ -65,7 +64,7 @@
 	&:not([active]):not(.router-link-exact-active):hover {
 		cursor: pointer;
 		border-bottom-color: var(--kt-shadow);
-		opacity: 1;
+		color: var(--kt-muted-color);
 	}
 
 	&:not([disabled]):hover {
@@ -74,13 +73,5 @@
 
 	&[disabled] {
 		opacity: 0.38;
-	}
-
-	svg {
-		margin-right: 4px;
-		fill: var(--kt-muted-color);
-		vertical-align: text-bottom;
-		width: 20px;
-		height: 20px;
 	}
 }
