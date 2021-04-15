@@ -1,0 +1,11 @@
+version: "3"
+services:
+    katan-ui:
+        build: https://github.com/KatanPanel/katan-ui.git#dev
+        container_name: katan-ui
+        ports:
+            - "1080:80"
+            - "1433:433"
+        environment:
+            - VUE_APP_GATEWAY_URL=ws://0.0.0.0:1080/
+            - VUE_APP_API_URL=http://0.0.0.0:1080/
