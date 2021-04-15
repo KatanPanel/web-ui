@@ -91,59 +91,13 @@
 					v-tooltip="
 						sidebarTooltip($t('navigation.sidebar.links.logout'))
 					"
-					@click="performLogout"
+					@click="$emit('logout')"
 				>
 					<a>
 						<v-icon name="logout" />
 					</a>
 				</li>
-				<!-- <li v-if="$isDevelopmentMode" class="v--text-muted-darker">
-					<a href="javascript:void(0)">
-						<small>{{
-								$t("navigation.sidebar.links.development-mode")
-							}}</small>
-					</a>
-				</li> -->
 			</ul>
-			<!-- <ul class="sidebar-items">
-				<router-link :to="{ name: 'advanced.settings' }" tag="li">
-					<a v-tooltip="$t('navigation.sidebar.links.advanced.settings.index')">
-						<v-icon name="user-preferences" />
-					</a>
-					<ul class="sidebar-sub-items">
-						<router-link
-							:to="{ name: 'advanced.settings.language' }"
-							tag="li"
-						>
-							<a>{{
-									$t(
-										"navigation.sidebar.links.advanced.settings.language"
-									)
-								}}</a>
-						</router-link>
-						<router-link
-							:to="{ name: 'advanced.settings.appearence' }"
-							tag="li"
-						>
-							<a>{{
-									$t(
-										"navigation.sidebar.links.advanced.settings.appearence"
-									)
-								}}</a>
-						</router-link>
-						<router-link
-							:to="{ name: 'advanced.settings.performance' }"
-							tag="li"
-						>
-							<a>{{
-									$t(
-										"navigation.sidebar.links.advanced.settings.performance"
-									)
-								}}</a>
-						</router-link>
-					</ul>
-				</router-link>
-			</ul> -->
 		</div>
 	</div>
 </template>
@@ -152,7 +106,6 @@
 import { Component, Vue } from "vue-property-decorator";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import TheLogo from "@/components/TheLogo.vue";
-import LogoutModal from "@/components/auth/LogoutModal.vue";
 
 @Component({
 	components: { VIcon, TheLogo },
@@ -164,13 +117,6 @@ export default class ThePanelSidebar extends Vue {
 			classes: ["v--tooltip", "sidebar-tooltip"],
 		}; */
 		return {};
-	}
-
-	performLogout(): void {
-		/* dispatch(AUTH_MODULE, AUTH_LOGOUT).then(() => {
-			this.$router.replace({ name: "login" });
-		}); */
-		this.$modal.show(LogoutModal, {}, { height: "auto", width: "30%" });
 	}
 }
 </script>
@@ -253,7 +199,7 @@ $border-radius: 64px;
 					}
 				}
 
-				&:not(.sidebar-logo).router-link-exact-active a {
+				&:not(.sidebar-logo):not(.ignore-route).router-link-active a {
 					background-color: var(--kt-primary-darker-color);
 				}
 			}

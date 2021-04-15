@@ -21,62 +21,77 @@
   -->
 
 <template>
-	<section id="theme">
-		<small class="v--text-cute v--text-muted-darker">
-			{{ $t("views.my-account.appearence.theme-label") }}
-		</small>
-		<v-field-list>
+	<div>
+		<h4 class="v--m-bottom-4">
+			{{ $t("views.my-account.language.title") }}
+		</h4>
+		<p class="v--text-muted">
+			{{ $t("views.my-account.language.select") }}
+		</p>
+		<v-field-list class="v--m-top-1">
 			<v-field
-				v-for="theme in getAvailableThemes()"
-				:key="theme"
-				:active="clientTheme === theme"
-				@click.native="clientTheme = theme"
+				v-for="language in getSupportedLanguages"
+				:key="language.tag"
+				:active="currentLanguage.tag === language.tag"
+				@click.native="currentLanguage = language"
 			>
-				{{ $t(`views.my-account.appearence.theme.${theme}`) }}
-			</v-field>
-			<v-field :active="!clientTheme" @click.native="clientTheme = null">
-				{{ $t("views.my-account.appearence.theme.system-default") }}
+				<div class="v--flex-child">
+					{{ language.name }}
+				</div>
+				<div
+					:style="{
+						backgroundImage: `url(/img/flags/${language.tag}.png)`,
+					}"
+					class="field-flag"
+				/>
 			</v-field>
 		</v-field-list>
-	</section>
+	</div>
 </template>
+
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { MetaInfo } from "vue-meta";
+import { generateMetaInfo } from "@/utils/component";
+import supportedLanguages from "@/supported-languages.json";
 import {
-	DARK_THEME,
 	getClientSettings,
-	LIGHT_THEME,
 	saveClientSettings,
 	updateClientSettings,
 } from "@/common/client-settings";
-import VRow from "@/components/ui/layout/VRow.vue";
-import VCol from "@/components/ui/layout/VCol.vue";
-import VSelect from "@/components/ui/form/VSelect.vue";
+import { loadLanguage } from "@/i18n";
 import VFieldList from "@/components/ui/field/VFieldList.vue";
 import VField from "@/components/ui/field/VField.vue";
-import { isUndefined } from "@/utils/any";
 
 @Component({
-	components: { VField, VFieldList, VSelect, VCol, VRow },
+	components: { VField, VFieldList },
+	metaInfo(): MetaInfo {
+		return generateMetaInfo("my-account.language");
+	},
 })
-export default class AppearenceTheme extends Vue {
-	get clientTheme(): string {
-		return getClientSettings().theme as string;
+export default class MyAccountLanguage extends Vue {
+	get getSupportedLanguages(): Language[] {
+		return supportedLanguages;
 	}
 
-	set clientTheme(theme: string) {
-		if (
-			!isUndefined(getClientSettings().theme) &&
-			getClientSettings().theme === theme
-		)
-			return;
-
-		updateClientSettings({ theme });
-		saveClientSettings();
+	get currentLanguage(): Language {
+		return getClientSettings().language as Language;
 	}
 
-	getAvailableThemes(): string[] {
-		return [LIGHT_THEME, DARK_THEME];
+	set currentLanguage(language: Language) {
+		loadLanguage(language.tag).then(() => {
+			updateClientSettings({ language });
+			saveClientSettings();
+		});
 	}
 }
 </script>
+<style lang="scss" scoped>
+.field-flag {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 40px;
+	height: 32px;
+}
+</style>

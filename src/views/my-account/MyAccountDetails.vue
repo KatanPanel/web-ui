@@ -21,44 +21,64 @@
   -->
 
 <template>
-	<div class="advanced-settings">
-		<v-row>
-			<v-col :size="9">
-				<v-tabs :align-with-hr="true">
-					<v-tab-link :to="{ name: 'advanced.settings' }">
-						{{ $t("views.advanced.settings.tabs.appearence") }}
-					</v-tab-link>
-					<v-tab-link :to="{ name: 'advanced.settings.language' }">
-						{{ $t("views.advanced.settings.tabs.language") }}
-					</v-tab-link>
-					<v-tab-link :to="{ name: 'advanced.settings.performance' }">
-						{{ $t("views.advanced.settings.tabs.performance") }}
-					</v-tab-link>
-					<v-tab-link :to="{ name: 'advanced.settings.advanced' }">
-						{{ $t("views.advanced.settings.tabs.advanced") }}
-					</v-tab-link>
-				</v-tabs>
-				<hr />
-			</v-col>
-		</v-row>
-		<router-view />
+	<div>
+		<h4 class="v--m-bottom-4">Minha conta</h4>
+		<v-form>
+			<v-row>
+				<v-col :size="6">
+					<v-input-group>
+						<v-label>ID da conta</v-label>
+						<v-input :value="account.id" readonly="true" />
+					</v-input-group>
+				</v-col>
+				<v-col :size="6">
+					<v-input-group>
+						<v-label>Nome de usuário</v-label>
+						<v-input
+							:value="account.username"
+							:placeholder="account.username"
+						/>
+					</v-input-group>
+				</v-col>
+			</v-row>
+			<v-row class="v--m-top-2">
+				<v-col :size="12">
+					<v-label>E-mail</v-label>
+					<v-input
+						:value="account.email"
+						:placeholder="
+							account.email || `${account.username}@katan.com`
+						"
+					/>
+				</v-col>
+			</v-row>
+		</v-form>
 	</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { generateMetaInfo } from "@/utils/component";
 import { MetaInfo } from "vue-meta";
-import VTabs from "@/components/ui/tab/VTabs.vue";
-import VTabLink from "@/components/ui/tab/VTabLink.vue";
+import { generateMetaInfo } from "@/utils/component";
+import VForm from "@/components/ui/form/VForm.vue";
+import VInputGroup from "@/components/ui/form/VInputGroup.vue";
+import VLabel from "@/components/ui/form/VLabel.vue";
+import VInput from "@/components/ui/form/VInput.vue";
+import { get } from "@/utils/vuex";
+import { AUTH_MODULE } from "@/store";
+import { GET_ACCOUNT } from "@/store/modules/auth/getters";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
 
 @Component({
-	components: { VCol, VRow, VTabLink, VTabs },
+	components: { VCol, VRow, VInput, VLabel, VInputGroup, VForm },
 	metaInfo(): MetaInfo {
-		return generateMetaInfo("advanced.settings.index");
+		return generateMetaInfo("my-account.my-account");
 	},
 })
-export default class AdvancedSettings extends Vue {}
+export default class MyAccountDetails extends Vue {
+	get account(): any {
+		return get(AUTH_MODULE, GET_ACCOUNT);
+	}
+}
 </script>

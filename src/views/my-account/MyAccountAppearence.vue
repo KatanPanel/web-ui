@@ -21,13 +21,27 @@
   -->
 
 <template>
-	<span class="v--display-block">
-		{{ $t("views.my-account.performance.levels.low") }}
-	</span>
+	<div>
+		<h4 class="v--m-bottom-4">
+			{{ $t("views.my-account.appearence.title") }}
+		</h4>
+		<AppearenceTheme />
+		<AppearenceServerConsoleLogDate class="v--m-top-5" />
+	</div>
 </template>
+
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { MetaInfo } from "vue-meta";
+import { generateMetaInfo } from "@/utils/component";
+import AppearenceTheme from "@/components/advanced/settings/appearence/AppearenceTheme.vue";
+import AppearenceServerConsoleLogDate from "@/components/advanced/settings/appearence/AppearenceServerConsoleLogDate.vue";
 
-@Component
-export default class LowPerformanceImpact extends Vue {}
+@Component({
+	components: { AppearenceServerConsoleLogDate, AppearenceTheme },
+	metaInfo(): MetaInfo {
+		return generateMetaInfo("my-account.appearence");
+	},
+})
+export default class MyAccountAppearence extends Vue {}
 </script>

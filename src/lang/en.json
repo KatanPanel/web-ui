@@ -13,44 +13,30 @@
 		"system": {
 			"accounts": "Accounts — System"
 		},
-		"advanced": {
-			"settings": {
-				"index": "User Settings",
-				"appearence": "Appearence - User Settings",
-				"language": "Language - User Settings",
-				"performance": "Performance - User Settings"
-			}
+		"my-account": {
+			"my-account": "My Account",
+			"appearence": "Appearence - My Account",
+			"language": "Language - My Account",
+			"performance": "Performance Settings - My Account",
+			"advanced": "Advanced - My Account"
 		}
 	},
 	"navigation": {
 		"sidebar": {
-			"labels": {
-				"system": "System",
-				"advanced": "Advanced",
-				"server": "Server – {server}"
+			"tips": {
+				"home": "Home",
+				"game-library": "Game Library",
+				"accounts": "Accounts",
+				"settings": "User Preferences",
+				"logout": "Log out"
 			},
 			"links": {
-				"home": "Homepage",
-				"game-library": "Game Library",
 				"server": {
 					"overview": "Overview",
 					"console": "Console",
 					"fs": "File Management",
 					"settings": "Settings"
-				},
-				"system": {
-					"accounts": "Accounts"
-				},
-				"advanced": {
-					"settings": {
-						"index": "User Settings",
-						"appearence": "Appearence",
-						"language": "Language",
-						"performance": "Performance"
-					}
-				},
-				"logout": "Log out",
-				"development-mode": "Development mode"
+				}
 			}
 		},
 		"windows": {
@@ -203,9 +189,68 @@
 				"see-more": "See more details about {username}"
 			}
 		},
-		"advanced": {
-			"settings": {
+		"my-account": {
+			"sidebar": {
+				"account": "Account",
+				"security": "Security",
+				"activity-history": "Activity History",
+				"appearence": "Appearence",
+				"language": "Language",
+				"performance": "Performance settings",
+				"advanced": "Advanced"
+			},
+			"appearence": {
+				"title": "Appearence",
+				"theme-label": "Theme",
+				"theme": {
+					"light": "Light",
+					"dark": "Dark",
+					"system-default": "System default"
+				},
+				"server-console-log-date": {
+					"title": "Display date and time of server logs",
+					"description": "When executing the defined action, the record in the console of a server will display the date and time when the same occurred in a floating element.",
+					"options": {
+						"click": "When clicked",
+						"hover": "When hovered",
+						"never": "Never"
+					}
+				}
+			},
+			"language": {
+				"title": "Language",
+				"select": "Select a preferred language."
+			},
+			"performance": {
 				"recommended-option": "Recommended option",
+				"title": "Performance",
+				"description": "Adjust small details in the performance of the Katan in relation to the use of resources so that it does not impact the use of your machine or browser.",
+				"fields": {
+					"performance-impact": "Performance impact level",
+					"category": "Category"
+				},
+				"levels": {
+					"all": "All",
+					"low": "Low performance impact",
+					"medium": "Medium performance impact",
+					"high": "High performance impact"
+				},
+				"categories": {
+					"all": "All",
+					"server": "Servers",
+					"app": "Application (Katan)"
+				},
+				"server-resources-update-rate": {
+					"title": "Server resources update rate",
+					"description": "Time interval the client (you) will ask the server for information about an server's CPU usage, RAM memory and network statistics.",
+					"define-x-seconds": "Set the time interval (up to {max} seconds).",
+					"values": {
+						"real-time": "Real time",
+						"every-x-seconds": "Time intervals"
+					}
+				}
+			},
+			"advanced": {
 				"title": "User Settings",
 				"description": "Depending on the version of your client ({version}), some configurations may be in the testing phase or badly of the legs, therefore, they may not work as they should or as you expect.",
 				"description-detail": "If you are the Bigfoot or notice something strange happening, contact the site administrators.",
@@ -216,64 +261,6 @@
 						"title": "Turn over all settings",
 						"description": "Reset your settings to the navigator's default if you are not satisfied with them, this will cause all adjustments made by you previously to be undone. Like a new born.",
 						"button": "Reset settings"
-					}
-				},
-				"tabs": {
-					"appearence": "Appearence",
-					"language": "Language",
-					"performance": "Performance",
-					"advanced": "Advanced"
-				},
-				"appearence": {
-					"title": "Appearence",
-					"theme-label": "Theme",
-					"theme": {
-						"light": "Light",
-						"dark": "Dark",
-						"system-default": "System default"
-					},
-					"server": {
-						"console-log-date": {
-							"title": "Server console log date time",
-							"description": "Display the date and time of a log on the server console.",
-							"options": {
-								"click": "When clicked",
-								"hover": "When hovered",
-								"never": "Never"
-							}
-						}
-					}
-				},
-				"language": {
-					"title": "Language",
-					"select": "Select a preferred language."
-				},
-				"performance": {
-					"title": "Performance",
-					"description": "Adjust small details in the performance of the Katan in relation to the use of resources so that it does not impact the use of your machine or browser.",
-					"fields": {
-						"performance-impact": "Performance impact level",
-						"category": "Category"
-					},
-					"levels": {
-						"all": "All",
-						"low": "Low performance impact",
-						"medium": "Medium performance impact",
-						"high": "High performance impact"
-					},
-					"categories": {
-						"all": "All",
-						"server": "Servers",
-						"app": "Application (Katan)"
-					},
-					"server-resources-update-rate": {
-						"title": "Server resources update rate",
-						"description": "Time interval the client (you) will ask the server for information about an server's CPU usage, RAM memory and network statistics.",
-						"define-x-seconds": "Set the time interval (up to {max} seconds).",
-						"values": {
-							"real-time": "Real time",
-							"every-x-seconds": "Time intervals"
-						}
 					}
 				}
 			}

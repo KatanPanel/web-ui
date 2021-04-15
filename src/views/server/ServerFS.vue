@@ -36,15 +36,15 @@
 </template>
 
 <script lang="ts">
-import {Component} from "vue-property-decorator";
-import {mixins} from "vue-class-component";
+import { Component } from "vue-property-decorator";
+import { mixins } from "vue-class-component";
 import WindowMixin from "@/mixins/window";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import WindowLink from "@/components/navigation/WindowLink.vue";
-import {AxiosError, AxiosResponse} from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 @Component<ServerFS>({
-	components: {WindowLink, VIcon},
+	components: { WindowLink, VIcon },
 	mounted(): void {
 		this.$http
 			.get(`servers/${this.getServer.id}/fs`)

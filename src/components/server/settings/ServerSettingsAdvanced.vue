@@ -35,13 +35,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import VButton from "@/components/ui/button/VButton.vue";
 
 @Component({
-	components: {VButton},
+	components: { VButton },
 })
 export default class ServerSettingsAdvanced extends Vue {
-	@Prop({type: Object, required: true}) private readonly server!: any;
+	@Prop({ type: Object, required: true }) private readonly server!: any;
 }
 </script>

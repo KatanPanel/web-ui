@@ -24,9 +24,9 @@
 	<div class="panel-windows-overlay" @click="$emit('close')">
 		<div class="panel-windows-overlay-inner">
 			<h4 class="v--m-bottom-5">Em segundo plano</h4>
-			<hr/>
+			<hr />
 			<small class="v--text-uppercase v--text-fw-800"
-			>Janela atual – {{ getOpenWindows.length }}</small
+				>Janela atual – {{ getOpenWindows.length }}</small
 			>
 			<ul class="window-list v--m-bottom-3">
 				<li
@@ -45,7 +45,7 @@
 			</ul>
 
 			<small class="v--text-uppercase v--text-fw-800"
-			>Minimizado – {{ getMinimizedWindows.length }}</small
+				>Minimizado – {{ getMinimizedWindows.length }}</small
 			>
 			<ul class="window-list">
 				<li
@@ -71,7 +71,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import {
 	getWindowsBy,
 	MinimizedWindowState,
@@ -83,7 +83,7 @@ import WindowLink from "@/components/navigation/WindowLink.vue";
 import ServerInfoItem from "@/components/server/ServerInfoItem.vue";
 
 @Component({
-	components: {ServerInfoItem, WindowLink},
+	components: { ServerInfoItem, WindowLink },
 })
 export default class PanelWindowsOverlay extends Vue {
 	get getOpenWindows(): Window[] {

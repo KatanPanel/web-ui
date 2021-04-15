@@ -22,6 +22,7 @@
 
 <template>
 	<div class="home">
+		<h4>Dashboard</h4>
 		<v-row>
 			<v-col :size="9">
 				<i18n class="v--text-fw-300" path="views.home.welcome" tag="h1">
@@ -32,7 +33,7 @@
 				<p class="v--text-muted">
 					{{ $t("views.home.description") }}
 				</p>
-				<br >
+				<br />
 				<i18n
 					class="v--text-muted"
 					path="views.home.safe-place"
@@ -42,7 +43,7 @@
 						<a href="#">{{ $t("views.home.permissions") }}</a>
 					</template>
 				</i18n>
-				<hr >
+				<hr />
 				<HomeServerList />
 			</v-col>
 		</v-row>

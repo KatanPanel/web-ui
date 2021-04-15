@@ -14,21 +14,21 @@
 </template>
 
 <script lang="ts">
-import {Component} from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import VForm from "@/components/ui/form/VForm.vue";
 import VInput from "@/components/ui/form/VInput.vue";
-import {mixins} from "vue-class-component";
+import { mixins } from "vue-class-component";
 import WindowMixin from "@/mixins/window";
 import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
 import VButton from "@/components/ui/button/VButton.vue";
 import ServerConsoleContent from "@/components/server/ServerConsoleContent.vue";
-import {get} from "@/utils/vuex";
-import {GET_NAVIGATION_HISTORY} from "@/store/getters";
-import {ROOT_MODULE} from "@/store";
-import {Location, Route} from "vue-router";
-import {routeToLocation} from "@/utils/navigation";
-import {updateWindowTitle} from "@/common/navigation/window";
+import { get } from "@/utils/vuex";
+import { GET_NAVIGATION_HISTORY } from "@/store/getters";
+import { ROOT_MODULE } from "@/store";
+import { Location, Route } from "vue-router";
+import { routeToLocation } from "@/utils/navigation";
+import { updateWindowTitle } from "@/common/navigation/window";
 
 @Component<ServerConsole>({
 	components: {
@@ -69,7 +69,7 @@ export default class ServerConsole extends mixins(WindowMixin) {
 
 	pinConsoleAndGoTo(location?: Location) {
 		this.$router
-			.replace(location || {name: "server.overview"})
+			.replace(location || { name: "server.overview" })
 			.then(() => {
 				this.$emit("pin-console");
 			});
@@ -82,7 +82,7 @@ export default class ServerConsole extends mixins(WindowMixin) {
 				value.length === 0
 					? "windows.server.console.empty"
 					: "windows.server.console.typing",
-				{input: value}
+				{ input: value }
 			) as string
 		);
 	}

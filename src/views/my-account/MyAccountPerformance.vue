@@ -21,128 +21,73 @@
   -->
 
 <template>
-	<v-row>
-		<v-col :size="9">
-			<h2>{{ $t("views.advanced.settings.performance.title") }}</h2>
-			<p class="v--text-muted">
-				{{ $t("views.advanced.settings.performance.description") }}
-			</p>
-			<hr />
-			<v-row>
-				<v-col :size="8">
-					<v-label
-						>{{
-							$t(
-								"views.advanced.settings.performance.fields.performance-impact"
-							)
-						}}
-					</v-label>
-					<v-select
-						:options="[
-							{
-								id: '*',
-								value: $t(
-									'views.advanced.settings.performance.levels.all'
-								),
-								active: true,
-							},
-							{
-								id: 'level-low',
-								value: $t(
-									'views.advanced.settings.performance.levels.low'
-								),
-							},
-							{
-								id: 'level-medium',
-								value: $t(
-									'views.advanced.settings.performance.levels.medium'
-								),
-							},
-							{
-								id: 'level-high',
-								value: $t(
-									'views.advanced.settings.performance.levels.high'
-								),
-							},
-						]"
-						@change="sortByLevel"
-					/>
-				</v-col>
-				<v-col :size="4">
-					<v-label
-						>{{
-							$t(
-								"views.advanced.settings.performance.fields.category"
-							)
-						}}
-					</v-label>
-					<v-select
-						:options="[
-							{
-								id: '*',
-								value: $t(
-									'views.advanced.settings.performance.categories.all'
-								),
-								active: true,
-							},
-							{
-								id: 'category-server',
-								value: $t(
-									'views.advanced.settings.performance.categories.server'
-								),
-							},
-							{
-								id: 'category-app',
-								value: $t(
-									'views.advanced.settings.performance.categories.app'
-								),
-							},
-						]"
-						@change="sortByCategory"
-					/>
-				</v-col>
-			</v-row>
-			<div class="v--m-top-4">
-				<PerformanceSetting
-					v-for="setting in currentSettings"
-					:key="setting.name"
-					:filters="setting.filters"
-					:level="setting.level"
-					:name="setting.name"
-				>
-					<component :is="setting.component" />
-				</PerformanceSetting>
-			</div>
-		</v-col>
-	</v-row>
+	<div>
+		<h4 class="v--m-bottom-4">
+			{{ $t("views.my-account.performance.title") }}
+		</h4>
+		<p class="v--text-muted">
+			{{ $t("views.my-account.performance.description") }}
+		</p>
+		<hr >
+		<v-row>
+			<v-col :size="8">
+				<v-label
+					>{{
+						$t(
+							"views.my-account.performance.fields.performance-impact"
+						)
+					}}
+				</v-label>
+				<v-select :options="levels" @change="sortByLevel" />
+			</v-col>
+			<v-col :size="4">
+				<v-label
+					>{{ $t("views.my-account.performance.fields.category") }}
+				</v-label>
+				<v-select :options="categories" @change="sortByCategory" />
+			</v-col>
+		</v-row>
+		<div class="v--m-top-4">
+			<PerformanceSetting
+				v-for="setting in currentSettings"
+				:key="setting.name"
+				:filters="setting.filters"
+				:level="setting.level"
+				:name="setting.name"
+			>
+				<component :is="setting.component" />
+			</PerformanceSetting>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import VRow from "@/components/ui/layout/VRow.vue";
 import { MetaInfo } from "vue-meta";
 import { generateMetaInfo } from "@/utils/component";
-import VCol from "@/components/ui/layout/VCol.vue";
-import ServerResourcesUpdateRate from "@/components/advanced/settings/performance/ServerResourcesUpdateRate.vue";
-import VSelect from "@/components/ui/form/VSelect.vue";
-import VLabel from "@/components/ui/form/VLabel.vue";
+import VFieldList from "@/components/ui/field/VFieldList.vue";
+import VField from "@/components/ui/field/VField.vue";
 import PerformanceSetting from "@/components/advanced/settings/performance/PerformanceSetting.vue";
+import VRow from "@/components/ui/layout/VRow.vue";
+import VCol from "@/components/ui/layout/VCol.vue";
+import VLabel from "@/components/ui/form/VLabel.vue";
+import VSelect from "@/components/ui/form/VSelect.vue";
 
 @Component({
 	components: {
-		PerformanceSetting,
-		VLabel,
 		VSelect,
-		ServerResourcesUpdateRate,
+		VLabel,
 		VCol,
 		VRow,
+		PerformanceSetting,
+		VField,
+		VFieldList,
 	},
 	metaInfo(): MetaInfo {
-		return generateMetaInfo("advanced.settings.performance");
+		return generateMetaInfo("my-account.performance");
 	},
 })
-export default class AdvancedSettingsPerformance extends Vue {
-	// sorting
+export default class MyAccountPerformance extends Vue {
 	category: string | null = null;
 	level: number | null = null;
 	private readonly defaultSettings: readonly any[] = Object.freeze([
@@ -153,8 +98,43 @@ export default class AdvancedSettingsPerformance extends Vue {
 			filters: ["server"],
 		},
 	]);
-	// reactive settings
+
 	settings = this.defaultSettings;
+	private readonly categories: readonly any[] = [
+		{
+			id: "*",
+			value: this.$t("views.my-account.performance.categories.all"),
+			active: true,
+		},
+		{
+			id: "category-server",
+			value: this.$t("views.my-account.performance.categories.server"),
+		},
+		{
+			id: "category-app",
+			value: this.$t("views.my-account.performance.categories.app"),
+		},
+	];
+
+	private readonly levels: readonly any[] = [
+		{
+			id: "*",
+			value: this.$t("views.my-account.performance.levels.all"),
+			active: true,
+		},
+		{
+			id: "level-low",
+			value: this.$t("views.my-account.performance.levels.low"),
+		},
+		{
+			id: "level-medium",
+			value: this.$t("views.my-account.performance.levels.medium"),
+		},
+		{
+			id: "level-high",
+			value: this.$t("views.my-account.performance.levels.high"),
+		},
+	];
 
 	get currentSettings(): readonly any[] {
 		if (this.category === null && this.level === null) {

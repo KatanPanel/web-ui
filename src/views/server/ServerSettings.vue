@@ -37,22 +37,22 @@
 				{{ $t("views.server.settings.tabs.advanced") }}
 			</v-tab>
 		</v-tabs>
-		<hr/>
+		<hr />
 		<v-tab-view :tab="`details:${window}`">
-			<ServerSettingsDetails :server="getServer"/>
+			<ServerSettingsDetails :server="getServer" />
 		</v-tab-view>
 		<v-tab-view :tab="`users:${window}`">
-			<ServerSettingsUsers :server="getServer"/>
+			<ServerSettingsUsers :server="getServer" />
 		</v-tab-view>
 		<v-tab-view :tab="`advanced:${window}`">
-			<ServerSettingsAdvanced :server="getServer"/>
+			<ServerSettingsAdvanced :server="getServer" />
 		</v-tab-view>
 	</div>
 </template>
 
 <script lang="ts">
-import {Component} from "vue-property-decorator";
-import {mixins} from "vue-class-component";
+import { Component } from "vue-property-decorator";
+import { mixins } from "vue-class-component";
 import WindowMixin from "@/mixins/window";
 import VTab from "@/components/ui/tab/VTab.vue";
 import VTabView from "@/components/ui/tab/VTabView.vue";
@@ -71,6 +71,5 @@ import ServerSettingsUsers from "@/components/server/settings/ServerSettingsUser
 		VTab,
 	},
 })
-export default class ServerSettings extends mixins(WindowMixin) {
-}
+export default class ServerSettings extends mixins(WindowMixin) {}
 </script>

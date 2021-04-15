@@ -24,29 +24,28 @@
 	<v-row>
 		<v-col :size="9">
 			<h2>{{ $t("views.advanced.settings.appearence.title") }}</h2>
-			<AppearenceTheme/>
-			<hr/>
+			<AppearenceTheme />
+			<hr />
 			<section id="server">
-				<AppearenceServerConsoleLogDate/>
+				<AppearenceServerConsoleLogDate />
 			</section>
 		</v-col>
 	</v-row>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
 import VFieldList from "@/components/ui/field/VFieldList.vue";
 import VField from "@/components/ui/field/VField.vue";
 import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
-import {generateMetaInfo} from "@/utils/component";
-import {MetaInfo} from "vue-meta";
+import { generateMetaInfo } from "@/utils/component";
+import { MetaInfo } from "vue-meta";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import VSelect from "@/components/ui/form/VSelect.vue";
-import AppearenceServerConsoleLogDate
-	from "@/components/advanced/settings/appearence/AppearenceServerConsoleLogDate.vue";
+import AppearenceServerConsoleLogDate from "@/components/advanced/settings/appearence/AppearenceServerConsoleLogDate.vue";
 import AppearenceTheme from "@/components/advanced/settings/appearence/AppearenceTheme.vue";
 
 @Component({
@@ -66,6 +65,5 @@ import AppearenceTheme from "@/components/advanced/settings/appearence/Appearenc
 		return generateMetaInfo("advanced.settings.appearence");
 	},
 })
-export default class AdvancedSettingsAppearence extends Vue {
-}
+export default class AdvancedSettingsAppearence extends Vue {}
 </script>

@@ -24,23 +24,23 @@
 	<v-field :active="active" :disabled="disabled" :with-content="true">
 		{{ permissionName }}
 		<template v-slot:content>
-			<slot/>
+			<slot />
 		</template>
 	</v-field>
 </template>
 
 <script lang="ts">
-import {Component, Prop} from "vue-property-decorator";
-import {mixins} from "vue-class-component";
-import {Activable} from "@/mixins/ui/activable";
+import { Component, Prop } from "vue-property-decorator";
+import { mixins } from "vue-class-component";
+import { Activable } from "@/mixins/ui/activable";
 import VField from "@/components/ui/field/VField.vue";
 import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
 
 @Component({
-	components: {VFieldRadio, VField},
+	components: { VFieldRadio, VField },
 })
 export default class PermissionValue extends mixins(Activable) {
-	@Prop({type: String, required: true})
+	@Prop({ type: String, required: true })
 	private readonly permissionName!: string;
 }
 </script>

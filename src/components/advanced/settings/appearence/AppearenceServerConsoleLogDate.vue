@@ -24,15 +24,13 @@
 	<section id="server-console-log-date">
 		<small class="v--text-cute v--text-muted-darker">
 			{{
-				$t(
-					"views.advanced.settings.appearence.server.console-log-date.title"
-				)
+				$t("views.my-account.appearence.server-console-log-date.title")
 			}}
 		</small>
 		<p class="v--text-muted">
 			{{
 				$t(
-					"views.advanced.settings.appearence.server.console-log-date.description"
+					"views.my-account.appearence.server-console-log-date.description"
 				)
 			}}
 		</p>
@@ -47,7 +45,7 @@
 	</section>
 </template>
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import {
 	getClientSettings,
 	saveClientSettings,
@@ -58,10 +56,10 @@ import VCol from "@/components/ui/layout/VCol.vue";
 import VSelect from "@/components/ui/form/VSelect.vue";
 
 @Component({
-	components: {VSelect, VCol, VRow},
+	components: { VSelect, VCol, VRow },
 })
 export default class AppearenceServerConsoleLogDate extends Vue {
-	onConsoleLogDateUpdate({id}: any) {
+	onConsoleLogDateUpdate({ id }: any) {
 		updateClientSettings({
 			serverSettings: {
 				showConsoleLogDate: id === "never" ? undefined : id,
@@ -76,7 +74,7 @@ export default class AppearenceServerConsoleLogDate extends Vue {
 			return {
 				id: value || "never",
 				value: this.$i18n.t(
-					`views.advanced.settings.appearence.server.console-log-date.options.${
+					`views.my-account.appearence.server-console-log-date.options.${
 						value || "never"
 					}`
 				),

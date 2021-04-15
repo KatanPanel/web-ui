@@ -18,20 +18,20 @@
 					}"
 					class="login-left"
 				>
-					<div class="overlay"/>
+					<div class="overlay" />
 					<div class="content">
-						<the-logo color="white"/>
+						<the-logo color="white" />
 					</div>
 				</div>
 				<div class="login-right v--flex-child">
-					<slot/>
+					<slot />
 				</div>
 			</v-flex-box>
 		</v-container>
 	</main>
 </template>
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import TheLogo from "@/components/TheLogo.vue";

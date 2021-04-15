@@ -26,4 +26,4 @@ export const WEB_SOCKET_LOG_TAG = "Web Socket";
 export const WINDOWS_LOG_TAG = "Navigation Windows";
 export const ROUTER_NAVIGATION_LOG_TAG = "Routing";
 export const ERROR_HANDLER_LOG_TAG = "Error Handler";
-export const I18N_LOG_TAG = "Localization";
+export const I18N_LOG_TAG = "I18N";

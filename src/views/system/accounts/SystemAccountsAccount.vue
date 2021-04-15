@@ -27,9 +27,9 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
-import {MetaInfo} from "vue-meta";
-import {generateMetaInfo} from "@/utils/component";
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { MetaInfo } from "vue-meta";
+import { generateMetaInfo } from "@/utils/component";
 
 @Component({
 	metaInfo(): MetaInfo {
@@ -37,6 +37,6 @@ import {generateMetaInfo} from "@/utils/component";
 	},
 })
 export default class SystemAccountsAccount extends Vue {
-	@Prop({type: String, required: true}) private readonly accountId!: string;
+	@Prop({ type: String, required: true }) private readonly accountId!: string;
 }
 </script>

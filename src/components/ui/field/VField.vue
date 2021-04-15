@@ -36,7 +36,9 @@
 			ref="radio"
 			active="true"
 		>
-			<slot name="radio" />
+			<slot name="radio">
+				<v-icon name="check" />
+			</slot>
 		</v-field-radio>
 		<v-field-radio
 			v-else-if="disabled"
@@ -47,9 +49,7 @@
 			<slot name="radio">&times;</slot>
 		</v-field-radio>
 		<v-field-radio v-else-if="selected" key="selected-state" ref="radio">
-			<slot name="radio">
-				<v-icon name="check" />
-			</slot>
+			<slot name="radio" />
 		</v-field-radio>
 		<v-field-radio v-else key="unknown-state" ref="radio">
 			<slot name="radio" />

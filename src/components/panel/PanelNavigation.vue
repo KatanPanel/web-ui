@@ -22,7 +22,7 @@
 
 <template>
 	<ul class="panel-navigation">
-		<li @click="$emit('update:switch')">
+		<li @click="$emit('update:overlay-visibility', !overlayVisibility)">
 			<v-popover
 				:disabled="overlayVisibility"
 				placement="bottom"
@@ -31,13 +31,24 @@
 				<a href="#">
 					<v-icon name="layers" />
 				</a>
-				<template #popover> Janelas</template>
+				<template #popover>Janelas</template>
 			</v-popover>
 		</li>
-		<li v-tooltip="account.username" class="account">
-			<router-link :to="{ name: 'account' }">
+		<li class="account">
+			<v-dropdown>
 				<Avatar :src="account.avatar" />
-			</router-link>
+				<template #items>
+					<v-dropdown-item>
+						<router-link :to="{ name: 'account' }">
+							Minha conta
+						</router-link>
+					</v-dropdown-item>
+					<hr >
+					<v-dropdown-item @click="$emit('logout')">
+						<span class="v--text-error">Terminar sessão</span>
+					</v-dropdown-item>
+				</template>
+			</v-dropdown>
 		</li>
 	</ul>
 </template>
@@ -49,9 +60,11 @@ import { AUTH_MODULE } from "@/store";
 import { GET_ACCOUNT } from "@/store/modules/auth/getters";
 import { get } from "@/utils/vuex";
 import Avatar from "@/components/Avatar.vue";
+import VDropdown from "@/components/ui/dropdown/VDropdown.vue";
+import VDropdownItem from "@/components/ui/dropdown/VDropdownItem.vue";
 
 @Component({
-	components: { Avatar, VIcon },
+	components: { VDropdownItem, VDropdown, Avatar, VIcon },
 })
 export default class PanelNavigation extends Vue {
 	@Prop({ type: Boolean, required: true })
@@ -87,6 +100,10 @@ export default class PanelNavigation extends Vue {
 		.avatar {
 			width: 40px;
 			height: 40px;
+
+			&:hover {
+				cursor: pointer;
+			}
 		}
 	}
 }

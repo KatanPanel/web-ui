@@ -92,7 +92,7 @@
 							</v-flex-box>
 						</v-box-body>
 					</v-box>
-					<hr >
+					<hr />
 					<div
 						v-if="getServer.state === 'running'"
 						class="server-resources"

@@ -22,11 +22,11 @@
 
 <template>
 	<span class="v--text-error v--display-block">
-		{{ $t("views.advanced.settings.performance.levels.high") }}
+		{{ $t("views.my-account.performance.levels.high") }}
 	</span>
 </template>
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class HighPerformanceImpact extends Vue {}

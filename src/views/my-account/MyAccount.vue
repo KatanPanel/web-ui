@@ -21,18 +21,36 @@
   -->
 
 <template>
-	<div class="account">Ok</div>
+	<div>
+		<MyAccountSidebar />
+		<div class="my-account-info">
+			<v-container>
+				<router-view />
+			</v-container>
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { MetaInfo } from "vue-meta";
 import { generateMetaInfo } from "@/utils/component";
+import MyAccountSidebar from "@/components/my-account/MyAccountSidebar.vue";
+import VContainer from "@/components/ui/layout/VContainer.vue";
 
 @Component({
+	components: {
+		VContainer,
+		MyAccountSidebar,
+	},
 	metaInfo(): MetaInfo {
-		return generateMetaInfo("account");
+		return generateMetaInfo("my-account.my-account");
 	},
 })
-export default class Account extends Vue {}
+export default class MyAccount extends Vue {}
 </script>
+<style lang="scss" scoped>
+.my-account-info {
+	margin-left: 240px;
+}
+</style>

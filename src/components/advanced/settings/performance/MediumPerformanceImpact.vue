@@ -22,11 +22,11 @@
 
 <template>
 	<span class="v--text-warning v--display-block">
-		{{ $t("views.advanced.settings.performance.levels.medium") }}
+		{{ $t("views.my-account.performance.levels.medium") }}
 	</span>
 </template>
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class MediumPerformanceImpact extends Vue {}

@@ -23,7 +23,6 @@
 <template>
 	<v-row>
 		<v-col :size="9">
-			<h1>{{ $t("views.advanced.settings.title") }}</h1>
 			<section id="testing-adjustments">
 				<i18n
 					class="v--text-muted"
@@ -42,7 +41,7 @@
 						>
 					</template>
 				</i18n>
-				<br >
+				<br />
 				<p class="v--text-muted v--m-bottom-4">
 					{{ $t("views.advanced.settings.description-detail") }}
 				</p>
@@ -53,7 +52,7 @@
 					@click.native="developerMode = !developerMode"
 					>{{ $t("views.advanced.settings.options.developer-mode") }}
 				</v-field>
-				<hr >
+				<hr />
 			</section>
 			<section id="reset-config">
 				<v-box :outlined="true">
@@ -107,6 +106,8 @@ import VBox from "@/components/ui/box/VBox.vue";
 import VBoxBody from "@/components/ui/box/VBoxBody.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import VField from "@/components/ui/field/VField.vue";
+import { MetaInfo } from "vue-meta";
+import { generateMetaInfo } from "@/utils/component";
 
 @Component({
 	components: {
@@ -118,6 +119,9 @@ import VField from "@/components/ui/field/VField.vue";
 		VWall,
 		VCol,
 		VRow,
+	},
+	metaInfo(): MetaInfo {
+		return generateMetaInfo("advanced.settings.advanced");
 	},
 })
 export default class AdvancedSettingsAdvanced extends Vue {

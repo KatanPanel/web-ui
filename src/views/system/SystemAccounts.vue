@@ -29,14 +29,14 @@
 			<p class="v--text-muted">
 				{{ $t("views.system.accounts.description") }}
 			</p>
-			<br >
+			<br />
 			<small class="v--text-cute v--text-primary">
 				{{ $t("views.system.accounts.server-permissions") }}
 			</small>
 			<p class="v--text-muted">
 				{{ $t("views.system.accounts.server-description") }}
 			</p>
-			<hr >
+			<hr />
 			<section id="filtering">
 				<v-row>
 					<v-col :size="4">

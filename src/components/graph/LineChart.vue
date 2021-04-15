@@ -21,9 +21,9 @@
   -->
 
 <script lang="ts">
-import {Component} from "vue-property-decorator";
-import {Line, mixins as Mix} from "vue-chartjs";
-import {mixins} from "vue-class-component";
+import { Component } from "vue-property-decorator";
+import { Line, mixins as Mix } from "vue-chartjs";
+import { mixins } from "vue-class-component";
 
 @Component<LineChart>({
 	extends: Line,
@@ -31,6 +31,5 @@ import {mixins} from "vue-class-component";
 		((this as unknown) as Line).renderChart(this.chartData, {});
 	},
 })
-export default class LineChart extends mixins(Mix.reactiveProp) {
-}
+export default class LineChart extends mixins(Mix.reactiveProp) {}
 </script>

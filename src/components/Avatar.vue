@@ -30,11 +30,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class Avatar extends Vue {
-	@Prop({type: String}) private readonly src!: string;
+	@Prop({ type: String }) private readonly src!: string;
 }
 </script>
 <style lang="scss" scoped>

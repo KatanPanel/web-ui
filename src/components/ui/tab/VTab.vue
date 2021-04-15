@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue, Watch} from "vue-property-decorator";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 import VTabs from "@/components/ui/tab/VTabs.vue";
 import VTabView from "@/components/ui/tab/VTabView.vue";
 
@@ -35,6 +35,7 @@ import VTabView from "@/components/ui/tab/VTabView.vue";
 export default class VTab extends Vue {
 	@Prop({ type: String, required: true }) public readonly tab!: string;
 	@Prop({ type: Boolean, default: false }) public readonly active!: boolean;
+
 	public state = this.active;
 	public view!: VTabView;
 

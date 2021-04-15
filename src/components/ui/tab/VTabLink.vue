@@ -21,7 +21,7 @@
   -->
 
 <template>
-	<router-link :to="to" class="v--tab" tag="li">
+	<router-link :to="to" tag="li" class="v--tab">
 		<a>
 			<slot />
 		</a>
@@ -29,13 +29,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop } from "vue-property-decorator";
-import { mixins } from "vue-class-component";
-import WindowMixin from "@/mixins/window";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import { RawLocation } from "vue-router";
 
 @Component
-export default class VTabLink extends mixins(WindowMixin) {
+export default class VTabLink extends Vue {
 	@Prop({ type: Object, required: true }) private readonly to!: RawLocation;
 }
 </script>

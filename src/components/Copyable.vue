@@ -30,13 +30,13 @@
 		:style="{ cursor: 'pointer', zIndex: 1 }"
 		@click="onClick"
 	>
-		<slot/>
+		<slot />
 	</span>
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
-import {copyValue} from "@/utils/dom";
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { copyValue } from "@/utils/dom";
 
 @Component<Copyable>({
 	beforeDestroy(): void {
@@ -44,7 +44,7 @@ import {copyValue} from "@/utils/dom";
 	},
 })
 export default class Copyable extends Vue {
-	@Prop({type: String, required: true}) private readonly copyValue!: string;
+	@Prop({ type: String, required: true }) private readonly copyValue!: string;
 	private copied = false;
 	private error: string | null = null;
 	private scheduler: number | null = null;
@@ -53,8 +53,8 @@ export default class Copyable extends Vue {
 		return this.error !== null
 			? this.error
 			: this.copied
-				? (this.$i18n.t("ui.copyable.copied") as string)
-				: (this.$i18n.t("ui.copyable.click-to-copy") as string);
+			? (this.$i18n.t("ui.copyable.copied") as string)
+			: (this.$i18n.t("ui.copyable.click-to-copy") as string);
 	}
 
 	updateClipboard(): void {

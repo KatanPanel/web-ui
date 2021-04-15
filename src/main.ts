@@ -40,9 +40,6 @@ import { ERROR_HANDLER_LOG_TAG } from "@/logging";
 import api from "@/api";
 import { isUndefined } from "@/utils/any";
 
-console.log("API: ", process.env.VUE_APP_API_URL);
-console.log("Gateway: ", process.env.VUE_APP_GATEWAY_URL);
-
 Vue.config.errorHandler = (err: Error, vm: Vue, info: string) => {
 	vm.$log.error({
 		tag: ERROR_HANDLER_LOG_TAG,

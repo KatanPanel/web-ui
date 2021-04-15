@@ -29,7 +29,7 @@
 			>
 				{{
 					$t(
-						"views.advanced.settings.performance.server-resources-update-rate.values.real-time"
+						"views.my-account.performance.server-resources-update-rate.values.real-time"
 					)
 				}}
 			</v-field>
@@ -41,7 +41,7 @@
 			>
 				{{
 					$t(
-						"views.advanced.settings.performance.server-resources-update-rate.values.every-x-seconds"
+						"views.my-account.performance.server-resources-update-rate.values.every-x-seconds"
 					)
 				}}
 				<RecommendedOption />
@@ -56,7 +56,7 @@
 				<v-label
 					>{{
 						$t(
-							"views.advanced.settings.performance.server-resources-update-rate.define-x-seconds",
+							"views.my-account.performance.server-resources-update-rate.define-x-seconds",
 							{
 								max: MAX_RESOURCE_UPDATE_TIME_VALUE,
 							}
@@ -92,7 +92,7 @@
 	</div>
 </template>
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import VField from "@/components/ui/field/VField.vue";
 import VFieldList from "@/components/ui/field/VFieldList.vue";
 import VBoxHeader from "@/components/ui/box/VBoxHeader.vue";
@@ -108,7 +108,7 @@ import {
 	updateClientSettings,
 } from "@/common/client-settings";
 import RecommendedOption from "@/components/advanced/settings/performance/RecommendedOption.vue";
-import {nullToUndefined, undefinedToNull} from "@/utils/any";
+import { nullToUndefined, undefinedToNull } from "@/utils/any";
 
 @Component({
 	components: {

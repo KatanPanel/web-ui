@@ -45,15 +45,15 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
-import {getClientSettings} from "@/common/client-settings";
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { getClientSettings } from "@/common/client-settings";
 import VForm from "@/components/ui/form/VForm.vue";
 import VInput from "@/components/ui/form/VInput.vue";
-import {getWebSocket} from "@/store";
-import {smoothScroll} from "@/utils/dom";
+import { getWebSocket } from "@/store";
+import { smoothScroll } from "@/utils/dom";
 
 @Component({
-	components: {VInput, VForm},
+	components: { VInput, VForm },
 	created(): void {
 		const socket = getWebSocket();
 		const vm = this as ServerConsoleContent;
@@ -104,8 +104,8 @@ import {smoothScroll} from "@/utils/dom";
 	},
 })
 export default class ServerConsoleContent extends Vue {
-	@Prop({type: String, default: "default"}) private readonly mode!: string;
-	@Prop({type: Number, required: true}) private readonly serverId!: number;
+	@Prop({ type: String, default: "default" }) private readonly mode!: string;
+	@Prop({ type: Number, required: true }) private readonly serverId!: number;
 
 	private logsFetchingState = 0;
 	private logs: any[] | null = null;

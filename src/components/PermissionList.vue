@@ -22,14 +22,13 @@
 
 <template>
 	<div class="permission-list">
-		<slot/>
+		<slot />
 	</div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class PermissionList extends Vue {
-}
+export default class PermissionList extends Vue {}
 </script>

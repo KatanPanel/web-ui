@@ -20,12 +20,37 @@
  * SOFTWARE.
  */
 
-import Vue from "vue";
-import LoginLayout from "@/layouts/LoginLayout.vue";
-import { LOGIN_LAYOUT } from "@/layouts";
+import Vue, { DirectiveOptions, VNode } from "vue";
+import { DirectiveBinding } from "vue/types/options";
+import { isUndefined } from "@/utils/any";
 
-function register(name: string, instance: typeof Vue): void {
-	Vue.component(`${name}-layout`, instance);
+type OutsideClickableElement = HTMLElement & {
+	clickOutsideListener: () => any;
+} & any;
+
+function bind(
+	el: OutsideClickableElement,
+	binding: DirectiveBinding,
+	node: VNode
+): void {
+	el.clickOutsideEvent = (event: Event) => {
+		// check if the click was outside the element and his children
+		if (!(el == event.target || el.contains(event.target))) {
+			const ctx: (Vue & any) | undefined = node.context;
+			if (isUndefined(ctx)) return;
+
+			ctx[binding.expression](event);
+		}
+	};
+
+	document.body.addEventListener("click", el.clickOutsideEvent);
 }
 
-register(LOGIN_LAYOUT, LoginLayout);
+function unbind(el: OutsideClickableElement): void {
+	document.removeEventListener("click", el.clickOutsideListener);
+}
+
+export const ClickOutsideDirective: DirectiveOptions = {
+	bind,
+	unbind,
+};

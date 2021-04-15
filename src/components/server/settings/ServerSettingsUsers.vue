@@ -24,7 +24,7 @@
 	<div class="server-settings-users">
 		<p class="v--text-muted">
 			{{
-				$t("views.server.settings.users.info", {server: server.name})
+				$t("views.server.settings.users.info", { server: server.name })
 			}}
 		</p>
 		<p class="v--text-muted">
@@ -41,7 +41,7 @@
 				</small>
 				<ul class="users">
 					<li v-for="user in users" :key="user.id" class="user">
-						<Avatar :src="user.avatar" class="user-avatar"/>
+						<Avatar :src="user.avatar" class="user-avatar" />
 						<div class="user-info">
 							<div class="user-name">{{ user.username }}</div>
 						</div>
@@ -56,7 +56,7 @@
 									)
 								"
 							>
-								<v-icon name="dot-horizontal"/>
+								<v-icon name="dot-horizontal" />
 							</div>
 							<template v-slot:items>
 								<v-dropdown-item @click="copyUserId(user)">
@@ -92,8 +92,8 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
-import {AxiosResponse} from "axios";
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { AxiosResponse } from "axios";
 import SystemAccount from "@/components/system/SystemAccount.vue";
 import Avatar from "@/components/Avatar.vue";
 import VRow from "@/components/ui/layout/VRow.vue";
@@ -101,7 +101,7 @@ import VCol from "@/components/ui/layout/VCol.vue";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VDropdown from "@/components/ui/dropdown/VDropdown.vue";
 import VDropdownItem from "@/components/ui/dropdown/VDropdownItem.vue";
-import {copyValue} from "@/utils/dom";
+import { copyValue } from "@/utils/dom";
 
 @Component<ServerSettingsUsers>({
 	components: {
@@ -126,7 +126,7 @@ import {copyValue} from "@/utils/dom";
 export default class ServerSettingsUsers extends Vue {
 	users: any[] | null = null;
 	roles: any[] | null = null;
-	@Prop({type: Object, required: true}) private readonly server!: any;
+	@Prop({ type: Object, required: true }) private readonly server!: any;
 
 	copyUserId(user: any): void {
 		copyValue(user.id);

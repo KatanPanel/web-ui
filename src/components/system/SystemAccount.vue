@@ -181,7 +181,7 @@
 						>
 							{{
 								$t("views.system.accounts.see-more", {
-									username: account.username
+									username: account.username,
 								})
 							}}
 						</v-button>

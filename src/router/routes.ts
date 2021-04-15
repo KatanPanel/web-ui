@@ -21,11 +21,10 @@
  */
 
 import { NavigationGuardNext, Route, RouteConfig } from "vue-router";
-import { LOGIN_LAYOUT, PANEL_LAYOUT } from "@/layouts";
+import { LOGIN_LAYOUT } from "@/layouts";
 import Panel from "@/views/Panel.vue";
 import { AuthenticatedOnlyGuard } from "@/guards/authenticated-only";
 import Home from "@/views/Home.vue";
-import Account from "@/views/account/Account.vue";
 import Login from "@/views/auth/Login.vue";
 import { vm } from "@/main";
 import { AUTH_TOKEN_KEY } from "@/api/auth";
@@ -46,7 +45,6 @@ export default [
 	{
 		path: "/",
 		component: Panel,
-		meta: { layout: PANEL_LAYOUT },
 		beforeEnter: AuthenticatedOnlyGuard,
 		children: [
 			{
@@ -61,8 +59,34 @@ export default [
 			},
 			{
 				path: "account",
-				name: "account",
-				component: Account,
+				component: importVM("my-account/MyAccount"),
+				children: [
+					{
+						path: "",
+						name: "account",
+						component: importVM("my-account/MyAccountDetails"),
+					},
+					{
+						path: "appearence",
+						name: "account.appearence",
+						component: importVM("my-account/MyAccountAppearence"),
+					},
+					{
+						path: "language",
+						name: "account.language",
+						component: importVM("my-account/MyAccountLanguage"),
+					},
+					{
+						path: "performance",
+						name: "account.performance",
+						component: importVM("my-account/MyAccountPerformance"),
+					},
+					{
+						path: "advanced",
+						name: "account.advanced",
+						component: importVM("my-account/MyAccountAdvanced"),
+					},
+				],
 			},
 			{
 				path: "server/:serverId",
