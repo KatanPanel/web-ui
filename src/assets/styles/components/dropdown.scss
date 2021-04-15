@@ -58,7 +58,7 @@
 		box-shadow: var(--kt-background-accent) 0 0 20px 4px;
 		border-radius: 4px;
 		width: max-content;
-		transform: translateY(10%);
+		transform: translate(-50%, 10%);
 		list-style: none;
 		z-index: 1001;
 		padding: 4px;
@@ -69,17 +69,26 @@
 			margin: 4px;
 			border-radius: 4px;
 			font-weight: 500;
+			justify-content: flex-start;
+			color: var(--kt-muted-color);
 
 			&:hover {
-				background-color: var(--kt-primary-color);
-				color: var(--kt-primary-text-color);
+				background-color: var(--kt-background-tertiary);
 				cursor: pointer;
+				color: var(--kt-text-color);
 			}
 
-			.v--icon {
-				margin-left: -4px;
-				margin-right: 12px;
+			a {
+				display: block;
+				height: 100%;
+				width: 100%;
+				position: relative;
+				text-decoration: none;
 			}
+		}
+
+		hr {
+			margin: 4px -4px;
 		}
 	}
 }

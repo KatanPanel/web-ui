@@ -36,10 +36,11 @@
 	--kt-text-color: #4f5660;
 	--kt-background: #fafafa;
 	--kt-background-secondary: #ffffff;
-	--kt-background-tertiary: rgba(0, 0, 0, 0.01);
-	--kt-background-accent: #eee;
+	--kt-background-tertiary: #f6f6f6;
+	--kt-background-accent: #f1f1f1;
 	--kt-panel-sidebar: var(--kt-primary-color);
-	--kt-border-color: #f1f1f1;
+	--kt-border-color: #eee;
+	--kt-border-accent: #ddd;
 	--kt-muted-color: gray;
 	--kt-muted-darker-color: darkgray;
 	--kt-shadow: rgba(0, 0, 0, 0.12);
@@ -53,8 +54,9 @@
 	--kt-background-secondary: #29303a;
 	--kt-background-tertiary: #252b33;
 	--kt-background-accent: #1e2329;
-	--kt-panel-sidebar: var(--kt-background-accent);
+	--kt-panel-sidebar: #222830;
 	--kt-border-color: #333b47;
+	--kt-border-accent: #414b5b;
 	--kt-muted-color: #bbb;
 	--kt-muted-darker-color: #999;
 	--kt-shadow: rgba(255, 255, 255, 0.06);

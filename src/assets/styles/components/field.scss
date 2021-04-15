@@ -53,6 +53,18 @@
 	&.v--field-selected {
 		background-color: var(--kt-background-accent);
 
+		.v--field-radio::after {
+			content: "";
+			width: 12px;
+			height: 12px;
+			background-color: var(--kt-primary-color);
+			border-radius: 50%;
+		}
+	}
+
+	&[active] {
+		background-color: var(--kt-background-accent);
+
 		.v--field-radio {
 			background-color: var(--kt-primary-color);
 			box-shadow: none;
@@ -60,19 +72,6 @@
 			svg {
 				fill: #fff;
 			}
-		}
-	}
-
-	&[active] {
-		background-color: var(--kt-background-accent);
-
-		.v--field-radio::after {
-			content: "";
-			width: 12px;
-			height: 12px;
-			background-color: var(--kt-primary-color);
-			box-shadow: var(--kt-primary-color) 0 0 12px 0;
-			border-radius: 50%;
 		}
 	}
 
@@ -84,7 +83,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		box-shadow: inset var(--kt-border-color) 0 0 4px 0;
+		box-shadow: inset var(--kt-shadow) 0 0 4px 1px;
 
 		svg {
 			width: 12px;

@@ -42,16 +42,21 @@
 		color: var(--kt-muted-darker-color);
 	}
 
-	&:focus {
+	&:not([readonly]):focus {
 		border-color: var(--kt-primary-color);
 	}
 
-	&:not(:focus):hover {
-		border-color: var(--kt-background-accent);
+	&:not([disabled]):not(:focus):hover {
+		border-color: var(--kt-border-accent);
 	}
 
-	&:disabled {
-		border-color: var(--kt-danger-color);
+	&[readonly] {
+		user-select: none;
+		cursor: default;
+	}
+
+	&[disabled] {
+		opacity: 0.54;
 	}
 }
 

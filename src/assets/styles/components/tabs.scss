@@ -36,11 +36,13 @@
 	font-weight: 500;
 	font-size: 14px;
 	color: var(--kt-muted-darker-color);
+	padding: 8px 16px;
+	border-bottom: 2px solid transparent;
 
 	a {
-		padding: 8px 16px 8px 16px;
-		border-bottom: 2px solid transparent;
 		display: inline-block;
+		margin: -8px -16px;
+		padding: 8px 16px;
 
 		&:hover {
 			text-decoration: none;
@@ -51,10 +53,7 @@
 	&.router-link-exact-active {
 		color: var(--kt-text-color);
 		font-weight: 600;
-
-		a {
-			border-bottom-color: var(--kt-primary-color);
-		}
+		border-bottom-color: var(--kt-primary-color);
 
 		svg {
 			fill: var(--kt-primary-color);
