@@ -7,5 +7,5 @@ services:
             - "1080:80"
             - "1433:433"
         environment:
-            - VUE_APP_GATEWAY_URL=ws://0.0.0.0:1080/
-            - VUE_APP_API_URL=http://0.0.0.0:1080/
+            - VUE_APP_KATAN_SERVER_API=http://0.0.0.0:1080/
+            - VUE_APP_KATAN_SERVER_WS=ws://0.0.0.0:1080/
