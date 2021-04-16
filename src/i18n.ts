@@ -155,7 +155,11 @@ export async function loadLanguage(
 
 			if (fallback.length === 0)
 				return await loadLanguage(FALLBACK_LANGUAGE);
-			else return await loadLanguage(fallback[0], fallback.slice(1));
+			else
+				return await loadLanguage(
+					fallback[0].toLowerCase(),
+					fallback.slice(1)
+				);
 		});
 }
 
