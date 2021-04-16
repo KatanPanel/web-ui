@@ -251,7 +251,7 @@
 				}
 			},
 			"advanced": {
-				"title": "User Settings",
+				"title": "Advanced",
 				"description": "Depending on the version of your client ({version}), some configurations may be in the testing phase or badly of the legs, therefore, they may not work as they should or as you expect.",
 				"description-detail": "If you are the Bigfoot or notice something strange happening, contact the site administrators.",
 				"current-version": "Current version of your client",
