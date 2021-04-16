@@ -24,16 +24,12 @@ import Vue, { DirectiveOptions, VNode } from "vue";
 import { DirectiveBinding } from "vue/types/options";
 import { isUndefined } from "@/utils/any";
 
-type OutsideClickableElement = HTMLElement & {
-	clickOutsideListener: () => any;
-} & any;
-
 function bind(
-	el: OutsideClickableElement,
+	el: HTMLElement & any,
 	binding: DirectiveBinding,
 	node: VNode
 ): void {
-	el.clickOutsideEvent = (event: Event) => {
+	el._clickOutsideListener = (event: Event) => {
 		// check if the click was outside the element and his children
 		if (!(el == event.target || el.contains(event.target))) {
 			const ctx: (Vue & any) | undefined = node.context;
@@ -43,11 +39,11 @@ function bind(
 		}
 	};
 
-	document.body.addEventListener("click", el.clickOutsideEvent);
+	document.body.addEventListener("click", el._clickOutsideListener);
 }
 
-function unbind(el: OutsideClickableElement): void {
-	document.removeEventListener("click", el.clickOutsideListener);
+function unbind(el: HTMLElement & any): void {
+	document.removeEventListener("click", el._clickOutsideListener);
 }
 
 export const ClickOutsideDirective: DirectiveOptions = {
