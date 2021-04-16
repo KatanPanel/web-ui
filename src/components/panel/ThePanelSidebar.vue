@@ -153,7 +153,7 @@ $border-radius: 64px;
 		overflow-x: hidden;
 		overflow-y: auto;
 		box-shadow: rgba(0, 0, 0, 0.12) 0 0 6px 0;
-		background-color: var(--kt-panel-sidebar);
+		background-color: var(--kt-sidebar-background);
 
 		&::-webkit-scrollbar {
 			width: 6px;
@@ -199,8 +199,20 @@ $border-radius: 64px;
 					}
 				}
 
-				&:not(.sidebar-logo):not(.ignore-route).router-link-active a {
-					background-color: var(--kt-primary-darker-color);
+				&:not(.sidebar-logo) {
+					&:hover a {
+						background-color: var(--kt-sidebar-link-hover);
+					}
+
+					&.router-link-exact-active a {
+						background-color: var(
+							--kt-sidebar-link-active-background
+						);
+
+						svg {
+							fill: var(--kt-sidebar-link-active-color);
+						}
+					}
 				}
 			}
 
