@@ -35,15 +35,13 @@ vm.$website = {
 };
 
 function configValue(key: string): string {
-	return isDevelopmentMode ? process.env[key] : `$${key}`;
+	return isDevelopmentMode ? process.env[key.substr(1)] : key;
 }
 
 vm.$config = {
-	appName: configValue("VUE_APP_NAME"),
-	appVersion: configValue("VUE_APP_VERSION"),
-	appWebsite: configValue("VUE_APP_KATAN_WEBSITE"),
-	apiUrl: configValue("VUE_APP_KATAN_SERVER_API"),
-	wsUrl: configValue("VUE_APP_KATAN_SERVER_WS"),
+	appName: configValue("$VUE_APP_NAME"),
+	appVersion: configValue("$VUE_APP_VERSION"),
+	appWebsite: configValue("$VUE_APP_KATAN_WEBSITE"),
+	apiUrl: configValue("$VUE_APP_KATAN_SERVER_API"),
+	wsUrl: configValue("$VUE_APP_KATAN_SERVER_WS"),
 };
-
-console.log("config:", vm.$config);
