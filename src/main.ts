@@ -50,6 +50,7 @@ Vue.config.errorHandler = (err: Error, vm: Vue, info: string) => {
 
 const proto: Vue = Vue.prototype;
 proto.$api = api;
+
 let clientSettings: ClientSettings | undefined = undefined;
 
 // preload client settings if defined before
@@ -79,4 +80,6 @@ export const vm = new Vue({
 	router,
 	i18n,
 	render: (h) => h(App),
-}).$mount("#app");
+});
+
+vm.$mount("#app");

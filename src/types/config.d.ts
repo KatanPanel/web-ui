@@ -20,30 +20,10 @@
  * SOFTWARE.
  */
 
-import Vue from "vue";
-
-const isDevelopmentMode = process.env.NODE_ENV === "development";
-Vue.config.devtools = isDevelopmentMode;
-Vue.config.performance = isDevelopmentMode;
-Vue.config.productionTip = isDevelopmentMode;
-
-const vm: Vue = Vue.prototype;
-vm.$website = {
-	name: process.env.VUE_APP_NAME,
-	version: process.env.VUE_APP_VERSION,
-	url: process.env.VUE_APP_KATAN_WEBSITE,
+declare type Config = {
+	appName: string;
+	appVersion: string;
+	appWebsite: string;
+	apiUrl: string;
+	wsUrl: string;
 };
-
-function configValue(key: string): string {
-	return isDevelopmentMode ? process.env[key] : `$${key}`;
-}
-
-vm.$config = {
-	appName: configValue("VUE_APP_NAME"),
-	appVersion: configValue("VUE_APP_VERSION"),
-	appWebsite: configValue("VUE_APP_KATAN_WEBSITE"),
-	apiUrl: configValue("VUE_APP_KATAN_SERVER_API"),
-	wsUrl: configValue("VUE_APP_KATAN_SERVER_WS"),
-};
-
-console.log("config:", vm.$config);

@@ -48,7 +48,7 @@ Vue.use(Vue2Storage, {
 });
 
 Vue.use(VueMeta, { refreshOnceOnNavigation: true });
-Vue.use(VueNativeSock, process.env.VUE_APP_GATEWAY_URL, {
+Vue.use(VueNativeSock, Vue.prototype.$config.wsUrl, {
 	connectManually: true,
 	reconnection: true,
 	format: "json",

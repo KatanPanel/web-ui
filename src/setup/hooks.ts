@@ -21,13 +21,17 @@
  */
 
 import Vue from "vue";
-import Axios, {AxiosResponse} from "axios";
-import Consola, {ConsolaReporter, ConsolaReporterArgs, ConsolaReporterLogObject,} from "consola";
+import Axios, { AxiosResponse } from "axios";
+import Consola, {
+	ConsolaReporter,
+	ConsolaReporterArgs,
+	ConsolaReporterLogObject,
+} from "consola";
 import dayjs from "dayjs";
 import dayJsAdvancedFormat from "dayjs/plugin/advancedFormat";
 import dayJsLocalizedFormat from "dayjs/plugin/localizedFormat";
-import {ERROR_HANDLER_LOG_TAG} from "@/logging";
-import {requireVM} from "@/utils/build";
+import { ERROR_HANDLER_LOG_TAG } from "@/logging";
+import { requireVM } from "@/utils/build";
 
 const vm: Vue = Vue.prototype;
 vm.$isDevelopmentMode = process.env.NODE_ENV === "development";
@@ -46,7 +50,7 @@ vm.$helpers = {
 };
 
 vm.$http = Axios.create({
-	baseURL: process.env.VUE_APP_API_URL,
+	baseURL: vm.$config.apiUrl,
 	timeout: 5000,
 });
 vm.$http.interceptors.response.use(
