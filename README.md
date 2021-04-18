@@ -1,10 +1,18 @@
 <p align="center"><img src="https://i.imgur.com/A4T861z.png" alt="Katan Logo"/></p>
-<h1 align="center">Katan UI</h1>
+<p align="center">
+	<a href="https://github.com/KatanPanel/Katan">Katan</a>'s user interface is part of an MIT-licensed open source project.
+</p>
+
+<p align="center"><img src="https://imgur.com/9lNr4Zj.png" alt="Katan UI" /></p>
 
 ## Documentation
 
-Check out the [Official Katan Website](https://katanpanel.github.io/katan-website) for installation,
-building and configuration.
+Check out the [Official Katan Website](https://katanpanel.github.io/katan-website) for installation and configuration.
+
+## Stay in Touch
+All questions must be redirected to our support via Discord or email.
+
+* [Discord](https://discord.gg/Tg7TTfT5ej)
 
 ## License
 
