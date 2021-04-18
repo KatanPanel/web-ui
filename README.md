@@ -3,6 +3,8 @@
 	<a href="https://github.com/KatanPanel/Katan">Katan</a>'s user interface is part of an MIT-licensed open source project.
 </p>
 
+<hr>
+
 <p align="center"><img src="https://imgur.com/9lNr4Zj.png" alt="Katan UI" /></p>
 
 ## Documentation
