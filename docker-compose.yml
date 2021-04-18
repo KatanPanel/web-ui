@@ -1,11 +1,10 @@
 version: "3"
 services:
     katan-ui:
-        build: https://github.com/KatanPanel/katan-ui.git#dev
+        image: katanio/ui:latest
         container_name: katan-ui
         ports:
-            - "1080:80"
-            - "1433:433"
+            - "80:80"
         environment:
-            - VUE_APP_KATAN_SERVER_API=http://0.0.0.0:1080/
-            - VUE_APP_KATAN_SERVER_WS=ws://0.0.0.0:1080/
+            - VUE_APP_KATAN_SERVER_API=http://0.0.0.0:1000/
+            - VUE_APP_KATAN_SERVER_WS=ws://0.0.0.0:1000/
