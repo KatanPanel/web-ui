@@ -38,7 +38,7 @@ const loaded: string[] = [];
 const i18n = new VueI18n({
 	fallbackLocale: FALLBACK_LANGUAGE,
 	messages: {
-		[FALLBACK_LANGUAGE]: require(`@/lang/${FALLBACK_LANGUAGE}.json`),
+		[FALLBACK_LANGUAGE]: require(/* webpackChunkName: "lang-[request]" */ `@/lang/${FALLBACK_LANGUAGE}.json`),
 	},
 });
 
@@ -63,24 +63,21 @@ export async function updateLanguage(language: string): Promise<string> {
 	try {
 		locale = await importDayJSLocale(lower);
 	} catch (e) {
-		// try to load simplified locale name, ex: en_US -> en
+		// try to load simplified locale name, ex: en-US -> en
 		const separator = lower.indexOf("-");
 		if (separator)
 			locale = await importDayJSLocale(lower.substr(0, separator));
 		else {
 			vm.$log.error({
 				tag: I18N_LOG_TAG,
-				message: `Cannot load the translations for ${language} date and time.`,
+				message: `Couldn't load date & time translations for ${language} language.`,
+				args: [e],
 			});
 			return language;
 		}
 	}
 
 	dayjs.locale(locale);
-	vm.$log.info({
-		tag: I18N_LOG_TAG,
-		message: `Document language updated to ${language}.`,
-	});
 	document.querySelector("html")!.setAttribute("lang", language);
 	return language;
 }
@@ -95,7 +92,7 @@ export async function setLanguage(language: string): Promise<string> {
 	);
 
 	if (!supported) {
-		vm.$log.error({
+		vm.$log.warn({
 			tag: I18N_LOG_TAG,
 			message: `Unsupported language: ${language}.`,
 		});
@@ -149,7 +146,7 @@ export async function loadLanguage(
 		.catch(async (e) => {
 			vm.$log.error({
 				tag: I18N_LOG_TAG,
-				message: `Cannot load language ${language}.`,
+				message: `Unable load language ${language}.`,
 				args: [e],
 			});
 
