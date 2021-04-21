@@ -20,12 +20,12 @@
  * SOFTWARE.
  */
 
-import {Module} from "vuex";
-import state, {AuthState} from "@/store/modules/auth/state";
+import { Module } from "vuex";
+import state, { AuthState } from "@/store/modules/auth/state";
 import actions from "@/store/modules/auth/actions";
 import mutations from "@/store/modules/auth/mutations";
 import getters from "@/store/modules/auth/getters";
-import {RootState} from "@/store/state";
+import { RootState } from "@/store/state";
 
 export default {
 	actions,

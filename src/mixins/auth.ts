@@ -22,10 +22,14 @@
 
 import Vue from "vue";
 import Component from "vue-class-component";
-import {AUTH_MODULE} from "@/store";
-import {GET_ACCOUNT, GET_STORED_ACCOUNTS, IS_LOGGED_IN,} from "@/store/modules/auth/getters";
-import {dispatch, get} from "@/utils/vuex";
-import {AUTH_LOGOUT} from "@/store/modules/auth/actions";
+import { AUTH_MODULE } from "@/store";
+import {
+	GET_ACCOUNT,
+	GET_STORED_ACCOUNTS,
+	IS_LOGGED_IN,
+} from "@/store/modules/auth/getters";
+import { dispatch, get } from "@/utils/vuex";
+import { AUTH_LOGOUT } from "@/store/modules/auth/actions";
 
 /**
  * This mixin is used when the component needs to have information about the account that is currently logged on.

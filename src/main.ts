@@ -80,6 +80,10 @@ proto.$log.info(
 	`[Git] ${proto.$config.gitCommit} @ ${proto.$config.gitBranch}`
 );
 
+proto.$log.info(`[Date] LLLL: ${proto.$date(new Date(), "LLLL")}`);
+proto.$log.info(`[Date] PPPppp: ${proto.$date(new Date(), "PPPppp")}`);
+proto.$log.info(`[Date] PPPPpppp: ${proto.$date(new Date(), "PPPPpppp")}`);
+
 export const vm = new Vue({
 	store,
 	router,

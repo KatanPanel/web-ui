@@ -20,10 +20,13 @@
  * SOFTWARE.
  */
 
-import {Window} from "@/common/navigation/window";
-import {Route} from "vue-router";
-import {ClientSettings, defaultClientSettings,} from "@/common/client-settings";
-import {RawWebSocket} from "@/common/websocket/websocket";
+import { Window } from "@/common/navigation/window";
+import { Route } from "vue-router";
+import {
+	ClientSettings,
+	defaultClientSettings,
+} from "@/common/client-settings";
+import { RawWebSocket } from "@/common/websocket/websocket";
 
 export interface RootState {
 	socket: RawWebSocket;

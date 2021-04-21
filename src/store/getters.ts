@@ -20,12 +20,12 @@
  * SOFTWARE.
  */
 
-import {GetterTree} from "vuex";
-import {RootState} from "@/store/state";
-import {Window} from "@/common/navigation/window";
-import {Route} from "vue-router";
-import {RawWebSocket} from "@/common/websocket/websocket";
-import {ClientSettings} from "@/common/client-settings";
+import { GetterTree } from "vuex";
+import { RootState } from "@/store/state";
+import { Window } from "@/common/navigation/window";
+import { Route } from "vue-router";
+import { RawWebSocket } from "@/common/websocket/websocket";
+import { ClientSettings } from "@/common/client-settings";
 
 export const GET_SOCKET = "getSocket";
 export const GET_BACKEND_INFO = "getBackendInfo";

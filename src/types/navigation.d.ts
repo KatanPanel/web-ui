@@ -20,8 +20,8 @@
  * SOFTWARE.
  */
 
-import {Location, Route} from "vue-router";
-import {WindowState} from "@/common/navigation/window";
+import { Location, Route } from "vue-router";
+import { WindowState } from "@/common/navigation/window";
 
 declare const ClosedWindowState = "closed";
 declare const OpenWindowState = "open";

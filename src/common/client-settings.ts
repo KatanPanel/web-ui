@@ -20,10 +20,13 @@
  * SOFTWARE.
  */
 
-import {commit, get} from "@/utils/vuex";
-import {ROOT_MODULE} from "@/store";
-import {SAVE_CLIENT_SETTINGS, UPDATE_CLIENT_SETTINGS,} from "@/store/mutations";
-import {GET_CLIENT_SETTINGS} from "@/store/getters";
+import { commit, get } from "@/utils/vuex";
+import { ROOT_MODULE } from "@/store";
+import {
+	SAVE_CLIENT_SETTINGS,
+	UPDATE_CLIENT_SETTINGS,
+} from "@/store/mutations";
+import { GET_CLIENT_SETTINGS } from "@/store/getters";
 
 export const LIGHT_THEME = "light";
 export const DARK_THEME = "dark";

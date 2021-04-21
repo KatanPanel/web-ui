@@ -20,11 +20,11 @@
  * SOFTWARE.
  */
 
-import {ActionContext, ActionTree} from "vuex";
-import {AuthState} from "@/store/modules/auth/state";
-import {UPDATE_ACCOUNT, UPDATE_TOKEN} from "@/store/modules/auth/mutations";
-import {vm} from "@/main";
-import {AUTH_TOKEN_KEY} from "@/api/auth";
+import { ActionContext, ActionTree } from "vuex";
+import { AuthState } from "@/store/modules/auth/state";
+import { UPDATE_ACCOUNT, UPDATE_TOKEN } from "@/store/modules/auth/mutations";
+import { vm } from "@/main";
+import { AUTH_TOKEN_KEY } from "@/api/auth";
 
 export const AUTH_LOGIN = "login";
 export const AUTH_VERIFY = "verify";

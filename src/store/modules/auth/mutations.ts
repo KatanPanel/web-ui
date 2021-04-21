@@ -20,8 +20,8 @@
  * SOFTWARE.
  */
 
-import {AuthState} from "@/store/modules/auth/state";
-import {MutationTree} from "vuex";
+import { AuthState } from "@/store/modules/auth/state";
+import { MutationTree } from "vuex";
 
 export const UPDATE_TOKEN = "updateToken";
 export const UPDATE_ACCOUNT = "updateAccount";

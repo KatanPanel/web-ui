@@ -43,7 +43,7 @@
 							Minha conta
 						</router-link>
 					</v-dropdown-item>
-					<hr >
+					<hr />
 					<v-dropdown-item @click="$emit('logout')">
 						<span class="v--text-error">Terminar sessão</span>
 					</v-dropdown-item>
