@@ -26,11 +26,9 @@ import Consola, {
 	ConsolaReporterArgs,
 	ConsolaReporterLogObject,
 } from "consola";
-import { extend as dayjsExtend } from "dayjs";
-import dayJsAdvancedFormat from "dayjs/plugin/advancedFormat";
-import dayJsLocalizedFormat from "dayjs/plugin/localizedFormat";
 import { ERROR_HANDLER_LOG_TAG } from "@/logging";
 import { requireVM } from "@/utils/build";
+import { formatDate } from "@/i18n";
 
 const vm: Vue = Vue.prototype;
 vm.$isDevelopmentMode = process.env.NODE_ENV === "development";
@@ -64,9 +62,7 @@ vm.$http.interceptors.response.use(
 	}
 );
 
-dayjsExtend(dayJsAdvancedFormat);
-dayjsExtend(dayJsLocalizedFormat);
-vm.$time = require("dayjs");
+vm.$date = formatDate;
 
 vm.$log = Consola.create({
 	reporters: [

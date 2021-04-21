@@ -40,7 +40,7 @@
 				<a>{{ $t("views.my-account.sidebar.activity-history") }}</a>
 			</router-link>
 		</ul>
-		<hr >
+		<hr />
 		<ul>
 			<router-link :to="{ name: 'account.appearence' }" tag="li">
 				<a>{{ $t("views.my-account.sidebar.appearence") }}</a>
@@ -52,7 +52,7 @@
 				<a>{{ $t("views.my-account.sidebar.performance") }}</a>
 			</router-link>
 		</ul>
-		<hr >
+		<hr />
 		<ul>
 			<router-link :to="{ name: 'account.advanced' }" tag="li">
 				<a>{{ $t("views.my-account.sidebar.advanced") }}</a>

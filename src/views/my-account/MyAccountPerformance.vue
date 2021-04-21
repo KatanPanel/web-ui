@@ -28,7 +28,7 @@
 		<p class="v--text-muted">
 			{{ $t("views.my-account.performance.description") }}
 		</p>
-		<hr >
+		<hr />
 		<v-row>
 			<v-col :size="8">
 				<v-label
