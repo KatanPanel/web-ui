@@ -7,7 +7,7 @@
 FILE=$(echo -n $BUILD_PATH | tail -c +2)
 
 if [ -z "${DOCKER_TAG}" ]; then
-  docker build --build-arg=GIT_COMMIT=$(git rev-parse --short HEAD) --build-arg=GIT_BRANCH=$SOURCE_BRANCH -t $IMAGE_NAME -f $FILE .
+  docker build --build-arg GIT_COMMIT=$(git rev-parse --short HEAD) --build-arg GIT_BRANCH=$SOURCE_BRANCH -t $IMAGE_NAME -f $FILE .
 else
-  docker build --build-arg=GIT_COMMIT=$(git rev-parse --short HEAD) --build-arg=GIT_BRANCH=$DOCKER_TAG -t $IMAGE_NAME -f $FILE .
+  docker build --build-arg GIT_COMMIT=$(git rev-parse --short HEAD) --build-arg GIT_BRANCH=$DOCKER_TAG -t $IMAGE_NAME -f $FILE .
 fi
