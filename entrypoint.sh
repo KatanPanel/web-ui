@@ -41,5 +41,5 @@ do
   rm "$file".tmpl
 done
 
+echo "Katan UI is ready.";
 nginx -g 'daemon off;'
-echo "Application started.";
