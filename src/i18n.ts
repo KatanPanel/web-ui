@@ -28,7 +28,7 @@ import {
 	updateClientSettings,
 } from "@/common/client-settings";
 import supportedLanguages from "@/supported-languages.json";
-import dayjs from "dayjs";
+import { locale as dayjsLocale } from "dayjs";
 
 Vue.use(VueI18n);
 
@@ -77,8 +77,8 @@ export async function updateLanguage(language: string): Promise<string> {
 		}
 	}
 
-	dayjs.locale(locale);
-	document.querySelector("html")!.setAttribute("lang", language);
+	dayjsLocale(locale);
+	document.querySelector("html")?.setAttribute("lang", language);
 	return language;
 }
 

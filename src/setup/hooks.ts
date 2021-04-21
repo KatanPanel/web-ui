@@ -23,11 +23,10 @@
 import Vue from "vue";
 import Axios, { AxiosResponse } from "axios";
 import Consola, {
-	ConsolaReporter,
 	ConsolaReporterArgs,
 	ConsolaReporterLogObject,
 } from "consola";
-import dayjs from "dayjs";
+import { extend as dayjsExtend } from "dayjs";
 import dayJsAdvancedFormat from "dayjs/plugin/advancedFormat";
 import dayJsLocalizedFormat from "dayjs/plugin/localizedFormat";
 import { ERROR_HANDLER_LOG_TAG } from "@/logging";
@@ -65,43 +64,39 @@ vm.$http.interceptors.response.use(
 	}
 );
 
-dayjs.extend(dayJsAdvancedFormat);
-dayjs.extend(dayJsLocalizedFormat);
-vm.$time = dayjs;
-
-class KatanBrowserReporter implements ConsolaReporter {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	log(logObj: ConsolaReporterLogObject, _args: ConsolaReporterArgs): void {
-		const consoleLogFn =
-			logObj.level < 1
-				? console.error
-				: logObj.level === 1 && console.warn
-				? console.warn
-				: console.log;
-
-		const tag = logObj.tag || "";
-		const style = `
-      		color: #8854d0;
-      		border-radius: 0;
-      		font-weight: bold;
-      		text-transform: capitalize;
-    	`;
-
-		const badge = tag.length === 0 ? "%c" : "%c[" + tag + "] ";
-		if (typeof logObj.args[0] === "string") {
-			consoleLogFn(
-				`${badge}%c${logObj.args[0]}`,
-				style,
-				// Empty string as style resets to default console style
-				"",
-				...logObj.args.slice(1)
-			);
-		} else {
-			consoleLogFn(badge, style, ...logObj.args);
-		}
-	}
-}
+dayjsExtend(dayJsAdvancedFormat);
+dayjsExtend(dayJsLocalizedFormat);
+vm.$time = require("dayjs");
 
 vm.$log = Consola.create({
-	reporters: [new KatanBrowserReporter()],
+	reporters: [
+		{
+			log(
+				logObj: ConsolaReporterLogObject,
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				_args: ConsolaReporterArgs
+			): void {
+				const consoleLogFn =
+					logObj.level < 1
+						? console.error
+						: logObj.level === 1 && console.warn
+						? console.warn
+						: console.log;
+
+				const tag = logObj.tag || "";
+				const style = `color: #8854d0; border-radius: 0; font-weight: bold; text-transform: capitalize;`;
+				const badge = tag.length === 0 ? "%c" : "%c[" + tag + "] ";
+
+				typeof logObj.args[0] === "string"
+					? consoleLogFn(
+							`${badge}%c${logObj.args[0]}`,
+							style,
+							// Empty string as style resets to default console style
+							"",
+							...logObj.args.slice(1)
+					  )
+					: consoleLogFn(badge, style, ...logObj.args);
+			},
+		},
+	],
 });
