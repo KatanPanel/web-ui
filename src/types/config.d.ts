@@ -26,4 +26,6 @@ declare type Config = {
 	appWebsite: string;
 	apiUrl: string;
 	wsUrl: string;
+	gitCommit: string;
+	gitBranch: string;
 };

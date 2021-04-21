@@ -54,10 +54,11 @@ proto.$api = api;
 let clientSettings: ClientSettings | undefined = undefined;
 
 // preload client settings if defined before
-if (proto.$storage.has(CLIENT_SETTINGS_CACHE_KEY))
+if (proto.$storage.has(CLIENT_SETTINGS_CACHE_KEY)) {
 	updateClientSettings(
 		(clientSettings = proto.$storage.get(CLIENT_SETTINGS_CACHE_KEY))
 	);
+}
 
 // sets the default dark theme if it is set as a preference
 if (isUndefined(clientSettings?.theme)) {
@@ -74,6 +75,10 @@ if (isUndefined(clientSettings?.theme)) {
 		false
 	);
 }
+
+proto.$log.info(
+	`[Git] ${proto.$config.gitCommit} @ ${proto.$config.gitBranch}`
+);
 
 export const vm = new Vue({
 	store,

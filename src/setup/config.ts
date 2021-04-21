@@ -44,4 +44,6 @@ vm.$config = {
 	appWebsite: configValue("$VUE_APP_KATAN_WEBSITE"),
 	apiUrl: configValue("$VUE_APP_KATAN_SERVER_API"),
 	wsUrl: configValue("$VUE_APP_KATAN_SERVER_WS"),
+	gitCommit: configValue("$VUE_APP_KATAN_GIT_COMMIT"),
+	gitBranch: configValue("$VUE_APP_KATAN_GIT_BRANCH"),
 };
