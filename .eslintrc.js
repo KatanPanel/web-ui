@@ -25,6 +25,12 @@ module.exports = {
 		"vue/script-indent": ["error", "tab"],
 		"vue/max-attributes-per-line": "off",
 		"@typescript-eslint/no-explicit-any": "off",
+		"prettier/prettier": [
+			"error",
+			{
+				endOfLine: "auto",
+			},
+		],
 	},
 	overrides: [
 		{
@@ -38,11 +44,11 @@ module.exports = {
 		},
 	],
 	extends: [
+		"plugin:prettier/recommended",
 		"plugin:vue/strongly-recommended",
 		"eslint:recommended",
 		"@vue/typescript/recommended",
 		"@vue/prettier",
 		"@vue/prettier/@typescript-eslint",
-		"plugin:prettier/recommended",
 	],
 };
