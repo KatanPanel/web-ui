@@ -1,8 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const supportedLanguages = require("./src/supported-languages.json");
+const { ContextReplacementPlugin, IgnorePlugin } = require("webpack");
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { ContextReplacementPlugin } = require("webpack");
+const supportedLanguages = require("./src/supported-languages.json");
 
 process.env.VUE_APP_VERSION = require("./package.json").version;
 
@@ -20,12 +20,12 @@ module.exports = {
 		config
 			.plugin("context-replacement")
 			.use(ContextReplacementPlugin, [
-				/dayjs[/\\]locale$/,
+				/date-fns[/\\]/,
 				new RegExp(
-					supportedLanguages
-						.map((locale) => `${locale.tag}$`)
-						.join("|")
+					`[/\\\\](${supportedLanguages.join("|")})[/\\\\]index.js$`
 				),
 			]);
+
+		config.plugin("ignore-plugin").use(IgnorePlugin, [/moment$/]);
 	},
 };

@@ -135,7 +135,7 @@ export default class ServerConsoleContent extends Vue {
 		if (!tooltipTrigger) return {};
 
 		return {
-			content: this.$time(log.t).format("LLLL"),
+			content: this.$date(log.t, "LLLL"),
 			trigger: tooltipTrigger,
 		};
 	}

@@ -28,7 +28,7 @@ import {
 	updateClientSettings,
 } from "@/common/client-settings";
 import supportedLanguages from "@/supported-languages.json";
-import { locale as dayjsLocale } from "dayjs";
+import { format as formatDateFns } from "date-fns";
 
 Vue.use(VueI18n);
 
@@ -44,10 +44,10 @@ const i18n = new VueI18n({
 
 const vm: Vue = Vue.prototype;
 
-async function importDayJSLocale(code: string) {
-	return import(
-		/* webpackChunkName: "dayjs-locales-[request]" */ `dayjs/locale/${code}`
-	);
+export function formatDate(date: Date | number, style: string): string {
+	return formatDateFns(date, style, {
+		locale: require(`date-fns/locale/${i18n.locale}/index.js`),
+	});
 }
 
 /**
@@ -57,27 +57,6 @@ async function importDayJSLocale(code: string) {
  */
 export async function updateLanguage(language: string): Promise<string> {
 	(vm.$i18n || i18n).locale = language;
-
-	const lower = language.toLowerCase();
-	let locale;
-	try {
-		locale = await importDayJSLocale(lower);
-	} catch (e) {
-		// try to load simplified locale name, ex: en-US -> en
-		const separator = lower.indexOf("-");
-		if (separator)
-			locale = await importDayJSLocale(lower.substr(0, separator));
-		else {
-			vm.$log.error({
-				tag: I18N_LOG_TAG,
-				message: `Couldn't load date & time translations for ${language} language.`,
-				args: [e],
-			});
-			return language;
-		}
-	}
-
-	dayjsLocale(locale);
 	document.querySelector("html")?.setAttribute("lang", language);
 	return language;
 }

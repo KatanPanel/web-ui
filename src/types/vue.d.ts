@@ -41,7 +41,7 @@ declare module "vue/types/vue" {
 		$disconnect(): void;
 
 		$log: Consola;
-		$time: (() => any) | any;
+		$date: (date: Date | number, style: string) => string;
 		$website: {
 			name: string;
 			version: string;
