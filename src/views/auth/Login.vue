@@ -1,37 +1,35 @@
 <template>
 	<div>
-		<h2 class="v--text-align-center">
+		<h2 class="v--text-align-center v--m-bottom-0">
 			<b>{{ $t("views.login.title") }}</b>
 		</h2>
-		<p
-			class="v--text-align-center v--text-muted"
-			style="margin-top: -12px; margin-bottom: 12px"
-		>
+		<p class="v--text-align-center v--text-muted">
 			{{ $t("views.login.please-identify") }}
 		</p>
 		<p class="error v--text-error" v-if="error">
 			{{ $t(`errors.${error}`) }}
 		</p>
-		<v-form @submit.native.prevent="performLogin">
+		<v-form class="v--m-top-4" @submit.native.prevent="performLogin">
 			<v-input-group>
 				<v-label>{{ $t("views.login.fields.username") }}</v-label>
 				<v-input
 					v-model="username"
+					:label="'username'"
+					:required="true"
+					type="text"
 					autocomplete="username"
 					maxlength="32"
 					minlength="2"
-					required
-					type="text"
 				/>
 			</v-input-group>
 			<v-input-group class="v--m-top-1">
 				<v-label>{{ $t("views.login.fields.password") }}</v-label>
 				<v-input
 					v-model="password"
+					:label="'password'"
+					type="password"
 					autocomplete="current-password"
 					maxlength="32"
-					type="password"
-					value=""
 				/>
 			</v-input-group>
 			<v-flex-box class="v--m-top-4 v--flex-justify-end v--flex-column">
@@ -55,12 +53,15 @@
 				>
 					{{
 						$t("views.login.fields.confirm-logged-in", {
-							username: getAccountUsername,
+							username: getAccountUsername
 						})
 					}}
 				</v-button>
 			</v-flex-box>
 		</v-form>
+		<div class="version-info">
+			{{ $config.toVersionInfoString() }} · {{ actualLocale }}
+		</div>
 	</div>
 </template>
 <script lang="ts">
@@ -82,6 +83,7 @@ import { dispatch, get } from "@/utils/vuex";
 import { MetaInfo } from "vue-meta";
 import { GET_ACCOUNT, IS_LOGGED_IN } from "@/store/modules/auth/getters";
 import { AUTH_TOKEN_KEY } from "@/api/auth";
+import { getClientSettings } from "@/common/client-settings";
 
 @Component<Login>({
 	components: {
@@ -92,17 +94,21 @@ import { AUTH_TOKEN_KEY } from "@/api/auth";
 		VLabel,
 		VInputGroup,
 		VForm,
-		VButton,
+		VButton
 	},
 	metaInfo(): MetaInfo {
 		return generateMetaInfo("login");
-	},
+	}
 })
 export default class Login extends Vue {
 	private username = "";
 	private password = "";
 	private isLocked = false;
 	private error: string | null = null;
+
+	get actualLocale(): string {
+		return getClientSettings().language.name;
+	}
 
 	get getAccountUsername(): string {
 		return get(AUTH_MODULE, GET_ACCOUNT).username;
@@ -120,7 +126,7 @@ export default class Login extends Vue {
 
 		dispatch(AUTH_MODULE, AUTH_LOGIN, {
 			username: this.username,
-			password: this.password,
+			password: this.password
 		})
 			.then(async (token: string) => {
 				this.$storage.set(AUTH_TOKEN_KEY, token);
@@ -141,7 +147,7 @@ export default class Login extends Vue {
 					this.$log.error({
 						tag: AUTH_LOG_TAG,
 						message: `Authentication error: ${code}`,
-						args: [err],
+						args: [err]
 					});
 				}
 
@@ -160,3 +166,16 @@ export default class Login extends Vue {
 	}
 }
 </script>
+<style lang="scss" scoped>
+.version-info {
+	position: fixed;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 1.2rem;
+	text-align: center;
+	width: 100%;
+	opacity: 0.38;
+	font-size: 12px;
+	user-select: none;
+}
+</style>
