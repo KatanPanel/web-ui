@@ -22,55 +22,54 @@
 
 <template>
 	<li
-		@click="onClick"
-		:active="state"
-		v-bind="{ 'aria-selected': state }"
+		v-bind="{
+			'aria-selected': isActive,
+			'aria-controls': `tab-view-${tab}`,
+			role: link ? 'presentation' : 'tab'
+		}"
+		@click="updateTab"
+		:class="{ active: isActive }"
+		:tabindex="!disabled ? '0' : '-1'"
+		:disabled="disabled"
 		class="v--tab"
-		role="tab"
 	>
-		<slot />
+		<slot v-if="!link" />
+		<router-link v-else :to="link" role="tab">
+			<slot />
+		</router-link>
 	</li>
 </template>
-
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator"
-import VTabs from "@/components/ui/tab/VTabs.vue"
-import VTabView from "@/components/ui/tab/VTabView.vue"
+import { Component, InjectReactive, Prop, Vue } from "vue-property-decorator";
+import { RawLocation } from "vue-router";
+import { isUndefined } from "@/utils/any";
 
 @Component
 export default class VTab extends Vue {
-	@Prop({ type: String, required: true }) public readonly tab!: string
-	@Prop({ type: Boolean, default: false }) public readonly active!: boolean
+	@Prop({ type: String, required: true })
+	public readonly tab!: string;
 
-	public state = this.active
-	public view!: VTabView
+	@Prop({ type: Boolean, default: false })
+	public readonly active!: boolean;
 
-	mounted(): void {
-		const view = document.getElementById(`tab-view-${this.tab}`)
-		if (!view) throw new Error(`Tab view not found for ${this.tab}.`)
+	@Prop({ type: Boolean, default: false })
+	private readonly disabled!: boolean;
 
-		this.view = (view as never)["__vue__"] as VTabView
+	@Prop({ type: Object })
+	private readonly link!: RawLocation;
 
-		// ensure that the view is displayed if the tab is the active default.
-		this.view.active = this.state
+	@InjectReactive()
+	readonly currentTab!: string | null;
+
+	get isActive(): boolean {
+		// links have its own active state checking
+		if (!isUndefined(this.link)) return false;
+		return this.currentTab === this.tab;
 	}
 
-	@Watch("state")
-	private onStateChange(value: boolean): void {
-		this.view.active = value
-	}
-
-	private onClick(e: Event): void {
-		e.stopPropagation()
-
-		if (this.state) return
-
-		const parent = this.$parent
-		if (!(parent instanceof VTabs)) {
-			throw new Error("Cannot find tab root.")
-		}
-
-		parent.setTab(this)
+	updateTab(): void {
+		if (this.disabled || !isUndefined(this.link)) return;
+		this.$emit("update:tab", this.tab);
 	}
 }
 </script>

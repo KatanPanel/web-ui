@@ -22,8 +22,8 @@
 
 <template>
 	<div
-		v-show="active"
-		v-bind="{ 'aria-hidden': !active }"
+		v-show="isActive"
+		v-bind="{ 'aria-hidden': !isActive }"
 		:id="`tab-view-${tab}`"
 		class="v--tab-view"
 		role="tabpanel"
@@ -33,11 +33,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator"
+import { Component, InjectReactive, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class VTabView extends Vue {
-	@Prop({ type: String, required: true }) private readonly tab!: boolean
-	public active = false
+	@Prop({ type: String, required: true })
+	private readonly tab!: string;
+
+	@InjectReactive()
+	readonly currentTab!: string | null;
+
+	get isActive(): boolean {
+		return this.currentTab === this.tab;
+	}
 }
 </script>

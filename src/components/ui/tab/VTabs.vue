@@ -21,49 +21,49 @@
   -->
 
 <template>
-	<ul
-		:class="{ 'align-with-hr': alignWithHr }"
-		class="v--tabs"
-		role="tablist"
-	>
-		<slot />
-	</ul>
+	<div class="v--tabs-container" :class="{ 'align-with-hr': alignWithHr }">
+		<ul class="v--tabs" role="tablist">
+			<slot name="items" />
+		</ul>
+		<slot name="views" />
+	</div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator"
-import VTab from "@/components/ui/tab/VTab.vue"
+import { Component, Prop, ProvideReactive, Vue } from "vue-property-decorator";
+import { undefinedToNull } from "@/utils/any";
+import VTab from "@/components/ui/tab/VTab.vue";
 
-@Component
-export default class VTabs extends Vue {
-	@Prop({ type: Boolean, default: false })
-	private readonly alignWithHr!: boolean
-
-	private currentTab: VTab | null = null
-
+@Component<VTabs>({
 	mounted(): void {
-		let active: VTab | null = null
-		const tabs: Array<VTab> = this.$children
-			.filter((component: Vue) => component instanceof VTab)
-			.map((component: Vue) => component as VTab)
+		let active: string | undefined = undefined;
+		for (const child of this.children) {
+			child.$on("update:tab", (tab: string) => {
+				this.updateTab(tab);
+			});
 
-		for (const child of tabs) {
-			// checks if it already has an active tab, if any it will be used with the default one.
-			if (child.active) {
-				if (active) throw new Error("Cannot use multiple active tabs.")
-				active = child
-			}
+			if (active) break;
+			if (child.active) active = child.tab;
 		}
 
-		const next = active || tabs[0]
-		if (next) this.setTab(next)
+		this.updateTab(undefinedToNull(active || this.children[0]?.tab));
+	}
+})
+export default class VTabs extends Vue {
+	@Prop({ type: Boolean, default: false })
+	private readonly alignWithHr!: boolean;
+
+	@ProvideReactive()
+	currentTab: string | null = null;
+
+	get children(): VTab[] {
+		return this.$children
+			.filter((component: Vue) => component instanceof VTab)
+			.map((component: Vue) => component as VTab);
 	}
 
-	public setTab(tab: VTab): void {
-		if (this.currentTab) this.currentTab!.state = false
-
-		this.currentTab = tab
-		this.currentTab!.state = true
+	updateTab(tab: string | null): void {
+		this.currentTab = tab;
 	}
 }
 </script>
