@@ -21,29 +21,11 @@
  */
 
 import Vue from "vue";
+import VTooltip from "v-tooltip";
 
-const isDevelopmentMode = process.env.NODE_ENV === "development";
-Vue.config.devtools = isDevelopmentMode;
-Vue.config.performance = isDevelopmentMode;
-Vue.config.productionTip = isDevelopmentMode;
+Vue.use(VTooltip, {
+	defaultClass: "v--tooltip"
+});
 
-const vm: Vue = Vue.prototype;
-vm.$website = {
-	name: process.env.VUE_APP_NAME,
-	version: process.env.VUE_APP_VERSION,
-	url: process.env.VUE_APP_KATAN_WEBSITE,
-};
-
-function configValue(key: string): string {
-	return isDevelopmentMode ? process.env[key.substr(1)] : key;
-}
-
-vm.$config = {
-	appName: configValue("$VUE_APP_NAME"),
-	appVersion: configValue("$VUE_APP_VERSION"),
-	appWebsite: configValue("$VUE_APP_KATAN_WEBSITE"),
-	apiUrl: configValue("$VUE_APP_KATAN_SERVER_API"),
-	wsUrl: configValue("$VUE_APP_KATAN_SERVER_WS"),
-	gitCommit: configValue("$VUE_APP_KATAN_GIT_COMMIT"),
-	gitBranch: configValue("$VUE_APP_KATAN_GIT_BRANCH"),
-};
+// disable tooltips on mobile devices
+(VTooltip as any).enabled = window.innerWidth >= 768;

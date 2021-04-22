@@ -20,19 +20,16 @@
  * SOFTWARE.
  */
 
+import { formatDate } from "@/i18n";
 import Vue from "vue";
-import App from "./App.vue";
-import "./registerServiceWorker";
-import store from "./store";
-import router from "./router";
-import i18n from "@/i18n";
-import "./config";
+import { ConfigService } from "@/services/config-service";
+import api from "@/api";
+import "./logging";
+import "./helpers";
 
-export const vm = new Vue({
-	store,
-	router,
-	i18n,
-	render: (h) => h(App)
-});
+const vm = Vue.prototype;
 
-vm.$mount("#app");
+vm.$isDevelopmentMode = process.env.NODE_ENV === "development";
+vm.$date = formatDate;
+vm.$config = new ConfigService();
+vm.$api = api;

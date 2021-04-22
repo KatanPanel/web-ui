@@ -20,24 +20,20 @@
  * SOFTWARE.
  */
 
-import Vue from "vue";
-import Axios, { AxiosResponse } from "axios";
-import Consola, {
-	ConsolaReporterArgs,
-	ConsolaReporterLogObject
-} from "consola";
-import { ERROR_HANDLER_LOG_TAG } from "@/logging";
+import Filesize from "filesize";
+import i18n from "@/i18n";
 import { requireVM } from "@/utils/build";
-import i18n, { formatDate } from "@/i18n";
+import Vue from "vue";
 
 const vm: Vue = Vue.prototype;
-vm.$isDevelopmentMode = process.env.NODE_ENV === "development";
+
+const filesize = Filesize.partial({
+	locale: i18n.locale
+});
 
 vm.$helpers = {
 	filesize(value: number): string {
-		return require("filesize")(value, {
-			locale: i18n.locale
-		});
+		return filesize(value);
 	},
 	routeMappings: {
 		"server.overview": requireVM("server/ServerOverview"),
@@ -47,54 +43,3 @@ vm.$helpers = {
 		"server.settings": requireVM("server/ServerSettings")
 	}
 };
-
-vm.$http = Axios.create({
-	baseURL: vm.$config.apiUrl,
-	timeout: 5000
-});
-vm.$http.interceptors.response.use(
-	(response: AxiosResponse) => response,
-	(error: any) => {
-		vm.$log.error({
-			tag: ERROR_HANDLER_LOG_TAG,
-			args: [error]
-		});
-
-		throw error;
-	}
-);
-
-vm.$date = formatDate;
-
-vm.$log = Consola.create({
-	reporters: [
-		{
-			log(
-				logObj: ConsolaReporterLogObject,
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				_args: ConsolaReporterArgs
-			): void {
-				const consoleLogFn =
-					logObj.level < 1
-						? console.error
-						: logObj.level === 1 && console.warn
-						? console.warn
-						: console.log;
-
-				const tag = logObj.tag || "";
-				const style = `color: #8854d0; border-radius: 0; font-weight: bold; text-transform: capitalize;`;
-				const badge = tag.length === 0 ? "%c" : "%c[" + tag + "] ";
-
-				typeof logObj.args[0] === "string"
-					? consoleLogFn(
-							`${badge}%c${logObj.args[0]}`,
-							style,
-							// Empty string as style resets to default console style
-							"",
-							...logObj.args.slice(1)
-					  )
-					: consoleLogFn(badge, style, ...logObj.args);
-			}
-		}
-	]
-});

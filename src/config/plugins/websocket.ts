@@ -21,33 +21,16 @@
  */
 
 import Vue from "vue";
-import { Vue2Storage } from "vue2-storage";
-import VueMeta from "vue-meta";
 import VueNativeSock from "vue-native-websocket";
-import VueSvgInlinePlugin from "vue-svg-inline-plugin";
-import VTooltip from "v-tooltip";
+import { joinBySlash } from "@/utils/text";
+import store, { ROOT_MODULE } from "@/store";
 import {
 	ON_SOCKET_CLOSE,
 	ON_SOCKET_ERROR,
 	ON_SOCKET_MESSAGE,
-	ON_SOCKET_OPEN,
+	ON_SOCKET_OPEN
 } from "@/store/mutations";
-import store, { ROOT_MODULE } from "@/store";
-import { joinBySlash } from "@/utils/text";
-import VModal from "vue-js-modal/dist/index.nocss.js";
-import { VueJSModalOptions } from "vue-js-modal";
 
-Vue.use<VueJSModalOptions>(VModal, {
-	dialog: false,
-});
-Vue.use(VueSvgInlinePlugin);
-Vue.use(Vue2Storage, {
-	prefix: "katan_",
-	driver: "sessionStorage",
-	ttl: 60 * 60 * 24 * 1000,
-});
-
-Vue.use(VueMeta, { refreshOnceOnNavigation: true });
 Vue.use(VueNativeSock, Vue.prototype.$config.wsUrl, {
 	connectManually: true,
 	reconnection: true,
@@ -56,14 +39,7 @@ Vue.use(VueNativeSock, Vue.prototype.$config.wsUrl, {
 		SOCKET_ONOPEN: joinBySlash(ROOT_MODULE, ON_SOCKET_OPEN),
 		SOCKET_ONCLOSE: joinBySlash(ROOT_MODULE, ON_SOCKET_CLOSE),
 		SOCKET_ONERROR: joinBySlash(ROOT_MODULE, ON_SOCKET_ERROR),
-		SOCKET_ONMESSAGE: joinBySlash(ROOT_MODULE, ON_SOCKET_MESSAGE),
+		SOCKET_ONMESSAGE: joinBySlash(ROOT_MODULE, ON_SOCKET_MESSAGE)
 	},
-	store,
+	store
 });
-
-Vue.use(VTooltip, {
-	defaultClass: "v--tooltip",
-});
-
-// disable tooltips on mobile devices
-(VTooltip as any).enabled = window.innerWidth >= 768;

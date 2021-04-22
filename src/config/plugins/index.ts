@@ -21,18 +21,24 @@
  */
 
 import Vue from "vue";
-import App from "./App.vue";
-import "./registerServiceWorker";
-import store from "./store";
-import router from "./router";
-import i18n from "@/i18n";
-import "./config";
+import { Vue2Storage } from "vue2-storage";
+import VueMeta from "vue-meta";
+import VueSvgInlinePlugin from "vue-svg-inline-plugin";
+import VModal from "vue-js-modal/dist/index.nocss.js";
+import { VueJSModalOptions } from "vue-js-modal";
+import { VueIocPlugin } from "@vue-ioc/core";
+import "./websocket";
+import "./tooltip";
 
-export const vm = new Vue({
-	store,
-	router,
-	i18n,
-	render: (h) => h(App)
+Vue.use(VueIocPlugin);
+Vue.use<VueJSModalOptions>(VModal, {
+	dialog: false
+});
+Vue.use(VueSvgInlinePlugin);
+Vue.use(Vue2Storage, {
+	prefix: "katan_",
+	driver: "sessionStorage",
+	ttl: 60 * 60 * 24 * 1000
 });
 
-vm.$mount("#app");
+Vue.use(VueMeta, { refreshOnceOnNavigation: true });

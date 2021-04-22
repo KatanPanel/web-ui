@@ -20,19 +20,41 @@
  * SOFTWARE.
  */
 
+import Consola, {
+	ConsolaReporterArgs,
+	ConsolaReporterLogObject
+} from "consola";
 import Vue from "vue";
-import App from "./App.vue";
-import "./registerServiceWorker";
-import store from "./store";
-import router from "./router";
-import i18n from "@/i18n";
-import "./config";
 
-export const vm = new Vue({
-	store,
-	router,
-	i18n,
-	render: (h) => h(App)
+Vue.prototype.$log = Consola.create({
+	reporters: [
+		{
+			log(
+				logObj: ConsolaReporterLogObject,
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				_args: ConsolaReporterArgs
+			): void {
+				const consoleLogFn =
+					logObj.level < 1
+						? console.error
+						: logObj.level === 1 && console.warn
+						? console.warn
+						: console.log;
+
+				const tag = logObj.tag || "";
+				const style = `color: #8854d0; border-radius: 0; font-weight: bold; text-transform: capitalize;`;
+				const badge = tag.length === 0 ? "%c" : "%c[" + tag + "] ";
+
+				typeof logObj.args[0] === "string"
+					? consoleLogFn(
+							`${badge}%c${logObj.args[0]}`,
+							style,
+							// Empty string as style resets to default console style
+							"",
+							...logObj.args.slice(1)
+					  )
+					: consoleLogFn(badge, style, ...logObj.args);
+			}
+		}
+	]
 });
-
-vm.$mount("#app");

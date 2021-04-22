@@ -20,19 +20,35 @@
  * SOFTWARE.
  */
 
+import {
+	ClientSettings,
+	DARK_THEME,
+	updateClientSettings
+} from "@/common/client-settings";
+import { CLIENT_SETTINGS_CACHE_KEY } from "@/store";
+import { isUndefined } from "@/utils/any";
 import Vue from "vue";
-import App from "./App.vue";
-import "./registerServiceWorker";
-import store from "./store";
-import router from "./router";
-import i18n from "@/i18n";
-import "./config";
 
-export const vm = new Vue({
-	store,
-	router,
-	i18n,
-	render: (h) => h(App)
-});
+const vm = Vue.prototype;
+let clientSettings: ClientSettings | undefined = undefined;
 
-vm.$mount("#app");
+// preload client settings if defined before
+if (vm.$storage.has(CLIENT_SETTINGS_CACHE_KEY)) {
+	updateClientSettings(
+		(clientSettings = vm.$storage.get(CLIENT_SETTINGS_CACHE_KEY))
+	);
+}
+
+// sets the default dark theme if it is set as a preference
+if (isUndefined(clientSettings?.theme)) {
+	const useDarkTheme =
+		window.matchMedia &&
+		window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+	updateClientSettings(
+		{
+			theme: useDarkTheme ? DARK_THEME : null /* null = machine default */
+		},
+		false
+	);
+}

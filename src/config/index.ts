@@ -21,18 +21,21 @@
  */
 
 import Vue from "vue";
-import App from "./App.vue";
-import "./registerServiceWorker";
-import store from "./store";
-import router from "./router";
-import i18n from "@/i18n";
-import "./config";
+import "./directives";
+import "./hooks";
+import "./plugins";
+import "./hooks/client-settings";
+import "./layouts";
+import { ERROR_HANDLER_LOG_TAG } from "@/logging";
 
-export const vm = new Vue({
-	store,
-	router,
-	i18n,
-	render: (h) => h(App)
-});
-
-vm.$mount("#app");
+const isDevelopmentMode = process.env.NODE_ENV === "development";
+Vue.config.devtools = isDevelopmentMode;
+Vue.config.performance = isDevelopmentMode;
+Vue.config.productionTip = isDevelopmentMode;
+Vue.config.errorHandler = (err: Error, vm: Vue, info: string) => {
+	vm.$log.error({
+		tag: ERROR_HANDLER_LOG_TAG,
+		message: info,
+		args: [err]
+	});
+};
