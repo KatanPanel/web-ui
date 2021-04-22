@@ -40,7 +40,7 @@ export default [
 			vm.$api.auth
 				.verify(vm.$storage.get(AUTH_TOKEN_KEY))
 				.finally(() => next());
-		},
+		}
 	},
 	{
 		path: "/",
@@ -50,12 +50,12 @@ export default [
 			{
 				path: "",
 				name: "home",
-				component: Home,
+				component: Home
 			},
 			{
 				path: "library",
 				name: "games",
-				component: importVM("GameLibrary"),
+				component: importVM("GameLibrary")
 			},
 			{
 				path: "account",
@@ -64,29 +64,29 @@ export default [
 					{
 						path: "",
 						name: "account",
-						component: importVM("my-account/MyAccountDetails"),
+						component: importVM("my-account/MyAccountDetails")
 					},
 					{
 						path: "appearence",
 						name: "account.appearence",
-						component: importVM("my-account/MyAccountAppearence"),
+						component: importVM("my-account/MyAccountAppearence")
 					},
 					{
 						path: "language",
 						name: "account.language",
-						component: importVM("my-account/MyAccountLanguage"),
+						component: importVM("my-account/MyAccountLanguage")
 					},
 					{
 						path: "performance",
 						name: "account.performance",
-						component: importVM("my-account/MyAccountPerformance"),
+						component: importVM("my-account/MyAccountPerformance")
 					},
 					{
 						path: "advanced",
 						name: "account.advanced",
-						component: importVM("my-account/MyAccountAdvanced"),
-					},
-				],
+						component: importVM("my-account/MyAccountAdvanced")
+					}
+				]
 			},
 			{
 				path: "server/:serverId",
@@ -97,12 +97,12 @@ export default [
 					{
 						path: "overview",
 						name: "server.overview",
-						component: importVM("server/ServerOverview"),
+						component: importVM("server/ServerOverview")
 					},
 					{
 						path: "console",
 						name: "server.console",
-						component: importVM("server/ServerConsole"),
+						component: importVM("server/ServerConsole")
 					},
 					{
 						path: "fs",
@@ -112,65 +112,31 @@ export default [
 							{
 								path: "disk/:disk",
 								name: "server.fs.disk",
-								component: importVM("server/fs/ServerFSDisk"),
-							},
-						],
+								component: importVM("server/fs/ServerFSDisk")
+							}
+						]
 					},
 					{
 						path: "settings",
 						name: "server.settings",
-						component: importVM("server/ServerSettings"),
-					},
-				],
+						component: importVM("server/ServerSettings")
+					}
+				]
 			},
 			{
 				path: "system/accounts",
 				name: "system.accounts",
-				component: importVM("system/SystemAccounts"),
+				component: importVM("system/SystemAccounts")
 			},
 			{
 				path: "system/accounts/:accountId",
 				name: "system.accounts.account",
-				component: importVM("system/accounts/SystemAccountsAccount"),
-			},
-			{
-				path: "advanced/settings",
-				component: importVM("advanced/AdvancedSettings"),
-				children: [
-					{
-						path: "",
-						name: "advanced.settings",
-						component: importVM(
-							"advanced/AdvancedSettingsAppearence"
-						),
-					},
-					{
-						path: "language",
-						name: "advanced.settings.language",
-						component: importVM(
-							"advanced/AdvancedSettingsLanguage"
-						),
-					},
-					{
-						path: "performance",
-						name: "advanced.settings.performance",
-						component: importVM(
-							"advanced/AdvancedSettingsPerformance"
-						),
-					},
-					{
-						path: "advanced",
-						name: "advanced.settings.advanced",
-						component: importVM(
-							"advanced/AdvancedSettingsAdvanced"
-						),
-					},
-				],
-			},
-		],
+				component: importVM("system/accounts/SystemAccountsAccount")
+			}
+		]
 	},
 	{
 		path: "*",
-		redirect: "/",
-	},
+		redirect: "/"
+	}
 ] as RouteConfig[];
