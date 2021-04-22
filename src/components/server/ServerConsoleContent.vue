@@ -80,7 +80,7 @@ import { smoothScroll } from "@/utils/dom";
 					const whitespace = log.indexOf(" ");
 					vm.logs?.push({
 						t: log.substr(0, whitespace),
-						c: log.substr(whitespace, log.length),
+						c: log.substr(whitespace, log.length)
 					});
 					break;
 				}
@@ -95,13 +95,13 @@ import { smoothScroll } from "@/utils/dom";
 
 		// request server logs
 		socket.send(1003, {
-			"server-id": vm.serverId,
+			"server-id": vm.serverId
 		});
 	},
 	activated(): void {
 		const vm = this as ServerConsoleContent;
 		if (vm.logsFetchingState === 3) vm.forceLogsContainerScroll();
-	},
+	}
 })
 export default class ServerConsoleContent extends Vue {
 	@Prop({ type: String, default: "default" }) private readonly mode!: string;
@@ -135,8 +135,8 @@ export default class ServerConsoleContent extends Vue {
 		if (!tooltipTrigger) return {};
 
 		return {
-			content: this.$date(log.t, "LLLL"),
-			trigger: tooltipTrigger,
+			content: this.$date(log.t),
+			trigger: tooltipTrigger
 		};
 	}
 }

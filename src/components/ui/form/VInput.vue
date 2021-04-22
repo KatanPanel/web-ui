@@ -13,17 +13,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator"
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class VInput extends Vue {
 	@Prop({ type: Boolean, default: false })
-	private readonly required!: boolean
+	private readonly required!: boolean;
 
 	@Prop({ type: Boolean, default: false })
-	private readonly disabled!: boolean
+	private readonly disabled!: boolean;
 
 	@Prop({ type: String })
-	private readonly label!: string
+	private readonly label!: string;
 }
 </script>
