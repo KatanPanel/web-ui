@@ -21,45 +21,49 @@
   -->
 
 <template>
-	<ul :class="{ 'align-with-hr': alignWithHr }" class="v--tabs">
+	<ul
+		:class="{ 'align-with-hr': alignWithHr }"
+		class="v--tabs"
+		role="tablist"
+	>
 		<slot />
 	</ul>
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
-import VTab from "@/components/ui/tab/VTab.vue";
+import { Component, Prop, Vue } from "vue-property-decorator"
+import VTab from "@/components/ui/tab/VTab.vue"
 
 @Component
 export default class VTabs extends Vue {
 	@Prop({ type: Boolean, default: false })
-	private readonly alignWithHr!: boolean;
+	private readonly alignWithHr!: boolean
 
-	private currentTab: VTab | null = null;
+	private currentTab: VTab | null = null
 
 	mounted(): void {
-		let active: VTab | null = null;
+		let active: VTab | null = null
 		const tabs: Array<VTab> = this.$children
 			.filter((component: Vue) => component instanceof VTab)
-			.map((component: Vue) => component as VTab);
+			.map((component: Vue) => component as VTab)
 
 		for (const child of tabs) {
 			// checks if it already has an active tab, if any it will be used with the default one.
 			if (child.active) {
-				if (active) throw new Error("Cannot use multiple active tabs.");
-				active = child;
+				if (active) throw new Error("Cannot use multiple active tabs.")
+				active = child
 			}
 		}
 
-		const next = active || tabs[0];
-		if (next) this.setTab(next);
+		const next = active || tabs[0]
+		if (next) this.setTab(next)
 	}
 
 	public setTab(tab: VTab): void {
-		if (this.currentTab) this.currentTab!.state = false;
+		if (this.currentTab) this.currentTab!.state = false
 
-		this.currentTab = tab;
-		this.currentTab!.state = true;
+		this.currentTab = tab
+		this.currentTab!.state = true
 	}
 }
 </script>

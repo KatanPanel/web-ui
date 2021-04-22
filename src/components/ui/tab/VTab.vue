@@ -21,50 +21,56 @@
   -->
 
 <template>
-	<li class="v--tab" :active="state" @click="onClick">
+	<li
+		@click="onClick"
+		:active="state"
+		v-bind="{ 'aria-selected': state }"
+		class="v--tab"
+		role="tab"
+	>
 		<slot />
 	</li>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import VTabs from "@/components/ui/tab/VTabs.vue";
-import VTabView from "@/components/ui/tab/VTabView.vue";
+import { Component, Prop, Vue, Watch } from "vue-property-decorator"
+import VTabs from "@/components/ui/tab/VTabs.vue"
+import VTabView from "@/components/ui/tab/VTabView.vue"
 
 @Component
 export default class VTab extends Vue {
-	@Prop({ type: String, required: true }) public readonly tab!: string;
-	@Prop({ type: Boolean, default: false }) public readonly active!: boolean;
+	@Prop({ type: String, required: true }) public readonly tab!: string
+	@Prop({ type: Boolean, default: false }) public readonly active!: boolean
 
-	public state = this.active;
-	public view!: VTabView;
+	public state = this.active
+	public view!: VTabView
 
 	mounted(): void {
-		const view = document.getElementById(`tab-view-${this.tab}`);
-		if (!view) throw new Error(`Tab view not found for ${this.tab}.`);
+		const view = document.getElementById(`tab-view-${this.tab}`)
+		if (!view) throw new Error(`Tab view not found for ${this.tab}.`)
 
-		this.view = (view as never)["__vue__"] as VTabView;
+		this.view = (view as never)["__vue__"] as VTabView
 
 		// ensure that the view is displayed if the tab is the active default.
-		this.view.active = this.state;
+		this.view.active = this.state
 	}
 
 	@Watch("state")
 	private onStateChange(value: boolean): void {
-		this.view.active = value;
+		this.view.active = value
 	}
 
 	private onClick(e: Event): void {
-		e.stopPropagation();
+		e.stopPropagation()
 
-		if (this.state) return;
+		if (this.state) return
 
-		const parent = this.$parent;
+		const parent = this.$parent
 		if (!(parent instanceof VTabs)) {
-			throw new Error("Cannot find tab root.");
+			throw new Error("Cannot find tab root.")
 		}
 
-		parent.setTab(this);
+		parent.setTab(this)
 	}
 }
 </script>

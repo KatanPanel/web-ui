@@ -21,17 +21,23 @@
   -->
 
 <template>
-	<div v-show="active" :id="`tab-view-${tab}`" class="v--tab-view">
+	<div
+		v-show="active"
+		v-bind="{ 'aria-hidden': !active }"
+		:id="`tab-view-${tab}`"
+		class="v--tab-view"
+		role="tabpanel"
+	>
 		<slot />
 	</div>
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator"
 
 @Component
 export default class VTabView extends Vue {
-	@Prop({ type: String, required: true }) private readonly tab!: boolean;
-	public active = false;
+	@Prop({ type: String, required: true }) private readonly tab!: boolean
+	public active = false
 }
 </script>
