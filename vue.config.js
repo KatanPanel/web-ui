@@ -1,7 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { ContextReplacementPlugin, IgnorePlugin } = require("webpack");
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const supportedLanguages = require("./src/supported-languages.json");
 
 process.env.VUE_APP_VERSION = require("./package.json").version;
@@ -9,7 +6,7 @@ process.env.VUE_APP_VERSION = require("./package.json").version;
 module.exports = {
 	pwa: {
 		name: process.env.VUE_APP_NAME,
-		manifestCrossorigin: "anonymous",
+		manifestCrossorigin: "anonymous"
 	},
 	chainWebpack: (config) => {
 		config.module
@@ -22,10 +19,12 @@ module.exports = {
 			.use(ContextReplacementPlugin, [
 				/date-fns[/\\]/,
 				new RegExp(
-					`[/\\\\](${supportedLanguages.join("|")})[/\\\\]index.js$`
-				),
+					`[/\\\\](${supportedLanguages
+						.map((locale) => locale.tag)
+						.join("|")})[/\\\\]index.js$`
+				)
 			]);
 
 		config.plugin("ignore-plugin").use(IgnorePlugin, [/moment$/]);
-	},
+	}
 };

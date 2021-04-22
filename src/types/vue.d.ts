@@ -22,6 +22,7 @@
 
 import { AxiosInstance } from "axios";
 import { Consola } from "consola";
+import { ConfigService } from "@/services/config-service";
 
 declare module "vue/types/vue" {
 	interface Vue {
@@ -38,13 +39,13 @@ declare module "vue/types/vue" {
 		$disconnect(): void;
 
 		$log: Consola;
-		$date: (date: Date | number, style: string) => string;
+		$date: (date: Date | number | string, style?: string) => string;
 		$website: {
 			name: string;
 			version: string;
 			url: string;
 		};
 		$api: API;
-		$config: Config;
+		$config: ConfigService;
 	}
 }

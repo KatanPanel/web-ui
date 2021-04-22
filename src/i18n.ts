@@ -25,29 +25,33 @@ import VueI18n from "vue-i18n";
 import { I18N_LOG_TAG } from "@/logging";
 import {
 	getClientSettings,
-	updateClientSettings,
+	updateClientSettings
 } from "@/common/client-settings";
 import supportedLanguages from "@/supported-languages.json";
 import { format as formatDateFns } from "date-fns";
 
 Vue.use(VueI18n);
 
-export const FALLBACK_LANGUAGE = "en";
-
+const fallbackLanguage = supportedLanguages[0].tag;
 const loaded: string[] = [];
 const i18n = new VueI18n({
-	fallbackLocale: FALLBACK_LANGUAGE,
-	messages: {
-		[FALLBACK_LANGUAGE]: require(/* webpackChunkName: "lang-[request]" */ `@/lang/${FALLBACK_LANGUAGE}.json`),
-	},
+	fallbackLocale: fallbackLanguage,
+	messages: {}
 });
 
 const vm: Vue = Vue.prototype;
 
-export function formatDate(date: Date | number, style: string): string {
-	return formatDateFns(date, style, {
-		locale: require(`date-fns/locale/${i18n.locale}/index.js`),
-	});
+export function formatDate(
+	date: Date | number | string,
+	style?: string
+): string {
+	return formatDateFns(
+		typeof date === "string" ? new Date(date) : date,
+		style || "PPPPpp",
+		{
+			locale: require(`date-fns/locale/${i18n.locale}/index.js`)
+		}
+	);
 }
 
 /**
@@ -73,7 +77,7 @@ export async function setLanguage(language: string): Promise<string> {
 	if (!supported) {
 		vm.$log.warn({
 			tag: I18N_LOG_TAG,
-			message: `Unsupported language: ${language}.`,
+			message: `Unsupported language: ${language}.`
 		});
 		return language;
 	}
@@ -99,25 +103,33 @@ export async function loadLanguage(
 	language: string,
 	fallback: ReadonlyArray<string> = []
 ): Promise<any> {
+	const separator = language.indexOf("-");
+	if (separator !== -1) {
+		// fix navigator language tag: en-us -> en-US
+		language =
+			language.substr(0, separator) +
+			language.substr(separator, language.length).toUpperCase();
+	}
+
 	if (i18n.locale === language) return language;
 
 	if (loaded.includes(language)) {
 		vm.$log.info({
 			tag: I18N_LOG_TAG,
-			message: `Language "${language}" reloaded.`,
+			message: `Language "${language}" reloaded.`
 		});
 		return await setLanguage(language);
 	}
 
 	return import(
-		/* webpackChunkName: "lang-[request]" */ `./lang/${language}.json`
+		/* webpackChunkName: "katan-lang-[request]" */ `./lang/${language}.json`
 	)
 		.then(async (messages) => {
 			(vm.$i18n || i18n).setLocaleMessage(language, messages);
 			loaded.push(language);
 			vm.$log.info({
 				tag: I18N_LOG_TAG,
-				message: `Language "${language}" loaded.`,
+				message: `Language "${language}" loaded.`
 			});
 
 			return await setLanguage(language);
@@ -126,16 +138,12 @@ export async function loadLanguage(
 			vm.$log.error({
 				tag: I18N_LOG_TAG,
 				message: `Unable load language ${language}.`,
-				args: [e],
+				args: [e]
 			});
 
 			if (fallback.length === 0)
-				return await loadLanguage(FALLBACK_LANGUAGE);
-			else
-				return await loadLanguage(
-					fallback[0].toLowerCase(),
-					fallback.slice(1)
-				);
+				return await loadLanguage(fallbackLanguage);
+			else return await loadLanguage(fallback[0], fallback.slice(1));
 		});
 }
 

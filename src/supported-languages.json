@@ -1,10 +1,10 @@
 [
 	{
-		"name": "English",
-		"tag": "en"
+		"name": "English (US)",
+		"tag": "en-US"
 	},
 	{
 		"name": "Português (Brasil)",
-		"tag": "pt-br"
+		"tag": "pt-BR"
 	}
 ]
