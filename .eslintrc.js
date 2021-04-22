@@ -1,10 +1,10 @@
 module.exports = {
 	root: true,
 	env: {
-		node: true,
+		node: true
 	},
 	parserOptions: {
-		ecmaVersion: 2020,
+		ecmaVersion: 2020
 	},
 	rules: {
 		"no-console": "off",
@@ -13,7 +13,7 @@ module.exports = {
 		"vue/no-parsing-error": "off",
 		"vue/attribute-hyphenation": "warn",
 		"vue/html-indent": "off",
-		"vue/html-self-closing": "warn",
+		"vue/html-self-closing": "off",
 		"vue/no-template-shadow": "error",
 		"vue/require-prop-types": "error",
 		"vue/no-confusing-v-for-v-if": "error",
@@ -24,24 +24,18 @@ module.exports = {
 		"vue/comma-dangle": "warn",
 		"vue/script-indent": ["error", "tab"],
 		"vue/max-attributes-per-line": "off",
-		"@typescript-eslint/no-explicit-any": "off",
-		"prettier/prettier": [
-			"error",
-			{
-				endOfLine: "auto",
-			},
-		],
+		"@typescript-eslint/no-explicit-any": "off"
 	},
 	overrides: [
 		{
 			files: [
 				"**/__tests__/*.{j,t}s?(x)",
-				"**/tests/unit/**/*.spec.{j,t}s?(x)",
+				"**/tests/unit/**/*.spec.{j,t}s?(x)"
 			],
 			env: {
-				jest: true,
-			},
-		},
+				jest: true
+			}
+		}
 	],
 	extends: [
 		"plugin:prettier/recommended",
@@ -49,6 +43,6 @@ module.exports = {
 		"eslint:recommended",
 		"@vue/typescript/recommended",
 		"@vue/prettier",
-		"@vue/prettier/@typescript-eslint",
-	],
-};
+		"@vue/prettier/@typescript-eslint"
+	]
+}
