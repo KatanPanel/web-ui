@@ -20,17 +20,14 @@
  * SOFTWARE.
  */
 
-import { VocaStatic } from "voca";
 import { AxiosInstance } from "axios";
 import { Consola } from "consola";
-import { Filesize } from "filesize";
 
 declare module "vue/types/vue" {
 	interface Vue {
 		$isDevelopmentMode: boolean;
 		$helpers: {
-			voca: VocaStatic;
-			filesize: Filesize;
+			filesize: (value: number) => string;
 			routeMappings: { [key: string]: () => any };
 		};
 		$socket: WebSocket;

@@ -24,38 +24,40 @@ import Vue from "vue";
 import Axios, { AxiosResponse } from "axios";
 import Consola, {
 	ConsolaReporterArgs,
-	ConsolaReporterLogObject,
+	ConsolaReporterLogObject
 } from "consola";
 import { ERROR_HANDLER_LOG_TAG } from "@/logging";
 import { requireVM } from "@/utils/build";
-import { formatDate } from "@/i18n";
+import i18n, { formatDate } from "@/i18n";
 
 const vm: Vue = Vue.prototype;
 vm.$isDevelopmentMode = process.env.NODE_ENV === "development";
 
 vm.$helpers = {
-	voca: require("voca"),
-	filesize: require("filesize"),
-
+	filesize(value: number): string {
+		return require("filesize")(value, {
+			locale: i18n.locale
+		});
+	},
 	routeMappings: {
 		"server.overview": requireVM("server/ServerOverview"),
 		"server.console": requireVM("server/ServerConsole"),
 		"server.fs": requireVM("server/ServerFS"),
 		"server.fs.disk": requireVM("server/fs/ServerFSDisk"),
-		"server.settings": requireVM("server/ServerSettings"),
-	},
+		"server.settings": requireVM("server/ServerSettings")
+	}
 };
 
 vm.$http = Axios.create({
 	baseURL: vm.$config.apiUrl,
-	timeout: 5000,
+	timeout: 5000
 });
 vm.$http.interceptors.response.use(
 	(response: AxiosResponse) => response,
 	(error: any) => {
 		vm.$log.error({
 			tag: ERROR_HANDLER_LOG_TAG,
-			args: [error],
+			args: [error]
 		});
 
 		throw error;
@@ -92,7 +94,7 @@ vm.$log = Consola.create({
 							...logObj.args.slice(1)
 					  )
 					: consoleLogFn(badge, style, ...logObj.args);
-			},
-		},
-	],
+			}
+		}
+	]
 });
