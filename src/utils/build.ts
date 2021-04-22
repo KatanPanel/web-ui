@@ -22,15 +22,22 @@
 
 import Vue from "vue";
 
+export function asyncComponent(component: string): () => Promise<any> {
+	return () =>
+		import(
+			/* webpackChunkName: "katan-component-[request]" */ `@/components/${component}.vue`
+		);
+}
+
 export function importVM(view: string): () => Promise<any> {
 	return () =>
 		import(
-			/* webpackChunkName: "katan-component-[request]" */ `@/views/${view}.vue`
+			/* webpackChunkName: "katan-view-[request]" */ `@/views/${view}.vue`
 		);
 }
 
 export function requireVM(view: string): () => Vue {
 	return () =>
-		require(/* webpackChunkName: "katan-component-[request]" */ `@/views/${view}.vue`)
+		require(/* webpackChunkName: "katan-view-[request]" */ `@/views/${view}.vue`)
 			.default;
 }

@@ -88,7 +88,7 @@ import PanelNavigation from "@/components/panel/PanelNavigation.vue";
 import { getOpenWindows, Window } from "@/common/navigation/window";
 import PanelServerWindowContainer from "@/components/panel/PanelServerWindowContainer.vue";
 import ThePanelSidebar from "@/components/panel/ThePanelSidebar.vue";
-import LogoutModal from "@/components/auth/LogoutModal.vue";
+import { asyncComponent } from "@/utils/build";
 
 @Component<Panel>({
 	components: {
@@ -97,7 +97,7 @@ import LogoutModal from "@/components/auth/LogoutModal.vue";
 		PanelNavigation,
 		PanelWindowsOverlay,
 		Loading,
-		VContainer,
+		VContainer
 	},
 	beforeRouteUpdate(to: Route, from: Route, next: NavigationGuardNext): void {
 		const vm = this as Panel;
@@ -122,7 +122,7 @@ import LogoutModal from "@/components/auth/LogoutModal.vue";
 		const vm = this as Panel;
 		document.removeEventListener("keyup", vm.onTabKeyUp);
 		document.removeEventListener("keydown", vm.onTabKeyDown);
-	},
+	}
 })
 export default class Panel extends Vue {
 	loading = true;
@@ -145,7 +145,11 @@ export default class Panel extends Vue {
 	}
 
 	private performLogout(): void {
-		this.$modal.show(LogoutModal, {}, { height: "auto", width: "30%" });
+		this.$modal.show(
+			asyncComponent("auth/LogoutModal"),
+			{},
+			{ height: "auto", width: "30%" }
+		);
 	}
 
 	public onTabKeyDown(e: KeyboardEvent): void {
