@@ -20,15 +20,56 @@
  * SOFTWARE.
  */
 
-import Consola, {
+import { Injectable } from "@vue-ioc/core";
+import {
+	Consola,
+	ConsolaLogObject,
+	ConsolaReporter,
 	ConsolaReporterArgs,
-	ConsolaReporterLogObject
+	ConsolaReporterLogObject,
+	default as ConsolaInstance
 } from "consola";
-import Vue from "vue";
 
-Vue.prototype.$log = Consola.create({
-	reporters: [
-		{
+export const AUTH_LOG_TAG = "Auth";
+export const VUEX_LOG_TAG = "Data Storage";
+export const WEB_SOCKET_LOG_TAG = "Web Socket";
+export const WINDOWS_LOG_TAG = "Navigation Windows";
+export const ROUTER_NAVIGATION_LOG_TAG = "Routing";
+export const ERROR_HANDLER_LOG_TAG = "Error Handler";
+export const I18N_LOG_TAG = "I18N";
+
+@Injectable()
+export class LoggingService {
+	private readonly logger!: Consola;
+
+	constructor() {
+		this.logger = ConsolaInstance.create({
+			reporters: [this.setupReporter()]
+		});
+	}
+
+	public log(message: ConsolaLogObject | any, ...args: any[]): void {
+		this.logger.log(message, args);
+	}
+
+	public debug(message: ConsolaLogObject | any, ...args: any[]): void {
+		this.logger.debug(message, args);
+	}
+
+	public info(message: ConsolaLogObject | any, ...args: any[]): void {
+		this.logger.info(message, args);
+	}
+
+	public warn(message: ConsolaLogObject | any, ...args: any[]): void {
+		this.logger.warn(message, args);
+	}
+
+	public error(message: ConsolaLogObject | any, ...args: any[]): void {
+		this.logger.error(message, args);
+	}
+
+	private setupReporter(): ConsolaReporter {
+		return {
 			log(
 				logObj: ConsolaReporterLogObject,
 				// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -55,6 +96,6 @@ Vue.prototype.$log = Consola.create({
 					  )
 					: consoleLogFn(badge, style, ...logObj.args);
 			}
-		}
-	]
-});
+		};
+	}
+}

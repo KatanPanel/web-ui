@@ -21,8 +21,8 @@
  */
 
 import { AxiosInstance } from "axios";
-import { Consola } from "consola";
 import { ConfigService } from "@/services/config-service";
+import { LoggingService } from "@/services/logging";
 
 declare module "vue/types/vue" {
 	interface Vue {
@@ -38,7 +38,7 @@ declare module "vue/types/vue" {
 
 		$disconnect(): void;
 
-		$log: Consola;
+		$log: LoggingService;
 		$date: (date: Date | number | string, style?: string) => string;
 		$website: {
 			name: string;

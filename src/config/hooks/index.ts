@@ -22,14 +22,15 @@
 
 import { formatDate } from "@/i18n";
 import Vue from "vue";
-import { ConfigService } from "@/services/config-service";
+import { ConfigService } from "@/services/config";
 import api from "@/api";
-import "./logging";
 import "./helpers";
+import { LoggingService } from "@/services/logging";
 
 const vm = Vue.prototype;
 
 vm.$isDevelopmentMode = process.env.NODE_ENV === "development";
 vm.$date = formatDate;
 vm.$config = new ConfigService();
+vm.$log = new LoggingService();
 vm.$api = api;

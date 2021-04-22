@@ -7,8 +7,22 @@
 	</div>
 </template>
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
+import { Module } from "@vue-ioc/core";
+import { ConfigService } from "@/services/config";
+import { LoggingService } from "@/services/logging";
 
+@Module({
+	providers: [
+		LoggingService,
+		{
+			provide: ConfigService,
+			useFactory(): any {
+				return Vue.prototype.$config;
+			}
+		}
+	]
+})
 @Component
 export default class App extends Vue {
 	private get layout(): string | null {

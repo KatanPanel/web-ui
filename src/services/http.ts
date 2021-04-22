@@ -20,12 +20,52 @@
  * SOFTWARE.
  */
 
-declare type Config = {
-	appName: string;
-	appVersion: string;
-	appWebsite: string;
-	apiUrl: string;
-	wsUrl: string;
-	gitCommit: string;
-	gitBranch: string;
-};
+import { Inject, Injectable } from "@vue-ioc/core";
+import Axios, {
+	AxiosInstance,
+	AxiosPromise,
+	AxiosRequestConfig,
+	AxiosResponse
+} from "axios";
+import { ConfigService } from "@/services/config";
+import { ERROR_HANDLER_LOG_TAG, LoggingService } from "@/services/logging";
+
+@Injectable()
+export class HttpService {
+	private readonly axios!: AxiosInstance;
+
+	constructor(
+		@Inject() private readonly logger: LoggingService,
+		@Inject() private readonly config: ConfigService
+	) {
+		this.axios = Axios.create({
+			baseURL: config.apiUrl,
+			timeout: 5000,
+			withCredentials: true
+		});
+
+		this.axios.interceptors.response.use(
+			(response: AxiosResponse) => response,
+			(error: any) => {
+				logger.error({
+					tag: ERROR_HANDLER_LOG_TAG,
+					args: [error]
+				});
+
+				throw error;
+			}
+		);
+	}
+
+	public get(url: string, config?: AxiosRequestConfig): AxiosPromise {
+		return this.axios.get(url, config);
+	}
+
+	public post(
+		url: string,
+		data?: any,
+		config?: AxiosRequestConfig
+	): AxiosPromise {
+		return this.axios.post(url, data, config);
+	}
+}
