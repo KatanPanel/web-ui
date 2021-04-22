@@ -30,7 +30,7 @@
 					tag="li"
 				>
 					<a>
-						<TheLogo :color="'white'" />
+						<TheLogo :white="true" />
 					</a>
 				</router-link>
 			</ul>
@@ -70,21 +70,6 @@
 						<v-icon name="id-card" />
 					</a>
 				</router-link>
-				<router-link
-					v-tooltip="
-						sidebarTooltip(
-							$t(
-								'navigation.sidebar.links.advanced.settings.index'
-							)
-						)
-					"
-					:to="{ name: 'advanced.settings' }"
-					tag="li"
-				>
-					<a>
-						<v-icon name="controls" />
-					</a>
-				</router-link>
 			</ul>
 			<ul class="sidebar-items">
 				<li
@@ -108,7 +93,7 @@ import VIcon from "@/components/ui/icon/VIcon.vue";
 import TheLogo from "@/components/TheLogo.vue";
 
 @Component({
-	components: { VIcon, TheLogo },
+	components: { VIcon, TheLogo }
 })
 export default class ThePanelSidebar extends Vue {
 	sidebarTooltip(content: any): any {

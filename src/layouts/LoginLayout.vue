@@ -20,7 +20,7 @@
 				>
 					<div class="overlay" />
 					<div class="content">
-						<the-logo color="white" />
+						<TheLogo :white="true" />
 					</div>
 				</div>
 				<div class="login-right">
@@ -31,23 +31,23 @@
 	</main>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator"
-import VContainer from "@/components/ui/layout/VContainer.vue"
-import VFlexBox from "@/components/ui/layout/VFlexBox.vue"
-import TheLogo from "@/components/TheLogo.vue"
+import { Component, Vue } from "vue-property-decorator";
+import VContainer from "@/components/ui/layout/VContainer.vue";
+import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
+import TheLogo from "@/components/TheLogo.vue";
 
 @Component<LoginLayout>({
 	components: { TheLogo, VFlexBox, VContainer },
 	beforeCreate(): void {
 		// TODO: use server static content
-		this.currentWallpaperIndex = Math.floor(Math.random() * 6)
+		this.currentWallpaperIndex = Math.floor(Math.random() * 6);
 	}
 })
 export default class LoginLayout extends Vue {
-	private currentWallpaperIndex!: number
+	private currentWallpaperIndex!: number;
 
 	private get currentWallpaper(): string {
-		return `/img/games/wallpapers/${this.currentWallpaperIndex}.jpg`
+		return `/img/games/wallpapers/${this.currentWallpaperIndex}.jpg`;
 	}
 }
 </script>
