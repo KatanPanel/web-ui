@@ -6,7 +6,7 @@
 			<transition mode="out-in" name="v--transition-slow-fade">
 				<div
 					:style="{
-						'background-image': `url(${currentWallpaper})`,
+						'background-image': `url(${currentWallpaper})`
 					}"
 					class="wallpaper"
 				/>
@@ -14,7 +14,7 @@
 			<v-flex-box class="login-box">
 				<div
 					:style="{
-						'background-image': `url(${currentWallpaper})`,
+						'background-image': `url(${currentWallpaper})`
 					}"
 					class="login-left"
 				>
@@ -23,7 +23,7 @@
 						<the-logo color="white" />
 					</div>
 				</div>
-				<div class="login-right v--flex-child">
+				<div class="login-right">
 					<slot />
 				</div>
 			</v-flex-box>
@@ -31,27 +31,29 @@
 	</main>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import VContainer from "@/components/ui/layout/VContainer.vue";
-import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
-import TheLogo from "@/components/TheLogo.vue";
+import { Component, Vue } from "vue-property-decorator"
+import VContainer from "@/components/ui/layout/VContainer.vue"
+import VFlexBox from "@/components/ui/layout/VFlexBox.vue"
+import TheLogo from "@/components/TheLogo.vue"
 
 @Component<LoginLayout>({
 	components: { TheLogo, VFlexBox, VContainer },
 	beforeCreate(): void {
 		// TODO: use server static content
-		this.currentWallpaperIndex = Math.floor(Math.random() * 6);
-	},
+		this.currentWallpaperIndex = Math.floor(Math.random() * 6)
+	}
 })
 export default class LoginLayout extends Vue {
-	private currentWallpaperIndex!: number;
+	private currentWallpaperIndex!: number
 
 	private get currentWallpaper(): string {
-		return `/img/games/wallpapers/${this.currentWallpaperIndex}.jpg`;
+		return `/img/games/wallpapers/${this.currentWallpaperIndex}.jpg`
 	}
 }
 </script>
 <style lang="scss" scoped>
+@import "../assets/styles/abstracts/variables";
+
 .v--layout-login {
 	height: 100%;
 
@@ -72,7 +74,6 @@ export default class LoginLayout extends Vue {
 
 	.login-box {
 		background-color: var(--kt-background);
-		min-height: 35.4%;
 		min-width: 65%;
 		align-items: normal;
 		box-shadow: rgba(0, 0, 0, 0.12) 0 0 10px 5px;
@@ -95,7 +96,7 @@ export default class LoginLayout extends Vue {
 				z-index: 1;
 			}
 
-			.v--katan-logo {
+			.logo {
 				position: relative;
 				top: 50%;
 				left: 50%;
@@ -109,9 +110,16 @@ export default class LoginLayout extends Vue {
 			}
 		}
 
+		@media (max-width: map-get($breakpoints, "medium")) {
+			.login-left {
+				display: none;
+			}
+		}
+
 		.login-right {
-			margin: 36px;
+			padding: 36px;
 			position: relative;
+			flex: 1;
 
 			.header {
 				align-items: baseline;
