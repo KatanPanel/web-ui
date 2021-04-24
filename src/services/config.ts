@@ -52,10 +52,12 @@ export class ConfigService {
 	 * @param {string} key - env key
 	 */
 	public value(key: string): string {
-		if (process.env.NODE_ENV === "development")
-			return process.env[key.indexOf("$") === -1 ? key : key.substr(1)];
+		const envKey = key.indexOf("$") === -1 ? key : key.substr(1);
+		const value = process.env[envKey];
 
-		// will be replaced in build stage
-		return key;
+		if (process.env.NODE_ENV === "development") return value;
+
+		// key will be replaced in build stage
+		return value || key;
 	}
 }
