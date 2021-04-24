@@ -54,7 +54,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import { commit, get } from "@/utils/vuex";
 import { UPDATE_BACKEND_INFO } from "@/store/mutations";
-import HomeServerList from "@/components/home/HomeServerList.vue";
+import HomeServerList from "@/components/modules/panel/home/HomeServerList.vue";
 import { AUTH_MODULE, ROOT_MODULE } from "@/store";
 import { MetaInfo } from "vue-meta";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
@@ -75,19 +75,19 @@ import VBoxBody from "@/components/ui/box/VBoxBody.vue";
 		VCol,
 		VRow,
 		VButton,
-		VFlexBox,
+		VFlexBox
 	},
 	metaInfo(): MetaInfo {
 		return {
 			title: process.env.VUE_APP_NAME,
-			titleTemplate: undefined,
+			titleTemplate: undefined
 		};
 	},
 	mounted(): void {
 		this.$api.info.getInfo().then((info: any) => {
 			commit(ROOT_MODULE, UPDATE_BACKEND_INFO, info);
 		});
-	},
+	}
 })
 export default class Home extends Vue {
 	get account(): any {

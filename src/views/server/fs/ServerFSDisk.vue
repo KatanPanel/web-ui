@@ -60,7 +60,7 @@
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import WindowMixin from "@/mixins/window";
+import WindowMixin from "@/shared/mixins/window";
 import { updateWindowTitle } from "@/common/navigation/window";
 import { MetaInfo } from "vue-meta";
 import { AxiosError, AxiosResponse } from "axios";
@@ -76,15 +76,15 @@ import VInput from "@/components/ui/form/VInput.vue";
 		return {
 			title: this.$i18n.t("titles.server.fs.disk", {
 				server: this.getServer.name,
-				disk: this.getDiskId,
-			}) as string,
+				disk: this.getDiskId
+			}) as string
 		};
 	},
 	activated(): void {
 		updateWindowTitle(
 			this.getWindow,
 			this.$i18n.t("windows.server.fs.disk", {
-				disk: this.getDiskId,
+				disk: this.getDiskId
 			}) as string
 		);
 	},
@@ -108,7 +108,7 @@ import VInput from "@/components/ui/form/VInput.vue";
 			.catch((err: AxiosError) => {
 				console.log("err:", err.response);
 			});
-	},
+	}
 })
 export default class ServerFSDisk extends mixins(WindowMixin) {
 	private disk: any | null = null;

@@ -18,11 +18,11 @@ import { Component } from "vue-property-decorator";
 import VForm from "@/components/ui/form/VForm.vue";
 import VInput from "@/components/ui/form/VInput.vue";
 import { mixins } from "vue-class-component";
-import WindowMixin from "@/mixins/window";
+import WindowMixin from "@/shared/mixins/window";
 import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
 import VButton from "@/components/ui/button/VButton.vue";
-import ServerConsoleContent from "@/components/server/ServerConsoleContent.vue";
+import ServerConsoleContent from "@/components/modules/panel/server/ServerConsoleContent.vue";
 import { get } from "@/utils/vuex";
 import { GET_NAVIGATION_HISTORY } from "@/store/getters";
 import { ROOT_MODULE } from "@/store";
@@ -37,8 +37,8 @@ import { updateWindowTitle } from "@/common/navigation/window";
 		VInputIcon,
 		VInputGroup,
 		VInput,
-		VForm,
-	},
+		VForm
+	}
 })
 export default class ServerConsole extends mixins(WindowMixin) {
 	get consoleMode(): string | null {

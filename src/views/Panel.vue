@@ -77,17 +77,17 @@
 import { Component, Vue } from "vue-property-decorator";
 import { ROOT_MODULE } from "@/store";
 import VContainer from "@/components/ui/layout/VContainer.vue";
-import Loading from "@/components/Loading.vue";
+import Loading from "@/components/shared/Loading.vue";
 import { commit } from "@/utils/vuex";
 import { AxiosResponse } from "axios";
 import { UPDATE_BACKEND_INFO } from "@/store/mutations";
 import { hasTabKeyPressed } from "@/utils/dom";
 import { NavigationGuardNext, Route } from "vue-router";
-import PanelWindowsOverlay from "@/components/panel/PanelWindowsOverlay.vue";
-import PanelNavigation from "@/components/panel/PanelNavigation.vue";
+import PanelWindowsOverlay from "@/components/modules/panel/PanelWindowsOverlay.vue";
+import PanelNavigation from "@/components/modules/panel/PanelNavigation.vue";
 import { getOpenWindows, Window } from "@/common/navigation/window";
-import PanelServerWindowContainer from "@/components/panel/PanelServerWindowContainer.vue";
-import ThePanelSidebar from "@/components/panel/ThePanelSidebar.vue";
+import PanelServerWindowContainer from "@/components/modules/panel/PanelServerWindowContainer.vue";
+import ThePanelSidebar from "@/components/modules/panel/ThePanelSidebar.vue";
 import { asyncComponent } from "@/utils/build";
 
 @Component<Panel>({

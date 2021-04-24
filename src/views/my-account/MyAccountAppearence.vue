@@ -34,14 +34,14 @@
 import { Component, Vue } from "vue-property-decorator";
 import { MetaInfo } from "vue-meta";
 import { generateMetaInfo } from "@/utils/component";
-import AppearenceTheme from "@/components/advanced/settings/appearence/AppearenceTheme.vue";
-import AppearenceServerConsoleLogDate from "@/components/advanced/settings/appearence/AppearenceServerConsoleLogDate.vue";
+import AppearenceTheme from "@/components/modules/panel/my-account/appearence/AppearenceTheme.vue";
+import AppearenceServerConsoleLogDate from "@/components/modules/panel/my-account/appearence/AppearenceServerConsoleLogDate.vue";
 
 @Component({
 	components: { AppearenceServerConsoleLogDate, AppearenceTheme },
 	metaInfo(): MetaInfo {
 		return generateMetaInfo("my-account.appearence");
-	},
+	}
 })
 export default class MyAccountAppearence extends Vue {}
 </script>

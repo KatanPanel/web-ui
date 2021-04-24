@@ -60,7 +60,7 @@
 			</v-flex-box>
 		</v-form>
 		<div class="version-info">
-			{{ $config.toVersionInfoString() }} · {{ actualLocale }}
+			{{ $config.toVersionInfoString() }}
 		</div>
 	</div>
 </template>
@@ -78,12 +78,11 @@ import { AxiosError } from "axios";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VInputIcon from "@/components/ui/form/VInputIcon.vue";
 import { generateMetaInfo } from "@/utils/component";
-import { AUTH_LOG_TAG } from "@/logging";
+import { AUTH_LOG_TAG } from "@/services/logging";
 import { dispatch, get } from "@/utils/vuex";
 import { MetaInfo } from "vue-meta";
 import { GET_ACCOUNT, IS_LOGGED_IN } from "@/store/modules/auth/getters";
 import { AUTH_TOKEN_KEY } from "@/api/auth";
-import { getClientSettings } from "@/common/client-settings";
 
 @Component<Login>({
 	components: {
@@ -105,10 +104,6 @@ export default class Login extends Vue {
 	private password = "";
 	private isLocked = false;
 	private error: string | null = null;
-
-	get actualLocale(): string {
-		return getClientSettings().language.name;
-	}
 
 	get getAccountUsername(): string {
 		return get(AUTH_MODULE, GET_ACCOUNT).username;
@@ -171,7 +166,7 @@ export default class Login extends Vue {
 	position: fixed;
 	left: 50%;
 	transform: translateX(-50%);
-	bottom: 1.2rem;
+	bottom: 1rem;
 	text-align: center;
 	width: 100%;
 	opacity: 0.38;

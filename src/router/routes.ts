@@ -20,121 +20,13 @@
  * SOFTWARE.
  */
 
-import { NavigationGuardNext, Route, RouteConfig } from "vue-router";
-import { LOGIN_LAYOUT } from "@/layouts";
-import Panel from "@/views/Panel.vue";
-import { AuthenticatedOnlyGuard } from "@/guards/authenticated-only";
-import Home from "@/views/Home.vue";
-import Login from "@/views/auth/Login.vue";
-import { vm } from "@/main";
-import { AUTH_TOKEN_KEY } from "@/api/auth";
-import { importVM } from "@/utils/build";
+import { RouteConfig } from "vue-router";
+import auth from "./modules/auth";
+import panel from "./modules/panel";
 
 export default [
-	{
-		path: "/login",
-		name: "login",
-		component: Login,
-		meta: { layout: LOGIN_LAYOUT },
-		beforeEnter: (to: Route, from: Route, next: NavigationGuardNext) => {
-			vm.$api.auth
-				.verify(vm.$storage.get(AUTH_TOKEN_KEY))
-				.finally(() => next());
-		}
-	},
-	{
-		path: "/",
-		component: Panel,
-		beforeEnter: AuthenticatedOnlyGuard,
-		children: [
-			{
-				path: "",
-				name: "home",
-				component: Home
-			},
-			{
-				path: "library",
-				name: "games",
-				component: importVM("GameLibrary")
-			},
-			{
-				path: "account",
-				component: importVM("my-account/MyAccount"),
-				children: [
-					{
-						path: "",
-						name: "account",
-						component: importVM("my-account/MyAccountDetails")
-					},
-					{
-						path: "appearence",
-						name: "account.appearence",
-						component: importVM("my-account/MyAccountAppearence")
-					},
-					{
-						path: "language",
-						name: "account.language",
-						component: importVM("my-account/MyAccountLanguage")
-					},
-					{
-						path: "performance",
-						name: "account.performance",
-						component: importVM("my-account/MyAccountPerformance")
-					},
-					{
-						path: "advanced",
-						name: "account.advanced",
-						component: importVM("my-account/MyAccountAdvanced")
-					}
-				]
-			},
-			{
-				path: "server/:serverId",
-				name: "server",
-				component: importVM("server/Server"),
-				props: true,
-				children: [
-					{
-						path: "overview",
-						name: "server.overview",
-						component: importVM("server/ServerOverview")
-					},
-					{
-						path: "console",
-						name: "server.console",
-						component: importVM("server/ServerConsole")
-					},
-					{
-						path: "fs",
-						name: "server.fs",
-						component: importVM("server/ServerFS"),
-						children: [
-							{
-								path: "disk/:disk",
-								name: "server.fs.disk",
-								component: importVM("server/fs/ServerFSDisk")
-							}
-						]
-					},
-					{
-						path: "settings",
-						name: "server.settings",
-						component: importVM("server/ServerSettings")
-					}
-				]
-			},
-			{
-				path: "system/accounts",
-				name: "system.accounts",
-				component: importVM("system/SystemAccounts")
-			},
-			{
-				path: "system/accounts/:accountId",
-				name: "system.accounts.account",
-				component: importVM("system/accounts/SystemAccountsAccount")
-			}
-		]
-	},
+	panel,
+	auth,
 	{
 		path: "*",
 		redirect: "/"

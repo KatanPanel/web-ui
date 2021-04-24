@@ -22,13 +22,13 @@
 
 import Vue from "vue";
 import VueI18n from "vue-i18n";
-import { I18N_LOG_TAG } from "@/logging";
 import {
 	getClientSettings,
 	updateClientSettings
 } from "@/common/client-settings";
 import supportedLanguages from "@/supported-languages.json";
 import { format as formatDateFns } from "date-fns";
+import { I18N_LOG_TAG } from "@/services/logging";
 
 Vue.use(VueI18n);
 

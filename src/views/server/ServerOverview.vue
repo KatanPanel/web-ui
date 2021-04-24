@@ -152,7 +152,7 @@
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import WindowMixin from "@/mixins/window";
+import WindowMixin from "@/shared/mixins/window";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
 import VBox from "@/components/ui/box/VBox.vue";
@@ -166,8 +166,8 @@ import VBoxBody from "@/components/ui/box/VBoxBody.vue";
 import VIcon from "@/components/ui/icon/VIcon.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import VButton from "@/components/ui/button/VButton.vue";
-import LineChart from "@/components/graph/LineChart.vue";
-import Avatar from "@/components/Avatar.vue";
+import LineChart from "@/components/modules/panel/server/graph/LineChart.vue";
+import Avatar from "@/components/shared/Avatar.vue";
 
 @Component<ServerOverview>({
 	components: {
@@ -185,7 +185,7 @@ import Avatar from "@/components/Avatar.vue";
 		VBoxHeader,
 		VBox,
 		VCol,
-		VRow,
+		VRow
 	},
 	mounted(): void {
 		/* const socket = getWebSocket();
@@ -198,7 +198,7 @@ import Avatar from "@/components/Avatar.vue";
 		socket.send(1009, {
 			"server-id": this.getServer.id,
 		}); */
-	},
+	}
 })
 export default class ServerOverview extends mixins(WindowMixin) {
 	private cpus = 0;
@@ -212,9 +212,9 @@ export default class ServerOverview extends mixins(WindowMixin) {
 					label: "Núcleo #1",
 					backgroundColor: "rgba(165, 94, 234, 0.2)",
 					borderColor: "rgba(165, 94, 234, 1.0)",
-					data: this.cpuUsage,
-				},
-			],
+					data: this.cpuUsage
+				}
+			]
 		};
 	}
 }

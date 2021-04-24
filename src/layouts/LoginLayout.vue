@@ -3,22 +3,19 @@
 		<v-container
 			class="v--flex v--flex-justify-center v--flex-align-center v--full-height"
 		>
-			<transition mode="out-in" name="v--transition-slow-fade">
-				<div
-					:style="{
-						'background-image': `url(${currentWallpaper})`
-					}"
-					class="wallpaper"
-				/>
-			</transition>
+			<div
+				:style="{
+					'background-image': `url(${wallpaperPath})`
+				}"
+				class="wallpaper"
+			/>
 			<v-flex-box class="login-box">
 				<div
 					:style="{
-						'background-image': `url(${currentWallpaper})`
+						'background-image': `url(${wallpaperPath})`
 					}"
 					class="login-left"
 				>
-					<div class="overlay" />
 					<div class="content">
 						<TheLogo :white="true" />
 					</div>
@@ -28,6 +25,9 @@
 				</div>
 			</v-flex-box>
 		</v-container>
+		<div class="game-name" @click="changeWallpaper">
+			{{ wallpaper.name }}
+		</div>
 	</main>
 </template>
 <script lang="ts">
@@ -38,16 +38,33 @@ import TheLogo from "@/components/TheLogo.vue";
 
 @Component<LoginLayout>({
 	components: { TheLogo, VFlexBox, VContainer },
-	beforeCreate(): void {
-		// TODO: use server static content
-		this.currentWallpaperIndex = Math.floor(Math.random() * 6);
+	created(): void {
+		this.updateWallpaper();
 	}
 })
 export default class LoginLayout extends Vue {
-	private currentWallpaperIndex!: number;
+	wallpaper: any | null = null;
 
-	private get currentWallpaper(): string {
-		return `/img/games/wallpapers/${this.currentWallpaperIndex}.jpg`;
+	get illustrations(): any[] {
+		return require("@/assets/illustrations");
+	}
+
+	get wallpaperPath(): string {
+		return `/img/games/illustrations/${this.wallpaper.file}`;
+	}
+
+	changeWallpaper(): void {
+		const old = this.wallpaper.file;
+		this.$nextTick(() => {
+			this.updateWallpaper();
+			while (old === this.wallpaper.file) this.updateWallpaper();
+		});
+	}
+
+	updateWallpaper(): void {
+		this.wallpaper = this.illustrations[
+			Math.floor(Math.random() * this.illustrations.length)
+		];
 	}
 }
 </script>
@@ -56,6 +73,25 @@ export default class LoginLayout extends Vue {
 
 .v--layout-login {
 	height: 100%;
+
+	.game-name {
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		color: #fff;
+		z-index: 1001;
+		opacity: 0.12;
+		margin: 1rem;
+		font-size: 12px;
+		user-select: none;
+		font-weight: 600;
+		transition: all 0.3s ease;
+
+		&:hover {
+			opacity: 0.54;
+			cursor: pointer;
+		}
+	}
 
 	.wallpaper {
 		position: fixed;
@@ -70,6 +106,7 @@ export default class LoginLayout extends Vue {
 		box-shadow: inset #000 0 0 250px 50px;
 		filter: blur(15px);
 		z-index: 1;
+		transition: all 0.3s ease;
 	}
 
 	.login-box {
@@ -84,7 +121,9 @@ export default class LoginLayout extends Vue {
 			background-size: cover;
 			background-attachment: scroll;
 			background-position: center;
+			background-repeat: no-repeat;
 			width: 40%;
+			transition: all 0.3s ease;
 
 			.overflow {
 				content: "";
@@ -104,7 +143,7 @@ export default class LoginLayout extends Vue {
 			}
 
 			.content {
-				box-shadow: inset rgba(0, 0, 0, 0.24) 0 0 100px 50px;
+				box-shadow: inset rgba(0, 0, 0, 1) 0 0 14rem -7rem;
 				z-index: 2;
 				height: 100%;
 			}

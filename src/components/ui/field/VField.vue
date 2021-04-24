@@ -72,10 +72,10 @@ import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import VFieldContent from "@/components/ui/field/VFieldContent.vue";
 import { mixins } from "vue-class-component";
-import { Activable } from "@/mixins/ui/activable";
+import { Activable } from "@/shared/mixins/ui/activable";
 
 @Component({
-	components: { VFieldContent, VFlexBox, VFieldRadio, VIcon },
+	components: { VFieldContent, VFlexBox, VFieldRadio, VIcon }
 })
 export default class VField extends mixins(Activable) {
 	@Prop({ type: Boolean, default: false })

@@ -67,7 +67,7 @@ import { MetaInfo } from "vue-meta";
 import { generateMetaInfo } from "@/utils/component";
 import VFieldList from "@/components/ui/field/VFieldList.vue";
 import VField from "@/components/ui/field/VField.vue";
-import PerformanceSetting from "@/components/advanced/settings/performance/PerformanceSetting.vue";
+import PerformanceSetting from "@/components/modules/panel/my-account/performance/PerformanceSetting.vue";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
@@ -81,11 +81,11 @@ import VSelect from "@/components/ui/form/VSelect.vue";
 		VRow,
 		PerformanceSetting,
 		VField,
-		VFieldList,
+		VFieldList
 	},
 	metaInfo(): MetaInfo {
 		return generateMetaInfo("my-account.performance");
-	},
+	}
 })
 export default class MyAccountPerformance extends Vue {
 	category: string | null = null;
@@ -95,8 +95,8 @@ export default class MyAccountPerformance extends Vue {
 			name: "server-resources-update-rate",
 			level: 1,
 			component: "ServerResourcesUpdateRate",
-			filters: ["server"],
-		},
+			filters: ["server"]
+		}
 	]);
 
 	settings = this.defaultSettings;
@@ -104,36 +104,36 @@ export default class MyAccountPerformance extends Vue {
 		{
 			id: "*",
 			value: this.$t("views.my-account.performance.categories.all"),
-			active: true,
+			active: true
 		},
 		{
 			id: "category-server",
-			value: this.$t("views.my-account.performance.categories.server"),
+			value: this.$t("views.my-account.performance.categories.server")
 		},
 		{
 			id: "category-app",
-			value: this.$t("views.my-account.performance.categories.app"),
-		},
+			value: this.$t("views.my-account.performance.categories.app")
+		}
 	];
 
 	private readonly levels: readonly any[] = [
 		{
 			id: "*",
 			value: this.$t("views.my-account.performance.levels.all"),
-			active: true,
+			active: true
 		},
 		{
 			id: "level-low",
-			value: this.$t("views.my-account.performance.levels.low"),
+			value: this.$t("views.my-account.performance.levels.low")
 		},
 		{
 			id: "level-medium",
-			value: this.$t("views.my-account.performance.levels.medium"),
+			value: this.$t("views.my-account.performance.levels.medium")
 		},
 		{
 			id: "level-high",
-			value: this.$t("views.my-account.performance.levels.high"),
-		},
+			value: this.$t("views.my-account.performance.levels.high")
+		}
 	];
 
 	get currentSettings(): readonly any[] {

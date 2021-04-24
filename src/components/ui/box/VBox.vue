@@ -3,7 +3,7 @@
 		:class="{
 			'v--box-outlined': outlined,
 			'v--box-no-shadow': noShadow,
-			...getColorClasses,
+			...getColorClasses
 		}"
 		class="v--box"
 	>
@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { Component, Prop } from "vue-property-decorator";
-import { Coloured } from "@/mixins/ui/coloured";
+import { Coloured } from "@/shared/mixins/ui/coloured";
 import { mixins } from "vue-class-component";
 
 @Component

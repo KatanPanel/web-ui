@@ -26,7 +26,7 @@ import "./hooks";
 import "./plugins";
 import "./hooks/client-settings";
 import "./layouts";
-import { ERROR_HANDLER_LOG_TAG } from "@/logging";
+import { ERROR_HANDLER_LOG_TAG } from "@/services/logging";
 
 const isDevelopmentMode = process.env.NODE_ENV === "development";
 Vue.config.devtools = isDevelopmentMode;

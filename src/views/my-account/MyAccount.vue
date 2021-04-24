@@ -35,17 +35,17 @@
 import { Component, Vue } from "vue-property-decorator";
 import { MetaInfo } from "vue-meta";
 import { generateMetaInfo } from "@/utils/component";
-import MyAccountSidebar from "@/components/my-account/MyAccountSidebar.vue";
+import MyAccountSidebar from "@/components/modules/panel/my-account/MyAccountSidebar.vue";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 
 @Component({
 	components: {
 		VContainer,
-		MyAccountSidebar,
+		MyAccountSidebar
 	},
 	metaInfo(): MetaInfo {
 		return generateMetaInfo("my-account.my-account");
-	},
+	}
 })
 export default class MyAccount extends Vue {}
 </script>

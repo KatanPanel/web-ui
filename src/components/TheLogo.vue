@@ -12,8 +12,8 @@ export default class TheLogo extends Vue {
 	@Prop({ type: Boolean, default: false })
 	private readonly filled!: boolean;
 
-	public get color(): string {
-		return this.white ? "white" : this.filled ? "filled" : "blue";
+	get color(): string {
+		return this.white ? "white" : this.filled ? "white-filled" : "blue";
 	}
 }
 </script>

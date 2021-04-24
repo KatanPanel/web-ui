@@ -38,13 +38,13 @@
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import WindowMixin from "@/mixins/window";
+import WindowMixin from "@/shared/mixins/window";
 import VIcon from "@/components/ui/icon/VIcon.vue";
-import WindowLink from "@/components/navigation/WindowLink.vue";
+import PanelWindowLink from "@/components/modules/panel/PanelWindowLink.vue";
 import { AxiosError, AxiosResponse } from "axios";
 
 @Component<ServerFS>({
-	components: { WindowLink, VIcon },
+	components: { WindowLink: PanelWindowLink, VIcon },
 	mounted(): void {
 		this.$http
 			.get(`servers/${this.getServer.id}/fs`)
@@ -55,7 +55,7 @@ import { AxiosError, AxiosResponse } from "axios";
 			.catch((err: AxiosError) => {
 				console.log("err:", err.response);
 			});
-	},
+	}
 })
 export default class ServerFS extends mixins(WindowMixin) {
 	disks = [];

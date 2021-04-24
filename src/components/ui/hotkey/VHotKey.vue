@@ -27,12 +27,12 @@
 <script lang="ts">
 import { Component, Prop } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import { Activable } from "@/mixins/ui/activable";
+import { Activable } from "@/shared/mixins/ui/activable";
 
 @Component({
 	beforeMount(): void {
 		// TODO: handle platform specific hotkeys
-	},
+	}
 })
 export default class VHotKey extends mixins(Activable) {
 	@Prop({ type: String, required: true }) private readonly hotkey!: string;

@@ -53,13 +53,13 @@
 <script lang="ts">
 import { Component } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import WindowMixin from "@/mixins/window";
+import WindowMixin from "@/shared/mixins/window";
 import VTab from "@/components/ui/tab/VTab.vue";
 import VTabView from "@/components/ui/tab/VTabView.vue";
 import VTabs from "@/components/ui/tab/VTabs.vue";
-import ServerSettingsDetails from "@/components/server/settings/ServerSettingsDetails.vue";
-import ServerSettingsAdvanced from "@/components/server/settings/ServerSettingsAdvanced.vue";
-import ServerSettingsUsers from "@/components/server/settings/ServerSettingsUsers.vue";
+import ServerSettingsDetails from "@/components/modules/panel/server/settings/ServerSettingsDetails.vue";
+import ServerSettingsAdvanced from "@/components/modules/panel/server/settings/ServerSettingsAdvanced.vue";
+import ServerSettingsUsers from "@/components/modules/panel/server/settings/ServerSettingsUsers.vue";
 
 @Component({
 	components: {
@@ -68,8 +68,8 @@ import ServerSettingsUsers from "@/components/server/settings/ServerSettingsUser
 		ServerSettingsDetails,
 		VTabs,
 		VTabView,
-		VTab,
-	},
+		VTab
+	}
 })
 export default class ServerSettings extends mixins(WindowMixin) {}
 </script>

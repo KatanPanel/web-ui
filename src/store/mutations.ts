@@ -28,8 +28,8 @@ import {
 	ROUTER_NAVIGATION_LOG_TAG,
 	VUEX_LOG_TAG,
 	WEB_SOCKET_LOG_TAG,
-	WINDOWS_LOG_TAG,
-} from "@/logging";
+	WINDOWS_LOG_TAG
+} from "@/services/logging";
 import {
 	getWindow,
 	getWindows,
@@ -37,20 +37,20 @@ import {
 	OpenWindowState,
 	updateWindow,
 	updateWindowState,
-	Window,
+	Window
 } from "@/common/navigation/window";
 import { Route } from "vue-router";
 import {
 	WEBSOCKET_CLOSE,
 	WEBSOCKET_ERROR,
 	WEBSOCKET_MESSAGE,
-	WEBSOCKET_OPEN,
+	WEBSOCKET_OPEN
 } from "@/common/websocket/websocket";
 import { INVALID_OP } from "@/common/websocket/operation-codes";
 import {
 	ClientSettings,
 	DARK_THEME,
-	LIGHT_THEME,
+	LIGHT_THEME
 } from "@/common/client-settings";
 import { isUndefined } from "@/utils/any";
 
@@ -78,7 +78,7 @@ const vm: Vue = Vue.prototype;
 function catchWindowNotFound(window: any): void {
 	vm.$log.info({
 		tag: WINDOWS_LOG_TAG,
-		message: `Window ${window} not found`,
+		message: `Window ${window} not found`
 	});
 }
 
@@ -129,7 +129,7 @@ export default {
 			vm.$log.log({
 				tag: VUEX_LOG_TAG,
 				message: "Client settings updated.",
-				args: [payload.clientSettings],
+				args: [payload.clientSettings]
 			});
 		}
 	},
@@ -140,14 +140,14 @@ export default {
 		state.socket.native = event.currentTarget as WebSocket;
 		vm.$log.log({
 			tag: WEB_SOCKET_LOG_TAG,
-			message: "Connected successfully.",
+			message: "Connected successfully."
 		});
 
 		state.socket.on(INVALID_OP, (message: any) => {
 			vm.$log.error({
 				tag: WEB_SOCKET_LOG_TAG,
 				message: "Invalid operation code",
-				args: [message.code],
+				args: [message.code]
 			});
 		});
 
@@ -173,9 +173,9 @@ export default {
 			openWindows.push(payload.window);
 
 		updateWindowState(payload.window, OpenWindowState);
-		vm.$log.success({
+		vm.$log.debug({
 			tag: WINDOWS_LOG_TAG,
-			message: `Window ${payload.window.id} opened`,
+			message: `Window ${payload.window.id} opened`
 		});
 	},
 	[MINIMIZE_WINDOW](state: RootState, payload: { window?: number }) {
@@ -198,7 +198,7 @@ export default {
 		vm.$log.info({
 			tag: WINDOWS_LOG_TAG,
 			message: `Window "${payload.window.name}" updated.`,
-			args: [payload.payload],
+			args: [payload.payload]
 		});
 	},
 	[UPDATE_BACKEND_INFO](state: RootState, payload: any) {
@@ -214,7 +214,7 @@ export default {
 			vm.$log.info({
 				message: "[~] Route page reloaded.",
 				tag: ROUTER_NAVIGATION_LOG_TAG,
-				args: [to],
+				args: [to]
 			});
 			return;
 		}
@@ -224,7 +224,7 @@ export default {
 			vm.$log.info({
 				message: "[<] Route switched to previous page.",
 				tag: ROUTER_NAVIGATION_LOG_TAG,
-				args: [to],
+				args: [to]
 			});
 			history.pop();
 			return;
@@ -235,10 +235,10 @@ export default {
 		vm.$log.info({
 			message: "[>] Route switched to next page.",
 			tag: ROUTER_NAVIGATION_LOG_TAG,
-			args: [to],
+			args: [to]
 		});
 	},
 	[UPDATE_SERVER_LIST](state: RootState, payload: { serverList: any[] }) {
 		state.serverList = payload.serverList;
-	},
+	}
 } as MutationTree<RootState>;

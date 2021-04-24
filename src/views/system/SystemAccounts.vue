@@ -47,14 +47,14 @@
 									value: $t(
 										'views.system.accounts.sorting.a-z'
 									),
-									active: true,
+									active: true
 								},
 								{
 									id: 'sort-za',
 									value: $t(
 										'views.system.accounts.sorting.z-a'
-									),
-								},
+									)
+								}
 							]"
 							@change="sortAccounts"
 						/>
@@ -88,7 +88,7 @@
 						<span v-else key="all-accounts">
 							{{
 								$t("views.system.accounts.all-accounts", {
-									count: preservedAccounts.length,
+									count: preservedAccounts.length
 								})
 							}}
 						</span>
@@ -100,7 +100,7 @@
 				>
 					{{
 						$t("views.system.accounts.results-found", {
-							value: accounts.length,
+							value: accounts.length
 						})
 					}}
 				</p>
@@ -143,13 +143,13 @@ import VIcon from "@/components/ui/icon/VIcon.vue";
 import VSelect from "@/components/ui/form/VSelect.vue";
 import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import VLabel from "@/components/ui/form/VLabel.vue";
-import Copyable from "@/components/Copyable.vue";
+import Copyable from "@/components/shared/Copyable.vue";
 import VBox from "@/components/ui/box/VBox.vue";
 import VBoxBody from "@/components/ui/box/VBoxBody.vue";
 import VWall from "@/components/ui/wall/VWall.vue";
 import VBoxHeader from "@/components/ui/box/VBoxHeader.vue";
-import PermissionList from "@/components/PermissionList.vue";
-import SystemAccount from "@/components/system/SystemAccount.vue";
+import PermissionList from "@/components/modules/panel/shared/PermissionList.vue";
+import SystemAccount from "@/components/modules/panel/system/SystemAccount.vue";
 
 @Component<SystemAccounts>({
 	components: {
@@ -171,7 +171,7 @@ import SystemAccount from "@/components/system/SystemAccount.vue";
 		VField,
 		VFieldList,
 		VCol,
-		VRow,
+		VRow
 	},
 	metaInfo(): MetaInfo {
 		return generateMetaInfo("system.accounts");
@@ -188,7 +188,7 @@ import SystemAccount from "@/components/system/SystemAccount.vue";
 		this.$http("/info/permissions").then((res: AxiosResponse) => {
 			this.permissions = res.data.data.permissions;
 		});
-	},
+	}
 })
 export default class SystemAccounts extends Vue {
 	// visible to SystemAccount

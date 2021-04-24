@@ -79,8 +79,8 @@
 													value: this.$i18n.t(
 														'views.game-library.options.my-games'
 													),
-													active: true,
-												},
+													active: true
+												}
 											]"
 											@change="updateOrder"
 										/>
@@ -104,14 +104,14 @@
 													value: $t(
 														'views.game-library.sorting.a-z'
 													),
-													active: true,
+													active: true
 												},
 												{
 													id: 'sort-za',
 													value: $t(
 														'views.game-library.sorting.z-a'
-													),
-												},
+													)
+												}
 											]"
 											@change="updateOrder"
 										/>
@@ -171,12 +171,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
-import {MetaInfo} from "vue-meta";
+import { Component, Vue } from "vue-property-decorator";
+import { MetaInfo } from "vue-meta";
 import VContainer from "@/components/ui/layout/VContainer.vue";
 import VRow from "@/components/ui/layout/VRow.vue";
 import VCol from "@/components/ui/layout/VCol.vue";
-import {generateMetaInfo} from "@/utils/component";
+import { generateMetaInfo } from "@/utils/component";
 import VWall from "@/components/ui/wall/VWall.vue";
 import VBox from "@/components/ui/box/VBox.vue";
 import VBoxBody from "@/components/ui/box/VBoxBody.vue";
@@ -187,15 +187,15 @@ import VFlexBox from "@/components/ui/layout/VFlexBox.vue";
 import VFieldList from "@/components/ui/field/VFieldList.vue";
 import VField from "@/components/ui/field/VField.vue";
 import VFieldRadio from "@/components/ui/field/VFieldRadio.vue";
-import Copyable from "@/components/Copyable.vue";
-import GameInfo from "@/components/game-library/GameInfo.vue";
-import GameLibraryCard from "@/components/game-library/GameLibraryCard.vue";
+import Copyable from "@/components/shared/Copyable.vue";
+import GameInfo from "@/components/modules/panel/game-library/GameInfo.vue";
+import GameLibraryCard from "@/components/modules/panel/game-library/GameLibraryCard.vue";
 import VForm from "@/components/ui/form/VForm.vue";
 import VInputGroup from "@/components/ui/form/VInputGroup.vue";
 import VInput from "@/components/ui/form/VInput.vue";
 import VSelect from "@/components/ui/form/VSelect.vue";
 import VSelectOption from "@/components/ui/form/VSelectOption.vue";
-import {sortAlphabetically, sortAlphabeticallyInversed} from "@/utils/arrays";
+import { sortAlphabetically, sortAlphabeticallyInversed } from "@/utils/arrays";
 
 type Game = {
 	id: string;
@@ -224,7 +224,7 @@ type Game = {
 		VWall,
 		VCol,
 		VRow,
-		VContainer,
+		VContainer
 	},
 	metaInfo(): MetaInfo {
 		return generateMetaInfo("game-library");
@@ -233,7 +233,7 @@ type Game = {
 		this.$api.info.getGames().then((games: any[]) => {
 			this.games = games;
 		});
-	},
+	}
 })
 export default class GameLibrary extends Vue {
 	private games: Game[] = [];

@@ -15,17 +15,17 @@
 import { Component, Prop } from "vue-property-decorator";
 import { NavigationGuardNext, Route } from "vue-router";
 import { mixins } from "vue-class-component";
-import WindowMixin from "@/mixins/window";
+import WindowMixin from "@/shared/mixins/window";
 import { resolveWindow } from "@/common/navigation/window";
 import { MetaInfo } from "vue-meta";
-import ServerLastInfo from "@/components/server/ServerLastInfo.vue";
-import ServerConsoleContent from "@/components/server/ServerConsoleContent.vue";
+import ServerLastInfo from "@/components/modules/panel/server/ServerLastInfo.vue";
+import ServerConsoleContent from "@/components/modules/panel/server/ServerConsoleContent.vue";
 import { getWebSocket } from "@/store";
 
 @Component<Server>({
 	components: {
 		ServerConsoleContent,
-		ServerLastInfo,
+		ServerLastInfo
 	},
 	metaInfo(): MetaInfo {
 		return { title: this.getServer.name };
@@ -42,7 +42,7 @@ import { getWebSocket } from "@/store";
 		});
 
 		this.$connect();
-	},
+	}
 })
 export default class Server extends mixins(WindowMixin) {
 	@Prop({ type: Boolean, default: false })

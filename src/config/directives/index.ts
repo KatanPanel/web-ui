@@ -21,8 +21,8 @@
  */
 
 import Vue from "vue";
-import { RouterHrefDirective } from "@/directives/router-href";
-import { ClickOutsideDirective } from "@/directives/click-outside";
+import { RouterHrefDirective } from "@/shared/directives/router-href";
+import { ClickOutsideDirective } from "@/shared/directives/click-outside";
 
 Vue.directive("router-href", RouterHrefDirective);
 Vue.directive("click-outside", ClickOutsideDirective);
