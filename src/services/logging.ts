@@ -49,23 +49,23 @@ export class LoggingService {
 	}
 
 	public log(message: ConsolaLogObject | any, ...args: any[]): void {
-		this.logger.log(message, args);
+		this.logger.log(message, ...args);
 	}
 
 	public debug(message: ConsolaLogObject | any, ...args: any[]): void {
-		this.logger.debug(message, args);
+		this.logger.debug(message, ...args);
 	}
 
 	public info(message: ConsolaLogObject | any, ...args: any[]): void {
-		this.logger.info(message, args);
+		this.logger.info(message, ...args);
 	}
 
 	public warn(message: ConsolaLogObject | any, ...args: any[]): void {
-		this.logger.warn(message, args);
+		this.logger.warn(message, ...args);
 	}
 
 	public error(message: ConsolaLogObject | any, ...args: any[]): void {
-		this.logger.error(message, args);
+		this.logger.error(message, ...args);
 	}
 
 	private setupReporter(): ConsolaReporter {
@@ -86,15 +86,15 @@ export class LoggingService {
 				const style = `color: #8854d0; border-radius: 0; font-weight: bold; text-transform: capitalize;`;
 				const badge = tag.length === 0 ? "%c" : "%c[" + tag + "] ";
 
-				typeof logObj.args[0] === "string"
-					? consoleLogFn(
-							`${badge}%c${logObj.args[0]}`,
-							style,
-							// Empty string as style resets to default console style
-							"",
-							...logObj.args.slice(1)
-					  )
-					: consoleLogFn(badge, style, ...logObj.args);
+				if (typeof logObj.args[0] === "string")
+					consoleLogFn(
+						`${badge}%c${logObj.args[0]}`,
+						style,
+						// Empty string as style resets to default console style
+						"",
+						...logObj.args.slice(1)
+					);
+				else consoleLogFn(badge, style, ...logObj.args);
 			}
 		};
 	}
