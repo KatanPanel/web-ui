@@ -77,9 +77,8 @@
 		},
 		"login": {
 			"title": "Sign In",
-			"please-identify": "Please identify yourself to proceed.",
 			"fields": {
-				"username": "Username",
+				"username": "Username or account id",
 				"password": "Password",
 				"confirm": "Continue",
 				"confirm-logged-in": "Continue as {username}"

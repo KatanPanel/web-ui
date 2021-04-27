@@ -76,10 +76,9 @@
 			"server-list-fetch-error": "Não foi possível carregar a lista de servidores."
 		},
 		"login": {
-			"title": "Entrar",
-			"please-identify": "É necessário que você se identifique para prosseguir.",
+			"title": "Iniciar sessão",
 			"fields": {
-				"username": "Nome de usuário",
+				"username": "ID da conta ou nome de usuário",
 				"password": "Senha",
 				"confirm": "Continuar",
 				"confirm-logged-in": "Continuar como {username}"

@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-import { AxiosInstance } from "axios";
-import { ConfigService } from "@/services/config-service";
-import { LoggingService } from "@/services/logging";
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import Vue from "vue";
 
 declare module "vue/types/vue" {
 	interface Vue {
@@ -32,20 +32,15 @@ declare module "vue/types/vue" {
 			routeMappings: { [key: string]: () => any };
 		};
 		$socket: WebSocket;
-		$http: AxiosInstance;
 
 		$connect(): void;
 
 		$disconnect(): void;
-
-		$log: LoggingService;
 		$date: (date: Date | number | string, style?: string) => string;
 		$website: {
 			name: string;
 			version: string;
 			url: string;
 		};
-		$api: API;
-		$config: ConfigService;
 	}
 }

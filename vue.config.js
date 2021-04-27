@@ -26,5 +26,6 @@ module.exports = {
 			]);
 
 		config.plugin("ignore-plugin").use(IgnorePlugin, [/moment$/]);
-	}
+	},
+	transpileDependencies: ["vuex-module-decorators"]
 };

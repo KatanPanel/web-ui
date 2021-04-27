@@ -66,10 +66,7 @@
 	flex-direction: column;
 	flex-wrap: wrap;
 	border-radius: 4px;
-
-	&:not(:last-child) {
-		margin-bottom: 12px;
-	}
+	margin: 6px 0;
 
 	&:focus {
 		.v--label {

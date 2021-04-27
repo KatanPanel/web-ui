@@ -38,23 +38,14 @@
 
 html {
 	font-size: 62.5%;
-	position: relative;
 }
 
 body {
 	font-family: $default-font;
-	display: flex;
-	display: -ms-flexbox;
-	flex-direction: column;
-	line-height: 1.6;
 	font-size: 16px;
-	font-weight: 500;
+	letter-spacing: 0.15px;
 	color: var(--kt-text-color);
-}
-
-#app {
-	display: flex;
-	flex-direction: column;
+	line-height: 1;
 }
 
 html,

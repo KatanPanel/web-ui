@@ -20,19 +20,27 @@
  * SOFTWARE.
  */
 
+import "reflect-metadata";
+import "@/register-service-worker";
+import store from "@/store";
+import katan from "@/katan";
 import Vue from "vue";
-import App from "./App.vue";
-import "./registerServiceWorker";
-import store from "./store";
-import router from "./router";
-import i18n from "@/i18n";
-import "./config";
+import App from "@/app/App.vue";
+import VueI18n from "vue-i18n";
+import VueRouter from "vue-router";
 
-export const vm = new Vue({
+Vue.use(VueRouter);
+Vue.use(VueI18n);
+
+const isDevelopmentMode = process.env.NODE_ENV === "development";
+Vue.config.devtools = isDevelopmentMode;
+Vue.config.performance = isDevelopmentMode;
+Vue.config.productionTip = isDevelopmentMode;
+
+const { router, i18n } = katan();
+new Vue({
 	store,
 	router,
 	i18n,
 	render: (h) => h(App)
-});
-
-vm.$mount("#app");
+}).$mount("#app");

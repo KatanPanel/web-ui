@@ -19,6 +19,8 @@
 		"date-fns": "^2.21.1",
 		"filesize": "^6.1.0",
 		"inversify": "^5.0.5",
+		"inversify-inject-decorators": "^3.1.0",
+		"inversify-props": "^2.2.6",
 		"reflect-metadata": "^0.1.13",
 		"register-service-worker": "^1.7.1",
 		"v-tooltip": "^2.0.3",
@@ -35,7 +37,8 @@
 		"vue-svg-inline-loader": "^1.5.1",
 		"vue-svg-inline-plugin": "^2.0.0",
 		"vue2-storage": "^5.0.0",
-		"vuex": "^3.4.0"
+		"vuex": "^3.4.0",
+		"vuex-module-decorators": "^1.0.1"
 	},
 	"devDependencies": {
 		"@types/jest": "^24.0.19",

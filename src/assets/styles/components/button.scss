@@ -49,6 +49,11 @@
 		text-decoration: underline;
 	}
 
+	&:not([disabled]):focus {
+		background-color: var(--kt-primary-darker-color);
+		border-color: var(--kt-primary-darker-color);
+	}
+
 	&[disabled] {
 		opacity: 0.54;
 	}

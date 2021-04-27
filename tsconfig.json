@@ -15,6 +15,7 @@
 		"sourceMap": true,
 		"baseUrl": ".",
 		"types": [
+			"reflect-metadata",
 			"webpack-env",
 			"jest"
 		],
@@ -31,7 +32,8 @@
 			"esnext",
 			"dom",
 			"dom.iterable",
-			"scripthost"
+			"scripthost",
+			"es6"
 		]
 	},
 	"include": [

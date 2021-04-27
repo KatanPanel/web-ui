@@ -36,6 +36,7 @@
 	--kt-sidebar-link-active-background: #fff;
 }
 
+:root,
 [data-theme="light"] {
 	--kt-text-color: #4f5660;
 	--kt-background: #fafafa;
@@ -47,6 +48,7 @@
 	--kt-muted-color: gray;
 	--kt-muted-darker-color: darkgray;
 	--kt-shadow: rgba(0, 0, 0, 0.12);
+	--kt-opacity: rgba(0, 0, 0, 0.54);
 	--kt-scrollbar: #fafafa;
 	--kt-scrollbar-thumb: #e5e5e5;
 }
@@ -62,6 +64,7 @@
 	--kt-muted-color: #bbb;
 	--kt-muted-darker-color: #999;
 	--kt-shadow: rgba(255, 255, 255, 0.06);
+	--kt-opacity: rgba(255, 255, 255, 0.54);
 	--kt-scrollbar: rgba(0, 0, 0, 0.01);
 	--kt-scrollbar-thumb: rgba(0, 0, 0, 0.15);
 }
