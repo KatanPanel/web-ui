@@ -51,6 +51,16 @@
 		}
 	}
 
+	.v--dropdown-caret-icon {
+		display: inline-block;
+		margin-left: 4px;
+
+		svg {
+			width: 8px;
+			height: 8px;
+		}
+	}
+
 	.v--dropdown-item-list {
 		position: absolute;
 		display: flex;
@@ -59,11 +69,18 @@
 		box-shadow: var(--kt-shadow) 1px 1px 6px 0px;
 		border-radius: 4px;
 		width: max-content;
-		transform: translate(0, 15%);
 		list-style: none;
 		z-index: 1001;
-		right: 0;
-		border: 1px solid var(--kt-border-color);
+
+		&.dropdown {
+			transform: translateY(15%);
+		}
+
+		&.dropup {
+			bottom: 100%;
+			transform: translateY(-20%);
+			right: 0;
+		}
 
 		.v--dropdown-item {
 			padding: 12px;
