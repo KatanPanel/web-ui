@@ -36,7 +36,10 @@
 	&.v--box-outlined {
 		box-shadow: none;
 		border-color: var(--kt-border-color);
-		background-color: transparent;
+
+		&:not(.v--box-no-shadow) {
+			background-color: transparent;
+		}
 
 		&.v--coloured-danger {
 			border-color: var(--kt-danger-color);
