@@ -22,200 +22,350 @@
 
 import Vue from "vue";
 import {
-	Container,
+	addIdToCache,
 	generateIdAndAddToCache,
 	generateIdNameOfDependency,
 	getOrSetIdFromCache,
 	setContainer
 } from "inversify-props";
-import { I18nService } from "@/app/shared/services/i18n";
 import KatanRouter from "@/router";
 import {
+	Instantiable,
 	KatanContainer,
 	KatanModule,
-	KatanRouteConfig
-} from "@/app/shared/models/module";
-import { decorate, injectable, interfaces } from "inversify";
-import VueI18n from "vue-i18n";
-import VueRouter, { RouteConfig } from "vue-router";
+	KatanNavigationGuard,
+	KatanRouteConfig,
+	ModuleMetadataKey,
+	ModuleOptions
+} from "@/ioc";
+import { Container, ContainerModule, interfaces } from "inversify";
+import { NavigationGuardNext, Route, RouteConfig } from "vue-router";
 import { Constructor } from "inversify-props/dist/lib/inversify.types";
 import { isUndefined } from "@/app/shared/utils/any";
 import AppModule from "@/app/app.module";
 import { getModule, VuexModule } from "vuex-module-decorators";
 import store from "@/store";
-import Newable = interfaces.Newable;
+import { lazyView } from "@/app/shared/utils/builtin";
+import {
+	RouteConfigMultipleViews,
+	RouteConfigSingleView
+} from "vue-router/types/router";
 
-Vue.use(VueRouter);
+const loadedModules: { [name: string]: KatanModule } = {};
 
-function decorateCatchable(
-	decorator: ClassDecorator | ParameterDecorator | MethodDecorator,
-	constructor: any
-): void {
-	try {
-		decorate(decorator, constructor);
-	} catch (e) {
-		if (
-			e.message !== "Cannot apply @injectable decorator multiple times."
-		) {
-			throw e;
-		}
-	}
-}
-
-function buildContainerPrototype(source: Container): KatanContainer {
+function buildContainerPrototype(
+	container: Container,
+	bind: interfaces.Bind,
+	rebind: interfaces.Rebind
+): KatanContainer {
 	return {
-		bind<T>(constructor: Newable<T>): interfaces.BindingWhenOnSyntax<T> {
-			const id = generateIdAndAddToCache(constructor);
-			decorateCatchable(injectable(), constructor);
-
-			console.log("[bind]", id);
-			return source.bind<T>(id).to(constructor).inSingletonScope();
+		container,
+		bind<T>(
+			constructor: Constructor<T>
+		): interfaces.BindingWhenOnSyntax<T> {
+			return bind<T>(generateIdAndAddToCache(constructor))
+				.to(constructor)
+				.inSingletonScope();
 		},
-		bindAll(constructors: Newable<any>[]): void {
+		bindAll(constructors: Constructor[]): void {
 			for (const constructor of constructors) {
 				this.bind(constructor);
 			}
 		},
+		bindValue<T>(constructor: Constructor<T> | symbol, value: T) {
+			bind(
+				typeof constructor === "symbol"
+					? addIdToCache(constructor, constructor.toString())
+					: generateIdAndAddToCache(constructor)
+			).toConstantValue(value);
+		},
 		bindFactory<T>(
-			constructor: Newable<T>,
+			constructor: Constructor<T>,
 			factory: interfaces.FactoryCreator<T>
 		): interfaces.BindingWhenOnSyntax<T> {
-			const id = generateIdAndAddToCache(constructor);
-			decorateCatchable(injectable(), constructor);
-
-			return source.bind<T>(id).toFactory(factory);
+			return bind<T>(generateIdAndAddToCache(constructor)).toFactory(
+				factory
+			);
+		},
+		bindDynamic<T>(
+			constructor: Constructor<T> | symbol,
+			value: (context: interfaces.Context) => T
+		): interfaces.BindingWhenOnSyntax<T> {
+			if (typeof constructor === "symbol") {
+				const name = constructor.toString();
+				return bind<T>(addIdToCache(constructor, name)).toDynamicValue(
+					value
+				);
+			} else {
+				return bind<T>(
+					generateIdAndAddToCache(constructor)
+				).toDynamicValue(value);
+			}
 		},
 		bindStoreLazy<T extends VuexModule>(
-			constructor: Constructor<T>
+			constructor: Constructor<T>,
+			root?: Constructor<T>
 		): interfaces.BindingWhenOnSyntax<T> {
 			const id = generateIdAndAddToCache(constructor);
-			decorateCatchable(injectable(), constructor);
 
-			console.log("[store inject]", id);
-			return source
-				.bind<T>(id)
-				.toDynamicValue(() => getModule(constructor, store))
+			return bind<T>(id)
+				.toDynamicValue(() => {
+					if (root) {
+						const rpath = root._vmdModuleName.split("/");
+						if (!store.hasModule(rpath)) {
+							store.registerModule(rpath, root);
+							this.bindValue(root, getModule(root, store));
+						}
+					}
+
+					const path = constructor._vmdModuleName.split("/");
+					store.registerModule(path, constructor);
+					const value = getModule(constructor, store);
+					rebind(id).toConstantValue(value);
+					return value as T;
+				})
 				.inSingletonScope();
 		},
 		get<T>(constructor: Constructor<T>): T {
-			return source.get(
+			return this.container.get(
 				getOrSetIdFromCache(generateIdNameOfDependency(constructor))
 			);
 		}
 	};
 }
 
-const loadedModules: string[] = [];
+function fixNaming(constructor: Constructor, suffix?: string): string {
+	let name = constructor.name;
+	const moduleSuffix = name.indexOf(suffix || "Module");
+	if (moduleSuffix !== -1) name = name.substr(0, moduleSuffix);
 
-function loadModule<T extends KatanModule>(
-	scope: KatanContainer,
-	module: KatanModule,
-	router: KatanRouter
-): void {
-	let name = module.constructor.name;
-	const moduleSuffix = name.indexOf("Module");
-	if (moduleSuffix !== -1) {
-		name = name.substr(0, moduleSuffix);
-	}
+	// kebab-case
+	return name.replace(
+		/[A-Z]+(?![a-z])|[A-Z]/g,
+		($: string, ofs: any) => (ofs ? "-" : "") + $.toLowerCase()
+	);
+}
 
-	name = name.toLowerCase();
-
-	console.log("[module] loading module", name);
-	if (loadedModules.includes(name)) {
-		console.warn(`Module ${name} already loaded.`);
-		return;
-	}
-
-	const depends = module.dependsOn();
-	if (depends.length !== 0) {
-		for (const depend of depends) loadModule(scope, depend, router);
-	}
-
-	if (!(module instanceof AppModule)) {
-		Object.defineProperty(module, "moduleName", {
-			value: name,
-			writable: false,
-			enumerable: true,
-			configurable: true
-		});
-	}
-
-	Object.defineProperty(module, "container", {
-		value: scope,
+function define(obj: any, key: PropertyKey, value: any) {
+	Object.defineProperty(obj, key, {
+		value,
 		writable: false,
 		enumerable: true,
 		configurable: true
 	});
+}
 
-	for (const state of module.stateManagement()) scope.bindStoreLazy(state);
+function loadModule(
+	container: KatanContainer,
+	module: Instantiable<any>,
+	router: KatanRouter
+): any {
+	if (!Reflect.hasMetadata(ModuleMetadataKey, module))
+		throw new Error(`${module.name} is not a Module`);
 
-	module.init();
+	const moduleName = fixNaming(module);
+	if (!isUndefined(loadedModules[moduleName]))
+		throw new Error(`Module ${moduleName} already loaded`);
 
-	const routes = module.routes();
-	if (!isUndefined(routes)) {
-		const rootConfig = router.routes.find(
-			(config) => config.path === "/"
-		) as RouteConfig;
+	const options: ModuleOptions =
+		Reflect.getMetadata(ModuleMetadataKey, module) || {};
 
-		if (!isUndefined(rootConfig) && isUndefined(rootConfig.children))
-			rootConfig.children = [];
-
-		if (Array.isArray(routes)) {
-			const arr = routes as KatanRouteConfig[];
-			for (const conf of arr) {
-				if (!conf.root) rootConfig.children.push(conf);
-				else router.routes.push(conf);
-			}
-		} else {
-			const conf = routes as KatanRouteConfig;
-			if (!conf.root) rootConfig.children.push(conf);
-			else router.routes.push(conf);
-		}
+	const depends = options.children;
+	if (!isUndefined(depends)) {
+		for (const depend of depends) loadModule(container, depend, router);
 	}
 
-	loadedModules.push(name);
+	const instance = new module();
+	define(instance, "moduleName", moduleName);
+
+	const containerModule = new ContainerModule(
+		(
+			bind: interfaces.Bind,
+			unbind: interfaces.Unbind,
+			isBound: interfaces.IsBound,
+			rebind: interfaces.Rebind
+		) => {
+			const proto = buildContainerPrototype(
+				container.container,
+				bind,
+				rebind
+			);
+			const services = options.services;
+			if (!isUndefined(services)) proto.bindAll(services);
+
+			const state = options.stateManagement;
+			if (!isUndefined(state)) {
+				if (Array.isArray(state)) {
+					for (const store of state) proto.bindStoreLazy(store);
+				} else {
+					const module = state.module;
+					if (module) {
+						const children: Constructor<VuexModule>[] | undefined =
+							state.children;
+						if (children) {
+							for (const child of children) {
+								proto.bindStoreLazy(child, module);
+							}
+						}
+					} else proto.bindStoreLazy(state);
+				}
+			}
+
+			const routes = options.router;
+			if (!isUndefined(routes)) {
+				const root = router.routes.find(
+					(config) => config.path === "/"
+				);
+
+				const routeToVue: (route: KatanRouteConfig) => RouteConfig = (
+					route
+				) => {
+					const value: RouteConfig = {
+						path: route.path
+					};
+
+					if (route.redirect) value.redirect = route.redirect;
+					if (route.name) value.name = route.name;
+					if (route.meta) value.meta = route.meta;
+
+					if (route.component) {
+						if (typeof route.component === "string") {
+							(value as RouteConfigSingleView).component = lazyView(
+								route.component,
+								instance instanceof AppModule
+									? undefined
+									: moduleName
+							);
+						} else {
+							const map: { [key: string]: any } = {};
+							for (const key of Object.keys(route.component)) {
+								map[key] = lazyView(
+									route.component[key],
+									instance instanceof AppModule
+										? undefined
+										: moduleName
+								);
+							}
+
+							(value as RouteConfigMultipleViews).components = map;
+						}
+					}
+
+					const beforeEnter = route.beforeEnter;
+					if (beforeEnter) {
+						value.beforeEnter = (
+							to: Route,
+							from: Route,
+							next: NavigationGuardNext
+						) => {
+							proto
+								.get<KatanNavigationGuard>(beforeEnter)
+								.handle(to, from, next);
+						};
+					}
+
+					if (
+						!isUndefined(route.children) &&
+						route.children.length > 0
+					) {
+						const children = [];
+						for (const child of route.children)
+							children.push(routeToVue(child));
+
+						value.children = children;
+					}
+					return value;
+				};
+
+				const resolveRoute: (route: KatanRouteConfig) => void = (
+					route
+				) => {
+					const resolved = routeToVue(route);
+					if (route.root || isUndefined(root))
+						router.routes.push(resolved);
+					else root.children?.push(resolved);
+				};
+
+				if (Array.isArray(routes)) {
+					for (const route of routes) resolveRoute(route);
+				} else resolveRoute(routes);
+			}
+
+			define(instance, "container", proto);
+			if (instance.init) instance.init();
+		}
+	);
+
+	define(instance, "containerModule", containerModule);
+	const directives = options.directives;
+	if (!isUndefined(directives)) {
+		for (const id of Object.keys(directives))
+			Vue.directive(id, directives[id]);
+	}
+
+	container.container.load(containerModule);
+	loadedModules[moduleName] = instance;
+	return instance;
 }
 
-function loadModules(scope: KatanContainer, router: KatanRouter): void {
-	const ctx = require.context(
-		"@/app",
-		true,
-		/(?!app)^.*\.module.ts$/,
-		"sync"
-	);
-	const modules = ctx
-		.keys()
-		.map((name: string) => {
-			return new (ctx(name).default)() as KatanModule;
-		})
-		.filter((module) => !(module instanceof AppModule));
+function loadModules(
+	container: KatanContainer,
+	router: KatanRouter,
+	autoLoad?: Constructor[]
+): void {
+	// load root module first
+	const root = loadModule(container, AppModule, router);
+	let modules = [];
 
-	// load root moduel first
-	const root = new AppModule();
-	loadModule(scope, root, router);
+	if (isUndefined(autoLoad)) {
+		const ctx = require.context(
+			"@/app",
+			true,
+			/(?!app)^.*\.module.(ts|js)$/m,
+			"sync"
+		);
+		modules = ctx
+			.keys()
+			.filter((name: string) => {
+				return name !== "./app.module.ts";
+			})
+			.map((name: string) => {
+				return ctx(name).default;
+			});
+	}
 
 	// then other modules
-	for (const module of modules) loadModule(scope, module, router);
+	for (const module of modules) {
+		loadModule(container, module, router);
+	}
 
 	root.afterInit();
-	for (const module of modules) module.afterInit();
+	for (const key of Object.keys(loadedModules)) {
+		const module = loadedModules[key];
+		if (module instanceof AppModule) continue;
+
+		if (module.afterInit) module.afterInit();
+	}
 }
 
-function createApp(): { i18n: VueI18n; router: VueRouter } {
+function createApp(vm: Vue, onLoad: () => void): void {
 	const container = setContainer({
 		autoBindInjectable: false,
 		skipBaseClassChecks: true,
 		defaultScope: "Singleton"
 	});
 
-	const scope = buildContainerPrototype(container);
-	const router = new KatanRouter();
-	loadModules(scope, router);
+	container.bind(generateIdAndAddToCache(Vue)).toConstantValue(vm);
+	const proto = buildContainerPrototype(
+		container,
+		container.bind,
+		container.rebind
+	);
 
-	return {
-		i18n: scope.get<I18nService>(I18nService).getI18n(),
-		router: router.createRouter()
-	};
+	const router = new KatanRouter(vm.$router);
+	loadModules(proto, router, undefined);
+	router.setup();
+	onLoad();
 }
 
 export default createApp;

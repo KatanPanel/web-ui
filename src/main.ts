@@ -23,24 +23,30 @@
 import "reflect-metadata";
 import "@/register-service-worker";
 import store from "@/store";
-import katan from "@/katan";
+import init from "@/katan";
 import Vue from "vue";
 import App from "@/app/App.vue";
-import VueI18n from "vue-i18n";
 import VueRouter from "vue-router";
+import VueI18n from "vue-i18n";
 
-Vue.use(VueRouter);
-Vue.use(VueI18n);
+const isProductionMode = process.env.NODE_ENV === "production";
+Vue.config.devtools = !isProductionMode;
+Vue.config.performance = !isProductionMode;
+Vue.config.productionTip = !isProductionMode;
 
-const isDevelopmentMode = process.env.NODE_ENV === "development";
-Vue.config.devtools = isDevelopmentMode;
-Vue.config.performance = isDevelopmentMode;
-Vue.config.productionTip = isDevelopmentMode;
-
-const { router, i18n } = katan();
-new Vue({
+const vm = new Vue({
 	store,
-	router,
-	i18n,
+	router: new VueRouter({
+		mode: "history",
+		base: process.env.BASE_URL,
+		routes: []
+	}),
+	i18n: new VueI18n(),
 	render: (h) => h(App)
-}).$mount("#app");
+});
+
+vm.$once("init", () => {
+	init(vm, () => vm.$emit("loaded"));
+});
+
+vm.$mount("#app");

@@ -20,13 +20,5 @@
  * SOFTWARE.
  */
 
-import Vuex from "vuex";
-import Vue from "vue";
-
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-	state: () => ({}),
-	strict: process.env.NODE_ENV !== "production",
-	devtools: process.env.NODE_ENV !== "production"
-});
+export type Constructor<T = any> = { new (...args: any[]): T } | any;
+export type Instantiable<T> = new (...args: any[]) => T;

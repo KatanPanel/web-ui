@@ -20,29 +20,6 @@
  * SOFTWARE.
  */
 
-import {
-	Constructor,
-	KatanModule,
-	KatanRouting
-} from "@/app/shared/models/module";
-import { LoggingService } from "@/app/shared/services/logging";
-import { ConfigService } from "@/app/shared/services/config";
-import { HttpService } from "@/app/shared/services/http";
-import { WebSocketService } from "@/app/shared/services/websocket";
-import {
-	AppClientSettingsStore,
-	CLIENT_SETTINGS_CACHE_KEY
-} from "@/app/shared/store/client-settings";
-import { StorageService } from "@/app/shared/services/storage";
-import { isUndefined } from "@/app/shared/utils/any";
-import { isDarkThemePreferred } from "@/app/shared/utils/dom";
-import { CLIENT_SETTINGS_DARK_THEME } from "@/app/shared/models/client-settings";
-import { AuthenticatedOnlyGuard } from "@/app/auth/guards/authenticated-only";
-import { I18nService } from "@/app/shared/services/i18n";
-import { VuexModule } from "vuex-module-decorators";
-import { AppWebSocketStore } from "@/app/shared/store/websocket";
-import { AppNavigationStore } from "@/app/shared/store/navigation";
-import { AppStore } from "@/app/app.store";
 import Vue from "vue";
 import { VueJSModalOptions } from "vue-js-modal";
 import VModal from "vue-js-modal/dist/index.nocss.js";
@@ -50,28 +27,39 @@ import VueSvgInlinePlugin from "vue-svg-inline-plugin";
 import VueMeta from "vue-meta";
 import VTooltip from "v-tooltip";
 import VueNativeSock from "vue-native-websocket";
-import { RouterHrefDirective } from "@/app/shared/directives/router-href";
-import { ClickOutsideDirective } from "@/app/shared/directives/click-outside";
+import { KatanModule, Module } from "@/ioc";
+import { RouterHrefDirective } from "@/app/shared/directives/router-href.directive";
+import { ClickOutsideDirective } from "@/app/shared/directives/click-outside.directive";
+import { LoggingService } from "@/app/shared/services/logging.service";
+import { HttpService } from "@/app/shared/services/http.service";
+import { ConfigService } from "@/app/shared/services/config.service";
+import { I18nService } from "@/app/shared/services/i18n.service";
+import { LocalStorageService } from "@/app/shared/services/local-storage.service";
+import { AppRouter } from "@/app/shared/router/app.router";
+import { AppStore } from "@/app/shared/store/app.store";
 
+@Module({
+	router: AppRouter,
+	stateManagement: AppStore,
+	services: [
+		LoggingService,
+		ConfigService,
+		HttpService,
+		LocalStorageService,
+		I18nService
+	],
+	directives: {
+		"router-href": RouterHrefDirective,
+		"click-outside": ClickOutsideDirective
+	}
+})
 export default class AppModule extends KatanModule {
-	init() {
-		this.bindAll([
-			LoggingService,
-			ConfigService,
-			HttpService,
-			StorageService,
-			WebSocketService,
-			I18nService
-		]);
+	afterInit() {
+		this.installPlugins();
 	}
 
-	installDirectives(): void {
-		Vue.directive("router-href", RouterHrefDirective);
-		Vue.directive("click-outside", ClickOutsideDirective);
-	}
-
-	installPlugins(): void {
-		const config = this.get<ConfigService>(ConfigService);
+	private installPlugins(): void {
+		const config = this.container.get<ConfigService>(ConfigService);
 		Vue.use<VueJSModalOptions>(VModal, {
 			dialog: false
 		});
@@ -90,77 +78,5 @@ export default class AppModule extends KatanModule {
 			reconnection: true,
 			format: "json"
 		});
-	}
-
-	setupClientSettings(): void {
-		const storageService = this.get(StorageService);
-		console.log("storage:", storageService);
-		const appClientSettingsStore = this.get(AppClientSettingsStore);
-		console.log("app client settings:", appClientSettingsStore);
-
-		// preload client settings if defined before
-		if (storageService.has(CLIENT_SETTINGS_CACHE_KEY)) {
-			appClientSettingsStore.updateClientSettings(
-				storageService.get(CLIENT_SETTINGS_CACHE_KEY),
-				true
-			);
-		}
-
-		const clientSettings = appClientSettingsStore.clientSettings;
-
-		// set the default dark theme if it is set as machine preference
-		if (isUndefined(clientSettings?.theme)) {
-			appClientSettingsStore.updateClientSettings(
-				{
-					theme: isDarkThemePreferred()
-						? CLIENT_SETTINGS_DARK_THEME
-						: null
-				},
-				false
-			);
-		}
-	}
-
-	afterInit() {
-		this.installPlugins();
-		this.installDirectives();
-		this.setupClientSettings();
-	}
-
-	stateManagement(): Constructor<VuexModule>[] {
-		return [
-			AppStore,
-			AppClientSettingsStore,
-			AppWebSocketStore,
-			AppNavigationStore
-		];
-	}
-
-	routes(): KatanRouting {
-		return [
-			{
-				path: "/",
-				root: true,
-				component: this.resolve("Panel"),
-				beforeEnter: this.navigationGuard(AuthenticatedOnlyGuard),
-				children: [
-					{
-						path: "",
-						name: "home",
-						component: this.resolve("home/Home")
-					},
-					{
-						path: "library",
-						name: "library",
-						component: this.resolve("library/GameLibrary")
-					}
-				]
-			},
-			{
-				path: "*",
-				redirect: "/",
-				root: true
-			}
-		];
 	}
 }

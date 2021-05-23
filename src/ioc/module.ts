@@ -20,13 +20,45 @@
  * SOFTWARE.
  */
 
-import Vuex from "vuex";
-import Vue from "vue";
+import {
+	Constructor,
+	KatanContainer,
+	KatanDirectives,
+	KatanRouting,
+	KatanStore
+} from "@/ioc";
+import { VuexModule } from "vuex-module-decorators";
+import { ContainerModule } from "inversify";
 
-Vue.use(Vuex);
+export const ModuleMetadataKey = "katan:module";
 
-export default new Vuex.Store({
-	state: () => ({}),
-	strict: process.env.NODE_ENV !== "production",
-	devtools: process.env.NODE_ENV !== "production"
-});
+export interface ModuleOptions {
+	services?: Constructor[];
+	router?: KatanRouting;
+	stateManagement?:
+		| KatanStore
+		| Constructor<VuexModule>
+		| Constructor<VuexModule>[];
+	directives?: KatanDirectives;
+	children?: Constructor[];
+}
+
+export function Module(options?: ModuleOptions): ClassDecorator {
+	return (target) => {
+		Reflect.defineMetadata(ModuleMetadataKey, options, target);
+	};
+}
+
+export abstract class KatanModule {
+	public readonly moduleName!: string;
+	public readonly containerModule!: ContainerModule;
+	public readonly container!: KatanContainer;
+
+	init(): void {
+		return;
+	}
+
+	afterInit(): void {
+		return;
+	}
+}

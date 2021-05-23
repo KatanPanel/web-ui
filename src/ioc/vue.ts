@@ -20,13 +20,39 @@
  * SOFTWARE.
  */
 
-import Vuex from "vuex";
-import Vue from "vue";
+import { NavigationGuardNext, RedirectOption, Route } from "vue-router";
+import { Constructor } from "@/ioc/utils";
+import { DirectiveFunction, DirectiveOptions } from "vue/types/options";
+import { VuexModule } from "vuex-module-decorators";
+import { RoutePropsFunction } from "vue-router/types/router";
 
-Vue.use(Vuex);
+export type KatanRouteConfig = {
+	path: string;
+	name?: string;
+	root?: boolean;
+	beforeEnter?: Constructor<KatanNavigationGuard>;
+	component?:
+		| {
+				[name: string]: string;
+		  }
+		| string;
+	redirect?: RedirectOption;
+	children?: KatanRouteConfig[];
+	props?: boolean | Record<string, any> | RoutePropsFunction;
+	meta?: any;
+};
 
-export default new Vuex.Store({
-	state: () => ({}),
-	strict: process.env.NODE_ENV !== "production",
-	devtools: process.env.NODE_ENV !== "production"
-});
+export type KatanDirectives = {
+	[id: string]: DirectiveOptions | DirectiveFunction;
+};
+
+export type KatanRouting = KatanRouteConfig | KatanRouteConfig[] | undefined;
+
+export interface KatanNavigationGuard {
+	handle(to: Route, from: Route, next: NavigationGuardNext): void;
+}
+
+export interface KatanStore {
+	module: Constructor<VuexModule>;
+	children?: Constructor<VuexModule>[];
+}
