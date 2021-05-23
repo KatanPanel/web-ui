@@ -20,6 +20,4 @@
  * SOFTWARE.
  */
 
-export interface Permission {
-	readonly id: string;
-}
+declare module "vue-content-loader";
