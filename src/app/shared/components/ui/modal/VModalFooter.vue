@@ -21,7 +21,7 @@
   -->
 
 <template>
-	<div class="v--modal-footer">
+	<div :class="$style.component">
 		<slot />
 	</div>
 </template>
@@ -32,3 +32,10 @@ import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class VModalFooter extends Vue {}
 </script>
+<style lang="scss" module>
+.component {
+	margin-top: 36px;
+	justify-content: flex-end;
+	display: flex;
+}
+</style>

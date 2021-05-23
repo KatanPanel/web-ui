@@ -20,16 +20,21 @@
   - SOFTWARE.
   -->
 
-<script lang="ts">
-import { Component } from "vue-property-decorator";
-import { Line, mixins as Mix } from "vue-chartjs";
-import { mixins } from "vue-class-component";
+<template>
+	<p :class="[$style.component]">
+		<slot />
+	</p>
+</template>
 
-@Component<LineChart>({
-	extends: Line,
-	mounted(): void {
-		((this as unknown) as Line).renderChart(this.chartData, {});
-	}
-})
-export default class LineChart extends mixins(Mix.reactiveProp) {}
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+
+@Component
+export default class VModalDescription extends Vue {}
 </script>
+<style lang="scss" module>
+.component {
+	text-align: left;
+	margin-bottom: 24px;
+}
+</style>

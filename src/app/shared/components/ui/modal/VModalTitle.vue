@@ -21,9 +21,9 @@
   -->
 
 <template>
-	<h6 class="v--text-cute v--modal-title">
+	<div :class="$style.component">
 		<slot />
-	</h6>
+	</div>
 </template>
 
 <script lang="ts">
@@ -32,3 +32,9 @@ import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class VModalTitle extends Vue {}
 </script>
+<style lang="scss" module>
+.component {
+	font-size: 24px;
+	font-weight: 600;
+}
+</style>

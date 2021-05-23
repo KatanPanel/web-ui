@@ -21,61 +21,59 @@
   -->
 
 <template>
-	<div class="window-container">
-		<div
-			v-for="window in openWindows"
-			:key="window.id"
-			:active="window.isActive(this.$route)"
-			@click="switchWindowFocus(window)"
-			class="window"
-		>
-			<Server
-				:server-id="window.data.id.toString()"
-				:window="window.id"
-			/>
+	<div :class="$style.component">
+		<v-modal-title v-if="hasTitle" :class="$style.title">
+			<slot name="title" />
+		</v-modal-title>
+		<div :class="$style.body">
+			<slot />
 		</div>
+		<v-modal-footer v-if="hasFooter" :class="$style.footer">
+			<slot name="footer" />
+		</v-modal-footer>
 	</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import {
-	getOpenWindows,
-	matchesWindowLocation,
-	Window
-} from "@/common/navigation/window";
-import Server from "@/views/server/Server.vue";
+import { isUndefined } from "@/app/shared/utils";
+import VModalTitle from "@/app/shared/components/ui/modal/VModalTitle.vue";
+import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
+import VModalFooter from "@/app/shared/components/ui/modal/VModalFooter.vue";
 
 @Component({
-	components: { Server }
+	components: { VModalFooter, VIcon, VModalTitle }
 })
-export default class ServerContainer extends Vue {
-	get openWindows(): Window[] {
-		return getOpenWindows();
+export default class VModal extends Vue {
+	get hasTitle(): boolean {
+		return !isUndefined(this.$scopedSlots.title);
 	}
 
-	switchWindowFocus(window: Window): void {
-		// checked before if there is more than one window open at the same time
-		// with just one window, it tends to fail resulting in "NavigationDuplicated".
-		if (getOpenWindows().length === 1) return;
+	get hasFooter(): boolean {
+		return !isUndefined(this.$scopedSlots.footer);
+	}
 
-		if (!matchesWindowLocation(window, this.$route))
-			this.$router.push(window.location);
+	close(): void {
+		this.$emit("close");
 	}
 }
 </script>
-<style lang="scss" scoped>
-.window-container {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+<style lang="scss" module>
+.component {
+	font-size: 14px;
+}
 
-	.window {
-		flex: 1 0 auto;
+.title {
+	padding: 18px 18px 0;
+	font-size: 24px;
+	font-weight: 600;
+}
 
-		&:not([active]) {
-			filter: grayscale(1);
-		}
-	}
+.body {
+	padding: 18px;
+}
+
+.footer {
+	padding: 18px;
 }
 </style>
