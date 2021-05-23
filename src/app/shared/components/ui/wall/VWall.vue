@@ -21,14 +21,61 @@
   -->
 
 <template>
-	<div class="v--wall">
+	<div
+		:class="[
+			$style.component,
+			{
+				[$style.colorPrimary]: colorPrimary,
+				[$style.colorDanger]: colorDanger
+			}
+		]"
+	>
+		<div v-if="hasTitle" :class="$style.title">
+			<slot name="title" />
+		</div>
 		<slot />
 	</div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { isUndefined } from "@/app/shared/utils";
 
 @Component
-export default class VWall extends Vue {}
+export default class VWall extends Vue {
+	@Prop({ type: Boolean, default: false })
+	private readonly colorPrimary!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly colorDanger!: boolean;
+
+	get hasTitle(): boolean {
+		return !isUndefined(this.$scopedSlots.title);
+	}
+}
 </script>
+<style lang="scss" module>
+.component {
+	border-radius: 4px;
+	padding: 12px;
+	background-color: var(--kt-background-tertiary);
+	color: var(--kt-muted-color);
+	font-size: 14px;
+	margin-bottom: 1rem;
+}
+
+.title {
+	font-weight: 700;
+	margin-bottom: 1rem;
+}
+
+.colorPrimary {
+	background-color: var(--kt-primary-rgba-color);
+	color: var(--kt-primary-color);
+}
+
+.colorDanger {
+	background-color: var(--kt-danger-rgba-color);
+	color: var(--kt-danger-color);
+}
+</style>
