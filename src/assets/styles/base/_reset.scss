@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700;800;900&display=swap");
 
 * {
 	margin: 0;
@@ -41,11 +41,18 @@ html {
 }
 
 body {
-	font-family: $default-font;
 	font-size: 16px;
+	font-weight: normal;
 	letter-spacing: 0.15px;
 	color: var(--kt-text-color);
-	line-height: 1;
+	background-color: var(--kt-background);
+	line-height: 1.2;
+}
+
+body,
+button,
+input {
+	font-family: $default-font;
 }
 
 html,
@@ -56,7 +63,7 @@ body {
 
 a {
 	color: inherit;
-	text-decoration: none;
+	text-decoration: underline dotted;
 
 	&:not([disabled]):hover {
 		cursor: pointer;
