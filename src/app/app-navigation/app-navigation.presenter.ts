@@ -195,7 +195,7 @@ export class AppNavigationPresenter {
 	public generateWindowChildren(
 		from: Route
 	): Partial<AppNavigationWindowChildren> {
-		const lastMatch = from.matched[from.matched.length - 1];
+		const lastMatch = from.matched[1];
 		return {
 			location: from,
 			component: lastMatch.components.default
