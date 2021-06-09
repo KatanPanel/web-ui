@@ -4,6 +4,7 @@ const supportedLanguages = require("./src/supported-languages.json");
 process.env.VUE_APP_VERSION = require("./package.json").version;
 
 module.exports = {
+	runtimeCompiler: true,
 	pwa: {
 		name: process.env.VUE_APP_NAME,
 		manifestCrossorigin: "anonymous"
