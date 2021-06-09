@@ -45,6 +45,14 @@ export function isNumber(value: any): value is number {
 }
 
 /**
+ * Returns `true` if the {@param value} is a object or `false` otherwise.
+ * @param {*} value - the value.
+ */
+export function isObject(value: any): value is object {
+	return typeof value === "object";
+}
+
+/**
  * Returns `true` if the {@param value} is a function or `false` otherwise.
  * @param {*} value - the value.
  */

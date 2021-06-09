@@ -74,11 +74,9 @@ import {
 import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
 import VDropdown from "@/app/shared/components/ui/dropdown/VDropdown.vue";
 import VDropdownItem from "@/app/shared/components/ui/dropdown/VDropdownItem.vue";
-import AppNavigationNavigationWindowIcon
-	from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindowIcon.vue";
+import AppNavigationNavigationWindowIcon from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindowIcon.vue";
 import VLabel from "@/app/shared/components/ui/form/VLabel.vue";
-import AppNavigationWindowsBarItemChildrenList
-	from "@/app/app-navigation/components/AppNavigationWindowsBarItemChildrenList.vue";
+import AppNavigationWindowsBarItemChildrenList from "@/app/app-navigation/components/AppNavigationWindowsBarItemChildrenList.vue";
 import { inject } from "inversify-props";
 import { AppNavigationPresenter } from "@/app/app-navigation/app-navigation.presenter";
 

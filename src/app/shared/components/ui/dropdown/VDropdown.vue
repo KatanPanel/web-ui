@@ -170,5 +170,4 @@ export default class VDropdown extends Vue {
 		}
 	}
 }
-
 </style>

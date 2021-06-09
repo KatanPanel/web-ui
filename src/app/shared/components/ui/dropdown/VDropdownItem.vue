@@ -1,8 +1,5 @@
 <template>
-	<li v-if="!link"
-		class="v--dropdown-item"
-		@click="$emit('click', $event)"
-	>
+	<li v-if="!link" class="v--dropdown-item" @click="$emit('click', $event)">
 		<slot />
 	</li>
 	<router-link v-else :to="link" class="v--dropdown-item">

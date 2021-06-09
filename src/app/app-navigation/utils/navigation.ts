@@ -22,7 +22,7 @@
 
 import { Location, Route } from "vue-router";
 import Vue from "vue";
-import { nullToUndefined, undefinedToNull } from "@/app/shared/utils/any";
+import { nullToUndefined, undefinedToNull } from "@/app/shared/utils";
 
 /**
  * Convert a {@link Route} object to a {@link Location} object.

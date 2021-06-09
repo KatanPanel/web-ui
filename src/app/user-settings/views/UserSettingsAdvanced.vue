@@ -37,9 +37,9 @@
 							$t('views.my-account.advanced.current-version')
 						"
 						class="v--text-primary"
-					><span class="v--cursor-default"
-					>v{{ $website.version }}</span
-					></code
+						><span class="v--cursor-default"
+							>v{{ $website.version }}</span
+						></code
 					>
 				</template>
 			</i18n>
@@ -52,7 +52,7 @@
 			<v-field
 				:active="userSettingsPresenter.getSettings.developerMode"
 				@click.native="updateDeveloperMode"
-			>{{ $t("views.my-account.advanced.options.developer-mode") }}
+				>{{ $t("views.my-account.advanced.options.developer-mode") }}
 			</v-field>
 			<hr />
 		</section>

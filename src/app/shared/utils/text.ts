@@ -20,8 +20,7 @@
  * SOFTWARE.
  */
 
-import { isNull } from "@/app/shared/utils/any";
-import { isObject } from "chart.js/helpers";
+import { isNull, isObject } from "@/app/shared/utils";
 
 export function joinBySlash(...values: string[]): string {
 	return values.filter((value: string) => value.length > 0).join("/");

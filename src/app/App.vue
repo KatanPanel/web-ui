@@ -28,7 +28,6 @@ import Loading from "@/app/shared/components/Loading.vue";
 })
 export default class App extends Vue {
 	loading = true;
-
 }
 </script>
 <style lang="scss" scoped>

@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { Component, Prop, ProvideReactive, Vue } from "vue-property-decorator";
-import { undefinedToNull } from "@/app/shared/utils/any";
+import { undefinedToNull } from "@/app/shared/utils";
 import VTab from "@/app/shared/components/ui/tab/VTab.vue";
 
 @Component<VTabs>({

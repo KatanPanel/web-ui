@@ -99,7 +99,8 @@ li {
 		padding: 8px 4px;
 		border-radius: 50%;
 
-		&:hover, &:focus {
+		&:hover,
+		&:focus {
 			background-color: var(--kt-sidebar-link-hover);
 		}
 

@@ -43,7 +43,7 @@
 <script lang="ts">
 import { Component, InjectReactive, Prop, Vue } from "vue-property-decorator";
 import { RawLocation } from "vue-router";
-import { isUndefined } from "@/app/shared/utils/any";
+import { isUndefined } from "@/app/shared/utils";
 
 @Component
 export default class VTab extends Vue {

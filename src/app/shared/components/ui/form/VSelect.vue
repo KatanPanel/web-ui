@@ -35,7 +35,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import VSelectOption from "@/app/shared/components/ui/form/VSelectOption.vue";
-import { undefinedToNull } from "@/app/shared/utils/any";
+import { undefinedToNull } from "@/app/shared/utils";
 import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
 
 export interface SelectOption {
@@ -59,7 +59,7 @@ export interface SelectOption {
 	},
 	mounted(): void {
 		if (this.selected !== null) this.$emit("change", this.selected);
-	},
+	}
 })
 export default class VSelect extends Vue {
 	@Prop({ type: Array, default: [] })

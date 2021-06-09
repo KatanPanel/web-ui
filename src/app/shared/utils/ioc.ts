@@ -23,7 +23,7 @@
 import { Container } from "inversify-props";
 import { getModule, VuexModule } from "vuex-module-decorators";
 import store from "@/store";
-import { isUndefined } from "@/app/shared/utils/any";
+import { isUndefined } from "@/app/shared/utils";
 
 export function bindStoreModule<T extends VuexModule>(
 	container: Container,

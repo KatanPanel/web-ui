@@ -22,7 +22,7 @@
 
 import store from "@/store";
 import { joinBySlash } from "@/app/shared/utils/text";
-import { isFunction } from "@/app/shared/utils/any";
+import { isFunction } from "@/app/shared/utils";
 
 /**
  * Returns the result of a getter.

@@ -26,6 +26,5 @@ export default class VFlexElement extends Vue {
 	get flexBasis(): string {
 		return typeof this.basis === "number" ? `${this.basis}%` : this.basis;
 	}
-
 }
 </script>

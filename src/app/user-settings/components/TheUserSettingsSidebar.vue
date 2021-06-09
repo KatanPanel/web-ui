@@ -65,8 +65,7 @@ import VDropdownItem from "@/app/shared/components/ui/dropdown/VDropdownItem.vue
 @Component({
 	components: { Avatar, VDropdownItem, VDropdown, VTabs, VTab }
 })
-export default class TheUserSettingsSidebar extends Vue {
-}
+export default class TheUserSettingsSidebar extends Vue {}
 </script>
 <style lang="scss" scoped>
 .my-account-sidebar {

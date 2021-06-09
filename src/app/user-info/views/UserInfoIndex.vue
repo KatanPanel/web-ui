@@ -21,15 +21,12 @@
   -->
 
 <template>
-	<div>
-		Bautica bau bau
-	</div>
+	<div>Bautica bau bau</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class UserInfoIndex extends Vue {
-}
+export default class UserInfoIndex extends Vue {}
 </script>

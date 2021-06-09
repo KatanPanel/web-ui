@@ -32,6 +32,5 @@ import BaseContentLoader from "@/app/shared/components/content-loaders/BaseConte
 @Component({
 	components: { BaseContentLoader }
 })
-export default class GameListItemLoader extends Vue {
-}
+export default class GameListItemLoader extends Vue {}
 </script>

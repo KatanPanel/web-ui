@@ -47,9 +47,7 @@
 						/>
 					</v-form-label>
 				</v-form-input-group>
-				<v-form-input-group>
-
-				</v-form-input-group>
+				<v-form-input-group> </v-form-input-group>
 			</v-form>
 		</v-col>
 	</section>

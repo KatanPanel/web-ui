@@ -41,14 +41,11 @@ import Loading from "@/app/shared/components/Loading.vue";
 import VContainer from "@/app/shared/components/ui/layout/VContainer.vue";
 import { AppNavigationPresenter } from "@/app/app-navigation/app-navigation.presenter";
 import { inject } from "inversify-props";
-import AppNavigationNavigationWindow
-	from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindow.vue";
+import AppNavigationNavigationWindow from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindow.vue";
 import { NavigationGuardNext, Route } from "vue-router";
 import { isUndefined } from "@/app/shared/utils";
-import TheAppNavigationWindowsBar
-	from "@/app/app-navigation/components/TheAppNavigationWindowsBar.vue";
-import AppNavigationWindowsContainer
-	from "@/app/app-navigation/components/AppNavigationWindowsContainer.vue";
+import TheAppNavigationWindowsBar from "@/app/app-navigation/components/TheAppNavigationWindowsBar.vue";
+import AppNavigationWindowsContainer from "@/app/app-navigation/components/AppNavigationWindowsContainer.vue";
 import { UserModel } from "@/app/user/models/user.model";
 import { USER_INJECTION_KEY } from "@/app/user/user.module";
 import TheAppSidebar from "@/app/shared/components/sidebar/TheAppSidebar.vue";

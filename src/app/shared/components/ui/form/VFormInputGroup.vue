@@ -30,8 +30,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class VFormInputGroup extends Vue {
-}
+export default class VFormInputGroup extends Vue {}
 </script>
 <style lang="scss" module>
 .component {

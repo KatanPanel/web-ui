@@ -22,24 +22,18 @@
 
 <template>
 	<section id="server-settings-console-log-date">
-		<h4
-			v-text="
-				$t('server.settings.console-log-date.title')
-			"
-		/>
+		<h4 v-text="$t('server.settings.console-log-date.title')" />
 		<p>
-			{{
-				$t(
-					"server.settings.console-log-date.description"
-				)
-			}}
+			{{ $t("server.settings.console-log-date.description") }}
 		</p>
 		<v-select :options="options" @change="updateConsoleLogDate" />
 	</section>
 </template>
 <script lang="ts">
 import { Component, InjectReactive, Vue } from "vue-property-decorator";
-import VSelect, { SelectOption } from "@/app/shared/components/ui/form/VSelect.vue";
+import VSelect, {
+	SelectOption
+} from "@/app/shared/components/ui/form/VSelect.vue";
 import { inject } from "inversify-props";
 import { UserSettingsPresenter } from "@/app/user-settings/user-settings.presenter";
 import { ServerModel } from "@/app/server/models/server.model";
@@ -69,7 +63,7 @@ export default class ServerSettingsShowConsoleLogDate extends Vue {
 		return undefinedToNull(
 			this.userClientSettingsPresenter.getSettings.serverSettings[
 				this.server.id
-				]?.showConsoleLogDate
+			]?.showConsoleLogDate
 		);
 	}
 

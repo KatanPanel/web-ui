@@ -64,6 +64,5 @@ import VContainer from "@/app/shared/components/ui/layout/VContainer.vue";
 		VContainer
 	}
 })
-export default class ServerSettingsMain extends Vue {
-}
+export default class ServerSettingsMain extends Vue {}
 </script>

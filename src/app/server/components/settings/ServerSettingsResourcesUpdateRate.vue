@@ -101,7 +101,7 @@ import VBoxBody from "@/app/shared/components/ui/box/VBoxBody.vue";
 import VForm from "@/app/shared/components/ui/form/VForm.vue";
 import VInputGroup from "@/app/shared/components/ui/form/VInputGroup.vue";
 import VInput from "@/app/shared/components/ui/form/VInput.vue";
-import { nullToUndefined, undefinedToNull } from "@/app/shared/utils/any";
+import { nullToUndefined, undefinedToNull } from "@/app/shared/utils";
 import { inject } from "inversify-props";
 import { UserSettingsModel } from "@/app/user-settings/models/user-settings.model";
 

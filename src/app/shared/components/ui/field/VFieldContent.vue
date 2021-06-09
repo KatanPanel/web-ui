@@ -30,8 +30,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class VFieldContent extends Vue {
-}
+export default class VFieldContent extends Vue {}
 </script>
 <style lang="scss" scoped>
 .v--field-content {

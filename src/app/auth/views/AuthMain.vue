@@ -34,6 +34,5 @@ import AuthLayout from "@/app/auth/layouts/AuthLayout.vue";
 		AuthLayout
 	}
 })
-export default class AuthMain extends Vue {
-}
+export default class AuthMain extends Vue {}
 </script>

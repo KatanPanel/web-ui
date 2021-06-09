@@ -33,8 +33,7 @@ import { Component, Vue } from "vue-property-decorator";
 import { MetaInfo } from "vue-meta";
 import { generateMetaInfo } from "@/app/shared/utils/builtin";
 import VContainer from "@/app/shared/components/ui/layout/VContainer.vue";
-import UserSettingsAppearenceTheme
-	from "@/app/user-settings/components/appearence/UserSettingsAppearenceTheme.vue";
+import UserSettingsAppearenceTheme from "@/app/user-settings/components/appearence/UserSettingsAppearenceTheme.vue";
 
 @Component({
 	components: { UserSettingsAppearenceTheme, VContainer },
@@ -42,6 +41,5 @@ import UserSettingsAppearenceTheme
 		return generateMetaInfo(this.$i18n, "user-settings.appearence");
 	}
 })
-export default class UserSettingsAppearence extends Vue {
-}
+export default class UserSettingsAppearence extends Vue {}
 </script>

@@ -89,8 +89,7 @@ import {
 	OpenNavigationWindowState
 } from "@/app/app-navigation/models/app-navigation-window.model";
 import { inject } from "inversify-props";
-import AppNavigationNavigationWindow
-	from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindow.vue";
+import AppNavigationNavigationWindow from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindow.vue";
 import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
 import VModalTitle from "@/app/shared/components/ui/modal/VModalTitle.vue";
 import VModalFooter from "@/app/shared/components/ui/modal/VModalFooter.vue";

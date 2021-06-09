@@ -21,15 +21,12 @@
   -->
 
 <template>
-	<section id="server-resources">
-		Resources here
-	</section>
+	<section id="server-resources">Resources here</section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class ServerOverviewResources extends Vue {
-}
+export default class ServerOverviewResources extends Vue {}
 </script>

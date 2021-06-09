@@ -52,10 +52,8 @@ import VButton from "@/app/shared/components/ui/button/VButton.vue";
 import VTabs from "@/app/shared/components/ui/tab/VTabs.vue";
 import VTab from "@/app/shared/components/ui/tab/VTab.vue";
 import VTabView from "@/app/shared/components/ui/tab/VTabView.vue";
-import AppCreateResourceModalServerResource
-	from "@/app/shared/components/AppCreateResourceModalServerResource.vue";
-import AppCreateResourceModalWindowResource
-	from "@/app/shared/components/AppCreateResourceModalWindowResource.vue";
+import AppCreateResourceModalServerResource from "@/app/shared/components/AppCreateResourceModalServerResource.vue";
+import AppCreateResourceModalWindowResource from "@/app/shared/components/AppCreateResourceModalWindowResource.vue";
 import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
 import VModalTitle from "@/app/shared/components/ui/modal/VModalTitle.vue";
 import VModal from "@/app/shared/components/ui/modal/VModal.vue";

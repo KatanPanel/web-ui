@@ -30,12 +30,10 @@
 import { Component } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
 import { AppNavigationWindowChildMixin } from "@/app/app-navigation/mixins/app-navigation-window-child-mixin.component";
-import AppNavigationWindowWrapper
-	from "@/app/app-navigation/components/AppNavigationWindowWrapper.vue";
+import AppNavigationWindowWrapper from "@/app/app-navigation/components/AppNavigationWindowWrapper.vue";
 
 @Component({
 	components: { AppNavigationWindowWrapper }
 })
-export default class SystemMain extends mixins(AppNavigationWindowChildMixin) {
-}
+export default class SystemMain extends mixins(AppNavigationWindowChildMixin) {}
 </script>

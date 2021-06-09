@@ -26,7 +26,7 @@
 			<p
 				v-t="{
 					path: 'footer.client-version',
-					args: { version: currentVersion },
+					args: { version: currentVersion }
 				}"
 			/>
 			<i18n path="footer.credits.icons" tag="p">
@@ -34,13 +34,13 @@
 					href="https://www.flaticon.com/authors/freepik"
 					target="_blank"
 					title="Freepik"
-				>Freepik</a
+					>Freepik</a
 				>
 				<a
 					href="https://www.flaticon.com/"
 					target="_blank"
 					title="Flaticon"
-				>www.flaticon.com</a
+					>www.flaticon.com</a
 				>
 			</i18n>
 		</v-container>

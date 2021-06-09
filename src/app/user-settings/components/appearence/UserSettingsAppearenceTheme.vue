@@ -42,7 +42,7 @@ import VRow from "@/app/shared/components/ui/layout/VRow.vue";
 import VCol from "@/app/shared/components/ui/layout/VCol.vue";
 import VSelect from "@/app/shared/components/ui/form/VSelect.vue";
 import VField from "@/app/shared/components/ui/field/VField.vue";
-import { isUndefined } from "@/app/shared/utils/any";
+import { isUndefined } from "@/app/shared/utils";
 import { inject } from "inversify-props";
 import { UserSettingsPresenter } from "@/app/user-settings/user-settings.presenter";
 

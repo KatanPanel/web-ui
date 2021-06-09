@@ -32,11 +32,7 @@
 					:icon="child.getIcon()"
 					class="icon"
 				/>
-				<span
-					:title="child.title"
-					class="title"
-					v-text="child.title"
-				/>
+				<span :title="child.title" class="title" v-text="child.title" />
 			</router-link>
 		</li>
 	</ul>
@@ -45,8 +41,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { AppNavigationWindowChildren } from "@/app/app-navigation/models/app-navigation-window.model";
-import AppNavigationNavigationWindowIcon
-	from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindowIcon.vue";
+import AppNavigationNavigationWindowIcon from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindowIcon.vue";
 import { Location, Route } from "vue-router";
 import { routeToLocation } from "@/app/app-navigation/utils/navigation";
 
@@ -80,13 +75,14 @@ export default class AppNavigationWindowsBarItemChildrenList extends Vue {
 	border-bottom-right-radius: 4px;
 	border-bottom-left-radius: 4px;
 	color: var(--kt-text-color);
-	box-shadow: rgba(0, 0, 0, .12) 0 0 4px 0;
+	box-shadow: rgba(0, 0, 0, 0.12) 0 0 4px 0;
 	padding: 8px 0;
 
 	li {
 		padding: 0 4px;
 
-		&:hover, &:focus {
+		&:hover,
+		&:focus {
 			.icon {
 				opacity: var(--kt-icon-opacity-focused);
 			}

@@ -31,15 +31,11 @@
 				</v-col>
 				<v-col :size="9">
 					<v-form-input-group>
-						<v-form-label>
-							Nome do servidor
-						</v-form-label>
+						<v-form-label> Nome do servidor </v-form-label>
 						<v-form-input placeholder="Meu servidor" required />
 					</v-form-input-group>
 					<v-form-input-group>
-						<v-form-label>
-							Jogo
-						</v-form-label>
+						<v-form-label> Jogo </v-form-label>
 						<v-select :options="gameOptions" />
 					</v-form-input-group>
 				</v-col>
@@ -64,7 +60,9 @@ import VFormInput from "@/app/shared/components/ui/form/VFormInput.vue";
 import VRow from "@/app/shared/components/ui/layout/VRow.vue";
 import VCol from "@/app/shared/components/ui/layout/VCol.vue";
 import Avatar from "@/app/shared/components/Avatar.vue";
-import VSelect, { SelectOption } from "@/app/shared/components/ui/form/VSelect.vue";
+import VSelect, {
+	SelectOption
+} from "@/app/shared/components/ui/form/VSelect.vue";
 import VModalFooter from "@/app/shared/components/ui/modal/VModalFooter.vue";
 import VButton from "@/app/shared/components/ui/button/VButton.vue";
 

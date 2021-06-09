@@ -22,7 +22,9 @@
 
 <template>
 	<v-container>
-		<h4><b>Bem-vindo(a), {{ user.username }}.</b></h4>
+		<h4>
+			<b>Bem-vindo(a), {{ user.username }}.</b>
+		</h4>
 		<section id="servers">
 			<ul class="server-list">
 				<li v-for="server in servers" :key="server.id">
@@ -64,11 +66,6 @@ import { AppNavigationWindowChildMixin } from "@/app/app-navigation/mixins/app-n
 import { USER_INJECTION_KEY } from "@/app/user/user.module";
 import { UserModel } from "@/app/user/models/user.model";
 import { inject } from "inversify-props";
-import VTaskContainer from "@/app/shared/components/ui/task/VTaskContainer.vue";
-import VTaskList from "@/app/shared/components/ui/task/VTaskList.vue";
-import AppHomeEmailTaskItem from "@/app/shared/components/home/AppHomeEmailTaskItem.vue";
-import AppHomeCreateServerTaskItem
-	from "@/app/shared/components/home/AppHomeCreateServerTaskItem.vue";
 import VFlexBox from "@/app/shared/components/ui/layout/VFlexBox.vue";
 import VBox from "@/app/shared/components/ui/box/VBox.vue";
 import VRow from "@/app/shared/components/ui/layout/VRow.vue";
@@ -82,10 +79,6 @@ import Avatar from "@/app/shared/components/Avatar.vue";
 		VRow,
 		VBox,
 		VFlexBox,
-		AppHomeCreateServerTaskItem,
-		AppHomeEmailTaskItem,
-		VTaskList,
-		VTaskContainer,
 		VContainer
 	},
 	metaInfo(): MetaInfo {
@@ -99,7 +92,8 @@ export default class AppHome extends mixins(AppNavigationWindowChildMixin) {
 	private readonly games: readonly any[] = Object.freeze([
 		{
 			id: "minecraft",
-			image: "https://image.api.playstation.com/vulcan/img/cfn/11307uYG0CXzRuA9aryByTHYrQLFz-HVQ3VVl7aAysxK15HMpqjkAIcC_R5vdfZt52hAXQNHoYhSuoSq_46_MT_tDBcLu49I.png"
+			image:
+				"https://image.api.playstation.com/vulcan/img/cfn/11307uYG0CXzRuA9aryByTHYrQLFz-HVQ3VVl7aAysxK15HMpqjkAIcC_R5vdfZt52hAXQNHoYhSuoSq_46_MT_tDBcLu49I.png"
 		},
 		{
 			id: "gta",
@@ -107,7 +101,8 @@ export default class AppHome extends mixins(AppNavigationWindowChildMixin) {
 		},
 		{
 			id: "rust",
-			image: "https://image.api.playstation.com/vulcan/ap/rnd/202103/1609/7fPS16E9bbTgKkTL6tnWMDHG.png"
+			image:
+				"https://image.api.playstation.com/vulcan/ap/rnd/202103/1609/7fPS16E9bbTgKkTL6tnWMDHG.png"
 		}
 	]);
 

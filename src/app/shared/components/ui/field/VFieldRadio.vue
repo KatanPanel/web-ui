@@ -30,8 +30,7 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class VFieldRadio extends Vue {
-}
+export default class VFieldRadio extends Vue {}
 </script>
 <style lang="scss" scoped>
 .v--field-radio {

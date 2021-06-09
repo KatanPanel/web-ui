@@ -1,9 +1,6 @@
 <template>
 	<img v-if="!containerized" :alt="alt" :src="`/img/logo-${color}.png`" />
-	<div
-		:style="{ backgroundImage: `url(/img/logo-${color}.png)` }"
-		v-else
-	/>
+	<div :style="{ backgroundImage: `url(/img/logo-${color}.png)` }" v-else />
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";

@@ -37,11 +37,7 @@
 			<section id="directories">
 				<h4><b>Pastas</b></h4>
 				<ul class="disk-directories">
-					<li
-						v-for="dir in []"
-						:key="dir.name"
-						class="directory"
-					>
+					<li v-for="dir in []" :key="dir.name" class="directory">
 						<div class="directory-icon">
 							<v-icon name="folder" />
 						</div>

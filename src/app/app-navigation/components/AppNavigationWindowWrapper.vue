@@ -34,6 +34,5 @@ import { AppNavigationWindowChildMixin } from "@/app/app-navigation/mixins/app-n
 @Component
 export default class AppNavigationWindowWrapper extends mixins(
 	AppNavigationWindowChildMixin
-) {
-}
+) {}
 </script>

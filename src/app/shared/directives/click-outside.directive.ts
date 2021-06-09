@@ -22,7 +22,7 @@
 
 import Vue, { DirectiveOptions, VNode } from "vue";
 import { DirectiveBinding } from "vue/types/options";
-import { isUndefined } from "@/app/shared/utils/any";
+import { isUndefined } from "@/app/shared/utils";
 
 const cache: { node: VNode; binding: DirectiveBinding }[] = [];
 let listener: (event: Event) => void;

@@ -26,9 +26,12 @@
 					</v-dropdown>
 				</v-flex-box> -->
 			</div>
-			<div :style="{
-				backgroundImage: `url(/img/games/illustrations/${wallpaper.file})`
-			}" class="auth-right">
+			<div
+				:style="{
+					backgroundImage: `url(/img/games/illustrations/${wallpaper.file})`
+				}"
+				class="auth-right"
+			>
 				<div class="game-name">
 					{{ wallpaper.name }}
 				</div>

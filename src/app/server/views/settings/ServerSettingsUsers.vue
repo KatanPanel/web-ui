@@ -36,8 +36,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import ServerSettingsUsersUserItem
-	from "@/app/server/components/settings/ServerSettingsUsersUserItem.vue";
+import ServerSettingsUsersUserItem from "@/app/server/components/settings/ServerSettingsUsersUserItem.vue";
 import { inject } from "inversify-props";
 import { UserService } from "@/app/user/services/user.service";
 

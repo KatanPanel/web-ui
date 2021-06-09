@@ -21,9 +21,7 @@
   -->
 
 <template>
-	<div>
-		Blab
-	</div>
+	<div>Blab</div>
 </template>
 
 <script lang="ts">

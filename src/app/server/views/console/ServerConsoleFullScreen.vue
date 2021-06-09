@@ -30,6 +30,5 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class ServerConsoleFullScreen extends Vue {
-}
+export default class ServerConsoleFullScreen extends Vue {}
 </script>

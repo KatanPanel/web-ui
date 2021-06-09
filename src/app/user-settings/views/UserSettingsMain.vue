@@ -48,8 +48,7 @@ import TheUserSettingsSidebar from "@/app/user-settings/components/TheUserSettin
 		VContainer
 	}
 })
-export default class UserSettingsMain extends Vue {
-}
+export default class UserSettingsMain extends Vue {}
 </script>
 <style lang="scss" scoped>
 .my-account {

@@ -34,6 +34,5 @@ import { NavigationGuardNext, Route } from "vue-router";
 		);
 	}
 })
-export default class AuthLogout extends Vue {
-}
+export default class AuthLogout extends Vue {}
 </script>

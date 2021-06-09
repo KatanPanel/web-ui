@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { isNumber, isUndefined } from "@/app/shared/utils/any";
+import { isNumber, isUndefined } from "@/app/shared/utils";
 
 export const WEBSOCKET_CONNECT = "connect";
 export const WEBSOCKET_ERROR = "error";

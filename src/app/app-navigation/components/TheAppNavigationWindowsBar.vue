@@ -42,9 +42,12 @@
 				<v-icon name="unfold_less" />
 			</li>
 		</ul>
-		<ul :class="{
-			'children-unfolded': childrenUnfolded
-		}" class="items windows">
+		<ul
+			:class="{
+				'children-unfolded': childrenUnfolded
+			}"
+			class="items windows"
+		>
 			<AppNavigationWindowsBarItem
 				v-for="window in getActiveWindows"
 				:key="window.id"
@@ -76,11 +79,9 @@ import {
 import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
 import VDropdown from "@/app/shared/components/ui/dropdown/VDropdown.vue";
 import VDropdownItem from "@/app/shared/components/ui/dropdown/VDropdownItem.vue";
-import AppNavigationNavigationWindowIcon
-	from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindowIcon.vue";
+import AppNavigationNavigationWindowIcon from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindowIcon.vue";
 import VLabel from "@/app/shared/components/ui/form/VLabel.vue";
-import AppNavigationWindowsBarItem
-	from "@/app/app-navigation/components/AppNavigationWindowsBarItem.vue";
+import AppNavigationWindowsBarItem from "@/app/app-navigation/components/AppNavigationWindowsBarItem.vue";
 
 @Component({
 	components: {
@@ -149,11 +150,12 @@ export default class TheAppNavigationWindowsBar extends Vue {
 					cursor: pointer;
 				}
 
-				&:hover, &:focus {
+				&:hover,
+				&:focus {
 					background-color: var(--kt-background-tertiary);
 
 					svg {
-						opacity: var(--kt-icon-opacity-focused)
+						opacity: var(--kt-icon-opacity-focused);
 					}
 				}
 

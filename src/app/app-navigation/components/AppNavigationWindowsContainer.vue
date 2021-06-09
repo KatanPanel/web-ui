@@ -34,8 +34,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import { inject } from "inversify-props";
 import { AppNavigationPresenter } from "@/app/app-navigation/app-navigation.presenter";
-import AppNavigationNavigationWindow
-	from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindow.vue";
+import AppNavigationNavigationWindow from "@/app/app-navigation/components/navigation-window/AppNavigationNavigationWindow.vue";
 
 @Component({
 	components: { AppNavigationNavigationWindow }

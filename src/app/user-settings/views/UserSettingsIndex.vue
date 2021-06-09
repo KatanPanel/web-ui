@@ -21,9 +21,7 @@
   -->
 
 <template>
-	<div>
-		Index
-	</div>
+	<div>Index</div>
 </template>
 
 <script lang="ts">
@@ -36,6 +34,5 @@ import { generateMetaInfo } from "@/app/shared/utils/builtin";
 		return generateMetaInfo(this.$i18n, "user-settings.indexl");
 	}
 })
-export default class UserSettingsIndex extends Vue {
-}
+export default class UserSettingsIndex extends Vue {}
 </script>

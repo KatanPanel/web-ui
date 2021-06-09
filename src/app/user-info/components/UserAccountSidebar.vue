@@ -94,7 +94,6 @@ export default class UserAccountSidebar extends Vue {
 		li {
 			position: relative;
 
-
 			&.router-link-exact-active a {
 				color: var(--kt-text-color);
 				font-weight: 600;

@@ -39,8 +39,7 @@ import { Component, Vue } from "vue-property-decorator";
 import { RoleModel } from "@/app/role/models/role.model";
 import { inject } from "inversify-props";
 import { RoleService } from "@/app/role/services/role.service";
-import ServerSettingsRolesRoleItem
-	from "@/app/server/components/settings/ServerSettingsRolesRoleItem.vue";
+import ServerSettingsRolesRoleItem from "@/app/server/components/settings/ServerSettingsRolesRoleItem.vue";
 
 @Component<ServerSettingsRoles>({
 	components: { ServerSettingsRolesRoleItem },

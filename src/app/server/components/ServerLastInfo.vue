@@ -38,7 +38,7 @@
 				<router-link
 					:to="{ name: 'server.overview' }"
 					class="server-name"
-				>{{ server.name }}
+					>{{ server.name }}
 				</router-link>
 				<div class="server-description">
 					<Copyable

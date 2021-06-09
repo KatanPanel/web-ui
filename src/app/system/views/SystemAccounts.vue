@@ -34,16 +34,22 @@
 								<v-row>
 									<v-col :size="4">
 										<v-form-input-group>
-											<v-form-label>Ordenar por</v-form-label>
+											<v-form-label
+												>Ordenar por</v-form-label
+											>
 											<v-select @change="sortAccounts">
-												<v-select-option option-id="a-z">
+												<v-select-option
+													option-id="a-z"
+												>
 													{{
 														$t(
 															"views.system.accounts.sorting.a-z"
 														)
 													}}
 												</v-select-option>
-												<v-select-option option-id="z-a">
+												<v-select-option
+													option-id="z-a"
+												>
 													{{
 														$t(
 															"views.system.accounts.sorting.z-a"
@@ -59,10 +65,10 @@
 											<v-input
 												v-model.trim="search"
 												:placeholder="
-												$t(
-													'views.system.accounts.search'
-												)
-											"
+													$t(
+														'views.system.accounts.search'
+													)
+												"
 												maxlength="64"
 												@input="searchAccounts"
 											/>
@@ -87,20 +93,20 @@
 									class="v--flex-justify-space-between v--m-top-4"
 								>
 									<small class="v--text-cute">
-									<span
-										v-if="search.length !== 0"
-										key="searching-account"
-									>
-										<i18n
-											path="views.system.accounts.searching"
+										<span
+											v-if="search.length !== 0"
+											key="searching-account"
 										>
-											<template v-slot:value>{{
+											<i18n
+												path="views.system.accounts.searching"
+											>
+												<template v-slot:value>{{
 													search
 												}}</template>
-										</i18n>
-									</span>
+											</i18n>
+										</span>
 										<span v-else key="all-accounts">
-										{{
+											{{
 												$t(
 													"views.system.accounts.all-accounts",
 													{
@@ -108,7 +114,7 @@
 													}
 												)
 											}}
-									</span>
+										</span>
 									</small>
 								</v-flex-box>
 								<p
@@ -116,9 +122,12 @@
 									class="v--text-muted v--m-bottom-2"
 								>
 									{{
-										$t("views.system.accounts.results-found", {
-											value: -1
-										})
+										$t(
+											"views.system.accounts.results-found",
+											{
+												value: -1
+											}
+										)
 									}}
 								</p>
 								<v-field-list v-if="accounts">
@@ -135,7 +144,9 @@
 												:key="account.id"
 												class="v--transition-fast-list-item account-item"
 											>
-												<SystemAccount :account="account" />
+												<SystemAccount
+													:account="account"
+												/>
 											</div>
 										</transition-group>
 									</div>
@@ -169,7 +180,10 @@ import VBox from "@/app/shared/components/ui/box/VBox.vue";
 import VBoxBody from "@/app/shared/components/ui/box/VBoxBody.vue";
 import VWall from "@/app/shared/components/ui/wall/VWall.vue";
 import VBoxHeader from "@/app/shared/components/ui/box/VBoxHeader.vue";
-import { sortAlphabetically, sortAlphabeticallyReversed } from "@/app/shared/utils/arrays";
+import {
+	sortAlphabetically,
+	sortAlphabeticallyReversed
+} from "@/app/shared/utils/arrays";
 import { generateMetaInfo } from "@/app/shared/utils/builtin";
 import SystemAccount from "@/app/system/components/SystemAccount.vue";
 import PermissionList from "@/app/shared/components/PermissionList.vue";
@@ -184,8 +198,7 @@ import Loading from "@/app/shared/components/Loading.vue";
 import VFormLabel from "@/app/shared/components/ui/form/VFormLabel.vue";
 import { mixins } from "vue-class-component";
 import { AppNavigationWindowChildMixin } from "@/app/app-navigation/mixins/app-navigation-window-child-mixin.component";
-import AppNavigationWindowWrapper
-	from "@/app/app-navigation/components/AppNavigationWindowWrapper.vue";
+import AppNavigationWindowWrapper from "@/app/app-navigation/components/AppNavigationWindowWrapper.vue";
 
 @Component<SystemAccounts>({
 	components: {
@@ -230,7 +243,9 @@ import AppNavigationWindowWrapper
 			});
 	}
 })
-export default class SystemAccounts extends mixins(AppNavigationWindowChildMixin) {
+export default class SystemAccounts extends mixins(
+	AppNavigationWindowChildMixin
+) {
 	// reactive for searching
 	accounts: UserModel[] | null = null;
 	search = "3";

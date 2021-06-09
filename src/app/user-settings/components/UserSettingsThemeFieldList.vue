@@ -49,7 +49,6 @@ import { UserSettingsPresenter } from "@/app/user-settings/user-settings.present
 	}
 })
 export default class UserSettingsThemeFieldList extends Vue {
-
 	selectedTheme: AppTheme | null = null;
 	@inject()
 	private readonly userSettingsPresenter!: UserSettingsPresenter;
@@ -62,6 +61,5 @@ export default class UserSettingsThemeFieldList extends Vue {
 		this.selectedTheme = theme;
 		this.userSettingsPresenter.updateSettings({ theme }, true);
 	}
-
 }
 </script>

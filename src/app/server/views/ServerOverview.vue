@@ -166,6 +166,5 @@ import ServerOverviewResources from "@/app/server/components/overview/ServerOver
 		VContainer
 	}
 })
-export default class ServerOverview extends Vue {
-}
+export default class ServerOverview extends Vue {}
 </script>

@@ -41,7 +41,7 @@ import {
 import { Container, ContainerModule, interfaces } from "inversify";
 import { NavigationGuardNext, Route, RouteConfig } from "vue-router";
 import { Constructor } from "inversify-props/dist/lib/inversify.types";
-import { isUndefined } from "@/app/shared/utils/any";
+import { isUndefined } from "@/app/shared/utils";
 import AppModule from "@/app/app.module";
 import { getModule, VuexModule } from "vuex-module-decorators";
 import store from "@/store";

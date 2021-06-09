@@ -22,7 +22,7 @@
 
 import VueI18n from "vue-i18n";
 import supportedLanguages from "@/supported-languages.json";
-import { isUndefined } from "@/app/shared/utils/any";
+import { isUndefined } from "@/app/shared/utils";
 import { format as formatDateFns } from "date-fns";
 import { injectable } from "inversify";
 import { inject } from "inversify-props";

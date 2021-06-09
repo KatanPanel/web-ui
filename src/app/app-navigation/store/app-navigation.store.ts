@@ -26,7 +26,7 @@ import {
 	isNumber,
 	isUndefined,
 	undefinedToNull
-} from "@/app/shared/utils/any";
+} from "@/app/shared/utils";
 import {
 	AppNavigationWindow,
 	AppNavigationWindowChildren,
