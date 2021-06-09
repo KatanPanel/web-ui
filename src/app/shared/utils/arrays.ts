@@ -43,3 +43,10 @@ export function arrayMatches<E, K extends keyof E>(
 ): boolean {
 	return array.findIndex((other: E) => value[prop] === other[prop]) !== -1;
 }
+
+export function arrayRemove<E>(
+	array: Array<E>,
+	predicate: (value: E) => boolean
+): boolean {
+	return array.splice(array.findIndex(predicate), 1).length !== 0;
+}

@@ -20,26 +20,12 @@
  * SOFTWARE.
  */
 
-import { KatanModule, KatanRouting } from "@/app/shared/models/module";
-import { SystemService } from "@/app/system/services/system";
+import { Module } from "@/ioc";
+import { SystemService } from "@/app/system/services/system.service";
+import { SystemRoutes } from "@/app/system/system.routes";
 
-export default class SystemModule extends KatanModule {
-	init() {
-		this.bind(SystemService);
-	}
-
-	routes(): KatanRouting {
-		return [
-			{
-				path: "system/accounts",
-				name: "system.accounts",
-				component: this.resolve("SystemAccounts")
-			},
-			{
-				path: "system/accounts/:accountId",
-				name: "system.accounts.account",
-				component: this.resolve("accounts/SystemAccountsAccount")
-			}
-		];
-	}
-}
+@Module({
+	services: [SystemService],
+	router: SystemRoutes
+})
+export default class SystemModule {}

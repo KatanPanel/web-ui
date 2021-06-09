@@ -227,6 +227,7 @@ function loadModule(
 					if (route.redirect) value.redirect = route.redirect;
 					if (route.name) value.name = route.name;
 					if (route.meta) value.meta = route.meta;
+					if (route.props) value.props = route.props;
 
 					if (route.component) {
 						if (typeof route.component === "string") {

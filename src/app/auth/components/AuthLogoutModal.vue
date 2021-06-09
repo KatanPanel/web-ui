@@ -25,14 +25,14 @@
 		<v-modal-title>
 			{{ $t("views.logout.title") }}
 		</v-modal-title>
-		<p class="v--text-muted">
+		<v-modal-description>
 			{{ $t("views.logout.description") }}
-		</p>
+		</v-modal-description>
 		<v-modal-footer>
 			<v-button @click="close">
 				{{ $t("views.logout.buttons.cancel") }}
 			</v-button>
-			<v-button :danger="true" @click="logout">
+			<v-button :color-danger="true" @click="logout">
 				{{ $t("views.logout.buttons.confirm") }}
 			</v-button>
 		</v-modal-footer>
@@ -44,19 +44,21 @@ import { Component, Vue } from "vue-property-decorator";
 import VButton from "@/app/shared/components/ui/button/VButton.vue";
 import VModalTitle from "@/app/shared/components/ui/modal/VModalTitle.vue";
 import VModalFooter from "@/app/shared/components/ui/modal/VModalFooter.vue";
-import { AuthStore } from "@/app/auth/auth.store";
+import { AuthPresenter } from "@/app/auth/auth.presenter";
 import { inject } from "inversify-props";
+import VModalDescription from "@/app/shared/components/ui/modal/VModalDescription.vue";
 
 @Component({
-	components: { VButton, VModalFooter, VModalTitle }
+	components: { VModalDescription, VButton, VModalFooter, VModalTitle }
 })
 export default class AuthLogoutModal extends Vue {
-	@inject() private readonly authStore!: AuthStore;
+	@inject() private readonly authPresenter!: AuthPresenter;
 
 	logout(): void {
-		this.close();
-		this.authStore.logout();
-		this.$router.replace({ name: "login" });
+		this.authPresenter.logout().then(() => {
+			this.close();
+			this.$router.replace({ name: "auth.login" });
+		});
 	}
 
 	close(): void {

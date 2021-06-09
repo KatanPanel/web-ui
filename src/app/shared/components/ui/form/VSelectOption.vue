@@ -5,8 +5,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
-export default class VSelectOption extends Vue {}
+export default class VSelectOption extends Vue {
+
+	@Prop({ type: String })
+	private readonly optionId!: string;
+
+}
 </script>

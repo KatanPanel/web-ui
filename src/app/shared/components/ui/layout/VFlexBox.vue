@@ -31,7 +31,8 @@ export default class VFlexBox extends Vue {
 	private readonly alignCenter!: boolean;
 
 	@Prop({ type: String, default: "normal" })
-	private readonly justify!: "flex-end" | "space-between";
+	private readonly justify!: "end" | "flex-end" | "space-between" |
+		"normal" | "center";
 }
 </script>
 <style lang="scss" module>
@@ -42,6 +43,7 @@ export default class VFlexBox extends Vue {
 
 .display-flex {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .display-inline {
@@ -67,5 +69,9 @@ export default class VFlexBox extends Vue {
 
 .justify-flex-end {
 	justify-content: flex-end;
+}
+
+.justify-center {
+	justify-content: center;
 }
 </style>

@@ -22,7 +22,12 @@
 			</v-select-option>
 		</div>
 		<div class="v--select-caret">
-			<v-icon name="caret-down" />
+			<span v-if="isOpen" key="open">
+				<v-icon name="caret-up" />
+			</span>
+			<span v-else key="closed">
+				<v-icon name="caret-down" />
+			</span>
 		</div>
 	</div>
 </template>

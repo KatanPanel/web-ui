@@ -20,33 +20,16 @@
  * SOFTWARE.
  */
 
-import {
-	Constructor,
-	KatanModule,
-	KatanRouting
-} from "@/app/shared/models/module";
-import { AuthService } from "@/app/auth/services/auth";
-import { AuthStore } from "@/app/auth/auth.store";
-import { AuthenticatedOnlyGuard } from "@/app/auth/guards/authenticated-only";
-import { VuexModule } from "vuex-module-decorators";
+import { Module } from "@/ioc";
+import { AuthenticatedOnlyGuard } from "@/app/auth/guards/authenticated-only.guard";
+import { AuthRouter } from "@/app/auth/router/auth.router";
+import { AuthStore } from "@/app/auth/store/auth.store";
+import { AuthPresenter } from "@/app/auth/auth.presenter";
+import { AuthService } from "@/app/auth/services/auth.service";
 
-export default class AuthModule extends KatanModule {
-	init() {
-		this.bind(AuthService);
-		this.bind(AuthenticatedOnlyGuard);
-	}
-
-	routes(): KatanRouting {
-		return {
-			path: "/login",
-			name: "login",
-			root: true,
-			component: this.resolve("Login"),
-			beforeEnter: this.navigationGuard(AuthenticatedOnlyGuard)
-		};
-	}
-
-	stateManagement(): Constructor<VuexModule>[] {
-		return [AuthStore];
-	}
-}
+@Module({
+	services: [AuthPresenter, AuthService, AuthenticatedOnlyGuard],
+	stateManagement: AuthStore,
+	router: AuthRouter
+})
+export default class AuthModule {}

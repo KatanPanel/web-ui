@@ -61,3 +61,7 @@ export function buildQueryString(
 export function buildSortingQueryString(resource: string, obj?: any): string {
 	return resource + (!obj ? "" : "?" + queryString(obj, ":", ","));
 }
+
+export function generateRandomString(): string {
+	return Math.random().toString().substr(2, 5);
+}

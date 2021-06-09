@@ -22,107 +22,99 @@
 
 <template>
 	<div
-		:active="active"
-		:class="{ 'v--field-selected': selected }"
-		:disabled="disabled"
-		class="v--field"
+		v-bind="{
+			'aria-disabled': disabled,
+			tabIndex: disabled ? -1 : 0
+		}"
+		:class="[
+			$style.component,
+			{
+				[$style.componentActive]: active,
+				disabled: disabled
+			}
+		]"
 		@click="onSelect"
-		@mouseenter="onMouseIn"
-		@mouseleave="onMouseOut"
+		@keydown.enter="onSelect"
 	>
-		<v-field-radio
-			v-if="active"
-			key="active-state"
-			ref="radio"
-			active="true"
-		>
+		<div :class="$style.content">
+			<slot />
+		</div>
+		<div v-if="$scopedSlots.radio" key="custom-radio" :class="$style.radio">
+			<slot name="radio" />
+		</div>
+		<div v-else-if="active" key="active-radio" :class="$style.radio">
 			<slot name="radio">
-				<v-icon name="check" />
+				<v-icon name="done" />
 			</slot>
-		</v-field-radio>
-		<v-field-radio
-			v-else-if="disabled"
-			key="disabled-state"
-			ref="radio"
-			disabled="true"
-		>
-			<slot name="radio">&times;</slot>
-		</v-field-radio>
-		<v-field-radio v-else-if="selected" key="selected-state" ref="radio">
-			<slot name="radio" />
-		</v-field-radio>
-		<v-field-radio v-else key="unknown-state" ref="radio">
-			<slot name="radio" />
-		</v-field-radio>
-		<v-flex-box class="v--flex-align-center v--full-width v--flex-column">
-			<div v-show="!contentVisible" class="v--field-body">
-				<slot />
-			</div>
-			<v-field-content v-show="contentVisible" ref="content">
-				<slot name="content" />
-			</v-field-content>
-		</v-flex-box>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import VFieldContent from "@/app/shared/components/ui/field/VFieldContent.vue";
 import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
-import VFieldRadio from "@/app/shared/components/ui/field/VFieldRadio.vue";
-import { Activable } from "@/app/shared/mixins/ui/activable";
-import VFlexBox from "@/app/shared/components/ui/layout/VFlexBox.vue";
+import { UiActivable } from "@/app/shared/mixins/ui/ui-activable";
 
 @Component({
-	components: { VFieldContent, VFlexBox, VFieldRadio, VIcon }
+	components: { VIcon }
 })
-export default class VField extends mixins(Activable) {
-	@Prop({ type: Boolean, default: false })
-	private readonly hiddenRadio!: boolean;
+export default class VField extends mixins(UiActivable) {
+	onSelect(): void {
+		if (this.disabled) return;
 
-	@Prop({ type: Boolean, default: false })
-	private readonly selectOnClick!: boolean;
-
-	@Prop({ type: Boolean, default: false })
-	private readonly selectedByDefault!: boolean;
-	private selected = this.selectedByDefault;
-
-	@Prop({ type: Boolean, default: false })
-	private readonly withContent!: boolean;
-	private contentVisible = false;
-
-	private onMouseIn(): void {
-		if (!this.withContent) return;
-
-		if (this.contentVisible) return;
-
-		this.contentVisible = true;
-	}
-
-	private onMouseOut(): void {
-		if (!this.withContent) return;
-
-		if (!this.contentVisible) return;
-
-		this.contentVisible = false;
-	}
-
-	private onSelect(e: Event): void {
-		e.stopPropagation();
-		if (this.withContent) {
-			if (
-				e.target !== this.$el &&
-				e.target !== (this.$refs["content"] as Vue).$el &&
-				e.target !== (this.$refs["radio"] as Vue).$el
-			) {
-				return;
-			}
-		}
-		if (!this.selectOnClick) return;
-
-		this.selected = !this.selected;
-		this.$emit("select", this.selected);
+		this.$emit("select");
 	}
 }
 </script>
+<style lang="scss" module>
+.component {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	list-style-type: none;
+	min-height: 40px;
+	background-color: var(--kt-background-secondary);
+	border-radius: 4px;
+	font-size: 14px;
+	font-weight: 500;
+	user-select: none;
+	border: 1px solid var(--kt-border-color);
+	margin: 4px 0;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&:not(.componentActive):hover {
+		border-color: var(--kt-border-accent);
+	}
+}
+
+.componentActive {
+	border-color: var(--kt-border-accent);
+
+	.radio {
+		svg {
+			fill: var(--kt-primary-color);
+		}
+	}
+}
+
+.content {
+	flex-grow: 1;
+	padding: 8px;
+	justify-content: center;
+	display: inline-flex;
+	flex-direction: column;
+}
+
+.radio {
+	margin: 8px;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+</style>

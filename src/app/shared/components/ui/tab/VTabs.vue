@@ -25,6 +25,7 @@
 		<ul class="v--tabs" role="tablist">
 			<slot name="items" />
 		</ul>
+		<slot />
 		<slot name="views" />
 	</div>
 </template>

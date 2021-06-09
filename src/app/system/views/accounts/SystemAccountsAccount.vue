@@ -26,10 +26,9 @@
 	</div>
 </template>
 <script lang="ts">
-import { Component, InjectReactive, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import { MetaInfo } from "vue-meta";
 import { generateMetaInfo } from "@/app/shared/utils/builtin";
-import { Permission } from "@/app/shared/models/permission";
 
 @Component({
 	metaInfo(): MetaInfo {
@@ -38,6 +37,5 @@ import { Permission } from "@/app/shared/models/permission";
 })
 export default class SystemAccountsAccount extends Vue {
 	@Prop({ type: String, required: true }) private readonly accountId!: string;
-	@InjectReactive() private permissions: Permission[] = [];
 }
 </script>

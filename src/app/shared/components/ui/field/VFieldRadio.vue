@@ -30,5 +30,26 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class VFieldRadio extends Vue {}
+export default class VFieldRadio extends Vue {
+}
 </script>
+<style lang="scss" scoped>
+.v--field-radio {
+	margin: 8px;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&.active {
+		svg {
+			width: 16px;
+			height: 16px;
+			fill: var(--kt-primary-color);
+			vertical-align: middle;
+		}
+	}
+}
+</style>

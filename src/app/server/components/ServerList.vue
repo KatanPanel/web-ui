@@ -43,26 +43,25 @@
 <script lang="ts">
 import { Component, Prop } from "vue-property-decorator";
 import Vue from "vue";
-import { Server } from "@/app/server/models/server";
 import Loading from "@/app/shared/components/Loading.vue";
-import { ServersService } from "@/app/server/services/server";
 import { inject } from "inversify-props";
+import { ServerModel } from "@/app/server/models/server.model";
 
 @Component<ServerList>({
 	components: { Loading },
 	created(): void {
 		this.serversService
 			.listServers(this.filters)
-			.then((servers: Server[]) => {
+			.then((servers: ServerModel[]) => {
 				this.serverList = servers;
 			});
 	}
 })
 export default class ServerList extends Vue {
 	@Prop({ type: Object })
-	private readonly filters!: Partial<Server>;
+	private readonly filters!: Partial<ServerModel>;
 
 	@inject() private readonly serversService!: ServersService;
-	private serverList: Server[] | null = null;
+	private serverList: ServerModel[] | null = null;
 }
 </script>

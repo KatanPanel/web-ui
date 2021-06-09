@@ -1,5 +1,5 @@
 <template>
-	<form class="v--form" @submit="$emit('submit', $event.target)">
+	<form class="v--form">
 		<slot />
 	</form>
 </template>

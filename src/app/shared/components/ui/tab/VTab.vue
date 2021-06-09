@@ -28,6 +28,7 @@
 			role: link ? 'presentation' : 'tab'
 		}"
 		@click="updateTab"
+		@keyup.enter="updateTab"
 		:class="{ active: isActive }"
 		:tabindex="!disabled ? '0' : '-1'"
 		:disabled="disabled"

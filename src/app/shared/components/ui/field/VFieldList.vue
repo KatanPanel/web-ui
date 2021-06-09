@@ -21,14 +21,63 @@
   -->
 
 <template>
-	<div class="v--field-list">
+	<div :class="$style.component">
 		<slot />
 	</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { isNull, isUndefined } from "@/app/shared/utils";
+import VField from "@/app/shared/components/ui/field/VField.vue";
 
-@Component
-export default class VFieldList extends Vue {}
+@Component<VFieldList>({
+	mounted(): void {
+		for (const child of this.$children) {
+			if (!(child instanceof VField))
+				throw new Error(
+					"Only fields can be defined inside a field list"
+				);
+
+			const key = child.$vnode.key;
+			if (isUndefined(key) || isNull(key))
+				throw new Error("Field must have a key attribute");
+
+			if (child.active) this.currentField = key;
+		}
+
+		this.$on("select", (field: VField) => {
+			this.onFieldSelect(field);
+		});
+	}
+})
+export default class VFieldList extends Vue {
+	currentField: (string | number) | null = null;
+
+	onFieldSelect(field: VField): void {
+		this.currentField = field.$vnode.key as string | number;
+	}
+
+	/* onSelectionUp(): void {
+			let index = this.currentFieldIndex;
+			if (index === null || index === 0) index = this.themes.length - 1;
+			else index--;
+
+			this.selectTheme(index, this.themes[index]);
+		}
+
+		onSelectionDown(): void {
+			let index = this.currentFieldIndex;
+			if (index === null || index === this.themes.length - 1) index = 0;
+			else index++;
+
+			this.selectTheme(index, this.themes[index]);
+		} */
+}
 </script>
+<style lang="scss" module>
+.component {
+	display: flex;
+	flex-direction: column;
+}
+</style>

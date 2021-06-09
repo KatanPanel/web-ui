@@ -1,5 +1,6 @@
 {
 	"page-titles": {
+		"home": "Dashboard",
 		"login": "Sign In",
 		"server": {
 			"index": "{server}",
@@ -40,6 +41,10 @@
 			}
 		},
 		"windows": {
+			"home": "Home",
+			"system": {
+				"accounts": "Users"
+			},
 			"server": {
 				"overview": "Overview",
 				"console": "Console",
@@ -78,10 +83,15 @@
 		"login": {
 			"title": "Sign In",
 			"fields": {
-				"username": "Username or account id",
+				"username": "Username",
 				"password": "Password",
 				"confirm": "Continue",
 				"confirm-logged-in": "Continue as {username}"
+			},
+			"continue": {
+				"title": "Resume session",
+				"last-login": "Last login: {time}",
+				"disable-settings-info": "You can choose to disable the option to keep your login session active in your Account Security settings."
 			}
 		},
 		"logout": {

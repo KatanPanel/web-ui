@@ -1,9 +1,9 @@
 <template>
-	<div id="app">
+	<div id="app" class="app">
 		<transition mode="out-in" name="v--transition-fade">
 			<div v-if="loading" key="loading" class="app-loading">
 				<div class="content">
-					<div class="info">Inicializando aplicação...</div>
+					<Loading />
 				</div>
 			</div>
 			<router-view v-else key="loaded" />
@@ -18,8 +18,9 @@ import Loading from "@/app/shared/components/Loading.vue";
 @Component<App>({
 	components: { Loading, TheLogo },
 	created(): void {
-		this.$root.$on("loading", () => (this.loading = true));
-		this.$root.$on("loaded", () => (this.loading = false));
+		const vm = this as App;
+		this.$root.$on("loading", () => (vm.loading = true));
+		this.$root.$on("loaded", () => (vm.loading = false));
 	},
 	mounted(): void {
 		this.$root.$emit("init");
@@ -27,11 +28,11 @@ import Loading from "@/app/shared/components/Loading.vue";
 })
 export default class App extends Vue {
 	loading = true;
+
 }
 </script>
-<style lang="scss" src="../assets/styles/main.scss" />
 <style lang="scss" scoped>
-#app {
+.app {
 	display: flex;
 	display: -ms-flexbox;
 	flex-direction: column;
@@ -52,18 +53,11 @@ export default class App extends Vue {
 		transform: translate(-50%, -50%);
 		left: 50%;
 		top: 50%;
-	}
 
-	.logo {
-		text-align: center;
-	}
-
-	.info {
-		color: var(--kt-primary-text-color);
-		font-size: 4.8rem;
-		position: relative;
-		font-weight: 100;
-		top: 2.4rem;
+		.loader-container {
+			width: 120px;
+			height: 120px;
+		}
 	}
 }
 </style>

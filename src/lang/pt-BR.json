@@ -1,6 +1,7 @@
 {
 	"page-titles": {
-		"login": "Entrar",
+		"home": "Dashboard",
+		"login": "Iniciar sessão",
 		"server": {
 			"index": "{server}",
 			"overview": "Visão Geral – {server}",
@@ -40,6 +41,10 @@
 			}
 		},
 		"windows": {
+			"home": "Página Inicial",
+			"system": {
+				"accounts": "Usuários do sistema"
+			},
 			"server": {
 				"overview": "Vista Geral",
 				"console": "Console",
@@ -78,10 +83,15 @@
 		"login": {
 			"title": "Iniciar sessão",
 			"fields": {
-				"username": "ID da conta ou nome de usuário",
+				"username": "Nome de usuário",
 				"password": "Senha",
 				"confirm": "Continuar",
 				"confirm-logged-in": "Continuar como {username}"
+			},
+			"continue": {
+				"title": "Continuar",
+				"last-login": "Último log-in: {time}",
+				"disable-settings-info": "Você pode optar por desabilitar a opção de manter sua sessão de log-in ativa nos Ajustes de Segurança da sua conta."
 			}
 		},
 		"logout": {
@@ -296,6 +306,13 @@
 			"copied": "Copiado!",
 			"already-copied": "Já copiado",
 			"unable-to-copy": "Não foi possível copiar"
+		}
+	},
+	"common": {
+		"themes": {
+			"light": "Claro",
+			"dark": "Escuro",
+			"system-default": "Padrão do sistema"
 		}
 	}
 }

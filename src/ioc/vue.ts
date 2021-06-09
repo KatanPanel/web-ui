@@ -24,12 +24,12 @@ import { NavigationGuardNext, RedirectOption, Route } from "vue-router";
 import { Constructor } from "@/ioc/utils";
 import { DirectiveFunction, DirectiveOptions } from "vue/types/options";
 import { VuexModule } from "vuex-module-decorators";
-import { RoutePropsFunction } from "vue-router/types/router";
+import { Dictionary, RoutePropsFunction } from "vue-router/types/router";
 
 export type KatanRouteConfig = {
 	path: string;
 	name?: string;
-	root?: boolean;
+	root?: true;
 	beforeEnter?: Constructor<KatanNavigationGuard>;
 	component?:
 		| {
@@ -38,7 +38,11 @@ export type KatanRouteConfig = {
 		| string;
 	redirect?: RedirectOption;
 	children?: KatanRouteConfig[];
-	props?: boolean | Record<string, any> | RoutePropsFunction;
+	props?:
+		| boolean
+		| object
+		| RoutePropsFunction
+		| Dictionary<boolean | object | RoutePropsFunction>;
 	meta?: any;
 };
 

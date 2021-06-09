@@ -37,6 +37,26 @@ import { I18nService } from "@/app/shared/services/i18n.service";
 import { LocalStorageService } from "@/app/shared/services/local-storage.service";
 import { AppRouter } from "@/app/shared/router/app.router";
 import { AppStore } from "@/app/shared/store/app.store";
+import VueTour from "vue-tour";
+
+import "../assets/styles/main.scss";
+
+require("vue-tour/dist/vue-tour.css");
+
+export const AppLightTheme = "light";
+export const AppDarkTheme = "dark";
+export const AppSystemDefaultTheme = "system-default";
+
+export type AppTheme =
+	| typeof AppLightTheme
+	| typeof AppDarkTheme
+	| typeof AppSystemDefaultTheme;
+
+export const AppThemes: readonly AppTheme[] = [
+	AppLightTheme,
+	AppDarkTheme,
+	AppSystemDefaultTheme
+];
 
 @Module({
 	router: AppRouter,
@@ -67,7 +87,8 @@ export default class AppModule extends KatanModule {
 
 		Vue.use(VueMeta, { refreshOnceOnNavigation: true });
 		Vue.use(VTooltip, {
-			defaultClass: "v--tooltip"
+			defaultClass: "v--tooltip",
+			defaultBoundariesElement: document.body
 		});
 
 		// disable tooltips on mobile devices
@@ -78,5 +99,7 @@ export default class AppModule extends KatanModule {
 			reconnection: true,
 			format: "json"
 		});
+
+		Vue.use(VueTour);
 	}
 }

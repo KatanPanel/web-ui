@@ -27,10 +27,10 @@
 <script lang="ts">
 import { Component, Prop } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
-import { Activable } from "@/app/shared/mixins/ui/activable";
+import { UiActivable } from "@/app/shared/mixins/ui/ui-activable";
 
 @Component
-export default class VHotKey extends mixins(Activable) {
+export default class VHotKey extends mixins(UiActivable) {
 	@Prop({ type: String, required: true }) private readonly hotkey!: string;
 
 	private resultKey = this.hotkey;

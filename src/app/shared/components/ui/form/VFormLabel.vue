@@ -1,5 +1,5 @@
 <template>
-	<label class="v--form-label">
+	<label :class="$style.component">
 		<slot />
 	</label>
 </template>
@@ -11,18 +11,13 @@ import { Component, Vue } from "vue-property-decorator";
 export default class VFormLabel extends Vue {
 }
 </script>
-<style lang="scss" scoped>
-.v--form-label {
+<style lang="scss" module>
+.component {
 	display: block;
 	text-transform: uppercase;
 	font-size: 12px;
 	font-weight: 700;
-	color: var(--kt-muted-darker-color);
-	cursor: default;
-	gap: 8px;
-
-	input {
-		margin-top: 6px;
-	}
+	user-select: none;
+	margin-bottom: 6px;
 }
 </style>

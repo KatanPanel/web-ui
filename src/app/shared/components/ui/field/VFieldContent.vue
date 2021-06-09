@@ -30,5 +30,15 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class VFieldContent extends Vue {}
+export default class VFieldContent extends Vue {
+}
 </script>
+<style lang="scss" scoped>
+.v--field-content {
+	flex-grow: 1;
+	padding: 8px;
+	justify-content: center;
+	display: inline-flex;
+	flex-direction: column;
+}
+</style>

@@ -194,7 +194,6 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { AppClientSettingsStore } from "@/app/shared/store/client-settings";
 import Copyable from "@/app/shared/components/Copyable.vue";
 import PermissionList from "@/app/shared/components/PermissionList.vue";
 import VRow from "@/app/shared/components/ui/layout/VRow.vue";

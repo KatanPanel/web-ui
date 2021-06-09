@@ -22,11 +22,18 @@
 
 <template>
 	<div
-		v-if="src"
+		v-bind="{ title: alt }"
 		:style="{ backgroundImage: `url(${src})` }"
+		v-if="src"
 		class="avatar"
 	/>
-	<TheLogo v-else :containerized="true" :filled="true" class="avatar" />
+	<TheLogo
+		v-else
+		:alt="alt"
+		:containerized="true"
+		:filled="true"
+		class="avatar"
+	/>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
@@ -37,6 +44,7 @@ import TheLogo from "@/app/shared/components/TheLogo.vue";
 })
 export default class Avatar extends Vue {
 	@Prop({ type: String }) private readonly src!: string;
+	@Prop({ type: String }) private readonly alt!: string;
 }
 </script>
 <style lang="scss" scoped>

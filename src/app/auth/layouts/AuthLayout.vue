@@ -1,40 +1,38 @@
 <template>
 	<div class="auth-layout">
 		<div class="auth-container">
-			<div :style="wallpaperStyle" class="wallpaper" />
-			<v-flex-box class="auth-box">
-				<div :style="wallpaperStyle" class="auth-image">
-					<div class="content">
-						<TheLogo :white="true" />
-					</div>
+			<div class="auth-box">
+				<div class="auth-logo">
+					<TheLogo :match-theme="true" class="auth-logo" />
 				</div>
-				<div class="auth-content">
+				<div class="auth-content-body">
 					<slot />
-					<v-flex-box :justify="'flex-end'">
-						<v-dropdown class="auth-language-dropdown">
-							<div class="auth-language" tabindex="0">
-								{{ i18nService.current.name }}
-								<v-icon class="caret-icon" name="caret-down" />
-							</div>
-							<template #items>
-								<v-dropdown-item
-									v-for="language in i18nService.supportedLanguages"
-									:key="language.tag"
-									@click="i18nService.loadLanguage0(language)"
-								>
-									<span v-text="language.name" />
-								</v-dropdown-item>
-							</template>
-						</v-dropdown>
-					</v-flex-box>
 				</div>
-			</v-flex-box>
-		</div>
-		<div class="game-name">
-			{{ wallpaper.name }}
-		</div>
-		<div class="version-info">
-			{{ configService.toVersionInfoString() }}
+				<!-- <v-flex-box :justify="'flex-end'"
+				class="auth-language-box">
+					<v-dropdown class="auth-language-dropdown">
+						<div class="auth-language">
+							{{ userSettingsPresenter.getSettings.language.name }}
+						</div>
+						<template #items>
+							<v-dropdown-item
+								v-for="language in i18nService.getSupportedLanguages"
+								:key="language.tag"
+								@click="i18nService.loadLanguage0(language)"
+							>
+								<span v-text="language.name" />
+							</v-dropdown-item>
+						</template>
+					</v-dropdown>
+				</v-flex-box> -->
+			</div>
+			<div :style="{
+				backgroundImage: `url(/img/games/illustrations/${wallpaper.file})`
+			}" class="auth-right">
+				<div class="game-name">
+					{{ wallpaper.name }}
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -43,45 +41,31 @@ import { Component, Vue } from "vue-property-decorator";
 import TheLogo from "@/app/shared/components/TheLogo.vue";
 import VFlexBox from "@/app/shared/components/ui/layout/VFlexBox.vue";
 import { inject } from "inversify-props";
-import { ConfigService } from "@/app/shared/services/config";
-import { I18nService } from "@/app/shared/services/i18n";
 import VDropdown from "@/app/shared/components/ui/dropdown/VDropdown.vue";
 import VDropdownItem from "@/app/shared/components/ui/dropdown/VDropdownItem.vue";
-import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
-import VFlexElement from "@/app/shared/components/ui/layout/VFlexElement.vue";
+import { UserSettingsPresenter } from "@/app/user-settings/user-settings.presenter";
 
-@Component({
+@Component<AuthLayout>({
 	components: {
-		VFlexElement,
-		VIcon,
 		VDropdownItem,
 		VDropdown,
 		TheLogo,
 		VFlexBox
 	},
 	beforeMount(): void {
-		(this as LoginLayout).updateWallpaper();
+		this.updateWallpaper();
 	}
 })
 export default class AuthLayout extends Vue {
+	@inject()
+	private readonly userSettingsPresenter!: UserSettingsPresenter;
+
 	wallpaper: any | null = null;
-	@inject() private readonly configService!: ConfigService;
-	@inject() private readonly i18nService!: I18nService;
-
-	get illustrations(): any[] {
-		return require("@/assets/illustrations");
-	}
-
-	get wallpaperStyle(): { backgroundImage: string } {
-		return {
-			backgroundImage: `url(/img/games/illustrations/${this.wallpaper.file})`
-		};
-	}
 
 	updateWallpaper(): void {
-		this.wallpaper = this.illustrations[
-			Math.floor(Math.random() * this.illustrations.length)
-		];
+		const illustrations: any[] = require("@/assets/illustrations");
+		this.wallpaper =
+			illustrations[Math.floor(Math.random() * illustrations.length)];
 	}
 }
 </script>
@@ -91,143 +75,117 @@ export default class AuthLayout extends Vue {
 .auth-layout {
 	height: 100%;
 
-	.version-info {
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		bottom: 1rem;
-		text-align: center;
-		width: 100%;
-		opacity: 0.38;
-		font-size: 12px;
-		user-select: none;
-		color: #fff;
-		z-index: 1001;
-		font-weight: 600;
-	}
-
-	.game-name {
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		color: #fff;
-		z-index: 1001;
-		opacity: 0;
-		margin: 1rem;
-		font-size: 16px;
-		user-select: none;
-		font-weight: 600;
-		transition: all 0.3s ease;
-
-		&:hover {
-			opacity: 0.54;
-		}
-	}
-
-	.wallpaper {
-		position: fixed;
-		top: -25px;
-		right: -25px;
-		left: -25px;
-		bottom: -25px;
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
-		overflow: auto;
-		box-shadow: inset #000 0 0 250px 50px;
-		filter: blur(15px);
-		z-index: 1;
-		transition: all 0.3s ease;
-	}
-
 	.auth-container {
 		display: flex;
-		height: 100%;
 		align-items: center;
-		justify-content: center;
-	}
+		height: 100%;
 
-	.auth-box {
-		align-items: normal;
-		box-shadow: rgba(0, 0, 0, 0.12) 0 0 10px 5px;
-		z-index: 1;
-		min-width: 60%;
-		max-width: 95%;
-
-		.auth-image {
-			position: relative;
-			background-size: cover;
-			background-attachment: scroll;
-			background-position: center;
-			background-repeat: no-repeat;
-			width: 40%;
-			transition: all 0.3s ease;
-
-			.content {
-				box-shadow: inset rgba(0, 0, 0, 1) 0 0 14rem -7rem;
-				z-index: 2;
-				height: 100%;
-
-				.logo {
-					position: relative;
-					top: 50%;
-					left: 50%;
-					transform: translate(-50%, -50%);
-					user-select: none;
-					max-width: 50%;
-				}
-			}
-		}
-
-		@media (max-width: map-get($breakpoints, "medium")) {
-			.auth-image {
-				display: none;
-			}
-		}
-
-		.auth-content {
-			background-color: var(--kt-background);
-			padding: 36px 36px 24px;
+		.auth-right {
 			position: relative;
 			flex: 1;
 			display: flex;
-			flex-direction: column;
+			height: 100%;
+			flex-direction: row;
+			align-items: flex-end;
+			overflow: hidden;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
 
-			::v-deep {
-				.auth-title {
-					margin-bottom: 24px;
-					text-align: center;
-				}
+			&:hover .game-name,
+			&:hover .version-info {
+				opacity: 1;
+			}
 
-				.auth-subtitle {
-					color: var(--kt-muted-color);
-					margin-bottom: 24px;
-					cursor: default;
-					text-align: center;
+			@media (max-width: map-get($breakpoints, "medium")) {
+				& {
+					display: none;
 				}
 			}
 
-			.auth-language-dropdown {
-				margin-top: 24px;
-			}
-
-			.auth-language {
-				font-size: 14px;
-				color: var(--kt-muted-darker-color);
-				display: inline-flex;
-				align-items: center;
+			.game-name {
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				color: #fff;
+				z-index: 1001;
+				opacity: 0;
+				margin: 12px;
+				font-size: 18px;
 				user-select: none;
+				font-weight: 600;
+				transition: opacity 500ms;
+			}
+		}
 
-				&:focus,
-				&:hover {
-					color: var(--kt-muted-color);
-					cursor: pointer;
+		.auth-box {
+			align-items: normal;
+			z-index: 1;
+			background: var(--kt-background-secondary);
+			position: relative;
+			left: 0;
+			height: 100%;
+			padding: 72px;
+			width: 35%;
+			max-width: 35%;
+
+			@media (max-width: map-get($breakpoints, "medium")) {
+				& {
+					width: 100%;
+					max-width: 100%;
+					padding: 24px;
+				}
+			}
+
+			.auth-logo {
+				max-width: 50px;
+				max-height: 50px;
+				position: relative;
+				margin-bottom: 144px;
+			}
+
+			@media (max-width: map-get($breakpoints, "medium")) {
+				.auth-image {
+					display: none;
+				}
+			}
+
+			.auth-content-body {
+				margin-bottom: 24px;
+			}
+
+			.auth-language-box {
+				position: absolute;
+				bottom: 0;
+				right: 0;
+				margin: 24px 48px;
+				display: flex;
+				font-size: 13px;
+				font-weight: 400;
+
+				@media (max-width: map-get($breakpoints, "medium")) {
+					& {
+						position: relative;
+						justify-content: center;
+					}
 				}
 
-				.caret-icon {
-					width: 8px;
-					height: 8px;
-					margin-left: 4px;
+				.auth-language-dropdown {
+					&:hover {
+						text-decoration: underline;
+						cursor: pointer;
+						color: var(--kt-muted-color);
+					}
+
+					&:focus {
+						color: var(--kt-muted-color);
+					}
+
+					.auth-language {
+						display: inline-flex;
+						align-items: center;
+						user-select: none;
+					}
 				}
 			}
 		}

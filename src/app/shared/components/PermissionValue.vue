@@ -33,13 +33,13 @@
 import { Component, Prop } from "vue-property-decorator";
 import { mixins } from "vue-class-component";
 import VFieldRadio from "@/app/shared/components/ui/field/VFieldRadio.vue";
-import { Activable } from "@/app/shared/mixins/ui/activable";
+import { UiActivable } from "@/app/shared/mixins/ui/ui-activable";
 import VField from "@/app/shared/components/ui/field/VField.vue";
 
 @Component({
 	components: { VFieldRadio, VField }
 })
-export default class PermissionValue extends mixins(Activable) {
+export default class PermissionValue extends mixins(UiActivable) {
 	@Prop({ type: String, required: true })
 	private readonly permissionName!: string;
 }

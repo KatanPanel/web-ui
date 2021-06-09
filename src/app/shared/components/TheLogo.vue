@@ -1,15 +1,8 @@
 <template>
-	<img
-		v-if="!containerized"
-		:src="`/img/logo-${color}.png`"
-		alt="Katan Logo"
-		class="logo"
-	/>
+	<img v-if="!containerized" :alt="alt" :src="`/img/logo-${color}.png`" />
 	<div
+		:style="{ backgroundImage: `url(/img/logo-${color}.png)` }"
 		v-else
-		:style="{ backgroundImage: `/img/logo-${color}.png` }"
-		class="logo"
-		title="Katan Logo"
 	/>
 </template>
 <script lang="ts">
@@ -25,6 +18,9 @@ export default class TheLogo extends Vue {
 
 	@Prop({ type: Boolean, default: false })
 	private readonly containerized!: boolean;
+
+	@Prop({ type: String, default: "Katan Logo" })
+	private readonly alt!: string;
 
 	get color(): string {
 		return this.white ? "white" : this.filled ? "white-filled" : "blue";

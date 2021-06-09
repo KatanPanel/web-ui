@@ -67,3 +67,10 @@ export function undefinedToNull<T = any>(value: T | undefined): T | null {
 export function nullToUndefined<T = any>(value: T | null): T | undefined {
 	return isNull(value) ? undefined : value;
 }
+
+/**
+ * Make all properties in T nullable
+ */
+export type Nullable<T> = {
+	[P in keyof T]: T[P] | null;
+};

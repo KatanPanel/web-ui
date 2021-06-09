@@ -72,8 +72,9 @@
 	top: 0;
 	width: 100%;
 	height: 100vh;
-	background: rgba(0, 0, 0, 0.8);
+	background: rgba(0, 0, 0, 0.12);
 	opacity: 1;
+	backdrop-filter: blur(6px);
 }
 
 .vm--container.scrollable {
@@ -88,9 +89,8 @@
 	overflow: hidden;
 	box-sizing: border-box;
 	background-color: var(--kt-background-secondary);
-	border-radius: 3px;
+	border-radius: 4px;
 	box-shadow: 0 20px 60px -2px rgba(27, 33, 58, 0.4);
-	padding: 12px;
 }
 
 .vm--container.scrollable .vm--modal {
@@ -133,10 +133,4 @@
 .vm-transition--default-enter,
 .vm-transition--default-leave-active {
 	opacity: 0;
-}
-
-.v--modal-footer {
-	margin-top: 48px;
-	justify-content: flex-end;
-	display: flex;
 }
