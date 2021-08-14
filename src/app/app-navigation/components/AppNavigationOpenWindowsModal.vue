@@ -141,7 +141,8 @@ export default class AppNavigationOpenWindowsModal extends Vue {
 
 	openWindow(window: AppNavigationWindow): void {
 		this.minimizedWindows = [window];
-		this.$router.push(window.location);
+		// TODO
+		// this.$router.push(window.location);
 	}
 
 	closeWindow(window: AppNavigationWindow): void {
@@ -151,13 +152,14 @@ export default class AppNavigationOpenWindowsModal extends Vue {
 	}
 
 	renderWindow(window: AppNavigationWindow): Vue {
-		const component = window.getComponent() as VueConstructor;
+		throw Error("Not supported");
+		/* const component = window.getComponent() as VueConstructor;
 		const content = window.instance().$refs.content as any;
 
 		return component.extend({
 			props: content.$props,
 			data: () => content.$data
-		});
+		}); */
 	}
 
 	isWindowOpen(window: AppNavigationWindow): boolean {

@@ -261,16 +261,17 @@ export default class SystemAccounts extends mixins(
 	}
 
 	sortAccounts(option: string): void {
-		switch (option) {
-			case "a-z": {
-				sortAlphabetically(this.accounts, "username");
-				break;
-			}
-			case "z-a": {
-				sortAlphabeticallyReversed(this.accounts, "username");
-				break;
-			}
-		}
+		// TODO fix this
+		// switch (option) {
+		// 	case "a-z": {
+		// 		sortAlphabetically(this.accounts, "username");
+		// 		break;
+		// 	}
+		// 	case "z-a": {
+		// 		sortAlphabeticallyReversed(this.accounts, "username");
+		// 		break;
+		// 	}
+		// }
 	}
 
 	searchAccounts(): void {

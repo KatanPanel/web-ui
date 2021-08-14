@@ -98,13 +98,14 @@ export default class AppCreateResourceModalWindowResource extends Vue {
 	}
 
 	confirm(): void {
-		this.appNavigationPresenter
-			.createWindow(this, {
-				name: this.windowName,
-				location: this.$router.resolve({ name: "home" }).route
-			})
-			.then((window) => this.appNavigationPresenter.openWindow(window))
-			.finally(() => this.close());
+		// TODO: fix this
+		// this.appNavigationPresenter
+		// 	.createWindow(this, {
+		// 		name: this.windowName,
+		// 		location: this.$router.resolve({ name: "home" }).route
+		// 	})
+		// 	.then((window) => this.appNavigationPresenter.openWindow(window))
+		// 	.finally(() => this.close());
 	}
 }
 </script>

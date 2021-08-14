@@ -227,13 +227,16 @@ import { inject } from "inversify-props";
 export default class SystemAccount extends Vue {
 	@Prop({ type: Object, required: true }) private readonly account!: any;
 
-	@inject()
-	private readonly appClientSettingsStore!: AppClientSettingsStore;
+	// TODO fix this
+	// @inject()
+	// private readonly appClientSettingsStore!: AppClientSettingsStore;
 
 	private visible = false;
 
 	get isDeveloperModeEnabled(): boolean {
-		return this.appClientSettingsStore.clientSettings.developerMode;
+		// TODO fix this
+		// return this.appClientSettingsStore.clientSettings.developerMode;
+		return true;
 	}
 }
 </script>

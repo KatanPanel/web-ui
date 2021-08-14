@@ -61,7 +61,8 @@ export default class AppearenceTheme extends Vue {
 		const current = this.getCurrentTheme;
 		if (!isUndefined(current) && current === theme) return;
 
-		this.userSettingsPresenter.updateSettings({ theme });
+		// TODO fix this
+		// this.userSettingsPresenter.updateSettings({ theme });
 	}
 }
 </script>

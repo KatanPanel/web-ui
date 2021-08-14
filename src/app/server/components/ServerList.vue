@@ -46,6 +46,7 @@ import Vue from "vue";
 import Loading from "@/app/shared/components/Loading.vue";
 import { inject } from "inversify-props";
 import { ServerModel } from "@/app/server/models/server.model";
+import { ServerService } from "../services/server.service";
 
 @Component<ServerList>({
 	components: { Loading },
@@ -61,7 +62,7 @@ export default class ServerList extends Vue {
 	@Prop({ type: Object })
 	private readonly filters!: Partial<ServerModel>;
 
-	@inject() private readonly serversService!: ServersService;
+	@inject() private readonly serversService!: ServerService;
 	private serverList: ServerModel[] | null = null;
 }
 </script>

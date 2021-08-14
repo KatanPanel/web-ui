@@ -123,22 +123,25 @@ export default class ServerResourcesUpdateRate extends Vue {
 	private readonly userSettings!: UserSettingsModel;
 
 	get serverResurceUpdateTime(): number | null {
-		return undefinedToNull(
-			this.userSettings.serverSettings.resourceUpdateTime
-		);
+		// TODO: fix this
+		// return undefinedToNull(
+		// 	this.userSettings.serverSettings[]
+		// );
+		return 1;
 	}
 
 	set serverResurceUpdateTime(value: number | null) {
 		const current = this.serverResurceUpdateTime;
 		if (current === value) return;
 
-		this.clientSettingsService.updateClientSettings({
-			serverSettings: {
-				resourceUpdateTime: nullToUndefined(value)
-			}
-		});
+		// TODO: fix this
+		// this.clientSettingsService.updateClientSettings({
+		// 	serverSettings: {
+		// 		resourceUpdateTime: nullToUndefined(value)
+		// 	}
+		// });
 
-		this.clientSettingsService.saveClientSettings();
+		// this.clientSettingsService.saveClientSettings();
 	}
 
 	private onServerResurceUpdateTimeChange(

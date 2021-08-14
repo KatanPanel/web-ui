@@ -78,9 +78,10 @@ import { ServerModel } from "@/app/server/models/server.model";
 		});
 	},
 	created(): void {
-		this.serverService
-			.findServerFileDisk(this.server.id, this.diskId)
-			.then((disk) => (this.disk = disk));
+		// TODO: fix this
+		// this.serverService
+		// 	.findServerFileDisk(this.server.id, this.diskId)
+		// 	.then((disk) => (this.disk = disk));
 	}
 })
 export default class ServerFileSystemDisk extends Vue {

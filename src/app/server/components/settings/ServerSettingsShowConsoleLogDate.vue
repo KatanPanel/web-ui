@@ -68,13 +68,14 @@ export default class ServerSettingsShowConsoleLogDate extends Vue {
 	}
 
 	updateConsoleLogDate(option: SelectOption) {
-		this.userClientSettingsPresenter.updateSettings({
-			serverSettings: {
-				[this.server.id]: {
-					showConsoleLogDate: option.id
-				}
-			}
-		});
+		// TODO: fix this
+		// this.userClientSettingsPresenter.updateSettings({
+		// 	serverSettings: {
+		// 		[this.server.id]: {
+		// 			showConsoleLogDate: option.id
+		// 		}
+		// 	}
+		// });
 	}
 }
 </script>

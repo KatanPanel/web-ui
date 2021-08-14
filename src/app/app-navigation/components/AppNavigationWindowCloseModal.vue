@@ -75,6 +75,7 @@ import VButton from "@/app/shared/components/ui/button/VButton.vue";
 import VLabel from "@/app/shared/components/ui/form/VLabel.vue";
 import VWall from "@/app/shared/components/ui/wall/VWall.vue";
 import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
+import { Route } from "vue-router";
 
 @Component({
 	components: { VIcon, VWall, VLabel, VButton, VModal }
@@ -91,16 +92,17 @@ export default class AppNavigationWindowCloseModal extends Vue {
 		this.appNavigationPresenter.removeWindowChildren(this.window, instance);
 
 		if (this.window.children.length === 0) {
-			this.appNavigationPresenter.updateWindow(this.window, {
-				location: undefined
-			});
+			// this.appNavigationPresenter.updateWindow(this.window, {
+			// 	location: undefined
+			// });
 			this.close();
 			return;
 		}
 
-		this.$router
-			.push(this.window.children[0].location)
-			.then(() => this.close());
+		// TODO: push
+		// this.$router
+		//	.push(this.window.children[0].location as Route)
+		//	.then(() => this.close());
 	}
 
 	navigateToInstance(instance: AppNavigationWindowChildren): void {
@@ -109,9 +111,10 @@ export default class AppNavigationWindowCloseModal extends Vue {
 			return;
 		}
 
-		this.$router.push(instance.location).then(() => {
-			this.close();
-		});
+		// TODO: push
+		// this.$router.push(instance.location).then(() => {
+		//	this.close();
+		// });
 	}
 
 	close(): void {
@@ -119,7 +122,8 @@ export default class AppNavigationWindowCloseModal extends Vue {
 	}
 
 	confirm(): void {
-		this.appNavigationPresenter.closeWindow(this.window);
+		// TODO: close
+		// this.appNavigationPresenter.closeWindow(this.window);
 		this.close();
 	}
 }

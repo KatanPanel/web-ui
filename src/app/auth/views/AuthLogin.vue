@@ -112,7 +112,7 @@ export default class AuthLogin extends Vue {
 
 		this.locked = true;
 		this.error = null;
-		return this.authPresenter
+		this.authPresenter
 			.authenticate(this.credentials.username, this.credentials.password)
 			.then(() => this.loginCompleted())
 			.catch((err: AxiosError) => this.loginFailed(err))
