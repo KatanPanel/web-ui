@@ -356,7 +356,10 @@ function createApp(vm: Vue, onLoad: () => void): void {
 		defaultScope: "Singleton"
 	});
 
+	console.log("Before Vue bind");
 	container.bind(generateIdAndAddToCache(Vue)).toConstantValue(vm);
+	console.log("After Vue bind");
+
 	const proto = buildContainerPrototype(
 		container,
 		container.bind,
