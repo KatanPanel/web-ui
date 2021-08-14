@@ -45,7 +45,9 @@ const vm = new Vue({
 	render: (h) => h(App)
 });
 
+console.log("Before init");
 vm.$once("init", () => {
+	console.log("Once init");
 	init(vm, () => vm.$emit("loaded"));
 });
 

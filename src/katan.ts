@@ -350,6 +350,7 @@ function loadModules(
 }
 
 function createApp(vm: Vue, onLoad: () => void): void {
+	console.log("Create App");
 	const container = setContainer({
 		autoBindInjectable: false,
 		skipBaseClassChecks: true,
