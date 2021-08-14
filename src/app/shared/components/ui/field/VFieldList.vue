@@ -57,22 +57,6 @@ export default class VFieldList extends Vue {
 	onFieldSelect(field: VField): void {
 		this.currentField = field.$vnode.key as string | number;
 	}
-
-	/* onSelectionUp(): void {
-			let index = this.currentFieldIndex;
-			if (index === null || index === 0) index = this.themes.length - 1;
-			else index--;
-
-			this.selectTheme(index, this.themes[index]);
-		}
-
-		onSelectionDown(): void {
-			let index = this.currentFieldIndex;
-			if (index === null || index === this.themes.length - 1) index = 0;
-			else index++;
-
-			this.selectTheme(index, this.themes[index]);
-		} */
 }
 </script>
 <style lang="scss" module>

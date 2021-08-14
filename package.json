@@ -77,5 +77,9 @@
 			"vue-cli-service lint",
 			"git add"
 		]
-	}
+	},
+	"main": "index.js",
+	"repository": "https://github.com/KatanPanel/katan-web-ui.git",
+	"author": "Natan Vieira <natanvnascimento@gmail.com>",
+	"license": "MIT"
 }
