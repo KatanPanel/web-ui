@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { RawLocation } from "vue-router";
+import type { RawLocation } from "vue-router";
 
 @Component
 export default class VDropdownItem extends Vue {

@@ -65,7 +65,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { AppNavigationPresenter } from "@/app/app-navigation/app-navigation.presenter";
-import {
+import type {
 	AppNavigationWindow,
 	AppNavigationWindowChildren
 } from "@/app/app-navigation/models/app-navigation-window.model";
@@ -75,7 +75,6 @@ import VButton from "@/app/shared/components/ui/button/VButton.vue";
 import VLabel from "@/app/shared/components/ui/form/VLabel.vue";
 import VWall from "@/app/shared/components/ui/wall/VWall.vue";
 import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
-import { Route } from "vue-router";
 
 @Component({
 	components: { VIcon, VWall, VLabel, VButton, VModal }

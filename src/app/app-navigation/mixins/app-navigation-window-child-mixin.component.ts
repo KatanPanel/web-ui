@@ -21,7 +21,7 @@
  */
 
 import { Component, InjectReactive, Prop, Vue } from "vue-property-decorator";
-import {
+import type {
 	AppNavigationWindowChildren,
 	UpdateableAppNavigationWindow
 } from "@/app/app-navigation/models/app-navigation-window.model";

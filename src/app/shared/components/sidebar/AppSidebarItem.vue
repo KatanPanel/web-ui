@@ -65,7 +65,7 @@
 import { Component, Prop } from "vue-property-decorator";
 import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
 import TheLogo from "@/app/shared/components/TheLogo.vue";
-import { RawLocation } from "vue-router";
+import type { RawLocation } from "vue-router";
 import { mixins } from "vue-class-component";
 import { UiActivable } from "@/app/shared/mixins/ui/ui-activable";
 

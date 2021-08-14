@@ -42,7 +42,7 @@
 </template>
 <script lang="ts">
 import { Component, InjectReactive, Prop, Vue } from "vue-property-decorator";
-import { RawLocation } from "vue-router";
+import type { RawLocation } from "vue-router";
 import { isUndefined } from "@/app/shared/utils";
 
 @Component

@@ -66,11 +66,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import {
+import type {
 	AppNavigationWindow,
-	AppNavigationWindowChildren,
-	OpenNavigationWindowState
+	AppNavigationWindowChildren
 } from "@/app/app-navigation/models/app-navigation-window.model";
+import { OpenNavigationWindowState } from "@/app/app-navigation/models/app-navigation-window.model";
 import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
 import VDropdown from "@/app/shared/components/ui/dropdown/VDropdown.vue";
 import VDropdownItem from "@/app/shared/components/ui/dropdown/VDropdownItem.vue";
