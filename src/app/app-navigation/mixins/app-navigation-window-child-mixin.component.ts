@@ -29,7 +29,7 @@ import { isUndefined } from "@/app/shared/utils";
 
 @Component<AppNavigationWindowChildMixin>({
 	created(): void {
-		if (isUndefined(this.windowChild.title))
+		if (isUndefined(this.windowChild?.title))
 			this.updateWindow({
 				title: this.$i18n.t(
 					`navigation.windows.${this.$route.name}`
