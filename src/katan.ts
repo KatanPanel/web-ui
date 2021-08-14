@@ -111,9 +111,9 @@ function buildContainerPrototype(
 			return bind<T>(id)
 				.toDynamicValue(() => {
 					if (root) {
-						const rpath = root._vmdModuleName.split("/");
-						if (!store.hasModule(rpath)) {
-							store.registerModule(rpath, root);
+						const rootPath = root._vmdModuleName.split("/");
+						if (!store.hasModule(rootPath)) {
+							store.registerModule(rootPath, root);
 							this.bindValue(root, getModule(root, store));
 						}
 					}
