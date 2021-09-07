@@ -103,40 +103,6 @@ import VForm from "@/app/shared/components/ui/form/VForm.vue";
 })
 export default class ServerConsoleContent extends Vue {
 	@Prop({ type: String, default: "default" }) private readonly mode!: string;
-	/* @Prop({ type: Number, required: true }) private readonly serverId!: number;
-
-		private logsFetchingState = 0;
-		private logs: any[] | null = null;
-		private consoleInput = "";
-
-		get logsContainer(): HTMLElement {
-			return this.$refs[`logs-container-${this.serverId}`] as HTMLElement;
-		}
-
-		updateLogsContainerScroll(): void {
-			const el = this.logsContainer;
-
-			// already scrolled to bottom
-			if (el.scrollHeight - el.clientHeight <= el.scrollTop + 1) return;
-
-			smoothScroll(2500, el, el.scrollHeight, "scrollTop");
-		}
-
-		forceLogsContainerScroll() {
-			this.logsContainer.scrollTop =
-				this.logsContainer.scrollHeight - this.logsContainer.clientHeight;
-		}
-
-		logTooltip(log: any) {
-			const tooltipTrigger = getClientSettings().serverSettings
-				.showConsoleLogDate;
-			if (!tooltipTrigger) return {};
-
-			return {
-				content: this.$date(log.t),
-				trigger: tooltipTrigger
-			};
-		} */
 }
 </script>
 <style lang="scss" scoped>

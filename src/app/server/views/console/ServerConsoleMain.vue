@@ -42,51 +42,5 @@ import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class ServerConsoleMain extends Vue {
 	mode: "default" | "fullscreen" = "default";
-
-	/* get consoleMode(): string | null {
-			return this.getWindowProperty("console-mode") || null;
-		}
-
-		updateConsoleMode(value: string) {
-			this.setReactiveWindowProperty("console-mode", value);
-		}
-
-		pinConsole() {
-			const navigationHistory = get(
-				ROOT_MODULE,
-				GET_NAVIGATION_HISTORY
-			) as Route[];
-
-			// 0 index is the console itself
-			if (navigationHistory.length <= 1) {
-				return this.pinConsoleAndGoTo();
-			}
-
-			const last = navigationHistory[navigationHistory.length - 2];
-			if (last.name && last.name === "server.console")
-				return this.pinConsoleAndGoTo();
-
-			this.pinConsoleAndGoTo(routeToLocation(last));
-		}
-
-		pinConsoleAndGoTo(location?: Location) {
-			this.$router
-				.replace(location || { name: "server.overview" })
-				.then(() => {
-					this.$emit("pin-console");
-				});
-		}
-
-		onConsoleInputChange(value: string): void {
-			updateWindowTitle(
-				this.getWindow,
-				this.$i18n.t(
-					value.length === 0
-						? "windows.server.console.empty"
-						: "windows.server.console.typing",
-					{ input: value }
-				) as string
-			);
-		} */
 }
 </script>
