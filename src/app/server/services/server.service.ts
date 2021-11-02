@@ -24,7 +24,7 @@ import { inject, injectable } from "inversify-props";
 import { AxiosResponse } from "axios";
 import { buildSortingQueryString } from "@/app/shared/utils/text";
 import { ServerModel } from "@/app/server/models/server.model";
-import { HttpService } from "@/app/shared/services/http.service";
+import { HttpService } from "@/app/app-network/services/http.service";
 import {
 	ServerFileSystemDiskModel,
 	ServerFileSystemFileModel,

@@ -23,7 +23,7 @@
 import { inject, injectable } from "inversify-props";
 import { AxiosResponse } from "axios";
 import { SystemPermissionModel } from "@/app/system/models/system-permission.model";
-import { HttpService } from "@/app/shared/services/http.service";
+import { HttpService } from "@/app/app-network/services/http.service";
 import { SystemInfoModel } from "@/app/system/models/system-info.model";
 
 @injectable()

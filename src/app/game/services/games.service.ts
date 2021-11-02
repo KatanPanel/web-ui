@@ -22,7 +22,7 @@
 
 import { inject, injectable } from "inversify-props";
 import { AxiosResponse } from "axios";
-import { HttpService } from "@/app/shared/services/http.service";
+import { HttpService } from "@/app/app-network/services/http.service";
 import { GameModel } from "@/app/game/models/game.model";
 
 @injectable()

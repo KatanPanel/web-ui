@@ -27,7 +27,7 @@ export const AppRouter: KatanRouting = [
 	{
 		path: "/",
 		beforeEnter: AuthenticatedOnlyGuard,
-		component: "AppPanel",
+		component: "AppNavigationMain",
 		children: [
 			{
 				path: "",

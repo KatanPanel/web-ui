@@ -24,7 +24,7 @@ import { AxiosResponse } from "axios";
 import { injectable } from "inversify";
 import { inject } from "inversify-props";
 import { UserModel } from "@/app/user/models/user.model";
-import { HttpService } from "@/app/shared/services/http.service";
+import { HttpService } from "@/app/app-network/services/http.service";
 
 @injectable()
 export class UserService {

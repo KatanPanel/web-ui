@@ -23,7 +23,7 @@
 import { injectable } from "inversify";
 import { lazyInject } from "@/ioc";
 import { inject } from "inversify-props";
-import { HttpService } from "@/app/shared/services/http.service";
+import { HttpService } from "@/app/app-network/services/http.service";
 import { AuthStore } from "@/app/auth/store/auth.store";
 import { UserModel } from "@/app/user/models/user.model";
 import { UserStore } from "@/app/user/store/user.store";

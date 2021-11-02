@@ -32,7 +32,7 @@ import { KatanModule, Module } from "@/ioc";
 import { RouterHrefDirective } from "@/app/shared/directives/router-href.directive";
 import { ClickOutsideDirective } from "@/app/shared/directives/click-outside.directive";
 import { LoggingService } from "@/app/shared/services/logging.service";
-import { HttpService } from "@/app/shared/services/http.service";
+import { HttpService } from "@/app/app-network/services/http.service";
 import { ConfigService } from "@/app/shared/services/config.service";
 import { I18nService } from "@/app/shared/services/i18n.service";
 import { LocalStorageService } from "@/app/shared/services/local-storage.service";
@@ -62,13 +62,7 @@ export const AppThemes: readonly AppTheme[] = [
 @Module({
 	router: AppRouter,
 	stateManagement: AppStore,
-	services: [
-		LoggingService,
-		ConfigService,
-		HttpService,
-		LocalStorageService,
-		I18nService
-	],
+	services: [LoggingService, ConfigService, LocalStorageService, I18nService],
 	directives: {
 		"router-href": RouterHrefDirective,
 		"click-outside": ClickOutsideDirective

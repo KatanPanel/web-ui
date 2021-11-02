@@ -22,7 +22,7 @@
 
 import { AxiosResponse } from "axios";
 import { inject, injectable } from "inversify-props";
-import { HttpService } from "@/app/shared/services/http.service";
+import { HttpService } from "@/app/app-network/services/http.service";
 import { UserModel } from "@/app/user/models/user.model";
 
 export const AUTHORIZATION_HEADER = "Authorization";
