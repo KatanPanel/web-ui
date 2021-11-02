@@ -1,34 +1,13 @@
-/*
- * Copyright (c) 2020-present Katan
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
+import { LoggingService } from "@/app/shared/services/logging.service";
 import { Module, Mutation, VuexModule } from "vuex-module-decorators";
-import { WebSocket2 } from "@/app/app-network/utils/websocket";
+import { NativeWebSocketClient } from "@/app/app-network/utils/websocket-client";
 import { isUndefined } from "@/app/shared/utils";
 
 @Module({ name: "app-websocket", namespaced: true })
 export class AppNetworkStore extends VuexModule {
-	private _websocket!: WebSocket2;
+	private _websocket!: NativeWebSocketClient;
 
-	public get getWebsocket(): WebSocket2 {
+	public get getWebsocket(): NativeWebSocketClient {
 		return this._websocket;
 	}
 
@@ -37,7 +16,7 @@ export class AppNetworkStore extends VuexModule {
 	 * @param {string} url - The WebSocket server endpoint.
 	 */
 	@Mutation
-	public connect(url: string): void {
+	public connect(url: string, loggingService: LoggingService): void {
 		if (
 			!isUndefined(this._websocket) &&
 			(this._websocket.state === WebSocket.OPEN ||
@@ -45,7 +24,7 @@ export class AppNetworkStore extends VuexModule {
 		)
 			throw new Error("Already connecting");
 
-		const ws = new WebSocket2();
+		const ws = new NativeWebSocketClient(loggingService.copy("Network"));
 		ws.connect(url);
 		this._websocket = ws;
 	}
@@ -66,7 +45,7 @@ export class AppNetworkStore extends VuexModule {
 	 * @param {WebSocket2} payload.websocket - The Websocket object.
 	 */
 	@Mutation
-	public setWebsocket(payload: { websocket: WebSocket2 }): void {
+	public setWebsocket(payload: { websocket: NativeWebSocketClient }): void {
 		this._websocket = payload.websocket;
 	}
 }
