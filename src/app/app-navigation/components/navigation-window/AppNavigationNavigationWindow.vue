@@ -23,13 +23,13 @@
 <template>
 	<div
 		v-if="isActive"
-		:id="`navigation-window-${window.id}`"
+		:id="`navigation-window-${navigationWindow.id}`"
 		v-bind="{
 			'aria-hidden': !isVisible,
 			tabindex: isVisible ? 0 : -1
 		}"
 	>
-		<div v-for="child in window.children" :key="child.id">
+		<div v-for="child in navigationWindow.children" :key="child.id">
 			<keep-alive>
 				<component
 					:is="child.component"
@@ -61,14 +61,14 @@ import VFormInput from "@/app/shared/components/ui/form/VFormInput.vue";
 export default class AppNavigationNavigationWindow extends Vue {
 	@Prop({ type: Object, required: true })
 	@ProvideReactive()
-	private readonly window!: UpdateableAppNavigationWindow | null;
+	private readonly navigationWindow!: UpdateableAppNavigationWindow | null;
 
 	get isActive(): boolean {
-		return this.window?.state !== ClosedNavigationWindowState;
+		return this.navigationWindow?.state !== ClosedNavigationWindowState;
 	}
 
 	get isVisible(): boolean {
-		return this.window?.state === OpenNavigationWindowState;
+		return this.navigationWindow?.state === OpenNavigationWindowState;
 	}
 
 	childrenParametersAsProps(children: AppNavigationWindowChildren): any {

@@ -21,6 +21,7 @@
  */
 
 import { isNumber, isUndefined } from "@/app/shared/utils";
+import { Consola } from "consola";
 
 export const WEBSOCKET_CONNECT = "connect";
 export const WEBSOCKET_ERROR = "error";
@@ -29,34 +30,39 @@ export const WEBSOCKET_MESSAGE = "message";
 
 export type WebSocketListener = Function;
 
-export class WebSocket2 {
-	private websocket: WebSocket | undefined;
+export class NativeWebSocketClient {
+	private nativeWebsocket: WebSocket | undefined;
 	private readonly _listeners = new Map<string, WebSocketListener[]>();
 
+	constructor(private readonly logger: Consola) {}
+
 	public get state(): number {
-		return this.websocket?.readyState || WebSocket.CLOSED;
+		return this.nativeWebsocket?.readyState || WebSocket.CLOSED;
 	}
 
 	public connect(url: string): void {
 		this.close();
+
+		this.logger.info(`Connecting to ${url}...`);
 		const ws = new WebSocket(url);
 		ws.onopen = () => this.call(WEBSOCKET_CONNECT);
 		ws.onerror = () => this.call(WEBSOCKET_ERROR);
 		ws.onclose = () => this.call(WEBSOCKET_CLOSE);
 		ws.onmessage = (ev: MessageEvent) =>
 			this.call(WEBSOCKET_MESSAGE, ev.data);
-		this.websocket = ws;
+		this.nativeWebsocket = ws;
 	}
 
 	public close(): void {
 		if (
-			isUndefined(this.websocket) ||
-			this.websocket.readyState === WebSocket.CLOSED ||
-			this.websocket.readyState === WebSocket.CLOSING
+			isUndefined(this.nativeWebsocket) ||
+			this.nativeWebsocket.readyState === WebSocket.CLOSED ||
+			this.nativeWebsocket.readyState === WebSocket.CLOSING
 		)
 			return;
 
-		this.websocket.close();
+		this.logger.info("Connection closed");
+		this.nativeWebsocket.close();
 	}
 
 	/**
@@ -70,8 +76,8 @@ export class WebSocket2 {
 
 		// send immediately if already connected
 		if (
-			!isUndefined(this.websocket) &&
-			this.websocket.readyState === WebSocket.OPEN
+			!isUndefined(this.nativeWebsocket) &&
+			this.nativeWebsocket.readyState === WebSocket.OPEN
 		) {
 			this.sendImmediately(payload);
 			return;
@@ -99,9 +105,9 @@ export class WebSocket2 {
 		// fast path -- the event is the WEBSOCKET_CONNECT event and the
 		// connection is already open
 		if (
-			!isUndefined(this.websocket) &&
+			!isUndefined(this.nativeWebsocket) &&
 			eventOrOp === WEBSOCKET_CONNECT &&
-			this.websocket.readyState === WebSocket.OPEN
+			this.nativeWebsocket.readyState === WebSocket.OPEN
 		) {
 			return handler();
 		}
@@ -130,6 +136,6 @@ export class WebSocket2 {
 	 * @private
 	 */
 	private sendImmediately(data: any): void {
-		this.websocket?.send(JSON.stringify(data));
+		this.nativeWebsocket?.send(JSON.stringify(data));
 	}
 }

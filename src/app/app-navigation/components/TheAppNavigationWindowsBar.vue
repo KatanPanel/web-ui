@@ -86,10 +86,10 @@ export default class TheAppNavigationWindowsBar extends Vue {
 	createDummyWindow(): void {
 		console.log("create dummy window");
 		this.appNavigationPresenter
-			.createWindow(this, { name: "Nova janela" })
+			.createNavigationWindow(this, { name: "Nova janela" })
 			.then((window) => {
 				console.log("open window", window);
-				this.appNavigationPresenter.openWindow(window, this);
+				this.appNavigationPresenter.openNavigationWindow(window, this);
 			});
 	}
 }

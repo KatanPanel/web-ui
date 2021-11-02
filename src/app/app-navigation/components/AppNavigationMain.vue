@@ -21,7 +21,18 @@
   -->
 
 <template>
-	<div v-if="$route.name !== 'welcome'" key="panel" class="panel">
+	<div :class="$style.root">
+		<TheAppSidebar />
+		<div :class="$style.content">
+			<TheAppNavigationWindowsBar />
+			<main :class="$style.main">
+				<router-view />
+				<AppNavigationWindowsContainer />
+			</main>
+		</div>
+	</div>
+
+	<!-- <div v-if="$route.name !== 'welcome'" key="panel" class="panel">
 		<TheAppSidebar @logout="performLogout" />
 		<div class="panel-content">
 			<TheAppNavigationWindowsBar id="windows-bar" />
@@ -32,7 +43,7 @@
 		</div>
 		<AppPanelTour />
 	</div>
-	<router-view v-else key="welcome" />
+	<router-view v-else key="welcome" /> -->
 </template>
 
 <script lang="ts">
@@ -50,8 +61,9 @@ import { UserModel } from "@/app/user/models/user.model";
 import { USER_INJECTION_KEY } from "@/app/user/user.module";
 import TheAppSidebar from "@/app/shared/components/sidebar/TheAppSidebar.vue";
 import AppPanelTour from "@/app/shared/views/AppPanelTour.vue";
+import { AppNavigationWindow } from "@/app/app-navigation/models/app-navigation-window.model";
 
-@Component<AppPanel>({
+@Component<AppNavigationMain>({
 	components: {
 		AppPanelTour,
 		TheAppSidebar,
@@ -62,35 +74,40 @@ import AppPanelTour from "@/app/shared/views/AppPanelTour.vue";
 		VContainer
 	},
 	beforeRouteUpdate(to: Route, from: Route, next: NavigationGuardNext): void {
-		const vm = this as AppPanel;
+		/* const vm = this as AppPanel;
 		const open = vm.appNavigationPresenter.getOpenWindow;
 
 		if (!isUndefined(open)) {
 			vm.appNavigationPresenter.replaceWindowChildren(
-				open,
+				open!,
 				vm.appNavigationPresenter.generateWindowChildren(to)
 			);
-		}
+		} */
 
 		next();
 	},
 	beforeMount(): void {
-		const vm = this as AppPanel;
+		const vm = this as AppNavigationMain;
 		const open = vm.appNavigationPresenter.getOpenWindow;
 
 		if (!isUndefined(open)) return;
 
-		vm.appNavigationPresenter.createWindow(this, {}).then((window) => {
-			vm.appNavigationPresenter.addWindowChildren(
-				window,
-				vm.appNavigationPresenter.generateWindowChildren(this.$route)
-			);
+		vm.appNavigationPresenter
+			.createNavigationWindow(this)
+			.then((navigationWindow: AppNavigationWindow) => {
+				vm.appNavigationPresenter.addNavigationWindowChild(
+					navigationWindow,
+					vm.appNavigationPresenter.routeToChildProperties(vm.$route)
+				);
 
-			vm.appNavigationPresenter.openWindow(window, this);
-		});
+				vm.appNavigationPresenter.openNavigationWindow(
+					vm,
+					navigationWindow
+				);
+			});
 	}
 })
-export default class AppPanel extends Vue {
+export default class AppNavigationMain extends Vue {
 	@inject()
 	private readonly appNavigationPresenter!: AppNavigationPresenter;
 
@@ -102,7 +119,25 @@ export default class AppPanel extends Vue {
 	}
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss" module>
+.root {
+	display: flex;
+	position: relative;
+	height: 100%;
+}
+
+.content {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+
+.main {
+	position: relative;
+	margin: 3% 0;
+}
+</style>
+<!-- <style lang="scss" scoped>
 .panel {
 	display: flex;
 	position: relative;
@@ -123,4 +158,4 @@ export default class AppPanel extends Vue {
 		}
 	}
 }
-</style>
+</style> -->

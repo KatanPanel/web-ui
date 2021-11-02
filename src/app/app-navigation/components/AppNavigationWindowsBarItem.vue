@@ -107,19 +107,19 @@ export default class AppNavigationWindowsBarItem extends Vue {
 
 	open(): void {
 		if (this.isOpen) return;
-		this.appNavigationPresenter.openWindow(this.window, this);
+		this.appNavigationPresenter.openNavigationWindow(this.window, this);
 	}
 
 	close(): void {
 		/* if (isUndefined(window.location)) {
 			this.appNavigationPresenter.closeWindow(this, window);
 			return;
-		} */
+		}
 
 		this.appNavigationPresenter.openNavigationWindowCloseModal(
 			this,
 			this.window
-		);
+		); */
 	}
 }
 </script>

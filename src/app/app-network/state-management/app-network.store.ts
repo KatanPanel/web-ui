@@ -21,11 +21,11 @@
  */
 
 import { Module, Mutation, VuexModule } from "vuex-module-decorators";
-import { WebSocket2 } from "@/app/app-websocket/utils/websocket";
+import { WebSocket2 } from "@/app/app-network/utils/websocket";
 import { isUndefined } from "@/app/shared/utils";
 
 @Module({ name: "app-websocket", namespaced: true })
-export class AppWebsocketStore extends VuexModule {
+export class AppNetworkStore extends VuexModule {
 	private _websocket!: WebSocket2;
 
 	public get getWebsocket(): WebSocket2 {

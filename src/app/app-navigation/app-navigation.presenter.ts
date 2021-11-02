@@ -28,35 +28,66 @@ import {
 	AppNavigationWindowChildren,
 	AppNavigationWindowComponent,
 	AppNavigationWindowState,
+	MinimizedNavigationWindowState,
 	OpenNavigationWindowState,
 	UpdateableAppNavigationWindow
 } from "@/app/app-navigation/models/app-navigation-window.model";
 import { Route } from "vue-router";
 import { inject } from "inversify-props";
 import Vue from "vue";
-import { lazyComponent } from "@/app/shared/utils/builtin";
-import { isUndefined } from "@/app/shared/utils";
+import { isUndefined, undefinedToNull } from "@/app/shared/utils";
+import { routeToLocation } from "@/app/app-navigation/utils/navigation";
 
+/**
+ *
+ */
 @injectable()
 export class AppNavigationPresenter {
-	@lazyInject() private readonly appNavigationStore!: AppNavigationStore;
+	/**
+	 * The navigation module state manager.
+	 * @private
+	 */
+	@lazyInject()
+	private readonly appNavigationStore!: AppNavigationStore;
 
+	/**
+	 * @constructor
+	 * @param {Vue} vue - The current Vue instance.
+	 */
 	constructor(@inject() private readonly vue: Vue) {}
 
-	public get getOpenWindow(): AppNavigationWindow | undefined {
-		return this.getWindows.find(
-			(value) => value.state === OpenNavigationWindowState
+	/**
+	 * Returns the navigation window that is currently open or null
+	 * if there is no window open.
+	 */
+	public get getOpenWindow(): AppNavigationWindow | null {
+		return undefinedToNull(
+			this.getWindows.find(
+				(value) => value.state === OpenNavigationWindowState
+			)
 		);
 	}
 
+	/**
+	 * Returns all created navigation windows.
+	 */
 	public get getWindows(): AppNavigationWindow[] {
 		return this.appNavigationStore.getWindows;
 	}
 
+	/**
+	 * Returns the window that has the specified id or undefined if there
+	 * is no window with that id.
+	 * @param {number} id - The navigation window id.
+	 */
 	public getWindowById(id: number): AppNavigationWindow | undefined {
 		return this.getWindows.find((value) => value.id === id);
 	}
 
+	/**
+	 * Returns all windows whose state is included within the specified states.
+	 * @param {AppNavigationWindowState} state - The states to be searched
+	 */
 	public getWindowsBy(
 		...state: AppNavigationWindowState[]
 	): AppNavigationWindow[] {
@@ -65,12 +96,15 @@ export class AppNavigationPresenter {
 		);
 	}
 
-	public async createWindow(
+	public async createNavigationWindow(
 		vm: Vue,
-		properties: Partial<AppNavigationWindow>
+		properties?: Partial<AppNavigationWindow>
 	): Promise<UpdateableAppNavigationWindow> {
+		(vm as any).katan = true;
+		console.log("Create window with", vm);
+
 		return this.appNavigationStore
-			.createWindow({ properties })
+			.createWindow({ properties: properties || {} })
 			.then((window) => {
 				this.addWindow(window);
 				return window;
@@ -91,19 +125,21 @@ export class AppNavigationPresenter {
 		});
 	}
 
-	public async openWindow(
-		window: AppNavigationWindow,
-		vm: Vue
+	public async openNavigationWindow(
+		vm: Vue,
+		window: AppNavigationWindow
 	): Promise<Route | void> {
-		/* // minimize all other open windows
+		// minimize all other open windows
 		for (const other of this.getWindowsBy(OpenNavigationWindowState)) {
 			this.updateWindow(other, {
 				state: MinimizedNavigationWindowState
 			});
 		}
 
+		const activeChild = window.getCurrentChild();
+
 		// fast path -- just mark as open
-		if (isUndefined(window.location)) {
+		if (isUndefined(activeChild)) {
 			this.updateWindow(window, {
 				state: OpenNavigationWindowState
 			});
@@ -111,7 +147,7 @@ export class AppNavigationPresenter {
 		}
 
 		// slow path -- resolve window location
-		const location = routeToLocation(window.location);
+		const location = routeToLocation(activeChild.location!);
 		if (location.name !== vm.$route.name)
 			return vm.$router.push(location).then(() => {
 				this.updateWindow(window, {
@@ -121,7 +157,7 @@ export class AppNavigationPresenter {
 		else
 			this.updateWindow(window, {
 				state: OpenNavigationWindowState
-			}); */
+			});
 
 		const child = window.getCurrentChild() || window.children[0];
 		if (!isUndefined(child)) {
@@ -171,17 +207,17 @@ export class AppNavigationPresenter {
 			return;
 		}
 
-		this.addWindowChildren(window, children);
+		this.addNavigationWindowChild(window, children);
 	}
 
-	public addWindowChildren(
-		window: AppNavigationWindow,
-		children: Partial<AppNavigationWindowChildren>
+	public addNavigationWindowChild(
+		navigationWindow: AppNavigationWindow,
+		childProperties: Partial<AppNavigationWindowChildren>
 	): void {
-		window.addChild(
-			children.component as AppNavigationWindowComponent,
-			children.location,
-			children.title
+		navigationWindow.addChild(
+			childProperties.component as AppNavigationWindowComponent,
+			childProperties.location,
+			childProperties?.title
 		).isActive = true;
 	}
 
@@ -192,7 +228,7 @@ export class AppNavigationPresenter {
 		this.appNavigationStore.removeWindowChildren({ window, children });
 	}
 
-	public generateWindowChildren(
+	public routeToChildProperties(
 		from: Route
 	): Partial<AppNavigationWindowChildren> {
 		const lastMatch = from.matched[1];
@@ -200,32 +236,5 @@ export class AppNavigationPresenter {
 			location: from,
 			component: lastMatch.components.default
 		};
-	}
-
-	public openCreateResourceModal(vm: Vue): void {
-		vm.$modal.show(
-			lazyComponent("AppCreateResourceModal"),
-			{},
-			{ height: "auto", width: "50%" }
-		);
-	}
-
-	public openNavigationWindowEditModal(vm: Vue, windowName: string): void {
-		vm.$modal.show(
-			lazyComponent("AppNavigationWindowEditModal", "app-navigation"),
-			{ windowName },
-			{ height: "auto", width: "50%" }
-		);
-	}
-
-	public openNavigationWindowCloseModal(
-		vm: Vue,
-		window: AppNavigationWindow
-	): void {
-		vm.$modal.show(
-			lazyComponent("AppNavigationWindowCloseModal", "app-navigation"),
-			{ window },
-			{ height: "auto", width: "50%" }
-		);
 	}
 }

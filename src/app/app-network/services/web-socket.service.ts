@@ -20,20 +20,42 @@
  * SOFTWARE.
  */
 
-import { KatanModule, Module } from "@/ioc";
-import { AppNavigationStore } from "@/app/app-navigation/store/app-navigation.store";
-import { AppNavigationPresenter } from "@/app/app-navigation/app-navigation.presenter";
-import { Vue } from "vue-property-decorator";
-import { AppNavigationWindowChildMixin } from "@/app/app-navigation/mixins/app-navigation-window-child-mixin.component";
-import { AppNavigationRouter } from "@/app/app-navigation/app-navigation.router";
+import { injectable } from "inversify";
+import { inject } from "inversify-props";
+import { ConfigService } from "@/app/shared/services/config.service";
+import { LoggingService } from "@/app/shared/services/logging.service";
+import { NativeWebSocketClient } from "@/app/app-network/utils/websocket-client";
+import { isUndefined } from "@/app/shared/utils";
 
-@Module({
-	stateManagement: AppNavigationStore,
-	services: [AppNavigationPresenter],
-	router: AppNavigationRouter
-})
-export default class AppNavigationModule extends KatanModule {
-	init(): void {
-		Vue.mixin(AppNavigationWindowChildMixin);
+@injectable()
+export class WebSocketService {
+	private readonly client!: NativeWebSocketClient;
+
+	constructor(
+		@inject() loggingService: LoggingService,
+		@inject() private readonly configService: ConfigService
+	) {
+		this.client = new NativeWebSocketClient(
+			loggingService.copy(WebSocketService.name)
+		);
+	}
+
+	public get state(): number {
+		return this.client?.state || WebSocket.CLOSED;
+	}
+
+	public connect(): void {
+		if (!isUndefined(this.client)) this.client.close();
+		this.client.connect(this.configService.wsUrl);
+	}
+
+	public close() {
+		if (isUndefined(this.client)) return;
+
+		this.client.close();
+	}
+
+	public sendMessage(operationCode: number, content: any): void {
+		this.client.send(operationCode, content);
 	}
 }

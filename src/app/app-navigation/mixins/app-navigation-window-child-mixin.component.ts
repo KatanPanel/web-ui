@@ -30,7 +30,7 @@ import { isUndefined } from "@/app/shared/utils";
 /**
  * Attribute added to Vue instances created from navigation windows.
  */
-export const NAVIGATION_WINDOW_ATTR = Symbol();
+export const NAVIGATION_WINDOW_ATTR = "katan-navigation-window";
 
 /**
  * This mixin is responsible for doing post-build and pre-destruct handling of
@@ -44,16 +44,16 @@ export const NAVIGATION_WINDOW_ATTR = Symbol();
  */
 @Component<AppNavigationWindowChildMixin>({
 	created(): void {
-		console.log("Navigation window created", this);
-		if (isUndefined(this.windowChild?.title))
+		/* console.log("Navigation window created", this);
+		if (isUndefined(this.navigationWindow?.title))
 			this.updateWindow({
 				title: this.$i18n.t(
 					`navigation.windows.${this.$route.name}`
 				) as string
-			});
+			}); */
 	},
 	beforeMount(): void {
-		if (isUndefined(this.window)) this.$destroy();
+		// if (isUndefined(this.navigationWindow)) this.$destroy();
 	},
 	mounted(): void {
 		/**
@@ -71,13 +71,11 @@ export const NAVIGATION_WINDOW_ATTR = Symbol();
 })
 export class AppNavigationWindowChildMixin extends Vue {
 	@InjectReactive()
-	protected readonly window!: UpdateableAppNavigationWindow | null;
-
-	@Prop({ type: Object, required: true })
-	protected readonly windowChild!: AppNavigationWindowChildren;
+	private readonly navigationWindow!: AppNavigationWindowChildren;
 
 	protected updateWindow(value: Partial<AppNavigationWindowChildren>): void {
-		this.window?.update(this.windowChild, value);
+		console.log("[UPDATE WINDOW]", value);
+		// this.navigationWindow?.update(this.navigationWindow, value);
 	}
 
 	/**
@@ -97,6 +95,6 @@ export class AppNavigationWindowChildMixin extends Vue {
 	 * @protected
 	 */
 	public uniqueId(input: string): string {
-		return this.window?.id + "_" + input;
+		return this.navigationWindow?.id + "_" + input;
 	}
 }

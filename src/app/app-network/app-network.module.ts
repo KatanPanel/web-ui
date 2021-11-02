@@ -21,9 +21,11 @@
  */
 
 import { Module } from "@/ioc";
-import { AppWebsocketStore } from "@/app/app-websocket/store/app-websocket.store";
+import { HttpService } from "@/app/app-network/services/http.service";
+import { AppNetworkStore } from "@/app/app-network/state-management/app-network.store";
 
 @Module({
-	stateManagement: AppWebsocketStore
+	stateManagement: AppNetworkStore,
+	services: [HttpService]
 })
-export default class AppWebsocketModule {}
+export default class AppNetworkModule {}
