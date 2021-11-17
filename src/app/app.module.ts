@@ -36,7 +36,7 @@ import { HttpService } from "@/app/app-network/services/http.service";
 import { ConfigService } from "@/app/shared/services/config.service";
 import { I18nService } from "@/app/shared/services/i18n.service";
 import { LocalStorageService } from "@/app/shared/services/local-storage.service";
-import { AppRouter } from "@/app/shared/router/app.router";
+import { AppRouter } from "@/app/shared/app.router";
 import { AppStore } from "@/app/shared/store/app.store";
 import VueTour from "vue-tour";
 
