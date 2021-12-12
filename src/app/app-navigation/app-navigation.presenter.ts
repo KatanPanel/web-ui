@@ -21,7 +21,7 @@
  */
 
 import { injectable } from "inversify";
-import { lazyInject } from "@/ioc";
+import { lazyInject } from "@/di";
 import { AppNavigationStore } from "@/app/app-navigation/store/app-navigation.store";
 import {
 	AppNavigationWindow,

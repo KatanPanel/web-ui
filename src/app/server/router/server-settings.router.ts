@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-import { KatanRouteConfig } from "@/ioc";
+import { ModuleRouteConfig } from "@/di";
 
-export const ServerSettingsRouter: KatanRouteConfig = {
+export const ServerSettingsRouter: ModuleRouteConfig = {
 	path: "settings",
 	name: "server.settings",
 	component: "settings/ServerSettingsMain",

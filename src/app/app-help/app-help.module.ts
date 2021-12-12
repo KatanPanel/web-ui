@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Module } from "@/ioc";
+import { Module } from "@/di";
 
 @Module({
 	router: {

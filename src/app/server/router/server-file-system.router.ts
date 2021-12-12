@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-import { KatanRouteConfig } from "@/ioc";
+import { ModuleRouteConfig } from "@/di";
 
-export const ServerFileSystemRouter: KatanRouteConfig = {
+export const ServerFileSystemRouter: ModuleRouteConfig = {
 	path: "fs",
 	name: "server.fs",
 	component: "file-system/ServerFileSystemMain",

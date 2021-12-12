@@ -28,7 +28,7 @@ import VueSvgInlinePlugin from "vue-svg-inline-plugin";
 import VueMeta from "vue-meta";
 import VTooltip from "v-tooltip";
 import VueNativeSock from "vue-native-websocket";
-import { KatanModule, Module } from "@/ioc";
+import { KatanModule, Module } from "@/di";
 import { RouterHrefDirective } from "@/app/shared/directives/router-href.directive";
 import { ClickOutsideDirective } from "@/app/shared/directives/click-outside.directive";
 import { LoggingService } from "@/app/shared/services/logging.service";

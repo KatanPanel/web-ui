@@ -20,10 +20,10 @@
  * SOFTWARE.
  */
 
-import { KatanRouting } from "@/ioc";
+import { ModuleRouting } from "@/di";
 import { AuthenticatedOnlyGuard } from "@/app/auth/guards/authenticated-only.guard";
 
-export const AppRouter: KatanRouting = [
+export const AppRouter: ModuleRouting = [
 	{
 		path: "/",
 		beforeEnter: AuthenticatedOnlyGuard,

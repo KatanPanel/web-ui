@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { KatanModule, Module } from "@/ioc";
+import { KatanModule, Module } from "@/di";
 import { UserInfoRouter } from "@/app/user-info/router/user-info.router";
 
 @Module({

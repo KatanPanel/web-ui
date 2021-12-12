@@ -21,7 +21,7 @@
  */
 
 import { GamesService } from "@/app/game/services/games.service";
-import { Module } from "@/ioc";
+import { Module } from "@/di";
 
 @Module({
 	services: [GamesService]

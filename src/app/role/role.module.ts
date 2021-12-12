@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Module } from "@/ioc";
+import { Module } from "@/di";
 import { RoleService } from "@/app/role/services/role.service";
 import { RoleRoutes } from "@/app/role/role.routes";
 

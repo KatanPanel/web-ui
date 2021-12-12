@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Module } from "@/ioc";
+import { Module } from "@/di";
 import { ServerService } from "@/app/server/services/server.service";
 import { ServerRouter } from "@/app/server/router/server.router";
 

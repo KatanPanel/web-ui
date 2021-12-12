@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { KatanModule, Module } from "@/ioc";
+import { KatanModule, Module } from "@/di";
 import { AppNavigationStore } from "@/app/app-navigation/store/app-navigation.store";
 import { AppNavigationPresenter } from "@/app/app-navigation/app-navigation.presenter";
 import { Vue } from "vue-property-decorator";

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Module } from "@/ioc";
+import { Module } from "@/di";
 import { AuthenticatedOnlyGuard } from "@/app/auth/guards/authenticated-only.guard";
 import { AuthRouter } from "@/app/auth/router/auth.router";
 import { AuthStore } from "@/app/auth/store/auth.store";

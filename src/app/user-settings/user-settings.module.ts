@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { KatanModule, Module } from "@/ioc";
+import { KatanModule, Module } from "@/di";
 import { UserSettingsPresenter } from "@/app/user-settings/user-settings.presenter";
 import { UserSettingsStore } from "@/app/user-settings/store/user-settings.store";
 import { UserSettingsRouter } from "@/app/user-settings/router/user-settings.router";

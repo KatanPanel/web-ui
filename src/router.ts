@@ -21,7 +21,7 @@
  */
 
 import VueRouter, { NavigationGuardNext, Route, RouteConfig } from "vue-router";
-import { lazyInject } from "@/ioc";
+import { lazyInject } from "@/di";
 import Vue from "vue";
 import { I18nService } from "@/app/shared/services/i18n.service";
 

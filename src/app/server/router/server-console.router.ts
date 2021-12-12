@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-import { KatanRouteConfig } from "@/ioc";
+import { ModuleRouteConfig } from "@/di";
 
-export const ServerConsoleRouter: KatanRouteConfig = {
+export const ServerConsoleRouter: ModuleRouteConfig = {
 	path: "console",
 	component: "console/ServerConsoleMain",
 	children: [

@@ -21,13 +21,13 @@
  */
 
 import { NavigationGuardNext, Route } from "vue-router";
-import { KatanNavigationGuard } from "@/ioc";
+import { ModuleRouteNavigationGuard } from "@/di";
 import { inject } from "inversify-props";
 import { injectable } from "inversify";
 import { AuthPresenter } from "@/app/auth/auth.presenter";
 
 @injectable()
-export class AuthenticatedOnlyGuard implements KatanNavigationGuard {
+export class AuthenticatedOnlyGuard implements ModuleRouteNavigationGuard {
 	constructor(@inject() private readonly authPresenter: AuthPresenter) {}
 
 	handle(to: Route, from: Route, next: NavigationGuardNext) {

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Module } from "@/ioc";
+import { Module } from "@/di";
 import { HttpService } from "@/app/app-network/services/http.service";
 import { AppNetworkStore } from "@/app/app-network/state-management/app-network.store";
 

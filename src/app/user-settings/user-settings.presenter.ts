@@ -21,7 +21,7 @@
  */
 
 import { injectable } from "inversify";
-import { lazyInject } from "@/ioc";
+import { lazyInject } from "@/di";
 import { UserSettingsStore } from "@/app/user-settings/store/user-settings.store";
 import { UserSettingsModel } from "@/app/user-settings/models/user-settings.model";
 import { inject } from "inversify-props";

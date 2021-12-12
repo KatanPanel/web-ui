@@ -24,3 +24,5 @@ export * from "./injection";
 export * from "./module";
 export * from "./utils";
 export * from "./vue";
+export * from "./container";
+export * from "./vue";
