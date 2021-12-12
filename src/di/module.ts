@@ -1,3 +1,4 @@
+import { Consola } from "consola";
 import { Constructor, DiContainer } from "@/di";
 import { VuexModule } from "vuex-module-decorators";
 import { ContainerModule } from "inversify";
@@ -9,6 +10,7 @@ export const ModuleMetadataKey = "katan:module";
 export const ModuleNameProp = "moduleName";
 export const ModuleContainerModuleProp = "containerModule";
 export const ModuleContainerProp = "container";
+export const ModuleLoggerProp = "logger";
 
 export type ModuleState =
 	| ModuleStore
@@ -21,6 +23,7 @@ export interface ModuleOptions {
 	stateManagement?: ModuleState;
 	directives?: ModuleDirectives;
 	children?: Constructor[];
+	imports?: Constructor[];
 }
 
 export function Module(options?: ModuleOptions): ClassDecorator {
@@ -33,6 +36,7 @@ export abstract class KatanModule {
 	public readonly [ModuleNameProp]!: string;
 	public readonly [ModuleContainerModuleProp]!: ContainerModule;
 	public readonly [ModuleContainerProp]!: DiContainer;
+	public readonly [ModuleLoggerProp]!: Consola;
 
 	init(): void {
 		return;

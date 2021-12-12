@@ -1,19 +1,15 @@
 import { KatanModule } from ".";
 import Vue from "vue";
-import { ModuleContainerModuleProp } from "./module";
-import {
-	Constructor,
-	defineProp,
-	fixConstructorNaming,
-	Instantiable
-} from "@/di/utils";
+import { ModuleContainerModuleProp, ModuleLoggerProp } from "./module";
+import { Constructor, defineProp, fixConstructorNaming } from "@/di/utils";
 import { ModuleMetadataKey, ModuleNameProp, ModuleOptions } from "@/di/module";
 import { isUndefined } from "@/app/shared/utils";
-import { DiContainer } from "@/di";
 import KatanRouter from "@/app/app.router";
 import { Store } from "vuex";
 import AppModule from "@/app/app.module";
 import { createContainerModule } from "./container-factory";
+import { LogLevel, default as ConsolaInstance } from "consola";
+import { Container } from "inversify";
 
 const LoadedModules: { [name: string]: KatanModule } = {};
 
@@ -22,7 +18,7 @@ export function isModuleLoaded(moduleName: string): boolean {
 }
 
 export function loadModule(
-	container: DiContainer,
+	root: Container,
 	module: Constructor,
 	store: Store<any>,
 	router: KatanRouter
@@ -33,29 +29,53 @@ export function loadModule(
 		);
 
 	const moduleName = fixConstructorNaming(module);
-	if (isModuleLoaded(moduleName))
-		throw new Error(
-			`Module ${moduleName} already loaded (cannot be loaded twice)`
-		);
+
+	// already loaded, just return the loaded module instance
+	if (isModuleLoaded(moduleName)) return LoadedModules[moduleName];
 
 	const options: ModuleOptions =
 		Reflect.getMetadata(ModuleMetadataKey, module) || {};
 
-	// all dependencies must be loaded before the module
-	const dependencies = options.children || [];
-	if (!isUndefined(dependencies)) {
-		for (const dependency of dependencies) {
-			loadModule(container, dependency, store, router);
-		}
-	}
+	let scopedContainer = root.createChild();
 
 	const moduleInstance: KatanModule = new module();
 	defineProp(moduleInstance, ModuleNameProp, moduleName);
+	defineProp(
+		moduleInstance,
+		ModuleLoggerProp,
+		ConsolaInstance.create({
+			level:
+				process.env.NODE_ENV !== "production"
+					? LogLevel.Debug
+					: LogLevel.Info
+		}).withTag(moduleName)
+	);
 
-	// container setup
-	const baseContainer = container.container;
+	// add imports to context
+	const imports = options.imports;
+	if (!isUndefined(imports)) {
+		for (const import0 of imports) {
+			// ensure imported module is loaded
+			const importedModule = loadModule(root, import0, store, router);
+
+			moduleInstance.logger.debug(
+				`now depends on "${importedModule.moduleName}" module`
+			);
+			scopedContainer = importedModule.container.container.createChild();
+		}
+	}
+
+	// load childs before the module
+	const childs = options.children;
+	if (!isUndefined(childs)) {
+		for (const child of childs) {
+			loadModule(scopedContainer.createChild(), child, store, router);
+		}
+	}
+
+	// container module setup
 	const containerModule = createContainerModule(
-		baseContainer,
+		scopedContainer,
 		store,
 		router,
 		options,
@@ -70,7 +90,7 @@ export function loadModule(
 			Vue.directive(id, directives[id]);
 	}
 
-	baseContainer.load(containerModule);
+	scopedContainer.load(containerModule);
 
 	// add the newly loaded module to list of loaded modules
 	LoadedModules[moduleName] = moduleInstance;
@@ -78,7 +98,7 @@ export function loadModule(
 }
 
 export function loadAllModules(
-	container: DiContainer,
+	container: Container,
 	store: Store<any>,
 	router: KatanRouter,
 	autoLoad?: Constructor[]
@@ -103,7 +123,7 @@ export function loadAllModules(
 			.map((name: string) => {
 				return ctx(name).default;
 			});
-	}
+	} else modules = autoLoad;
 
 	// then load other modules
 	for (const module of modules) {

@@ -68,10 +68,12 @@ function configureRouter(
 
 export function createContainer(
 	container: Container,
+	module: KatanModule,
 	store: Store<any>
 ): DiContainer {
 	return new DefaultDiContainer(
 		container,
+		module,
 		container.bind,
 		container.rebind,
 		store
@@ -92,7 +94,18 @@ export function createContainerModule(
 			_isBound: interfaces.IsBound,
 			rebind: interfaces.Rebind
 		) => {
-			const container = new DefaultDiContainer(base, bind, rebind, store);
+			const container = new DefaultDiContainer(
+				base,
+				module,
+				bind,
+				rebind,
+				store
+			);
+
+			// inject services into module context
+			const services = options.services;
+			if (!isUndefined(services)) container.bindAll(services);
+
 			hookStateManagement(container, options.stateManagement);
 			configureRouter(router, options.router, module);
 

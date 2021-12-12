@@ -23,9 +23,6 @@
 import {
 	Consola,
 	ConsolaLogObject,
-	ConsolaReporter,
-	ConsolaReporterArgs,
-	ConsolaReporterLogObject,
 	default as ConsolaInstance,
 	LogLevel
 } from "consola";
@@ -40,8 +37,7 @@ export class LoggingService {
 			level:
 				process.env.NODE_ENV !== "production"
 					? LogLevel.Debug
-					: LogLevel.Info,
-			reporters: [this.setupReporter()]
+					: LogLevel.Info
 		});
 	}
 
@@ -67,36 +63,5 @@ export class LoggingService {
 
 	public error(message: ConsolaLogObject | any, ...args: any[]): void {
 		this._logger.error(message, ...args);
-	}
-
-	private setupReporter(): ConsolaReporter {
-		return {
-			log(
-				logObj: ConsolaReporterLogObject,
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				_args: ConsolaReporterArgs
-			): void {
-				const consoleLogFn =
-					logObj.level < 1
-						? console.error
-						: logObj.level === 1 && console.warn
-						? console.warn
-						: console.log;
-
-				const tag = logObj.tag || "";
-				const style = `color: #8854d0; border-radius: 0; font-weight: bold; text-transform: capitalize;`;
-				const badge = tag.length === 0 ? "%c" : "%c[" + tag + "] ";
-
-				if (typeof logObj.args[0] === "string")
-					consoleLogFn(
-						`${badge}%c${logObj.args[0]}`,
-						style,
-						// Empty string as style resets to default console style
-						"",
-						...logObj.args.slice(1)
-					);
-				else consoleLogFn(badge, style, ...logObj.args);
-			}
-		};
 	}
 }

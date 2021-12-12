@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import { KatanModule } from "@/di";
 import "@/register-service-worker";
 import store from "@/app/app.store";
 import Vue from "vue";
@@ -6,9 +7,11 @@ import App from "@/app/App.vue";
 import VueRouter from "vue-router";
 import VueI18n from "vue-i18n";
 import { generateIdAndAddToCache, setContainer } from "inversify-props";
+import { injectable } from "inversify";
 import KatanRouter from "./app/app.router";
-import { createContainer } from "./di/container-factory";
 import { loadAllModules } from "./di/module-loader";
+import { Module } from "./di";
+import AuthModule from "./app/auth/auth.module";
 
 const isProductionMode = process.env.NODE_ENV === "production";
 Vue.config.devtools = !isProductionMode;
@@ -42,8 +45,7 @@ baseContainer.bind(generateIdAndAddToCache(Vue)).toConstantValue(vm);
 // init will be called when the App is mounted
 vm.$once("init", () => {
 	const diRouter = new KatanRouter(vmRouter);
-	const diContainer = createContainer(baseContainer, store);
-	loadAllModules(diContainer, store, diRouter, undefined);
+	loadAllModules(baseContainer, store, diRouter, undefined);
 
 	diRouter.setup();
 	vm.$emit("loaded");

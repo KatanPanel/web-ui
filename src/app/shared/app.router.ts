@@ -26,7 +26,7 @@ import { AuthenticatedOnlyGuard } from "@/app/auth/guards/authenticated-only.gua
 export const AppRouter: ModuleRouting = [
 	{
 		path: "/",
-		beforeEnter: AuthenticatedOnlyGuard,
+		// beforeEnter: AuthenticatedOnlyGuard,
 		component: "AppNavigationMain",
 		children: [
 			{

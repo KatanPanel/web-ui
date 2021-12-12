@@ -1,4 +1,5 @@
-import { Instantiable } from "@/di/utils";
+import { KatanModule } from ".";
+import { fixConstructorNaming, Instantiable } from "@/di/utils";
 import { Constructor } from "inversify-props/dist/lib/inversify.types";
 import { Container, interfaces } from "inversify";
 import { Store } from "vuex";
@@ -43,18 +44,28 @@ export interface DiContainer {
 export class DefaultDiContainer implements DiContainer {
 	constructor(
 		readonly container: Container,
+		private readonly module: KatanModule,
 		private readonly _bind: interfaces.Bind,
 		private readonly _rebind: interfaces.Rebind,
 		private readonly store: Store<any>
 	) {}
 
 	get<T>(constructor: Constructor<T>): T {
-		return this.container.get(
-			getOrSetIdFromCache(generateIdNameOfDependency(constructor))
-		);
+		const name = generateIdNameOfDependency(constructor);
+		const identifier = getOrSetIdFromCache(name);
+		if (!this.container.isBound(identifier)) {
+			const error = new Error(
+				`Could not find instance for dependency "${name}" in "${this.module.moduleName}" module context, it must be exported as a service of the module or its imports`
+			);
+			this.module.logger.error(error);
+			throw error;
+		}
+
+		return this.container.get(identifier);
 	}
 
 	bind<T>(constructor: Constructor<T>): interfaces.BindingWhenOnSyntax<T> {
+		this.module.logger.debug(`[service] injected "${constructor.name}"`);
 		return this._bind<T>(generateIdAndAddToCache(constructor))
 			.to(constructor)
 			.inSingletonScope();
@@ -69,15 +80,16 @@ export class DefaultDiContainer implements DiContainer {
 	}
 
 	bindAll(constructors: Constructor[]): void {
-		for (const constructor of constructors) {
-			this.bind(constructor);
-		}
+		for (const constructor of constructors) this.bind(constructor);
 	}
 
 	bindStoreLazy<T extends VuexModule>(
 		constructor: Constructor<T>,
 		root?: Constructor<T>
 	): interfaces.BindingWhenOnSyntax<T> {
+		this.module.logger.debug(
+			`[store] injected "${constructor._vmdModuleName}"`
+		);
 		const id = generateIdAndAddToCache(constructor);
 
 		return this._bind<T>(id)
