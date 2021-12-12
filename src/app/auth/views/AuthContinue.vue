@@ -43,7 +43,7 @@
 							<small class="info">
 								{{
 									$t("views.login.continue.last-login", {
-										time: i18nService.formatDate(
+										time: $i18n.i18n.formatDate(
 											user.lastLogin,
 											"PPPP"
 										)
@@ -72,7 +72,6 @@ import VIcon from "@/app/shared/components/ui/icon/VIcon.vue";
 import { UserModel } from "@/app/user/models/user.model";
 import { USER_INJECTION_KEY } from "@/app/user/user.module";
 import { inject } from "inversify-props";
-import { I18nService } from "@/app/shared/services/i18n.service";
 import AuthLayout from "@/app/auth/layouts/AuthLayout.vue";
 
 @Component({
@@ -81,9 +80,6 @@ import AuthLayout from "@/app/auth/layouts/AuthLayout.vue";
 export default class AuthContinue extends Vue {
 	@inject(USER_INJECTION_KEY)
 	private readonly user!: UserModel;
-
-	@inject()
-	private readonly i18nService!: I18nService;
 
 	continueAs() {
 		this.$router.push({ name: "home" });

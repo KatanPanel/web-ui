@@ -5,12 +5,14 @@ import { ContainerModule } from "inversify";
 import { NavigationGuardNext, RedirectOption, Route } from "vue-router";
 import { DirectiveFunction, DirectiveOptions } from "vue/types/options";
 import { Dictionary, RoutePropsFunction } from "vue-router/types/router";
+import KatanRouter from "@/app/app.router";
 
 export const ModuleMetadataKey = "katan:module";
 export const ModuleNameProp = "moduleName";
 export const ModuleContainerModuleProp = "containerModule";
 export const ModuleContainerProp = "container";
 export const ModuleLoggerProp = "logger";
+export const ModuleRouterProp = "router";
 
 export type ModuleState =
 	| ModuleStore
@@ -37,6 +39,7 @@ export abstract class KatanModule {
 	public readonly [ModuleContainerModuleProp]!: ContainerModule;
 	public readonly [ModuleContainerProp]!: DiContainer;
 	public readonly [ModuleLoggerProp]!: Consola;
+	public readonly [ModuleRouterProp]!: KatanRouter;
 
 	init(): void {
 		return;
@@ -56,7 +59,8 @@ export type ModuleRouteConfig = {
 		| {
 				[name: string]: string;
 		  }
-		| string;
+		| string
+		| Constructor;
 	redirect?: RedirectOption;
 	children?: ModuleRouteConfig[];
 	props?:

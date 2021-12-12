@@ -28,11 +28,19 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import AuthLayout from "@/app/auth/layouts/AuthLayout.vue";
+import { AuthPresenter } from "../auth.presenter";
+import { lazyInject } from "@/di";
 
-@Component({
+@Component<AuthMain>({
 	components: {
 		AuthLayout
+	},
+	mounted(): void {
+		console.log("value:", this.authPresenter);
 	}
 })
-export default class AuthMain extends Vue {}
+export default class AuthMain extends Vue {
+	@lazyInject()
+	readonly authPresenter!: AuthPresenter;
+}
 </script>

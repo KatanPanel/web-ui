@@ -60,7 +60,7 @@ export function defineProp(target: any, key: PropertyKey, value: any) {
  */
 export function moduleRouteConfigToVueRouteConfig(
 	route: ModuleRouteConfig,
-	module: KatanModule
+	module: KatanModule | undefined
 ): RouteConfig {
 	const value: RouteConfig = {
 		path: route.path
@@ -72,18 +72,25 @@ export function moduleRouteConfigToVueRouteConfig(
 	if (route.props) value.props = route.props;
 
 	if (route.component) {
+		const targetRootName = isUndefined(module)
+			? undefined
+			: module instanceof AppModule
+			? undefined
+			: module.moduleName;
 		if (typeof route.component === "string") {
 			(value as RouteConfigSingleView).component = lazyView(
 				route.component,
-				module instanceof AppModule ? undefined : module.moduleName
+				targetRootName
+			);
+		} else if (!isUndefined(route.component.name)) {
+			(value as RouteConfigSingleView).component = lazyView(
+				route.component.name,
+				targetRootName
 			);
 		} else {
 			const map: { [key: string]: any } = {};
 			for (const key of Object.keys(route.component)) {
-				map[key] = lazyView(
-					route.component[key],
-					module instanceof AppModule ? undefined : module.moduleName
-				);
+				map[key] = lazyView(route.component[key], targetRootName);
 			}
 
 			(value as RouteConfigMultipleViews).components = map;
@@ -91,7 +98,7 @@ export function moduleRouteConfigToVueRouteConfig(
 	}
 
 	const beforeEnter = route.beforeEnter;
-	if (beforeEnter) {
+	if (!isUndefined(module) && !isUndefined(module.container) && beforeEnter) {
 		value.beforeEnter = (
 			to: Route,
 			from: Route,

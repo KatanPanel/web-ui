@@ -1,16 +1,15 @@
+import { KatanModule } from "@/di";
 import VueRouter, { NavigationGuardNext, Route, RouteConfig } from "vue-router";
 import { lazyInject } from "@/di";
 import Vue from "vue";
-import { I18nService } from "@/app/shared/services/i18n.service";
+import { default as I18n } from "@/i18n";
 
 Vue.use(VueRouter);
 
 export default class KatanRouter {
 	public readonly routes: RouteConfig[] = [];
 
-	@lazyInject() private readonly i18nService!: I18nService;
-
-	constructor(private readonly router: VueRouter) {}
+	constructor(readonly router: VueRouter) {}
 
 	public setup(): void {
 		this.router.beforeEach(
@@ -18,6 +17,7 @@ export default class KatanRouter {
 				this.beforeEach(to, from, next);
 			}
 		);
+
 		this.router.addRoutes(this.routes);
 	}
 
@@ -26,8 +26,11 @@ export default class KatanRouter {
 		from: Route,
 		next: NavigationGuardNext
 	): void {
-		this.i18nService
-			.loadLanguage(navigator.language.toLowerCase(), navigator.languages)
+		console.log("LLLLLLLLLLLLLLL joining into", to);
+
+		const targetModuleName = to.matched[0].meta.module;
+		console.log("trying to load module", targetModuleName);
+		I18n.loadLanguage(navigator.language.toLowerCase(), navigator.languages)
 			.then(() => {
 				// const isServerRoute = false;
 				// to.matched.findIndex(

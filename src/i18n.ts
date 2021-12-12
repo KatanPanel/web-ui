@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import { Consola } from "consola";
+import { Consola, default as ConsolaInstance } from "consola";
 import VueI18n from "vue-i18n";
 import supportedLanguages from "@/supported-languages.json";
 import { isUndefined } from "@/app/shared/utils";
@@ -32,20 +32,16 @@ import { LoggingService } from "@/app/shared/services/logging.service";
 
 Vue.use(VueI18n);
 
-@injectable()
-export class I18nService {
-	private readonly logger: Consola;
+export class I18n {
+	private readonly logger: Consola = ConsolaInstance.create({}).withTag(
+		"I18n"
+	);
 	private readonly _cached: string[] = [];
 
-	constructor(
-		@inject() private readonly vue: Vue,
-		@inject() private readonly loggingService: LoggingService
-	) {
-		this.logger = this.loggingService.copy("I18n");
-	}
+	constructor(private readonly i18n: VueI18n) {}
 
 	public get getI18n(): VueI18n {
-		return this.vue.$i18n;
+		return this.i18n;
 	}
 
 	public get getSupportedLanguages(): Language[] {
@@ -84,7 +80,7 @@ export class I18nService {
 			tag !== this.getI18n.fallbackLocale &&
 			this.getI18n.locale === tag
 		) {
-			this.loggingService.error({
+			this.logger.error({
 				message: `Locale ${tag} already set.`
 			});
 			return;
@@ -105,7 +101,7 @@ export class I18nService {
 				this.setLanguage(language);
 			})
 			.catch(async (error: unknown) => {
-				this.loggingService.error({
+				this.logger.error({
 					message: `Unable to load language ${language}`,
 					args: [error]
 				});
@@ -137,7 +133,7 @@ export class I18nService {
 		);
 
 		if (!supported) {
-			this.loggingService.warn(`Unsupported language: ${language}`);
+			this.logger.warn(`Unsupported language: ${language}`);
 			return this.loadFallback(fallback);
 		}
 
@@ -152,3 +148,12 @@ export class I18nService {
 		else return await this.loadLanguage(fallback[0], fallback.slice(1));
 	}
 }
+
+const vmi18n = new VueI18n({
+	fallbackLocale: "en-US"
+});
+
+const i18n = new I18n(vmi18n);
+(vmi18n as any).i18n = i18n;
+
+export default i18n;

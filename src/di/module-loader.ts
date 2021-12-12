@@ -7,22 +7,55 @@ import { isUndefined } from "@/app/shared/utils";
 import KatanRouter from "@/app/app.router";
 import { Store } from "vuex";
 import AppModule from "@/app/app.module";
-import { createContainerModule } from "./container-factory";
+import { configureRouter, createContainerModule } from "./container-factory";
 import { LogLevel, default as ConsolaInstance } from "consola";
 import { Container } from "inversify";
 
+const PreLoadedModules: { [name: string]: KatanModule } = {};
 const LoadedModules: { [name: string]: KatanModule } = {};
+let Router: KatanRouter | undefined = undefined;
 
 export function isModuleLoaded(moduleName: string): boolean {
 	return !isUndefined(LoadedModules[moduleName]);
+}
+
+export function preloadModule(module: Constructor, router: KatanRouter): void {
+	if (!Reflect.hasMetadata(ModuleMetadataKey, module))
+		throw new Error(
+			`${module.name} is not a module (metadata key not found)`
+		);
+
+	const moduleName = fixConstructorNaming(module);
+	const options: ModuleOptions =
+		Reflect.getMetadata(ModuleMetadataKey, module) || {};
+
+	const moduleInstance: KatanModule = new module();
+	defineProp(moduleInstance, ModuleNameProp, moduleName);
+	defineProp(
+		moduleInstance,
+		ModuleLoggerProp,
+		ConsolaInstance.create({
+			level:
+				process.env.NODE_ENV !== "production"
+					? LogLevel.Debug
+					: LogLevel.Info
+		}).withTag(moduleName)
+	);
+	configureRouter(router, options.router, moduleInstance);
+	PreLoadedModules[moduleName] = moduleInstance;
 }
 
 export function loadModule(
 	root: Container,
 	module: Constructor,
 	store: Store<any>,
-	router: KatanRouter
+	router: KatanRouter | undefined
 ): KatanModule {
+	if (isUndefined(Router) && isUndefined(router))
+		throw new Error("Both global and parameter router is undefined");
+	else if (!isUndefined(router)) Router = router;
+	else router = Router!;
+
 	if (!Reflect.hasMetadata(ModuleMetadataKey, module))
 		throw new Error(
 			`${module.name} is not a module (metadata key not found)`
@@ -40,18 +73,26 @@ export function loadModule(
 	let scopedContainer =
 		module.name === AppModule.name ? root : root.createChild();
 
-	const moduleInstance: KatanModule = new module();
-	defineProp(moduleInstance, ModuleNameProp, moduleName);
-	defineProp(
-		moduleInstance,
-		ModuleLoggerProp,
-		ConsolaInstance.create({
-			level:
-				process.env.NODE_ENV !== "production"
-					? LogLevel.Debug
-					: LogLevel.Info
-		}).withTag(moduleName)
-	);
+	const startTime = performance.now();
+	const preLoaded = !isUndefined(PreLoadedModules[moduleName]);
+	let moduleInstance: KatanModule;
+	if (!preLoaded) {
+		moduleInstance = new module();
+		defineProp(moduleInstance, ModuleNameProp, moduleName);
+		defineProp(
+			moduleInstance,
+			ModuleLoggerProp,
+			ConsolaInstance.create({
+				level:
+					process.env.NODE_ENV !== "production"
+						? LogLevel.Debug
+						: LogLevel.Info
+			}).withTag(moduleName)
+		);
+	} else {
+		moduleInstance = PreLoadedModules[moduleName];
+		delete PreLoadedModules[moduleName];
+	}
 
 	// add imports to context
 	const imports = options.imports;
@@ -81,7 +122,8 @@ export function loadModule(
 		store,
 		router,
 		options,
-		moduleInstance
+		moduleInstance,
+		preLoaded
 	);
 	defineProp(moduleInstance, ModuleContainerModuleProp, containerModule);
 
@@ -96,6 +138,12 @@ export function loadModule(
 
 	// add the newly loaded module to list of loaded modules
 	LoadedModules[moduleName] = moduleInstance;
+
+	const endTime = performance.now();
+	moduleInstance.logger.debug(
+		"loaded took",
+		Math.round((endTime - startTime + Number.EPSILON) * 100) / 100 + "ms"
+	);
 	return moduleInstance;
 }
 
@@ -129,7 +177,7 @@ export function loadAllModules(
 
 	// then load other modules
 	for (const module of modules) {
-		loadModule(container, module, store, router);
+		preloadModule(module, router);
 	}
 
 	root.afterInit();

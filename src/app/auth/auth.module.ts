@@ -22,13 +22,13 @@
 
 import { Module } from "@/di";
 import { AuthenticatedOnlyGuard } from "@/app/auth/guards/authenticated-only.guard";
-import { AuthRouter } from "@/app/auth/router/auth.router";
+import { AuthRouter } from "@/app/auth/auth.router";
 import { AuthStore } from "@/app/auth/store/auth.store";
 import { AuthPresenter } from "@/app/auth/auth.presenter";
 import { AuthService } from "@/app/auth/services/auth.service";
 
 @Module({
-	services: [AuthPresenter, AuthService, AuthenticatedOnlyGuard],
+	services: [AuthService, AuthenticatedOnlyGuard],
 	stateManagement: AuthStore,
 	router: AuthRouter
 })

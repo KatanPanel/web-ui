@@ -16,6 +16,7 @@ import {
 	DefaultDiContainer,
 	ModuleOptions
 } from ".";
+import { RouteConfig } from "vue-router";
 
 /**
  * @private
@@ -44,10 +45,21 @@ function hookStateManagement(
 	}
 }
 
+function applyRouteMetaModule(route: RouteConfig, module: Constructor): void {
+	if (isUndefined(route.meta)) route.meta = {};
+	route.meta.module = module;
+
+	if (!isUndefined(route.children)) {
+		for (const children of route.children) {
+			applyRouteMetaModule(children, module);
+		}
+	}
+}
+
 /**
  * @private
  */
-function configureRouter(
+export function configureRouter(
 	router: KatanRouter,
 	routing: ModuleRouting | undefined,
 	module: KatanModule
@@ -55,10 +67,26 @@ function configureRouter(
 	if (isUndefined(routing)) return;
 
 	const root = router.routes.find((config) => config.path === "/");
+	const current = router.router.currentRoute;
+
 	const resolveRoute: (route: ModuleRouteConfig) => void = (route) => {
 		const resolved = moduleRouteConfigToVueRouteConfig(route, module);
-		if (route.root || isUndefined(root)) router.routes.push(resolved);
-		else root.children?.push(resolved);
+		applyRouteMetaModule(resolved, module.constructor);
+
+		if (
+			(!isUndefined(route.root) &&
+				typeof route.root === "boolean" &&
+				route.root) ||
+			isUndefined(root)
+		) {
+			router.routes.push(resolved);
+			if (module.logger)
+				module.logger.debug(`route "${resolved.path}" registered`);
+		} else {
+			root.children?.push(resolved);
+			if (module.logger)
+				module.logger.debug(`route "${resolved.path}" added to root`);
+		}
 	};
 
 	if (Array.isArray(routing)) {
@@ -85,7 +113,8 @@ export function createContainerModule(
 	store: Store<any>,
 	router: KatanRouter,
 	options: ModuleOptions,
-	module: KatanModule
+	module: KatanModule,
+	preLoaded: boolean
 ): ContainerModule {
 	return new ContainerModule(
 		(
@@ -107,7 +136,7 @@ export function createContainerModule(
 			if (!isUndefined(services)) container.bindAll(services);
 
 			hookStateManagement(container, options.stateManagement);
-			configureRouter(router, options.router, module);
+			if (!preLoaded) configureRouter(router, options.router, module);
 
 			defineProp(module, ModuleContainerProp, container);
 			if (!isUndefined(module.init)) module.init();

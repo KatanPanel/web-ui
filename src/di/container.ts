@@ -1,6 +1,6 @@
 import { KatanModule } from ".";
 import { fixConstructorNaming, Instantiable } from "@/di/utils";
-import { Constructor } from "inversify-props/dist/lib/inversify.types";
+import { Constructor, Id } from "inversify-props/dist/lib/inversify.types";
 import { Container, interfaces } from "inversify";
 import { Store } from "vuex";
 import { getModule, VuexModule } from "vuex-module-decorators";
@@ -15,6 +15,8 @@ export interface DiContainer {
 	readonly container: Container;
 
 	get<T>(constructor: Constructor<T>): T;
+
+	getById<T>(identifier: Id): T;
 
 	bind<T>(constructor: Constructor<T>): interfaces.BindingWhenOnSyntax<T>;
 
@@ -51,14 +53,18 @@ export class DefaultDiContainer implements DiContainer {
 	) {}
 
 	get<T>(constructor: Constructor<T>): T {
-		const name = generateIdNameOfDependency(constructor);
-		const identifier = getOrSetIdFromCache(name);
+		return this.getById(
+			getOrSetIdFromCache(generateIdNameOfDependency(constructor))
+		);
+	}
+
+	getById<T>(identifier: Id): T {
 		if (!this.container.isBound(identifier)) {
-			const error = new Error(
-				`Could not find instance for dependency "${name}" in "${this.module.moduleName}" module context, it must be exported as a service of the module or its imports`
+			throw new Error(
+				`Could not find instance for "${identifier.toString()}" in "${
+					this.module.moduleName
+				}" module context, it must be exported as a service of the module or its imports`
 			);
-			this.module.logger.error(error);
-			throw error;
 		}
 
 		return this.container.get(identifier);

@@ -22,7 +22,7 @@ import Loading from "@/app/shared/components/Loading.vue";
 		this.$root.$on("loading", () => (vm.loading = true));
 		this.$root.$on("loaded", () => (vm.loading = false));
 	},
-	mounted(): void {
+	beforeMount() {
 		this.$root.$emit("init");
 	}
 })

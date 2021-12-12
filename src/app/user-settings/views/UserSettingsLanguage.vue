@@ -60,7 +60,6 @@ import { generateMetaInfo } from "@/app/shared/utils/builtin";
 import VFieldList from "@/app/shared/components/ui/field/VFieldList.vue";
 import { inject } from "inversify-props";
 import { UserSettingsPresenter } from "@/app/user-settings/user-settings.presenter";
-import { I18nService } from "@/app/shared/services/i18n.service";
 
 @Component({
 	components: { VField, VFieldList },
@@ -70,10 +69,9 @@ import { I18nService } from "@/app/shared/services/i18n.service";
 })
 export default class UserSettingsLanguage extends Vue {
 	@inject() private readonly userSettingsPresenter!: UserSettingsPresenter;
-	@inject() private readonly i18nService!: I18nService;
 
 	updateLanguage(language: Language) {
-		this.i18nService.loadLanguage(language.tag).then(() => {
+		this.$i18n.i18n.loadLanguage(language.tag).then(() => {
 			this.userSettingsPresenter.updateSettings({ language });
 		});
 	}

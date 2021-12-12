@@ -11,7 +11,6 @@ import { RouterHrefDirective } from "@/app/shared/directives/router-href.directi
 import { ClickOutsideDirective } from "@/app/shared/directives/click-outside.directive";
 import { LoggingService } from "@/app/shared/services/logging.service";
 import { ConfigService } from "@/app/shared/services/config.service";
-import { I18nService } from "@/app/shared/services/i18n.service";
 import { LocalStorageService } from "@/app/shared/services/local-storage.service";
 import { AppRouter } from "@/app/shared/app.router";
 import { AppStore } from "@/app/shared/store/app.store";
@@ -39,7 +38,7 @@ export const AppThemes: readonly AppTheme[] = [
 @Module({
 	router: AppRouter,
 	stateManagement: AppStore,
-	services: [LoggingService, ConfigService, LocalStorageService, I18nService],
+	services: [LoggingService, ConfigService, LocalStorageService],
 	directives: {
 		"router-href": RouterHrefDirective,
 		"click-outside": ClickOutsideDirective
