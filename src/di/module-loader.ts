@@ -36,7 +36,9 @@ export function loadModule(
 	const options: ModuleOptions =
 		Reflect.getMetadata(ModuleMetadataKey, module) || {};
 
-	let scopedContainer = root.createChild();
+	// if it is the root module it must inject the dependencies into the root container so that they are available globally
+	let scopedContainer =
+		module.name === AppModule.name ? root : root.createChild();
 
 	const moduleInstance: KatanModule = new module();
 	defineProp(moduleInstance, ModuleNameProp, moduleName);
