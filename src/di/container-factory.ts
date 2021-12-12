@@ -1,5 +1,5 @@
 import { isUndefined } from "@/app/shared/utils";
-import KatanRouter from "@/router";
+import KatanRouter from "@/app/app.router";
 import { Container, interfaces, ContainerModule } from "inversify";
 import { Store } from "vuex";
 import { VuexModule } from "vuex-module-decorators";

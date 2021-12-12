@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-import store from "@/store";
+import store from "@/app/app.store";
 import { joinBySlash } from "@/app/shared/utils/text";
 import { isFunction } from "@/app/shared/utils";
 

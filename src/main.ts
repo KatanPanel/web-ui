@@ -1,12 +1,12 @@
 import "reflect-metadata";
 import "@/register-service-worker";
-import store from "@/store";
+import store from "@/app/app.store";
 import Vue from "vue";
 import App from "@/app/App.vue";
 import VueRouter from "vue-router";
 import VueI18n from "vue-i18n";
 import { generateIdAndAddToCache, setContainer } from "inversify-props";
-import KatanRouter from "./router";
+import KatanRouter from "./app/app.router";
 import { createContainer } from "./di/container-factory";
 import { loadAllModules } from "./di/module-loader";
 

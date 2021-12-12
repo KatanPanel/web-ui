@@ -10,7 +10,7 @@ import {
 import { ModuleMetadataKey, ModuleNameProp, ModuleOptions } from "@/di/module";
 import { isUndefined } from "@/app/shared/utils";
 import { DiContainer } from "@/di";
-import KatanRouter from "@/router";
+import KatanRouter from "@/app/app.router";
 import { Store } from "vuex";
 import AppModule from "@/app/app.module";
 import { createContainerModule } from "./container-factory";
