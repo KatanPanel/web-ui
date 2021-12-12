@@ -69,7 +69,7 @@ import VTab from "@/app/shared/components/ui/tab/VTab.vue";
 import VTabs from "@/app/shared/components/ui/tab/VTabs.vue";
 import VDropdown from "@/app/shared/components/ui/dropdown/VDropdown.vue";
 import VDropdownItem from "@/app/shared/components/ui/dropdown/VDropdownItem.vue";
-import { lazyInject } from "@/ioc";
+import { lazyInject } from "@/di";
 import { UserModel } from "@/app/user/models/user.model";
 
 @Component({

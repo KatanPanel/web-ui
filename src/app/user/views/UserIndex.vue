@@ -59,7 +59,7 @@ import VRow from "@/app/shared/components/ui/layout/VRow.vue";
 import { generateMetaInfo } from "@/app/shared/utils/builtin";
 import VFormInput from "@/app/shared/components/ui/form/VFormInput.vue";
 import VFormLabel from "@/app/shared/components/ui/form/VFormLabel.vue";
-import { lazyInject } from "@/ioc";
+import { lazyInject } from "@/di";
 import { UserSettingsModel } from "@/app/user-settings/models/user-settings.model";
 import { UserModel } from "@/app/user/models/user.model";
 import VContainer from "@/app/shared/components/ui/layout/VContainer.vue";

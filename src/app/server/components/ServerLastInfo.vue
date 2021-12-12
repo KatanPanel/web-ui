@@ -93,7 +93,7 @@ import Copyable from "@/app/shared/components/Copyable.vue";
 import VDropdown from "@/app/shared/components/ui/dropdown/VDropdown.vue";
 import VDropdownItem from "@/app/shared/components/ui/dropdown/VDropdownItem.vue";
 import { copyValue } from "@/app/shared/utils/dom";
-import { lazyInject } from "@/ioc";
+import { lazyInject } from "@/di";
 import { ServerModel } from "@/app/server/models/server.model";
 import { UserSettingsModel } from "@/app/user-settings/models/user-settings.model";
 

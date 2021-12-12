@@ -28,7 +28,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import { MetaInfo } from "vue-meta";
 import { generateMetaInfo } from "@/app/shared/utils/builtin";
-import { lazyInject } from "@/ioc";
+import { lazyInject } from "@/di";
 import { UserModel } from "@/app/user/models/user.model";
 
 @Component({
