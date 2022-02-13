@@ -26,3 +26,4 @@ jobs:
                 with:
                     eslint: false
                     prettier: true
+                    auto_fix: true
