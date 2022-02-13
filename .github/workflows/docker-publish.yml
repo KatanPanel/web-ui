@@ -3,17 +3,16 @@ name: Docker
 on:
     workflow_dispatch:
         push:
-            branches: [ master ]
+            branches: [ main ]
             tags: [ 'v*.*.*' ]
     pull_request:
-        branches: [ master ]
+        branches: [ main ]
 
 env:
     # Use docker.io for Docker Hub if empty
     REGISTRY: ghcr.io
     # github.repository as <account>/<repo>
     IMAGE_NAME: ${{ github.repository }}
-
 
 jobs:
     build:
