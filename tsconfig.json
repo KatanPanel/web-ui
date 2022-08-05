@@ -4,24 +4,25 @@
 		"module": "esnext",
 		"strict": true,
 		"jsx": "preserve",
-		"importHelpers": true,
 		"moduleResolution": "node",
+		"importHelpers": true,
 		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+		"emitDecoratorMetadata": true,
+		"useDefineForClassFields": false,
 		"sourceMap": true,
+		"noImplicitAny": false,
+		"resolveJsonModule": true,
 		"baseUrl": ".",
 		"types": [
-			"reflect-metadata",
 			"webpack-env",
+			"@wdio/mocha-framework",
+			"expect-webdriverio",
+			"webdriverio/sync",
 			"jest"
-		],
-		"typeRoots": [
-			"node_modules/@types",
-			"src/types"
 		],
 		"paths": {
 			"@/*": [
@@ -32,8 +33,7 @@
 			"esnext",
 			"dom",
 			"dom.iterable",
-			"scripthost",
-			"es6"
+			"scripthost"
 		]
 	},
 	"include": [
@@ -44,7 +44,6 @@
 		"tests/**/*.tsx"
 	],
 	"exclude": [
-		"node_modules",
-		"vue.config.js"
+		"node_modules"
 	]
 }

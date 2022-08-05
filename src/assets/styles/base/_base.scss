@@ -1,83 +1,18 @@
-/*!
- * Copyright (c) 2020-present Katan
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
-
 :root {
-	--kt-success-color: #2ecc71;
-	--kt-success-darker-color: #27ae60;
-	--kt-danger-color: #fc5c65;
-	--kt-danger-darker-color: #eb3b5a;
-	--kt-danger-text-color: #ffffff;
-	--kt-danger-rgba-color: rgba(252, 92, 101, 0.12);
-	--kt-warning-color: #fed330;
-	--kt-warning-color-rgb: 254 211 48;
-	--kt-warning-darker-color: #f7b731;
-	--kt-primary-color: #4b7bec;
-	--kt-primary-darker-color: #3c70ea;
-	--kt-primary-text-color: #ffffff;
-	--kt-primary-rgba-color: rgba(75, 123, 236, 0.12);
-	--kt-button-outline-primary-bg: rgba(75, 123, 236, 0.05);
-	--kt-sidebar-background: var(--kt-primary-color);
-	--kt-sidebar-link-hover: rgba(255, 255, 255, 0.12);
-	--kt-sidebar-link-active-color: var(--kt-primary-color);
-	--kt-sidebar-link-active-background: #fff;
-	--kt-header-search-background: rgba(75, 123, 236, 0.06);
-	--kt-header-search-icon-color: #4b7bec;
-}
-
-:root,
-[data-theme="light"] {
-	--kt-text-color: #4f5660;
-	--kt-background: #fff;
-	--kt-background-secondary: #fafafa;
-	--kt-background-tertiary: #f6f6f6;
-	--kt-background-accent: #f1f1f1;
-	--kt-border-color: #eee;
-	--kt-border-accent: #ddd;
-	--kt-muted-color: #a9a9a9;
-	--kt-muted-darker-color: #ccc;
-	--kt-shadow: rgba(0, 0, 0, 0.12);
-	--kt-opacity: rgba(0, 0, 0, 0.54);
-	--kt-scrollbar: #fafafa;
-	--kt-scrollbar-thumb: #e5e5e5;
-	--kt-icon-opacity-unfocused: 0.54;
-	--kt-icon-opacity-focused: 0.87;
-	--kt-icon-opacity-inactive: 0.38;
-}
-
-[data-theme="dark"] {
-	--kt-text-color: #ffffff;
-	--kt-background: #232931;
-	--kt-background-secondary: #29303a;
-	--kt-background-tertiary: #252b33;
-	--kt-background-accent: #1e2329;
-	--kt-border-color: #333b47;
-	--kt-border-accent: #485465;
-	--kt-muted-color: #bbb;
-	--kt-muted-darker-color: #a9a9a9;
-	--kt-shadow: rgba(255, 255, 255, 0.06);
-	--kt-opacity: rgba(255, 255, 255, 0.54);
-	--kt-scrollbar: rgba(0, 0, 0, 0.01);
-	--kt-scrollbar-thumb: rgba(0, 0, 0, 0.15);
-	--kt-icon-opacity-unfocused: 0.7;
-	--kt-icon-opacity-focused: 1;
-	--kt-icon-opacity-inactive: 0.5;
+	--kt-headline-font: "Urbanist", sans-serif;
+	--kt-body-font: "Roboto", sans-serif;
+	--kt-background-surface: #ffffff;
+	--kt-background-surface-high: #f7f7fa;
+	--kt-content-primary: rgb(31, 81, 255); // Neon blue
+	--kt-content-primary-overlay: rgba(31 81 255, 0.54);
+	--kt-content-primary-hover: #2c64e9;
+	--kt-content-negative: #fc5c65;
+	--kt-content-negative-overlay: rgb(252, 92, 101, 0.10);
+	--kt-content-negative-hover: #ee0412;
+	--kt-content-neutral: #767f8d;
+	--kt-content-neutral-low: #a6aeba;
+	--kt-content-neutral-high: #303742;
+	--kt-content-neutral-overlay: RGB(118 127 141 / 10%);
+	--kt-border-medium: RGB(48 55 66 / 20%);
+	--kt-border-low: RGB(48 55 66 / 10%);
 }

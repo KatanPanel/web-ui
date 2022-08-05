@@ -3,7 +3,7 @@
 # Git info to Docker Hub automated builds
 # Reference: https://docs.docker.com/docker-cloud/builds/advanced/
 
-# Convert the location "/Dockerfile" to "Dockerfile"
+# Convert the location "/Dockerfile" to "./Dockerfile"
 FILE=$(echo -n "$BUILD_PATH" | tail -c +2)
 
 if [ -z "${DOCKER_TAG}" ]; then

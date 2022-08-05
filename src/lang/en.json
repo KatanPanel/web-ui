@@ -1,0 +1,8 @@
+{
+	"auth.login.title": "Log In",
+	"auth.login.subtitle": "Enter your credentials to access your account.",
+	"auth.login.username-label": "Username",
+	"auth.login.password-label": "Password",
+	"auth.login.submit-button": "Log In",
+	"error.3001": "Incorrect username or password."
+}

@@ -1,48 +1,20 @@
-import { default as I18n } from "@/i18n";
-import "reflect-metadata";
-import "@/register-service-worker";
-import store from "@/app/app.store";
-import Vue from "vue";
-import App from "@/app/App.vue";
-import VueRouter from "vue-router";
-import { generateIdAndAddToCache, setContainer } from "inversify-props";
-import KatanRouter from "./app/app.router";
-import { loadAllModules } from "./di/module-loader";
+import "@/assets/styles/main.scss";
+import { createApp } from "vue";
+import App from "@/presentation/views/App.vue";
+import "./registerServiceWorker";
+import appStore from "@/native/store/app.store";
+import appRouter from "@/native/routes/app.router";
+import { setupI18n } from "@/native/i18n";
+import en from "@/lang/en.json";
 
-const isProductionMode = process.env.NODE_ENV === "production";
-Vue.config.devtools = !isProductionMode;
-Vue.config.performance = !isProductionMode;
-Vue.config.productionTip = !isProductionMode;
-
-const baseContainer = setContainer({
-	autoBindInjectable: false,
-	skipBaseClassChecks: true,
-	defaultScope: "Singleton"
+export const i18n = setupI18n({
+	legacy: true,
+	allowComposition: true,
+	messages: {
+		en
+	}
 });
 
-const vmRouter = new VueRouter({
-	mode: "history",
-	base: process.env.BASE_URL,
-	routes: []
-});
+const app = createApp(App).use(appStore).use(appRouter).use(i18n);
 
-const vm = new Vue({
-	store,
-	router: vmRouter,
-	i18n: I18n.getI18n,
-	render: (h) => h(App)
-});
-
-// bind Vue global object
-baseContainer.bind(generateIdAndAddToCache(Vue)).toConstantValue(vm);
-
-// init will be called when the App is mounted
-vm.$once("init", () => {
-	const diRouter = new KatanRouter(vmRouter);
-	loadAllModules(baseContainer, store, diRouter, undefined);
-
-	diRouter.setup();
-	vm.$emit("loaded");
-});
-
-vm.$mount("#app");
+app.mount("#app");

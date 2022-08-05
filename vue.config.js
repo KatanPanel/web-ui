@@ -1,36 +1,33 @@
-const { ContextReplacementPlugin, IgnorePlugin } = require("webpack");
+const { defineConfig } = require("@vue/cli-service");
+const path = require("path");
+const VueI18nPlugin = require("@intlify/unplugin-vue-i18n/webpack");
 
 process.env.VUE_APP_VERSION = require("./package.json").version;
 
-module.exports = {
-	runtimeCompiler: true,
+module.exports = defineConfig({
+	transpileDependencies: true,
+	lintOnSave: false,
 	pwa: {
 		name: process.env.VUE_APP_NAME,
-		manifestCrossorigin: "anonymous"
+		manifestCrossorigin: "anonymous",
+	},
+	configureWebpack: {
+		plugins: [
+			VueI18nPlugin({
+				include: path.resolve(__dirname, "./src/lang/**"),
+			}),
+		],
 	},
 	chainWebpack: (config) => {
-		config.module
-			.rule("vue")
-			.use("vue-svg-inline-loader")
-			.loader("vue-svg-inline-loader");
+		const svgRule = config.module.rule("svg");
 
-		const supportedLanguages = require("./src/supported-languages.json");
-		config
-			.plugin("context-replacement")
-			.use(ContextReplacementPlugin, [
-				/date-fns[/\\]/,
-				new RegExp(
-					`[/\\\\](${supportedLanguages
-						.map((locale) => locale.tag)
-						.join("|")})[/\\\\]index.js$`
-				)
-			]);
+		svgRule.uses.clear();
 
-		config.plugin("ignore-plugin").use(IgnorePlugin, [/moment$/]);
-
-		// temporary workaround for
-		// "Uncaught TypeError: Cannot read properties of undefined (reading 'charAt')"
-		config.optimization.minimize(false);
+		svgRule
+			.use("vue-loader")
+			.loader("vue-loader")
+			.end()
+			.use("vue-svg-loader")
+			.loader("vue-svg-loader")
 	},
-	transpileDependencies: ["vuex-module-decorators"]
-};
+});
