@@ -1,7 +1,7 @@
 <template>
 	<div :class="[$style.root, `alert--variant-${variant}`]">
 		<div class="alert__icon">
-			<VIcon name="alert-circle-outline" />
+			<Component :is="getComponent" />
 		</div>
 		<div class="alert__title">
 			<slot>Title</slot>
@@ -14,13 +14,25 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import VIcon from "@/presentation/components/ui/icon/VIcon.vue";
+import AlertCircleOutlineIcon from "vue-material-design-icons/AlertCircleOutline.vue";
+import { isUndefined } from "@/utils";
 
 @Component({
-	components: { VIcon }
+	components: { AlertCircleOutlineIcon }
 })
-export default class VButton extends Vue {
+export default class VAlert extends Vue {
 	@Prop({ type: String }) readonly variant!: "default" | "error";
+
+	get getComponent() {
+		let path: string | undefined = undefined;
+		if (this.variant == "error") path = "AlertCircleOutline";
+
+		if (!isUndefined(path))
+			return require(/* webpackChunkName: "icon-[request]" */
+			"vue-material-design-icons/" + path + ".vue").default;
+
+		throw new Error(`No icon defined to variant: ${this.variant}`);
+	}
 }
 </script>
 <style lang="scss" module>
@@ -46,7 +58,7 @@ $base-padding: 1.2rem;
 	padding-top: 0;
 }
 
-.alert--variant-danger {
+.alert--variant-error {
 	background-color: var(--kt-content-negative-overlay);
 	box-shadow: inset 0 0 0 1.5px var(--kt-content-negative-overlay);
 

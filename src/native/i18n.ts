@@ -1,9 +1,11 @@
 import { nextTick } from "vue";
 import { createI18n, I18nOptions } from "vue-i18n";
 
-export const SUPPORT_LOCALES = ["en"];
+export const SUPPORT_LOCALES: string[] = ["en-US"];
 
-export function setupI18n(options: I18nOptions = { locale: "en" }) {
+export function setupI18n(
+	options: I18nOptions = { locale: SUPPORT_LOCALES[0] }
+) {
 	const i18n = createI18n(options);
 	setI18nLanguage(i18n, options.locale);
 	return i18n;
@@ -16,9 +18,8 @@ export function setI18nLanguage(i18n, locale) {
 		i18n.global.locale.value = locale;
 	}
 	/**
-	 * NOTE:
-	 * If you need to specify the language setting for headers, such as the `fetch` API, set it here.
-	 * The following is an example for axios.
+	 * NOTE: If you need to specify the language setting for headers, such as
+	 * the `fetch` API, set it here. The following is an example for axios.
 	 *
 	 * axios.defaults.headers.common['Accept-Language'] = locale
 	 */

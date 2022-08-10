@@ -1,8 +1,8 @@
 version: "3"
 services:
     katan-ui:
-        image: katanio/ui:latest
-        container_name: katan-ui
+        image: katanio/design-system:latest
+        container_name: katan-design-system
         ports:
             - "80:80"
         environment:

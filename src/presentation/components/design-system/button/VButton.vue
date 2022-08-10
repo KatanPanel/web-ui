@@ -24,7 +24,13 @@ import { Component, Prop, Vue } from "vue-facing-decorator";
 export default class VButton extends Vue {
 	@Prop({ type: Boolean }) readonly disabled!: boolean;
 	@Prop({ type: Boolean }) readonly flat!: boolean;
-	@Prop({ type: String }) readonly variant!: "default" | "primary";
+	@Prop({
+		type: String,
+		validator(value: string): boolean {
+			return value == "primary";
+		}
+	})
+	readonly variant!: "primary";
 	@Prop({ type: Boolean }) readonly block!: boolean;
 }
 </script>
