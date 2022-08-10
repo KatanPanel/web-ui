@@ -10,6 +10,6 @@ export default class TheSidebar extends Vue {}
 </script>
 <style lang="scss" module>
 .root {
-	background-color: var(--kt-background-surface-high);
+	background-color: var(--kt-background-surface);
 }
 </style>

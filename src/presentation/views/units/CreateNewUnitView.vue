@@ -1,7 +1,7 @@
 <template>
 	<HomeLayout>
 		<div :class="$style.root">
-			<VHeadline4 :class="$style.title"> Create new unit </VHeadline4>
+			<h4 :class="$style.title">Create new unit</h4>
 			<VForm>
 				<VFieldSet>
 					<VLabel>name</VLabel>
@@ -17,7 +17,6 @@
 </template>
 <script>
 import { Component, Vue } from "vue-facing-decorator";
-import VHeadline4 from "@/presentation/components/ui/typography/VHeadline4";
 import VForm from "@/presentation/components/ui/form/VForm";
 import VFieldSet from "@/presentation/components/ui/form/VFieldSet";
 import VInput from "@/presentation/components/ui/form/VInput";
@@ -25,7 +24,7 @@ import VLabel from "@/presentation/components/ui/form/VLabel";
 import HomeLayout from "@/presentation/layouts/home/HomeLayout";
 
 @Component({
-	components: { HomeLayout, VLabel, VInput, VFieldSet, VForm, VHeadline4 }
+	components: { HomeLayout, VLabel, VInput, VFieldSet, VForm }
 })
 export default class CreateNewUnitView extends Vue {}
 </script>

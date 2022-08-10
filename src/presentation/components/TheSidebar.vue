@@ -1,7 +1,7 @@
 <template>
 	<aside :class="$style.root">
 		<div :class="$style.logo">
-			<TheLogo black="true" />
+			<TheLogo />
 		</div>
 	</aside>
 </template>
@@ -20,7 +20,7 @@ $size: 64px;
 $base-padding: 8px;
 
 .root {
-	background-color: var(--kt-background-surface);
+	background-color: var(--kt-background-surface-high);
 	padding: 8px;
 }
 

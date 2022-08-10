@@ -1,6 +1,6 @@
 <template>
 	<AuthLayout>
-		<VHeadline4>{{ $t("auth.login.title") }}</VHeadline4>
+		<h4>{{ $t("auth.login.title") }}</h4>
 		<VBody2 class="description">{{ $t("auth.login.subtitle") }}</VBody2>
 		<VAlert variant="danger" class="alert" v-if="errorCode">
 			<template v-slot:description>
@@ -47,7 +47,6 @@ import VButton from "@/presentation/components/ui/button/VButton.vue";
 import VFieldSet from "@/presentation/components/ui/form/VFieldSet.vue";
 import VForm from "@/presentation/components/ui/form/VForm.vue";
 import VBody2 from "@/presentation/components/ui/typography/VBody2.vue";
-import VHeadline4 from "@/presentation/components/ui/typography/VHeadline4.vue";
 import AuthLayout from "@/presentation/layouts/auth/AuthLayout.vue";
 import VLabel from "@/presentation/components/ui/form/VLabel.vue";
 import VInput from "@/presentation/components/ui/form/VInput.vue";
@@ -61,7 +60,6 @@ import logService from "@/data/services/log.service";
 		VInput,
 		VLabel,
 		AuthLayout,
-		VHeadline4,
 		VBody2,
 		VForm,
 		VFieldSet,

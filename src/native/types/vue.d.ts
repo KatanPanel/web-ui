@@ -1,11 +1,13 @@
-// noinspection ES6UnusedImports
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+// noinspection ES6UnusedImports
 import Vue from "vue";
-import ConfigService from "@/data/services/config.service";
+import { User } from "@/domain/models/user/user.model";
 
-declare module "vue/types/vue" {
-	interface Vue {
+declare module "@vue/runtime-core" {
+	interface ComponentCustomProperties {
 		$isDevelopmentMode: boolean;
-		$config: ConfigService;
+		$katan: {
+			getUser: () => User;
+		};
 	}
 }
