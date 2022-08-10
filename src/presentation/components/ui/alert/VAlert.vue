@@ -17,7 +17,7 @@ import { Component, Prop, Vue } from "vue-facing-decorator";
 import VIcon from "@/presentation/components/ui/icon/VIcon.vue";
 
 @Component({
-	components: { VIcon },
+	components: { VIcon }
 })
 export default class VButton extends Vue {
 	@Prop({ type: String }) readonly variant!: "default" | "error";

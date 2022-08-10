@@ -7,6 +7,6 @@ export const AuthRoutes: Array<RouteRecordRaw> = [
 	{
 		path: "/login",
 		name: AUTH_LOGIN_ROUTE,
-		component: importView("auth/AuthLoginView.vue"),
-	},
+		component: importView("auth/AuthLoginView.vue")
+	}
 ];

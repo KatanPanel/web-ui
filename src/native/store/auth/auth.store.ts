@@ -5,7 +5,7 @@ import appStore from "@/native/store/app.store";
 	name: "Auth",
 	namespaced: true,
 	dynamic: true,
-	store: appStore,
+	store: appStore
 })
 export default class AuthStore extends VuexModule {
 	private _token: string | null = null;

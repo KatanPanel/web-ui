@@ -9,6 +9,6 @@ export const HomeRoutes: Array<RouteRecordRaw> = [
 		path: "/",
 		name: HOME_ROUTE,
 		component: importView("home/HomeView.vue"),
-		beforeEnter: AuthenticatedOnlyGuard,
-	},
+		beforeEnter: AuthenticatedOnlyGuard
+	}
 ];

@@ -1,6 +1,6 @@
 import { User } from "@/domain/models/user/user.model";
 import authService, {
-	AUTHORIZATION_TOKEN_KEY,
+	AUTHORIZATION_TOKEN_KEY
 } from "@/data/services/auth.service";
 import { getModule } from "vuex-module-decorators";
 import UserStore from "@/native/store/user/user.store";

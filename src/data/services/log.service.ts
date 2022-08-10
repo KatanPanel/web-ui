@@ -2,7 +2,7 @@ import {
 	Consola,
 	ConsolaLogObject,
 	default as ConsolaInstance,
-	LogLevel,
+	LogLevel
 } from "consola";
 
 class LogService {
@@ -13,7 +13,7 @@ class LogService {
 			level:
 				process.env.NODE_ENV !== "production"
 					? LogLevel.Debug
-					: LogLevel.Info,
+					: LogLevel.Info
 		});
 	}
 

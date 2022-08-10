@@ -1,7 +1,7 @@
 import {
 	NavigationGuard,
 	NavigationGuardNext,
-	RouteLocationNormalized,
+	RouteLocationNormalized
 } from "vue-router";
 import authPresenter from "@/data/presenters/auth.presenter";
 import { AUTH_LOGIN_ROUTE } from "@/native/routes/auth/auth.routes";

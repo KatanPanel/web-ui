@@ -5,8 +5,8 @@
 			`variant-${variant}`,
 			{
 				[$style.flat]: variant,
-				[$style.block]: block,
-			},
+				[$style.block]: block
+			}
 		]"
 		:disabled="disabled"
 		:tabindex="disabled ? -1 : 0"

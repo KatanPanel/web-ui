@@ -4,7 +4,7 @@ import Axios, {
 	AxiosInstance,
 	AxiosPromise,
 	AxiosRequestConfig,
-	AxiosResponse,
+	AxiosResponse
 } from "axios";
 import configService from "@/data/services/config.service";
 import { isUndefined } from "@/utils";
@@ -19,8 +19,8 @@ class HttpService {
 			baseURL: configService.apiUrl,
 			timeout: 5000,
 			headers: {
-				"Content-Type": "application/json",
-			},
+				"Content-Type": "application/json"
+			}
 		});
 
 		this.axios.interceptors.response.use(

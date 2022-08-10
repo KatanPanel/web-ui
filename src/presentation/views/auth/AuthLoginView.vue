@@ -65,8 +65,8 @@ import logService from "@/data/services/log.service";
 		VBody2,
 		VForm,
 		VFieldSet,
-		VButton,
-	},
+		VButton
+	}
 })
 export default class AuthLoginView extends Vue {
 	username = "";

@@ -7,7 +7,7 @@ import { isNull } from "@/utils";
 	name: "user",
 	namespaced: true,
 	dynamic: true,
-	store: appStore,
+	store: appStore
 })
 export default class UserStore extends VuexModule {
 	private _user: User | null = null;

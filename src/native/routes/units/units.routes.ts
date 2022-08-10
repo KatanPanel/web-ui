@@ -12,8 +12,8 @@ export const UnitsRoutes: Array<RouteRecordRaw> = [
 			{
 				path: "new",
 				name: CREATE_NEW_UNIT_ROUTE,
-				component: importView("units/CreateNewUnitView.vue"),
-			},
-		],
-	},
+				component: importView("units/CreateNewUnitView.vue")
+			}
+		]
+	}
 ];

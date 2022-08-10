@@ -8,7 +8,7 @@ class AuthGateway {
 		return httpService
 			.post("auth/login", {
 				username,
-				password,
+				password
 			})
 			.then(
 				(res: AxiosResponse) =>
@@ -24,8 +24,8 @@ class AuthGateway {
 		return httpService
 			.get("auth", {
 				headers: {
-					Authorization: `Bearer ${token}`,
-				},
+					Authorization: `Bearer ${token}`
+				}
 			})
 			.then((res: AxiosResponse) => res.data.account as User);
 	}

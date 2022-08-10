@@ -13,8 +13,7 @@ import TheLogo from "@/presentation/components/TheLogo";
 @Component({
 	components: { TheLogo }
 })
-export default class TheSidebar extends Vue {
-}
+export default class TheSidebar extends Vue {}
 </script>
 <style lang="scss" module>
 $size: 64px;

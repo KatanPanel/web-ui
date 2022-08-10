@@ -5,7 +5,7 @@
 			readonly: disabled,
 			'aria-disabled': disabled,
 			'aria-readonly': disabled,
-			placeholder: placeholder,
+			placeholder: placeholder
 		}"
 		:class="$style.root"
 		:value="$props.modelValue"
@@ -17,7 +17,7 @@
 import { Component, Prop, Vue } from "vue-facing-decorator";
 
 @Component({
-	emits: ["update:modelValue"],
+	emits: ["update:modelValue"]
 })
 export default class VInput extends Vue {
 	@Prop({ type: Boolean }) readonly disabled!: boolean;
@@ -36,15 +36,7 @@ export default class VInput extends Vue {
 	font-size: 14px;
 	width: 100%;
 	border-radius: 8px;
-	box-shadow: inset 0 0 0 1.5px var(--kt-border-low);
-
-	&:not([disabled], [readonly], :focus):hover {
-		box-shadow: inset 0 0 0 1.5px var(--kt-border-medium);
-	}
-
-	&:not([readonly], [disabled]):focus {
-		box-shadow: inset 0 0 0 1.5px var(--kt-content-primary);
-	}
+	background-color: var(--kt-background-surface-high);
 
 	&[readonly] {
 		user-select: none;

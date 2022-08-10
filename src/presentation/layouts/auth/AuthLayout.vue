@@ -44,8 +44,8 @@ export default class AuthLayout extends Vue {}
 	position: relative;
 	left: 0;
 	height: 100%;
-	width: 35%;
-	max-width: 35%;
+	width: 30%;
+	max-width: 30%;
 	box-shadow: RGB(0 0 0 / 24%) 4px 0 8px 0;
 	padding: 4.8rem 7.2rem;
 

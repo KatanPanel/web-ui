@@ -16,8 +16,7 @@ import TheHeader from "@/presentation/components/TheHeader.vue";
 @Component({
 	components: { TheHeader, TheSidebar }
 })
-export default class HomeLayout extends Vue {
-}
+export default class HomeLayout extends Vue {}
 </script>
 <style lang="scss" module>
 .root {

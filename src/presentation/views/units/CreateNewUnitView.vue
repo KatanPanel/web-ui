@@ -1,9 +1,7 @@
 <template>
 	<HomeLayout>
 		<div :class="$style.root">
-			<VHeadline4 :class="$style.title">
-				Create new unit
-			</VHeadline4>
+			<VHeadline4 :class="$style.title"> Create new unit </VHeadline4>
 			<VForm>
 				<VFieldSet>
 					<VLabel>name</VLabel>
@@ -29,8 +27,7 @@ import HomeLayout from "@/presentation/layouts/home/HomeLayout";
 @Component({
 	components: { HomeLayout, VLabel, VInput, VFieldSet, VForm, VHeadline4 }
 })
-export default class CreateNewUnitView extends Vue {
-}
+export default class CreateNewUnitView extends Vue {}
 </script>
 <style lang="scss" module>
 .root {

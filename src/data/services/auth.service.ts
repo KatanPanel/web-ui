@@ -18,7 +18,7 @@ class AuthService {
 		return authGateway.login(username, password).then((accessToken) => {
 			httpService.defaults().headers.common.Authorization = `Bearer ${accessToken.token}`;
 			localStorageService.set(AUTHORIZATION_TOKEN_KEY, {
-				token: accessToken.token,
+				token: accessToken.token
 			} as AccessToken);
 			return accessToken;
 		});
