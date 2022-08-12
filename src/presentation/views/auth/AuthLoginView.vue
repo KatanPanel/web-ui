@@ -2,7 +2,8 @@
 	<AuthLayout>
 		<h4>{{ $t("auth.login.title") }}</h4>
 		<VBody2 class="description">{{ $t("auth.login.subtitle") }}</VBody2>
-		<VAlert v-if="!errorCode" variant="error" class="alert">
+		<VAlert v-if="errorCode" variant="error" class="alert">
+			{{ $t("auth.login.error-title") }}
 			<template v-slot:description>
 				{{ $t(`error.${errorCode}`) }}
 			</template>
@@ -76,6 +77,8 @@ export default class AuthLoginView extends Vue {
 		if (this.loading) return;
 
 		this.loading = true;
+		this.errorCode = null;
+
 		authPresenter
 			.login(this.username, this.password)
 			.then(() => {
@@ -98,11 +101,11 @@ export default class AuthLoginView extends Vue {
 }
 
 .description {
-	margin-bottom: 3.6rem;
+	margin-bottom: 1.8rem;
 	color: var(--kt-content-neutral-low);
 }
 
 .alert {
-	margin-bottom: 0.8rem;
+	margin-bottom: 2.4rem;
 }
 </style>
