@@ -1,4 +1,4 @@
-import { User } from "@/domain/models/user/user.model";
+import { Account } from "@/domain/models/account/account.model";
 
 /* eslint-disable */
 declare module "*.vue" {
@@ -13,7 +13,7 @@ declare module "@vue/runtime-core" {
 	interface ComponentCustomProperties {
 		$isDevelopmentMode: boolean;
 		$katan: {
-			getUser: () => User;
+			getUser: () => Account;
 		};
 	}
 }

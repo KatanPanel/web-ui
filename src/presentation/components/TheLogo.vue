@@ -9,7 +9,7 @@ export default class TheLogo extends Vue {
 	@Prop({ type: Boolean }) readonly black!: boolean;
 
 	get getLogoSrc(): string {
-		return `img/${this.black ? "logo-black" : "logo"}.svg`;
+		return `/img/${this.black ? "logo-black" : "logo"}.svg`;
 	}
 
 	get getLogoName(): string {

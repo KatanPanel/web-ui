@@ -1,5 +1,5 @@
 import { Module, Mutation, VuexModule } from "vuex-module-decorators";
-import { User } from "@/domain/models/user/user.model";
+import { Account } from "@/domain/models/account/account.model";
 import appStore from "@/native/store/app.store";
 import { isNull } from "@/utils";
 
@@ -10,13 +10,13 @@ import { isNull } from "@/utils";
 	store: appStore
 })
 export default class UserStore extends VuexModule {
-	private _user: User | null = null;
+	private _user: Account | null = null;
 
 	/**
-	 * Returns the user who is currently logged in.
+	 * Returns the account who is currently logged in.
 	 */
-	public get getUser(): User {
-		if (this._user == null) throw new Error("Cannot retrieve null user");
+	public get getUser(): Account {
+		if (this._user == null) throw new Error("Cannot retrieve null account");
 
 		return this._user;
 	}
@@ -26,7 +26,7 @@ export default class UserStore extends VuexModule {
 	}
 
 	@Mutation
-	public updateUser(payload: { user: User }): void {
+	public updateUser(payload: { user: Account }): void {
 		this._user = payload.user;
 	}
 }
