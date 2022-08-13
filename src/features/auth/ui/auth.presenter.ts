@@ -17,13 +17,18 @@ class AuthPresenter {
 		return authService.login(username, password);
 	}
 
-	async verify(): Promise<Account> {
+	async verify(): Promise<void> {
 		const accessToken = localStorageService.get<AccessToken | null>(
 			AUTHORIZATION_TOKEN_KEY
 		);
-		if (isNull(accessToken)) throw new Error("Access token not found");
+		if (isNull(accessToken))
+			throw new Error("Access token not found in local storage");
 
-		return authService.verify(accessToken.token);
+		return authService
+			.verify(accessToken.token)
+			.then((account: Account) => {
+				getModule(AccountStore).updateAccount({ account });
+			});
 	}
 }
 

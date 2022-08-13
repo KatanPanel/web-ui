@@ -5,7 +5,6 @@ import {
 } from "vue-router";
 import authPresenter from "@/features/auth/ui/auth.presenter";
 import { AUTH_LOGIN_ROUTE } from "@/features/auth/routing/auth.routes";
-import logService from "@/features/shared/data/log.service";
 
 export const AuthenticatedOnlyGuard: NavigationGuard = (
 	to: RouteLocationNormalized,
@@ -17,8 +16,5 @@ export const AuthenticatedOnlyGuard: NavigationGuard = (
 	authPresenter
 		.verify()
 		.then(() => next())
-		.catch((error: Error) => {
-			logService.error(error);
-			next({ name: AUTH_LOGIN_ROUTE });
-		});
+		.catch((error: Error) => next({ name: AUTH_LOGIN_ROUTE }));
 };

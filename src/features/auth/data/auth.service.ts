@@ -1,6 +1,4 @@
 import { Account } from "@/features/account/models/account.model";
-import { getModule } from "vuex-module-decorators";
-import AccountStore from "@/features/account/store/account.store";
 import authGateway from "@/features/auth/data/auth.gateway";
 import httpService from "@/features/shared/data/http.service";
 import localStorageService from "@/features/shared/data/local-storage.service";
@@ -20,11 +18,7 @@ class AuthService {
 	}
 
 	async verify(accessToken: string): Promise<Account> {
-		return authGateway.verify(accessToken).then((account: Account) => {
-			// TODO move to presenter
-			getModule(AccountStore).updateAccount({ account });
-			return account;
-		});
+		return authGateway.verify(accessToken);
 	}
 }
 
