@@ -1,4 +1,4 @@
-import { Account } from "@/domain/models/account/account.model";
+import { Account } from "@/features/account/models/account.model";
 
 /* eslint-disable */
 declare module "*.vue" {
@@ -17,4 +17,3 @@ declare module "@vue/runtime-core" {
 		};
 	}
 }
-

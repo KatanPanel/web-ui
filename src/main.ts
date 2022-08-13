@@ -1,12 +1,12 @@
 import "@/assets/styles/main.scss";
 import { createApp } from "vue";
-import App from "@/presentation/views/App.vue";
+import App from "@/features/shared/ui/views/App.vue";
 import "./registerServiceWorker";
-import appStore from "@/native/store/app.store";
-import appRouter from "@/native/routes/app.router";
+import appStore from "@/features/shared/ui/store/app.store";
+import appRouter from "@/router";
 import { setupI18n } from "@/i18n";
 import { getModule } from "vuex-module-decorators";
-import UserStore from "@/native/store/user/user.store";
+import AccountStore from "@/features/account/store/account.store";
 import { ComponentCustomProperties } from "@vue/runtime-core";
 import VueHead from "vue-head";
 
@@ -25,7 +25,7 @@ const app = createApp(App).use(appStore).use(appRouter).use(VueHead).use(i18n);
 Object.assign(app.config.globalProperties, {
 	$isDevelopmentMode: process.env.NODE_ENV !== "production",
 	$katan: {
-		getUser: () => getModule(UserStore).getUser
+		getUser: () => getModule(AccountStore).getAccount
 	}
 } as ComponentCustomProperties);
 

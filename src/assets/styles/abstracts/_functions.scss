@@ -35,7 +35,7 @@
 @function rgbaColor($color, $alpha: 1) {
 	@if ($color == "warning") {
 		@return rgba(254, 211, 48, $alpha);
-	} @else if($color == "danger") {
+	} @else if ($color == "danger") {
 		@return rgba(235, 59, 90, $alpha);
 	} @else if ($color == "primary") {
 		@return rgba(75, 123, 236, $alpha);
