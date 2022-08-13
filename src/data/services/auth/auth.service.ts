@@ -1,4 +1,4 @@
-import { User } from "@/domain/models/user/user.model";
+import { Account } from "@/domain/models/account/account.model";
 import { getModule } from "vuex-module-decorators";
 import UserStore from "@/native/store/user/user.store";
 import authGateway from "@/data/gateway/auth.gateway";
@@ -24,8 +24,8 @@ class AuthService {
 		});
 	}
 
-	async verify(accessToken: string): Promise<User> {
-		return authGateway.verify(accessToken).then((user: User) => {
+	async verify(accessToken: string): Promise<Account> {
+		return authGateway.verify(accessToken).then((user: Account) => {
 			getModule(UserStore).updateUser({ user });
 			return user;
 		});

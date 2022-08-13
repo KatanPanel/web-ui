@@ -1,6 +1,6 @@
 import httpService from "@/data/services/http.service";
 import { AxiosResponse } from "axios";
-import { User } from "@/domain/models/user/user.model";
+import { Account } from "@/domain/models/account/account.model";
 import { AccessToken } from "@/domain/models/auth/access-token.model";
 
 class AuthGateway {
@@ -20,14 +20,14 @@ class AuthGateway {
 			});
 	}
 
-	async verify(token: string): Promise<User> {
+	async verify(token: string): Promise<Account> {
 		return httpService
 			.get("auth", {
 				headers: {
 					Authorization: `Bearer ${token}`
 				}
 			})
-			.then((res: AxiosResponse) => res.data.account as User);
+			.then((res: AxiosResponse) => res.data.account as Account);
 	}
 }
 

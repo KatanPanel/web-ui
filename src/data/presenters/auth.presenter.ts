@@ -1,7 +1,7 @@
-import { User } from "@/domain/models/user/user.model";
+import { Account } from "@/domain/models/account/account.model";
 import authService, {
 	AUTHORIZATION_TOKEN_KEY
-} from "@/data/services/auth.service";
+} from "@/data/services/auth/auth.service";
 import { getModule } from "vuex-module-decorators";
 import UserStore from "@/native/store/user/user.store";
 import { AccessToken } from "@/domain/models/auth/access-token.model";
@@ -17,7 +17,7 @@ class AuthPresenter {
 		return authService.login(username, password);
 	}
 
-	async verify(): Promise<User> {
+	async verify(): Promise<Account> {
 		const accessToken = localStorageService.get<AccessToken | null>(
 			AUTHORIZATION_TOKEN_KEY
 		);
