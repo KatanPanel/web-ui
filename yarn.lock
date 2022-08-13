@@ -10653,6 +10653,11 @@ vue-facing-decorator@^2.1.0:
   resolved "https://registry.yarnpkg.com/vue-facing-decorator/-/vue-facing-decorator-2.1.3.tgz#a1ffe9ab291959420601eb8f8d630c0adc7b52e6"
   integrity sha512-WIqkhKRzERvEBSCkBu3iHqIIVTM0zHGSOa+yUBeL0/YLWaiRmMrzLpXK/JiAV7MQSDiXOb90z+XZPZ/pH0Avhg==
 
+vue-final-modal@^3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/vue-final-modal/-/vue-final-modal-3.4.4.tgz#9f4cdb0aabab86a14eb0c005b2645159b0f2095c"
+  integrity sha512-4nOLU+cMcUqAT0kg+64+Hi96kkQPOph2LOJa7Fl58BXlTyhfRxaMuz3M91wi2ooMIL4poWA8428P5GIAXSpuZg==
+
 vue-head@MKGaru/vue-head#vue3:
   version "2.2.0"
   resolved "https://codeload.github.com/MKGaru/vue-head/tar.gz/48f32a8132b7eb8f9c0ef6613227d01991650d5b"
