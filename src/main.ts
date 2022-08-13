@@ -4,7 +4,7 @@ import App from "@/presentation/views/App.vue";
 import "./registerServiceWorker";
 import appStore from "@/native/store/app.store";
 import appRouter from "@/native/routes/app.router";
-import { setupI18n } from "@/native/i18n";
+import { setupI18n } from "@/i18n";
 import { getModule } from "vuex-module-decorators";
 import UserStore from "@/native/store/user/user.store";
 import { ComponentCustomProperties } from "@vue/runtime-core";

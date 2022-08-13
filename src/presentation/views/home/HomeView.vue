@@ -8,7 +8,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import HomeLayout from "@/presentation/layouts/home/HomeLayout.vue";
+import HomeLayout from "@/presentation/DefaultLayout.vue";
 import HomeSidebarInfo from "@/presentation/components/home/HomeSidebarInfo.vue";
 import HomeUnitsList from "@/presentation/components/home/units-list/HomeUnitsList.vue";
 import VContainer from "@/presentation/components/design-system/grid/VContainer.vue";
