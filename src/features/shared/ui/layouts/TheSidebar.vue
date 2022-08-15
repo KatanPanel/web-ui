@@ -102,12 +102,13 @@ export default class TheSidebar extends Vue {
 			&:hover {
 				background-color: var(--kt-content-neutral-overlay);
 			}
-		}
-	}
 
-	:deep(svg) {
-		width: 32px;
-		height: 32px;
+			:deep(svg) {
+				width: 24px;
+				height: 24px;
+				opacity: 0.54;
+			}
+		}
 	}
 }
 </style>

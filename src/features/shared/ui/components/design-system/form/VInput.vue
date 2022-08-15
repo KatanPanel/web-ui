@@ -47,5 +47,11 @@ export default class VInput extends Vue {
 		opacity: 0.38;
 		cursor: not-allowed;
 	}
+
+	&::placeholder {
+		font-family: var(--kt-headline-font);
+		font-weight: 600;
+		opacity: 0.54;
+	}
 }
 </style>
