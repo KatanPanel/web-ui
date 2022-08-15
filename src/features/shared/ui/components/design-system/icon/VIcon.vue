@@ -1,5 +1,9 @@
 <template>
-	<Component :is="component" />
+	<Component
+		:is="component"
+		:class="$style.root"
+		:aria-label="`icon-${name}`"
+	/>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
@@ -31,3 +35,8 @@ export default class VIcon extends Vue {
 	}
 }
 </script>
+<style lang="scss" module>
+.root svg {
+	width: 100% !important;
+}
+</style>
