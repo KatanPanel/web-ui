@@ -1,7 +1,7 @@
 import httpService from "@/features/shared/data/http.service";
 import { AxiosResponse } from "axios";
-import { Account } from "@/features/account/models/account.model";
 import { AccessToken } from "@/features/auth/models/access-token.model";
+import { AccountResponse } from "@/features/account/data/account.response";
 
 class AuthGateway {
 	async login(username: string, password: string): Promise<AccessToken> {
@@ -20,14 +20,14 @@ class AuthGateway {
 			});
 	}
 
-	async verify(token: string): Promise<Account> {
+	async verify(token: string): Promise<AccountResponse> {
 		return httpService
 			.get("auth", {
 				headers: {
 					Authorization: `Bearer ${token}`
 				}
 			})
-			.then((res: AxiosResponse) => res.data.account as Account);
+			.then((res: AxiosResponse) => res.data.account as AccountResponse);
 	}
 }
 
