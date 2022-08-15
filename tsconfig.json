@@ -22,7 +22,8 @@
 			"@wdio/mocha-framework",
 			"expect-webdriverio",
 			"webdriverio/sync",
-			"jest"
+			"jest",
+			"node_modules/vue/macros-global.d.ts"
 		],
 		"paths": {
 			"@/*": [
@@ -37,12 +38,12 @@
 		]
 	},
 	"include": [
-		"src/**/*.ts",
-		"src/**/*.tsx",
-		"src/**/*.vue",
-		"tests/**/*.ts",
-		"tests/**/*.tsx"
-	],
+      "src/**/*.ts",
+      "src/**/*.tsx",
+      "src/**/*.vue",
+      "tests/**/*.ts",
+      "tests/**/*.tsx"
+    ],
 	"exclude": [
 		"node_modules"
 	]
