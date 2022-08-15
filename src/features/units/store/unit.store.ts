@@ -8,7 +8,7 @@ import { Unit } from "@/features/units/models/unit.model";
 	dynamic: true,
 	store: appStore
 })
-export default class UnitsStore extends VuexModule {
+export default class UnitStore extends VuexModule {
 	private _unit: Unit | null = null;
 
 	public get getUnit(): Unit | null {

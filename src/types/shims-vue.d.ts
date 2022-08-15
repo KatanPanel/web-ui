@@ -16,6 +16,7 @@ declare module "@vue/runtime-core" {
 		$katan: {
 			getUser: () => Account;
 		};
-		created(this: ComponentPublicInstance): void
+
+		created(this: ComponentPublicInstance): void;
 	}
 }
