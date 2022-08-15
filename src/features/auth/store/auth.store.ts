@@ -1,8 +1,8 @@
 import { Module, Mutation, VuexModule } from "vuex-module-decorators";
-import appStore from "@/features/shared/ui/store/app.store";
+import appStore from "@/store";
 
 @Module({
-	name: "Auth",
+	name: "auth",
 	namespaced: true,
 	dynamic: true,
 	store: appStore

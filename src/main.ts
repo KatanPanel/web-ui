@@ -2,7 +2,7 @@ import "@/assets/styles/main.scss";
 import { createApp } from "vue";
 import App from "@/features/shared/ui/views/App.vue";
 import "./registerServiceWorker";
-import appStore from "@/features/shared/ui/store/app.store";
+import appStore from "@/store";
 import appRouter from "@/router";
 import { setupI18n } from "@/i18n";
 import { getModule } from "vuex-module-decorators";
