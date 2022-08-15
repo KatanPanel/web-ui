@@ -1,5 +1,5 @@
 <template>
-	<aside class="root">
+	<aside class="root" role="complementary">
 		<div class="logo">
 			<router-link to="/"><TheLogo :black="true" /></router-link>
 		</div>
