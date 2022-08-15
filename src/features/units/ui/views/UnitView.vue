@@ -1,21 +1,18 @@
 <template>
-	<HomeLayout>
-		<VContainer>
-			<div v-if="unit != null">
-				<h4>{{ unit.name }} ({{ unit.id }})</h4>
-				<VForm @submit.prevent="updateUnit">
-					<VFieldSet>
-						<VInput v-model="newName" />
-					</VFieldSet>
-				</VForm>
-			</div>
-			<div v-else>Carregando...</div>
-		</VContainer>
-	</HomeLayout>
+	<VContainer>
+		<div v-if="unit != null">
+			<h4>{{ unit.name }} ({{ unit.id }})</h4>
+			<VForm @submit.prevent="updateUnit">
+				<VFieldSet>
+					<VInput v-model="newName" />
+				</VFieldSet>
+			</VForm>
+		</div>
+		<div v-else>Carregando...</div>
+	</VContainer>
 </template>
 <script lang="ts">
 import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
-import HomeLayout from "@/features/shared/ui/layouts/RootLayout.vue";
 import { Component, Vue } from "vue-facing-decorator";
 import { Unit } from "@/features/units/models/unit.model";
 import unitsPresenter from "@/features/units/ui/units.presenter";
@@ -28,8 +25,7 @@ import VInput from "@/features/shared/ui/components/design-system/form/VInput.vu
 		VInput,
 		VFieldSet,
 		VForm,
-		VContainer,
-		HomeLayout
+		VContainer
 	}
 })
 export default class UnitView extends Vue {
