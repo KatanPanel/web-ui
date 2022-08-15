@@ -1,5 +1,5 @@
 <template>
-	<main :class="$style.main">
+	<main :class="$style.root">
 		<router-view />
 	</main>
 </template>
@@ -11,7 +11,7 @@ export default class App extends Vue {}
 </script>
 
 <style lang="scss" module>
-.main {
+.root {
 	display: flex;
 	display: -ms-flexbox;
 	flex-direction: column;

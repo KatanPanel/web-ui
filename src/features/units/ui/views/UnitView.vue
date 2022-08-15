@@ -1,27 +1,24 @@
 <template>
-	<VContainer>
-		<div v-if="unit != null">
-			<h4>{{ unit.name }} ({{ unit.id }})</h4>
-			<VForm @submit.prevent="updateUnit">
-				<VFieldSet>
-					<VInput v-model="newName" />
-				</VFieldSet>
-			</VForm>
-		</div>
-		<div v-else>Carregando...</div>
-	</VContainer>
+	<div :class="$style.root" v-if="hasUnitAvailable">
+		<TheUnitSidebar />
+		<VContainer :class="$style.container">
+			<router-view />
+		</VContainer>
+	</div>
+	<div v-else>Carregando...</div>
 </template>
 <script lang="ts">
 import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
 import { Component, Vue } from "vue-facing-decorator";
-import { Unit } from "@/features/units/models/unit.model";
 import unitsPresenter from "@/features/units/ui/units.presenter";
 import VForm from "@/features/shared/ui/components/design-system/form/VForm.vue";
 import VFieldSet from "@/features/shared/ui/components/design-system/form/VFieldSet.vue";
 import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
+import TheUnitSidebar from "@/features/units/ui/components/TheUnitSidebar.vue";
 
 @Component({
 	components: {
+		TheUnitSidebar,
 		VInput,
 		VFieldSet,
 		VForm,
@@ -29,31 +26,24 @@ import VInput from "@/features/shared/ui/components/design-system/form/VInput.vu
 	}
 })
 export default class UnitView extends Vue {
-	unit: Unit | null = null;
-
-	newName = "";
+	get hasUnitAvailable(): boolean {
+		return unitsPresenter.getCurrentUnit != null;
+	}
 
 	created() {
-		this.lookupUnit();
-	}
-
-	lookupUnit() {
-		unitsPresenter
-			.getUnit(this.getUnitId)
-			.then((result) => (this.unit = result));
-	}
-
-	updateUnit() {
-		unitsPresenter
-			.updateUnit(this.unit!.id, { name: this.newName })
-			.then((result: Unit) => {
-				this.unit = result;
-				console.log("updated", result);
-			});
-	}
-
-	get getUnitId(): string {
-		return this.$route.params.unitId as string;
+		const unitId = this.$route.params.unitId as string;
+		unitsPresenter.getAndSaveUnit(unitId);
 	}
 }
 </script>
+<style lang="scss" module>
+.root {
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+}
+
+.container {
+	margin-top: 2.4rem;
+}
+</style>

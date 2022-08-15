@@ -3,9 +3,7 @@
 		<TheSidebar />
 		<div :class="$style.body">
 			<TheHeader />
-			<div :class="$style.content">
-				<slot />
-			</div>
+			<slot />
 		</div>
 	</div>
 </template>
@@ -29,9 +27,5 @@ export default class RootLayout extends Vue {}
 
 .body {
 	flex-grow: 1;
-}
-
-.content {
-	margin-top: 48px;
 }
 </style>

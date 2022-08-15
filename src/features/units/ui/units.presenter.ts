@@ -1,14 +1,26 @@
 import { Unit } from "@/features/units/models/unit.model";
 import unitsService from "@/features/units/data/units.service";
-import { UpdateUnitRequest } from "@/features/units/data/request/update-unit.request";
+import { getModule } from "vuex-module-decorators";
+import UnitsStore from "@/features/units/store/units.store";
+import { isNull } from "@/utils";
 
 class UnitsPresenter {
-	async getUnit(id: string): Promise<Unit> {
-		return unitsService.getUnit(id);
+	get getCurrentUnit(): Unit | null {
+		return getModule(UnitsStore).getUnit;
 	}
 
-	async updateUnit(id: string, data: UpdateUnitRequest): Promise<Unit> {
-		return unitsService.updateUnit(id, data);
+	get getCurrentUnitOrThrow(): Unit {
+		const curr = this.getCurrentUnit;
+		if (isNull(curr)) throw new Error("Current unit cannot be null");
+
+		return curr;
+	}
+
+	async getAndSaveUnit(id: string): Promise<Unit> {
+		return unitsService.getUnit(id).then((unit) => {
+			getModule(UnitsStore).updateUnit({ unit });
+			return unit;
+		});
 	}
 }
 

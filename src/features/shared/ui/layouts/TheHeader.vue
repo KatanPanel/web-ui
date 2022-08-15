@@ -1,10 +1,14 @@
 <template>
-	<header class="root">
-		<div class="search-bar">
-			<VInput placeholder="Search" />
+	<header :class="$style.root">
+		<div :class="$style.search_bar">
+			<VInput :class="$style.search_bar__input" placeholder="Search" />
 		</div>
-		<div class="account-info">
-			<router-link to="/" class="avatar" title="Account" />
+		<div :class="$style.account_info">
+			<router-link
+				to="/"
+				:class="$style.account_info__avatar"
+				title="Account"
+			/>
 		</div>
 	</header>
 </template>
@@ -17,25 +21,30 @@ import VInput from "@/features/shared/ui/components/design-system/form/VInput";
 })
 export default class TheSidebar extends Vue {}
 </script>
-<style lang="scss" scoped>
+<style lang="scss" module>
 .root {
 	background-color: var(--kt-background-surface);
-	padding: 24px;
+	//padding: 24px;
 	display: flex;
+	border-bottom: 1px solid var(--kt-border-low);
 }
 
-.search-bar {
+.search_bar {
 	flex-grow: 1;
 }
 
-.account-info {
-	margin-left: 8px;
-	width: 40px;
-	height: 40px;
+.search_bar__input {
+	border-radius: 0;
+}
 
-	.avatar {
-		box-shadow: 0 0 4px 0 RGB(0 0 0 / 12%) inset;
-		border-radius: 50%;
-	}
+.account_info {
+	margin-left: 8px;
+	width: 32px;
+	height: 32px;
+}
+
+.account_info__avatar {
+	box-shadow: 0 0 4px 0 RGB(0 0 0 / 12%) inset;
+	border-radius: 50%;
 }
 </style>

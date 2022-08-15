@@ -23,10 +23,8 @@ export default class HomeUnitsList extends Vue {
 	unitsList: Unit[] = [];
 
 	created() {
-		logService.info("Loading units...");
 		homePresenter.listUnits().then((units) => {
 			this.unitsList = units;
-			logService.info("Loaded", units);
 		});
 	}
 }

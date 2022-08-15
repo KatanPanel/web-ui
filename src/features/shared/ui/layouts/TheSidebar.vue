@@ -106,7 +106,6 @@ export default class TheSidebar extends Vue {
 			:deep(svg) {
 				width: 24px;
 				height: 24px;
-				opacity: 0.54;
 			}
 		}
 	}

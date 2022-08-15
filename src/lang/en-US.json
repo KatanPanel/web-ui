@@ -5,6 +5,10 @@
 	"auth.login.password-label": "Password",
 	"auth.login.submit-button": "Log In",
 	"auth.login.error-title": "Failed to perform login",
+	"units.overview.title": "Overview",
+	"units.audit-log.title": "Audit Log",
+	"units.settings.title": "Settings",
+	"units.instances.console.title": "Console",
 	"error.1001": "Account not found",
 	"error.2002": "Incorrect username or password."
 }
