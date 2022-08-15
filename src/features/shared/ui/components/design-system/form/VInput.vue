@@ -45,6 +45,7 @@ export default class VInput extends Vue {
 
 	&[disabled] {
 		opacity: 0.38;
+		user-select: none;
 		cursor: not-allowed;
 	}
 

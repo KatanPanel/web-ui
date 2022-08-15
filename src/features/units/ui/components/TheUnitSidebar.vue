@@ -1,5 +1,5 @@
 <template>
-	<div :class="$style.root">
+	<nav :class="$style.root" role="navigation">
 		<TheUnitSidebarSection display-icon="Home" display-label="Workspace">
 			<TheUnitSidebarSectionItem :href="links.overview">
 				General
@@ -19,7 +19,7 @@
 				Audit Log
 			</TheUnitSidebarSectionItem>
 		</TheUnitSidebarSection>
-	</div>
+	</nav>
 </template>
 
 <script lang="ts">

@@ -20,6 +20,6 @@ declare module "@vue/runtime-core" {
 		created(this: ComponentPublicInstance): void;
 		mounted(this: ComponentPublicInstance): void;
 		beforeMount(this: ComponentPublicInstance): void;
-		beforeUnmount(this: ComponentPublicInstance): void
+		beforeUnmount(this: ComponentPublicInstance): void;
 	}
 }

@@ -1,27 +1,33 @@
 <template>
-	<h4>
+	<h5>
 		<b>{{ $t("units.settings.title") }}</b>
-	</h4>
-	<VForm>
-		<VFieldSet>
-			<VLabel>Name</VLabel>
-			<VInput :value="unit.name" readonly />
-		</VFieldSet>
-	</VForm>
+	</h5>
+	<VTabList label="Settings Tab">
+		<VTab id="general" label="General">
+			<UnitSettingsGeneralTab />
+		</VTab>
+		<VTab id="advanced" label="Advanced">
+			<UnitSettingsAdvancedTab />
+		</VTab>
+	</VTabList>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import VForm from "@/features/shared/ui/components/design-system/form/VForm.vue";
-import VFieldSet from "@/features/shared/ui/components/design-system/form/VFieldSet.vue";
-import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
 import unitsPresenter from "@/features/units/ui/units.presenter";
 import { Unit } from "@/features/units/models/unit.model";
-import VSubtitle1 from "@/features/shared/ui/components/design-system/typography/VSubtitle1.vue";
+import VTabList from "@/features/shared/ui/components/design-system/tabs/VTabList.vue";
+import VTab from "@/features/shared/ui/components/design-system/tabs/VTab.vue";
+import UnitSettingsGeneralTab from "@/features/units/ui/components/settings/UnitSettingsGeneralTab.vue";
+import UnitSettingsAdvancedTab from "@/features/units/ui/components/settings/UnitSettingsAdvancedTab.vue";
 
 @Component({
-	components: { VSubtitle1, VLabel, VInput, VFieldSet, VForm }
+	components: {
+		UnitSettingsAdvancedTab,
+		UnitSettingsGeneralTab,
+		VTab,
+		VTabList
+	}
 })
 export default class UnitSettingsView extends Vue {
 	get unit(): Unit {
@@ -30,4 +36,8 @@ export default class UnitSettingsView extends Vue {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" module>
+.form {
+	margin-top: 2.4rem;
+}
+</style>
