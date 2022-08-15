@@ -42,15 +42,23 @@ class HttpService {
 		return this.axios.defaults;
 	}
 
-	get(url: string, config?: AxiosRequestConfig): AxiosPromise {
+	get<T>(url: string, config?: AxiosRequestConfig): AxiosPromise<T> {
 		return this.axios.get(url, config);
 	}
 
-	post<T>(url: string, data?: T, config?: AxiosRequestConfig): AxiosPromise {
+	post<T>(
+		url: string,
+		data?: T,
+		config?: AxiosRequestConfig
+	): AxiosPromise<T> {
 		return this.axios.post(url, data, config);
 	}
 
-	patch<T>(url: string, data?: T, config?: AxiosRequestConfig): AxiosPromise {
+	patch<T>(
+		url: string,
+		data?: T,
+		config?: AxiosRequestConfig
+	): AxiosPromise<T> {
 		return this.axios.patch(url, data, config);
 	}
 

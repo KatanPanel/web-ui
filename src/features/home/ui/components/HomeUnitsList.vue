@@ -13,7 +13,7 @@
 import { Unit } from "@/features/units/models/unit.model";
 import { Component, Vue } from "vue-facing-decorator";
 import homePresenter from "@/features/home/ui/home.presenter";
-import HomeUnitsListItem from "@/features/home/ui/components/units-list/HomeUnitsListItem.vue";
+import HomeUnitsListItem from "@/features/home/ui/components/HomeUnitsListItem.vue";
 import logService from "@/features/shared/data/log.service";
 
 @Component({

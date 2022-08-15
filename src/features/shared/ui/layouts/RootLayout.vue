@@ -3,20 +3,22 @@
 		<TheSidebar />
 		<div :class="$style.body">
 			<TheHeader />
-			<slot />
+			<div :class="$style.content">
+				<slot />
+			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import TheSidebar from "@/features/shared/ui/components/TheSidebar.vue";
-import TheHeader from "@/features/shared/ui/components/TheHeader.vue";
+import TheSidebar from "@/features/shared/ui/layouts/TheSidebar.vue";
+import TheHeader from "@/features/shared/ui/layouts/TheHeader.vue";
 
 @Component({
 	components: { TheHeader, TheSidebar }
 })
-export default class HomeLayout extends Vue {}
+export default class RootLayout extends Vue {}
 </script>
 <style lang="scss" module>
 .root {
@@ -27,5 +29,9 @@ export default class HomeLayout extends Vue {}
 
 .body {
 	flex-grow: 1;
+}
+
+.content {
+	margin-top: 48px;
 }
 </style>
