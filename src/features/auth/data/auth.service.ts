@@ -10,7 +10,6 @@ export const AUTHORIZATION_TOKEN_KEY = "token";
 class AuthService {
 	async login(username: string, password: string): Promise<AccessToken> {
 		return authGateway.login(username, password).then((accessToken) => {
-			httpService.defaults().headers.common.Authorization = `Bearer ${accessToken.token}`;
 			localStorageService.set(AUTHORIZATION_TOKEN_KEY, {
 				token: accessToken.token
 			} as AccessToken);
@@ -20,6 +19,7 @@ class AuthService {
 
 	async verify(accessToken: string): Promise<Account> {
 		return authGateway.verify(accessToken).then((response) => {
+			httpService.defaults().headers.common.Authorization = `Bearer ${accessToken}`;
 			const lastLoggedInAt = response["last-logged-in-at"];
 
 			return {
