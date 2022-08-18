@@ -6,11 +6,14 @@
 	"auth.login.submit-button": "Log In",
 	"auth.login.error-title": "Failed to perform login",
 	"units.overview.title": "Overview",
-	"units.audit-log.title": "Audit Log",
 	"units.settings.title": "Settings",
 	"units.settings.general.unit-name.label": "Unit name",
 	"units.settings.general.unit-name.placeholder": "e.g.: My Awesome Server",
 	"units.instances.console.title": "Console",
+	"units.audit-log.title": "Audit Log",
+	"units.audit-log.subtitle": "An audit log is a set of records that capture events, recording an activity performed and what activity was performed, use the audit logs to find out everything that has changed on a drive, and increase the security of a unit's data.",
+	"units.audit-log.entry.pattern.1": "{user} created this unit",
+	"units.audit-log.entry.pattern.2": "{user} updated {unit}",
 	"error.1001": "Account not found",
 	"error.2002": "Incorrect username or password."
 }

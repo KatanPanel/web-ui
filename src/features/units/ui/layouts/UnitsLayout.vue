@@ -1,0 +1,33 @@
+<template>
+	<div :class="$style.root">
+		<TheSidebar />
+		<TheUnitSidebar />
+		<div :class="$style.body">
+			<TheHeader />
+			<slot />
+		</div>
+	</div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from "vue-facing-decorator";
+import TheSidebar from "@/features/shared/ui/layouts/TheSidebar.vue";
+import TheHeader from "@/features/shared/ui/layouts/TheHeader.vue";
+import TheUnitSidebar from "@/features/units/ui/components/TheUnitSidebar.vue";
+
+@Component({
+	components: { TheUnitSidebar, TheHeader, TheSidebar }
+})
+export default class UnitsLayout extends Vue {}
+</script>
+<style lang="scss" module>
+.root {
+	display: flex;
+	height: 100%;
+	background-color: var(--kt-background-surface);
+}
+
+.body {
+	flex-grow: 1;
+}
+</style>

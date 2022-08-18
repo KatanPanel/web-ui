@@ -73,6 +73,7 @@ class UnitsService {
 		return {
 			id: response.id,
 			targetId: response["target-id"],
+			actorId: response["actor-id"],
 			event: response.event,
 			createdAt: new Date(response["created-at"]),
 			changes: response.changes.map((change) =>

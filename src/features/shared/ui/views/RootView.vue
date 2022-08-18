@@ -1,7 +1,7 @@
 <template>
-	<RootLayout>
+	<component :is="layout">
 		<router-view />
-	</RootLayout>
+	</component>
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
@@ -12,5 +12,9 @@ import RootLayout from "@/features/shared/ui/layouts/RootLayout.vue";
 		RootLayout
 	}
 })
-export default class RootView extends Vue {}
+export default class RootView extends Vue {
+	get layout(): unknown {
+		return this.$route.meta.layout ?? RootLayout;
+	}
+}
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<nav :class="$style.root" role="navigation">
+	<nav v-if="unit != null" :class="$style.root" role="navigation">
 		<TheUnitSidebarSection display-icon="Home" display-label="Workspace">
 			<TheUnitSidebarSectionItem :href="links.overview">
 				General
@@ -46,20 +46,22 @@ import TheUnitSidebarSectionItem from "@/features/units/ui/components/TheUnitSid
 	}
 })
 export default class TheUnitSidebar extends Vue {
-	readonly links = Object.freeze({
-		overview: { name: UNIT_ROUTE },
-		auditLog: { name: UNIT_AUDIT_LOG_ROUTE },
-		settings: { name: UNIT_SETTINGS_ROUTE },
-		instanceConsole: {
-			name: INSTANCE_CONSOLE_ROUTE,
-			params: {
-				instanceId: this.unit.instanceId
+	get links(): any {
+		return Object.freeze({
+			overview: { name: UNIT_ROUTE },
+			auditLog: { name: UNIT_AUDIT_LOG_ROUTE },
+			settings: { name: UNIT_SETTINGS_ROUTE },
+			instanceConsole: {
+				name: INSTANCE_CONSOLE_ROUTE,
+				params: {
+					instanceId: this.unit?.instanceId
+				}
 			}
-		}
-	});
+		});
+	}
 
-	get unit(): Unit {
-		return unitsPresenter.getCurrentUnitOrThrow;
+	get unit(): Unit | null {
+		return unitsPresenter.getCurrentUnit;
 	}
 }
 </script>

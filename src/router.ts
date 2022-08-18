@@ -3,6 +3,7 @@ import { AuthRoutes } from "@/features/auth/routing/auth.routes";
 import { HomeRoutes } from "@/features/home/routing/home.routes";
 import { UnitsRoute } from "@/features/units/routing/units.routes";
 import { AuthenticatedOnlyGuard } from "@/features/auth/routing/authenticated-only.guard";
+import { AccountsRoute } from "@/features/account/routing/accounts.routes";
 
 export function importView(
 	featureName: string,
@@ -21,7 +22,7 @@ const router = createRouter({
 			path: "/",
 			component: importView("shared", "RootView"),
 			beforeEnter: AuthenticatedOnlyGuard,
-			children: [...HomeRoutes, ...UnitsRoute]
+			children: [...HomeRoutes, ...UnitsRoute, ...AccountsRoute]
 		},
 		...AuthRoutes
 	] as Array<RouteRecordRaw>

@@ -4,47 +4,55 @@
 			<VInput :class="$style.search_bar__input" placeholder="Search" />
 		</div>
 		<div :class="$style.account_info">
-			<router-link
-				to="/"
-				:class="$style.account_info__avatar"
-				title="Account"
-			/>
+			<router-link :to="routeToAccount" title="My Account">
+				<Avatar
+					:src="account.avatar"
+					:label="`${account.username} avatar`"
+				/>
+			</router-link>
 		</div>
 	</header>
 </template>
 <style lang="scss" module></style>
-<script>
+<script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import VInput from "@/features/shared/ui/components/design-system/form/VInput";
+import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
+import Avatar from "@/features/shared/ui/components/Avatar.vue";
+import { Account } from "@/features/account/models/account.model";
+import { RouteLocationRaw } from "vue-router";
+import { ACCOUNT_ROUTE } from "@/features/account/routing/accounts.routes";
+
 @Component({
-	components: { VInput }
+	components: { Avatar, VInput }
 })
-export default class TheSidebar extends Vue {}
+export default class TheSidebar extends Vue {
+	readonly routeToAccount: RouteLocationRaw = {
+		name: ACCOUNT_ROUTE
+	};
+
+	get account(): Account {
+		return this.$katan.getUser();
+	}
+}
 </script>
 <style lang="scss" module>
 .root {
 	background-color: var(--kt-background-surface);
-	//padding: 24px;
+	padding: 24px;
 	display: flex;
-	border-bottom: 1px solid var(--kt-border-low);
+	//border-bottom: 1px solid var(--kt-border-low);
 }
 
 .search_bar {
 	flex-grow: 1;
+	margin-right: 4.8rem;
 }
 
 .search_bar__input {
-	border-radius: 0;
 }
 
 .account_info {
-	margin-left: 8px;
 	width: 32px;
 	height: 32px;
-}
-
-.account_info__avatar {
-	box-shadow: 0 0 4px 0 RGB(0 0 0 / 12%) inset;
-	border-radius: 50%;
 }
 </style>

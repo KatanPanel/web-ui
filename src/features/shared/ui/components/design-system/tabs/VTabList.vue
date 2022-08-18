@@ -1,5 +1,5 @@
 <template>
-	<ul :class="$style.root" :aria-label="label" role="tablist">
+	<ul :class="$style.root" :aria-label="accessibilityLabel" role="tablist">
 		<li v-for="(tab, idx) in tabs" :key="idx" role="presentation">
 			<a
 				@click="selectTab(tab.hash, $event)"
@@ -52,7 +52,7 @@ export type Tab = {
 })
 export default class VTabList extends Vue {
 	@Prop({ type: String, required: true })
-	private readonly label!: string;
+	private readonly accessibilityLabel!: string;
 
 	activeTabHash = "";
 	lastActiveTabHash = "";
@@ -113,7 +113,8 @@ export default class VTabList extends Vue {
 
 .tab {
 	font-size: 14px;
-	padding: 1.2rem 1.6rem;
+	padding: 0.8rem 1.2rem;
+	margin: 0 0.8rem;
 	color: var(--kt-content-neutral-low);
 	text-decoration: none;
 	display: inline-block;
@@ -122,7 +123,7 @@ export default class VTabList extends Vue {
 
 .tab__active {
 	font-weight: 600;
-	color: var(--kt-content-primary);
+	color: var(--kt-content-neutral-high);
 	border-color: var(--kt-content-primary);
 }
 </style>

@@ -3,7 +3,6 @@
 		v-show="isActive"
 		:id="`tabpanel-${id}`"
 		:aria-hidden="!isActive"
-		:class="$style.root"
 		:tabindex="isActive ? 0 : -1"
 		role="tabpanel"
 	>
@@ -64,7 +63,3 @@ export default class VTab extends Vue {
 	}
 }
 </script>
-<style lang="scss" module>
-.root {
-}
-</style>

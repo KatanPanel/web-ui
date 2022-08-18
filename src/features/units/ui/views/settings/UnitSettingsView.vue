@@ -1,8 +1,6 @@
 <template>
-	<h5>
-		<b>{{ $t("units.settings.title") }}</b>
-	</h5>
-	<VTabList label="Settings Tab">
+	<h4>{{ $t("units.settings.title") }}</h4>
+	<VTabList accessibility-label="Settings Tab">
 		<VTab id="general" label="General">
 			<UnitSettingsGeneralTab />
 		</VTab>

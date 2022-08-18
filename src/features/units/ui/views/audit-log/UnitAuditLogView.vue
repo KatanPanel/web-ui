@@ -1,27 +1,29 @@
 <template>
-	<h4>
-		<b>{{ $t("units.audit-log.title") }}</b>
-		<VCard v-if="auditLog">
-			<div
-				:key="entry.id"
-				v-for="entry in auditLog.entries"
-				class="auditlog"
-			>
-				{{ entry.id }}
-			</div>
-		</VCard>
-	</h4>
+	<PageHeader>
+		<template #title>{{ $t("units.audit-log.title") }}</template>
+		<template #subtitle>{{ $t("units.audit-log.subtitle") }}</template>
+	</PageHeader>
+	<ul v-if="auditLog">
+		<UnitAuditLogEntry
+			v-for="entry in auditLog.entries"
+			:entry="entry"
+			:key="entry.id"
+			:title="entry.id"
+		/>
+	</ul>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
 import { AuditLog } from "@/features/units/models/audit-log.model";
-import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
 import unitsPresenter from "@/features/units/ui/units.presenter";
 import { Unit } from "@/features/units/models/unit.model";
+import logService from "@/features/shared/data/log.service";
+import UnitAuditLogEntry from "@/features/units/ui/components/audit-log/UnitAuditLogEntry.vue";
+import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
 
 @Component({
-	components: { VCard }
+	components: { PageHeader, UnitAuditLogEntry }
 })
 export default class UnitAuditLogView extends Vue {
 	auditLog: AuditLog | null = null;
@@ -31,11 +33,12 @@ export default class UnitAuditLogView extends Vue {
 	}
 
 	created() {
-		unitsPresenter
-			.getAuditLog(this.unit.id)
-			.then((auditLog) => (this.auditLog = auditLog));
+		unitsPresenter.getAuditLog(this.unit.id).then((auditLog) => {
+			this.auditLog = auditLog;
+			logService.log("Audit log fetched", auditLog);
+		});
 	}
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" module></style>

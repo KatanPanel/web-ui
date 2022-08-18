@@ -5,6 +5,7 @@ export type AuditLogResponse = {
 export type AuditLogEntryResponse = {
 	id: string;
 	"target-id": string;
+	"actor-id"?: string;
 	event: number;
 	"created-at": string;
 	changes: AuditLogEntryChangeResponse[];

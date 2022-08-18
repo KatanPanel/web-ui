@@ -14,7 +14,7 @@ export default class VSubtitle2 extends Vue {}
 .root {
 	font-family: var(--kt-headline-font);
 	font-weight: 500;
-	font-size: 18px;
+	font-size: 12px;
 	letter-spacing: 0.1px;
 }
 </style>
