@@ -20,6 +20,7 @@ export const i18n = setupI18n({
 });
 
 const app = createApp(App).use(appStore).use(appRouter).use(VueHead).use(i18n);
+app.config.unwrapInjectedRef = true;
 
 // assigned all declared augmented types from shims-vue.d.ts
 Object.assign(app.config.globalProperties, {
