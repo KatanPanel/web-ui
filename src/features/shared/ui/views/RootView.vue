@@ -1,5 +1,5 @@
 <template>
-	<component :is="layout">
+	<component :is="getLayout()">
 		<router-view />
 	</component>
 </template>
@@ -13,7 +13,7 @@ import RootLayout from "@/features/shared/ui/layouts/RootLayout.vue";
 	}
 })
 export default class RootView extends Vue {
-	get layout(): unknown {
+	getLayout(): unknown {
 		return this.$route.meta.layout ?? RootLayout;
 	}
 }
