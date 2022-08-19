@@ -10648,10 +10648,10 @@ vue-eslint-parser@^8.0.0, vue-eslint-parser@^8.0.1:
     lodash "^4.17.21"
     semver "^7.3.5"
 
-vue-facing-decorator@^2.1.5:
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/vue-facing-decorator/-/vue-facing-decorator-2.1.5.tgz#3550643f16d60aaf755266d5ee04b99dcddd43d7"
-  integrity sha512-K40kPIc94bUSg882t4YzP07yJ5Q1otm5B2/HuuoEI9/9RSfAh2rPK/FZ3kWgQT3EXpAhR0i1+1hC7UuOPBqjaw==
+vue-facing-decorator@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/vue-facing-decorator/-/vue-facing-decorator-2.1.7.tgz#37c2928e73aca12c31b1075e5a0a42957990a7b1"
+  integrity sha512-0T3+k8Kad63xMSHAPYkMal19Au0X09lBvZmTPT8WcP+hCdAaUgfMpHaPoLvSDfMKs0QkLEPJEE4ttWQSHj0T2A==
 
 vue-final-modal@^3.4.4:
   version "3.4.4"
@@ -10718,7 +10718,7 @@ vue3-icon@^2.0.0:
   dependencies:
     simple-icons "^5.3.0"
 
-vue@^3.2.13:
+vue@^3.2.37:
   version "3.2.37"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.37.tgz#da220ccb618d78579d25b06c7c21498ca4e5452e"
   integrity sha512-bOKEZxrm8Eh+fveCqS1/NkG/n6aMidsI6hahas7pa0w/l7jkbssJVsRhVDs07IdDq7h9KHswZOgItnwJAgtVtQ==
