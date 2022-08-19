@@ -25,13 +25,13 @@ export default class VTab extends Vue {
 	@Prop({ type: Boolean, default: false })
 	private readonly isDisabled!: boolean;
 
-	@Inject({ from: "addTab" })
+	@Inject()
 	private readonly addTab!: (tab: Tab) => void;
 
-	@Inject({ from: "removeTab" })
+	@Inject()
 	private readonly removeTab!: (id: string) => void;
 
-	@Inject({ from: "tabs" })
+	@Inject()
 	private readonly tabs!: Tab[];
 
 	get isActive(): boolean {

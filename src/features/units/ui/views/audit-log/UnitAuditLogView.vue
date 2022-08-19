@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-facing-decorator";
+import { Component, Inject, Vue } from "vue-facing-decorator";
 import { AuditLog } from "@/features/units/models/audit-log.model";
 import unitsPresenter from "@/features/units/ui/units.presenter";
 import { Unit } from "@/features/units/models/unit.model";
@@ -26,11 +26,10 @@ import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
 	components: { PageHeader, UnitAuditLogEntry }
 })
 export default class UnitAuditLogView extends Vue {
-	auditLog: AuditLog | null = null;
+	@Inject()
+	private readonly unit!: Unit;
 
-	get unit(): Unit {
-		return unitsPresenter.getCurrentUnitOrThrow;
-	}
+	auditLog: AuditLog | null = null;
 
 	created() {
 		unitsPresenter.getAuditLog(this.unit.id).then((auditLog) => {

@@ -36,11 +36,14 @@ export default class VInput extends Vue {
 	font-size: 14px;
 	width: 100%;
 	border-radius: 8px;
+	letter-spacing: 0.25px;
 	background-color: var(--kt-background-surface-high);
 
 	&[readonly] {
 		user-select: none;
 		cursor: default;
+		font-weight: 600;
+		color: var(--kt-content-neutral-low);
 	}
 
 	&[disabled] {

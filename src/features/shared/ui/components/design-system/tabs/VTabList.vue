@@ -32,8 +32,6 @@ export type Tab = {
 @Component({
 	emits: ["changed", "clicked"],
 	provide(this: VTabList) {
-		console.log("provide this", this);
-
 		return {
 			tabs: this.tabs,
 			addTab(tab: Tab) {

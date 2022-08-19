@@ -5,6 +5,7 @@ class ConfigService {
 	public readonly appVersion = this.value("$VUE_APP_VERSION");
 	public readonly appWebsite = this.value("$VUE_APP_KATAN_WEBSITE");
 	public readonly apiUrl = this.value("$VUE_APP_KATAN_API");
+	public readonly gatewayUrl = this.value("$VUE_APP_KATAN_GATEWAY");
 	public readonly gitCommit = this.value("$VUE_APP_KATAN_GIT_COMMIT");
 	public readonly gitBranch = this.value("$VUE_APP_KATAN_GIT_BRANCH");
 

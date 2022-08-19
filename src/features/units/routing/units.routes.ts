@@ -9,6 +9,7 @@ export const UNIT_AUDIT_LOG_ROUTE = "unit.audit-log";
 export const UNIT_SETTINGS_ROUTE = "unit.settings";
 export const INSTANCE_ROUTE = "instances";
 export const INSTANCE_CONSOLE_ROUTE = "instances.console";
+export const INSTANCE_NETWORK_ROUTE = "instances.network";
 
 export const UnitsRoute: Array<RouteRecordRaw> = [
 	{
@@ -46,7 +47,15 @@ export const UnitsRoute: Array<RouteRecordRaw> = [
 						name: INSTANCE_CONSOLE_ROUTE,
 						component: importView(
 							FEATURE_NAME,
-							"instances/InstanceConsoleView"
+							"instances/console/InstanceConsoleView"
+						)
+					},
+					{
+						path: "network",
+						name: INSTANCE_NETWORK_ROUTE,
+						component: importView(
+							FEATURE_NAME,
+							"instances/network/InstanceNetworkView"
 						)
 					}
 				]

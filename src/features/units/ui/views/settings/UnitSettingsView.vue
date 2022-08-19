@@ -1,41 +1,46 @@
 <template>
-	<h4>{{ $t("units.settings.title") }}</h4>
-	<VTabList accessibility-label="Settings Tab">
-		<VTab id="general" label="General">
-			<UnitSettingsGeneralTab />
-		</VTab>
-		<VTab id="advanced" label="Advanced">
-			<UnitSettingsAdvancedTab />
-		</VTab>
-	</VTabList>
+	<VContainer>
+		<PageHeader>
+			<template #title>{{ $t("units.settings.title") }}</template>
+		</PageHeader>
+		<VTabList accessibility-label="Settings Tab">
+			<VTab id="general" label="General">
+				<UnitSettingsGeneralTab />
+			</VTab>
+			<VTab id="advanced" label="Advanced">
+				<UnitSettingsAdvancedTab />
+			</VTab>
+		</VTabList>
+	</VContainer>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-facing-decorator";
-import unitsPresenter from "@/features/units/ui/units.presenter";
+import { Component, Inject, Vue } from "vue-facing-decorator";
 import { Unit } from "@/features/units/models/unit.model";
 import VTabList from "@/features/shared/ui/components/design-system/tabs/VTabList.vue";
 import VTab from "@/features/shared/ui/components/design-system/tabs/VTab.vue";
 import UnitSettingsGeneralTab from "@/features/units/ui/components/settings/UnitSettingsGeneralTab.vue";
 import UnitSettingsAdvancedTab from "@/features/units/ui/components/settings/UnitSettingsAdvancedTab.vue";
+import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
+import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
 
 @Component({
 	components: {
+		PageHeader,
 		UnitSettingsAdvancedTab,
 		UnitSettingsGeneralTab,
 		VTab,
-		VTabList
+		VTabList,
+		VContainer
+	},
+	provide(this: UnitSettingsView) {
+		return {
+			unit: this.unit
+		};
 	}
 })
 export default class UnitSettingsView extends Vue {
-	get unit(): Unit {
-		return unitsPresenter.getCurrentUnitOrThrow;
-	}
+	@Inject()
+	private readonly unit!: Unit;
 }
 </script>
-
-<style lang="scss" module>
-.form {
-	margin-top: 2.4rem;
-}
-</style>

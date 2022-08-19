@@ -1,19 +1,19 @@
 <template>
 	<div :class="$style.root">
 		<h4 :class="$style.title"><slot name="title" /></h4>
-		<VBody1 v-if="$slots.subtitle" :class="$style.subtitle"
-			><slot name="subtitle"
-		/></VBody1>
+		<VBody2 v-if="$slots.subtitle" :class="$style.subtitle">
+			<slot name="subtitle" />
+		</VBody2>
 		<slot />
 	</div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import VBody1 from "@/features/shared/ui/components/design-system/typography/VBody1.vue";
+import VBody2 from "@/features/shared/ui/components/design-system/typography/VBody2.vue";
 
 @Component({
-	components: { VBody1 }
+	components: { VBody2 }
 })
 export default class PageHeader extends Vue {}
 </script>

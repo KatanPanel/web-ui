@@ -1,33 +1,23 @@
 <template>
-	<VContainer v-if="hasUnitAvailable" :class="$style.root">
+	<div :class="$style.root">
 		<router-view />
-	</VContainer>
+	</div>
 </template>
 <script lang="ts">
-import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
-import { Component, Vue } from "vue-facing-decorator";
-import unitsPresenter from "@/features/units/ui/units.presenter";
+import { Component, Inject, Vue } from "vue-facing-decorator";
+import { Unit } from "@/features/units/models/unit.model";
 
-@Component({
-	components: {
-		VContainer
-	}
-})
+@Component
 export default class UnitView extends Vue {
-	get hasUnitAvailable(): boolean {
-		return unitsPresenter.getCurrentUnit != null;
-	}
-
-	created() {
-		const unitId = this.$route.params.unitId as string;
-		unitsPresenter.getAndSaveUnit(unitId);
-	}
+	@Inject()
+	private readonly unit!: Unit;
 }
 </script>
 <style lang="scss" module>
 .root {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	height: 100%;
+	padding: 2.4rem;
 }
 </style>

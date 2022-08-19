@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-facing-decorator";
+import { Component, Inject, Vue } from "vue-facing-decorator";
 import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
 import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
 import VFieldSet from "@/features/shared/ui/components/design-system/form/VFieldSet.vue";
@@ -26,12 +26,17 @@ import logService from "@/features/shared/data/log.service";
 	components: { VInput, VLabel, VFieldSet, VForm }
 })
 export default class UnitSettingsGeneralTab extends Vue {
+	@Inject()
+	private unit!: Unit;
+
 	updateModel = {
-		name: this.unit.name
+		name: ""
 	};
 
-	get unit(): Unit {
-		return unitsPresenter.getCurrentUnitOrThrow;
+	mounted() {
+		this.updateModel = {
+			name: this.unit.name
+		};
 	}
 
 	onSubmit() {
@@ -41,6 +46,7 @@ export default class UnitSettingsGeneralTab extends Vue {
 			})
 			.then((unit) => {
 				logService.info("Unit updated", unit);
+				this.unit = unit;
 			});
 	}
 }

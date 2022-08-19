@@ -5,6 +5,7 @@
 			backgroundImage: `url(${this.source})`
 		}"
 		:aria-label="label"
+		role="figure"
 	/>
 </template>
 
@@ -15,7 +16,7 @@ import { isUndefined } from "@/utils";
 @Component
 export default class Avatar extends Vue {
 	@Prop({ type: String, required: true })
-	private readonly src!: string;
+	private readonly src?: string | undefined;
 
 	@Prop({ type: String, required: true })
 	private readonly label!: string;
@@ -28,8 +29,10 @@ export default class Avatar extends Vue {
 
 <style lang="scss" module>
 .root {
-	width: 40px;
-	height: 40px;
+	width: 100%;
+	height: 100%;
+	min-height: 40px;
+	min-width: 40px;
 	box-shadow: 0 0 4px 0 RGB(0 0 0 / 12%) inset;
 	margin-right: 16px;
 	border-radius: 50%;

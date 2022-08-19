@@ -37,10 +37,10 @@ export default class TheSidebar extends Vue {
 </script>
 <style lang="scss" module>
 .root {
-	background-color: var(--kt-background-surface);
-	padding: 24px;
+	margin: 2.4rem 1.6rem;
 	display: flex;
-	//border-bottom: 1px solid var(--kt-border-low);
+	//box-shadow: 0 0 1px rgba(0, 0, 0, 0.12), 0 6px 12px -2px rgba(0, 0, 0, 0.04);
+	background-color: var(--kt-background-body);
 }
 
 .search_bar {
@@ -49,6 +49,7 @@ export default class TheSidebar extends Vue {
 }
 
 .search_bar__input {
+	background-color: var(--kt-background-surface);
 }
 
 .account_info {

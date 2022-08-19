@@ -44,11 +44,12 @@ $base-padding: 1.2rem;
 	box-shadow: inset 0 0 0 1.5px var(--kt-border-low);
 	border-radius: 8px;
 	display: flex;
+	margin-bottom: 0.8rem;
 }
 
 .alert__title {
 	font-size: 15px;
-	font-weight: 600;
+	font-weight: 700;
 	padding-top: 1.2rem;
 	padding-right: $base-padding;
 }
@@ -59,7 +60,7 @@ $base-padding: 1.2rem;
 
 .alert__description {
 	font-size: 13px;
-	font-weight: 400;
+	font-weight: 500;
 	margin-top: 4px;
 	padding-bottom: $base-padding;
 	padding-right: $base-padding;
