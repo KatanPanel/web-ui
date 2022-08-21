@@ -9,6 +9,7 @@ import { getModule } from "vuex-module-decorators";
 import AccountStore from "@/features/account/store/account.store";
 import { ComponentCustomProperties } from "@vue/runtime-core";
 import VueHead from "vue-head";
+import "vue-progressive-image/dist/style.css";
 
 export const i18n = setupI18n({
 	legacy: true,

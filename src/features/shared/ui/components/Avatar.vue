@@ -1,19 +1,28 @@
 <template>
 	<div
+		v-if="!source"
 		:class="$style.root"
 		:style="{
-			backgroundImage: `url(${this.source})`
+			backgroundImage: `url(${source})`
 		}"
-		:aria-label="label"
-		role="figure"
+	/>
+	<ProgressiveImage
+		v-else
+		@error="onLoadError"
+		:class="$style.root"
+		:src="this.source"
 	/>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { isUndefined } from "@/utils";
+import { ProgressiveImage } from "vue-progressive-image";
+import logService from "@/features/shared/data/log.service";
 
-@Component
+@Component({
+	components: { ProgressiveImage }
+})
 export default class Avatar extends Vue {
 	@Prop({ type: String, required: true })
 	private readonly src?: string | undefined;
@@ -23,6 +32,10 @@ export default class Avatar extends Vue {
 
 	get source(): string {
 		return isUndefined(this.src) ? "/img/logo-black.svg" : this.src;
+	}
+
+	onLoadError(error: Error) {
+		logService.error("Failed to load avatar", error);
 	}
 }
 </script>
