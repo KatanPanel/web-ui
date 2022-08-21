@@ -16,6 +16,11 @@
 					</a>
 				</li>
 				<li>
+					<router-link :to="linkToBlueprints()">
+						<VIcon name="ScriptTextOutline" />
+					</router-link>
+				</li>
+				<li>
 					<a href="#">
 						<VIcon name="Plus" />
 					</a>
@@ -41,6 +46,7 @@ import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue"
 import configService from "@/features/shared/data/config.service";
 import { RouteLocationRaw } from "vue-router";
 import { ABOUT_ROUTE } from "@/features/home/routing/home.routes";
+import { BLUEPRINTS_ROUTES } from "@/features/blueprints/routing/blueprints.routes";
 
 @Component({
 	components: { TheLogo, VIcon }
@@ -50,6 +56,10 @@ export default class TheSidebar extends Vue {
 
 	linkToAbout(): RouteLocationRaw {
 		return { name: ABOUT_ROUTE };
+	}
+
+	linkToBlueprints(): RouteLocationRaw {
+		return { name: BLUEPRINTS_ROUTES };
 	}
 }
 </script>

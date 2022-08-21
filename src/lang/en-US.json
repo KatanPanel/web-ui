@@ -17,6 +17,7 @@
 	"instances.network.title": "Network",
 	"instances.network.host.label": "Host",
 	"instances.network.port.label": "Port",
+	"blueprints.home.title": "Blueprints",
 	"error.1001": "Account not found",
 	"error.2002": "Incorrect username or password."
 }
