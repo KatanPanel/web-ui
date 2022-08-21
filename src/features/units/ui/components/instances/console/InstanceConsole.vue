@@ -1,11 +1,6 @@
 <template>
 	<div :class="$style.root">
 		<VButton @click="onFullscreenButtonClick">Fullscreen</VButton>
-		<pre>
-			<code v-for="i in 10" :key="`line-${i}`">
-			Text {{ i }}
-		</code>
-		</pre>
 	</div>
 </template>
 

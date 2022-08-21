@@ -22,7 +22,7 @@
 				</TheUnitSidebarSectionItem>
 			</TheUnitSidebarSection>
 		</div>
-		<div :class="$style.separator" role="separator" />
+		<!--		<div :class="$style.separator" role="separator" />-->
 		<TheUnitSidebarSection>
 			<TheUnitSidebarSectionItem
 				:href="links.instance?.console"

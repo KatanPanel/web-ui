@@ -46,7 +46,7 @@ export default class UnitSettingsGeneralTab extends Vue {
 			})
 			.then((unit) => {
 				logService.info("Unit updated", unit);
-				this.unit = unit;
+				this.unit = Object.assign(this.unit, unit);
 			});
 	}
 }

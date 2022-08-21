@@ -11,13 +11,17 @@
 			<VRow>
 				<VCol :size="10">
 					<VFieldSet>
-						<VLabel>{{ $t("instances.network.host.label") }}</VLabel>
+						<VLabel>{{
+							$t("instances.network.host.label")
+						}}</VLabel>
 						<VInput :value="instance.connection.host" readonly />
 					</VFieldSet>
 				</VCol>
 				<VCol :size="2">
 					<VFieldSet>
-						<VLabel>{{ $t("instances.network.port.label") }}</VLabel>
+						<VLabel>{{
+							$t("instances.network.port.label")
+						}}</VLabel>
 						<VInput :value="instance.connection.port" readonly />
 					</VFieldSet>
 				</VCol>

@@ -1,7 +1,7 @@
 <template>
 	<div :class="$style.root">
 		<div :class="$style.header">
-			<h4 :class="$style.title">Console</h4>
+			<h4 :class="$style.title">Console {{ unit.name }}</h4>
 			<div :class="$style.close" @click="toggleFullscreen">
 				<VIcon name="Close" />
 			</div>
@@ -44,10 +44,12 @@ export default class InstanceConsoleFullscreen extends Vue {
 	private readonly unit!: Unit;
 
 	@Ref()
-	private readonly inputEl!: HTMLInputElement;
+	private readonly inputEl!: VInput;
 
 	@Ref()
 	private readonly logsEl!: HTMLElement;
+
+	private ws!: WebSocket;
 
 	input = "";
 	logs: string[] = [];
@@ -75,31 +77,44 @@ export default class InstanceConsoleFullscreen extends Vue {
 	onInput() {
 		if (this.input.length === 0) return;
 
-		this.logs.push(this.input);
-		this.inputEl.value = "";
+		this.ws.send(
+			JSON.stringify({
+				o: 1,
+				d: {
+					tid: this.unit.instanceId,
+					v: this.input
+				}
+			})
+		);
+		this.input = "";
 	}
 
 	listenForLogs() {
 		logService.info("lets listen for logs");
+
 		const ws = new WebSocket("ws://localhost:8080");
 		ws.addEventListener("open", () => {
 			logService.info("ws connection established");
 			ws.send(
 				JSON.stringify({
-					code: 0,
-					"instance-id": this.unit.instanceId
+					o: 0,
+					d: {
+						tid: this.unit.instanceId
+					}
 				})
 			);
 		});
 		ws.addEventListener("message", (event) => {
 			logService.debug("ws received", event.data);
-			const result: any = JSON.parse(event.data);
-			this.logs.push(result.value);
+			const result: { o: number; d: any } = JSON.parse(event.data);
+			this.logs.push(result.d.v);
 			this.scrollDown();
 		});
 		ws.addEventListener("close", () => {
 			logService.info("ws closed");
 		});
+
+		this.ws = ws;
 	}
 }
 </script>
@@ -130,7 +145,6 @@ $console_font: "IBM Plex Mono", monospace;
 	color: $primary_color;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	overflow-y: auto;
 }
 
@@ -167,7 +181,7 @@ $console_font: "IBM Plex Mono", monospace;
 .fieldset {
 	display: flex;
 	flex-direction: row;
-	background-color: rgba(255, 255, 255, 0.12);
+	background-color: rgba(255, 255, 255, 0.05);
 	height: 42px;
 	padding: 0 1.6rem;
 }
@@ -175,7 +189,7 @@ $console_font: "IBM Plex Mono", monospace;
 .input {
 	background-color: transparent;
 	font-family: $console_font;
-	color: $primary_color;
+	color: #fff;
 	height: auto;
 	font-size: 14px;
 }

@@ -13,8 +13,12 @@ export default class TheUnitSidebarSection extends Vue {}
 
 <style lang="scss" module>
 .root {
-	margin: 24px 0;
+	margin-top: 1.2rem;
 	display: flex;
 	flex-direction: column;
+
+	&:first-child {
+		margin-top: 2.4rem;
+	}
 }
 </style>

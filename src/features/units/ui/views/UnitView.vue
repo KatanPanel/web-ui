@@ -15,9 +15,7 @@ export default class UnitView extends Vue {
 </script>
 <style lang="scss" module>
 .root {
-	display: flex;
-	flex-direction: column;
-	height: 100%;
+	flex-grow: 1;
 	padding: 2.4rem;
 }
 </style>
