@@ -4,18 +4,19 @@
 			<div :class="$style.details">
 				<h4><b>Overview</b></h4>
 				<div :class="$style.analytics">
-					<VLabel :on-color="true">Analytics</VLabel>
+					<VLabel :on-color="true">Server Information</VLabel>
 				</div>
 			</div>
-			<div :class="$style.updateCheck">
-				<div class="icon">
-
-				</div>
-				<div class="title">Checking for updates...</div>
-			</div>
+			<!--			<div :class="$style.updateCheck">-->
+			<!--				<div class="icon" />-->
+			<!--				<div class="title">Checking for updates...</div>-->
+			<!--			</div>-->
 		</div>
 		<VContainer :class="$style.container">
-			<h4>Welcome</h4>
+			<PageHeader>
+				<template #title>Welcome</template>
+			</PageHeader>
+
 			<HomeUnitsList />
 		</VContainer>
 	</div>
@@ -25,12 +26,14 @@ import { Component, Vue } from "vue-facing-decorator";
 import HomeUnitsList from "@/features/home/ui/components/HomeUnitsList.vue";
 import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
 import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
+import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
 
 @Component({
 	components: {
 		VLabel,
 		VContainer,
-		HomeUnitsList
+		HomeUnitsList,
+		PageHeader
 	}
 })
 export default class HomeView extends Vue {}
@@ -53,13 +56,12 @@ export default class HomeView extends Vue {}
 }
 
 .details {
-	padding: 2.4rem;
+	padding: 3.6rem 2.4rem;
 }
 
 .container {
 	float: right;
 	flex-shrink: 0;
-	padding: 2.4rem 0;
 }
 
 .updateCheck {

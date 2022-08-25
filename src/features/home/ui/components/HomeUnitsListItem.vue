@@ -1,17 +1,20 @@
 <template>
-	<li class="root">
+	<VCard :hoverable="true" :class="$style.root">
 		<router-link :to="getTargetUnitLocation">
 			<h6>{{ name }}</h6>
 			<p>{{ unitId }}</p>
 		</router-link>
-	</li>
+	</VCard>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { RouteLocationRaw } from "vue-router";
 import { UNIT_ROUTE } from "@/features/units/routing/units.routes";
+import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
 
-@Component
+@Component({
+	components: { VCard }
+})
 export default class HomeUnitsListItem extends Vue {
 	@Prop({ type: String, required: true })
 	private readonly unitId!: string;
@@ -29,15 +32,8 @@ export default class HomeUnitsListItem extends Vue {
 	}
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss" module>
 .root {
-	box-shadow: inset 0 0 0 1.5px var(--kt-border-low);
-	border-radius: 8px;
-
-	&:hover {
-		box-shadow: inset 0 0 0 1.5px var(--kt-border-medium);
-	}
-
 	&:not(:last-child) {
 		margin-bottom: 8px;
 	}

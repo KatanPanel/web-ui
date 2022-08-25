@@ -27,7 +27,7 @@ export default class VCard extends Vue {
 
 	&.hoverable:hover {
 		cursor: pointer;
-		box-shadow: inset 0 0 0 1.5px var(--kt-border-medium);
+		background-color: var(--kt-content-primary-overlay);
 	}
 }
 </style>
