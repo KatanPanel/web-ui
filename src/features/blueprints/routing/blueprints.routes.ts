@@ -8,7 +8,6 @@ export const BLUEPRINTS_ROUTES = "blueprints";
 export const BlueprintsRoutes: Array<RouteRecordRaw> = [
 	{
 		path: "/blueprints",
-		name: BLUEPRINTS_ROUTES,
 		component: importView(FEATURE_NAME, "BlueprintsView"),
 		children: [
 			{

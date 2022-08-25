@@ -21,7 +21,9 @@ export default class VCard extends Vue {
 	align-items: center;
 	border-radius: 8px;
 	padding: 8px;
-	box-shadow: inset 0 0 0 1.5px var(--kt-border-low);
+	background-color: var(--kt-background-surface);
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.12),
+		0px 3px 4px -1px rgba(0, 0, 0, 0.04);
 
 	&.hoverable:hover {
 		cursor: pointer;

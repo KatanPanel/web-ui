@@ -2,7 +2,7 @@
 	<li class="root">
 		<router-link :to="getTargetUnitLocation">
 			<h6>{{ name }}</h6>
-			<p>{{ unitId }} ({{ instanceId }})</p>
+			<p>{{ unitId }}</p>
 		</router-link>
 	</li>
 </template>
@@ -18,9 +18,6 @@ export default class HomeUnitsListItem extends Vue {
 
 	@Prop({ type: String, required: true })
 	private readonly name!: string;
-
-	@Prop({ type: String, required: true })
-	private readonly instanceId!: string;
 
 	get getTargetUnitLocation(): RouteLocationRaw {
 		return {

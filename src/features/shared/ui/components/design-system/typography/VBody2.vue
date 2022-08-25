@@ -14,7 +14,7 @@ export default class VBody2 extends Vue {}
 .root {
 	font-family: var(--kt-body-font);
 	font-weight: 400;
-	font-size: 14px;
+	font-size: 15px;
 	letter-spacing: 0;
 }
 </style>

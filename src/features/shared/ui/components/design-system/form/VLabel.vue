@@ -1,14 +1,24 @@
 <template>
-	<label :class="$style.root">
+	<label
+		:class="[
+			$style.root,
+			{
+				[$style.onColor]: onColor
+			}
+		]"
+	>
 		<slot />
 	</label>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-facing-decorator";
+import { Component, Prop, Vue } from "vue-facing-decorator";
 
 @Component
-export default class VLabel extends Vue {}
+export default class VLabel extends Vue {
+	@Prop({ type: Boolean })
+	private readonly onColor!: boolean;
+}
 </script>
 <style lang="scss" module>
 .root {
@@ -24,5 +34,9 @@ export default class VLabel extends Vue {}
 	&:not(:first-child) {
 		margin-top: 16px;
 	}
+}
+
+.onColor {
+	color: var(--kt-content-primary-oncolor);
 }
 </style>

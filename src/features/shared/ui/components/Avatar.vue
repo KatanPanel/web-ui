@@ -47,7 +47,6 @@ export default class Avatar extends Vue {
 	min-height: 40px;
 	min-width: 40px;
 	box-shadow: 0 0 4px 0 RGB(0 0 0 / 12%) inset;
-	margin-right: 16px;
 	border-radius: 50%;
 	background-size: cover;
 	background-position: center;

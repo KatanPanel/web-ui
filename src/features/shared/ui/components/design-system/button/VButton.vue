@@ -41,9 +41,9 @@ export default class VButton extends Vue {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	font-weight: 400;
+	font-weight: 600;
 	font-size: 14px;
-	border-radius: 4px;
+	border-radius: 8px;
 	outline: none;
 	appearance: none;
 	-webkit-appearance: none;
@@ -51,7 +51,8 @@ export default class VButton extends Vue {
 	border: 1px solid transparent;
 	user-select: none;
 	position: relative;
-	padding: 12px 16px;
+	height: 36px;
+	padding: 0.8rem 1.6rem;
 	font-family: var(--kt-body-font);
 
 	&:hover,

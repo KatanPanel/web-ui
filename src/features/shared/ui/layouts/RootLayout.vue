@@ -25,6 +25,8 @@ export default class RootLayout extends Vue {}
 }
 
 .body {
+	display: flex;
 	flex-grow: 1;
+	flex-direction: column;
 }
 </style>
