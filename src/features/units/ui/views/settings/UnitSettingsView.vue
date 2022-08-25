@@ -1,7 +1,7 @@
 <template>
 	<VContainer>
 		<PageHeader>
-			<template #title>{{ $t("units.settings.title") }}</template>
+			<template #title><span v-t="'units.settings.title'" /></template>
 		</PageHeader>
 		<VTabList accessibility-label="Settings Tab">
 			<VTab id="general" label="General">

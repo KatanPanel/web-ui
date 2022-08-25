@@ -1,7 +1,9 @@
 <template>
 	<VContainer>
 		<PageHeader>
-			<template #title>{{ $t("blueprints.home.title") }}</template>
+			<template #title>
+				<span v-t="'blueprints.home.title'" />
+			</template>
 		</PageHeader>
 	</VContainer>
 </template>

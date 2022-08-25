@@ -42,8 +42,8 @@ export default class VInput extends Vue {
 	&[readonly] {
 		user-select: none;
 		cursor: default;
-		font-weight: 600;
-		color: var(--kt-content-neutral-low);
+		font-weight: 500;
+		color: var(--kt-content-neutral);
 	}
 
 	&[disabled] {

@@ -4,7 +4,9 @@
 		<VBody2 v-if="$slots.subtitle" :class="$style.subtitle">
 			<slot name="subtitle" />
 		</VBody2>
-		<slot />
+		<div v-if="$slots.default" :class="$style.body">
+			<slot />
+		</div>
 	</div>
 </template>
 
@@ -30,5 +32,9 @@ export default class PageHeader extends Vue {}
 .subtitle {
 	margin-top: 1.6rem;
 	color: var(--kt-content-neutral);
+}
+
+.body {
+	margin-top: 1.2rem;
 }
 </style>

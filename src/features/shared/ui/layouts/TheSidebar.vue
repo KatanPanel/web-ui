@@ -66,7 +66,7 @@ export default class TheSidebar extends Vue {
 <style lang="scss" scoped>
 .root {
 	background-color: var(--kt-background-surface);
-	border-right: 1px solid var(--kt-border-low);
+	//border-right: 1px solid var(--kt-border-low);
 	padding: 20px 0;
 	display: flex;
 	flex-direction: column;

@@ -1,43 +1,44 @@
 <template>
 	<AuthLayout>
-		<h4>{{ $t("auth.login.title") }}</h4>
-		<VBody2 class="description">{{ $t("auth.login.subtitle") }}</VBody2>
-		<VAlert v-if="errorCode" class="alert" variant="error">
-			{{ $t("auth.login.error-title") }}
-			<template v-slot:description>
-				{{ $t(`error.${errorCode}`) }}
+		<h4 v-t="'auth.login.title'" />
+		<VBody2 :class="$style.description" v-t="'auth.login.subtitle'" />
+		<VAlert :class="$style.alert" :variant="'error'" v-if="errorCode">
+			<template #title>
+				<span v-t="'auth.login.error-title'" />
+			</template>
+			<template #description>
+				<span v-t="`error.${errorCode}`"></span>
 			</template>
 		</VAlert>
 		<VForm @submit.prevent="performLogin">
 			<VFieldSet>
 				<VLabel>
-					{{ $t("auth.login.username-label") }}
+					<span v-t="'auth.login.username-label'" />
 					<VInput
-						v-model="username"
 						autocomplete="username"
-						required
 						type="text"
+						required="true"
+						v-model="username"
 					/>
 				</VLabel>
 				<VLabel>
-					{{ $t("auth.login.password-label") }}
+					<span v-t="'auth.login.password-label'" />
 					<VInput
-						v-model="password"
 						autocomplete="current-password"
-						required
 						type="password"
+						required="true"
+						v-model="password"
 					/>
 				</VLabel>
 			</VFieldSet>
 			<VButton
-				:disabled="loading"
-				block
-				class="login-button"
 				type="submit"
-				variant="primary"
-			>
-				{{ $t("auth.login.submit-button") }}
-			</VButton>
+				:disabled="loading"
+				:class="$style.loginButton"
+				:variant="'primary'"
+				:block="true"
+				v-t="'auth.login.submit-button'"
+			/>
 		</VForm>
 	</AuthLayout>
 </template>
@@ -95,17 +96,19 @@ export default class AuthLoginView extends Vue {
 	}
 }
 </script>
-<style lang="scss" scoped>
-.login-button {
+<style lang="scss" module>
+.loginButton {
 	margin-top: 2.4rem;
 }
 
 .description {
+	margin-top: 0.8rem;
 	margin-bottom: 1.8rem;
-	color: var(--kt-content-neutral-low);
+	color: var(--kt-content-neutral);
 }
 
 .alert {
-	margin-bottom: 2.4rem;
+	margin-top: -0.8rem;
+	margin-bottom: 2.4rem !important;
 }
 </style>

@@ -22,7 +22,6 @@ export default class RootLayout extends Vue {}
 .root {
 	display: flex;
 	height: 100%;
-	background-color: var(--kt-background-surface);
 }
 
 .body {

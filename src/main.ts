@@ -5,8 +5,6 @@ import "./registerServiceWorker";
 import appStore from "@/store";
 import appRouter from "@/router";
 import { setupI18n } from "@/i18n";
-import { getModule } from "vuex-module-decorators";
-import AccountStore from "@/features/account/store/account.store";
 import { ComponentCustomProperties } from "@vue/runtime-core";
 import VueHead from "vue-head";
 import "vue-progressive-image/dist/style.css";
@@ -25,10 +23,7 @@ app.config.unwrapInjectedRef = true;
 
 // assigned all declared augmented types from shims-vue.d.ts
 Object.assign(app.config.globalProperties, {
-	$isDevelopmentMode: process.env.NODE_ENV !== "production",
-	$katan: {
-		getUser: () => getModule(AccountStore).getAccount
-	}
+	$isDevelopmentMode: process.env.NODE_ENV !== "production"
 } as ComponentCustomProperties);
 
 app.mount("#app");

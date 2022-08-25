@@ -41,7 +41,6 @@ export default class UnitsLayout extends Vue {
 .root {
 	display: flex;
 	height: 100%;
-	background-color: var(--kt-background-body);
 }
 
 .body {

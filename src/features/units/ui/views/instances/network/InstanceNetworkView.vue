@@ -1,27 +1,28 @@
 <template>
 	<VContainer>
 		<PageHeader>
-			<template #title>{{ $t("instances.network.title") }}</template>
+			<template #title>
+				<span v-t="'instances.network.title'" />
+			</template>
+			<VAlert variant="info">
+				<template #description> Abcdefghijklmnopqrstuvwxyz </template>
+			</VAlert>
 		</PageHeader>
-		<VAlert variant="error" v-if="false">
-			Network assignment failed
+		<VAlert v-if="isNetworkAssignmentFailedStatus()" variant="error">
+			<template #title>Network assignment failed</template>
 			<template #description>Descriptioosodsoso</template>
 		</VAlert>
 		<VForm>
 			<VRow>
 				<VCol :size="10">
 					<VFieldSet>
-						<VLabel>{{
-							$t("instances.network.host.label")
-						}}</VLabel>
+						<VLabel v-t="'instances.network.host.label'" />
 						<VInput :value="instance.connection.host" readonly />
 					</VFieldSet>
 				</VCol>
 				<VCol :size="2">
 					<VFieldSet>
-						<VLabel>{{
-							$t("instances.network.port.label")
-						}}</VLabel>
+						<VLabel v-t="'instances.network.port.label'" />
 						<VInput :value="instance.connection.port" readonly />
 					</VFieldSet>
 				</VCol>
@@ -59,5 +60,9 @@ import VCol from "@/features/shared/ui/components/design-system/grid/VCol.vue";
 export default class InstanceNetworkView extends Vue {
 	@Inject()
 	private readonly instance!: Instance;
+
+	isNetworkAssignmentFailedStatus() {
+		return this.instance.status === "network-assignment-failed";
+	}
 }
 </script>

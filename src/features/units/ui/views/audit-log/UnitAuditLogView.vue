@@ -1,7 +1,7 @@
 <template>
 	<PageHeader>
-		<template #title>{{ $t("units.audit-log.title") }}</template>
-		<template #subtitle>{{ $t("units.audit-log.subtitle") }}</template>
+		<template #title><span v-t="'units.audit-log.title'" /></template>
+		<template #subtitle><span v-t="'units.audit-log.subtitle'" /></template>
 	</PageHeader>
 	<ul v-if="auditLog">
 		<UnitAuditLogEntry

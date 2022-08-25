@@ -5,10 +5,7 @@
 		</div>
 		<div :class="$style.account_info">
 			<router-link :to="routeToAccount" title="My Account">
-				<Avatar
-					:src="account.avatar"
-					:label="`${account.username} avatar`"
-				/>
+				<Avatar :src="undefined" :label="`Account avatar`" />
 			</router-link>
 		</div>
 	</header>
@@ -18,7 +15,6 @@
 import { Component, Vue } from "vue-facing-decorator";
 import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
 import Avatar from "@/features/shared/ui/components/Avatar.vue";
-import { Account } from "@/features/account/models/account.model";
 import { RouteLocationRaw } from "vue-router";
 import { ACCOUNT_ROUTE } from "@/features/account/routing/accounts.routes";
 
@@ -29,10 +25,6 @@ export default class TheSidebar extends Vue {
 	readonly routeToAccount: RouteLocationRaw = {
 		name: ACCOUNT_ROUTE
 	};
-
-	get account(): Account {
-		return this.$katan.getUser();
-	}
 }
 </script>
 <style lang="scss" module>

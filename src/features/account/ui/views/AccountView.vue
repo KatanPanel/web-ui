@@ -1,15 +1,10 @@
-<template>Current account: {{ account.id }}</template>
+<template>Current account</template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import { Account } from "@/features/account/models/account.model";
 
 @Component
-export default class AccountView extends Vue {
-	get account(): Account {
-		return this.$katan.getUser();
-	}
-}
+export default class AccountView extends Vue {}
 </script>
 
 <style lang="scss" scoped></style>

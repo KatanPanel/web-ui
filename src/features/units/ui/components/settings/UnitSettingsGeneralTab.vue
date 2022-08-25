@@ -1,7 +1,7 @@
 <template>
 	<VForm @submit.prevent="onSubmit" :class="$style.form">
 		<VFieldSet>
-			<VLabel>{{ $t("units.settings.general.unit-name.label") }}</VLabel>
+			<VLabel v-t="'units.settings.general.unit-name.label'" />
 			<VInput
 				:placeholder="
 					$t(`units.settings.general.unit-name.placeholder`)

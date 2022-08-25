@@ -1,4 +1,3 @@
-import { Account } from "@/features/account/models/account.model";
 import { ComponentPublicInstance } from "vue";
 
 /* eslint-disable */
@@ -13,10 +12,6 @@ declare module "*.vue" {
 declare module "@vue/runtime-core" {
 	interface ComponentCustomProperties {
 		$isDevelopmentMode: boolean;
-		$katan: {
-			getUser: () => Account;
-		};
-
 		created(this: ComponentPublicInstance): void;
 		mounted(this: ComponentPublicInstance): void;
 		beforeMount(this: ComponentPublicInstance): void;
