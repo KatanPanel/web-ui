@@ -1,9 +1,9 @@
 <template>
-	<aside class="root" role="complementary">
-		<div class="logo">
+	<aside :class="$style.root" role="complementary">
+		<div :class="$style.logo">
 			<router-link to="/"><TheLogo :black="true" /></router-link>
 		</div>
-		<div class="items">
+		<div :class="$style.items">
 			<ul>
 				<li>
 					<router-link :to="linkToAbout()">
@@ -27,12 +27,21 @@
 				</li>
 			</ul>
 		</div>
-		<div class="items">
+		<div :class="$style.items">
 			<ul>
 				<li>
 					<a :href="appWebsite" target="_blank">
 						<VIcon name="HelpCircleOutline" />
 					</a>
+				</li>
+				<li>
+					<router-link :to="linkToAccount()" :class="$style.account">
+						<Avatar
+							:class="$style.accountAvatar"
+							:src="undefined"
+							label="Account avatar"
+						/>
+					</router-link>
 				</li>
 			</ul>
 		</div>
@@ -47,9 +56,11 @@ import configService from "@/features/shared/data/config.service";
 import { RouteLocationRaw } from "vue-router";
 import { ABOUT_ROUTE } from "@/features/home/routing/home.routes";
 import { BLUEPRINTS_ROUTES } from "@/features/blueprints/routing/blueprints.routes";
+import { ACCOUNT_ROUTE } from "@/features/account/routing/accounts.routes";
+import Avatar from "@/features/shared/ui/components/Avatar.vue";
 
 @Component({
-	components: { TheLogo, VIcon }
+	components: { TheLogo, VIcon, Avatar }
 })
 export default class TheSidebar extends Vue {
 	private readonly appWebsite = configService.appWebsite;
@@ -61,9 +72,13 @@ export default class TheSidebar extends Vue {
 	linkToBlueprints(): RouteLocationRaw {
 		return { name: BLUEPRINTS_ROUTES };
 	}
+
+	linkToAccount(): RouteLocationRaw {
+		return { name: ACCOUNT_ROUTE };
+	}
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss" module>
 .root {
 	background-color: var(--kt-background-surface);
 	//border-right: 1px solid var(--kt-border-low);
@@ -119,5 +134,12 @@ export default class TheSidebar extends Vue {
 			}
 		}
 	}
+}
+
+.account {
+}
+
+.accountAvatar {
+	max-height: 24px;
 }
 </style>
