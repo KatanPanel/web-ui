@@ -1,9 +1,7 @@
 <template>
 	<PageHeader>
 		<template #title>Bucket</template>
-		<template #subtitle>
-			{{ bucketId }}
-		</template>
+		<template #subtitle> {{ bucketId }} {{ this.path ?? "/" }} </template>
 	</PageHeader>
 	<div v-if="files">
 		<EmptyState
@@ -33,20 +31,37 @@
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";
 import instancesPresenter from "@/features/units/ui/instances.presenter";
-import { Instance } from "@/features/units/models/instance.model";
+import {
+	Instance,
+	InstanceFsBucket
+} from "@/features/units/models/instance.model";
 import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
 import EmptyState from "@/features/shared/ui/components/EmptyState.vue";
 import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
 import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
 import { RouteLocationRaw } from "vue-router";
-import { watch } from "vue";
+import { computed, watch } from "vue";
 
 @Component({
-	components: { VIcon, EmptyState, PageHeader, VContainer }
+	components: { VIcon, EmptyState, PageHeader, VContainer },
+	provide(this: InstanceFsBucketView) {
+		return {
+			bucket: computed(() => this.bucket)
+		};
+	}
 })
 export default class InstanceFsBucketView extends Vue {
 	@Inject()
 	private readonly instance!: Instance;
+
+	bucket: InstanceFsBucket | null = null;
+
+	created() {
+		const id = this.$route.params.bucketId as string;
+		instancesPresenter.getBucket(this.instance.id, id).then((result) => {
+			this.bucket = result;
+		});
+	}
 
 	files: unknown[] | null = null;
 
@@ -75,23 +90,23 @@ export default class InstanceFsBucketView extends Vue {
 		});
 	}
 
-	created() {
-		watch(
-			() => this.$route.query.path,
-			(newValue, oldValue) => {
-				console.log("route changed", oldValue, newValue);
-				this.loadFiles(newValue as string);
-			},
-			{
-				deep: true
-			}
-		);
-		this.loadFiles(this.path);
-	}
+	// created() {
+	// 	watch(
+	// 		() => this.$route.query.path,
+	// 		(newValue, oldValue) => {
+	// 			console.log("route changed", oldValue, newValue);
+	// 			this.loadFiles(newValue as string);
+	// 		},
+	// 		{
+	// 			deep: true
+	// 		}
+	// 	);
+	// 	this.loadFiles(this.path);
+	// }
 
 	loadFiles(path: string) {
 		instancesPresenter
-			.getBucketFiles(this.instance.id, this.bucketId, path)
+			.getFile(this.instance.id, this.bucketId, path)
 			.then((files) => {
 				this.files = (files as any[]).sort(
 					(x: any, y: any) => y["is-directory"] - x["is-directory"]

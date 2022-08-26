@@ -1,30 +1,39 @@
 import httpService from "@/features/shared/data/http.service";
 import { AxiosResponse } from "axios";
-import { InstanceResponse } from "@/features/units/data/response/instance.response";
+import {
+	InstanceFsBucketResponse,
+	InstanceFsFileResponse,
+	InstanceResponse
+} from "@/features/units/data/response/instance.response";
 
 class InstancesGateway {
 	async getInstance(id: string): Promise<InstanceResponse> {
-		return httpService.get(`instances/${id}`).then((res: AxiosResponse) => {
-			console.log("getInstance", res.data);
-			return res.data as InstanceResponse;
-		});
+		return httpService
+			.get(`instances/${id}`)
+			.then((response: AxiosResponse) => response.data);
 	}
 
-	async listInstanceFiles(
+	async getInstanceFile(
 		instanceId: string,
 		bucket: string,
 		path?: string
-	): Promise<unknown> {
+	): Promise<InstanceFsFileResponse> {
 		return httpService
-			.get(`instances/${instanceId}/fs/${bucket}/list`, {
+			.get(`instances/${instanceId}/fs/${bucket}/file`, {
 				params: {
 					path
 				}
 			})
-			.then((res: AxiosResponse) => {
-				console.log("listInstanceFiles", res.data);
-				return res.data.files;
-			});
+			.then((response: AxiosResponse) => response.data);
+	}
+
+	async getBucket(
+		instanceId: string,
+		bucket: string
+	): Promise<InstanceFsBucketResponse> {
+		return httpService
+			.get(`instances/${instanceId}/fs/${bucket}`)
+			.then((response: AxiosResponse) => response.data);
 	}
 }
 

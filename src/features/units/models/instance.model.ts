@@ -48,3 +48,25 @@ export interface InstanceConnection {
 	readonly host: string;
 	readonly port: number;
 }
+
+export interface InstanceFsFile {
+	readonly name: string;
+	readonly relativePath: string;
+	readonly absolutePath: string;
+	readonly size: number;
+	readonly isDirectory: boolean;
+	readonly isHidden: boolean;
+	readonly createdAt?: Date;
+	readonly modifiedAt?: Date;
+}
+
+export interface InstanceFsDirectory extends InstanceFsFile {
+	readonly children: InstanceFsFile[];
+}
+
+export interface InstanceFsBucket {
+	readonly path: string;
+	readonly name: string;
+	readonly isLocal: boolean;
+	readonly createdAt?: Date;
+}

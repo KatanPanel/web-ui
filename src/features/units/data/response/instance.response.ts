@@ -29,3 +29,26 @@ export type InstanceMountResponse = {
 	dest: boolean;
 	target: string;
 };
+
+export type InstanceFsSingleFileResponse = {
+	name: string;
+	"relative-path": string;
+	"absolute-path": string;
+	size: number;
+	"is-directory": boolean;
+	"is-hidden": boolean;
+	"created-at"?: string;
+	"modified-at"?: string;
+};
+
+export type InstanceFsFileResponse = {
+	file: InstanceFsSingleFileResponse;
+	children?: InstanceFsSingleFileResponse[];
+};
+
+export type InstanceFsBucketResponse = {
+	path: string;
+	name: string;
+	"is-local": boolean;
+	"created-at"?: string;
+};
