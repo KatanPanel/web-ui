@@ -1,6 +1,6 @@
 <template>
 	<AuthLayout>
-		<h4 v-t="'auth.login.title'" />
+		<h4><b v-t="'auth.login.title'" /></h4>
 		<VBody2 :class="$style.description" v-t="'auth.login.subtitle'" />
 		<VAlert :class="$style.alert" :variant="'error'" v-if="errorCode">
 			<template #title>
@@ -102,7 +102,7 @@ export default class AuthLoginView extends Vue {
 }
 
 .description {
-	margin-top: 0.8rem;
+	margin-top: 0.4rem;
 	margin-bottom: 1.8rem;
 	color: var(--kt-content-neutral);
 }

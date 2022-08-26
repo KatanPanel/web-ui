@@ -10,6 +10,8 @@ export const UNIT_SETTINGS_ROUTE = "unit.settings";
 export const INSTANCE_ROUTE = "instances";
 export const INSTANCE_CONSOLE_ROUTE = "instances.console";
 export const INSTANCE_NETWORK_ROUTE = "instances.network";
+export const INSTANCE_FS_ROUTE = "instances.fs";
+export const INSTANCE_FS_BUCKET_ROUTE = "instances.fs.buckets";
 
 export const UnitsRoute: Array<RouteRecordRaw> = [
 	{
@@ -57,6 +59,31 @@ export const UnitsRoute: Array<RouteRecordRaw> = [
 							FEATURE_NAME,
 							"instances/network/InstanceNetworkView"
 						)
+					},
+					{
+						path: "fs",
+						component: importView(
+							FEATURE_NAME,
+							"instances/fs/InstanceFsView"
+						),
+						children: [
+							{
+								path: "",
+								name: INSTANCE_FS_ROUTE,
+								component: importView(
+									FEATURE_NAME,
+									"instances/fs/InstanceFsBucketListView"
+								)
+							},
+							{
+								path: ":bucketId",
+								name: INSTANCE_FS_BUCKET_ROUTE,
+								component: importView(
+									FEATURE_NAME,
+									"instances/fs/buckets/InstanceFsBucketView"
+								)
+							}
+						]
 					}
 				]
 			}

@@ -4,6 +4,23 @@ export interface Instance {
 	readonly containerId?: string;
 	readonly updatePolicy: InstanceUpdatePolicy;
 	readonly connection?: InstanceConnection;
+	readonly runtime?: InstanceRuntime;
+}
+
+export interface InstanceRuntime {
+	readonly exitCode: number;
+	readonly startedAt?: Date;
+	readonly finishedAt?: Date;
+	readonly status: string;
+	readonly oom: boolean;
+	readonly pid: number;
+	readonly platform: string;
+	readonly mounts: InstanceMount[];
+}
+
+export interface InstanceMount {
+	readonly id: string;
+	readonly readonly: boolean;
 }
 
 export type InstanceUpdatePolicy = "always" | "never";

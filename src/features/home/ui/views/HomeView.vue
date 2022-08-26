@@ -48,7 +48,7 @@ export default class HomeView extends Vue {}
 	float: left;
 	width: 360px;
 	background-color: var(--kt-content-primary);
-	color: #fff; // TODO use on color text
+	color: var(--kt-content-primary-oncolor);
 	position: relative;
 	display: flex;
 	flex-direction: column;

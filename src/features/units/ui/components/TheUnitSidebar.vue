@@ -42,6 +42,12 @@
 			>
 				Audit Log
 			</TheUnitSidebarSectionItem>
+			<TheUnitSidebarSectionItem
+				:href="links.instance?.files"
+				icon="Folder"
+			>
+				Files
+			</TheUnitSidebarSectionItem>
 			<TheUnitSidebarSectionItem :href="links.settings" icon="CogOutline">
 				Settings
 			</TheUnitSidebarSectionItem>
@@ -53,6 +59,7 @@
 import { Component, Inject, Vue } from "vue-facing-decorator";
 import {
 	INSTANCE_CONSOLE_ROUTE,
+	INSTANCE_FS_ROUTE,
 	INSTANCE_NETWORK_ROUTE,
 	UNIT_AUDIT_LOG_ROUTE,
 	UNIT_ROUTE,
@@ -101,12 +108,19 @@ export default class TheUnitSidebar extends Vue {
 							params: {
 								instanceId: this.unit.instanceId
 							}
+						},
+						files: {
+							name: INSTANCE_FS_ROUTE,
+							params: {
+								instanceId: this.unit.instanceId
+							}
 						}
 				  }
 				: null
 		});
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	onTogglerClick(): void {}
 }
 </script>

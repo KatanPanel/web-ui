@@ -16,18 +16,14 @@ export default class VCard extends Vue {
 
 <style lang="scss" scoped>
 .card {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
 	border-radius: 8px;
 	padding: 8px;
 	background-color: var(--kt-background-surface);
-	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.12),
-		0px 3px 4px -1px rgba(0, 0, 0, 0.04);
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.12), 0 3px 4px -1px rgba(0, 0, 0, 0.04);
 
 	&.hoverable:hover {
 		cursor: pointer;
-		background-color: var(--kt-content-primary-overlay);
+		background-color: var(--kt-background-surface-hover);
 	}
 }
 </style>

@@ -1,3 +1,12 @@
+export function undefinedOr<T, R = unknown>(
+	value: T | undefined,
+	fallback: (value: T) => unknown
+): R | undefined {
+	if (!isUndefined(value)) return fallback(value) as R;
+
+	return undefined;
+}
+
 /**
  * Returns `true` if the {@param value} is `undefined` or `false` otherwise.
  * @param {*} value - the value.

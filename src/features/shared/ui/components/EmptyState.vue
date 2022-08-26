@@ -1,5 +1,12 @@
 <template>
-	<div :class="$style.root">
+	<div
+		:class="[
+			$style.root,
+			{
+				[$style.alignedY]: alignY
+			}
+		]"
+	>
 		<VIcon :name="icon" :class="$style.icon" />
 		<div :class="$style.text">
 			<slot />
@@ -17,6 +24,9 @@ import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue"
 export default class EmptyState extends Vue {
 	@Prop({ type: String, required: true })
 	private readonly icon!: string;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly alignY!: boolean;
 }
 </script>
 
@@ -30,6 +40,11 @@ export default class EmptyState extends Vue {
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+.alignedY {
+	top: 50%;
+	transform: translate(-50%, 50%);
 }
 
 .icon svg {
