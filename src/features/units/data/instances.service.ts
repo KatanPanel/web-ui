@@ -7,6 +7,8 @@ import instancesGateway from "@/features/units/data/instances.gateway";
 import instancesMapper from "@/features/units/data/mappers/instances.mapper";
 
 class InstancesService {
+	private textDecoder = new TextDecoder();
+
 	async getInstance(id: string): Promise<Instance> {
 		return instancesGateway
 			.getInstance(id)
@@ -21,6 +23,20 @@ class InstancesService {
 		return instancesGateway
 			.getInstanceFile(instanceId, bucket, path)
 			.then((response) => instancesMapper.toFile(response));
+	}
+
+	async readFile(
+		instanceId: string,
+		bucket: string,
+		path: string
+	): Promise<string> {
+		return instancesGateway
+			.readFile(instanceId, bucket, path)
+			.then((res) => {
+				return this.textDecoder.decode(res.data, {
+					stream: false
+				});
+			});
 	}
 
 	async getBucket(

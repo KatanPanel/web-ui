@@ -34,7 +34,7 @@ export type InstanceFsSingleFileResponse = {
 	name: string;
 	"relative-path": string;
 	"absolute-path": string;
-	size: number;
+	size: number; // TODO use bigint when response became a string
 	"is-directory": boolean;
 	"is-hidden": boolean;
 	"created-at"?: string;
@@ -51,4 +51,9 @@ export type InstanceFsBucketResponse = {
 	name: string;
 	"is-local": boolean;
 	"created-at"?: string;
+};
+
+export type InstanceFsReadFileResponse = {
+	contentLength: number;
+	data: ArrayBuffer;
 };

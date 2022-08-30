@@ -3,6 +3,7 @@ import { AxiosResponse } from "axios";
 import {
 	InstanceFsBucketResponse,
 	InstanceFsFileResponse,
+	InstanceFsReadFileResponse,
 	InstanceResponse
 } from "@/features/units/data/response/instance.response";
 
@@ -20,11 +21,30 @@ class InstancesGateway {
 	): Promise<InstanceFsFileResponse> {
 		return httpService
 			.get(`instances/${instanceId}/fs/${bucket}/file`, {
-				params: {
-					path
-				}
+				params: { path }
 			})
-			.then((response: AxiosResponse) => response.data);
+			.then((response: AxiosResponse) => {
+				console.log("response", response.data);
+				return response.data;
+			});
+	}
+
+	async readFile(
+		instanceId: string,
+		bucket: string,
+		path: string
+	): Promise<InstanceFsReadFileResponse> {
+		return httpService
+			.get(`instances/${instanceId}/fs/${bucket}/file/read`, {
+				params: { path },
+				responseType: "arraybuffer"
+			})
+			.then((response: AxiosResponse) => {
+				return {
+					contentLength: Number(response.headers["Content-Length"]),
+					data: response.data
+				};
+			});
 	}
 
 	async getBucket(
