@@ -5,6 +5,14 @@
 		</PageHeader>
 		<VForm>
 			<VRow>
+				<VCol :size="6">
+					<VFieldSet>
+						<VLabel>ID</VLabel>
+						<VInput type="text" :value="account.id" readonly />
+					</VFieldSet>
+				</VCol>
+			</VRow>
+			<VRow>
 				<VCol :size="4">
 					<VFieldSet>
 						<VLabel>Username</VLabel>
