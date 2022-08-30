@@ -25,6 +25,7 @@ class AuthService {
 			return {
 				id: response.id,
 				username: response.username,
+				email: response.email,
 				createdAt: new Date(response["created-at"]),
 				updatedAt: new Date(response["updated-at"]),
 				lastLoggedInAt: isUndefined(lastLoggedInAt)
