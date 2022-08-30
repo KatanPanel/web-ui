@@ -20,3 +20,8 @@
 	--kt-border-medium: rgba(48, 55, 66, 0.2);
 	--kt-border-low: rgba(48, 55, 66, 0.1);
 }
+
+hr {
+	border-top: 1px solid var(--kt-border-low);
+	margin: 1.6rem 0;
+}
