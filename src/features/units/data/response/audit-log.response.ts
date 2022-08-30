@@ -1,4 +1,5 @@
 export type AuditLogResponse = {
+	actors: any[]; // TODO type safety
 	entries: AuditLogEntryResponse[];
 };
 

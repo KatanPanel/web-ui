@@ -1,4 +1,5 @@
 export interface AuditLog {
+	readonly actors: any[];
 	readonly entries: AuditLogEntry[];
 }
 
@@ -6,7 +7,8 @@ export interface AuditLog {
 export type AuditLogEventsType = { [key: string]: number };
 
 export const AuditLogEvents: { [name: string]: AuditLogEvent } = {
-	unitCreate: 1
+	UnitCreate: 1,
+	UnitUpdate: 2
 };
 
 export type AuditLogEvent = number;
