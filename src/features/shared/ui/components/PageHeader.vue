@@ -22,7 +22,7 @@ export default class PageHeader extends Vue {}
 
 <style lang="scss" module>
 .root {
-	margin: 3.6rem 0 2.4rem;
+	margin: 4.8rem 0 2.4rem;
 }
 
 .title {
