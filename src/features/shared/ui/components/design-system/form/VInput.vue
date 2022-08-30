@@ -1,7 +1,6 @@
 <template>
 	<input
 		:class="$style.root"
-		:value="$props.modelValue"
 		v-bind="{
 			disabled: disabled,
 			readonly: disabled,
@@ -37,13 +36,13 @@ export default class VInput extends Vue {
 	width: 100%;
 	border-radius: 8px;
 	letter-spacing: 0.25px;
-	background-color: var(--kt-background-surface-high);
+	background-color: var(--kt-background-surface);
 
 	&[readonly] {
 		user-select: none;
 		cursor: default;
 		font-weight: 500;
-		color: var(--kt-content-neutral);
+		background-color: var(--kt-background-surface-high);
 	}
 
 	&[disabled] {
@@ -53,7 +52,7 @@ export default class VInput extends Vue {
 	}
 
 	&::placeholder {
-		font-family: var(--kt-headline-font);
+		font-family: var(--kt-body-font);
 		font-weight: 600;
 		opacity: 0.54;
 	}
