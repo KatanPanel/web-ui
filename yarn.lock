@@ -990,6 +990,70 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@codemirror/autocomplete@^6.0.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/autocomplete/-/autocomplete-6.1.0.tgz#7d3ca6d49e3a71cfd366c0af16172f5c128376eb"
+  integrity sha512-wtO4O5WDyXhhCd4q4utDIDZxnQfmJ++3dGBCG9LMtI79+92OcA1DVk/n7BEupKmjIr8AzvptDz7YQ9ud6OkU+A==
+  dependencies:
+    "@codemirror/language" "^6.0.0"
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+    "@lezer/common" "^1.0.0"
+
+"@codemirror/commands@6.x", "@codemirror/commands@^6.0.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/commands/-/commands-6.1.0.tgz#c9da851f419f25dae400d7cd94f80b80ef060696"
+  integrity sha512-qCj2YqmbBjj0P1iumnlL5lBqZvJPzT+t2UvgjcaXErp5ZvMqFRVgQyrEfdXX6SX5UcvcHKBjXqno+MkUp0aYvQ==
+  dependencies:
+    "@codemirror/language" "^6.0.0"
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+    "@lezer/common" "^1.0.0"
+
+"@codemirror/language@6.x", "@codemirror/language@^6.0.0":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@codemirror/language/-/language-6.2.1.tgz#cb10cd785a76e50ecd2fe2dc59ff66af8a41b87a"
+  integrity sha512-MC3svxuvIj0MRpFlGHxLS6vPyIdbTr2KKPEW46kCoCXw2ktb4NTkpkPBI/lSP/FoNXLCBJ0mrnUi1OoZxtpW1Q==
+  dependencies:
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+    "@lezer/common" "^1.0.0"
+    "@lezer/highlight" "^1.0.0"
+    "@lezer/lr" "^1.0.0"
+    style-mod "^4.0.0"
+
+"@codemirror/lint@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/lint/-/lint-6.0.0.tgz#a249b021ac9933b94fe312d994d220f0ef11a157"
+  integrity sha512-nUUXcJW1Xp54kNs+a1ToPLK8MadO0rMTnJB8Zk4Z8gBdrN0kqV7uvUraU/T2yqg+grDNR38Vmy/MrhQN/RgwiA==
+  dependencies:
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+    crelt "^1.0.5"
+
+"@codemirror/search@^6.0.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/search/-/search-6.2.0.tgz#05742292c8414dfcf86bd27ef2908d43620f79d2"
+  integrity sha512-FVhpUvPFUJe8lg2EQJTTcF4RNI9d/OC3PVitvOfhv5OuY7ZgtMfJl22o5eMkzOEsUY2Wxe7BKGLpe2UI5Wq3PQ==
+  dependencies:
+    "@codemirror/state" "^6.0.0"
+    "@codemirror/view" "^6.0.0"
+    crelt "^1.0.5"
+
+"@codemirror/state@6.x", "@codemirror/state@^6.0.0":
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/@codemirror/state/-/state-6.1.1.tgz#4f512e5e34ea23a5e10b2c1fe43f6195e90417bb"
+  integrity sha512-2s+aXsxmAwnR3Rd+JDHPG/1lw0YsA9PEwl7Re88gHJHGfxyfEzKBmsN4rr53RyPIR4lzbbhJX0DCq0WlqlBIRw==
+
+"@codemirror/view@6.x", "@codemirror/view@^6.0.0":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@codemirror/view/-/view-6.2.1.tgz#299698639c658c738f10021c5ea78a513c63977b"
+  integrity sha512-r1svbtAj2Lp/86F3yy1TfDAOAtJRGLINLSEqByETyUaGo1EnLS+P+bbGCVHV62z46BzZYm16noDid69+4bzn0g==
+  dependencies:
+    "@codemirror/state" "^6.0.0"
+    style-mod "^4.0.0"
+    w3c-keyname "^2.2.4"
+
 "@eslint/eslintrc@^0.4.3":
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.4.3.tgz#9e42981ef035beb3dd49add17acb96e8ff6f394c"
