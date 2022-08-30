@@ -27,6 +27,7 @@ export default class VAlert extends Vue {
 
 	get getIconName(): string {
 		let name: string | undefined = undefined;
+		if (this.variant === "default") name = "HelpCircleOutline";
 		if (this.variant === "info") name = "InformationOutline";
 		if (this.variant === "error") name = "AlertCircleOutline";
 
@@ -39,10 +40,10 @@ export default class VAlert extends Vue {
 </script>
 <style lang="scss" scoped>
 $base-padding: 1.2rem;
+$shadow: 1.5px;
 
 .alert {
 	background-color: var(--kt-background-surface-high);
-	box-shadow: inset 0 0 0 1.5px var(--kt-border-low);
 	border-radius: 8px;
 	display: flex;
 	margin-bottom: 0.8rem;
@@ -66,20 +67,18 @@ $base-padding: 1.2rem;
 }
 
 .alert__description {
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: 500;
-	margin-top: 4px;
 	padding: $base-padding $base-padding $base-padding 0;
 }
 
 .alert__title + .alert__description {
-	padding: 0;
-	padding-bottom: $base-padding;
+	padding: 0 0 $base-padding;
 }
 
 .alert--variant-error {
 	background-color: var(--kt-content-negative-overlay);
-	box-shadow: inset 0 0 0 1.5px var(--kt-content-negative-overlay);
+	box-shadow: inset 0 0 0 $shadow var(--kt-content-negative-overlay);
 
 	.alert__icon {
 		color: var(--kt-content-negative);
@@ -88,7 +87,7 @@ $base-padding: 1.2rem;
 
 .alert--variant-info {
 	background-color: var(--kt-content-primary-overlay);
-	box-shadow: inset 0 0 0 1.5px var(--kt-content-primary-overlay);
+	box-shadow: inset 0 0 0 $shadow var(--kt-content-primary-overlay);
 
 	.alert__icon {
 		color: var(--kt-content-primary);
