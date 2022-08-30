@@ -10,13 +10,14 @@
 		v-else
 		@error="onLoadError"
 		:class="$style.root"
-		:src="this.source"
+		:src="source"
 	/>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { isUndefined } from "@/utils";
+// noinspection TypeScriptCheckImport
 import { ProgressiveImage } from "vue-progressive-image";
 import logService from "@/features/shared/data/log.service";
 
@@ -24,7 +25,7 @@ import logService from "@/features/shared/data/log.service";
 	components: { ProgressiveImage }
 })
 export default class Avatar extends Vue {
-	@Prop({ type: String, required: true })
+	@Prop({ type: String })
 	private readonly src?: string | undefined;
 
 	@Prop({ type: String, required: true })
@@ -44,8 +45,6 @@ export default class Avatar extends Vue {
 .root {
 	width: 100%;
 	height: 100%;
-	min-height: 40px;
-	min-width: 40px;
 	box-shadow: 0 0 4px 0 RGB(0 0 0 / 12%) inset;
 	border-radius: 50%;
 	background-size: cover;
