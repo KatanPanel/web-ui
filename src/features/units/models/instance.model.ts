@@ -16,6 +16,17 @@ export interface InstanceRuntime {
 	readonly pid: number;
 	readonly platform: string;
 	readonly mounts: InstanceMount[];
+	readonly network: InstanceNetwork;
+}
+
+export interface InstanceNetwork {
+	readonly hostname: string;
+	readonly networks: InstanceNetworkConnection[];
+}
+
+export interface InstanceNetworkConnection {
+	readonly id: string;
+	readonly name: string;
 }
 
 export interface InstanceMount {

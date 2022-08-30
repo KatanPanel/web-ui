@@ -61,6 +61,7 @@ class UnitsService {
 
 	private static toAuditLogDomain(response: AuditLogResponse): AuditLog {
 		return {
+			actors: response.actors,
 			entries: response.entries.map((entry) =>
 				UnitsService.toAuditLogEntryDomain(entry)
 			)

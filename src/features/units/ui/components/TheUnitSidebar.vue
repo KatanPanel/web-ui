@@ -1,57 +1,32 @@
 <template>
-	<nav :class="$style.root" role="navigation">
-		<TheUnitSidebarToggler @click="onTogglerClick" />
-		<div :class="$style.header">
-			<div :class="$style.header__inner">
-				<div :class="$style.header__logo">
-					<Avatar :src="unit.logo" label="Logo" />
-				</div>
-				<div :class="$style.header__info">
-					<div :class="$style.header__info__name">
-						{{ unit.name }}
-					</div>
-					<div :class="$style.header__label">Workspace</div>
-				</div>
-			</div>
-			<TheUnitSidebarSection>
+	<nav v-if="unit" :class="$style.root" role="navigation">
+		<TheUnitSidebarHeader />
+		<template v-for="link in createLinks()" :key="link.key">
+			<TheUnitSidebarSectionItem
+				v-if="link.link"
+				:href="link.link"
+				:icon="link.icon"
+			>
+				<span v-t="translationShortcutLink(link.translationTextKey)" />
+			</TheUnitSidebarSectionItem>
+			<TheUnitSidebarSection
+				v-else-if="link.children"
+				:disabled="!link.enabled"
+				:label="translationShortcutLabel(link.label)"
+			>
 				<TheUnitSidebarSectionItem
-					:href="links.overview"
-					icon="HomeVariantOutline"
+					v-for="child in link.children"
+					:disabled="child.disabled"
+					:key="child.link.name"
+					:href="child.link"
+					:icon="child.icon"
 				>
-					Overview
+					<span
+						v-t="translationShortcutLink(child.translationTextKey)"
+					/>
 				</TheUnitSidebarSectionItem>
 			</TheUnitSidebarSection>
-		</div>
-		<!--		<div :class="$style.separator" role="separator" />-->
-		<TheUnitSidebarSection>
-			<TheUnitSidebarSectionItem
-				:href="links.instance?.console"
-				icon="CodeTags"
-			>
-				Console
-			</TheUnitSidebarSectionItem>
-			<TheUnitSidebarSectionItem
-				:href="links.instance?.network"
-				icon="NetworkOutline"
-			>
-				Network
-			</TheUnitSidebarSectionItem>
-			<TheUnitSidebarSectionItem
-				:href="links.auditLog"
-				icon="ClipboardTextSearchOutline"
-			>
-				Audit Log
-			</TheUnitSidebarSectionItem>
-			<TheUnitSidebarSectionItem
-				:href="links.instance?.files"
-				icon="Folder"
-			>
-				Files
-			</TheUnitSidebarSectionItem>
-			<TheUnitSidebarSectionItem :href="links.settings" icon="CogOutline">
-				Settings
-			</TheUnitSidebarSectionItem>
-		</TheUnitSidebarSection>
+		</template>
 	</nav>
 </template>
 
@@ -62,7 +37,7 @@ import {
 	INSTANCE_FS_ROUTE,
 	INSTANCE_NETWORK_ROUTE,
 	UNIT_AUDIT_LOG_ROUTE,
-	UNIT_ROUTE,
+	UNIT_OVERVIEW_ROUTE,
 	UNIT_SETTINGS_ROUTE
 } from "@/features/units/routing/units.routes";
 import { Unit } from "@/features/units/models/unit.model";
@@ -74,9 +49,28 @@ import Avatar from "@/features/shared/ui/components/Avatar.vue";
 import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
 import TheUnitSidebarToggler from "@/features/units/ui/components/TheUnitSidebarToggler.vue";
 import { isUndefined } from "@/utils";
+import { RouteLocationRaw } from "vue-router";
+import TheUnitSidebarHeader from "@/features/units/ui/components/TheUnitSidebarHeader.vue";
+
+type Section = {
+	label: string;
+	children: SectionItem[];
+	enabled: boolean;
+	key: string;
+};
+
+type SectionItem = {
+	translationTextKey: string;
+	icon: string;
+	link: RouteLocationRaw;
+	disabled?: boolean;
+};
+
+type Sections = (Section | SectionItem)[];
 
 @Component({
 	components: {
+		TheUnitSidebarHeader,
 		TheUnitSidebarToggler,
 		VIcon,
 		Avatar,
@@ -90,38 +84,76 @@ export default class TheUnitSidebar extends Vue {
 	@Inject()
 	private readonly unit!: Unit;
 
-	get links(): any {
-		return Object.freeze({
-			overview: { name: UNIT_ROUTE },
-			auditLog: { name: UNIT_AUDIT_LOG_ROUTE },
-			settings: { name: UNIT_SETTINGS_ROUTE },
-			instance: !isUndefined(this.unit.instanceId)
-				? {
-						console: {
-							name: INSTANCE_CONSOLE_ROUTE,
-							params: {
-								instanceId: this.unit.instanceId
-							}
-						},
-						network: {
-							name: INSTANCE_NETWORK_ROUTE,
-							params: {
-								instanceId: this.unit.instanceId
-							}
-						},
-						files: {
-							name: INSTANCE_FS_ROUTE,
-							params: {
-								instanceId: this.unit.instanceId
-							}
-						}
-				  }
-				: null
-		});
+	createLinks(): Sections {
+		return [
+			{
+				translationTextKey: "overview",
+				icon: "HomeVariantOutline",
+				link: { name: UNIT_OVERVIEW_ROUTE }
+			},
+			{
+				label: "instance",
+				enabled: !isUndefined(this.unit.instanceId),
+				key: "instance",
+				children: [
+					{
+						icon: "ConsoleLine",
+						translationTextKey: "console",
+						link: this.createInstanceRoute({
+							name: INSTANCE_CONSOLE_ROUTE
+						})
+					},
+					{
+						icon: "FolderOutline",
+						translationTextKey: "files",
+						link: this.createInstanceRoute({
+							name: INSTANCE_FS_ROUTE
+						})
+					},
+					{
+						icon: "Lan",
+						translationTextKey: "network",
+						link: this.createInstanceRoute({
+							name: INSTANCE_NETWORK_ROUTE
+						})
+					}
+				]
+			},
+			{
+				label: "advanced",
+				key: "advanced",
+				enabled: true,
+				children: [
+					{
+						translationTextKey: "auditlog",
+						icon: "ClipboardTextSearchOutline",
+						link: { name: UNIT_AUDIT_LOG_ROUTE }
+					},
+					{
+						translationTextKey: "settings",
+						icon: "CogOutline",
+						link: { name: UNIT_SETTINGS_ROUTE }
+					}
+				]
+			}
+		];
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	onTogglerClick(): void {}
+	translationShortcutLabel(value: string): string {
+		return this.$t(`units.sidebar.label.${value}`);
+	}
+
+	translationShortcutLink(value: string): string {
+		return this.$t(`units.sidebar.links.${value}`);
+	}
+
+	private createInstanceRoute(
+		location: Partial<RouteLocationRaw>
+	): RouteLocationRaw {
+		return Object.assign(location, {
+			params: { instanceId: this.unit.instanceId }
+		});
+	}
 }
 </script>
 
@@ -132,62 +164,12 @@ export default class TheUnitSidebar extends Vue {
 	overflow-y: auto;
 	height: 100%;
 	flex-shrink: 0;
-	width: 240px;
+	width: 260px;
 	background-color: var(--kt-background-surface);
-	margin-right: 1.6rem;
 }
 
 .banner {
 	width: 100%;
 	height: 60px;
-}
-
-.header {
-	display: flex;
-	flex-direction: column;
-	margin-top: 2.4rem;
-}
-
-.header__inner {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-}
-
-.header__info {
-	flex-grow: 1;
-	align-self: center;
-	user-select: none;
-}
-
-.header__info__name {
-	font-size: 22px;
-	color: var(--kt-content-primary);
-	font-family: var(--kt-headline-font);
-	font-weight: 700;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-
-.header__label {
-	font-size: 12px;
-	font-weight: 500;
-	color: var(--kt-content-neutral-low);
-	margin-top: 0.4rem;
-}
-
-.header__logo {
-	margin: 0 1.2rem;
-	align-self: center;
-	width: 40px;
-	height: 40px;
-}
-
-.separator {
-	display: block;
-	width: 100%;
-	height: 1px;
-	background-color: var(--kt-border-low);
 }
 </style>

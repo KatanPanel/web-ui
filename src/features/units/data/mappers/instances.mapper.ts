@@ -13,6 +13,7 @@ import {
 	InstanceFsDirectory,
 	InstanceFsFile,
 	InstanceMount,
+	InstanceNetworkConnection,
 	InstanceRuntime,
 	InstanceStatus,
 	InstanceUpdatePolicy
@@ -85,13 +86,24 @@ export default {
 						oom: runtime.oom,
 						pid: runtime.pid,
 						platform: runtime.platform,
+						exitCode: runtime["exit-code"],
 						mounts: runtime.mounts.map((mount) => {
 							return {
 								id: mount.target,
 								readonly: mount.readonly
 							} as InstanceMount;
 						}),
-						exitCode: runtime["exit-code"]
+						network: {
+							hostname: runtime.network.hostname,
+							networks: runtime.network.networks.map(
+								(network) => {
+									return {
+										id: network.id,
+										name: network.name
+									} as InstanceNetworkConnection;
+								}
+							)
+						}
 					} as InstanceRuntime;
 				}
 			)

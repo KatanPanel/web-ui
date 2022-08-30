@@ -1,12 +1,12 @@
 <template>
-	<li v-if="href" :class="$style.root">
+	<div v-if="href && !disabled" :class="$style.root">
 		<router-link :to="href" :class="$style.link" class="link">
 			<VIcon :name="icon" :class="$style.icon" />
 			<span :class="$style.text" class="text">
 				<slot />
 			</span>
 		</router-link>
-	</li>
+	</div>
 </template>
 
 <script lang="ts">
@@ -19,18 +19,19 @@ import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue"
 })
 export default class TheUnitSidebarSectionItem extends Vue {
 	@Prop({ type: Object, required: true })
-	private readonly href!: RouteLocationRaw | undefined;
+	private readonly href!: RouteLocationRaw;
 
 	@Prop({ type: String, required: true })
 	private readonly icon!: string;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly disabled!: boolean;
 }
 </script>
 
 <style lang="scss" module>
-.root {
-	&:not(:last-child) {
-		margin-bottom: 0.4rem;
-	}
+.root:not(:last-child) {
+	margin-bottom: 0.4rem;
 }
 
 .link {
@@ -40,9 +41,10 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	align-items: center;
 	font-weight: 600;
 	font-size: 14px;
-	border-left: 2px solid transparent;
-	padding: 0.8rem 1.6rem;
-	color: var(--kt-content-neutral-low);
+	border-radius: 8px;
+	padding: 0.8rem 1.2rem;
+	margin: 0 0.8rem;
+	color: var(--kt-content-neutral);
 }
 
 .icon {
@@ -57,7 +59,6 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	white-space: nowrap;
 	overflow: hidden;
 	align-self: center;
-	top: 2px;
 	position: relative;
 	font-weight: 600;
 	font-family: var(--kt-headline-font);
@@ -66,19 +67,13 @@ export default class TheUnitSidebarSectionItem extends Vue {
 <style lang="scss" scoped>
 .link {
 	&:not(.router-link-exact-active):hover {
-		background-color: var(--kt-background-surface-high);
-		color: var(--kt-content-neutral);
+		//background-color: var(--kt-background-surface-hover);
+		color: var(--kt-content-neutral-high);
 	}
 
 	&.router-link-exact-active {
-		color: var(--kt-content-primary);
-		border-left: 2px solid var(--kt-content-primary);
-		background-color: var(--kt-content-primary-overlay);
-
-		.text {
-			color: initial !important;
-			font-weight: 700;
-		}
+		background-color: var(--kt-background-surface-high);
+		color: var(--kt-content-neutral-high);
 	}
 }
 </style>

@@ -21,6 +21,17 @@ export type InstanceRuntimeResponse = {
 	"finished-at": string;
 	status: string;
 	mounts: InstanceMountResponse[];
+	network: InstanceNetworkResponse;
+};
+
+export type InstanceNetworkResponse = {
+	hostname: string;
+	networks: InstanceNetworkConnectionResponse[];
+};
+
+export type InstanceNetworkConnectionResponse = {
+	id: string;
+	name: string;
 };
 
 export type InstanceMountResponse = {

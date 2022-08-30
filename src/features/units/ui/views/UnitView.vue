@@ -16,6 +16,7 @@ export default class UnitView extends Vue {
 <style lang="scss" module>
 .root {
 	flex-grow: 1;
-	padding: 2.4rem;
+	padding: 2.4rem 0;
+	overflow-y: auto;
 }
 </style>

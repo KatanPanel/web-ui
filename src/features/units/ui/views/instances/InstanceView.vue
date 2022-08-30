@@ -1,5 +1,5 @@
 <template>
-	<router-view v-if="instance" />
+	<router-view v-if="instance" :class="$style.root" />
 	<div v-else>Laoding</div>
 </template>
 
@@ -27,3 +27,10 @@ export default class InstanceView extends Vue {
 	}
 }
 </script>
+<style lang="scss" module>
+.root {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+</style>
