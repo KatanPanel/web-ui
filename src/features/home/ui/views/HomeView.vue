@@ -5,6 +5,7 @@
 				<h4><b>Overview</b></h4>
 				<div :class="$style.analytics">
 					<VLabel :on-color="true">Server Information</VLabel>
+					<p></p>
 				</div>
 			</div>
 			<!--			<div :class="$style.updateCheck">-->
@@ -60,7 +61,6 @@ export default class HomeView extends Vue {}
 }
 
 .container {
-	float: right;
 	flex-shrink: 0;
 }
 

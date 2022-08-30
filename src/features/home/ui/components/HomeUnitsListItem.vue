@@ -11,7 +11,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { RouteLocationRaw } from "vue-router";
-import { UNIT_ROUTE } from "@/features/units/routing/units.routes";
+import { UNIT_OVERVIEW_ROUTE } from "@/features/units/routing/units.routes";
 import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
 import Avatar from "@/features/shared/ui/components/Avatar.vue";
 
@@ -27,7 +27,7 @@ export default class HomeUnitsListItem extends Vue {
 
 	get getTargetUnitLocation(): RouteLocationRaw {
 		return {
-			name: UNIT_ROUTE,
+			name: UNIT_OVERVIEW_ROUTE,
 			params: {
 				unitId: this.unitId
 			}
