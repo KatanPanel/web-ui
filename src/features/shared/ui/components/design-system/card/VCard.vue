@@ -1,5 +1,17 @@
 <template>
-	<div class="card" :class="{ hoverable: hoverable }">
+	<div
+		:class="[
+			$style.root,
+			{
+				[$style.root__hoverable]: hoverable,
+				[$style.root__flat]: flat,
+				[$style.root__reduced]: reduced
+			}
+		]"
+	>
+		<div :class="$style.title" v-if="$slots.title">
+			<slot name="title" />
+		</div>
 		<slot />
 	</div>
 </template>
@@ -11,19 +23,37 @@ import { Component, Prop, Vue } from "vue-facing-decorator";
 export default class VCard extends Vue {
 	@Prop({ type: Boolean, default: false })
 	private readonly hoverable!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly flat!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly reduced!: boolean;
 }
 </script>
 
-<style lang="scss" scoped>
-.card {
+<style lang="scss" module>
+.root {
 	border-radius: 8px;
-	padding: 8px;
+	padding: 2.4rem;
 	background-color: var(--kt-background-surface);
-	box-shadow: 0 0 1px rgba(0, 0, 0, 0.12), 0 3px 4px -1px rgba(0, 0, 0, 0.04);
+}
 
-	&.hoverable:hover {
-		cursor: pointer;
-		background-color: var(--kt-background-surface-hover);
-	}
+.root__hoverable:hover {
+	cursor: pointer;
+	background-color: var(--kt-background-surface-hover);
+}
+
+.root__flat {
+	background-color: transparent;
+	border-radius: 0;
+}
+
+.root__reduced {
+	padding: 1.2rem;
+}
+
+.title {
+	font-weight: 600;
 }
 </style>
