@@ -10,8 +10,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import TheSidebar from "@/features/shared/ui/layouts/TheSidebar.vue";
-import TheHeader from "@/features/shared/ui/layouts/TheHeader.vue";
+import TheSidebar from "@/features/shared/ui/components/TheSidebar.vue";
+import TheHeader from "@/features/shared/ui/components/TheHeader.vue";
 
 @Component({
 	components: { TheHeader, TheSidebar }

@@ -21,9 +21,9 @@
 					</router-link>
 				</li>
 				<li>
-					<a href="#">
-						<VIcon name="Plus" />
-					</a>
+					<router-link :to="linkToUsers()">
+						<VIcon name="AccountMultipleOutline" />
+					</router-link>
 				</li>
 			</ul>
 		</div>
@@ -58,6 +58,7 @@ import { ABOUT_ROUTE } from "@/features/home/routing/home.routes";
 import { BLUEPRINTS_ROUTES } from "@/features/blueprints/routing/blueprints.routes";
 import { ACCOUNT_ROUTE } from "@/features/account/routing/accounts.routes";
 import Avatar from "@/features/shared/ui/components/Avatar.vue";
+import { USERS_ROUTE } from "@/features/users/routing/users.routes";
 
 @Component({
 	components: { TheLogo, VIcon, Avatar }
@@ -76,13 +77,16 @@ export default class TheSidebar extends Vue {
 	linkToAccount(): RouteLocationRaw {
 		return { name: ACCOUNT_ROUTE };
 	}
+
+	linkToUsers(): RouteLocationRaw {
+		return { name: USERS_ROUTE };
+	}
 }
 </script>
 <style lang="scss" module>
 .root {
-	background-color: var(--kt-background-surface);
 	//border-right: 1px solid var(--kt-border-low);
-	padding: 20px 0;
+	padding: 1.6rem 0;
 	display: flex;
 	flex-direction: column;
 }
