@@ -33,6 +33,7 @@ const app = createApp(App)
 	})
 	.component("vue-simple-context-menu", VueSimpleContextMenu)
 	.use(i18n);
+
 app.config.unwrapInjectedRef = true;
 
 // assigned all declared augmented types from shims-vue.d.ts

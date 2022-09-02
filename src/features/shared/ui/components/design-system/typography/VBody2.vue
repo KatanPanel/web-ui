@@ -17,6 +17,7 @@ export default class VBody2 extends Vue {}
 	font-size: 14px;
 	letter-spacing: 0;
 	color: var(--kt-content-neutral);
-	margin: 1.2rem 0 2.4rem;
+	margin: 0.4rem 0 2rem;
+	user-select: none;
 }
 </style>

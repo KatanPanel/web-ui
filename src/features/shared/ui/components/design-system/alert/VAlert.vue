@@ -44,6 +44,7 @@ $shadow: 1.5px;
 
 .alert {
 	background-color: var(--kt-background-surface-high);
+	border: 1px solid var(--kt-border-medium);
 	border-radius: 8px;
 	display: flex;
 	margin-bottom: 0.8rem;
@@ -78,7 +79,7 @@ $shadow: 1.5px;
 
 .alert--variant-error {
 	background-color: var(--kt-content-negative-overlay);
-	box-shadow: inset 0 0 0 $shadow var(--kt-content-negative-overlay);
+	border-color: var(--kt-content-negative-overlay);
 
 	.alert__icon {
 		color: var(--kt-content-negative);
@@ -87,7 +88,7 @@ $shadow: 1.5px;
 
 .alert--variant-info {
 	background-color: var(--kt-content-primary-overlay);
-	box-shadow: inset 0 0 0 $shadow var(--kt-content-primary-overlay);
+	border-color: var(--kt-content-primary-overlay);
 
 	.alert__icon {
 		color: var(--kt-content-primary);

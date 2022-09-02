@@ -65,6 +65,7 @@ export type InstanceFsBucketResponse = {
 };
 
 export type InstanceFsReadFileResponse = {
-	contentLength: number;
 	data: ArrayBuffer;
+	contentLength: number;
+	contentType: string;
 };

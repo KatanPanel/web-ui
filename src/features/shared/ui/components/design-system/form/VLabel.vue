@@ -23,9 +23,9 @@ export default class VLabel extends Vue {
 <style lang="scss" module>
 .root {
 	font-family: var(--kt-headline-font);
-	color: var(--kt-content-neutral-low);
+	color: var(--kt-content-neutral);
 	font-size: 12px;
-	font-weight: 600;
+	font-weight: 700;
 	line-height: 21.75px;
 	letter-spacing: 0.285px;
 	text-transform: uppercase;

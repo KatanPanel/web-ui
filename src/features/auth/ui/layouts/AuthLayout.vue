@@ -41,7 +41,7 @@ export default class AuthLayout extends Vue {}
 .left_side {
 	align-items: normal;
 	z-index: 1;
-	background: var(--kt-background-surface);
+	background: var(--kt-background-body);
 	position: relative;
 	left: 0;
 	height: 100%;

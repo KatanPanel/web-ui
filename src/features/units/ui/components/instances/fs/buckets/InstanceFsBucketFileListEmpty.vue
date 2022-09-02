@@ -1,6 +1,6 @@
 <template>
 	<EmptyState :align-y="true" icon="FolderOffOutline">
-		<h4 v-t="'instances.fs.empty-folder'" />
+		<h5 v-t="'instances.fs.empty-folder'" />
 	</EmptyState>
 </template>
 

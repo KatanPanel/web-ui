@@ -7,14 +7,14 @@
 			<template #subtitle>
 				<span v-t="'units.audit-log.subtitle'" />
 			</template>
+			<VAlert variant="info">
+				<template #description>
+					<i18n-t keypath="units.audit-log.paging-limited">
+						<template #count> 20 </template>
+					</i18n-t>
+				</template>
+			</VAlert>
 		</PageHeader>
-		<VAlert variant="info" :class="$style.alert">
-			<template #description>
-				<i18n-t keypath="units.audit-log.paging-limited">
-					<template #count> 20 </template>
-				</i18n-t>
-			</template>
-		</VAlert>
 		<UnitAuditLogEntryList :unit-id="unit.id" />
 	</VContainer>
 </template>
@@ -35,9 +35,3 @@ export default class UnitAuditLogView extends Vue {
 	private readonly unit!: Unit;
 }
 </script>
-
-<style lang="scss" module>
-.alert {
-	margin-bottom: 3.2rem !important;
-}
-</style>

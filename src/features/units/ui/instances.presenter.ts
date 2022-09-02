@@ -23,7 +23,11 @@ class InstancesPresenter {
 		bucket: string,
 		path: string
 	): Promise<string> {
-		return await instancesService.readFile(instanceId, bucket, path);
+		return await instancesService.readOrDownloadFile(
+			instanceId,
+			bucket,
+			path
+		);
 	}
 
 	async getBucket(

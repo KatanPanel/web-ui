@@ -23,10 +23,13 @@ export default class PageHeader extends Vue {}
 <style lang="scss" module>
 .root {
 	margin: 4.8rem 0 2.4rem;
+	padding-bottom: 1.6rem;
+	border-bottom: 1px solid var(--kt-border-low);
 }
 
 .title {
 	font-weight: 600;
+	user-select: none;
 }
 
 .subtitle {

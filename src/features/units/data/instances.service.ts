@@ -25,7 +25,7 @@ class InstancesService {
 			.then((response) => instancesMapper.toFile(response));
 	}
 
-	async readFile(
+	async readOrDownloadFile(
 		instanceId: string,
 		bucket: string,
 		path: string

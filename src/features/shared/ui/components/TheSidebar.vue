@@ -61,7 +61,7 @@ import Avatar from "@/features/shared/ui/components/Avatar.vue";
 import { USERS_ROUTE } from "@/features/users/routing/users.routes";
 
 @Component({
-	components: { TheLogo, VIcon, Avatar }
+	components: { TheLogo, Avatar, VIcon }
 })
 export default class TheSidebar extends Vue {
 	private readonly appWebsite = configService.appWebsite;

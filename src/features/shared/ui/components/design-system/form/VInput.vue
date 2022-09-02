@@ -42,7 +42,6 @@ export default class VInput extends Vue {
 		user-select: none;
 		cursor: default;
 		font-weight: 500;
-		background-color: var(--kt-background-surface-high);
 	}
 
 	&[disabled] {

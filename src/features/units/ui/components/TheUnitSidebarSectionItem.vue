@@ -66,7 +66,7 @@ export default class TheUnitSidebarSectionItem extends Vue {
 </style>
 <style lang="scss" scoped>
 .link {
-	&:not(.router-link-exact-active):hover {
+	&:not(.router-link-exact-active):hover .text {
 		//background-color: var(--kt-background-surface-hover);
 		color: var(--kt-content-neutral-high);
 	}

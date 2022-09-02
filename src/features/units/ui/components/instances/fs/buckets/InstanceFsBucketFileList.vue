@@ -1,5 +1,5 @@
 <template>
-	<!--	<span @click="back()" v-if="path.length !== 0">Voltar</span>-->
+	<span @click="back()" v-if="path.length !== 0">Voltar</span>
 	<div v-if="isLoading">Loadfing :)</div>
 	<InstanceFsBucketFileContent v-else-if="!isDirectory" />
 	<InstanceFsBucketFileListEmpty v-else-if="isEmpty" />

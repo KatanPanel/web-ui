@@ -41,8 +41,9 @@ class InstancesGateway {
 			})
 			.then((response: AxiosResponse) => {
 				return {
-					contentLength: Number(response.headers["Content-Length"]),
-					data: response.data
+					data: response.data,
+					contentType: response.headers["Content-Type"],
+					contentLength: Number(response.headers["Content-Length"])
 				};
 			});
 	}
