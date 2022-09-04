@@ -12,9 +12,11 @@ declare module "*.vue" {
 declare module "@vue/runtime-core" {
 	interface ComponentCustomProperties {
 		$isDevelopmentMode: boolean;
+		beforeCreate(this: ComponentPublicInstance): void;
 		created(this: ComponentPublicInstance): void;
 		mounted(this: ComponentPublicInstance): void;
 		beforeMount(this: ComponentPublicInstance): void;
 		beforeUnmount(this: ComponentPublicInstance): void;
+		destroyed(): void;
 	}
 }

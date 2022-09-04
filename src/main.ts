@@ -10,7 +10,7 @@ import VueSimpleContextMenu from "vue-simple-context-menu";
 import VueHead from "vue-head";
 import VueCodeMirror from "vue-codemirror";
 import { basicSetup } from "codemirror";
-import "vue-progressive-image/dist/style.css";
+import VueLoading from "vue-loading-overlay";
 
 export const i18n = setupI18n({
 	legacy: true,
@@ -31,6 +31,7 @@ const app = createApp(App)
 		tabSize: 4,
 		extensions: [basicSetup]
 	})
+	.use(VueLoading)
 	.component("vue-simple-context-menu", VueSimpleContextMenu)
 	.use(i18n);
 
