@@ -11,6 +11,7 @@ import VueHead from "vue-head";
 import VueCodeMirror from "vue-codemirror";
 import { basicSetup } from "codemirror";
 import VueLoading from "vue-loading-overlay";
+import VueProgressiveImage from "vue-progressive-image";
 
 export const i18n = setupI18n({
 	legacy: true,
@@ -32,6 +33,7 @@ const app = createApp(App)
 		extensions: [basicSetup]
 	})
 	.use(VueLoading)
+	.use(VueProgressiveImage)
 	.component("vue-simple-context-menu", VueSimpleContextMenu)
 	.use(i18n);
 

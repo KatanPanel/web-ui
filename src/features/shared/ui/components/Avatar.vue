@@ -17,13 +17,9 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { isUndefined } from "@/utils";
-// noinspection TypeScriptCheckImport
-import { ProgressiveImage } from "vue-progressive-image";
 import logService from "@/features/shared/data/log.service";
 
-@Component({
-	components: { ProgressiveImage }
-})
+@Component
 export default class Avatar extends Vue {
 	@Prop({ type: String })
 	private readonly src?: string | undefined;
