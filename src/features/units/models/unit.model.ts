@@ -5,4 +5,5 @@ export interface Unit {
 	readonly createdAt: Date;
 	readonly updatedAt: Date;
 	readonly nodeId: number;
+	readonly icon?: string;
 }
