@@ -1,6 +1,11 @@
 <template>
 	<LoadingState v-if="isLoading" key="loading" />
-	<EmptyState v-else-if="isEmpty" :icon="emptyStateIcon" key="empty">
+	<EmptyState
+		v-else-if="isEmpty"
+		:icon="emptyStateIcon"
+		:align-y="emptyStateAlignY"
+		key="empty"
+	>
 		<h5 v-if="emptyStateTitle" v-t="emptyStateTitle" />
 		<p v-if="emptyStateDescription" v-t="emptyStateDescription" />
 	</EmptyState>
@@ -11,17 +16,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-facing-decorator";
+import { Component, Emit, Prop, Vue } from "vue-facing-decorator";
 import ErrorState from "@/features/shared/ui/components/ErrorState.vue";
 import EmptyState from "@/features/shared/ui/components/EmptyState.vue";
 import LoadingState from "@/features/shared/ui/components/LoadingState.vue";
 import { isUndefined } from "@/utils";
+import logService from "@/features/shared/data/log.service";
 
 const LOADED_EVENT = "loaded";
+const ERROR_EVENT = "error";
 
 @Component({
 	components: { LoadingState, EmptyState, ErrorState },
-	emits: [LOADED_EVENT]
+	emits: [LOADED_EVENT, ERROR_EVENT]
 })
 export default class Resource extends Vue {
 	@Prop({ type: Function, required: true })
@@ -35,6 +42,9 @@ export default class Resource extends Vue {
 
 	@Prop({ type: String })
 	readonly emptyStateIcon!: string;
+
+	@Prop({ type: Boolean, default: false })
+	readonly emptyStateAlignY!: boolean;
 
 	@Prop({ type: Function })
 	readonly emptyEval!: (resource: unknown) => boolean;
@@ -50,18 +60,32 @@ export default class Resource extends Vue {
 	private load() {
 		this.reset();
 		this.resource()
-			.then((value) => {
-				if (isUndefined(this.emptyEval)) {
-					if (value instanceof Array)
-						this.isEmpty = (value as []).length === 0;
-				} else {
-					this.isEmpty = this.emptyEval(value);
-				}
-
-				this.$emit(LOADED_EVENT, value);
-			})
-			.catch((error) => (this.error = error))
+			.then(this.onDataLoaded)
+			.catch(this.onError)
 			.finally(() => (this.isLoading = false));
+	}
+
+	@Emit(LOADED_EVENT)
+	onDataLoaded(value: unknown | undefined): unknown {
+		if (isUndefined(this.emptyEval)) {
+			// services return "undefined" to some "Unknown entity" http errors
+			// so we need to threat undefined values as empty
+			this.isEmpty = isUndefined(value);
+
+			if (value instanceof Array)
+				this.isEmpty = (value as []).length === 0;
+		} else {
+			this.isEmpty = this.emptyEval(value);
+		}
+
+		return value;
+	}
+
+	@Emit(ERROR_EVENT)
+	onError(error: Error): Error {
+		logService.error("Failed to load resource.", error);
+		this.error = error;
+		return error;
 	}
 
 	private reset() {
@@ -71,5 +95,3 @@ export default class Resource extends Vue {
 	}
 }
 </script>
-
-<style lang="scss" scoped></style>

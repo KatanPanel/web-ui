@@ -44,7 +44,8 @@ export default class EmptyState extends Vue {
 
 .alignedY {
 	top: 50%;
-	transform: translate(-50%, 50%);
+	transform: translate(-50%, -50%);
+	margin: 0;
 }
 
 .icon svg {

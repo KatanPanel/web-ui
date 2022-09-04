@@ -5,14 +5,24 @@ import {
 } from "@/features/units/models/instance.model";
 import instancesGateway from "@/features/units/data/instances.gateway";
 import instancesMapper from "@/features/units/data/mappers/instances.mapper";
+import { HttpError, HttpErrors } from "@/features/shared/models/error.model";
 
 class InstancesService {
 	private textDecoder = new TextDecoder();
 
-	async getInstance(id: string): Promise<Instance> {
+	async getInstance(id: string): Promise<Instance | undefined> {
 		return instancesGateway
 			.getInstance(id)
-			.then((response) => instancesMapper.toInstance(response));
+			.then((response) => instancesMapper.toInstance(response))
+			.catch((error: Error) => {
+				if (
+					error instanceof HttpError &&
+					error.code == HttpErrors.UnknownInstance
+				)
+					return undefined;
+
+				throw error;
+			});
 	}
 
 	async getFile(

@@ -10,3 +10,7 @@ export class HttpError implements Error {
 
 	constructor(private readonly error: KatanError) {}
 }
+
+export const HttpErrors = {
+	UnknownInstance: 1003
+};

@@ -1,6 +1,16 @@
 <template>
-	<router-view v-if="instance" :class="$style.root" />
-	<div v-else>Laoding</div>
+	<Resource
+		empty-state-title="instances.main.empty-state.title"
+		empty-state-description="instances.main.empty-state.description"
+		@loaded="onLoadSuccess"
+		@error="onLoadError"
+		:resource="getResource"
+		:empty-state-align-y="true"
+	>
+		<keep-alive>
+			<router-view :class="$style.root" />
+		</keep-alive>
+	</Resource>
 </template>
 
 <script lang="ts">
@@ -8,9 +18,11 @@ import { Component, Vue } from "vue-facing-decorator";
 import instancesPresenter from "@/features/units/ui/instances.presenter";
 import { Instance } from "@/features/units/models/instance.model";
 import { computed } from "vue";
+import Resource from "@/features/shared/ui/components/Resource.vue";
 import logService from "@/features/shared/data/log.service";
 
 @Component({
+	components: { Resource },
 	provide(this: InstanceView) {
 		return {
 			instance: computed(() => this.instance)
@@ -18,32 +30,25 @@ import logService from "@/features/shared/data/log.service";
 	}
 })
 export default class InstanceView extends Vue {
-	instance: Instance | null = null;
+	instance!: Instance;
 
-	created() {
-		const id = this.$route.params.instanceId as string;
-		instancesPresenter.getInstance(id).then((result) => {
-			this.instance = result;
+	getResource(): Promise<Instance | undefined> {
+		return instancesPresenter.getInstance(this.getCurrentInstanceId());
+	}
 
-			const ws = new WebSocket("ws://localhost:8080");
-			ws.addEventListener("open", () => {
-				logService.info("ws connection established");
-				const data = {
-					o: 2,
-					d: {
-						tid: this.instance?.id
-					}
-				};
-				console.log("sending", data);
-				ws.send(JSON.stringify(data));
-			});
-			ws.addEventListener("message", (event) => {
-				logService.debug("ws received", event.data);
-			});
-			ws.addEventListener("close", () => {
-				logService.info("ws closed");
-			});
-		});
+	onLoadSuccess(instance: Instance) {
+		this.instance = instance;
+	}
+
+	onLoadError(error: Error) {
+		logService.error(
+			`failed to load instance ${this.getCurrentInstanceId()}`,
+			error
+		);
+	}
+
+	getCurrentInstanceId(): string {
+		return this.$route.params.instanceId as string;
 	}
 }
 </script>

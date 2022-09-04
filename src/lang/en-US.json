@@ -27,6 +27,8 @@
 	"units.audit-log.entry.pattern.1": "{user} created this unit",
 	"units.audit-log.entry.pattern.2": "{user} updated this unit",
 	"units.audit-log.change.pattern.unit.name": "Changed name from \"{oldValue}\" to \"{newValue}\"",
+	"instances.main.empty-state.title": "Unknown instance",
+	"instances.main.empty-state.description": "We couldn't find this instance, make sure it exists and try again.",
 	"instances.network.title": "Network",
 	"instances.network.subtitle": "Instance network settings. Don't change anything unless you know exactly what you're doing!",
 	"instances.network.primary-address.title": "Primary Address",

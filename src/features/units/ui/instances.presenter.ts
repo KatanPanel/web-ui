@@ -6,7 +6,7 @@ import {
 import instancesService from "@/features/units/data/instances.service";
 
 class InstancesPresenter {
-	async getInstance(id: string): Promise<Instance> {
+	async getInstance(id: string): Promise<Instance | undefined> {
 		return await instancesService.getInstance(id);
 	}
 
