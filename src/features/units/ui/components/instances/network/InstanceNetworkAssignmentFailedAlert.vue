@@ -1,5 +1,5 @@
 <template>
-	<VAlert v-show="!isVisible()" variant="error">
+	<VAlert v-show="isVisible()" variant="error">
 		<template #description>
 			<span v-t="'instances.network.assignment-failed'" />
 		</template>
