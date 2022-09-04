@@ -2,10 +2,10 @@
 	<div
 		class="icon"
 		:class="`state__${state}`"
-		:aria-label="getLabel"
-		:title="getLabel"
+		:aria-label="getLabel()"
+		:title="getLabel()"
 	>
-		<VIcon :name="getIconName" />
+		<VIcon :name="getIconName()" />
 	</div>
 </template>
 
@@ -25,12 +25,12 @@ export default class AboutInfoUpdateState extends Vue {
 	@Prop({ type: String })
 	private readonly state!: States;
 
-	get getIconName(): string {
+	getIconName(): string {
 		if (this.state == UPDATE) return "Update";
 		return "ShieldCheck";
 	}
 
-	get getLabel(): string {
+	getLabel(): string {
 		if (this.state == UPDATE) return "Needs update";
 		return "Updated";
 	}

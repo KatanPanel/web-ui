@@ -1,7 +1,7 @@
 <template>
 	<div :class="`alert--variant-${variant}`" class="alert">
 		<div class="alert__icon">
-			<VIcon :name="getIconName" />
+			<VIcon :name="getIconName()" />
 		</div>
 		<div class="alert__header">
 			<div v-if="$slots.title" class="alert__title">
@@ -25,7 +25,7 @@ import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue"
 export default class VAlert extends Vue {
 	@Prop({ type: String }) readonly variant!: "default" | "info" | "error";
 
-	get getIconName(): string {
+	getIconName(): string {
 		let name: string | undefined = undefined;
 		if (this.variant === "default") name = "HelpCircleOutline";
 		if (this.variant === "info") name = "InformationOutline";
