@@ -7,7 +7,11 @@
 				:href="link.link"
 				:icon="link.icon"
 			>
-				<span v-t="translationShortcutLink(link.translationTextKey)" />
+				<span
+					v-if="link.translationTextKey"
+					v-t="translationShortcutLink(link.translationTextKey)"
+				/>
+				<template v-else>{{ link.text }}</template>
 			</TheUnitSidebarSectionItem>
 			<TheUnitSidebarSection
 				v-else-if="link.children"
@@ -22,8 +26,10 @@
 					:icon="child.icon"
 				>
 					<span
+						v-if="child.translationTextKey"
 						v-t="translationShortcutLink(child.translationTextKey)"
 					/>
+					<template v-else>{{ child.text }}</template>
 				</TheUnitSidebarSectionItem>
 			</TheUnitSidebarSection>
 		</template>
@@ -60,7 +66,8 @@ type Section = {
 };
 
 type SectionItem = {
-	translationTextKey: string;
+	text?: string;
+	translationTextKey?: string;
 	icon: string;
 	link: RouteLocationRaw;
 	disabled?: boolean;
@@ -82,7 +89,7 @@ type Sections = (Section | SectionItem)[];
 })
 export default class TheUnitSidebar extends Vue {
 	@Inject()
-	private readonly unit!: Unit;
+	readonly unit!: Unit;
 
 	createLinks(): Sections {
 		return [
@@ -116,6 +123,18 @@ export default class TheUnitSidebar extends Vue {
 						link: this.createInstanceRoute({
 							name: INSTANCE_NETWORK_ROUTE
 						})
+					}
+				]
+			},
+			{
+				label: "services",
+				key: "services",
+				enabled: true,
+				children: [
+					{
+						text: "Redis",
+						icon: "https://cdn4.iconfinder.com/data/icons/redis-2/1451/Untitled-2-512.png",
+						link: { name: UNIT_AUDIT_LOG_ROUTE }
 					}
 				]
 			},

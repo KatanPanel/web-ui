@@ -27,13 +27,13 @@ import logService from "@/features/shared/data/log.service";
 })
 export default class UnitSettingsGeneralTab extends Vue {
 	@Inject()
-	private unit!: Unit;
+	unit!: Unit;
 
 	updateModel = {
 		name: ""
 	};
 
-	mounted() {
+	created() {
 		this.updateModel = {
 			name: this.unit.name
 		};

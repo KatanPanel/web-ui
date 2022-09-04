@@ -41,7 +41,7 @@ import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue"
 })
 export default class UnitOverviewView extends Vue {
 	@Inject()
-	private readonly unit!: Unit;
+	readonly unit!: Unit;
 }
 </script>
 

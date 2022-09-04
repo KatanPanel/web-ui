@@ -1,7 +1,12 @@
 <template>
 	<div v-if="href && !disabled" :class="$style.root">
 		<router-link :to="href" :class="$style.link" class="link">
-			<VIcon :name="icon" :class="$style.icon" />
+			<ProgressiveImage
+				v-if="isExternalIcon()"
+				:src="icon"
+				:class="$style.icon"
+			/>
+			<VIcon v-else :name="icon" :class="$style.icon" />
 			<span :class="$style.text" class="text">
 				<slot />
 			</span>
@@ -13,19 +18,24 @@
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { RouteLocationRaw } from "vue-router";
 import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
+import isURL from "validator/lib/isURL";
 
 @Component({
 	components: { VIcon }
 })
 export default class TheUnitSidebarSectionItem extends Vue {
 	@Prop({ type: Object, required: true })
-	private readonly href!: RouteLocationRaw;
+	readonly href!: RouteLocationRaw;
 
 	@Prop({ type: String, required: true })
-	private readonly icon!: string;
+	readonly icon!: string;
 
 	@Prop({ type: Boolean, default: false })
-	private readonly disabled!: boolean;
+	readonly disabled!: boolean;
+
+	isExternalIcon(): boolean {
+		return isURL(this.icon);
+	}
 }
 </script>
 

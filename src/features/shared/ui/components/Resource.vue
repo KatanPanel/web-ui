@@ -25,19 +25,19 @@ const LOADED_EVENT = "loaded";
 })
 export default class Resource extends Vue {
 	@Prop({ type: Function, required: true })
-	private readonly resource!: () => Promise<unknown>;
+	readonly resource!: () => Promise<unknown>;
 
 	@Prop({ type: String })
-	private readonly emptyStateTitle!: string;
+	readonly emptyStateTitle!: string;
 
 	@Prop({ type: String })
-	private readonly emptyStateDescription!: string;
+	readonly emptyStateDescription!: string;
 
 	@Prop({ type: String })
-	private readonly emptyStateIcon!: string;
+	readonly emptyStateIcon!: string;
 
 	@Prop({ type: Function })
-	private readonly emptyEval!: (unknown) => boolean;
+	readonly emptyEval!: (resource: unknown) => boolean;
 
 	isLoading = true;
 	isEmpty = false;

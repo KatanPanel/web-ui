@@ -8,7 +8,6 @@
 			'aria-readonly': disabled,
 			placeholder: placeholder
 		}"
-		@input="$emit('update:modelValue', $event.target.value)"
 	/>
 </template>
 
@@ -21,7 +20,6 @@ import { Component, Prop, Vue } from "vue-facing-decorator";
 export default class VInput extends Vue {
 	@Prop({ type: Boolean }) readonly disabled!: boolean;
 	@Prop({ type: String }) readonly placeholder!: string;
-	@Prop({ type: String }) readonly modelValue!: string;
 }
 </script>
 <style lang="scss" module>

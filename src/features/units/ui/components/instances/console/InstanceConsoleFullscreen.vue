@@ -41,7 +41,7 @@ import logService from "@/features/shared/data/log.service";
 })
 export default class InstanceConsoleFullscreen extends Vue {
 	@Inject()
-	private readonly unit!: Unit;
+	readonly unit!: Unit;
 
 	@Ref()
 	private readonly inputEl!: VInput;
@@ -94,7 +94,6 @@ export default class InstanceConsoleFullscreen extends Vue {
 
 		const ws = new WebSocket("ws://localhost:8080");
 		ws.addEventListener("open", () => {
-			logService.info("ws connection established");
 			ws.send(
 				JSON.stringify({
 					o: 0,
@@ -105,7 +104,6 @@ export default class InstanceConsoleFullscreen extends Vue {
 			);
 		});
 		ws.addEventListener("message", (event) => {
-			logService.debug("ws received", event.data);
 			const result: { o: number; d: any } = JSON.parse(event.data);
 			this.logs.push(result.d.v);
 			this.scrollDown();

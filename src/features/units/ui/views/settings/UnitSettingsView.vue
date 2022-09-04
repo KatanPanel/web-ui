@@ -32,15 +32,10 @@ import VContainer from "@/features/shared/ui/components/design-system/grid/VCont
 		VTab,
 		VTabList,
 		VContainer
-	},
-	provide(this: UnitSettingsView) {
-		return {
-			unit: this.unit
-		};
 	}
 })
 export default class UnitSettingsView extends Vue {
 	@Inject()
-	private readonly unit!: Unit;
+	readonly unit!: Unit;
 }
 </script>

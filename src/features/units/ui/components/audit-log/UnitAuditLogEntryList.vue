@@ -38,13 +38,13 @@ export default class UnitAuditLogEntryList extends Vue {
 	@Prop({ type: String, required: true })
 	private readonly unitId!: string;
 
-	auditLog: AuditLog | null = null;
+	auditLog!: AuditLog;
 
-	getResource(): Promise<AuditLog | null> {
+	getResource(): Promise<AuditLog> {
 		return unitsPresenter.getAuditLog(this.unitId);
 	}
 
-	onLoad(auditLog: AuditLog | null) {
+	onLoad(auditLog: AuditLog) {
 		this.auditLog = auditLog;
 	}
 

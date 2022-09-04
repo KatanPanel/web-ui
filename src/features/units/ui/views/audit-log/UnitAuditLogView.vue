@@ -7,15 +7,17 @@
 			<template #subtitle>
 				<span v-t="'units.audit-log.subtitle'" />
 			</template>
-			<VAlert variant="info">
-				<template #description>
-					<i18n-t keypath="units.audit-log.paging-limited">
-						<template #count> 20 </template>
-					</i18n-t>
-				</template>
-			</VAlert>
 		</PageHeader>
-		<UnitAuditLogEntryList :unit-id="unit.id" />
+		<VAlert variant="info">
+			<template #description>
+				<i18n-t keypath="units.audit-log.paging-limited">
+					<template #count> 20 </template>
+				</i18n-t>
+			</template>
+		</VAlert>
+		<VSection>
+			<UnitAuditLogEntryList :unit-id="unit.id" />
+		</VSection>
 	</VContainer>
 </template>
 
@@ -26,12 +28,19 @@ import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
 import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
 import UnitAuditLogEntryList from "@/features/units/ui/components/audit-log/UnitAuditLogEntryList.vue";
 import VAlert from "@/features/shared/ui/components/design-system/alert/VAlert.vue";
+import VSection from "@/features/shared/ui/components/design-system/grid/VSection.vue";
 
 @Component({
-	components: { VContainer, PageHeader, UnitAuditLogEntryList, VAlert }
+	components: {
+		VSection,
+		VContainer,
+		PageHeader,
+		UnitAuditLogEntryList,
+		VAlert
+	}
 })
 export default class UnitAuditLogView extends Vue {
 	@Inject()
-	private readonly unit!: Unit;
+	readonly unit!: Unit;
 }
 </script>
