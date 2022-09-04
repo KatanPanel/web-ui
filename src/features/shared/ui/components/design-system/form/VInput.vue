@@ -1,6 +1,5 @@
 <template>
 	<input
-		:class="$style.root"
 		v-bind="{
 			disabled: disabled,
 			readonly: disabled,
@@ -8,6 +7,8 @@
 			'aria-readonly': disabled,
 			placeholder: placeholder
 		}"
+		:class="$style.root"
+		@input="onInputChange($event.target.value)"
 	/>
 </template>
 
@@ -20,6 +21,11 @@ import { Component, Prop, Vue } from "vue-facing-decorator";
 export default class VInput extends Vue {
 	@Prop({ type: Boolean }) readonly disabled!: boolean;
 	@Prop({ type: String }) readonly placeholder!: string;
+	@Prop({ type: String }) readonly modelValue!: string;
+
+	onInputChange(value: string) {
+		this.$emit("update:modelValue", value);
+	}
 }
 </script>
 <style lang="scss" module>
