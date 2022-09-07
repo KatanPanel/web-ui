@@ -1,7 +1,7 @@
 <template>
 	<div :class="`alert--variant-${variant}`" class="alert">
 		<div class="alert__icon">
-			<VIcon :name="getIconName()" />
+			<VIcon class="alert__icon__svg" :name="getIconName()" />
 		</div>
 		<div class="alert__header">
 			<div v-if="$slots.title" class="alert__title">
@@ -23,13 +23,18 @@ import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue"
 	components: { VIcon }
 })
 export default class VAlert extends Vue {
-	@Prop({ type: String }) readonly variant!: "default" | "info" | "error";
+	@Prop({ type: String }) readonly variant!:
+		| "default"
+		| "info"
+		| "error"
+		| "warn";
 
 	getIconName(): string {
 		let name: string | undefined = undefined;
 		if (this.variant === "default") name = "HelpCircleOutline";
 		if (this.variant === "info") name = "InformationOutline";
 		if (this.variant === "error") name = "AlertCircleOutline";
+		if (this.variant === "warn") name = "AlertOutline";
 
 		if (isUndefined(name))
 			throw new Error(`No icon defined to variant: ${this.variant}`);
@@ -47,7 +52,6 @@ $shadow: 1.5px;
 	border: 1px solid var(--kt-border-medium);
 	border-radius: 8px;
 	display: flex;
-	margin-bottom: 0.8rem;
 }
 
 .alert__title {
@@ -55,6 +59,7 @@ $shadow: 1.5px;
 	font-weight: 600;
 	padding-top: 1.2rem;
 	padding-right: $base-padding;
+	user-select: none;
 }
 
 .alert__header {
@@ -67,10 +72,17 @@ $shadow: 1.5px;
 	padding: $base-padding;
 }
 
+.alert__icon__svg :deep(svg) {
+	width: 20px !important;
+	height: 20px;
+	vertical-align: baseline;
+}
+
 .alert__description {
 	font-size: 14px;
 	font-weight: 500;
 	padding: $base-padding $base-padding $base-padding 0;
+	user-select: none;
 }
 
 .alert__title + .alert__description {
@@ -83,6 +95,15 @@ $shadow: 1.5px;
 
 	.alert__icon {
 		color: var(--kt-content-negative);
+	}
+}
+
+.alert--variant-warn {
+	background-color: var(--kt-content-warn-overlay);
+	border-color: var(--kt-content-warn-overlay);
+
+	.alert__icon {
+		color: var(--kt-content-warn);
 	}
 }
 
