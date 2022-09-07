@@ -55,8 +55,6 @@ export default class VInput extends Vue {
 	}
 
 	&::placeholder {
-		font-family: var(--kt-body-font);
-		font-weight: 600;
 		opacity: 0.54;
 	}
 }
