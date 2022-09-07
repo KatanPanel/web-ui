@@ -72,20 +72,20 @@ export default class ImportBlueprintModal extends Vue {
 	}
 
 	submit() {
-		if (validator.isEmpty(validator.trim(this.url))) return;
+		if (!this.isValidInput) return;
 
 		this.isLoading = !this.isLoading;
 	}
 
-	get isValidInput(): boolean {
+	get canButtonBeEnabled(): boolean {
+		return this.isValidInput && !this.isLoading;
+	}
+
+	private get isValidInput(): boolean {
 		const isBlank = validator.isEmpty(validator.trim(this.url));
 		if (isBlank) return false;
 
 		return validator.isURL(this.url);
-	}
-
-	get canButtonBeEnabled(): boolean {
-		return this.isValidInput && !this.isLoading;
 	}
 }
 </script>

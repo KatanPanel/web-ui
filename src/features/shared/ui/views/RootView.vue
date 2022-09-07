@@ -8,11 +8,11 @@ import { Component, Vue } from "vue-facing-decorator";
 import RootLayout from "@/features/shared/ui/layouts/RootLayout.vue";
 import httpService from "@/features/shared/data/http.service";
 import { AxiosResponse } from "axios";
-import { ServerInfo } from "@/features/shared/models/server-info";
 import websocketService from "@/features/shared/data/websocket.service";
 import { ActiveLoader } from "vue-loading-overlay";
 import logService from "@/features/shared/data/log.service";
 import { isUndefined } from "@/utils";
+import { ServerInfo } from "@/features/shared/models/server-info.model";
 
 @Component({
 	components: {
