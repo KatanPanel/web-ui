@@ -1,5 +1,6 @@
 <template>
 	<router-view />
+	<modals-container />
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
