@@ -1,7 +1,3 @@
-class BlueprintsPresenter {
-
-
-
-}
+class BlueprintsPresenter {}
 
 export default new BlueprintsPresenter();

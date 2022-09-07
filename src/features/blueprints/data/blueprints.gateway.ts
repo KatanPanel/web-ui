@@ -22,7 +22,7 @@ class BlueprintsGateway {
 
 	async importBlueprint(url: string): Promise<RawBlueprintResponse> {
 		return httpService
-			.post(`blueprints/${url}/import`)
+			.post(`blueprints/import`, { url })
 			.then((res: AxiosResponse) => res.data as RawBlueprintResponse);
 	}
 

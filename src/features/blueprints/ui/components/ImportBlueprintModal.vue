@@ -45,6 +45,8 @@ import { ComponentPublicInstance } from "vue";
 import VButton from "@/features/shared/ui/components/design-system/button/VButton.vue";
 import validator from "validator";
 import LoadingState from "@/features/shared/ui/components/LoadingState.vue";
+import blueprintsService from "@/features/blueprints/data/blueprints.service";
+import logService from "@/features/shared/data/log.service";
 
 @Component({
 	components: {
@@ -74,7 +76,14 @@ export default class ImportBlueprintModal extends Vue {
 	submit() {
 		if (!this.isValidInput) return;
 
-		this.isLoading = !this.isLoading;
+		this.isLoading = true;
+
+		blueprintsService
+			.importBlueprint(this.url)
+			.then((result) => {
+				logService.debug("import result", result);
+			})
+			.finally(() => (this.isLoading = false));
 	}
 
 	get canButtonBeEnabled(): boolean {
