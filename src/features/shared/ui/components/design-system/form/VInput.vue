@@ -7,7 +7,12 @@
 			'aria-readonly': disabled,
 			placeholder: placeholder
 		}"
-		:class="$style.root"
+		:class="[
+			$style.root,
+			{
+				[$style.root__onSurface]: onSurface
+			}
+		]"
 		@input="onInputChange($event.target.value)"
 	/>
 </template>
@@ -22,6 +27,7 @@ export default class VInput extends Vue {
 	@Prop({ type: Boolean }) readonly disabled!: boolean;
 	@Prop({ type: String }) readonly placeholder!: string;
 	@Prop({ type: String }) readonly modelValue!: string;
+	@Prop({ type: Boolean, default: false }) readonly onSurface!: boolean;
 
 	onInputChange(value: string) {
 		this.$emit("update:modelValue", value);
@@ -57,5 +63,9 @@ export default class VInput extends Vue {
 	&::placeholder {
 		opacity: 0.54;
 	}
+}
+
+.root__onSurface {
+	background-color: var(--kt-background-surface-high);
 }
 </style>
