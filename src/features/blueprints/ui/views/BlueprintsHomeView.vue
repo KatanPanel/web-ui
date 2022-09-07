@@ -19,7 +19,7 @@
 import { Component, Vue } from "vue-facing-decorator";
 import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
 import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
-import BlueprintsHomeListing from "@/features/blueprints/components/home/BlueprintsHomeListing.vue";
+import BlueprintsHomeListing from "@/features/blueprints/ui/components/home/BlueprintsHomeListing.vue";
 import VButton from "@/features/shared/ui/components/design-system/button/VButton.vue";
 import ImportBlueprintModal from "@/features/blueprints/ui/components/ImportBlueprintModal.vue";
 
