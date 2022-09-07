@@ -1,16 +1,23 @@
 <template>
-	<button
-		:class="[
-			$style.root,
-			`variant-${variant}`,
-			{
-				[$style.flat]: variant,
-				[$style.block]: block
-			}
-		]"
+	<router-link
+		type="button"
+		v-if="to"
+		:to="to"
+		:class="getClasses()"
 		:disabled="disabled"
 		:tabindex="disabled ? -1 : 0"
+		@click="$emit('click')"
+		@keydown.enter="$emit('keydown', $event)"
+	>
+		<slot />
+	</router-link>
+	<button
 		type="button"
+		v-else
+		:class="getClasses()"
+		:disabled="disabled"
+		:tabindex="disabled ? -1 : 0"
+		@click="$emit('click', $event)"
 		@keydown.enter="$emit('keydown', $event)"
 	>
 		<slot />
@@ -19,8 +26,11 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
+import { RouteLocationRaw } from "vue-router";
 
-@Component
+@Component({
+	emits: ["click", "keydown"]
+})
 export default class VButton extends Vue {
 	@Prop({ type: Boolean }) readonly disabled!: boolean;
 	@Prop({ type: Boolean }) readonly flat!: boolean;
@@ -32,9 +42,21 @@ export default class VButton extends Vue {
 	})
 	readonly variant!: "primary";
 	@Prop({ type: Boolean }) readonly block!: boolean;
+	@Prop({ type: Object }) readonly to!: RouteLocationRaw;
+
+	getClasses(): unknown {
+		return [
+			"root",
+			`variant--${this.variant}`,
+			{
+				flat: this.variant,
+				block: this.block
+			}
+		];
+	}
 }
 </script>
-<style lang="scss" module>
+<style lang="scss" scoped>
 .root {
 	text-decoration: none;
 	opacity: 1;
@@ -62,7 +84,6 @@ export default class VButton extends Vue {
 
 	&[disabled] {
 		opacity: 0.38;
-		cursor: not-allowed;
 	}
 
 	&:not([disabled]):hover,
@@ -76,8 +97,7 @@ export default class VButton extends Vue {
 	background-color: transparent;
 	color: var(--kt-content-primary);
 
-	&:hover {
-		background-color: transparent;
+	&:hover:not([disabled]) {
 		background-color: var(--kt-content-primary-hover);
 	}
 }
@@ -85,9 +105,8 @@ export default class VButton extends Vue {
 .block {
 	width: 100%;
 }
-</style>
-<style lang="scss" scoped>
-.variant-primary {
+
+.variant--primary {
 	background-color: var(--kt-content-primary);
 	border-color: var(--kt-content-primary);
 	color: var(--kt-background-surface);
@@ -99,7 +118,7 @@ export default class VButton extends Vue {
 	}
 }
 
-.variant_outlined {
+.variant--outlined {
 	background-color: transparent;
 	border-color: var(--kt-border-color);
 	color: var(--kt-primary-color);
