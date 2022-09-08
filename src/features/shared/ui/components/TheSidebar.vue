@@ -89,6 +89,7 @@ export default class TheSidebar extends Vue {
 	padding: 1.6rem 0;
 	display: flex;
 	flex-direction: column;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
 }
 
 .logo {

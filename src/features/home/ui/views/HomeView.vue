@@ -13,12 +13,14 @@
 			<!--				<div class="title">Checking for updates...</div>-->
 			<!--			</div>-->
 		</div>
-		<VContainer :class="$style.container">
+		<VContainer>
 			<PageHeader>
 				<template #title>Welcome</template>
 			</PageHeader>
 
-			<HomeUnitsList />
+			<div :class="$style.contents">
+				<HomeUnitsList />
+			</div>
 		</VContainer>
 	</div>
 </template>
@@ -60,8 +62,9 @@ export default class HomeView extends Vue {}
 	padding: 3.6rem 2.4rem;
 }
 
-.container {
-	flex-shrink: 0;
+.contents {
+	display: flex;
+	flex-direction: column;
 }
 
 .updateCheck {

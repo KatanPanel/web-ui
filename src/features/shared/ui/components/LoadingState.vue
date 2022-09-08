@@ -30,6 +30,6 @@ export default class LoadingState extends Vue {
 .root {
 	position: relative;
 	width: 100%;
-	height: 100%;
+	height: 72px;
 }
 </style>

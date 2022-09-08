@@ -8,6 +8,17 @@
 	>
 		<h5 v-if="emptyStateTitle" v-t="emptyStateTitle" />
 		<p v-if="emptyStateDescription" v-t="emptyStateDescription" />
+		<div
+			:class="$style.empty__body"
+			v-if="$slots.empty || includeRefreshButton"
+		>
+			<VButton
+				:class="$style.button"
+				@click="refresh()"
+				v-t="'empty-state.refresh'"
+			/>
+			<slot name="empty" />
+		</div>
 	</EmptyState>
 	<ErrorState v-else-if="error" key="error" />
 	<template v-else>
@@ -22,12 +33,13 @@ import EmptyState from "@/features/shared/ui/components/EmptyState.vue";
 import LoadingState from "@/features/shared/ui/components/LoadingState.vue";
 import { isUndefined } from "@/utils";
 import logService from "@/features/shared/data/log.service";
+import VButton from "@/features/shared/ui/components/design-system/button/VButton.vue";
 
 const LOADED_EVENT = "loaded";
 const ERROR_EVENT = "error";
 
 @Component({
-	components: { LoadingState, EmptyState, ErrorState },
+	components: { LoadingState, EmptyState, ErrorState, VButton },
 	emits: [LOADED_EVENT, ERROR_EVENT]
 })
 export default class Resource extends Vue {
@@ -48,6 +60,9 @@ export default class Resource extends Vue {
 
 	@Prop({ type: Function })
 	readonly emptyEval!: (resource: unknown) => boolean;
+
+	@Prop({ type: Boolean, default: false })
+	readonly includeRefreshButton!: boolean;
 
 	isLoading = true;
 	isEmpty = false;
@@ -88,6 +103,10 @@ export default class Resource extends Vue {
 		return error;
 	}
 
+	refresh() {
+		this.load();
+	}
+
 	private reset() {
 		this.isLoading = true;
 		this.isEmpty = false;
@@ -95,3 +114,12 @@ export default class Resource extends Vue {
 	}
 }
 </script>
+<style lang="scss" module>
+.empty__body {
+	margin-top: 1.6rem;
+}
+
+.button:not(:last-child) {
+	margin-right: 0.8rem;
+}
+</style>

@@ -4,8 +4,8 @@
 		v-if="to"
 		:to="to"
 		:class="getClasses()"
-		:disabled="disabled"
 		:tabindex="disabled ? -1 : 0"
+		v-bind="{ disabled }"
 		@click="$emit('click')"
 		@keydown.enter="$emit('keydown', $event)"
 	>
@@ -76,18 +76,22 @@ export default class VButton extends Vue {
 	height: 36px;
 	padding: 0.8rem 1.6rem;
 	font-family: var(--kt-body-font);
+	background-color: var(--kt-background-surface-high);
+	color: var(--kt-content-neutral);
 
 	&:hover,
 	&:focus {
 		text-decoration: none !important;
+		background-color: var(--kt-background-surface-hover);
+		color: var(--kt-content-neutral-high);
 	}
 
-	&[disabled] {
+	&[disabled="true"] {
 		opacity: 0.38;
 	}
 
-	&:not([disabled]):hover,
-	&:not([disabled]):focus {
+	&:not([disabled="true"]):hover,
+	&:not([disabled="true"]):focus {
 		cursor: pointer;
 		text-decoration: underline;
 	}
@@ -97,7 +101,7 @@ export default class VButton extends Vue {
 	background-color: transparent;
 	color: var(--kt-content-primary);
 
-	&:hover:not([disabled]) {
+	&:hover:not([disabled="true"]) {
 		background-color: var(--kt-content-primary-hover);
 	}
 }
@@ -109,12 +113,13 @@ export default class VButton extends Vue {
 .variant--primary {
 	background-color: var(--kt-content-primary);
 	border-color: var(--kt-content-primary);
-	color: var(--kt-background-surface);
+	color: var(--kt-content-primary-oncolor);
 
-	&:not([disabled]):hover,
-	&:not([disabled]):focus {
+	&:not([disabled="true"]):hover,
+	&:not([disabled="true"]):focus {
 		background-color: var(--kt-content-primary-hover);
 		border-color: var(--kt-content-primary-hover);
+		color: var(--kt-content-primary-oncolor);
 	}
 }
 
@@ -129,8 +134,8 @@ export default class VButton extends Vue {
 		text-decoration: underline;
 	}
 
-	&:not([disabled]):hover,
-	&:not([disabled]):focus {
+	&:not([disabled="true"]):hover,
+	&:not([disabled="true"]):focus {
 		background-color: transparent;
 		border-color: var(--kt-primary-darker-color);
 	}
