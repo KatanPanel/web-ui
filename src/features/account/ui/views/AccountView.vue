@@ -4,32 +4,36 @@
 			<template #title>Account</template>
 		</PageHeader>
 		<VForm>
-			<VRow>
-				<VCol :size="6">
-					<VFieldSet>
-						<VLabel>ID</VLabel>
-						<VInput type="text" :value="account.id" readonly />
-					</VFieldSet>
-				</VCol>
-			</VRow>
-			<VRow>
-				<VCol :size="4">
-					<VFieldSet>
-						<VLabel>Username</VLabel>
-						<VInput type="text" :value="account.username" />
-					</VFieldSet>
-				</VCol>
-				<VCol :size="8">
-					<VFieldSet>
-						<VLabel>Email</VLabel>
-						<VInput
-							type="email"
-							placeholder="example@katan.org"
-							:value="account.email"
-						/>
-					</VFieldSet>
-				</VCol>
-			</VRow>
+			<VSection>
+				<VRow>
+					<VCol :size="6">
+						<VFieldSet>
+							<VLabel>ID</VLabel>
+							<VInput type="text" :value="account.id" readonly />
+						</VFieldSet>
+					</VCol>
+				</VRow>
+			</VSection>
+			<VSection>
+				<VRow>
+					<VCol :size="4">
+						<VFieldSet>
+							<VLabel>Username</VLabel>
+							<VInput type="text" :value="account.username" />
+						</VFieldSet>
+					</VCol>
+					<VCol :size="8">
+						<VFieldSet>
+							<VLabel>Email</VLabel>
+							<VInput
+								type="email"
+								placeholder="example@katan.org"
+								:value="account.email"
+							/>
+						</VFieldSet>
+					</VCol>
+				</VRow>
+			</VSection>
 		</VForm>
 	</VContainer>
 </template>
@@ -48,6 +52,7 @@ import { Account } from "@/features/account/models/account.model";
 import { getModule } from "vuex-module-decorators";
 import AccountStore from "@/features/account/store/account.store";
 import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
+import VSection from "@/features/shared/ui/components/design-system/grid/VSection.vue";
 
 @Component({
 	components: {
@@ -59,7 +64,8 @@ import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue"
 		VLabel,
 		VRow,
 		VCol,
-		VCard
+		VCard,
+		VSection
 	}
 })
 export default class AccountView extends Vue {
