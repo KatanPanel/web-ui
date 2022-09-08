@@ -16,7 +16,7 @@ export type RawBlueprintRemoteResponse = {
 export type RawBlueprintBuildResponse = {
 	readonly image: string;
 	readonly entrypoint: string;
-	readonly env?: readonly (readonly [string, string])[];
+	readonly env?: { readonly [key: string]: string };
 };
 
 export type RawBlueprintInstanceSettingsResponse = {

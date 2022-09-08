@@ -2,7 +2,7 @@ import { BlueprintResponse } from "@/features/blueprints/data/response/blueprint
 import httpService from "@/features/shared/data/http.service";
 import { AxiosResponse } from "axios";
 import { ReadBlueprintFileResponse } from "@/features/blueprints/data/response/read-blueprint-file.response";
-import { RawBlueprintResponse } from "@/features/blueprints/data/response/raw-blueprint.response";
+import { ImportBlueprintResponse } from "@/features/blueprints/data/response/import-blueprint.response";
 
 class BlueprintsGateway {
 	async listBlueprints(): Promise<BlueprintResponse[]> {
@@ -20,10 +20,10 @@ class BlueprintsGateway {
 			.then((res: AxiosResponse) => res.data as BlueprintResponse);
 	}
 
-	async importBlueprint(url: string): Promise<RawBlueprintResponse> {
+	async importBlueprint(url: string): Promise<ImportBlueprintResponse> {
 		return httpService
 			.post(`blueprints/import`, { url })
-			.then((res: AxiosResponse) => res.data as RawBlueprintResponse);
+			.then((res: AxiosResponse) => res.data as ImportBlueprintResponse);
 	}
 
 	async readBlueprintFile(

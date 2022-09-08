@@ -2,28 +2,30 @@
 	<Resource
 		@loaded="onLoad"
 		:resource="getResource"
-		:empty-eval="(value) => value == null || value.entries.length === 0"
 		empty-state-title="blueprints.empty-state.title"
 		empty-state-description="blueprints.empty-state.description"
 		empty-state-icon="ScriptOutline"
 	>
-		Olá mundo com {{ blueprints.length }} blueprints
+		<div v-for="blueprint in blueprints" :key="blueprint.id">
+			<BlueprintsListItem
+				:blueprint-id="blueprint.id"
+				:name="blueprint.name"
+			/>
+		</div>
 	</Resource>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
 import { Blueprint } from "@/features/blueprints/models/blueprint.model";
-import EmptyState from "@/features/shared/ui/components/EmptyState.vue";
-import LoadingState from "@/features/shared/ui/components/LoadingState.vue";
-import ErrorState from "@/features/shared/ui/components/ErrorState.vue";
 import blueprintsService from "@/features/blueprints/data/blueprints.service";
 import Resource from "@/features/shared/ui/components/Resource.vue";
+import BlueprintsListItem from "@/features/blueprints/ui/components/home/BlueprintsListItem.vue";
 
 @Component({
-	components: { LoadingState, EmptyState, ErrorState, Resource }
+	components: { Resource, BlueprintsListItem }
 })
-export default class BlueprintsHomeListing extends Vue {
+export default class BlueprintsList extends Vue {
 	blueprints!: Blueprint[];
 
 	getResource(): Promise<Blueprint[]> {

@@ -13,8 +13,14 @@ export default {
 		return {
 			id: response.id,
 			name: response.name,
-			image: response.image,
-			createdAt: new Date(response["created-at"])
+			version: response.version,
+			imageId: response["image-id"],
+			createdAt: new Date(response["created-at"]),
+			updatedAt: undefinedOr(
+				response["updated-at"],
+				(updatedAt) => new Date(updatedAt)
+			),
+			raw: this.toRawBlueprint(response.raw)
 		};
 	},
 	toRawBlueprint(response: RawBlueprintResponse): RawBlueprint {
@@ -31,7 +37,7 @@ export default {
 				image: response.build.image,
 				entrypoint: response.build.entrypoint,
 				env: undefinedOr(response.build.env, (env) => {
-					return new Map(env);
+					return new Map(Object.entries(env));
 				})
 			},
 			instance: undefinedOr(response.instance, (settings) => {

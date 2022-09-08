@@ -11,7 +11,7 @@
 				>Import from remote source</VButton
 			>
 		</PageHeader>
-		<BlueprintsHomeListing />
+		<BlueprintsList />
 	</VContainer>
 </template>
 
@@ -19,12 +19,12 @@
 import { Component, Vue } from "vue-facing-decorator";
 import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
 import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
-import BlueprintsHomeListing from "@/features/blueprints/ui/components/home/BlueprintsHomeListing.vue";
+import BlueprintsList from "@/features/blueprints/ui/components/home/BlueprintsList.vue";
 import VButton from "@/features/shared/ui/components/design-system/button/VButton.vue";
 import ImportBlueprintModal from "@/features/blueprints/ui/components/ImportBlueprintModal.vue";
 
 @Component({
-	components: { VButton, VContainer, PageHeader, BlueprintsHomeListing }
+	components: { VButton, VContainer, PageHeader, BlueprintsList }
 })
 export default class BlueprintsHomeView extends Vue {
 	onImportClick() {
