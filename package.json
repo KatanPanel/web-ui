@@ -23,7 +23,7 @@
 		"validator": "^13.7.0",
 		"vue": "^3.2.37",
 		"vue-class-component": "^8.0.0-0",
-		"vue-codemirror": "^6.0.2",
+		"vue-codemirror": "^6.1.1",
 		"vue-content-loader": "^2.0.1",
 		"vue-facing-decorator": "^2.1.7",
 		"vue-final-modal": "^3.4.4",
