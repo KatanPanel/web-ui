@@ -30,8 +30,7 @@ import InstanceNetworkConnectedNetworksListItem from "@/features/units/ui/compon
 import EmptyState from "@/features/shared/ui/components/EmptyState.vue";
 import VCol from "@/features/shared/ui/components/design-system/grid/VCol.vue";
 import VRow from "@/features/shared/ui/components/design-system/grid/VRow.vue";
-import VLabel
-	from "@/features/shared/ui/components/design-system/form/VLabel.vue";
+import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
 
 @Component({
 	components: {
