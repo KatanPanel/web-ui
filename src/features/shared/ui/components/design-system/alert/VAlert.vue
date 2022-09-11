@@ -69,7 +69,7 @@ $shadow: 1.5px;
 }
 
 .alert__icon {
-	padding: $base-padding;
+	padding: $base-padding $base-padding 0 $base-padding;
 }
 
 .alert__icon__svg :deep(svg) {
@@ -83,6 +83,7 @@ $shadow: 1.5px;
 	font-weight: 500;
 	padding: $base-padding $base-padding $base-padding 0;
 	user-select: none;
+	color: var(--kt-content-neutral-high);
 }
 
 .alert__title + .alert__description {
