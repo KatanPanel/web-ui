@@ -36,8 +36,12 @@ export default class VIcon extends Vue {
 }
 </script>
 <style lang="scss" module>
-.root svg {
-	width: 100% !important;
-	vertical-align: middle;
+.root {
+	display: inline-block;
+
+	svg {
+		width: 100% !important;
+		vertical-align: middle;
+	}
 }
 </style>
