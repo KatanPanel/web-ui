@@ -1,13 +1,9 @@
 <template>
 	<VContainer>
-		<PageHeader>
-			<template #title>
-				<span v-t="'instances.network.title'" />
-			</template>
-			<template #subtitle>
-				<span v-t="'instances.network.subtitle'" />
-			</template>
-		</PageHeader>
+		<PageHeader
+			title-translation-key="instances.network.title"
+			no-divider
+		/>
 		<InstanceNetworkAssignmentFailedAlert />
 		<VSection>
 			<VRow>
