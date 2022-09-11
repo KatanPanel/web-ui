@@ -52,7 +52,7 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	font-weight: 600;
 	font-size: 14px;
 	border-radius: 8px;
-	padding: 0.8rem 1.2rem;
+	padding: 0.8rem 1.6rem;
 	margin: 0 0.8rem;
 	color: var(--kt-content-neutral);
 }
