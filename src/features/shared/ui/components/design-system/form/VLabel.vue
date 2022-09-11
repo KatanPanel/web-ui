@@ -3,7 +3,8 @@
 		:class="[
 			$style.root,
 			{
-				[$style.onColor]: onColor
+				[$style.onColor]: onColor,
+				[$style.required]: required
 			}
 		]"
 	>
@@ -18,6 +19,9 @@ import { Component, Prop, Vue } from "vue-facing-decorator";
 export default class VLabel extends Vue {
 	@Prop({ type: Boolean })
 	private readonly onColor!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly required!: boolean;
 }
 </script>
 <style lang="scss" module>
@@ -30,6 +34,7 @@ export default class VLabel extends Vue {
 	letter-spacing: 0.285px;
 	text-transform: uppercase;
 	user-select: none;
+	margin-bottom: 0.2rem;
 
 	&:not(:first-child) {
 		margin-top: 16px;
@@ -38,5 +43,13 @@ export default class VLabel extends Vue {
 
 .onColor {
 	color: var(--kt-content-primary-oncolor);
+}
+
+.required::after {
+	content: "*";
+	position: relative;
+	display: inline-block;
+	color: var(--kt-content-negative);
+	font-size: 14px;
 }
 </style>
