@@ -17,7 +17,7 @@ export default class VFieldSet extends Vue {}
 	flex-direction: column;
 
 	&:not(:last-child) {
-		margin-bottom: 8px;
+		margin-bottom: 1.6rem;
 	}
 
 	&[disabled] {
