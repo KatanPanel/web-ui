@@ -5,7 +5,10 @@
 			{
 				[$style.root__hoverable]: hoverable,
 				[$style.root__flat]: flat,
-				[$style.root__reduced]: reduced
+				[$style.root__reduced]: reduced,
+				[$style.root__onSurface]: onSurface,
+				[$style.root__outlined]: outlined,
+				[$style.root__scrollable]: scrollable
 			}
 		]"
 	>
@@ -29,13 +32,22 @@ export default class VCard extends Vue {
 
 	@Prop({ type: Boolean, default: false })
 	private readonly reduced!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly onSurface!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly outlined!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly scrollable!: boolean;
 }
 </script>
 
 <style lang="scss" module>
 .root {
 	border-radius: 8px;
-	padding: 2.4rem;
+	padding: 2rem;
 	background-color: var(--kt-background-surface);
 	border: 1px solid var(--kt-border-low);
 }
@@ -49,11 +61,24 @@ export default class VCard extends Vue {
 	border-color: var(--kt-background-surface);
 }
 
+.root__onSurface {
+	background-color: var(--kt-background-surface-high);
+}
+
+.root__outlined {
+	background-color: transparent;
+}
+
 .root__reduced {
 	padding: 1.2rem;
 }
 
 .title {
 	font-weight: 600;
+}
+
+.root__scrollable {
+	overflow-y: auto;
+	max-height: 540px;
 }
 </style>
