@@ -54,7 +54,7 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	border-radius: 8px;
 	padding: 0.8rem 1.6rem;
 	margin: 0 0.8rem;
-	color: var(--kt-content-neutral);
+	color: var(--kt-content-neutral-high);
 }
 
 .icon {
@@ -82,8 +82,8 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	}
 
 	&.router-link-exact-active {
-		background-color: var(--kt-background-surface-high);
-		color: var(--kt-content-neutral-high);
+		background-color: var(--kt-content-primary-overlay);
+		color: var(--kt-content-primary);
 	}
 }
 </style>

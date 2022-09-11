@@ -42,6 +42,7 @@ import {
 	INSTANCE_CONSOLE_ROUTE,
 	INSTANCE_FS_ROUTE,
 	INSTANCE_NETWORK_ROUTE,
+	INSTANCE_RESOURCES_ROUTE,
 	UNIT_AUDIT_LOG_ROUTE,
 	UNIT_OVERVIEW_ROUTE,
 	UNIT_SETTINGS_ROUTE
@@ -104,7 +105,7 @@ export default class TheUnitSidebar extends Vue {
 				key: "instance",
 				children: [
 					{
-						icon: "ConsoleLine",
+						icon: "Console",
 						translationTextKey: "console",
 						link: this.createInstanceRoute({
 							name: INSTANCE_CONSOLE_ROUTE
@@ -118,7 +119,14 @@ export default class TheUnitSidebar extends Vue {
 						})
 					},
 					{
-						icon: "Lan",
+						icon: "ChartMultiline",
+						translationTextKey: "resources",
+						link: this.createInstanceRoute({
+							name: INSTANCE_RESOURCES_ROUTE
+						})
+					},
+					{
+						icon: "NetworkStrength4Cog",
 						translationTextKey: "network",
 						link: this.createInstanceRoute({
 							name: INSTANCE_NETWORK_ROUTE

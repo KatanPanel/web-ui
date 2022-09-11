@@ -1,87 +1,70 @@
 <template>
-	<div v-if="actor !== undefined" :class="$style.root" role="listitem">
-		<VCard reduced :class="$style.card">
-			<Avatar
-				:src="actor?.avatar"
-				:label="`Avatar of ${entry.targetId}`"
-				:class="$style.actorAvatar"
+	<VCard role="listitem" :reduced="true" :class="$style.root">
+		<UnitAuditLogEntryListItemAvatar
+			:avatar-url="actor.avatar"
+			:subject="actor.username"
+		/>
+		<div :class="$style.info">
+			<UnitAuditLogEntryListItemTitle
+				:actor-name="actor.username"
+				:event="entry.event"
 			/>
-			<div :class="$style.info">
-				<div :class="$style.infoTitle">{{ createTitle() }}</div>
-				<time :datetime="entry.createdAt" :class="$style.infoTimestamp">
-					{{ getFormattedTimestamp(entry.createdAt) }}
-				</time>
-				<ul v-if="entry.changes.length !== 0" :class="$style.changes">
-					<li v-for="change in entry.changes" :key="change.key">
-						<i18n-t :keypath="translationKeyFor(change)">
-							<template v-if="change.oldValue" #oldValue>
-								<span
-									v-text="change.oldValue"
-									:class="$style.infoMark"
-								/>
-							</template>
-							<template v-if="change.newValue" #newValue>
-								<span
-									v-text="change.newValue"
-									:class="$style.infoMark"
-								/>
-							</template>
-						</i18n-t>
-					</li>
-				</ul>
-			</div>
-		</VCard>
-	</div>
+			<UnitAuditLogEntryListItemTimestamp :timestamp="entry.createdAt" />
+
+			<ul v-if="entry.changes.length !== 0" :class="$style.changes">
+				<li
+					v-for="change in entry.changes"
+					:key="createUniqueKeyForChange(change.key)"
+				>
+					<UnitAuditLogEntryListItemChange :change="change" />
+				</li>
+			</ul>
+		</div>
+	</VCard>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import {
-	AuditLogEntry,
-	AuditLogEntryChange
-} from "@/features/units/models/audit-log.model";
+import { AuditLogEntry } from "@/features/units/models/audit-log.model";
 import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
 import Avatar from "@/features/shared/ui/components/Avatar.vue";
 import { Account } from "@/features/account/models/account.model";
-import dayjs from "dayjs";
+import UnitAuditLogEntryListItemTitle from "@/features/units/ui/components/audit-log/UnitAuditLogEntryListItemTitle.vue";
+import UnitAuditLogEntryListItemTimestamp from "@/features/units/ui/components/audit-log/UnitAuditLogEntryListItemTimestamp.vue";
+import UnitAuditLogEntryListItemAvatar from "@/features/units/ui/components/audit-log/UnitAuditLogEntryListItemAvatar.vue";
+import UnitAuditLogEntryListItemChange from "@/features/units/ui/components/audit-log/UnitAuditLogEntryListItemChange.vue";
 
 @Component({
-	components: { Avatar, VCard }
+	components: {
+		Avatar,
+		VCard,
+		UnitAuditLogEntryListItemTitle,
+		UnitAuditLogEntryListItemTimestamp,
+		UnitAuditLogEntryListItemAvatar,
+		UnitAuditLogEntryListItemChange
+	}
 })
 export default class UnitAuditLogEntryListItem extends Vue {
 	@Prop({ type: Object, required: true })
 	private readonly entry!: AuditLogEntry;
 
 	@Prop({ type: Object })
-	private readonly actor!: Account | undefined;
+	private readonly actor!: Account;
 
-	createTitle(): string {
-		return this.$t(`units.audit-log.entry.pattern.${this.entry.event}`, {
-			user: this.actor?.username,
-			unit: this.entry.targetId
-		});
-	}
-
-	translationKeyFor(change: AuditLogEntryChange): string {
-		return `units.audit-log.change.pattern.unit.${change.key}`;
-	}
-
-	getFormattedTimestamp(timestamp: Date): string {
-		return dayjs(timestamp, "dddd") as unknown as string;
+	createUniqueKeyForChange(key: string): string {
+		return `change-${key}`;
 	}
 }
 </script>
 
 <style lang="scss" module>
 .root {
+	display: flex;
+	flex-direction: row;
+
 	&:not(:last-child) {
 		margin-bottom: 8px;
 	}
-}
-
-.card {
-	display: flex;
-	flex-direction: row;
 }
 
 .actorAvatar {
@@ -98,6 +81,7 @@ export default class UnitAuditLogEntryListItem extends Vue {
 
 .infoTitle {
 	font-size: 15px;
+	color: var(--kt-content-neutral);
 }
 
 .infoTimestamp {

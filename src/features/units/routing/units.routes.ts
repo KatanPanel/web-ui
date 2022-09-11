@@ -10,6 +10,7 @@ export const UNIT_AUDIT_LOG_ROUTE = "units.audit-log";
 export const UNIT_SETTINGS_ROUTE = "units.settings";
 export const INSTANCE_ROUTE = "instances";
 export const INSTANCE_CONSOLE_ROUTE = "instances.console";
+export const INSTANCE_RESOURCES_ROUTE = "instances.resources";
 export const INSTANCE_NETWORK_ROUTE = "instances.network";
 export const INSTANCE_FS_ROUTE = "instances.fs";
 export const INSTANCE_FS_BUCKET_ROUTE = "instances.fs.buckets";
@@ -50,6 +51,14 @@ export const UnitsRoute: Array<RouteRecordRaw> = [
 				name: INSTANCE_ROUTE,
 				component: importView(FEATURE_NAME, "instances/InstanceView"),
 				children: [
+					{
+						path: "resources",
+						name: INSTANCE_RESOURCES_ROUTE,
+						component: importView(
+							FEATURE_NAME,
+							"instances/resource-monitor/InstanceResourceMonitorView"
+						)
+					},
 					{
 						path: "console",
 						name: INSTANCE_CONSOLE_ROUTE,
