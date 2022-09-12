@@ -1,6 +1,6 @@
 :root {
 	--kt-headline-font: "Urbanist", sans-serif;
-	--kt-body-font: "Nunito Sans", sans-serif;
+	--kt-body-font: "Inter", sans-serif;
 	--kt-background-body: #F2F4F7;
 	--kt-background-surface: #fff;
 	--kt-background-surface-overlay: rgba(0, 0, 0, 0.1);
@@ -22,8 +22,8 @@
 	--kt-content-neutral-low: #a6aeba;
 	--kt-content-neutral-high: #303742;
 	--kt-content-neutral-overlay: rgba(118, 127, 141, 0.1);
-	--kt-border-medium: rgba(48, 55, 66, 0.2);
-	--kt-border-low: rgba(48, 55, 66, 0.1);
+	--kt-border-medium: rgba(48, 55, 66, 0.1);
+	--kt-border-low: rgba(48, 55, 66, 0.05);
 }
 
 hr {
