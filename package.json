@@ -27,7 +27,7 @@
 		"vue-codemirror": "^6.1.1",
 		"vue-content-loader": "^2.0.1",
 		"vue-echarts": "^6.2.3",
-		"vue-facing-decorator": "^2.1.7",
+		"vue-facing-decorator": "^2.1.12",
 		"vue-final-modal": "^3.4.4",
 		"vue-head": "MKGaru/vue-head#vue3",
 		"vue-i18n": "^9.2.2",

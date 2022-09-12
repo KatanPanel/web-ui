@@ -10921,10 +10921,10 @@ vue-eslint-parser@^8.0.0, vue-eslint-parser@^8.0.1:
     lodash "^4.17.21"
     semver "^7.3.5"
 
-vue-facing-decorator@^2.1.7:
-  version "2.1.7"
-  resolved "https://registry.yarnpkg.com/vue-facing-decorator/-/vue-facing-decorator-2.1.7.tgz#37c2928e73aca12c31b1075e5a0a42957990a7b1"
-  integrity sha512-0T3+k8Kad63xMSHAPYkMal19Au0X09lBvZmTPT8WcP+hCdAaUgfMpHaPoLvSDfMKs0QkLEPJEE4ttWQSHj0T2A==
+vue-facing-decorator@^2.1.12:
+  version "2.1.12"
+  resolved "https://registry.yarnpkg.com/vue-facing-decorator/-/vue-facing-decorator-2.1.12.tgz#403fcba43578f02a2e9679112cc833937cd773ec"
+  integrity sha512-W3Ndjtvd7ibN4XL6ScUpiUuFrlNv924tGUj13xNrqcPpsNAkiRtky/HgNqqOjGDjSbfzdePw6geCRoiZg+hEaw==
 
 vue-final-modal@^3.4.4:
   version "3.4.4"
