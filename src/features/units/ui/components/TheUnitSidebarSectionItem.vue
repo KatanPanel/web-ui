@@ -70,7 +70,7 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	overflow: hidden;
 	align-self: center;
 	position: relative;
-	font-weight: 700;
+	font-weight: 600;
 	font-size: 14px;
 	color: var(--kt-content-neutral-high);
 }
