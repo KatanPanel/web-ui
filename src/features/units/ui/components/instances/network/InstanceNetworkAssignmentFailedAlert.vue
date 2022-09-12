@@ -1,5 +1,5 @@
 <template>
-	<VAlert v-show="isVisible()" variant="error">
+	<VAlert variant="error" :class="$style.root">
 		<template #description>
 			<span v-t="'instances.network.assignment-failed'" />
 		</template>
@@ -7,21 +7,16 @@
 </template>
 
 <script lang="ts">
-import { Component, Inject, Vue } from "vue-facing-decorator";
+import { Component, Vue } from "vue-facing-decorator";
 import VAlert from "@/features/shared/ui/components/design-system/alert/VAlert.vue";
-import { Instance } from "@/features/units/models/instance.model";
 
 @Component({
 	components: { VAlert }
 })
-export default class InstanceNetworkAssignmentFailedAlert extends Vue {
-	@Inject()
-	private readonly instance!: Instance;
-
-	isVisible(): boolean {
-		return this.instance.status === "network-assignment-failed";
-	}
-}
+export default class InstanceNetworkAssignmentFailedAlert extends Vue {}
 </script>
-
-<style lang="scss" scoped></style>
+<style lang="scss" module>
+.root {
+	margin-bottom: 2.4rem;
+}
+</style>

@@ -58,7 +58,6 @@ export default class PageHeader extends Vue {
 .root__nodivider {
 	border-bottom: none;
 	padding-bottom: 0;
-	margin-bottom: 0;
 }
 
 .title {

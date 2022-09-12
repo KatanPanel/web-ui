@@ -10,6 +10,7 @@
 			<BlueprintsListItem
 				:blueprint-id="blueprint.id"
 				:name="blueprint.name"
+				:icon="blueprint.raw.icon"
 			/>
 		</div>
 	</Resource>

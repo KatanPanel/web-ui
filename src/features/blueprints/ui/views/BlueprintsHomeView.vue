@@ -1,18 +1,25 @@
 <template>
-	<VContainer>
-		<PageHeader>
-			<template #title>
-				<span v-t="'blueprints.home.title'" />
-			</template>
-			<template #subtitle>
-				<span v-t="'blueprints.home.subtitle'" />
-			</template>
-			<VButton @click="onImportClick" variant="primary" :flat="true"
-				>Import from remote source</VButton
-			>
-		</PageHeader>
-		<BlueprintsList />
-	</VContainer>
+	<PageHeader :class="$style.header">
+		<template #title>
+			<span :class="$style.header__title" v-t="'blueprints.home.title'" />
+		</template>
+		<template #subtitle>
+			<span v-t="'blueprints.home.subtitle'" />
+		</template>
+		<VButton variant="primary" :flat="true" @click="onImportClick">
+			Import from remote source
+		</VButton>
+	</PageHeader>
+	<div :class="$style.backdrop" />
+	<div :class="$style.body">
+		<div :class="$style.body__filters"></div>
+		<div :class="$style.body__contents">
+			<h6>Available locally</h6>
+			<BlueprintsList />
+			<BlueprintsList />
+			<BlueprintsList />
+		</div>
+	</div>
 </template>
 
 <script lang="ts">
@@ -35,4 +42,46 @@ export default class BlueprintsHomeView extends Vue {
 }
 </script>
 
-<style lang="scss" module></style>
+<style lang="scss" module>
+.backdrop {
+	background-image: url(https://wallpaperset.com/w/full/f/9/0/90893.jpg);
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 240px;
+	margin-left: 72px;
+	z-index: -1;
+}
+
+.header {
+	padding: 0 4.8rem;
+}
+
+.header__title {
+	font-size: 43px;
+	font-weight: 700;
+	color: var(--kt-content-primary-oncolor);
+}
+
+.body {
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	flex-grow: 1;
+	overflow-y: hidden;
+}
+
+.body__filters {
+	background-color: var(--kt-background-surface);
+	height: 100%;
+	padding: 0 2.4rem;
+	position: relative;
+}
+
+.body__contents {
+	padding: 2.4rem 4.8rem;
+	flex-grow: 1;
+	overflow-y: auto;
+}
+</style>

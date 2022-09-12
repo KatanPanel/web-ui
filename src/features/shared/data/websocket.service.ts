@@ -2,12 +2,14 @@ import { isUndefined } from "@/utils";
 import logService from "@/features/shared/data/log.service";
 import configService from "@/features/shared/data/config.service";
 
+export type WebSocketMessage = { o: number; d?: unknown };
+
 class WebSocketService {
 	private ws?: WebSocket;
 	private logger = logService.copy("Gateway");
 
-	tryConnect(onConnect: () => void): void {
-		if (!isUndefined(this.ws)) return;
+	tryConnect(onConnect: () => void, onFailure?: () => void): void {
+		if (this.isConnected()) return;
 
 		const url = configService.gatewayUrl;
 		this.logger.debug("Connecting to", url);
@@ -19,16 +21,40 @@ class WebSocketService {
 			this.logger.debug(`Connected in ${end - start}ms`);
 			onConnect();
 		};
+		this.ws.onerror = () => {
+			onFailure?.();
+		};
+		this.ws.onmessage = (e: MessageEvent) => {
+			console.log("received", e.data);
+		};
 	}
 
-	send(message: object): void {
-		if (isUndefined(this.ws) || this.ws.readyState !== WebSocket.OPEN)
-			throw new Error("Gateway not connected");
+	async send(message: WebSocketMessage): Promise<void> {
+		if (isUndefined(this.ws) || this.ws.readyState !== WebSocket.OPEN) {
+			this.logger.debug(
+				"Waiting connection be established to send message..."
+			);
+			await this.awaitConnect();
+		}
 
 		this.ws?.send(JSON.stringify(message));
+		this.logger.debug("Sent", message);
+	}
+
+	awaitConnect(): Promise<void> {
+		return new Promise((resolve, reject) => {
+			if (this.isConnected()) return resolve();
+
+			this.tryConnect(resolve, reject);
+		});
+	}
+
+	isConnected(): boolean {
+		return !isUndefined(this.ws) && this.ws.readyState === WebSocket.OPEN;
 	}
 
 	close(): void {
+		this.ws?.close(1000);
 		this.ws = undefined;
 	}
 }

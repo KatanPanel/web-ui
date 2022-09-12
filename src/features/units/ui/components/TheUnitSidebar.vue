@@ -1,6 +1,7 @@
 <template>
 	<nav v-if="unit" :class="$style.root" role="navigation">
 		<TheUnitSidebarHeader />
+		<TheUnitSidebarStatus />
 		<template v-for="link in createLinks()" :key="link.key">
 			<TheUnitSidebarSectionItem
 				v-if="link.link"
@@ -58,6 +59,8 @@ import TheUnitSidebarToggler from "@/features/units/ui/components/TheUnitSidebar
 import { isUndefined } from "@/utils";
 import { RouteLocationRaw } from "vue-router";
 import TheUnitSidebarHeader from "@/features/units/ui/components/TheUnitSidebarHeader.vue";
+import TheUnitSidebarStatus
+	from "@/features/units/ui/components/TheUnitSidebarStatus.vue";
 
 type Section = {
 	label: string;
@@ -84,6 +87,7 @@ type Sections = (Section | SectionItem)[];
 		Avatar,
 		TheUnitSidebarSectionItem,
 		TheUnitSidebarSection,
+		TheUnitSidebarStatus,
 		VLabel,
 		VOverline
 	}
@@ -196,12 +200,7 @@ export default class TheUnitSidebar extends Vue {
 	overflow-y: auto;
 	height: 100%;
 	flex-shrink: 0;
-	width: 260px;
-	background-color: var(--kt-background-surface);
-}
-
-.banner {
-	width: 100%;
-	height: 60px;
+	flex-grow: 0;
+	flex-basis: 280px;
 }
 </style>

@@ -9,7 +9,8 @@
 				:class="[$style.tab, { [$style.tab__active]: tab.isActive }]"
 				role="tab"
 			>
-				{{ tab.label }}
+				<VIcon :name="tab.icon" v-if="tab.icon" />
+				<span v-text="tab.label" />
 			</a>
 		</li>
 	</ul>
@@ -18,6 +19,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
+import VIcon
+	from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
 
 export type Tab = {
 	id: string;
@@ -25,11 +28,13 @@ export type Tab = {
 	name: string;
 	hash: string;
 	label: string;
+	icon: string | undefined;
 	isActive: boolean;
 	isDisabled: boolean;
 };
 
 @Component({
+	components: { VIcon },
 	emits: ["changed", "clicked"],
 	provide(this: VTabList) {
 		return {

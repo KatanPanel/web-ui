@@ -16,14 +16,10 @@ import { Tab } from "@/features/shared/ui/components/design-system/tabs/VTabList
 
 @Component
 export default class VTab extends Vue {
-	@Prop({ type: String, required: true })
-	readonly id!: string;
-
-	@Prop({ type: String, required: true })
-	private readonly label!: string;
-
-	@Prop({ type: Boolean, default: false })
-	private readonly isDisabled!: boolean;
+	@Prop({ type: String, required: true }) readonly id!: string;
+	@Prop({ type: String, required: true }) readonly label!: string;
+	@Prop({ type: Boolean, default: false }) readonly disabled!: boolean;
+	@Prop({ type: String }) readonly icon!: string;
 
 	@Inject()
 	private readonly addTab!: (tab: Tab) => void;
@@ -43,7 +39,7 @@ export default class VTab extends Vue {
 	}
 
 	get hash(): string {
-		return `#${this.isDisabled ? "" : this.computedId}`;
+		return `#${this.disabled ? "" : this.computedId}`;
 	}
 
 	beforeMount() {
@@ -54,7 +50,8 @@ export default class VTab extends Vue {
 			label: this.label,
 			hash: this.hash,
 			isActive: false,
-			isDisabled: this.isDisabled
+			isDisabled: this.disabled,
+			icon: this.icon
 		});
 	}
 

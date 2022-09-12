@@ -49,12 +49,10 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	font-weight: 600;
-	font-size: 14px;
 	border-radius: 8px;
 	padding: 0.8rem 1.6rem;
 	margin: 0 0.8rem;
-	color: var(--kt-content-neutral-high);
+	color: var(--kt-content-neutral);
 }
 
 .icon {
@@ -62,6 +60,8 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	height: 24px;
 	margin-right: 1.2rem;
 	flex-shrink: 0;
+	top: -1px;
+	position: relative;
 }
 
 .text {
@@ -70,8 +70,9 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	overflow: hidden;
 	align-self: center;
 	position: relative;
-	font-weight: 600;
-	font-family: var(--kt-headline-font);
+	font-weight: 700;
+	font-size: 14px;
+	color: var(--kt-content-neutral-high);
 }
 </style>
 <style lang="scss" scoped>
@@ -84,6 +85,10 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	&.router-link-exact-active {
 		background-color: var(--kt-content-primary-overlay);
 		color: var(--kt-content-primary);
+
+		.text {
+			color: var(--kt-content-primary);
+		}
 	}
 }
 </style>

@@ -55,7 +55,6 @@
 	"instances.main.empty-state.title": "Unknown instance",
 	"instances.main.empty-state.description": "We couldn't find this instance, make sure it exists and try again.",
 	"instances.network.title": "Network",
-	"instances.network.subtitle": "Instance network settings. Don't change anything unless you know exactly what you're doing!",
 	"instances.network.primary-address.title": "Primary Address",
 	"instances.network.primary-address.subtitle": "Remote address that is used to connect to this instance.",
 	"instances.network.primary-address.host": "Host",

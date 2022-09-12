@@ -4,18 +4,18 @@
 			title-translation-key="instances.network.title"
 			no-divider
 		/>
-		<InstanceNetworkAssignmentFailedAlert />
-		<VSection>
-			<VRow>
-				<VCol :size="8">
-					<InstanceNetworkConnectedNetworks />
-				</VCol>
-				<VCol :size="4">
-					<InstanceNetworkHostname />
-					<InstanceNetworkPrimaryAddress />
-				</VCol>
-			</VRow>
-		</VSection>
+		<InstanceNetworkAssignmentFailedAlert
+			v-show="hasNetworkAssignmentFailed()"
+		/>
+		<VRow>
+			<VCol :size="8">
+				<InstanceNetworkConnectedNetworks />
+			</VCol>
+			<VCol :size="4">
+				<InstanceNetworkHostname />
+				<InstanceNetworkPrimaryAddress />
+			</VCol>
+		</VRow>
 	</VContainer>
 </template>
 
@@ -48,5 +48,15 @@ import InstanceNetworkConnectedNetworks from "@/features/units/ui/components/ins
 export default class InstanceNetworkView extends Vue {
 	@Inject()
 	private readonly instance!: Instance;
+
+	// TEST ONLY
+	networkAssignmentFailed: boolean | undefined = undefined;
+
+	hasNetworkAssignmentFailed(): boolean {
+		return (
+			!!this.networkAssignmentFailed ||
+			this.instance.status === "network-assignment-failed"
+		);
+	}
 }
 </script>

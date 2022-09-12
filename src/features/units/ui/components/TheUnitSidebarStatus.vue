@@ -22,7 +22,7 @@ import Avatar from "@/features/shared/ui/components/Avatar.vue";
 @Component({
 	components: { Avatar }
 })
-export default class TheUnitSidebarHeader extends Vue {
+export default class TheUnitSidebarStatus extends Vue {
 	@Inject()
 	private readonly unit!: Unit;
 }

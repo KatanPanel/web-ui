@@ -1,9 +1,11 @@
 <template>
-	<VFieldSet>
-		<VLabel v-t="'instances.network.hostname.title'" />
-		<VBody2 v-t="'instances.network.hostname.subtitle'" />
-		<VInput :value="instance.runtime.network.hostname" readonly />
-	</VFieldSet>
+	<VCard :flat="true">
+		<VFieldSet>
+			<VLabel v-t="'instances.network.hostname.title'" />
+			<VBody2 v-t="'instances.network.hostname.subtitle'" />
+			<VInput :value="instance.runtime.network.hostname" readonly />
+		</VFieldSet>
+	</VCard>
 </template>
 
 <script lang="ts">
@@ -13,9 +15,10 @@ import VFieldSet from "@/features/shared/ui/components/design-system/form/VField
 import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
 import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
 import VBody2 from "@/features/shared/ui/components/design-system/typography/VBody2.vue";
+import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
 
 @Component({
-	components: { VFieldSet, VLabel, VInput, VBody2 }
+	components: { VCard, VFieldSet, VLabel, VInput, VBody2 }
 })
 export default class InstanceNetworkHostname extends Vue {
 	@Inject()

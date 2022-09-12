@@ -42,10 +42,10 @@ export default class TheUnitSidebarSection extends Vue {
 }
 
 .label {
-	margin: 2.4rem 2.4rem 0.4rem;
+	margin: 2.4rem 2.4rem 1.2rem;
 	display: inline-block;
-	color: var(--kt-content-neutral-low);
+	color: var(--kt-content-neutral);
 	font-size: 12px;
-	font-weight: 600;
+	font-weight: 700;
 }
 </style>
