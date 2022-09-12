@@ -49,7 +49,11 @@ export default class VCard extends Vue {
 	border-radius: 8px;
 	padding: 2rem;
 	background-color: var(--kt-background-surface);
-	border: 1px solid var(--kt-border-low);
+	border: 1px solid var(--kt-border-medium);
+
+	&:not(:last-child) {
+		margin-bottom: 0.8rem;
+	}
 }
 
 .root__hoverable:hover {

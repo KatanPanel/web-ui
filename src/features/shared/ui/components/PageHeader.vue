@@ -52,7 +52,7 @@ export default class PageHeader extends Vue {
 .root {
 	margin: 4.8rem 0 2.4rem;
 	padding-bottom: 1.6rem;
-	border-bottom: 1px solid var(--kt-border-low);
+	border-bottom: 1px solid var(--kt-border-medium);
 }
 
 .root__nodivider {
@@ -61,13 +61,15 @@ export default class PageHeader extends Vue {
 }
 
 .title {
-	font-weight: 600;
+	font-weight: 700;
+	font-family: var(--kt-headline-font);
 	user-select: none;
 }
 
 .subtitle {
 	margin-top: 1.6rem;
 	color: var(--kt-content-neutral);
+	font-size: 14px;
 }
 
 .body {
