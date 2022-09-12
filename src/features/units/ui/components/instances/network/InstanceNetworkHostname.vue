@@ -3,7 +3,7 @@
 		<VFieldSet>
 			<VLabel v-t="'instances.network.hostname.title'" />
 			<VBody2 v-t="'instances.network.hostname.subtitle'" />
-			<VInput :value="instance.runtime.network.hostname" readonly />
+			<VInput :value="instance.runtime.network.hostname" :on-surface="true" readonly />
 		</VFieldSet>
 	</VCard>
 </template>

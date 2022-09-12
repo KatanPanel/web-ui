@@ -1,22 +1,30 @@
 <template>
-	<VSection>
+	<VCard :flat="true" :class="$style.root">
 		<VLabel v-t="'instances.network.primary-address.title'" />
 		<VBody2 v-t="'instances.network.primary-address.subtitle'" />
 		<VRow>
 			<VCol :size="9">
 				<VFieldSet>
 					<VLabel v-t="'instances.network.primary-address.host'" />
-					<VInput :value="instance.connection.host" readonly />
+					<VInput
+						:value="instance.connection.host"
+						:on-surface="true"
+						readonly
+					/>
 				</VFieldSet>
 			</VCol>
 			<VCol :size="3">
 				<VFieldSet>
 					<VLabel v-t="'instances.network.primary-address.port'" />
-					<VInput :value="instance.connection.port" readonly />
+					<VInput
+						:value="instance.connection.port"
+						:on-surface="true"
+						readonly
+					/>
 				</VFieldSet>
 			</VCol>
 		</VRow>
-	</VSection>
+	</VCard>
 </template>
 
 <script lang="ts">
@@ -48,3 +56,14 @@ export default class InstanceNetworkPrimaryAddress extends Vue {
 	private readonly instance!: Instance;
 }
 </script>
+<style lang="scss" module>
+.root {
+	background-color: var(--kt-content-primary);
+	color: var(--kt-content-primary-oncolor);
+
+	p,
+	label {
+		color: var(--kt-content-primary-oncolor);
+	}
+}
+</style>

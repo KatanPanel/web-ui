@@ -12,8 +12,8 @@
 				<InstanceNetworkConnectedNetworks />
 			</VCol>
 			<VCol :size="4">
-				<InstanceNetworkHostname />
 				<InstanceNetworkPrimaryAddress />
+				<InstanceNetworkHostname />
 			</VCol>
 		</VRow>
 	</VContainer>

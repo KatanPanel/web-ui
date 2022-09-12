@@ -1,23 +1,25 @@
 <template>
-	<EmptyState v-if="isEmpty" icon="LanDisconnect">
-		<h5 v-t="'instances.network.connected.empty'" />
-	</EmptyState>
-	<template v-else>
-		<VRow>
-			<VCol :size="9">
-				<VLabel>Network Name</VLabel>
-			</VCol>
-			<VCol :size="3">
-				<VLabel>Type</VLabel>
-			</VCol>
-		</VRow>
-		<InstanceNetworkConnectedNetworksListItem
-			v-for="network in networks"
-			:key="network.id"
-			:network-id="network.id"
-			:network-name="network.name"
-		/>
-	</template>
+	<div :class="$style.root">
+		<EmptyState v-if="isEmpty" icon="LanDisconnect">
+			<h5 v-t="'instances.network.connected.empty'" />
+		</EmptyState>
+		<template v-else>
+			<VRow>
+				<VCol :size="9">
+					<VLabel>Network Details</VLabel>
+				</VCol>
+				<VCol :size="3">
+					<VLabel>Type</VLabel>
+				</VCol>
+			</VRow>
+			<InstanceNetworkConnectedNetworksListItem
+				v-for="network in networks"
+				:key="network.id"
+				:network-id="network.id"
+				:network-name="network.name"
+			/>
+		</template>
+	</div>
 </template>
 
 <script lang="ts">
@@ -57,3 +59,9 @@ export default class InstanceNetworkConnectedNetworksList extends Vue {
 	}
 }
 </script>
+<style lang="scss" module>
+.root {
+	border-top: 1px solid var(--kt-border-medium);
+	padding-top: 1.6rem;
+}
+</style>

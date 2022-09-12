@@ -1,5 +1,5 @@
 <template>
-	<div :class="$style.root">
+	<div :class="$style.root" tabindex="1">
 		<VRow>
 			<VCol :size="9">
 				<div :class="$style.info">
@@ -10,9 +10,10 @@
 					</div>
 				</div>
 			</VCol>
-			<VCol :size="3">
-				<div :class="$style.type">Unknown</div>
-			</VCol>
+			<!-- TODO include network type -->
+			<!--			<VCol :size="3">-->
+			<!--				<div :class="$style.type" />-->
+			<!--			</VCol>-->
 		</VRow>
 	</div>
 </template>
@@ -35,6 +36,7 @@ export default class InstanceNetworkConnectedNetworksListItem extends Vue {
 	private readonly networkName!: string;
 
 	createIconName(): string {
+		// TODO customize icon based on network type and/or availability
 		return "LanConnect";
 	}
 
@@ -60,7 +62,10 @@ export default class InstanceNetworkConnectedNetworksListItem extends Vue {
 
 .icon {
 	margin-right: 1.6rem;
-	color: var(--kt-content-neutral-high);
+	border-radius: 8px;
+	padding: 0.8rem;
+	color: var(--kt-content-primary);
+	background-color: var(--kt-content-primary-overlay);
 
 	svg {
 		width: 24px;
@@ -72,10 +77,11 @@ export default class InstanceNetworkConnectedNetworksListItem extends Vue {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	user-select: none;
 }
 
 .id {
-	font-size: 11px;
+	font-size: 12px;
 	color: var(--kt-content-neutral);
 }
 
@@ -90,5 +96,6 @@ export default class InstanceNetworkConnectedNetworksListItem extends Vue {
 }
 
 .type {
+	user-select: none;
 }
 </style>

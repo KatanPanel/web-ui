@@ -1,11 +1,11 @@
 <template>
-	<VLabel>
-		<i18n-t keypath="instances.network.connected.title">
-			<template #count>{{ getConnectedNetworksCount() }}</template>
-		</i18n-t>
-	</VLabel>
-	<VBody2 v-t="'instances.network.connected.subtitle'" />
-	<VCard flat>
+	<VCard :flat="true">
+		<VLabel>
+			<i18n-t keypath="instances.network.connected.title">
+				<template #count>{{ getConnectedNetworksCount() }}</template>
+			</i18n-t>
+		</VLabel>
+		<VBody2 v-t="'instances.network.connected.subtitle'" />
 		<InstanceNetworkConnectedNetworksList />
 	</VCard>
 </template>
@@ -24,10 +24,6 @@ import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vu
 export default class InstanceNetworkConnectedNetworks extends Vue {
 	@Inject()
 	private readonly instance!: Instance;
-
-	created() {
-		console.log("networks", this.instance.runtime?.network.networks);
-	}
 
 	getConnectedNetworksCount(): number {
 		return this.instance.runtime?.network.networks.length || 0;

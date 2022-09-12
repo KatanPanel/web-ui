@@ -61,10 +61,7 @@ export default class UnitAuditLogEntryListItem extends Vue {
 .root {
 	display: flex;
 	flex-direction: row;
-
-	&:not(:last-child) {
-		margin-bottom: 8px;
-	}
+	user-select: none;
 }
 
 .actorAvatar {
