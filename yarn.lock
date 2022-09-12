@@ -10969,10 +10969,10 @@ vue-material-design-icons@^5.1.2:
   resolved "https://registry.yarnpkg.com/vue-material-design-icons/-/vue-material-design-icons-5.1.2.tgz#d0b9227786672fc17be239fb8c1d8e22e33feb45"
   integrity sha512-nD1qFM2qAkMlVoe23EfNKIeMfYl6YjHZjSty9q0mwc2gXmPmvEhixywJQhM+VF5KVBI1zAkVTNLoUEERPY10pA==
 
-vue-progressive-image@^4.0.0-beta.10:
-  version "4.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/vue-progressive-image/-/vue-progressive-image-4.0.0-beta.10.tgz#6e1b674d04559d6e96c0f8f95307c76337ff3de9"
-  integrity sha512-AQdz0cU75TUH37UOigCDmIzo42RO0x7o1bhKO5tWn5WEHrshW0A2P10jMzHlEmxcMJBfb2phssxC0K8e9e/JsA==
+vue-progressive-image@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/vue-progressive-image/-/vue-progressive-image-4.0.0.tgz#dc74add192ee82a0238e67a17b85a2336aadcba5"
+  integrity sha512-ieLNX0q28Y8Oo4vsyi7vAtH9PzzpThiqk/IqO+jRbFE4xdM9ZYirhmRFfNnaxGSAhYWnQzY7z/BRTqupmpyKRQ==
 
 vue-router@^4.0.3:
   version "4.1.3"

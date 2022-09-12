@@ -33,7 +33,7 @@
 		"vue-i18n": "^9.2.2",
 		"vue-loading-overlay": "5.0",
 		"vue-material-design-icons": "^5.1.2",
-		"vue-progressive-image": "^4.0.0-beta.10",
+		"vue-progressive-image": "^4.0.0",
 		"vue-router": "^4.0.3",
 		"vue-simple-context-menu": "^4.0.4",
 		"vue3-icon": "^2.0.0",
