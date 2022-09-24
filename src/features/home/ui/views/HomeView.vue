@@ -4,8 +4,8 @@
 			<div :class="$style.details">
 				<h4><b>Overview</b></h4>
 				<div :class="$style.analytics">
-					<VLabel :on-color="true">Server Information</VLabel>
-					<p></p>
+					<VLabel :on-color="true"> Server Information </VLabel>
+					<p />
 				</div>
 			</div>
 			<!--			<div :class="$style.updateCheck">-->
@@ -15,7 +15,7 @@
 		</div>
 		<VContainer>
 			<PageHeader>
-				<template #title>Welcome</template>
+				<template #title> Welcome </template>
 			</PageHeader>
 
 			<div :class="$style.contents">
@@ -27,8 +27,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
 import HomeUnitsList from "@/features/home/ui/components/HomeUnitsList.vue";
-import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
+import VContainer from "@/design-system/grid/VContainer.vue";
+import VLabel from "@/design-system/form/VLabel.vue";
 import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
 
 @Component({

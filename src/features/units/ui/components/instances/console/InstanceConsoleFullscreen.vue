@@ -6,7 +6,7 @@
 				<VIcon name="Close" />
 			</div>
 		</div>
-		<div :class="$style.logs" ref="logsEl">
+		<div ref="logsEl" :class="$style.logs">
 			<code v-for="(log, i) in logs" :key="`log-${i}`">
 				{{ log }}
 			</code>
@@ -30,10 +30,10 @@
 <script lang="ts">
 import { Component, Emit, Inject, Ref, Vue } from "vue-facing-decorator";
 import { Unit } from "@/features/units/models/unit.model";
-import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
-import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
-import VForm from "@/features/shared/ui/components/design-system/form/VForm.vue";
-import VFieldSet from "@/features/shared/ui/components/design-system/form/VFieldSet.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
+import VInput from "@/design-system/form/VInput.vue";
+import VForm from "@/design-system/form/VForm.vue";
+import VFieldSet from "@/design-system/form/VFieldSet.vue";
 import logService from "@/features/shared/data/log.service";
 
 @Component({

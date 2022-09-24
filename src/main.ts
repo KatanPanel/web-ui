@@ -14,6 +14,27 @@ import VueLoading from "vue-loading-overlay";
 import VueProgressiveImage from "vue-progressive-image";
 import VueFinalModal from "vue-final-modal";
 
+// import ECharts modules manually to reduce bundle size
+import { CanvasRenderer } from "echarts/renderers";
+import { LineChart } from "echarts/charts";
+import {
+	GridComponent,
+	LegendComponent,
+	TitleComponent,
+	TooltipComponent
+} from "echarts/components";
+import ECharts from "vue-echarts";
+import { use } from "echarts/core";
+
+use([
+	CanvasRenderer,
+	LineChart,
+	GridComponent,
+	TitleComponent,
+	TooltipComponent,
+	LegendComponent
+]);
+
 export const i18n = setupI18n({
 	legacy: true,
 	allowComposition: true,
@@ -36,14 +57,15 @@ const app = createApp(App)
 	.use(VueLoading)
 	.use(VueProgressiveImage)
 	.use(VueFinalModal)
+	.use(i18n)
 	.component("vue-simple-context-menu", VueSimpleContextMenu)
-	.use(i18n);
+	.component("v-chart", ECharts);
 
 app.config.unwrapInjectedRef = true;
 
 // assigned all declared augmented types from shims-vue.d.ts
 Object.assign(app.config.globalProperties, {
 	$isDevelopmentMode: process.env.NODE_ENV !== "production"
-} as ComponentCustomProperties);
+});
 
 app.mount("#app");

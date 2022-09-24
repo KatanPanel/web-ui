@@ -27,13 +27,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from "vue-facing-decorator";
+import { Component, Emit, Prop, Vue, Watch } from "vue-facing-decorator";
 import ErrorState from "@/features/shared/ui/components/ErrorState.vue";
 import EmptyState from "@/features/shared/ui/components/EmptyState.vue";
 import LoadingState from "@/features/shared/ui/components/LoadingState.vue";
 import { isUndefined } from "@/utils";
 import logService from "@/features/shared/data/log.service";
-import VButton from "@/features/shared/ui/components/design-system/button/VButton.vue";
+import VButton from "@/design-system/button/VButton.vue";
+import { HttpError } from "@/features/shared/models/error.model";
 
 const LOADED_EVENT = "loaded";
 const ERROR_EVENT = "error";
@@ -64,6 +65,9 @@ export default class Resource extends Vue {
 	@Prop({ type: Boolean, default: false })
 	readonly includeRefreshButton!: boolean;
 
+	@Prop({ type: String })
+	readonly reactivityKey!: string | null;
+
 	isLoading = true;
 	isEmpty = false;
 	error!: unknown;
@@ -73,11 +77,21 @@ export default class Resource extends Vue {
 	}
 
 	private load() {
-		this.reset();
 		this.resource()
 			.then(this.onDataLoaded)
 			.catch(this.onError)
 			.finally(() => (this.isLoading = false));
+	}
+
+	refresh() {
+		this.reset();
+		this.load();
+	}
+
+	private reset() {
+		this.isLoading = true;
+		this.isEmpty = false;
+		this.error = undefined;
 	}
 
 	@Emit(LOADED_EVENT)
@@ -97,20 +111,32 @@ export default class Resource extends Vue {
 	}
 
 	@Emit(ERROR_EVENT)
-	onError(error: Error): Error {
+	onError(error: Error): Error | undefined {
+		if (
+			error instanceof HttpError &&
+			(error as HttpError).message.includes("Unknown")
+		) {
+			this.isEmpty = true;
+			return undefined;
+		}
+
 		logService.error("Failed to load resource.", error);
 		this.error = error;
 		return error;
 	}
 
-	refresh() {
-		this.load();
-	}
+	@Watch("reactivityKey", {
+		immediate: true
+	})
+	onStateChange(newValue: string | undefined): void {
+		if (isUndefined(newValue)) return;
 
-	private reset() {
-		this.isLoading = true;
-		this.isEmpty = false;
-		this.error = undefined;
+		logService.debug(
+			`Update resource state, refreshing... (is loading: ${this.isLoading})`,
+			newValue
+		);
+		if (this.isLoading) return;
+		this.refresh();
 	}
 }
 </script>

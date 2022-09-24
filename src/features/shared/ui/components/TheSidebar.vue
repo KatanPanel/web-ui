@@ -1,7 +1,9 @@
 <template>
 	<aside :class="$style.root" role="complementary">
 		<div :class="$style.logo">
-			<router-link to="/"><TheLogo :black="true" /></router-link>
+			<router-link to="/">
+				<TheLogo :black="true" />
+			</router-link>
 		</div>
 		<div :class="$style.items">
 			<ul>
@@ -47,11 +49,10 @@
 		</div>
 	</aside>
 </template>
-<style lang="scss" module></style>
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
 import TheLogo from "@/features/shared/ui/components/TheLogo.vue";
-import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
 import configService from "@/features/shared/data/config.service";
 import { RouteLocationRaw } from "vue-router";
 import { ABOUT_ROUTE } from "@/features/home/routing/home.routes";
@@ -83,13 +84,12 @@ export default class TheSidebar extends Vue {
 	}
 }
 </script>
+<style lang="scss" module></style>
 <style lang="scss" module>
 .root {
-	//border-right: 1px solid var(--kt-border-low);
 	padding: 1.6rem 0;
 	display: flex;
 	flex-direction: column;
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
 	background-color: var(--kt-background-surface);
 }
 
@@ -129,6 +129,7 @@ export default class TheSidebar extends Vue {
 		a {
 			padding: 6px;
 			border-radius: 8px;
+			color: var(--kt-content-neutral-high);
 
 			&:hover {
 				background-color: var(--kt-content-neutral-overlay);

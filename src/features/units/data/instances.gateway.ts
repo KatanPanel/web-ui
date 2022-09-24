@@ -6,6 +6,7 @@ import {
 	InstanceFsReadFileResponse,
 	InstanceResponse
 } from "@/features/units/data/response/instance.response";
+import { InstanceStatusUpdateCode } from "@/features/units/models/instance.model";
 
 class InstancesGateway {
 	async getInstance(id: string): Promise<InstanceResponse> {
@@ -23,10 +24,7 @@ class InstancesGateway {
 			.get(`instances/${instanceId}/fs/${bucket}/file`, {
 				params: { path }
 			})
-			.then((response: AxiosResponse) => {
-				console.log("response", response.data);
-				return response.data;
-			});
+			.then((response: AxiosResponse) => response.data);
 	}
 
 	async readFile(
@@ -55,6 +53,15 @@ class InstancesGateway {
 		return httpService
 			.get(`instances/${instanceId}/fs/${bucket}`)
 			.then((response: AxiosResponse) => response.data);
+	}
+
+	async updateInstanceStatus(
+		instanceId: string,
+		status: InstanceStatusUpdateCode
+	): Promise<unknown> {
+		return httpService.post(`instances/${instanceId}/status`, {
+			code: status
+		});
 	}
 }
 

@@ -1,13 +1,13 @@
 <template>
 	<AuthLayout>
 		<h4><b v-t="'auth.login.title'" /></h4>
-		<VBody2 :class="$style.description" v-t="'auth.login.subtitle'" />
+		<VBody2 v-t="'auth.login.subtitle'" :class="$style.description" />
 		<VAlert :class="$style.alert" :variant="'error'" v-if="errorCode">
 			<template #title>
 				<span v-t="'auth.login.error-title'" />
 			</template>
 			<template #description>
-				<span v-t="`error.${errorCode}`"></span>
+				<span v-t="`error.${errorCode}`" />
 			</template>
 		</VAlert>
 		<VForm @submit.prevent="performLogin">
@@ -45,14 +45,14 @@
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
 import authPresenter from "@/features/auth/ui/auth.presenter";
-import VButton from "@/features/shared/ui/components/design-system/button/VButton.vue";
-import VFieldSet from "@/features/shared/ui/components/design-system/form/VFieldSet.vue";
-import VForm from "@/features/shared/ui/components/design-system/form/VForm.vue";
-import VBody2 from "@/features/shared/ui/components/design-system/typography/VBody2.vue";
+import VButton from "@/design-system/button/VButton.vue";
+import VFieldSet from "@/design-system/form/VFieldSet.vue";
+import VForm from "@/design-system/form/VForm.vue";
+import VBody2 from "@/design-system/typography/VBody2.vue";
 import AuthLayout from "@/features/auth/ui/layouts/AuthLayout.vue";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
-import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
-import VAlert from "@/features/shared/ui/components/design-system/alert/VAlert.vue";
+import VLabel from "@/design-system/form/VLabel.vue";
+import VInput from "@/design-system/form/VInput.vue";
+import VAlert from "@/design-system/alert/VAlert.vue";
 import { HttpError } from "@/features/shared/models/error.model";
 import logService from "@/features/shared/data/log.service";
 

@@ -26,7 +26,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { AuditLogEntry } from "@/features/units/models/audit-log.model";
-import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
+import VCard from "@/design-system/card/VCard.vue";
 import Avatar from "@/features/shared/ui/components/Avatar.vue";
 import { Account } from "@/features/account/models/account.model";
 import UnitAuditLogEntryListItemTitle from "@/features/units/ui/components/audit-log/UnitAuditLogEntryListItemTitle.vue";

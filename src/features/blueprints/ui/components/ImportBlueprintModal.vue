@@ -1,8 +1,8 @@
 <template>
 	<Modal>
-		<template #title>Import blueprint</template>
+		<template #title> Import blueprint </template>
 		<Transition name="transition-loading-state" mode="out-in">
-			<div :class="$style.loaderWrapper" v-if="isLoading">
+			<div v-if="isLoading" :class="$style.loaderWrapper">
 				<LoadingState />
 			</div>
 			<div v-else>
@@ -35,14 +35,14 @@
 
 <script lang="ts">
 import Modal from "@/features/shared/ui/components/modal/Modal.vue";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
+import VLabel from "@/design-system/form/VLabel.vue";
 import { Component, Ref, Vue } from "vue-facing-decorator";
-import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
-import VFieldSet from "@/features/shared/ui/components/design-system/form/VFieldSet.vue";
-import VForm from "@/features/shared/ui/components/design-system/form/VForm.vue";
-import VAlert from "@/features/shared/ui/components/design-system/alert/VAlert.vue";
+import VInput from "@/design-system/form/VInput.vue";
+import VFieldSet from "@/design-system/form/VFieldSet.vue";
+import VForm from "@/design-system/form/VForm.vue";
+import VAlert from "@/design-system/alert/VAlert.vue";
 import { ComponentPublicInstance } from "vue";
-import VButton from "@/features/shared/ui/components/design-system/button/VButton.vue";
+import VButton from "@/design-system/button/VButton.vue";
 import validator from "validator";
 import LoadingState from "@/features/shared/ui/components/LoadingState.vue";
 import blueprintsService from "@/features/blueprints/data/blueprints.service";

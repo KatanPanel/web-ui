@@ -1,5 +1,5 @@
 <template>
-	<div :class="$style.root">
+	<VCard>
 		<EmptyState v-if="isEmpty" icon="LanDisconnect">
 			<h5 v-t="'instances.network.connected.empty'" />
 		</EmptyState>
@@ -19,7 +19,7 @@
 				:network-name="network.name"
 			/>
 		</template>
-	</div>
+	</VCard>
 </template>
 
 <script lang="ts">
@@ -30,9 +30,10 @@ import {
 } from "@/features/units/models/instance.model";
 import InstanceNetworkConnectedNetworksListItem from "@/features/units/ui/components/instances/network/InstanceNetworkConnectedNetworksListItem.vue";
 import EmptyState from "@/features/shared/ui/components/EmptyState.vue";
-import VCol from "@/features/shared/ui/components/design-system/grid/VCol.vue";
-import VRow from "@/features/shared/ui/components/design-system/grid/VRow.vue";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
+import VCol from "@/design-system/grid/VCol.vue";
+import VRow from "@/design-system/grid/VRow.vue";
+import VLabel from "@/design-system/form/VLabel.vue";
+import VCard from "@/design-system/card/VCard.vue";
 
 @Component({
 	components: {
@@ -40,14 +41,15 @@ import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vu
 		InstanceNetworkConnectedNetworksListItem,
 		VRow,
 		VCol,
-		VLabel
+		VLabel,
+		VCard
 	}
 })
 export default class InstanceNetworkConnectedNetworksList extends Vue {
 	@Inject()
 	private readonly instance!: Instance;
 
-	// used for debbuging
+	// used for debugging
 	private _isEmpty?: boolean = undefined;
 
 	get networks(): InstanceNetworkConnection[] {
@@ -59,9 +61,3 @@ export default class InstanceNetworkConnectedNetworksList extends Vue {
 	}
 }
 </script>
-<style lang="scss" module>
-.root {
-	border-top: 1px solid var(--kt-border-medium);
-	padding-top: 1.6rem;
-}
-</style>

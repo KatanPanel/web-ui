@@ -67,16 +67,16 @@
 </template>
 
 <script lang="ts">
-import VFieldSet from "@/features/shared/ui/components/design-system/form/VFieldSet.vue";
+import VFieldSet from "@/design-system/form/VFieldSet.vue";
 import { Component, Vue } from "vue-facing-decorator";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
-import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
-import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
-import VCol from "@/features/shared/ui/components/design-system/grid/VCol.vue";
-import VRow from "@/features/shared/ui/components/design-system/grid/VRow.vue";
-import VBody2 from "@/features/shared/ui/components/design-system/typography/VBody2.vue";
-import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
-import VSection from "@/features/shared/ui/components/design-system/grid/VSection.vue";
+import VLabel from "@/design-system/form/VLabel.vue";
+import VInput from "@/design-system/form/VInput.vue";
+import VCard from "@/design-system/card/VCard.vue";
+import VCol from "@/design-system/grid/VCol.vue";
+import VRow from "@/design-system/grid/VRow.vue";
+import VBody2 from "@/design-system/typography/VBody2.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
+import VSection from "@/design-system/grid/VSection.vue";
 
 @Component({
 	components: {

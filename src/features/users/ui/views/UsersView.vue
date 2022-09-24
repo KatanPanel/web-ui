@@ -1,7 +1,7 @@
 <template>
 	<VContainer>
 		<PageHeader>
-			<template #title>Users</template>
+			<template #title> Users </template>
 			<template #subtitle>
 				Users have strictly defined permissions and roles that can be
 				changed here. You can only change users with roles below yours
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
+import VContainer from "@/design-system/grid/VContainer.vue";
 import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
 import { Component, Vue } from "vue-facing-decorator";
 

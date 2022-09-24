@@ -1,7 +1,7 @@
 <template>
 	<VCard flat>
 		<VFieldSet>
-			<VLabel required>Name</VLabel>
+			<VLabel required> Name </VLabel>
 			<VInput
 				placeholder="My Awesome Unit!"
 				required
@@ -12,10 +12,10 @@
 </template>
 
 <script lang="ts">
-import VFieldSet from "@/features/shared/ui/components/design-system/form/VFieldSet.vue";
-import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
-import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
+import VFieldSet from "@/design-system/form/VFieldSet.vue";
+import VCard from "@/design-system/card/VCard.vue";
+import VInput from "@/design-system/form/VInput.vue";
+import VLabel from "@/design-system/form/VLabel.vue";
 import { Component, Vue } from "vue-facing-decorator";
 
 @Component({

@@ -6,10 +6,10 @@
 				:aria-controls="tab.hash"
 				:aria-selected="tab.isActive"
 				:href="tab.hash"
-				:class="[$style.tab, { [$style.tab__active]: tab.isActive }]"
+				:class="[$style.tab, { [$style['tab--active']]: tab.isActive }]"
 				role="tab"
 			>
-				<VIcon :name="tab.icon" v-if="tab.icon" />
+				<VIcon v-if="tab.icon" :name="tab.icon" />
 				<span v-text="tab.label" />
 			</a>
 		</li>
@@ -19,8 +19,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import VIcon
-	from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
 
 export type Tab = {
 	id: string;
@@ -109,24 +108,39 @@ export default class VTabList extends Vue {
 	top: -1px;
 	display: flex;
 	flex-direction: row;
-	margin-top: 3.2rem;
 	margin-bottom: 2.4rem;
 	border-bottom: 1px solid var(--kt-border-medium);
 }
 
 .tab {
-	font-size: 14px;
-	padding: 0.8rem 1.2rem;
-	margin: 0 0.8rem;
-	color: var(--kt-content-neutral-low);
+	position: relative;
+	font-size: 16px;
+	font-weight: 500;
+	padding: 0.8rem 0.4rem;
+	margin: 0 2.4rem;
+	color: var(--kt-content-neutral);
 	text-decoration: none;
 	display: inline-block;
-	border-bottom: 2px solid transparent;
+	border-bottom: 1px solid transparent;
+
+	&:first-child {
+		margin-left: 0;
+	}
+
+	span {
+		position: relative;
+	}
 }
 
-.tab__active {
+.tab--active {
+	top: 1px;
+	padding-bottom: 0.9rem;
 	font-weight: 600;
 	color: var(--kt-content-neutral-high);
 	border-color: var(--kt-content-primary);
+
+	span {
+		top: -1px;
+	}
 }
 </style>

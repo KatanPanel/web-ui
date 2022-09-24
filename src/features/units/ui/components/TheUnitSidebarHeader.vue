@@ -1,7 +1,7 @@
 <template>
 	<div :class="$style.root">
 		<div :class="$style.icon">
-			<Avatar :src="unit.icon" />
+			<Avatar :src="unit.icon" label="Unit icon" />
 		</div>
 		<div :class="$style.info">
 			<div :class="$style.name">
@@ -11,20 +11,31 @@
 				<code>{{ unit.id }}</code>
 			</div>
 		</div>
+		<div :class="$style.statusUpdate" @click="updateStatus">
+			<VIcon name="Play" />
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { Component, Inject, Vue } from "vue-facing-decorator";
+import { Component, Emit, Inject, Vue } from "vue-facing-decorator";
 import { Unit } from "@/features/units/models/unit.model";
 import Avatar from "@/features/shared/ui/components/Avatar.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
+import { InstanceStatusUpdateCode } from "@/features/units/models/instance.model";
 
 @Component({
-	components: { Avatar }
+	components: { Avatar, VIcon },
+	emits: ["status-update"]
 })
 export default class TheUnitSidebarHeader extends Vue {
 	@Inject()
 	private readonly unit!: Unit;
+
+	@Emit("status-update")
+	updateStatus(): InstanceStatusUpdateCode {
+		return 1;
+	}
 }
 </script>
 
@@ -32,10 +43,11 @@ export default class TheUnitSidebarHeader extends Vue {
 .root {
 	display: flex;
 	flex-direction: row;
-	margin: 2.4rem 2.4rem 1.6rem;
-	background-color: var(--kt-background-surface);
-	border-radius: 8px;
-	border: 1px solid var(--kt-border-low);
+	margin-bottom: 1.6rem;
+	background-color: var(--kt-content-primary);
+	color: var(--kt-content-primary-oncolor);
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
 }
 
 .icon {
@@ -49,6 +61,7 @@ export default class TheUnitSidebarHeader extends Vue {
 	justify-content: center;
 	flex-grow: 1;
 	flex-direction: column;
+	user-select: none;
 }
 
 .name {
@@ -60,6 +73,20 @@ export default class TheUnitSidebarHeader extends Vue {
 .label {
 	margin: 0 1.2rem 1.2rem 1.2rem;
 	font-size: 12px;
-	color: var(--kt-content-neutral);
+	color: var(--kt-content-primary-oncolor);
+}
+
+.statusUpdate {
+	color: var(--kt-content-primary-oncolor);
+	border-radius: 8px;
+	display: inline-flex;
+	align-self: center;
+	margin-right: 1.6rem;
+	max-height: 24px;
+
+	&:hover {
+		background-color: var(--kt-content-primary-oncolor-overlay);
+		cursor: pointer;
+	}
 }
 </style>

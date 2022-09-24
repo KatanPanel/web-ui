@@ -1,7 +1,7 @@
 <template>
 	<VTabList accessibility-label="resources">
 		<VTab id="cpu" label="Central Processing Unit" icon="CPU">
-			CPU resources :)
+			<InstanceResourceMonitorCPU />
 		</VTab>
 		<VTab id="memory" label="Memory Access" icon="Ruler">
 			Memory resources :)
@@ -11,18 +11,23 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import VTabList from "@/features/shared/ui/components/design-system/tabs/VTabList.vue";
-import VTab from "@/features/shared/ui/components/design-system/tabs/VTab.vue";
+import VTabList from "@/design-system/tabs/VTabList.vue";
+import VTab from "@/design-system/tabs/VTab.vue";
 import websocketService from "@/features/shared/data/websocket.service";
+import InstanceResourceMonitorCPU from "@/features/units/ui/components/instances/resource-monitor/InstanceResourceMonitorCPU.vue";
 
 @Component({
-	components: { VTabList, VTab }
+	components: { VTabList, VTab, InstanceResourceMonitorCPU }
 })
 export default class InstanceResourceMonitor extends Vue {
 	@Prop({ type: String, required: true })
 	private readonly instanceId!: string;
 
 	created(): void {
+		websocketService.listen(2, (message) => {
+			console.log("[InstanceResourceMonitor]", message);
+		});
+
 		websocketService.send({
 			o: 2,
 			d: {

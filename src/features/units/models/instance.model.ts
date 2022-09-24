@@ -1,38 +1,38 @@
-export interface Instance {
-	readonly id: string;
-	readonly status: InstanceStatus;
-	readonly containerId?: string;
-	readonly updatePolicy: InstanceUpdatePolicy;
-	readonly connection?: InstanceConnection;
-	readonly runtime?: InstanceRuntime;
-}
+export type Instance = {
+	id: string;
+	status: InstanceStatus;
+	containerId?: string;
+	updatePolicy: InstanceUpdatePolicy;
+	connection?: InstanceConnection;
+	runtime?: InstanceRuntime;
+};
 
-export interface InstanceRuntime {
-	readonly exitCode: number;
-	readonly startedAt?: Date;
-	readonly finishedAt?: Date;
-	readonly status: string;
-	readonly oom: boolean;
-	readonly pid: number;
-	readonly platform: string;
-	readonly mounts: InstanceMount[];
-	readonly network: InstanceNetwork;
-}
+export type InstanceRuntime = {
+	exitCode: number;
+	startedAt?: Date;
+	finishedAt?: Date;
+	status: string;
+	oom: boolean;
+	pid: number;
+	platform: string;
+	mounts: InstanceMount[];
+	network: InstanceNetwork;
+};
 
 export interface InstanceNetwork {
-	readonly hostname: string;
-	readonly networks: InstanceNetworkConnection[];
+	hostname: string;
+	networks: InstanceNetworkConnection[];
 }
 
-export interface InstanceNetworkConnection {
-	readonly id: string;
-	readonly name: string;
-}
+export type InstanceNetworkConnection = {
+	id: string;
+	name: string;
+};
 
-export interface InstanceMount {
-	readonly id: string;
-	readonly readonly: boolean;
-}
+export type InstanceMount = {
+	id: string;
+	readonly: boolean;
+};
 
 export type InstanceUpdatePolicy = "always" | "never";
 
@@ -55,29 +55,31 @@ export type InstanceStatus =
 	| "stopping"
 	| "restarting";
 
-export interface InstanceConnection {
-	readonly host: string;
-	readonly port: number;
-}
+export type InstanceConnection = {
+	host: string;
+	port: number;
+};
 
-export interface InstanceFsFile {
-	readonly name: string;
-	readonly relativePath: string;
-	readonly absolutePath: string;
-	readonly size: number;
-	readonly isDirectory: boolean;
-	readonly isHidden: boolean;
-	readonly createdAt?: Date;
-	readonly modifiedAt?: Date;
-}
+export type InstanceFsFile = {
+	name: string;
+	relativePath: string;
+	absolutePath: string;
+	size: number;
+	isDirectory: boolean;
+	isHidden: boolean;
+	createdAt?: Date;
+	modifiedAt?: Date;
+};
 
-export interface InstanceFsDirectory extends InstanceFsFile {
-	readonly children: InstanceFsFile[];
-}
+export type InstanceFsDirectory = {
+	children: InstanceFsFile[];
+} & InstanceFsFile;
 
-export interface InstanceFsBucket {
-	readonly path: string;
-	readonly name: string;
-	readonly isLocal: boolean;
-	readonly createdAt?: Date;
-}
+export type InstanceFsBucket = {
+	path: string;
+	name: string;
+	isLocal: boolean;
+	createdAt?: Date;
+};
+
+export type InstanceStatusUpdateCode = 0 | 1 | 2;

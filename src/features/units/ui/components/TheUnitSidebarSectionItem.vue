@@ -17,7 +17,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { RouteLocationRaw } from "vue-router";
-import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
 import isURL from "validator/lib/isURL";
 
 @Component({
@@ -50,17 +50,17 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	flex-direction: row;
 	align-items: center;
 	border-radius: 8px;
-	padding: 0.8rem 1.6rem;
+	padding: 0.8rem;
 	margin: 0 0.8rem;
 	color: var(--kt-content-neutral);
 }
 
 .icon {
-	width: 24px;
-	height: 24px;
+	width: 20px;
+	height: 20px;
 	margin-right: 1.2rem;
 	flex-shrink: 0;
-	top: -1px;
+	top: -1.5px;
 	position: relative;
 }
 
@@ -70,16 +70,19 @@ export default class TheUnitSidebarSectionItem extends Vue {
 	overflow: hidden;
 	align-self: center;
 	position: relative;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 14px;
 	color: var(--kt-content-neutral-high);
 }
 </style>
 <style lang="scss" scoped>
 .link {
-	&:not(.router-link-exact-active):hover .text {
-		//background-color: var(--kt-background-surface-hover);
-		color: var(--kt-content-neutral-high);
+	&:not(.router-link-exact-active):hover {
+		background-color: var(--kt-background-surface-hover);
+
+		.text {
+			color: var(--kt-content-neutral-high);
+		}
 	}
 
 	&.router-link-exact-active {
@@ -88,6 +91,7 @@ export default class TheUnitSidebarSectionItem extends Vue {
 
 		.text {
 			color: var(--kt-content-primary);
+			font-weight: 600;
 		}
 	}
 }

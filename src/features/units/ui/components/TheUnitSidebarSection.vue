@@ -5,14 +5,14 @@
 		:aria-labelledby="label"
 		v-if="!disabled"
 	>
-		<VLabel v-text="label" :class="$style.label" :aria-label="label" />
+		<VLabel :class="$style.label" v-text="label" :aria-label="label" />
 		<slot />
 	</div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
+import VLabel from "@/design-system/form/VLabel.vue";
 
 @Component({
 	components: { VLabel }
@@ -30,10 +30,6 @@ export default class TheUnitSidebarSection extends Vue {
 .root {
 	display: flex;
 	flex-direction: column;
-
-	&:first-child {
-		margin-top: 2.4rem;
-	}
 }
 
 .root__disabled {
@@ -42,7 +38,7 @@ export default class TheUnitSidebarSection extends Vue {
 }
 
 .label {
-	margin: 2.4rem 2.4rem 1.2rem;
+	margin: 2.4rem 1.6rem 0.6rem;
 	display: inline-block;
 	color: var(--kt-content-neutral);
 	font-size: 12px;

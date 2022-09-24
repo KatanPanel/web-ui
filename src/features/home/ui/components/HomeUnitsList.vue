@@ -30,7 +30,7 @@ import { Component, Vue } from "vue-facing-decorator";
 import HomeUnitsListItem from "@/features/home/ui/components/HomeUnitsListItem.vue";
 import Resource from "@/features/shared/ui/components/Resource.vue";
 import unitsService from "@/features/units/data/units.service";
-import VButton from "@/features/shared/ui/components/design-system/button/VButton.vue";
+import VButton from "@/design-system/button/VButton.vue";
 import { RouteLocationRaw } from "vue-router";
 import { CREATE_UNIT } from "@/features/units/routing/units.routes";
 

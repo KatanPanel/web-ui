@@ -4,6 +4,7 @@
 			$style.root,
 			{
 				[$style.onColor]: onColor,
+				[$style.high]: high,
 				[$style.required]: required
 			}
 		]"
@@ -22,6 +23,9 @@ export default class VLabel extends Vue {
 
 	@Prop({ type: Boolean, default: false })
 	private readonly required!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	private readonly high!: boolean;
 }
 </script>
 <style lang="scss" module>
@@ -39,6 +43,10 @@ export default class VLabel extends Vue {
 	&:not(:first-child) {
 		margin-top: 16px;
 	}
+}
+
+.high {
+	color: var(--kt-content-neutral-high);
 }
 
 .onColor {

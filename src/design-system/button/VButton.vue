@@ -1,10 +1,10 @@
 <template>
 	<router-link
-		type="button"
 		v-if="to"
-		:to="to"
 		:class="getClasses()"
 		:tabindex="disabled ? -1 : 0"
+		:to="to"
+		type="button"
 		v-bind="{ disabled }"
 		@click="$emit('click')"
 		@keydown.enter="$emit('keydown', $event)"
@@ -63,7 +63,7 @@ export default class VButton extends Vue {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 14px;
 	border-radius: 8px;
 	outline: none;

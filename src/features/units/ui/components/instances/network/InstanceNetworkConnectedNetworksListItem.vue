@@ -5,8 +5,8 @@
 				<div :class="$style.info">
 					<VIcon :name="createIconName()" :class="$style.icon" />
 					<div :class="$style.nameAndId">
-						<span v-text="networkName" :class="$style.name" />
-						<code v-text="networkId" :class="$style.id" />
+						<span :class="$style.name" v-text="networkName" />
+						<code :class="$style.id" v-text="networkId" />
 					</div>
 				</div>
 			</VCol>
@@ -20,10 +20,10 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
-import VSubtitle1 from "@/features/shared/ui/components/design-system/typography/VSubtitle1.vue";
-import VRow from "@/features/shared/ui/components/design-system/grid/VRow.vue";
-import VCol from "@/features/shared/ui/components/design-system/grid/VCol.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
+import VSubtitle1 from "@/design-system/typography/VSubtitle1.vue";
+import VRow from "@/design-system/grid/VRow.vue";
+import VCol from "@/design-system/grid/VCol.vue";
 
 @Component({
 	components: { VRow, VCol, VIcon, VSubtitle1 }

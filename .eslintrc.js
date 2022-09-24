@@ -5,13 +5,15 @@ module.exports = {
 	},
 	extends: [
 		"eslint:recommended",
-		"plugin:vue/vue3-essential",
-		"plugin:prettier/recommended",
 		"plugin:vue/vue3-recommended",
-		"@vue/typescript/recommended"
+		"prettier"
 	],
+	plugins: ["prettier"],
+	parser: "@babel/eslint-parser",
 	parserOptions: {
-		ecmaVersion: 2020
+		requireConfigFile: true,
+		ecmaVersion: "latest",
+		sourceType: "module"
 	},
 	rules: {
 		"no-console": process.env.NODE_ENV === "production" ? "warn" : "off",

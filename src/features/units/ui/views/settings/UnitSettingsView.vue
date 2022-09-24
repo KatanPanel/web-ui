@@ -1,8 +1,14 @@
 <template>
 	<VContainer>
-		<PageHeader>
-			<template #title><span v-t="'units.settings.title'" /></template>
-		</PageHeader>
+		<PageHeader
+			title-translation-key="units.settings.title"
+			:no-divider="true"
+		/>
+		<VTabList accessibility-label="settings">
+			<VTab id="users" label="Users"> Users </VTab>
+			<VTab id="roles" label="Roles"> Roles </VTab>
+			<VTab id="advanced" label="Advanced"> Advanced </VTab>
+		</VTabList>
 		<VSection>
 			<VForm>
 				<VFieldSet>
@@ -18,12 +24,14 @@
 import { Component, Inject, Vue } from "vue-facing-decorator";
 import { Unit } from "@/features/units/models/unit.model";
 import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
-import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
-import VFieldSet from "@/features/shared/ui/components/design-system/form/VFieldSet.vue";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
-import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
-import VForm from "@/features/shared/ui/components/design-system/form/VForm.vue";
-import VSection from "@/features/shared/ui/components/design-system/grid/VSection.vue";
+import VInput from "@/design-system/form/VInput.vue";
+import VFieldSet from "@/design-system/form/VFieldSet.vue";
+import VLabel from "@/design-system/form/VLabel.vue";
+import VContainer from "@/design-system/grid/VContainer.vue";
+import VForm from "@/design-system/form/VForm.vue";
+import VSection from "@/design-system/grid/VSection.vue";
+import VTab from "@/design-system/tabs/VTab.vue";
+import VTabList from "@/design-system/tabs/VTabList.vue";
 
 @Component({
 	components: {
@@ -33,7 +41,9 @@ import VSection from "@/features/shared/ui/components/design-system/grid/VSectio
 		VFieldSet,
 		VInput,
 		VLabel,
-		VSection
+		VSection,
+		VTabList,
+		VTab
 	}
 })
 export default class UnitSettingsView extends Vue {

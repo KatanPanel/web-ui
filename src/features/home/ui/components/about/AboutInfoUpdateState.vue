@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
 import { Component, Prop, Vue } from "vue-facing-decorator";
 
 const UPDATE = "update";

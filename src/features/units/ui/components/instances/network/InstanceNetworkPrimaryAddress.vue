@@ -29,15 +29,15 @@
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";
-import VBody2 from "@/features/shared/ui/components/design-system/typography/VBody2.vue";
-import VRow from "@/features/shared/ui/components/design-system/grid/VRow.vue";
-import VCol from "@/features/shared/ui/components/design-system/grid/VCol.vue";
-import VFieldSet from "@/features/shared/ui/components/design-system/form/VFieldSet.vue";
-import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
+import VBody2 from "@/design-system/typography/VBody2.vue";
+import VRow from "@/design-system/grid/VRow.vue";
+import VCol from "@/design-system/grid/VCol.vue";
+import VFieldSet from "@/design-system/form/VFieldSet.vue";
+import VInput from "@/design-system/form/VInput.vue";
+import VLabel from "@/design-system/form/VLabel.vue";
 import { Instance } from "@/features/units/models/instance.model";
-import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
-import VSection from "@/features/shared/ui/components/design-system/grid/VSection.vue";
+import VCard from "@/design-system/card/VCard.vue";
+import VSection from "@/design-system/grid/VSection.vue";
 
 @Component({
 	components: {

@@ -16,10 +16,8 @@
 	<div class="update-checking">
 		<VSubtitle1>Update Checking</VSubtitle1>
 		<VSelectableCard class="card">
-			<template v-slot:title>
-				Você é um negão de tirar o chapeu
-			</template>
-			<template v-slot:description>
+			<template #title> Você é um negão de tirar o chapeu </template>
+			<template #description>
 				Ainda não me chame de bb, ainda não me chame de bb, pq era assim
 				que ela me chamava
 			</template>
@@ -30,13 +28,13 @@
 import { Component, Vue } from "vue-facing-decorator";
 import configService from "@/features/shared/data/config.service";
 import TheLogo from "@/features/shared/ui/components/TheLogo.vue";
-import VSubtitle2 from "@/features/shared/ui/components/design-system/typography/VSubtitle2.vue";
-import VSubtitle1 from "@/features/shared/ui/components/design-system/typography/VSubtitle1.vue";
-import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
+import VSubtitle2 from "@/design-system/typography/VSubtitle2.vue";
+import VSubtitle1 from "@/design-system/typography/VSubtitle1.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
 import AboutInfoUpdateState from "@/features/home/ui/components/about/AboutInfoUpdateState.vue";
-import VBody2 from "@/features/shared/ui/components/design-system/typography/VBody2.vue";
-import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
-import VSelectableCard from "@/features/shared/ui/components/design-system/card/VSelectableCard.vue";
+import VBody2 from "@/design-system/typography/VBody2.vue";
+import VCard from "@/design-system/card/VCard.vue";
+import VSelectableCard from "@/design-system/card/VSelectableCard.vue";
 
 @Component({
 	components: {

@@ -1,22 +1,83 @@
 <template>
-	<div :class="$style.root">
-		<router-view />
-	</div>
+	<Resource
+		empty-state-title="units.empty.title"
+		empty-state-icon="PackageVariant"
+		:resource="getResource"
+		:empty-state-align-y="true"
+		@loaded="onLoad"
+		@error="onLoadError"
+	>
+		<div :class="$style.root">
+			<TheUnitSidebar @status-update="onStatusUpdate" />
+			<div :class="$style.content">
+				<router-view />
+			</div>
+		</div>
+	</Resource>
 </template>
 <script lang="ts">
-import { Component, Inject, Vue } from "vue-facing-decorator";
+import { Component, Vue } from "vue-facing-decorator";
 import { Unit } from "@/features/units/models/unit.model";
+import { computed } from "vue";
+import unitsPresenter from "@/features/units/ui/units.presenter";
+import Resource from "@/features/shared/ui/components/Resource.vue";
+import logService from "@/features/shared/data/log.service";
+import TheUnitSidebar from "@/features/units/ui/components/TheUnitSidebar.vue";
+import { InstanceStatusUpdateCode } from "@/features/units/models/instance.model";
+import instancesService from "@/features/units/data/instances.service";
 
-@Component
+@Component({
+	components: { Resource, TheUnitSidebar },
+	provide(this: UnitView) {
+		return {
+			unit: computed(() => this.unit)
+		};
+	}
+})
 export default class UnitView extends Vue {
-	@Inject()
-	private readonly unit!: Unit;
+	unit!: Unit;
+
+	private getUnitId(): string {
+		return this.$route.params.unitId as string;
+	}
+
+	getResource(): Promise<Unit> {
+		return unitsPresenter.getUnit(this.getUnitId());
+	}
+
+	onLoad(unit: Unit): void {
+		this.unit = unit;
+	}
+
+	onLoadError(error: Error): void {
+		logService.error(`failed to load instance ${this.getUnitId()}`, error);
+	}
+
+	onStatusUpdate(status: InstanceStatusUpdateCode): void {
+		logService.info("Stauts updated", status);
+		instancesService
+			.updateInstanceStatus(this.unit.instanceId, status)
+			.then(() =>
+				logService.info(
+					"Instance status updated",
+					this.unit.instanceId,
+					status
+				)
+			);
+	}
 }
 </script>
 <style lang="scss" module>
 .root {
+	display: flex;
+	flex-direction: row;
 	flex-grow: 1;
-	padding: 2.4rem 0;
 	overflow-y: auto;
+}
+
+.content {
+	display: inline-flex;
+	flex-direction: column;
+	flex-grow: 1;
 }
 </style>

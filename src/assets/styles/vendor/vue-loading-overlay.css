@@ -34,7 +34,7 @@
 	opacity: 0.5;
 }
 
-.vld-overlay .vld-icon, .vld-parent {
+.vld-overlay .vld-icon,
+.vld-parent {
 	position: relative;
 }
-

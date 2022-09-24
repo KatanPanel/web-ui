@@ -14,13 +14,13 @@
 </template>
 
 <script lang="ts">
-import VFieldSet from "@/features/shared/ui/components/design-system/form/VFieldSet.vue";
+import VFieldSet from "@/design-system/form/VFieldSet.vue";
 import { Component, Vue } from "vue-facing-decorator";
-import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
-import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
-import VBody2 from "@/features/shared/ui/components/design-system/typography/VBody2.vue";
-import VAlert from "@/features/shared/ui/components/design-system/alert/VAlert.vue";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
+import VInput from "@/design-system/form/VInput.vue";
+import VCard from "@/design-system/card/VCard.vue";
+import VBody2 from "@/design-system/typography/VBody2.vue";
+import VAlert from "@/design-system/alert/VAlert.vue";
+import VLabel from "@/design-system/form/VLabel.vue";
 
 @Component({
 	components: {

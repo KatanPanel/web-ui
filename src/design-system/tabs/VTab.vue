@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { Component, Inject, Prop, Vue } from "vue-facing-decorator";
-import { Tab } from "@/features/shared/ui/components/design-system/tabs/VTabList.vue";
+import { Tab } from "@/design-system/tabs/VTabList.vue";
 
 @Component
 export default class VTab extends Vue {

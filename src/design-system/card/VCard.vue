@@ -12,7 +12,7 @@
 			}
 		]"
 	>
-		<div :class="$style.title" v-if="$slots.title">
+		<div v-if="$slots.title" :class="$style.title">
 			<slot name="title" />
 		</div>
 		<slot />

@@ -1,7 +1,8 @@
 import {
 	Instance,
 	InstanceFsBucket,
-	InstanceFsFile
+	InstanceFsFile,
+	InstanceStatusUpdateCode
 } from "@/features/units/models/instance.model";
 import instancesGateway from "@/features/units/data/instances.gateway";
 import instancesMapper from "@/features/units/data/mappers/instances.mapper";
@@ -56,6 +57,13 @@ class InstancesService {
 		return instancesGateway
 			.getBucket(instanceId, bucket)
 			.then((response) => instancesMapper.toBucket(response));
+	}
+
+	async updateInstanceStatus(
+		instanceId: string,
+		status: InstanceStatusUpdateCode
+	): Promise<unknown> {
+		return instancesGateway.updateInstanceStatus(instanceId, status);
 	}
 }
 

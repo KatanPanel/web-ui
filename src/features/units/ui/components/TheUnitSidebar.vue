@@ -1,44 +1,54 @@
 <template>
-	<nav v-if="unit" :class="$style.root" role="navigation">
-		<TheUnitSidebarHeader />
+	<nav :class="$style.root" role="navigation">
+		<TheUnitSidebarHeader @status-update="onStatusUpdate" />
 		<TheUnitSidebarStatus />
-		<template v-for="link in createLinks()" :key="link.key">
-			<TheUnitSidebarSectionItem
-				v-if="link.link"
-				:href="link.link"
-				:icon="link.icon"
-			>
-				<span
-					v-if="link.translationTextKey"
-					v-t="translationShortcutLink(link.translationTextKey)"
-				/>
-				<template v-else>{{ link.text }}</template>
-			</TheUnitSidebarSectionItem>
-			<TheUnitSidebarSection
-				v-else-if="link.children"
-				:disabled="!link.enabled"
-				:label="translationShortcutLabel(link.label)"
-			>
+		<div :class="$style.menu">
+			<template v-for="link in createLinks()" :key="link.key">
 				<TheUnitSidebarSectionItem
-					v-for="child in link.children"
-					:disabled="child.disabled"
-					:key="child.link.name"
-					:href="child.link"
-					:icon="child.icon"
+					v-if="link.link"
+					:href="link.link"
+					:icon="link.icon"
 				>
 					<span
-						v-if="child.translationTextKey"
-						v-t="translationShortcutLink(child.translationTextKey)"
+						v-if="link.translationTextKey"
+						v-t="translationShortcutLink(link.translationTextKey)"
 					/>
-					<template v-else>{{ child.text }}</template>
+					<template v-else>
+						{{ link.text }}
+					</template>
 				</TheUnitSidebarSectionItem>
-			</TheUnitSidebarSection>
-		</template>
+				<TheUnitSidebarSection
+					v-else-if="link.children"
+					:disabled="!link.enabled"
+					:label="translationShortcutLabel(link.label)"
+				>
+					<TheUnitSidebarSectionItem
+						v-for="child in link.children"
+						:disabled="child.disabled"
+						:key="child.link.name"
+						:href="child.link"
+						:icon="child.icon"
+					>
+						<span
+							v-if="child.translationTextKey"
+							v-t="
+								translationShortcutLink(
+									child.translationTextKey
+								)
+							"
+						/>
+						<template v-else>
+							{{ child.text }}
+						</template>
+					</TheUnitSidebarSectionItem>
+				</TheUnitSidebarSection>
+			</template>
+		</div>
 	</nav>
 </template>
 
 <script lang="ts">
-import { Component, Inject, Vue } from "vue-facing-decorator";
+import { Component, Emit, Inject, Vue } from "vue-facing-decorator";
 import {
 	INSTANCE_CONSOLE_ROUTE,
 	INSTANCE_FS_ROUTE,
@@ -49,18 +59,17 @@ import {
 	UNIT_SETTINGS_ROUTE
 } from "@/features/units/routing/units.routes";
 import { Unit } from "@/features/units/models/unit.model";
-import VOverline from "@/features/shared/ui/components/design-system/typography/VOverline.vue";
-import VLabel from "@/features/shared/ui/components/design-system/form/VLabel.vue";
+import VOverline from "@/design-system/typography/VOverline.vue";
+import VLabel from "@/design-system/form/VLabel.vue";
 import TheUnitSidebarSection from "@/features/units/ui/components/TheUnitSidebarSection.vue";
 import TheUnitSidebarSectionItem from "@/features/units/ui/components/TheUnitSidebarSectionItem.vue";
 import Avatar from "@/features/shared/ui/components/Avatar.vue";
-import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
-import TheUnitSidebarToggler from "@/features/units/ui/components/TheUnitSidebarToggler.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
 import { isUndefined } from "@/utils";
 import { RouteLocationRaw } from "vue-router";
 import TheUnitSidebarHeader from "@/features/units/ui/components/TheUnitSidebarHeader.vue";
-import TheUnitSidebarStatus
-	from "@/features/units/ui/components/TheUnitSidebarStatus.vue";
+import TheUnitSidebarStatus from "@/features/units/ui/components/TheUnitSidebarStatus.vue";
+import { InstanceStatusUpdateCode } from "@/features/units/models/instance.model";
 
 type Section = {
 	label: string;
@@ -80,9 +89,9 @@ type SectionItem = {
 type Sections = (Section | SectionItem)[];
 
 @Component({
+	emits: ["status-update"],
 	components: {
 		TheUnitSidebarHeader,
-		TheUnitSidebarToggler,
 		VIcon,
 		Avatar,
 		TheUnitSidebarSectionItem,
@@ -95,6 +104,11 @@ type Sections = (Section | SectionItem)[];
 export default class TheUnitSidebar extends Vue {
 	@Inject()
 	readonly unit!: Unit;
+
+	@Emit("status-update")
+	onStatusUpdate(status: InstanceStatusUpdateCode): InstanceStatusUpdateCode {
+		return status;
+	}
 
 	createLinks(): Sections {
 		return [
@@ -201,6 +215,13 @@ export default class TheUnitSidebar extends Vue {
 	height: 100%;
 	flex-shrink: 0;
 	flex-grow: 0;
-	flex-basis: 280px;
+	flex-basis: 320px;
+	padding: 0 24px;
+}
+
+.menu {
+	background-color: var(--kt-background-surface);
+	border-radius: 8px;
+	padding: 1.6rem 0.8rem;
 }
 </style>

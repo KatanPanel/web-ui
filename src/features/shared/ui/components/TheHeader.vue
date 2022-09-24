@@ -7,10 +7,9 @@
 		</div>
 	</header>
 </template>
-<style lang="scss" module></style>
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import VInput from "@/features/shared/ui/components/design-system/form/VInput.vue";
+import VInput from "@/design-system/form/VInput.vue";
 import Avatar from "@/features/shared/ui/components/Avatar.vue";
 import { RouteLocationRaw } from "vue-router";
 import { ACCOUNT_ROUTE } from "@/features/account/routing/accounts.routes";
@@ -24,6 +23,7 @@ export default class TheSidebar extends Vue {
 	};
 }
 </script>
+<style lang="scss" module></style>
 <style lang="scss" module>
 .root {
 	position: absolute;

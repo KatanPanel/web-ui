@@ -1,82 +1,41 @@
 <template>
-	<tr :class="$style.root" @contextmenu.prevent.stop="onRootInteract($event)">
-		<td :class="$style.row">
+	<VRow :class="$style.root">
+		<VCol :size="4">
 			<router-link :to="getRoute()" :class="$style.link">
 				<VIcon :name="getIcon()" :class="$style.icon" />
 				<span :class="$style.name">{{ fileName }}</span>
 			</router-link>
-		</td>
-		<td>{{ toHumanReadableSize() }}</td>
-		<td>{{ lastModified }}</td>
-	</tr>
-	<vue-simple-context-menu
-		:element-id="`context-menu-${index}`"
-		:options="createContextMenuOptions()"
-		@option-clicked="onContextMenuItemClick"
-		ref="contextMenu"
-	/>
+		</VCol>
+		<VCol :size="4">
+			{{ toHumanReadableSize() }}
+		</VCol>
+		<VCol :size="4">
+			{{ lastModified }}
+		</VCol>
+	</VRow>
 </template>
 
 <script lang="ts">
-import { Component, Inject, Prop, Ref, Vue } from "vue-facing-decorator";
+import { Component, Inject, Prop, Vue } from "vue-facing-decorator";
 import { InstanceFsBucket } from "@/features/units/models/instance.model";
 import filesize from "filesize";
-import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
 import { isUndefined } from "@/utils";
 import { RouteLocationRaw } from "vue-router";
-import { ComponentPublicInstance } from "vue";
+import VCol from "@/design-system/grid/VCol.vue";
+import VRow from "@/design-system/grid/VRow.vue";
 
 @Component({
-	components: { VIcon }
+	components: { VIcon, VRow, VCol }
 })
 export default class InstanceFsBucketFileListItem extends Vue {
-	@Inject()
-	private readonly bucket!: InstanceFsBucket;
-
-	@Prop({ type: Number, required: true })
-	private readonly index!: number;
-
-	@Prop({ type: String, required: true })
-	private readonly fileName!: string;
-
-	@Prop({ type: Number, required: true })
-	private readonly size!: number;
-
-	@Prop({ type: Boolean, default: false })
-	private readonly isHidden!: boolean;
-
-	@Prop({ type: Boolean, required: true })
-	private readonly isDirectory!: boolean;
-
-	@Prop({ type: Date })
-	private readonly lastModified!: Date | undefined;
-
-	@Ref
-	private readonly contextMenu!: ComponentPublicInstance & {
-		showMenu(event: PointerEvent, item: any);
-	} & unknown;
-
-	onRootInteract(event: PointerEvent) {
-		console.log("context menu", this.contextMenu);
-		this.contextMenu.showMenu(event, this);
-	}
-
-	onContextMenuItemClick(item: any) {
-		window.alert("clicked @ " + item);
-	}
-
-	createContextMenuOptions(): any[] {
-		return [
-			{
-				name: "Renomear",
-				slug: "abc"
-			},
-			{
-				name: "Deletar",
-				slug: "def"
-			}
-		];
-	}
+	@Inject() readonly bucket!: InstanceFsBucket;
+	@Prop({ type: Number, required: true }) readonly index!: number;
+	@Prop({ type: String, required: true }) readonly fileName!: string;
+	@Prop({ type: Number, required: true }) readonly size!: number;
+	@Prop({ type: Boolean, default: false }) readonly isHidden!: boolean;
+	@Prop({ type: Boolean, required: true }) readonly isDirectory!: boolean;
+	@Prop({ type: Date }) readonly lastModified!: Date | undefined;
 
 	getRoute(): RouteLocationRaw {
 		const currPath = this.$route.query.path || "";
@@ -86,14 +45,6 @@ export default class InstanceFsBucketFileListItem extends Vue {
 				path: currPath + "/" + this.fileName
 			}
 		});
-	}
-
-	getFileNameWithoutExtension(): string {
-		const fname = this.fileName;
-		const dotIndex = fname.lastIndexOf(".");
-		if (dotIndex === -1) return fname;
-
-		return fname.substring(0, dotIndex);
 	}
 
 	getFileExtension(): string | undefined {
@@ -125,21 +76,21 @@ export default class InstanceFsBucketFileListItem extends Vue {
 	}
 
 	toHumanReadableSize(): string {
-		return filesize(this.size);
+		return this.isDirectory ? "" : filesize(this.size);
 	}
 }
 </script>
 <style lang="scss" module>
 .root {
 	width: 100%;
+
 	&:hover {
 		background-color: var(--kt-background-surface-hover);
 	}
 }
 
 .icon {
-	color: var(--kt-content-primary);
-	background-color: var(--kt-content-primary-overlay);
+	color: var(--kt-content-neutral);
 	padding: 4px;
 	border-radius: 8px;
 	margin-right: 0.8rem;

@@ -3,26 +3,32 @@
 		:class="[
 			$style.root,
 			{
-				[$style.root__nodivider]: noDivider
+				[$style.noDivider]: noDivider,
+				[$style.rowAlignment]: rowAlignment
 			}
 		]"
 	>
-		<h4 :class="$style.title">
-			<slot name="title">
-				<span v-if="titleTranslationKey" v-t="titleTranslationKey" />
-			</slot>
-		</h4>
-		<VBody2
-			v-if="$slots.subtitle || subtitleTranslationKey"
-			:class="$style.subtitle"
-		>
-			<slot name="subtitle">
-				<span
-					v-if="subtitleTranslationKey"
-					v-t="subtitleTranslationKey"
-				/>
-			</slot>
-		</VBody2>
+		<div :class="$style.text">
+			<h4 :class="$style.title">
+				<slot name="title">
+					<span
+						v-if="titleTranslationKey"
+						v-t="titleTranslationKey"
+					/>
+				</slot>
+			</h4>
+			<VBody2
+				v-if="$slots.subtitle || subtitleTranslationKey"
+				:class="$style.subtitle"
+			>
+				<slot name="subtitle">
+					<span
+						v-if="subtitleTranslationKey"
+						v-t="subtitleTranslationKey"
+					/>
+				</slot>
+			</VBody2>
+		</div>
 		<div v-if="$slots.default" :class="$style.body">
 			<slot />
 		</div>
@@ -31,20 +37,23 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import VBody2 from "@/features/shared/ui/components/design-system/typography/VBody2.vue";
+import VBody2 from "@/design-system/typography/VBody2.vue";
 
 @Component({
 	components: { VBody2 }
 })
 export default class PageHeader extends Vue {
 	@Prop({ type: String, required: false })
-	private readonly titleTranslationKey!: string;
+	readonly titleTranslationKey!: string;
 
 	@Prop({ type: String, required: false })
-	private readonly subtitleTranslationKey!: string;
+	readonly subtitleTranslationKey!: string;
 
 	@Prop({ type: Boolean, default: false })
-	private readonly noDivider!: boolean;
+	readonly noDivider!: boolean;
+
+	@Prop({ type: Boolean, default: false })
+	readonly rowAlignment!: boolean;
 }
 </script>
 
@@ -55,15 +64,20 @@ export default class PageHeader extends Vue {
 	border-bottom: 1px solid var(--kt-border-medium);
 }
 
-.root__nodivider {
+.noDivider {
 	border-bottom: none;
 	padding-bottom: 0;
+}
+
+.rowAlignment {
+	display: flex;
 }
 
 .title {
 	font-weight: 700;
 	font-family: var(--kt-headline-font);
 	user-select: none;
+	color: var(--kt-content-neutral-high);
 }
 
 .subtitle {
@@ -74,5 +88,9 @@ export default class PageHeader extends Vue {
 
 .body {
 	margin-top: 1.2rem;
+}
+
+.text {
+	flex-grow: 1;
 }
 </style>

@@ -1,18 +1,4 @@
-<template>
-	<div :class="$style.root">
-		<div :class="$style.icon">
-			<Avatar :src="unit.icon" />
-		</div>
-		<div :class="$style.info">
-			<div :class="$style.name">
-				{{ unit.name }}
-			</div>
-			<div :class="$style.label">
-				<code>{{ unit.id }}</code>
-			</div>
-		</div>
-	</div>
-</template>
+<template />
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";
@@ -35,7 +21,7 @@ export default class TheUnitSidebarStatus extends Vue {
 	margin: 2.4rem 2.4rem 1.6rem;
 	background-color: var(--kt-background-surface);
 	border-radius: 8px;
-	border: 1px solid var(--kt-border-low);
+	border: 1px solid var(--kt-border-medium);
 }
 
 .icon {

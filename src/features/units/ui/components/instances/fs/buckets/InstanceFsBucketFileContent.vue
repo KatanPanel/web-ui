@@ -20,7 +20,7 @@ import {
 	InstanceFsFile
 } from "@/features/units/models/instance.model";
 import instancesPresenter from "@/features/units/ui/instances.presenter";
-import VTextArea from "@/features/shared/ui/components/design-system/form/VTextArea.vue";
+import VTextArea from "@/design-system/form/VTextArea.vue";
 
 @Component({
 	components: { VTextArea }

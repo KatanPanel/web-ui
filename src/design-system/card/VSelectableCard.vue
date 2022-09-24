@@ -7,9 +7,11 @@
 		@click="onSelect"
 		class="root"
 	>
-		<div @click="onSelect" class="radio" />
+		<div class="radio" @click="onSelect" />
 		<div class="content">
-			<div class="title"><slot name="title" /></div>
+			<div class="title">
+				<slot name="title" />
+			</div>
 			<div v-if="$slots.description" class="description">
 				<slot name="description" />
 			</div>
@@ -19,7 +21,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import VCard from "@/features/shared/ui/components/design-system/card/VCard.vue";
+import VCard from "@/design-system/card/VCard.vue";
 
 @Component({
 	components: { VCard }

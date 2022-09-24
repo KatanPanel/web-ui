@@ -11,7 +11,7 @@
 		<div class="modal__content">
 			<slot :params="params" />
 		</div>
-		<div class="modal__action" v-show="$slots.actions">
+		<div v-show="$slots.actions" class="modal__action">
 			<slot name="actions" />
 		</div>
 		<button class="modal__close" @click="close">
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import VIcon from "@/features/shared/ui/components/design-system/icon/VIcon.vue";
+import VIcon from "@/design-system/icon/VIcon.vue";
 
 @Component({
 	inheritAttrs: false,

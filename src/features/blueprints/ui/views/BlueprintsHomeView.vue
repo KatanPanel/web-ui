@@ -1,7 +1,7 @@
 <template>
 	<PageHeader :class="$style.header">
 		<template #title>
-			<span :class="$style.header__title" v-t="'blueprints.home.title'" />
+			<span v-t="'blueprints.home.title'" :class="$style.header__title" />
 		</template>
 		<template #subtitle>
 			<span v-t="'blueprints.home.subtitle'" />
@@ -12,7 +12,7 @@
 	</PageHeader>
 	<div :class="$style.backdrop" />
 	<div :class="$style.body">
-		<div :class="$style.body__filters"></div>
+		<div :class="$style.body__filters" />
 		<div :class="$style.body__contents">
 			<h6>Available locally</h6>
 			<BlueprintsList />
@@ -25,9 +25,9 @@
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
 import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
-import VContainer from "@/features/shared/ui/components/design-system/grid/VContainer.vue";
+import VContainer from "@/design-system/grid/VContainer.vue";
 import BlueprintsList from "@/features/blueprints/ui/components/home/BlueprintsList.vue";
-import VButton from "@/features/shared/ui/components/design-system/button/VButton.vue";
+import VButton from "@/design-system/button/VButton.vue";
 import ImportBlueprintModal from "@/features/blueprints/ui/components/ImportBlueprintModal.vue";
 
 @Component({

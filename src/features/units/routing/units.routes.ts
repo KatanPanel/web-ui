@@ -1,6 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
 import { importView } from "@/router";
-import UnitsLayout from "@/features/units/ui/layouts/UnitsLayout.vue";
 
 const FEATURE_NAME = "units";
 
@@ -24,9 +23,6 @@ export const UnitsRoute: Array<RouteRecordRaw> = [
 	{
 		path: "/units/:unitId",
 		component: importView(FEATURE_NAME, "UnitView"),
-		meta: {
-			layout: UnitsLayout
-		},
 		children: [
 			{
 				path: "",
