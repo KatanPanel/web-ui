@@ -6,15 +6,11 @@
 				<span :class="$style.name">{{ fileName }}</span>
 			</router-link>
 		</VCol>
-		<VCol :size="4">
-			{{ toHumanReadableSize() }}
-		</VCol>
-		<VCol :size="4">
-			{{ lastModified }}
-		</VCol>
+		<VCol :size="2" v-text="toHumanReadableSize()"/>
+		<VCol :size="3" v-text="formatDateTime(lastModified)" />
+		<VCol :size="3" v-text="formatDateTime(createdAt)"/>
 	</VRow>
 </template>
-
 <script lang="ts">
 import { Component, Inject, Prop, Vue } from "vue-facing-decorator";
 import { InstanceFsBucket } from "@/features/units/models/instance.model";
@@ -24,18 +20,21 @@ import { isUndefined } from "@/utils";
 import { RouteLocationRaw } from "vue-router";
 import VCol from "@/design-system/grid/VCol.vue";
 import VRow from "@/design-system/grid/VRow.vue";
+import dayjs from "dayjs";
 
 @Component({
 	components: { VIcon, VRow, VCol }
 })
 export default class InstanceFsBucketFileListItem extends Vue {
 	@Inject() readonly bucket!: InstanceFsBucket;
+
 	@Prop({ type: Number, required: true }) readonly index!: number;
 	@Prop({ type: String, required: true }) readonly fileName!: string;
 	@Prop({ type: Number, required: true }) readonly size!: number;
-	@Prop({ type: Boolean, default: false }) readonly isHidden!: boolean;
+	@Prop({ type: Boolean, required: true }) readonly isHidden!: boolean;
 	@Prop({ type: Boolean, required: true }) readonly isDirectory!: boolean;
-	@Prop({ type: Date }) readonly lastModified!: Date | undefined;
+	@Prop({ type: Date, required: true }) readonly lastModified!: Date | undefined;
+	@Prop({ type: Date, required: true }) readonly createdAt!: Date | undefined;
 
 	getRoute(): RouteLocationRaw {
 		const currPath = this.$route.query.path || "";
@@ -78,11 +77,18 @@ export default class InstanceFsBucketFileListItem extends Vue {
 	toHumanReadableSize(): string {
 		return this.isDirectory ? "" : filesize(this.size);
 	}
+
+	formatDateTime(date: Date | undefined): string {
+		return isUndefined(date) ? "" : dayjs(date).format("LLLL")
+	}
+
 }
 </script>
 <style lang="scss" module>
 .root {
 	width: 100%;
+	margin: 0 -2rem;
+	padding: 0 2rem;
 
 	&:hover {
 		background-color: var(--kt-background-surface-hover);
@@ -91,16 +97,17 @@ export default class InstanceFsBucketFileListItem extends Vue {
 
 .icon {
 	color: var(--kt-content-neutral);
-	padding: 4px;
+	padding: 4px 0;
 	border-radius: 8px;
 	margin-right: 0.8rem;
 }
 
 .name {
 	align-self: center;
-	font-weight: 600;
+	font-weight: 400;
 	margin-top: 0.6rem;
 	flex-grow: 1;
+	color: var(--kt-content-neutral);
 }
 
 .row {
@@ -111,5 +118,6 @@ export default class InstanceFsBucketFileListItem extends Vue {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
+	text-decoration: none;
 }
 </style>

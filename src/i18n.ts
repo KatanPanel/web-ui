@@ -1,5 +1,7 @@
 import { nextTick } from "vue";
 import { createI18n, I18nOptions } from "vue-i18n";
+import dayjs from "dayjs";
+import logService from "@/features/shared/data/log.service";
 
 export const SUPPORT_LOCALES: string[] = ["en-US"];
 
@@ -17,6 +19,9 @@ export function setI18nLanguage(i18n, locale) {
 	} else {
 		i18n.global.locale.value = locale;
 	}
+
+	updateTime(locale);
+
 	/**
 	 * NOTE: If you need to specify the language setting for headers, such as
 	 * the `fetch` API, set it here. The following is an example for axios.
@@ -24,6 +29,12 @@ export function setI18nLanguage(i18n, locale) {
 	 * axios.defaults.headers.common['Accept-Language'] = locale
 	 */
 	document.querySelector("html")?.setAttribute("lang", locale);
+}
+
+function updateTime(locale) {
+	import(/* webpackChunkName: "time-locale-[request]" */ `dayjs/locale/${locale}`)
+		.then(() => dayjs.locale(locale))
+		.catch((error) => logService.error("failed to find time locale", locale, error))
 }
 
 export async function loadLocaleMessages(i18n, locale) {

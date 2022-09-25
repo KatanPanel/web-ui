@@ -1,15 +1,10 @@
 <template>
-	<div :class="$style.root">
-		<div :class="$style.textarea">
-			<codemirror
-				v-model="contentsAsString"
-				placeholder="Write something here..."
-			/>
-			<div :class="$style.details">
-				<code>Selected: 2</code>
-			</div>
-		</div>
-	</div>
+	<VCard>
+		<codemirror
+			v-model="contentsAsString"
+			placeholder="Write something here..."
+		/>
+	</VCard>
 </template>
 
 <script lang="ts">
@@ -20,10 +15,10 @@ import {
 	InstanceFsFile
 } from "@/features/units/models/instance.model";
 import instancesPresenter from "@/features/units/ui/instances.presenter";
-import VTextArea from "@/design-system/form/VTextArea.vue";
+import VCard from "@/design-system/card/VCard.vue";
 
 @Component({
-	components: { VTextArea }
+	components: { VCard }
 })
 export default class InstanceFsBucketFileContent extends Vue {
 	@Inject() private readonly instance!: Instance;

@@ -1,14 +1,17 @@
 <template>
-	<VCard>
+	<VCard :flat="true">
 		<VRow>
 			<VCol :size="4">
-				<VLabel>Name</VLabel>
+				<VLabel v-t="'instances.fs.bucket.file-list.labels.name'"/>
 			</VCol>
-			<VCol :size="4">
-				<VLabel>Size</VLabel>
+			<VCol :size="2">
+				<VLabel v-t="'instances.fs.bucket.file-list.labels.size'"/>
 			</VCol>
-			<VCol :size="4">
-				<VLabel>Last Modified</VLabel>
+			<VCol :size="3">
+				<VLabel v-t="'instances.fs.bucket.file-list.labels.modified'"/>
+			</VCol>
+			<VCol :size="3">
+				<VLabel v-t="'instances.fs.bucket.file-list.labels.created'"/>
 			</VCol>
 		</VRow>
 		<InstanceFsBucketFileListItem
@@ -20,14 +23,15 @@
 			:is-hidden="file.isHidden"
 			:size="file.size"
 			:last-modified="file.modifiedAt"
+			:created-at="file.createdAt"
 		/>
 	</VCard>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { InstanceFsFile } from "@/features/units/models/instance.model";
-import InstanceFsBucketFileListItem from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketFileListItem.vue";
-import VContainer from "@/design-system/grid/VContainer.vue";
+import InstanceFsBucketFileListItem
+	from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketFileListItem.vue";
 import VCol from "@/design-system/grid/VCol.vue";
 import VRow from "@/design-system/grid/VRow.vue";
 import VLabel from "@/design-system/form/VLabel.vue";
