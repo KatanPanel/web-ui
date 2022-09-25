@@ -11,7 +11,12 @@
 		"ci": "yarn install --immutable --immutable-cache --check-cache"
 	},
 	"dependencies": {
+		"@codemirror/lang-json": "^6.0.0",
+		"@codemirror/lang-markdown": "^6.0.1",
+		"@codemirror/lang-xml": "^6.0.0",
 		"@types/filesize": "^5.0.0",
+		"@uiw/codemirror-extensions-color": "^4.12.3",
+		"@uiw/codemirror-extensions-hyper-link": "^4.12.3",
 		"axios": "^0.27.2",
 		"codemirror": "^6.0.1",
 		"consola": "^2.15.3",
