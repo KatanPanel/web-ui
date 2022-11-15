@@ -1,10 +1,11 @@
 # Build stage
-FROM node:lts-alpine as build-stage
+FROM node:lts as build-stage
+ENV NPM_CONFIG_LOGLEVEL info
 LABEL MAINTAINER="Natan Vieira Do Nascimento <natanvnascimento@gmail.com>"
 
 WORKDIR /app
 COPY package*.json ./
-RUN yarn install
+RUN yarn ci
 COPY . .
 RUN yarn build
 
