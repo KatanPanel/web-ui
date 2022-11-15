@@ -8,7 +8,7 @@ module.exports = defineConfig({
 	transpileDependencies: true,
 	lintOnSave: false,
 	pwa: {
-		name: process.env.VUE_APP_NAME,
+		name: "Katan",
 		manifestCrossorigin: "anonymous"
 	},
 	configureWebpack: {

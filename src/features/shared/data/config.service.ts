@@ -1,7 +1,7 @@
 import { isUndefined } from "@/utils";
 
 class ConfigService {
-	public readonly appName = this.value("$VUE_APP_NAME");
+	public readonly appName = "Katan";
 	public readonly appVersion = this.value("$VUE_APP_VERSION");
 	public readonly appWebsite = this.value("$VUE_APP_KATAN_WEBSITE");
 	public readonly apiUrl = this.value("$VUE_APP_KATAN_API");

@@ -11203,10 +11203,10 @@ vue-facing-decorator@^2.1.12:
   resolved "https://registry.yarnpkg.com/vue-facing-decorator/-/vue-facing-decorator-2.1.12.tgz#403fcba43578f02a2e9679112cc833937cd773ec"
   integrity sha512-W3Ndjtvd7ibN4XL6ScUpiUuFrlNv924tGUj13xNrqcPpsNAkiRtky/HgNqqOjGDjSbfzdePw6geCRoiZg+hEaw==
 
-vue-final-modal@^3.4.4:
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/vue-final-modal/-/vue-final-modal-3.4.4.tgz#9f4cdb0aabab86a14eb0c005b2645159b0f2095c"
-  integrity sha512-4nOLU+cMcUqAT0kg+64+Hi96kkQPOph2LOJa7Fl58BXlTyhfRxaMuz3M91wi2ooMIL4poWA8428P5GIAXSpuZg==
+vue-final-modal@3:
+  version "3.4.10"
+  resolved "https://registry.yarnpkg.com/vue-final-modal/-/vue-final-modal-3.4.10.tgz#05158dc2723f74294d0927fab68c2a0271dcb6f4"
+  integrity sha512-dFTkVyI6ueXtPEnjb7mnznttojuzHZquUA/DfqlzOUj/qggncfMXQ6qkv1gsconniRnMTZAvM+sEZ72eEWRgBQ==
 
 vue-head@MKGaru/vue-head#vue3:
   version "2.2.0"
