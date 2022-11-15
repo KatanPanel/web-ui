@@ -4,9 +4,9 @@ LABEL MAINTAINER="Natan Vieira Do Nascimento <natanvnascimento@gmail.com>"
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN yarn install
 COPY . .
-RUN npm run build
+RUN yarn
 
 # Production stage
 FROM nginx:stable-alpine as production-stage
