@@ -29,18 +29,18 @@ class ConfigService {
 	 * @param {string} key - The environment key.
 	 */
 	public value(key: string): string {
-		const envKey = key.indexOf("$") === -1 ? key : key.substr(1);
-		const value = process.env[envKey];
+		const envKey = key.indexOf("$") === -1 ? key : key.substring(1);
+		const value = process.env[envKey] || envKey;
 
 		if (process.env.NODE_ENV === "development")
 			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 			return value!;
 
 		if (isUndefined(value))
-			throw Error(`Environment var not found: ${key}`);
+			throw Error(`Environment var not found: ${envKey}`);
 
 		// key will be replaced in build stage
-		return value || key;
+		return value || envKey;
 	}
 }
 
