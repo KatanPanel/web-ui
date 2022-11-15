@@ -1,6 +1,7 @@
 # Build stage
 FROM node:lts as build-stage
 ENV NPM_CONFIG_LOGLEVEL info
+ENV NODE_OPTIONS "--max_old_space_size=4096"
 LABEL MAINTAINER="Natan Vieira Do Nascimento <natanvnascimento@gmail.com>"
 
 WORKDIR /app
