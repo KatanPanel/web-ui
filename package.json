@@ -52,7 +52,7 @@
 		"@types/jest": "^27.0.1",
 		"@types/mocha": "^9.1.1",
 		"@types/validator": "^13.7.6",
-		"@typescript-eslint/eslint-plugin": "^5.4.0",
+		"@typescript-eslint/eslint-plugin": "^5.44.0",
 		"@typescript-eslint/parser": "^5.4.0",
 		"@vue/cli-plugin-babel": "~5.0.0",
 		"@vue/cli-plugin-e2e-webdriverio": "~5.0.0",
