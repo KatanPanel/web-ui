@@ -2981,12 +2981,22 @@
     split2 "^4.0.0"
     stream-buffers "^3.0.2"
 
-"@wdio/logger@7.19.0", "@wdio/logger@^7.19.0", "@wdio/logger@^7.5.3":
+"@wdio/logger@7.19.0", "@wdio/logger@^7.5.3":
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-7.19.0.tgz#23697a4b4aaea56c3bd477a0393af2a5c175fc85"
   integrity sha512-xR7SN/kGei1QJD1aagzxs3KMuzNxdT/7LYYx+lt6BII49+fqL/SO+5X0FDCZD0Ds93AuQvvz9eGyzrBI2FFXmQ==
   dependencies:
     chalk "^4.0.0"
+    loglevel "^1.6.0"
+    loglevel-plugin-prefix "^0.8.4"
+    strip-ansi "^6.0.0"
+
+"@wdio/logger@^8.0.0-alpha.219":
+  version "8.0.14"
+  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-8.0.14.tgz#667afda72f4f8f356949577e1043b4ae00c09062"
+  integrity sha512-EeWxksSASb04WnDLhc5CM8awXdNI2BLXUckOc+8E33kRVuyglzOh4HvlY5HGMr1WeAYEtLpXox5FAb66Od59qg==
+  dependencies:
+    chalk "^5.1.2"
     loglevel "^1.6.0"
     loglevel-plugin-prefix "^0.8.4"
     strip-ansi "^6.0.0"
@@ -3997,6 +4007,11 @@ chalk@^4.0.0, chalk@^4.0.2, chalk@^4.1.0, chalk@^4.1.1, chalk@^4.1.2:
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
+
+chalk@^5.1.2:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.2.0.tgz#249623b7d66869c673699fb66d65723e54dfcfb3"
+  integrity sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==
 
 change-case@^4.1.2:
   version "4.1.2"
@@ -5966,7 +5981,7 @@ fs-constants@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs-constants/-/fs-constants-1.0.0.tgz#6be0de9be998ce16af8afc24497b9ee9b7ccd9ad"
   integrity sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==
 
-fs-extra@^10.0.0, fs-extra@^10.0.1:
+fs-extra@^10.0.0, fs-extra@^10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
   integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
@@ -6079,10 +6094,10 @@ get-package-type@^0.1.0:
   resolved "https://registry.yarnpkg.com/get-package-type/-/get-package-type-0.1.0.tgz#8de2d803cff44df3bc6c456e6668b36c3926e11a"
   integrity sha512-pjzuKtY64GYfWizNAJ0fr9VqttZkNiK2iS430LtIHzjBEr6bX8Am2zm4sW4Ro5wjWW5cAlRL1qAMTcXbjNAO2Q==
 
-get-port@^5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/get-port/-/get-port-5.1.1.tgz#0469ed07563479de6efb986baf053dcd7d4e3193"
-  integrity sha512-g/Q1aTSDOxFpchXC4i8ZWvxA1lnPqx/JHqcpIw0/LX9T8x/GBbi6YnlN5nhaKIFkT8oFsscUKgDJYxfwfS6QsQ==
+get-port@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/get-port/-/get-port-6.1.2.tgz#c1228abb67ba0e17fb346da33b15187833b9c08a"
+  integrity sha512-BrGGraKm2uPqurfGVj/z97/zv8dPleC6x9JBNRTrDNtCkkRF4rPwrQXFgL7+I+q8QSdU4ntLQX2D7KIxSy8nGw==
 
 get-stream@3.0.0, get-stream@^3.0.0:
   version "3.0.0"
@@ -11366,14 +11381,14 @@ wdio-chromedriver-service@^7.0.0:
     split2 "^3.2.2"
     tcp-port-used "^1.0.1"
 
-wdio-geckodriver-service@^2.0.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/wdio-geckodriver-service/-/wdio-geckodriver-service-2.1.2.tgz#723e6bd842f9e977110fe553436ae8a5cf9625d9"
-  integrity sha512-wrDxaxeK4Q+CoZVqpdz85C1Zl7Ic8rQAVJz3hKHEP3FS6sCTPNZofahEqROhPooMNKkkAJdngI4nLhdnjQUZyw==
+wdio-geckodriver-service@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/wdio-geckodriver-service/-/wdio-geckodriver-service-4.0.0.tgz#0118dab14b025a72174d30bde5a711d58e6c14ca"
+  integrity sha512-aqkxRxr3+npQtEHjQUhKvX5BSollu6ACjEY4R3F16gUXF4hgLixq3MW/IK4eXlrjHl8doRrJA1aTKQBYVWy2Ww==
   dependencies:
-    "@wdio/logger" "^7.19.0"
-    fs-extra "^10.0.1"
-    get-port "^5.1.1"
+    "@wdio/logger" "^8.0.0-alpha.219"
+    fs-extra "^10.1.0"
+    get-port "^6.1.2"
     split2 "^4.1.0"
     tcp-port-used "^1.0.2"
 
