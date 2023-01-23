@@ -2466,10 +2466,10 @@
     "@typescript-eslint/types" "5.47.1"
     eslint-visitor-keys "^3.3.0"
 
-"@uiw/codemirror-extensions-color@^4.12.3":
-  version "4.12.3"
-  resolved "https://registry.yarnpkg.com/@uiw/codemirror-extensions-color/-/codemirror-extensions-color-4.12.3.tgz#101de9ff164ad953447a463ff1232a3f86157cb1"
-  integrity sha512-kSg4IWCAZZ9WuyXpCvQ89YwyT1xWSSnCNs5xWO1FCut3sKa8bzxUJS66lH0IE/tJdShJn6K0kHPHBYv/KgUrTQ==
+"@uiw/codemirror-extensions-color@^4.19.7":
+  version "4.19.7"
+  resolved "https://registry.yarnpkg.com/@uiw/codemirror-extensions-color/-/codemirror-extensions-color-4.19.7.tgz#22d43f4d77c46fe7c6f2eb60bd761b6d206a235b"
+  integrity sha512-cAFAZwQ83zTvMNqLzaouGWhTc+RQl8HcEKRZXuW9mCcu60yo2i5HeB+DpTRDXLZlLxVLbFjEZe0VNrTJ+dRyLw==
   dependencies:
     colors-named "^1.0.0"
     colors-named-hex "^1.0.0"
