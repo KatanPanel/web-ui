@@ -4,7 +4,7 @@
 	"empty-state.refresh": "Refresh",
 	"auth.login.title": "Log In",
 	"auth.login.subtitle": "Enter your credentials to access your account.",
-	"auth.login.username-label": "Username",
+	"auth.login.username-label": "Username or Email address",
 	"auth.login.password-label": "Password",
 	"auth.login.submit-button": "Log In",
 	"auth.login.error-title": "Failed to perform login",
