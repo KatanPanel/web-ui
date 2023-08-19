@@ -6,19 +6,15 @@ $shadow: 1.5px;
 	border: 1px solid var(--kt-border-medium);
 	border-radius: 8px;
 	display: flex;
-
-	&__header {
-		&__title {
-			font-size: 15px;
-			font-weight: 600;
-			padding-top: 1.2rem;
-			padding-right: $base-padding;
-			user-select: none;
-		}
-	}
 }
 
 .alert__title {
+	font-size: 14px;
+	font-weight: 600;
+	padding-top: 1.2rem;
+	padding-right: $base-padding;
+	user-select: none;
+	font-family: var(--kt-headline-font);
 }
 
 .alert__header {
@@ -46,7 +42,7 @@ $shadow: 1.5px;
 }
 
 .alert__title + .alert__description {
-	padding: 0 0 $base-padding;
+	padding: 0.8rem 0 $base-padding;
 }
 
 .alert--variant-error {
