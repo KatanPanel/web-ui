@@ -5,10 +5,6 @@
 			<div class="content">
 				<slot />
 			</div>
-			<div class="copyright">
-				&copy; 2020 - {{ new Date().getFullYear() }}&nbsp;
-				<span>Katan</span>
-			</div>
 		</div>
 		<div class="right_side" />
 	</div>
@@ -62,15 +58,6 @@ export default class AuthLayout extends Vue {}
 		max-width: 64px;
 		position: relative;
 		border-radius: 8px;
-	}
-
-	.copyright {
-		margin: 12px 0;
-		opacity: 0.38;
-		font-size: 12px;
-		user-select: none;
-		position: absolute;
-		bottom: 0;
 	}
 
 	.content {

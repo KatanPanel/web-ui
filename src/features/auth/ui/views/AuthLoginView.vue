@@ -1,11 +1,11 @@
 <template>
 	<AuthLayout>
-		<h4><b v-t="'auth.login.title'" /></h4>
+		<h4 v-t="'auth.login.title'" />
 		<VBody2 v-t="'auth.login.subtitle'" :class="$style.description" />
 		<VAlert :class="$style.alert" :variant="'error'" v-if="errorCode">
-			<template #title>
-				<span v-t="'auth.login.error-title'" />
-			</template>
+			<!--<template #title>-->
+			<!--	<span v-t="'auth.login.error-title'" />-->
+			<!--</template>-->
 			<template #description>
 				<span v-t="`error.${errorCode}`" />
 			</template>
@@ -103,12 +103,15 @@ export default class AuthLoginView extends Vue {
 
 .description {
 	margin-top: 0.4rem;
-	margin-bottom: 1.8rem;
+	margin-bottom: 1.6rem;
 	color: var(--kt-content-neutral);
 }
 
 .alert {
-	margin-top: -0.8rem;
 	margin-bottom: 2.4rem !important;
+}
+
+form {
+	padding-top: 0.8rem;
 }
 </style>
