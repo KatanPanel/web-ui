@@ -29,15 +29,15 @@ import VContainer from "@/features/platform/ui/components/grid/VContainer.vue";
 import BlueprintsList from "@/features/blueprints/ui/components/home/BlueprintsList.vue";
 import VButton from "@/features/platform/ui/components/button/VButton.vue";
 import ImportBlueprintModal from "@/features/blueprints/ui/components/ImportBlueprintModal.vue";
+import { useModal } from "vue-final-modal";
 
 @Component({
 	components: { VButton, VContainer, PageHeader, BlueprintsList }
 })
 export default class BlueprintsHomeView extends Vue {
+
 	onImportClick() {
-		this.$vfm.show({
-			component: ImportBlueprintModal
-		});
+		useModal({ component: ImportBlueprintModal }).open()
 	}
 }
 </script>

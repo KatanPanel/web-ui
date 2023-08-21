@@ -33,7 +33,7 @@
 		"vue-content-loader": "^2.0.1",
 		"vue-echarts": "^6.2.3",
 		"vue-facing-decorator": "^2.1.12",
-		"vue-final-modal": "3",
+		"vue-final-modal": "^4.4.5",
 		"vue-head": "MKGaru/vue-head#vue3",
 		"vue-i18n": "^9.2.2",
 		"vue-loading-overlay": "5.0",
