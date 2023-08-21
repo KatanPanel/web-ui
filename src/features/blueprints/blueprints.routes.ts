@@ -9,17 +9,17 @@ export const IMPORT_BLUEPRINT_ROUTE = "blueprints.import";
 export const BlueprintsRoutes: Array<RouteRecordRaw> = [
 	{
 		path: "/blueprints",
-		component: importView(FEATURE_NAME, "BlueprintsView"),
+		component: importView(FEATURE_NAME, "Blueprints"),
 		children: [
 			{
 				path: "",
 				name: BLUEPRINTS_ROUTES,
-				component: importView(FEATURE_NAME, "BlueprintsHomeView")
+				component: importView(FEATURE_NAME, "BlueprintsHome")
 			},
 			{
 				path: "import",
 				name: IMPORT_BLUEPRINT_ROUTE,
-				component: importView(FEATURE_NAME, "ImportBlueprintView")
+				component: importView(FEATURE_NAME, "ImportBlueprint")
 			}
 		]
 	}

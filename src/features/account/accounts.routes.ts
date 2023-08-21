@@ -10,6 +10,6 @@ export const AccountsRoute: Array<RouteRecordRaw> = [
 	{
 		path: "/account",
 		name: ACCOUNT_ROUTE,
-		component: importView(FEATURE_NAME, "AccountView")
+		component: importView(FEATURE_NAME, "Account")
 	}
 ];

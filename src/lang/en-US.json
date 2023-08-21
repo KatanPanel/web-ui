@@ -7,7 +7,6 @@
 	"auth.login.username-label": "Username or Email address",
 	"auth.login.password-label": "Password",
 	"auth.login.submit-button": "Log In",
-	"auth.login.error-title": "Failed to perform login",
 	"home.units-list.empty.title": "There are no units yet",
 	"home.units-list.empty.description": "Create units so they are shown here.",
 	"home.units-list.empty.create-unit": "Create unit",

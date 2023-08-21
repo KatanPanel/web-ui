@@ -79,7 +79,6 @@ export default class AuthLoginView extends Vue {
 		if (this.loginBeingPerformed)
 			return;
 
-
 		this.errorTranslationText = null;
 
 		authService

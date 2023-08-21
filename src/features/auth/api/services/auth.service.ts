@@ -9,14 +9,14 @@ import accountService from "@/features/account/api/services/account.service";
 export const AUTHORIZATION_TOKEN_KEY = "token";
 
 class AuthService {
-	private logger = logService.create(AuthService.name);
+	private readonly logger = logService.create(AuthService.name);
 
-	async login(username: string, password: string): Promise<AccessToken> {
+	async login(username: string, password: string): Promise<void> {
 		return httpService.post("auth/login", { username, password })
 			.then((res: AxiosResponse) => {
 				const accessToken = { token: res.data.token } as AccessToken
+				this.logger.debug("Login performed", accessToken)
 				localStorageService.set(AUTHORIZATION_TOKEN_KEY, accessToken);
-				return accessToken
 			})
 			.catch((error: AxiosError) => {
 				this.logger.debug("Failed to perform login", error)

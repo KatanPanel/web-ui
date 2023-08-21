@@ -12,6 +12,7 @@ import authService, {
 } from "@/features/auth/api/services/auth.service";
 import { isNull } from "@/utils";
 import { Account } from "@/features/account/api/models/account.model";
+import logService from "@/features/platform/api/log.service";
 
 export const AuthenticatedOnlyGuard: NavigationGuard = (
 	_to: RouteLocationNormalized,
@@ -23,12 +24,16 @@ export const AuthenticatedOnlyGuard: NavigationGuard = (
 	const localToken: AccessToken | null = localStorageService.get(
 		AUTHORIZATION_TOKEN_KEY
 	);
-	if (!isNull(localToken)) return next({ name: AUTH_LOGIN_ROUTE });
+	if (isNull(localToken)) return next({ name: AUTH_LOGIN_ROUTE });
 
 	authService
 		.verify(localToken!)
-		.then((account: Account) => accountService.updateAccount(account))
-		.then(next, () => {
-			next({ name: AUTH_LOGIN_ROUTE });
-		});
+		.then(
+			(account: Account) => accountService.updateAccount(account),
+			(error: Error) => {
+				logService.debug(`Unable to verify local token`, error);
+				next({ name: AUTH_LOGIN_ROUTE });
+			}
+		)
+		.then(next);
 };

@@ -10,11 +10,11 @@ export const HomeRoutes: Array<RouteRecordRaw> = [
 	{
 		path: "",
 		name: HOME_ROUTE,
-		component: importView(FEATURE_NAME, "HomeView")
+		component: importView(FEATURE_NAME, "Home")
 	},
 	{
 		path: "about",
 		name: ABOUT_ROUTE,
-		component: importView(FEATURE_NAME, "AboutView")
+		component: importView(FEATURE_NAME, "About")
 	}
 ];

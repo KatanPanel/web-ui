@@ -1,27 +1,28 @@
 import { Account } from "@/features/account/api/models/account.model";
 import AccountStore from "@/features/account/account.store";
 import { getModule } from "vuex-module-decorators";
-import { AccessToken } from "@/features/auth/api/models/access-token.model";
-import authService from "@/features/auth/api/services/auth.service";
+import logService from "@/features/platform/api/log.service";
+import { Consola } from "consola";
 
 class AccountService {
+	private readonly logger!: Consola;
+
+	constructor() {
+		this.logger = logService.create(AccountService.name);
+	}
 
 	private dataStore(): AccountStore {
-		return getModule(AccountStore)
+		return getModule(AccountStore);
 	}
 
 	get isLoggedIn(): boolean {
-		return this.dataStore().isLoggedIn
+		return this.dataStore().isLoggedIn;
 	}
 
-	async updateAccount(account: Account) {
-		this.dataStore().updateAccount({ account })
-	}
-
-	async retrieveAccount(accessToken: AccessToken) {
-		return authService.verify(accessToken)
-			.then((account: Account) => this.updateAccount(account))
+	async updateAccount(account: Account): Promise<void> {
+		this.logger.debug("Account updated", account)
+		this.dataStore().updateAccount({ account });
 	}
 }
 
-export default new AccountService()
+export default new AccountService();

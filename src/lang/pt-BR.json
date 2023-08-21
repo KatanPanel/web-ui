@@ -1,0 +1,10 @@
+{
+	"error.1001": "Conta não encontrada",
+	"error.2002": "Não foi possível fazer log-in, altere suas credenciais e tente novamente.",
+	"empty-state.refresh": "Atualizar",
+	"auth.login.title": "Fazer login",
+	"auth.login.subtitle": "Enter your credentials to access your account.",
+	"auth.login.username-label": "Nome de usuário ou email",
+	"auth.login.password-label": "Senha",
+	"auth.login.submit-button": "Logar"
+}

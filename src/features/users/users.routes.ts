@@ -9,6 +9,6 @@ export const UsersRoutes: Array<RouteRecordRaw> = [
 	{
 		path: "/users",
 		name: USERS_ROUTE,
-		component: importView(FEATURE_NAME, "UsersView")
+		component: importView(FEATURE_NAME, "Users")
 	}
 ];

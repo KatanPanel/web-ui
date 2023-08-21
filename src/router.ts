@@ -10,7 +10,7 @@ import { UsersRoutes } from "@/features/users/users.routes";
 export function importView(feature: string, path: string): () => Promise<unknown> {
 	return () =>
 		import(
-			/* webpackChunkName: "view-[request]" */ `@/features/${feature}/ui/views/${path}.vue`
+			/* webpackChunkName: "view-[request]" */ `@/features/${feature}/ui/views/${path}View.vue`
 		);
 }
 
@@ -19,7 +19,7 @@ const Router = createRouter({
 	routes: [
 		{
 			path: "/",
-			component: importView("platform", "RootView"),
+			component: importView("platform", "Root"),
 			beforeEnter: AuthenticatedOnlyGuard,
 			children: [
 				...HomeRoutes,

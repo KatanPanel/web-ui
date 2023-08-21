@@ -18,41 +18,41 @@ export const UnitsRoute: Array<RouteRecordRaw> = [
 	{
 		path: "/create",
 		name: CREATE_UNIT,
-		component: importView(FEATURE_NAME, "create/CreateUnitView")
+		component: importView(FEATURE_NAME, "create/CreateUnit")
 	},
 	{
 		path: "/units/:unitId",
-		component: importView(FEATURE_NAME, "UnitView"),
+		component: importView(FEATURE_NAME, "Unit"),
 		children: [
 			{
 				path: "",
 				name: UNIT_OVERVIEW_ROUTE,
-				component: importView(FEATURE_NAME, "UnitOverviewView")
+				component: importView(FEATURE_NAME, "UnitOverview")
 			},
 			{
 				path: "auditlog",
 				name: UNIT_AUDIT_LOG_ROUTE,
 				component: importView(
 					FEATURE_NAME,
-					"audit-log/UnitAuditLogView"
+					"audit-log/UnitAuditLog"
 				)
 			},
 			{
 				path: "settings",
 				name: UNIT_SETTINGS_ROUTE,
-				component: importView(FEATURE_NAME, "settings/UnitSettingsView")
+				component: importView(FEATURE_NAME, "settings/UnitSettings")
 			},
 			{
 				path: "instances/:instanceId",
 				name: INSTANCE_ROUTE,
-				component: importView(FEATURE_NAME, "instances/InstanceView"),
+				component: importView(FEATURE_NAME, "instances/Instance"),
 				children: [
 					{
 						path: "resources",
 						name: INSTANCE_RESOURCES_ROUTE,
 						component: importView(
 							FEATURE_NAME,
-							"instances/resource-monitor/InstanceResourceMonitorView"
+							"instances/resource-monitor/InstanceResourceMonitor"
 						)
 					},
 					{
@@ -60,7 +60,7 @@ export const UnitsRoute: Array<RouteRecordRaw> = [
 						name: INSTANCE_CONSOLE_ROUTE,
 						component: importView(
 							FEATURE_NAME,
-							"instances/console/InstanceConsoleView"
+							"instances/console/InstanceConsole"
 						)
 					},
 					{
@@ -68,14 +68,14 @@ export const UnitsRoute: Array<RouteRecordRaw> = [
 						name: INSTANCE_NETWORK_ROUTE,
 						component: importView(
 							FEATURE_NAME,
-							"instances/network/InstanceNetworkView"
+							"instances/network/InstanceNetwork"
 						)
 					},
 					{
 						path: "fs",
 						component: importView(
 							FEATURE_NAME,
-							"instances/fs/InstanceFsView"
+							"instances/fs/InstanceFs"
 						),
 						children: [
 							{
@@ -83,7 +83,7 @@ export const UnitsRoute: Array<RouteRecordRaw> = [
 								name: INSTANCE_FS_ROUTE,
 								component: importView(
 									FEATURE_NAME,
-									"instances/fs/InstanceFsBucketListView"
+									"instances/fs/InstanceFsBucketList"
 								)
 							},
 							{
@@ -91,7 +91,7 @@ export const UnitsRoute: Array<RouteRecordRaw> = [
 								name: INSTANCE_FS_BUCKET_ROUTE,
 								component: importView(
 									FEATURE_NAME,
-									"instances/fs/buckets/InstanceFsBucketView"
+									"instances/fs/buckets/InstanceFsBucket"
 								)
 							}
 						]
