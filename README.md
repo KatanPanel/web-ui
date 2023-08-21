@@ -18,13 +18,13 @@ git clone https://github.com/KatanPanel/web-ui.git
 
 TypeScript, Node and Yarn are needed to run this project.
 
-First you need to configure environment variables, create a `.env.local` file containing the environment variables needed to run
-the project locally. See [environment variables example file](https://github.com/KatanPanel/web-ui/blob/main/.env.example) to get started.
-
-
 ```
 yarn serve
 ```
+
+Also is needed to configure environment variables, create a `.env.local` file
+containing the environment variables needed to run the project locally. See
+[environment variables example file](https://github.com/KatanPanel/web-ui/blob/main/.env.example) to get started.
 
 **Build for production**
 
@@ -37,8 +37,6 @@ yarn build
 ```
 yarn test:unit test:e2e
 ```
-
-****
 
 ## License
 
