@@ -47,7 +47,8 @@ const I18N = setupI18n({
 	allowComposition: true,
 	messages: {
 		"en-US": require(/* webpackChunkName: "locale-[request]" */"@/lang/en-US.json").default
-	}
+	},
+	fallbackLocale: "en-US"
 });
 
 const App = createApp(AppRoot)
