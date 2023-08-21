@@ -12,7 +12,9 @@
 ├── types
 ├── features/
 │   └── .../
-│       ├── api
+│       ├── api/
+│       │   ├── services
+│       │   └── models
 │       ├── guards
 │       ├── ui/
 │       │   ├── components
