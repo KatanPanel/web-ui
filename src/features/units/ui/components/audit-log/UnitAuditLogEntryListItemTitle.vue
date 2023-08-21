@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import { AuditLogEvent } from "@/features/units/models/audit-log.model";
+import { AuditLogEvent } from "@/features/units/api/models/audit-log.model";
 
 @Component
 export default class UnitAuditLogEntryListItemTitle extends Vue {

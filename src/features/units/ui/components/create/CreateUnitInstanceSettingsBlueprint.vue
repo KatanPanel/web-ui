@@ -12,16 +12,16 @@
 </template>
 
 <script lang="ts">
-import VFieldSet from "@/design-system/form/VFieldSet.vue";
+import VFieldSet from "@/features/platform/ui/components/form/VFieldSet.vue";
 import { Component, Vue } from "vue-facing-decorator";
-import VLabel from "@/design-system/form/VLabel.vue";
-import VInput from "@/design-system/form/VInput.vue";
-import VCard from "@/design-system/card/VCard.vue";
-import VCol from "@/design-system/grid/VCol.vue";
-import VRow from "@/design-system/grid/VRow.vue";
-import VSection from "@/design-system/grid/VSection.vue";
-import VBody2 from "@/design-system/typography/VBody2.vue";
-import VAlert from "@/design-system/alert/VAlert.vue";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
+import VInput from "@/features/platform/ui/components/form/VInput.vue";
+import VCard from "@/features/platform/ui/components/card/VCard.vue";
+import VCol from "@/features/platform/ui/components/grid/VCol.vue";
+import VRow from "@/features/platform/ui/components/grid/VRow.vue";
+import VSection from "@/features/platform/ui/components/grid/VSection.vue";
+import VBody2 from "@/features/platform/ui/components/typography/VBody2.vue";
+import VAlert from "@/features/platform/ui/components/alert/VAlert.vue";
 import CreateUnitInstanceSettingsImageUpdatePolicy from "@/features/units/ui/components/create/CreateUnitInstanceSettingsImageUpdatePolicy.vue";
 import CreateUnitInstanceSettingsNetwork from "@/features/units/ui/components/create/CreateUnitInstanceSettingsNetwork.vue";
 

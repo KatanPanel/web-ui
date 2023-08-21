@@ -57,19 +57,19 @@ import {
 	UNIT_AUDIT_LOG_ROUTE,
 	UNIT_OVERVIEW_ROUTE,
 	UNIT_SETTINGS_ROUTE
-} from "@/features/units/routing/units.routes";
-import { Unit } from "@/features/units/models/unit.model";
-import VOverline from "@/design-system/typography/VOverline.vue";
-import VLabel from "@/design-system/form/VLabel.vue";
+} from "@/features/units/units.routes";
+import { Unit } from "@/features/units/api/models/unit.model";
+import VOverline from "@/features/platform/ui/components/typography/VOverline.vue";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
 import TheUnitSidebarSection from "@/features/units/ui/components/TheUnitSidebarSection.vue";
 import TheUnitSidebarSectionItem from "@/features/units/ui/components/TheUnitSidebarSectionItem.vue";
-import Avatar from "@/features/shared/ui/components/Avatar.vue";
-import VIcon from "@/design-system/icon/VIcon.vue";
+import Avatar from "@/features/platform/ui/components/Avatar.vue";
+import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
 import { isUndefined } from "@/utils";
 import { RouteLocationRaw } from "vue-router";
 import TheUnitSidebarHeader from "@/features/units/ui/components/TheUnitSidebarHeader.vue";
 import TheUnitSidebarStatus from "@/features/units/ui/components/TheUnitSidebarStatus.vue";
-import { InstanceStatusUpdateCode } from "@/features/units/models/instance.model";
+import { InstanceStatusUpdateCode } from "@/features/units/api/models/instance.model";
 
 type Section = {
 	label: string;

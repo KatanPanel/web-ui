@@ -29,12 +29,12 @@
 
 <script lang="ts">
 import { Component, Emit, Inject, Ref, Vue } from "vue-facing-decorator";
-import { Unit } from "@/features/units/models/unit.model";
-import VIcon from "@/design-system/icon/VIcon.vue";
-import VInput from "@/design-system/form/VInput.vue";
-import VForm from "@/design-system/form/VForm.vue";
-import VFieldSet from "@/design-system/form/VFieldSet.vue";
-import logService from "@/features/shared/data/log.service";
+import { Unit } from "@/features/units/api/models/unit.model";
+import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
+import VInput from "@/features/platform/ui/components/form/VInput.vue";
+import VForm from "@/features/platform/ui/components/form/VForm.vue";
+import VFieldSet from "@/features/platform/ui/components/form/VFieldSet.vue";
+import logService from "@/features/platform/api/log.service";
 
 @Component({
 	components: { VFieldSet, VForm, VInput, VIcon }

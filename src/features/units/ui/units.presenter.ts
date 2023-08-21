@@ -1,7 +1,7 @@
-import { Unit } from "@/features/units/models/unit.model";
-import unitsService from "@/features/units/data/units.service";
-import { AuditLog } from "@/features/units/models/audit-log.model";
-import { UpdateUnitRequest } from "@/features/units/data/request/update-unit.request";
+import { Unit } from "@/features/units/api/models/unit.model";
+import unitsService from "@/features/units/api/units.service";
+import { AuditLog } from "@/features/units/api/models/audit-log.model";
+import { UpdateUnitRequest } from "@/features/units/api/request/update-unit.request";
 
 class UnitsPresenter {
 	async getUnit(id: string): Promise<Unit> {

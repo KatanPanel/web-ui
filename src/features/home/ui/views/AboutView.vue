@@ -26,15 +26,15 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import configService from "@/features/shared/data/config.service";
-import TheLogo from "@/features/shared/ui/components/TheLogo.vue";
-import VSubtitle2 from "@/design-system/typography/VSubtitle2.vue";
-import VSubtitle1 from "@/design-system/typography/VSubtitle1.vue";
-import VIcon from "@/design-system/icon/VIcon.vue";
+import configService from "@/features/platform/api/config.service";
+import TheLogo from "@/features/platform/ui/components/TheLogo.vue";
+import VSubtitle2 from "@/features/platform/ui/components/typography/VSubtitle2.vue";
+import VSubtitle1 from "@/features/platform/ui/components/typography/VSubtitle1.vue";
+import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
 import AboutInfoUpdateState from "@/features/home/ui/components/about/AboutInfoUpdateState.vue";
-import VBody2 from "@/design-system/typography/VBody2.vue";
-import VCard from "@/design-system/card/VCard.vue";
-import VSelectableCard from "@/design-system/card/VSelectableCard.vue";
+import VBody2 from "@/features/platform/ui/components/typography/VBody2.vue";
+import VCard from "@/features/platform/ui/components/card/VCard.vue";
+import VSelectableCard from "@/features/platform/ui/components/card/VSelectableCard.vue";
 
 @Component({
 	components: {

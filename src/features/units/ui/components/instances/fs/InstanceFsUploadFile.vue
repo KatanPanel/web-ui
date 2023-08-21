@@ -17,9 +17,9 @@
 </template>
 
 <script lang="ts">
-import VContainer from "@/design-system/grid/VContainer.vue";
-import VIcon from "@/design-system/icon/VIcon.vue";
-import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
+import VContainer from "@/features/platform/ui/components/grid/VContainer.vue";
+import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
+import PageHeader from "@/features/platform/ui/components/PageHeader.vue";
 import { Component, Vue } from "vue-facing-decorator";
 
 @Component({

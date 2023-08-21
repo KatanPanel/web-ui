@@ -22,16 +22,16 @@
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";
-import { Unit } from "@/features/units/models/unit.model";
-import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
-import VInput from "@/design-system/form/VInput.vue";
-import VFieldSet from "@/design-system/form/VFieldSet.vue";
-import VLabel from "@/design-system/form/VLabel.vue";
-import VContainer from "@/design-system/grid/VContainer.vue";
-import VForm from "@/design-system/form/VForm.vue";
-import VSection from "@/design-system/grid/VSection.vue";
-import VTab from "@/design-system/tabs/VTab.vue";
-import VTabList from "@/design-system/tabs/VTabList.vue";
+import { Unit } from "@/features/units/api/models/unit.model";
+import PageHeader from "@/features/platform/ui/components/PageHeader.vue";
+import VInput from "@/features/platform/ui/components/form/VInput.vue";
+import VFieldSet from "@/features/platform/ui/components/form/VFieldSet.vue";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
+import VContainer from "@/features/platform/ui/components/grid/VContainer.vue";
+import VForm from "@/features/platform/ui/components/form/VForm.vue";
+import VSection from "@/features/platform/ui/components/grid/VSection.vue";
+import VTab from "@/features/platform/ui/components/tabs/VTab.vue";
+import VTabList from "@/features/platform/ui/components/tabs/VTabList.vue";
 
 @Component({
 	components: {

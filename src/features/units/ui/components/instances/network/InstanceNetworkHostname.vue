@@ -14,12 +14,12 @@
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";
-import { Instance } from "@/features/units/models/instance.model";
-import VFieldSet from "@/design-system/form/VFieldSet.vue";
-import VLabel from "@/design-system/form/VLabel.vue";
-import VInput from "@/design-system/form/VInput.vue";
-import VBody2 from "@/design-system/typography/VBody2.vue";
-import VCard from "@/design-system/card/VCard.vue";
+import { Instance } from "@/features/units/api/models/instance.model";
+import VFieldSet from "@/features/platform/ui/components/form/VFieldSet.vue";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
+import VInput from "@/features/platform/ui/components/form/VInput.vue";
+import VBody2 from "@/features/platform/ui/components/typography/VBody2.vue";
+import VCard from "@/features/platform/ui/components/card/VCard.vue";
 
 @Component({
 	components: { VCard, VFieldSet, VLabel, VInput, VBody2 }

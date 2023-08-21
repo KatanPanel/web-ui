@@ -1,7 +1,7 @@
 import "@/registerServiceWorker";
 import "@/assets/styles/main.scss";
 import { createApp } from "vue";
-import App from "@/features/shared/ui/views/App.vue";
+import App from "@/App.vue";
 import appStore from "@/store";
 import appRouter from "@/router";
 import { installPlugins } from "@/plugins";

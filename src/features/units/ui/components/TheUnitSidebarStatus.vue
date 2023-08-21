@@ -2,8 +2,8 @@
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";
-import { Unit } from "@/features/units/models/unit.model";
-import Avatar from "@/features/shared/ui/components/Avatar.vue";
+import { Unit } from "@/features/units/api/models/unit.model";
+import Avatar from "@/features/platform/ui/components/Avatar.vue";
 
 @Component({
 	components: { Avatar }

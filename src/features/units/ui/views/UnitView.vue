@@ -17,14 +17,14 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import { Unit } from "@/features/units/models/unit.model";
+import { Unit } from "@/features/units/api/models/unit.model";
 import { computed } from "vue";
 import unitsPresenter from "@/features/units/ui/units.presenter";
-import Resource from "@/features/shared/ui/components/Resource.vue";
-import logService from "@/features/shared/data/log.service";
+import Resource from "@/features/platform/ui/components/Resource.vue";
+import logService from "@/features/platform/api/log.service";
 import TheUnitSidebar from "@/features/units/ui/components/TheUnitSidebar.vue";
-import { InstanceStatusUpdateCode } from "@/features/units/models/instance.model";
-import instancesService from "@/features/units/data/instances.service";
+import { InstanceStatusUpdateCode } from "@/features/units/api/models/instance.model";
+import instancesService from "@/features/units/api/instances.service";
 
 @Component({
 	components: { Resource, TheUnitSidebar },

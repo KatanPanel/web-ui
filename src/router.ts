@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { AuthRoutes } from "@/features/auth/routing/auth.routes";
-import { HomeRoutes } from "@/features/home/routing/home.routes";
-import { UnitsRoute } from "@/features/units/routing/units.routes";
-import { AuthenticatedOnlyGuard } from "@/features/auth/routing/authenticated-only.guard";
-import { AccountsRoute } from "@/features/account/routing/accounts.routes";
-import { BlueprintsRoutes } from "@/features/blueprints/routing/blueprints.routes";
-import { UsersRoutes } from "@/features/users/routing/users.routes";
+import { AuthRoutes } from "@/features/auth/auth.routes";
+import { HomeRoutes } from "@/features/home/home.routes";
+import { UnitsRoute } from "@/features/units/units.routes";
+import { AuthenticatedOnlyGuard } from "@/features/auth/guards/authenticated-only.guard";
+import { AccountsRoute } from "@/features/account/accounts.routes";
+import { BlueprintsRoutes } from "@/features/blueprints/blueprints.routes";
+import { UsersRoutes } from "@/features/users/users.routes";
 
 export function importView(
 	featureName: string,

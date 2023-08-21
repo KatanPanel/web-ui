@@ -19,13 +19,13 @@ import {
 	Instance,
 	InstanceFsBucket,
 	InstanceFsFile
-} from "@/features/units/models/instance.model";
+} from "@/features/units/api/models/instance.model";
 import InstanceFsBucketFileContent from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketFileContent.vue";
-import Resource from "@/features/shared/ui/components/Resource.vue";
+import Resource from "@/features/platform/ui/components/Resource.vue";
 import instancesPresenter from "@/features/units/ui/instances.presenter";
 import { computed } from "vue";
 import InstanceFsBucketFileDirectory from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketFileDirectory.vue";
-import logService from "@/features/shared/data/log.service";
+import logService from "@/features/platform/api/log.service";
 import { isUndefined } from "@/utils";
 
 const ROOT = "/";

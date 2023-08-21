@@ -1,5 +1,5 @@
-import { Unit } from "@/features/units/models/unit.model";
-import unitsService from "@/features/units/data/units.service";
+import { Unit } from "@/features/units/api/models/unit.model";
+import unitsService from "@/features/units/api/units.service";
 
 class HomePresenter {
 	async listUnits(): Promise<Unit[]> {

@@ -18,9 +18,9 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import { Blueprint } from "@/features/blueprints/models/blueprint.model";
-import blueprintsService from "@/features/blueprints/data/blueprints.service";
-import Resource from "@/features/shared/ui/components/Resource.vue";
+import { Blueprint } from "@/features/blueprints/api/blueprint.model";
+import blueprintsService from "@/features/blueprints/api/blueprints.service";
+import Resource from "@/features/platform/ui/components/Resource.vue";
 import BlueprintsListItem from "@/features/blueprints/ui/components/home/BlueprintsListItem.vue";
 
 @Component({

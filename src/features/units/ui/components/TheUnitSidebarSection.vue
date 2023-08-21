@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import VLabel from "@/design-system/form/VLabel.vue";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
 
 @Component({
 	components: { VLabel }

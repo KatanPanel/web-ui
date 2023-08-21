@@ -27,14 +27,14 @@
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";
-import { Unit } from "@/features/units/models/unit.model";
-import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
-import VContainer from "@/design-system/grid/VContainer.vue";
-import VCol from "@/design-system/grid/VCol.vue";
-import VRow from "@/design-system/grid/VRow.vue";
-import VLabel from "@/design-system/form/VLabel.vue";
-import Avatar from "@/features/shared/ui/components/Avatar.vue";
-import VCard from "@/design-system/card/VCard.vue";
+import { Unit } from "@/features/units/api/models/unit.model";
+import PageHeader from "@/features/platform/ui/components/PageHeader.vue";
+import VContainer from "@/features/platform/ui/components/grid/VContainer.vue";
+import VCol from "@/features/platform/ui/components/grid/VCol.vue";
+import VRow from "@/features/platform/ui/components/grid/VRow.vue";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
+import Avatar from "@/features/platform/ui/components/Avatar.vue";
+import VCard from "@/features/platform/ui/components/card/VCard.vue";
 
 @Component({
 	components: { PageHeader, VContainer, VRow, VCol, VLabel, Avatar, VCard }

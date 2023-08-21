@@ -44,17 +44,17 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import authPresenter from "@/features/auth/ui/auth.presenter";
-import VButton from "@/design-system/button/VButton.vue";
-import VFieldSet from "@/design-system/form/VFieldSet.vue";
-import VForm from "@/design-system/form/VForm.vue";
-import VBody2 from "@/design-system/typography/VBody2.vue";
+import authPresenter from "@/features/auth/auth.presenter";
+import VButton from "@/features/platform/ui/components/button/VButton.vue";
+import VFieldSet from "@/features/platform/ui/components/form/VFieldSet.vue";
+import VForm from "@/features/platform/ui/components/form/VForm.vue";
+import VBody2 from "@/features/platform/ui/components/typography/VBody2.vue";
 import AuthLayout from "@/features/auth/ui/layouts/AuthLayout.vue";
-import VLabel from "@/design-system/form/VLabel.vue";
-import VInput from "@/design-system/form/VInput.vue";
-import VAlert from "@/design-system/alert/VAlert.vue";
-import { HttpError } from "@/features/shared/models/error.model";
-import logService from "@/features/shared/data/log.service";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
+import VInput from "@/features/platform/ui/components/form/VInput.vue";
+import VAlert from "@/features/platform/ui/components/alert/VAlert.vue";
+import { HttpError } from "@/features/platform/api/error.model";
+import logService from "@/features/platform/api/log.service";
 
 @Component({
 	components: {

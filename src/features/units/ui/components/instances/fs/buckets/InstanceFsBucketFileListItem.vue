@@ -13,13 +13,13 @@
 </template>
 <script lang="ts">
 import { Component, Inject, Prop, Vue } from "vue-facing-decorator";
-import { InstanceFsBucket } from "@/features/units/models/instance.model";
+import { InstanceFsBucket } from "@/features/units/api/models/instance.model";
 import filesize from "filesize";
-import VIcon from "@/design-system/icon/VIcon.vue";
+import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
 import { isUndefined } from "@/utils";
 import { RouteLocationRaw } from "vue-router";
-import VCol from "@/design-system/grid/VCol.vue";
-import VRow from "@/design-system/grid/VRow.vue";
+import VCol from "@/features/platform/ui/components/grid/VCol.vue";
+import VRow from "@/features/platform/ui/components/grid/VRow.vue";
 import dayjs from "dayjs";
 
 @Component({

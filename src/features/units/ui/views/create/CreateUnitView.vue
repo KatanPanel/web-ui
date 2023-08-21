@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import VContainer from "@/design-system/grid/VContainer.vue";
+import VContainer from "@/features/platform/ui/components/grid/VContainer.vue";
 import CreateUnitInstanceSettings from "@/features/units/ui/components/create/CreateUnitInstanceSettings.vue";
 import CreateUnitName from "@/features/units/ui/components/create/CreateUnitName.vue";
 

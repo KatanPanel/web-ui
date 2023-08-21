@@ -14,11 +14,11 @@
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";
-import { Instance } from "@/features/units/models/instance.model";
-import VCard from "@/design-system/card/VCard.vue";
-import VBody2 from "@/design-system/typography/VBody2.vue";
+import { Instance } from "@/features/units/api/models/instance.model";
+import VCard from "@/features/platform/ui/components/card/VCard.vue";
+import VBody2 from "@/features/platform/ui/components/typography/VBody2.vue";
 import InstanceNetworkConnectedNetworksList from "@/features/units/ui/components/instances/network/InstanceNetworkConnectedNetworksList.vue";
-import VLabel from "@/design-system/form/VLabel.vue";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
 
 @Component({
 	components: { VBody2, VCard, VLabel, InstanceNetworkConnectedNetworksList }

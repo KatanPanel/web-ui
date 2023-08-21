@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import Avatar from "@/features/shared/ui/components/Avatar.vue";
+import Avatar from "@/features/platform/ui/components/Avatar.vue";
 
 @Component({
 	components: {

@@ -21,12 +21,12 @@
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";
-import { Instance } from "@/features/units/models/instance.model";
-import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
-import VContainer from "@/design-system/grid/VContainer.vue";
-import VRow from "@/design-system/grid/VRow.vue";
-import VCol from "@/design-system/grid/VCol.vue";
-import VSection from "@/design-system/grid/VSection.vue";
+import { Instance } from "@/features/units/api/models/instance.model";
+import PageHeader from "@/features/platform/ui/components/PageHeader.vue";
+import VContainer from "@/features/platform/ui/components/grid/VContainer.vue";
+import VRow from "@/features/platform/ui/components/grid/VRow.vue";
+import VCol from "@/features/platform/ui/components/grid/VCol.vue";
+import VSection from "@/features/platform/ui/components/grid/VSection.vue";
 import InstanceNetworkPrimaryAddress from "@/features/units/ui/components/instances/network/InstanceNetworkPrimaryAddress.vue";
 import InstanceNetworkAssignmentFailedAlert from "@/features/units/ui/components/instances/network/InstanceNetworkAssignmentFailedAlert.vue";
 import InstanceNetworkHostname from "@/features/units/ui/components/instances/network/InstanceNetworkHostname.vue";

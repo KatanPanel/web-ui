@@ -26,12 +26,12 @@
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
 import InstanceFsUploadFile from "@/features/units/ui/components/instances/fs/InstanceFsUploadFile.vue";
-import VInput from "@/design-system/form/VInput.vue";
-import VForm from "@/design-system/form/VForm.vue";
-import VContainer from "@/design-system/grid/VContainer.vue";
-import VIcon from "@/design-system/icon/VIcon.vue";
-import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
-import VButton from "@/design-system/button/VButton.vue";
+import VInput from "@/features/platform/ui/components/form/VInput.vue";
+import VForm from "@/features/platform/ui/components/form/VForm.vue";
+import VContainer from "@/features/platform/ui/components/grid/VContainer.vue";
+import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
+import PageHeader from "@/features/platform/ui/components/PageHeader.vue";
+import VButton from "@/features/platform/ui/components/button/VButton.vue";
 
 @Component({
 	components: {

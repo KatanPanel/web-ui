@@ -17,11 +17,11 @@
 </template>
 
 <script lang="ts">
-import VCard from "@/design-system/card/VCard.vue";
+import VCard from "@/features/platform/ui/components/card/VCard.vue";
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { RouteLocationRaw } from "vue-router";
-import { BLUEPRINTS_ROUTES } from "@/features/blueprints/routing/blueprints.routes";
-import Avatar from "@/features/shared/ui/components/Avatar.vue";
+import { BLUEPRINTS_ROUTES } from "@/features/blueprints/blueprints.routes";
+import Avatar from "@/features/platform/ui/components/Avatar.vue";
 
 @Component({
 	components: { VCard, Avatar }

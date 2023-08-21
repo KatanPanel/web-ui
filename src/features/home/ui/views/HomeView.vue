@@ -27,9 +27,9 @@
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
 import HomeUnitsList from "@/features/home/ui/components/HomeUnitsList.vue";
-import VContainer from "@/design-system/grid/VContainer.vue";
-import VLabel from "@/design-system/form/VLabel.vue";
-import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
+import VContainer from "@/features/platform/ui/components/grid/VContainer.vue";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
+import PageHeader from "@/features/platform/ui/components/PageHeader.vue";
 
 @Component({
 	components: {

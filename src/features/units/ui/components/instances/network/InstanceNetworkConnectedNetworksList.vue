@@ -27,13 +27,13 @@ import { Component, Inject, Vue } from "vue-facing-decorator";
 import {
 	Instance,
 	InstanceNetworkConnection
-} from "@/features/units/models/instance.model";
+} from "@/features/units/api/models/instance.model";
 import InstanceNetworkConnectedNetworksListItem from "@/features/units/ui/components/instances/network/InstanceNetworkConnectedNetworksListItem.vue";
-import EmptyState from "@/features/shared/ui/components/EmptyState.vue";
-import VCol from "@/design-system/grid/VCol.vue";
-import VRow from "@/design-system/grid/VRow.vue";
-import VLabel from "@/design-system/form/VLabel.vue";
-import VCard from "@/design-system/card/VCard.vue";
+import EmptyState from "@/features/platform/ui/components/EmptyState.vue";
+import VCol from "@/features/platform/ui/components/grid/VCol.vue";
+import VRow from "@/features/platform/ui/components/grid/VRow.vue";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
+import VCard from "@/features/platform/ui/components/card/VCard.vue";
 
 @Component({
 	components: {

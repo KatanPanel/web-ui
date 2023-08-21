@@ -7,10 +7,10 @@
 </template>
 
 <script lang="ts">
-import VForm from "@/design-system/form/VForm.vue";
-import VInput from "@/design-system/form/VInput.vue";
+import VForm from "@/features/platform/ui/components/form/VForm.vue";
+import VInput from "@/features/platform/ui/components/form/VInput.vue";
 import { Component, Vue } from "vue-facing-decorator";
-import VFieldSet from "@/design-system/form/VFieldSet.vue";
+import VFieldSet from "@/features/platform/ui/components/form/VFieldSet.vue";
 
 @Component({
 	components: { VForm, VInput, VFieldSet }

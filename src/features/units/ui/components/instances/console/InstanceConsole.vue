@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from "vue-facing-decorator";
-import VButton from "@/design-system/button/VButton.vue";
+import VButton from "@/features/platform/ui/components/button/VButton.vue";
 
 @Component({
 	components: { VButton }

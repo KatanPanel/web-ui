@@ -13,9 +13,9 @@ import {
 	Instance,
 	InstanceFsBucket,
 	InstanceFsFile
-} from "@/features/units/models/instance.model";
+} from "@/features/units/api/models/instance.model";
 import instancesPresenter from "@/features/units/ui/instances.presenter";
-import VCard from "@/design-system/card/VCard.vue";
+import VCard from "@/features/platform/ui/components/card/VCard.vue";
 
 @Component({
 	components: { VCard }

@@ -21,12 +21,12 @@
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";
-import { Unit } from "@/features/units/models/unit.model";
-import PageHeader from "@/features/shared/ui/components/PageHeader.vue";
-import VContainer from "@/design-system/grid/VContainer.vue";
+import { Unit } from "@/features/units/api/models/unit.model";
+import PageHeader from "@/features/platform/ui/components/PageHeader.vue";
+import VContainer from "@/features/platform/ui/components/grid/VContainer.vue";
 import UnitAuditLogEntryList from "@/features/units/ui/components/audit-log/UnitAuditLogEntryList.vue";
-import VAlert from "@/design-system/alert/VAlert.vue";
-import VSection from "@/design-system/grid/VSection.vue";
+import VAlert from "@/features/platform/ui/components/alert/VAlert.vue";
+import VSection from "@/features/platform/ui/components/grid/VSection.vue";
 
 @Component({
 	components: {

@@ -14,8 +14,8 @@ import { Component, Inject, Vue } from "vue-facing-decorator";
 import {
 	InstanceFsDirectory,
 	InstanceFsFile
-} from "@/features/units/models/instance.model";
-import Resource from "@/features/shared/ui/components/Resource.vue";
+} from "@/features/units/api/models/instance.model";
+import Resource from "@/features/platform/ui/components/Resource.vue";
 import InstanceFsBucketFileList from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketFileList.vue";
 
 @Component({

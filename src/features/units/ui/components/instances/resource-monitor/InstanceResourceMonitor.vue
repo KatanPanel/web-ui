@@ -11,9 +11,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import VTabList from "@/design-system/tabs/VTabList.vue";
-import VTab from "@/design-system/tabs/VTab.vue";
-import websocketService from "@/features/shared/data/websocket.service";
+import VTabList from "@/features/platform/ui/components/tabs/VTabList.vue";
+import VTab from "@/features/platform/ui/components/tabs/VTab.vue";
+import websocketService from "@/features/platform/api/websocket.service";
 import InstanceResourceMonitorCPU from "@/features/units/ui/components/instances/resource-monitor/InstanceResourceMonitorCPU.vue";
 
 @Component({

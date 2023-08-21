@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import VAlert from "@/design-system/alert/VAlert.vue";
+import VAlert from "@/features/platform/ui/components/alert/VAlert.vue";
 
 @Component({
 	components: { VAlert }

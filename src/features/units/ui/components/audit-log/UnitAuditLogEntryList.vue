@@ -23,9 +23,9 @@ import { Component, Prop, Vue } from "vue-facing-decorator";
 import {
 	AuditLog,
 	AuditLogEntry
-} from "@/features/units/models/audit-log.model";
+} from "@/features/units/api/models/audit-log.model";
 import UnitAuditLogEntryListItem from "@/features/units/ui/components/audit-log/UnitAuditLogEntryListItem.vue";
-import Resource from "@/features/shared/ui/components/Resource.vue";
+import Resource from "@/features/platform/ui/components/Resource.vue";
 import unitsPresenter from "@/features/units/ui/units.presenter";
 
 @Component({

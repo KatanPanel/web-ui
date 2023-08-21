@@ -34,19 +34,19 @@
 </template>
 
 <script lang="ts">
-import Modal from "@/features/shared/ui/components/modal/Modal.vue";
-import VLabel from "@/design-system/form/VLabel.vue";
+import Modal from "@/features/platform/ui/components/modal/Modal.vue";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
 import { Component, Ref, Vue } from "vue-facing-decorator";
-import VInput from "@/design-system/form/VInput.vue";
-import VFieldSet from "@/design-system/form/VFieldSet.vue";
-import VForm from "@/design-system/form/VForm.vue";
-import VAlert from "@/design-system/alert/VAlert.vue";
+import VInput from "@/features/platform/ui/components/form/VInput.vue";
+import VFieldSet from "@/features/platform/ui/components/form/VFieldSet.vue";
+import VForm from "@/features/platform/ui/components/form/VForm.vue";
+import VAlert from "@/features/platform/ui/components/alert/VAlert.vue";
 import { ComponentPublicInstance } from "vue";
-import VButton from "@/design-system/button/VButton.vue";
+import VButton from "@/features/platform/ui/components/button/VButton.vue";
 import validator from "validator";
-import LoadingState from "@/features/shared/ui/components/LoadingState.vue";
-import blueprintsService from "@/features/blueprints/data/blueprints.service";
-import logService from "@/features/shared/data/log.service";
+import LoadingState from "@/features/platform/ui/components/LoadingState.vue";
+import blueprintsService from "@/features/blueprints/api/blueprints.service";
+import logService from "@/features/platform/api/log.service";
 
 @Component({
 	components: {

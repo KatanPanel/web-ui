@@ -19,10 +19,10 @@
 
 <script lang="ts">
 import { Component, Emit, Inject, Vue } from "vue-facing-decorator";
-import { Unit } from "@/features/units/models/unit.model";
-import Avatar from "@/features/shared/ui/components/Avatar.vue";
-import VIcon from "@/design-system/icon/VIcon.vue";
-import { InstanceStatusUpdateCode } from "@/features/units/models/instance.model";
+import { Unit } from "@/features/units/api/models/unit.model";
+import Avatar from "@/features/platform/ui/components/Avatar.vue";
+import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
+import { InstanceStatusUpdateCode } from "@/features/units/api/models/instance.model";
 
 @Component({
 	components: { Avatar, VIcon },

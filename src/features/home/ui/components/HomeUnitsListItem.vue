@@ -11,9 +11,9 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { RouteLocationRaw } from "vue-router";
-import { UNIT_OVERVIEW_ROUTE } from "@/features/units/routing/units.routes";
-import VCard from "@/design-system/card/VCard.vue";
-import Avatar from "@/features/shared/ui/components/Avatar.vue";
+import { UNIT_OVERVIEW_ROUTE } from "@/features/units/units.routes";
+import VCard from "@/features/platform/ui/components/card/VCard.vue";
+import Avatar from "@/features/platform/ui/components/Avatar.vue";
 
 @Component({
 	components: { VCard, Avatar }

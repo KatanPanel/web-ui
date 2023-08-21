@@ -2,8 +2,8 @@ import {
 	Instance,
 	InstanceFsBucket,
 	InstanceFsFile
-} from "@/features/units/models/instance.model";
-import instancesService from "@/features/units/data/instances.service";
+} from "@/features/units/api/models/instance.model";
+import instancesService from "@/features/units/api/instances.service";
 
 class InstancesPresenter {
 	async getInstance(id: string): Promise<Instance | undefined> {

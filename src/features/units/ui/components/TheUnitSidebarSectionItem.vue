@@ -17,7 +17,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { RouteLocationRaw } from "vue-router";
-import VIcon from "@/design-system/icon/VIcon.vue";
+import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
 import isURL from "validator/lib/isURL";
 
 @Component({

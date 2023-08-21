@@ -16,10 +16,10 @@ import { Component, Inject, Vue } from "vue-facing-decorator";
 import {
 	Instance,
 	InstanceMount
-} from "@/features/units/models/instance.model";
+} from "@/features/units/api/models/instance.model";
 import { RouteLocationRaw } from "vue-router";
-import { INSTANCE_FS_BUCKET_ROUTE } from "@/features/units/routing/units.routes";
-import Resource from "@/features/shared/ui/components/Resource.vue";
+import { INSTANCE_FS_BUCKET_ROUTE } from "@/features/units/units.routes";
+import Resource from "@/features/platform/ui/components/Resource.vue";
 
 @Component({
 	components: { Resource }

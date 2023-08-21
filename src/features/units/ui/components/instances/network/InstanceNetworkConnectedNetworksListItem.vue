@@ -20,10 +20,10 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import VIcon from "@/design-system/icon/VIcon.vue";
-import VSubtitle1 from "@/design-system/typography/VSubtitle1.vue";
-import VRow from "@/design-system/grid/VRow.vue";
-import VCol from "@/design-system/grid/VCol.vue";
+import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
+import VSubtitle1 from "@/features/platform/ui/components/typography/VSubtitle1.vue";
+import VRow from "@/features/platform/ui/components/grid/VRow.vue";
+import VCol from "@/features/platform/ui/components/grid/VCol.vue";
 
 @Component({
 	components: { VRow, VCol, VIcon, VSubtitle1 }

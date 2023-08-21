@@ -25,10 +25,10 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import { AuditLogEntry } from "@/features/units/models/audit-log.model";
-import VCard from "@/design-system/card/VCard.vue";
-import Avatar from "@/features/shared/ui/components/Avatar.vue";
-import { Account } from "@/features/account/models/account.model";
+import { AuditLogEntry } from "@/features/units/api/models/audit-log.model";
+import VCard from "@/features/platform/ui/components/card/VCard.vue";
+import Avatar from "@/features/platform/ui/components/Avatar.vue";
+import { Account } from "@/features/account/api/account.model";
 import UnitAuditLogEntryListItemTitle from "@/features/units/ui/components/audit-log/UnitAuditLogEntryListItemTitle.vue";
 import UnitAuditLogEntryListItemTimestamp from "@/features/units/ui/components/audit-log/UnitAuditLogEntryListItemTimestamp.vue";
 import UnitAuditLogEntryListItemAvatar from "@/features/units/ui/components/audit-log/UnitAuditLogEntryListItemAvatar.vue";

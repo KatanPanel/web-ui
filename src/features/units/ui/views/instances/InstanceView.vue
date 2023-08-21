@@ -16,10 +16,10 @@
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
 import instancesPresenter from "@/features/units/ui/instances.presenter";
-import { Instance } from "@/features/units/models/instance.model";
+import { Instance } from "@/features/units/api/models/instance.model";
 import { computed } from "vue";
-import Resource from "@/features/shared/ui/components/Resource.vue";
-import logService from "@/features/shared/data/log.service";
+import Resource from "@/features/platform/ui/components/Resource.vue";
+import logService from "@/features/platform/api/log.service";
 
 @Component({
 	components: { Resource },

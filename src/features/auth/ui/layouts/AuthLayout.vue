@@ -11,7 +11,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import TheLogo from "@/features/shared/ui/components/TheLogo.vue";
+import TheLogo from "@/features/platform/ui/components/TheLogo.vue";
 
 @Component({
 	components: { TheLogo }
@@ -20,7 +20,7 @@ export default class AuthLayout extends Vue {}
 </script>
 <style lang="scss" scoped>
 // TODO remove it from here
-@import "@/assets/styles/abstracts/_variables";
+@import "variables";
 
 .root {
 	display: flex;

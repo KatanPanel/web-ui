@@ -17,9 +17,9 @@ import instancesPresenter from "@/features/units/ui/instances.presenter";
 import {
 	Instance,
 	InstanceFsBucket
-} from "@/features/units/models/instance.model";
+} from "@/features/units/api/models/instance.model";
 import { computed } from "vue";
-import Resource from "@/features/shared/ui/components/Resource.vue";
+import Resource from "@/features/platform/ui/components/Resource.vue";
 import InstanceFsBucketFile from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketFile.vue";
 import InstanceFsBucketSearch from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketSearch.vue";
 

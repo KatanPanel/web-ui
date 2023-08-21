@@ -12,10 +12,10 @@
 </template>
 
 <script lang="ts">
-import VFieldSet from "@/design-system/form/VFieldSet.vue";
-import VCard from "@/design-system/card/VCard.vue";
-import VInput from "@/design-system/form/VInput.vue";
-import VLabel from "@/design-system/form/VLabel.vue";
+import VFieldSet from "@/features/platform/ui/components/form/VFieldSet.vue";
+import VCard from "@/features/platform/ui/components/card/VCard.vue";
+import VInput from "@/features/platform/ui/components/form/VInput.vue";
+import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
 import { Component, Vue } from "vue-facing-decorator";
 
 @Component({
