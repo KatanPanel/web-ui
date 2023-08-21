@@ -2,7 +2,7 @@
 	<AuthLayout>
 		<h4 v-t="'auth.login.title'" />
 		<VBody2 v-t="'auth.login.subtitle'" :class="$style.description" />
-		<VAlert :class="$style.alert" :variant="'error'" v-if="errorCode">
+		<VAlert :class="$style.alert" variant="error" v-if="errorCode">
 			<!--<template #title>-->
 			<!--	<span v-t="'auth.login.error-title'" />-->
 			<!--</template>-->
@@ -33,10 +33,10 @@
 			</VFieldSet>
 			<VButton
 				type="submit"
+				variant="primary"
+				block="true"
 				:disabled="loading"
 				:class="$style.loginButton"
-				:variant="'primary'"
-				:block="true"
 				v-t="'auth.login.submit-button'"
 			/>
 		</VForm>

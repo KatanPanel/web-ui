@@ -1,7 +1,7 @@
 <template>
 	<div class="root">
 		<div class="left_side">
-			<TheLogo :black="true" class="logo" />
+			<TheLogo black="true" class="logo" />
 			<div class="content">
 				<slot />
 			</div>
@@ -20,7 +20,7 @@ export default class AuthLayout extends Vue {}
 </script>
 <style lang="scss" scoped>
 // TODO remove it from here
-@import "variables";
+@import "@/assets/styles/abstracts/variables";
 
 .root {
 	display: flex;

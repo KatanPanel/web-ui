@@ -7,22 +7,19 @@ import { AccountsRoute } from "@/features/account/accounts.routes";
 import { BlueprintsRoutes } from "@/features/blueprints/blueprints.routes";
 import { UsersRoutes } from "@/features/users/users.routes";
 
-export function importView(
-	featureName: string,
-	path: string
-): () => Promise<unknown> {
+export function importView(feature: string, path: string): () => Promise<unknown> {
 	return () =>
 		import(
-			/* webpackChunkName: "view-[request]" */ `@/features/${featureName}/ui/views/${path}.vue`
+			/* webpackChunkName: "view-[request]" */ `@/features/${feature}/ui/views/${path}.vue`
 		);
 }
 
-const router = createRouter({
+const Router = createRouter({
 	history: createWebHistory(process.env.BASE_URL),
 	routes: [
 		{
 			path: "/",
-			component: importView("shared", "RootView"),
+			component: importView("platform", "RootView"),
 			beforeEnter: AuthenticatedOnlyGuard,
 			children: [
 				...HomeRoutes,
@@ -36,4 +33,4 @@ const router = createRouter({
 	] as Array<RouteRecordRaw>
 });
 
-export default router;
+export default Router;
