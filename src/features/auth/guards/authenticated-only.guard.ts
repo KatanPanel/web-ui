@@ -21,9 +21,7 @@ export const AuthenticatedOnlyGuard: NavigationGuard = (
 ) => {
 	if (accountService.isLoggedIn) return next();
 
-	const localToken: AccessToken | null = localStorageService.get(
-		AUTHORIZATION_TOKEN_KEY
-	);
+	const localToken = authService.getLocalAccessToken()
 	if (isNull(localToken)) return next({ name: AUTH_LOGIN_ROUTE });
 
 	authService

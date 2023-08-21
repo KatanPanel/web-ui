@@ -12,7 +12,7 @@ import { HttpError, KatanError } from "@/features/platform/api/error.model";
 import logService from "@/features/platform/api/log.service";
 
 class HttpService {
-	private readonly axios: AxiosInstance;
+	readonly axios: AxiosInstance;
 
 	constructor() {
 		this.axios = Axios.create({
@@ -36,10 +36,6 @@ class HttpService {
 				throw new HttpError(data as KatanError);
 			}
 		);
-	}
-
-	defaults(): AxiosDefaults {
-		return this.axios.defaults;
 	}
 
 	get<T>(url: string, config?: AxiosRequestConfig): AxiosPromise<T> {
