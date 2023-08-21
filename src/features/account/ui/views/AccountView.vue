@@ -14,7 +14,7 @@ import { Component, Vue } from "vue-facing-decorator";
 import PageHeader from "@/features/platform/ui/components/PageHeader.vue";
 import VContainer from "@/features/platform/ui/components/grid/VContainer.vue";
 import VForm from "@/features/platform/ui/components/form/VForm.vue";
-import { Account } from "@/features/account/api/account.model";
+import { Account } from "@/features/account/api/models/account.model";
 import { getModule } from "vuex-module-decorators";
 import AccountStore from "@/features/account/account.store";
 import AccountBasicInfo from "@/features/account/ui/components/AccountBasicInfo.vue";

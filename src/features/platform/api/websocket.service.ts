@@ -7,7 +7,7 @@ type WebSocketListener = (unknown) => void;
 
 class WebSocketService {
 	private ws?: WebSocket;
-	private logger = logService.copy("Gateway");
+	private logger = logService.create("Gateway");
 	private listeners = new Map<number, WebSocketListener[]>();
 
 	tryConnect(onConnect: () => void, onFailure?: () => void): void {

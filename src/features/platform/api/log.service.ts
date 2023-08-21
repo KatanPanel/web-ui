@@ -17,7 +17,7 @@ class LogService {
 		});
 	}
 
-	copy(tag: string): Consola {
+	create(tag: string): Consola {
 		return this.logger.withTag(tag);
 	}
 

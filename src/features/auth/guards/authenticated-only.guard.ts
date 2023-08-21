@@ -3,22 +3,32 @@ import {
 	NavigationGuardNext,
 	RouteLocationNormalized
 } from "vue-router";
-import authPresenter from "@/features/auth/auth.presenter";
 import { AUTH_LOGIN_ROUTE } from "@/features/auth/auth.routes";
-import logService from "@/features/platform/api/log.service";
+import accountService from "@/features/account/api/services/account.service";
+import localStorageService from "@/features/platform/api/local-storage.service";
+import { AccessToken } from "@/features/auth/api/models/access-token.model";
+import authService, {
+	AUTHORIZATION_TOKEN_KEY
+} from "@/features/auth/api/services/auth.service";
+import { isNull } from "@/utils";
+import { Account } from "@/features/account/api/models/account.model";
 
 export const AuthenticatedOnlyGuard: NavigationGuard = (
-	to: RouteLocationNormalized,
-	from: RouteLocationNormalized,
+	_to: RouteLocationNormalized,
+	_from: RouteLocationNormalized,
 	next: NavigationGuardNext
 ) => {
-	if (authPresenter.isLoggedIn) return next();
+	if (accountService.isLoggedIn) return next();
 
-	authPresenter
-		.verify()
-		.then(() => next())
-		.catch((error: Error) => {
-			logService.error("Authentication failed", error);
+	const localToken: AccessToken | null = localStorageService.get(
+		AUTHORIZATION_TOKEN_KEY
+	);
+	if (!isNull(localToken)) return next({ name: AUTH_LOGIN_ROUTE });
+
+	authService
+		.verify(localToken!)
+		.then((account: Account) => accountService.updateAccount(account))
+		.then(next, () => {
 			next({ name: AUTH_LOGIN_ROUTE });
 		});
 };

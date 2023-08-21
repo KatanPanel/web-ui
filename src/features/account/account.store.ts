@@ -1,5 +1,5 @@
 import { Module, Mutation, VuexModule } from "vuex-module-decorators";
-import { Account } from "@/features/account/api/account.model";
+import { Account } from "@/features/account/api/models/account.model";
 import appStore from "@/store";
 import { isNull } from "@/utils";
 

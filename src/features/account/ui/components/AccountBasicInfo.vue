@@ -27,7 +27,7 @@ import VCard from "@/features/platform/ui/components/card/VCard.vue";
 import VCol from "@/features/platform/ui/components/grid/VCol.vue";
 import VRow from "@/features/platform/ui/components/grid/VRow.vue";
 import { Component, Inject, Vue } from "vue-facing-decorator";
-import { Account } from "@/features/account/api/account.model";
+import { Account } from "@/features/account/api/models/account.model";
 import VInput from "@/features/platform/ui/components/form/VInput.vue";
 import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
 import VFieldSet from "@/features/platform/ui/components/form/VFieldSet.vue";

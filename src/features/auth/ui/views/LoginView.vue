@@ -2,12 +2,9 @@
 	<AuthLayout>
 		<h4 v-t="'auth.login.title'" />
 		<VBody2 v-t="'auth.login.subtitle'" :class="$style.description" />
-		<VAlert :class="$style.alert" variant="error" v-if="errorCode">
-			<!--<template #title>-->
-			<!--	<span v-t="'auth.login.error-title'" />-->
-			<!--</template>-->
+		<VAlert :class="$style.alert" variant="error" v-if="errorTranslationText">
 			<template #description>
-				<span v-t="`error.${errorCode}`" />
+				<span v-t="errorTranslationText" />
 			</template>
 		</VAlert>
 		<VForm @submit.prevent="performLogin">
@@ -18,7 +15,7 @@
 						autocomplete="username"
 						type="text"
 						required="true"
-						v-model="username"
+						v-model="credentials.username"
 					/>
 				</VLabel>
 				<VLabel>
@@ -27,7 +24,7 @@
 						autocomplete="current-password"
 						type="password"
 						required="true"
-						v-model="password"
+						v-model="credentials.password"
 					/>
 				</VLabel>
 			</VFieldSet>
@@ -35,7 +32,7 @@
 				type="submit"
 				variant="primary"
 				block="true"
-				:disabled="loading"
+				:disabled="loginBeingPerformed"
 				:class="$style.loginButton"
 				v-t="'auth.login.submit-button'"
 			/>
@@ -44,7 +41,6 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-facing-decorator";
-import authPresenter from "@/features/auth/auth.presenter";
 import VButton from "@/features/platform/ui/components/button/VButton.vue";
 import VFieldSet from "@/features/platform/ui/components/form/VFieldSet.vue";
 import VForm from "@/features/platform/ui/components/form/VForm.vue";
@@ -54,7 +50,7 @@ import VLabel from "@/features/platform/ui/components/form/VLabel.vue";
 import VInput from "@/features/platform/ui/components/form/VInput.vue";
 import VAlert from "@/features/platform/ui/components/alert/VAlert.vue";
 import { HttpError } from "@/features/platform/api/error.model";
-import logService from "@/features/platform/api/log.service";
+import authService from "@/features/auth/api/services/auth.service";
 
 @Component({
 	components: {
@@ -69,30 +65,28 @@ import logService from "@/features/platform/api/log.service";
 	}
 })
 export default class AuthLoginView extends Vue {
-	username = "";
-	password = "";
-	loading = false;
-	errorCode: number | null = null;
+
+	credentials = { username: "", password: "" };
+	errorTranslationText: string | null = null
+
+	/**
+	 * Becomes true when the client clicks on "Log In" button.
+	 * Prevents double login action by consecutive clicks.
+	 **/
+	loginBeingPerformed = false;
 
 	performLogin() {
-		if (this.loading) return;
+		if (this.loginBeingPerformed)
+			return;
 
-		this.loading = true;
-		this.errorCode = null;
 
-		authPresenter
-			.login(this.username, this.password)
-			.then(() => {
-				this.$router.push({ path: "/" });
-			})
-			.catch((error: HttpError) => {
-				// TODO handle error properly, show error alert
-				logService.error("Failed to log in", error.code);
-				this.errorCode = error.code;
-			})
-			.finally(() => {
-				this.loading = false;
-			});
+		this.errorTranslationText = null;
+
+		authService
+			.login(this.credentials.username, this.credentials.password)
+			.then(() => { this.$router.push({ path: "/" }) })
+			.catch((error: HttpError) => { this.errorTranslationText = `error.${error.code}` })
+			.finally(() => { this.loginBeingPerformed = false });
 	}
 }
 </script>

@@ -53,7 +53,7 @@ export default class RootView extends Vue {
 				}
 			} as ServerInfo;
 
-			logService.copy("build info").info(info);
+			logService.create("build info").info(info);
 			return info;
 		});
 	}
