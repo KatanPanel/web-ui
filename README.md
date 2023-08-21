@@ -2,7 +2,7 @@
 
 This project is a web user-interface for [Katan](https://github.com/KatanPanel/Katan), for those who prefer clicking buttons rather than writing command lines, written in Typescript and uses Vue 3 as a framework.
 
-For user guide, installation and documentation visit our [official website](https://katan.org/).
+Looking for user guide, installation and documentation? Visit our [official website](https://katan.org/).
 
 <img src="https://github.com/KatanPanel/web-ui/assets/24600258/54789254-9dc7-4c71-bc14-f4afe3d552b4" alt="Preview">
 
