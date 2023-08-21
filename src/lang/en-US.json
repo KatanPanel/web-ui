@@ -1,6 +1,6 @@
 {
 	"error.1001": "Account not found",
-	"error.2002": "Incorrect username or password.",
+	"error.2002": "Unable to login, please change your credentials and try again.",
 	"empty-state.refresh": "Refresh",
 	"auth.login.title": "Log In",
 	"auth.login.subtitle": "Enter your credentials to access your account.",
