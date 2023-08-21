@@ -60,7 +60,7 @@ export type InstanceConnection = {
 	port: number;
 };
 
-export type InstanceFsFile = {
+export type InstanceFile = {
 	name: string;
 	relativePath: string;
 	absolutePath: string;
@@ -71,11 +71,11 @@ export type InstanceFsFile = {
 	modifiedAt?: Date;
 };
 
-export type InstanceFsDirectory = {
-	children: InstanceFsFile[];
-} & InstanceFsFile;
+export type InstanceDirectory = {
+	children: InstanceFile[];
+} & InstanceFile;
 
-export type InstanceFsBucket = {
+export type InstanceBucket = {
 	path: string;
 	name: string;
 	isLocal: boolean;

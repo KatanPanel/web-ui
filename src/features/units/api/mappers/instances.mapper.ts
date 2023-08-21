@@ -9,9 +9,9 @@ import {
 import {
 	Instance,
 	InstanceConnection,
-	InstanceFsBucket,
-	InstanceFsDirectory,
-	InstanceFsFile,
+	InstanceBucket,
+	InstanceDirectory,
+	InstanceFile,
 	InstanceMount,
 	InstanceNetworkConnection,
 	InstanceRuntime,
@@ -21,7 +21,7 @@ import {
 import { isUndefined, undefinedOr } from "@/utils";
 
 export default {
-	toBucket(response: InstanceFsBucketResponse): InstanceFsBucket {
+	toBucket(response: InstanceFsBucketResponse): InstanceBucket {
 		return {
 			name: response.name,
 			path: response.path,
@@ -32,7 +32,7 @@ export default {
 			)
 		};
 	},
-	toFile(response: InstanceFsFileResponse): InstanceFsFile {
+	toFile(response: InstanceFsFileResponse): InstanceFile {
 		const file = this.toSingleFile(response.file);
 		if (isUndefined(response.children)) {
 			return file;
@@ -41,9 +41,9 @@ export default {
 		return {
 			...file,
 			children: response.children.map((child) => this.toSingleFile(child))
-		} as InstanceFsDirectory;
+		} as InstanceDirectory;
 	},
-	toSingleFile(response: InstanceFsSingleFileResponse): InstanceFsFile {
+	toSingleFile(response: InstanceFsSingleFileResponse): InstanceFile {
 		return {
 			name: response.name,
 			relativePath: response["relative-path"],

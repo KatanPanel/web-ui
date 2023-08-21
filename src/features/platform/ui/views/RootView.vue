@@ -48,8 +48,8 @@ export default class RootView extends Vue {
 					time: d.build.message
 				},
 				defaultNetwork: {
-					name: d["default-network"].name,
-					driver: d["default-network"].driver
+					name: d["default-network"]?.name,
+					driver: d["default-network"]?.driver
 				}
 			} as ServerInfo;
 

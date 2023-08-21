@@ -12,8 +12,8 @@
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";
 import {
-	InstanceFsDirectory,
-	InstanceFsFile
+	InstanceDirectory,
+	InstanceFile
 } from "@/features/units/api/models/instance.model";
 import Resource from "@/features/platform/ui/components/Resource.vue";
 import InstanceFsBucketFileList from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketFileList.vue";
@@ -22,17 +22,17 @@ import InstanceFsBucketFileList from "@/features/units/ui/components/instances/f
 	components: { Resource, InstanceFsBucketFileList }
 })
 export default class InstanceFsBucketFileDirectory extends Vue {
-	@Inject() private readonly file!: InstanceFsFile;
+	@Inject() private readonly file!: InstanceFile;
 
-	children!: InstanceFsFile[];
+	children!: InstanceFile[];
 
-	getResource(): Promise<InstanceFsFile[]> {
+	getResource(): Promise<InstanceFile[]> {
 		return new Promise((resolve) =>
-			resolve((this.file as InstanceFsDirectory).children)
+			resolve((this.file as InstanceDirectory).children)
 		);
 	}
 
-	onLoad(children: InstanceFsFile[]): void {
+	onLoad(children: InstanceFile[]): void {
 		this.children = children;
 	}
 }

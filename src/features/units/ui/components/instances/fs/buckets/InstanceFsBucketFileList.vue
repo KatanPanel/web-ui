@@ -29,7 +29,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import { InstanceFsFile } from "@/features/units/api/models/instance.model";
+import { InstanceFile } from "@/features/units/api/models/instance.model";
 import InstanceFsBucketFileListItem
 	from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketFileListItem.vue";
 import VCol from "@/features/platform/ui/components/grid/VCol.vue";
@@ -48,9 +48,9 @@ import VCard from "@/features/platform/ui/components/card/VCard.vue";
 })
 export default class InstanceFsBucketFileList extends Vue {
 	@Prop({ type: Array, required: true })
-	private readonly files!: InstanceFsFile[];
+	private readonly files!: InstanceFile[];
 
-	private _files!: InstanceFsFile[];
+	private _files!: InstanceFile[];
 
 	created(): void {
 		this._files = this.files;
@@ -60,7 +60,7 @@ export default class InstanceFsBucketFileList extends Vue {
 		this.sortFiles(this._files);
 	}
 
-	get getFiles(): InstanceFsFile[] {
+	get getFiles(): InstanceFile[] {
 		return this._files;
 	}
 
@@ -70,9 +70,9 @@ export default class InstanceFsBucketFileList extends Vue {
 	 * @param files The file list.
 	 * @private
 	 */
-	private sortFiles(files: InstanceFsFile[]) {
+	private sortFiles(files: InstanceFile[]) {
 		files.sort(
-			(a: InstanceFsFile, b: InstanceFsFile) =>
+			(a: InstanceFile, b: InstanceFile) =>
 				(b.isDirectory ? 1 : 0) - (a.isDirectory ? 1 : 0)
 		);
 	}

@@ -1,7 +1,7 @@
 import {
 	Instance,
-	InstanceFsBucket,
-	InstanceFsFile,
+	InstanceBucket,
+	InstanceFile,
 	InstanceStatusUpdateCode
 } from "@/features/units/api/models/instance.model";
 import instancesGateway from "@/features/units/api/instances.gateway";
@@ -30,7 +30,7 @@ class InstancesService {
 		instanceId: string,
 		bucket: string,
 		path: string
-	): Promise<InstanceFsFile> {
+	): Promise<InstanceFile> {
 		return instancesGateway
 			.getInstanceFile(instanceId, bucket, path)
 			.then((response) => instancesMapper.toFile(response));
@@ -53,7 +53,7 @@ class InstancesService {
 	async getBucket(
 		instanceId: string,
 		bucket: string
-	): Promise<InstanceFsBucket> {
+	): Promise<InstanceBucket> {
 		return instancesGateway
 			.getBucket(instanceId, bucket)
 			.then((response) => instancesMapper.toBucket(response));

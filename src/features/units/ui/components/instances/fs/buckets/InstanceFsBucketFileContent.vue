@@ -11,8 +11,8 @@
 import { Component, Inject, Vue } from "vue-facing-decorator";
 import {
 	Instance,
-	InstanceFsBucket,
-	InstanceFsFile
+	InstanceBucket,
+	InstanceFile
 } from "@/features/units/api/models/instance.model";
 import instancesPresenter from "@/features/units/ui/instances.presenter";
 import VCard from "@/features/platform/ui/components/card/VCard.vue";
@@ -22,8 +22,8 @@ import VCard from "@/features/platform/ui/components/card/VCard.vue";
 })
 export default class InstanceFsBucketFileContent extends Vue {
 	@Inject() private readonly instance!: Instance;
-	@Inject() private readonly bucket!: InstanceFsBucket;
-	@Inject() private readonly file!: InstanceFsFile;
+	@Inject() private readonly bucket!: InstanceBucket;
+	@Inject() private readonly file!: InstanceFile;
 
 	contentsAsString = "";
 	linesCount = 0;

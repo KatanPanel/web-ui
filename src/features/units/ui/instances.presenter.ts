@@ -1,7 +1,7 @@
 import {
 	Instance,
-	InstanceFsBucket,
-	InstanceFsFile
+	InstanceBucket,
+	InstanceFile
 } from "@/features/units/api/models/instance.model";
 import instancesService from "@/features/units/api/instances.service";
 
@@ -14,7 +14,7 @@ class InstancesPresenter {
 		instanceId: string,
 		bucket: string,
 		path: string
-	): Promise<InstanceFsFile> {
+	): Promise<InstanceFile> {
 		return await instancesService.getFile(instanceId, bucket, path);
 	}
 
@@ -33,7 +33,7 @@ class InstancesPresenter {
 	async getBucket(
 		instanceId: string,
 		bucket: string
-	): Promise<InstanceFsBucket> {
+	): Promise<InstanceBucket> {
 		return await instancesService.getBucket(instanceId, bucket);
 	}
 }

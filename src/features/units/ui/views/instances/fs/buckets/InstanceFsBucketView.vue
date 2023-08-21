@@ -16,7 +16,7 @@ import { Component, Inject, Vue } from "vue-facing-decorator";
 import instancesPresenter from "@/features/units/ui/instances.presenter";
 import {
 	Instance,
-	InstanceFsBucket
+	InstanceBucket
 } from "@/features/units/api/models/instance.model";
 import { computed } from "vue";
 import Resource from "@/features/platform/ui/components/Resource.vue";
@@ -39,16 +39,16 @@ export default class InstanceFsBucketView extends Vue {
 	@Inject()
 	private readonly instance!: Instance;
 
-	bucket!: InstanceFsBucket;
+	bucket!: InstanceBucket;
 
-	getResource(): Promise<InstanceFsBucket> {
+	getResource(): Promise<InstanceBucket> {
 		return instancesPresenter.getBucket(
 			this.instance.id,
 			this.$route.params.bucketId as string
 		);
 	}
 
-	onLoad(bucket: InstanceFsBucket): void {
+	onLoad(bucket: InstanceBucket): void {
 		this.bucket = bucket;
 	}
 }

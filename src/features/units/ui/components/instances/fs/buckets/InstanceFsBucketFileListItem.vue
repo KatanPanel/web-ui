@@ -13,7 +13,7 @@
 </template>
 <script lang="ts">
 import { Component, Inject, Prop, Vue } from "vue-facing-decorator";
-import { InstanceFsBucket } from "@/features/units/api/models/instance.model";
+import { InstanceBucket } from "@/features/units/api/models/instance.model";
 import filesize from "filesize";
 import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
 import { isUndefined } from "@/utils";
@@ -26,7 +26,7 @@ import dayjs from "dayjs";
 	components: { VIcon, VRow, VCol }
 })
 export default class InstanceFsBucketFileListItem extends Vue {
-	@Inject() readonly bucket!: InstanceFsBucket;
+	@Inject() readonly bucket!: InstanceBucket;
 
 	@Prop({ type: Number, required: true }) readonly index!: number;
 	@Prop({ type: String, required: true }) readonly fileName!: string;

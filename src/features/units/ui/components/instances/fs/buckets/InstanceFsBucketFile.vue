@@ -17,8 +17,8 @@
 import { Component, Inject, Vue, Watch } from "vue-facing-decorator";
 import {
 	Instance,
-	InstanceFsBucket,
-	InstanceFsFile
+	InstanceBucket,
+	InstanceFile
 } from "@/features/units/api/models/instance.model";
 import InstanceFsBucketFileContent from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketFileContent.vue";
 import Resource from "@/features/platform/ui/components/Resource.vue";
@@ -44,14 +44,14 @@ const ROOT = "/";
 })
 export default class InstanceFsBucketFile extends Vue {
 	@Inject() private readonly instance!: Instance;
-	@Inject() private readonly bucket!: InstanceFsBucket;
+	@Inject() private readonly bucket!: InstanceBucket;
 
 	path: string | null = null;
 
 	// file can change we cast it to null so Vue will make it reactive
-	file: InstanceFsFile | null = null;
+	file: InstanceFile | null = null;
 
-	getResource(): Promise<InstanceFsFile> {
+	getResource(): Promise<InstanceFile> {
 		return instancesPresenter.getFile(
 			this.instance.id,
 			this.bucket.name,
@@ -59,7 +59,7 @@ export default class InstanceFsBucketFile extends Vue {
 		);
 	}
 
-	onLoad(file: InstanceFsFile): void {
+	onLoad(file: InstanceFile): void {
 		this.file = file;
 	}
 
