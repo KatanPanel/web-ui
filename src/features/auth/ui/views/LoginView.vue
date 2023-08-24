@@ -12,7 +12,6 @@
 				<VLabel>
 					<span v-t="'auth.login.username-label'" />
 					<VInput
-						autocomplete="username"
 						type="text"
 						required="true"
 						v-model="credentials.username"
@@ -21,7 +20,6 @@
 				<VLabel>
 					<span v-t="'auth.login.password-label'" />
 					<VInput
-						autocomplete="current-password"
 						type="password"
 						required="true"
 						v-model="credentials.password"
