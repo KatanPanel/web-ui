@@ -1,7 +1,7 @@
 name: 🐞 Bug report
 description: Something isn't working
-title: "[BUG] "
-labels: ["type: bug"]
+title: ""
+labels: [bug"]
 body:
     - type: checkboxes
       attributes:
@@ -37,18 +37,14 @@ body:
       attributes:
           label: 💻 Platform
           description: On which platform did the bug occur?
-          options:
-              - label: Windows
-              - label: macOS
-              - label: Linux
-              - label: Other
+          placeholder: "e.g. Mozilla Firefox on Windows 11"
       validations:
           required: true
     - type: input
       id: environment
       attributes:
           label: ⭐ Environment
-          description: Which is your Katan UI version.
+          description: Which is your Katan Web UI version.
           placeholder: "e.g. 1.0.2-beta"
       validations:
           required: true
