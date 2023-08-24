@@ -24,8 +24,8 @@
 				>
 					<TheUnitSidebarSectionItem
 						v-for="child in link.children"
-						:disabled="child.disabled"
 						:key="child.link.name"
+						:disabled="child.disabled"
 						:href="child.link"
 						:icon="child.icon"
 					>

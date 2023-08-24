@@ -1,4 +1,4 @@
-<template />
+<template>TODO</template>
 
 <script lang="ts">
 import { Component, Inject, Vue } from "vue-facing-decorator";

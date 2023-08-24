@@ -7,7 +7,10 @@ import { AccountsRoute } from "@/features/account/accounts.routes";
 import { BlueprintsRoutes } from "@/features/blueprints/blueprints.routes";
 import { UsersRoutes } from "@/features/users/users.routes";
 
-export function importView(feature: string, path: string): () => Promise<unknown> {
+export function importView(
+	feature: string,
+	path: string
+): () => Promise<unknown> {
 	return () =>
 		import(
 			/* webpackChunkName: "view-[request]" */ `@/features/${feature}/ui/views/${path}View.vue`

@@ -2,10 +2,10 @@
 	<Resource
 		empty-state-title="instances.main.empty-state.title"
 		empty-state-description="instances.main.empty-state.description"
-		@loaded="onLoadSuccess"
-		@error="onLoadError"
 		:resource="getResource"
 		:empty-state-align-y="true"
+		@loaded="onLoadSuccess"
+		@error="onLoadError"
 	>
 		<keep-alive>
 			<router-view :class="$style.root" />

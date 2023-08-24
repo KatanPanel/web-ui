@@ -2,22 +2,22 @@
 	<VCard :flat="true">
 		<VRow>
 			<VCol :size="4">
-				<VLabel v-t="'instances.fs.bucket.file-list.labels.name'"/>
+				<VLabel v-t="'instances.fs.bucket.file-list.labels.name'" />
 			</VCol>
 			<VCol :size="2">
-				<VLabel v-t="'instances.fs.bucket.file-list.labels.size'"/>
+				<VLabel v-t="'instances.fs.bucket.file-list.labels.size'" />
 			</VCol>
 			<VCol :size="3">
-				<VLabel v-t="'instances.fs.bucket.file-list.labels.modified'"/>
+				<VLabel v-t="'instances.fs.bucket.file-list.labels.modified'" />
 			</VCol>
 			<VCol :size="3">
-				<VLabel v-t="'instances.fs.bucket.file-list.labels.created'"/>
+				<VLabel v-t="'instances.fs.bucket.file-list.labels.created'" />
 			</VCol>
 		</VRow>
 		<InstanceFsBucketFileListItem
 			v-for="(file, idx) in getFiles"
-			:index="idx"
 			:key="file.absolutePath"
+			:index="idx"
 			:file-name="file.name"
 			:is-directory="file.isDirectory"
 			:is-hidden="file.isHidden"
@@ -30,8 +30,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { InstanceFile } from "@/features/units/api/models/instance.model";
-import InstanceFsBucketFileListItem
-	from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketFileListItem.vue";
+import InstanceFsBucketFileListItem from "@/features/units/ui/components/instances/fs/buckets/InstanceFsBucketFileListItem.vue";
 import VCol from "@/features/platform/ui/components/grid/VCol.vue";
 import VRow from "@/features/platform/ui/components/grid/VRow.vue";
 import VLabel from "@/features/platform/ui/components/form/VLabel.vue";

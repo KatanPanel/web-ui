@@ -1,96 +1,61 @@
 import { Unit } from "@/features/units/api/models/unit.model";
-import { ListUnitsResponse } from "@/features/units/api/response/list-units.response";
-import { UnitResponse } from "@/features/units/api/response/unit.response";
-import unitsGateway from "@/features/units/api/units.gateway";
 import { UpdateUnitRequest } from "@/features/units/api/request/update-unit.request";
-import {
-	AuditLog,
-	AuditLogEntry,
-	AuditLogEntryChange
-} from "@/features/units/api/models/audit-log.model";
-import {
-	AuditLogEntryChangeResponse,
-	AuditLogEntryResponse,
-	AuditLogResponse
-} from "@/features/units/api/response/audit-log.response";
+import { AuditLog } from "@/features/units/api/models/audit-log.model";
+import { AxiosResponse } from "axios";
+import httpService from "@/features/platform/api/http.service";
 
-// TODO move mappings to mapper
 class UnitsService {
 	async listUnits(): Promise<Unit[]> {
-		return unitsGateway
-			.listUnits()
-			.then((response: ListUnitsResponse) =>
-				response.units.map((value: UnitResponse) =>
-					UnitsService.toUnitDomain(value)
-				)
+		return httpService
+			.get("units")
+			.then((res: AxiosResponse) =>
+				(res.data as any[]).map(UnitsService.toUnit)
 			);
 	}
 
 	async getUnit(id: string): Promise<Unit> {
-		return unitsGateway.getUnit(id).then((response: UnitResponse) => {
-			return UnitsService.toUnitDomain(response);
-		});
+		return httpService
+			.get(`units/${id}`)
+			.then((res: AxiosResponse) => UnitsService.toUnit(res.data));
 	}
 
 	async updateUnit(id: string, payload: UpdateUnitRequest): Promise<Unit> {
-		return unitsGateway
-			.updateUnit(id, payload)
-			.then((response: UnitResponse) => {
-				return UnitsService.toUnitDomain(response);
-			});
+		return httpService
+			.patch(`units/${id}`, payload)
+			.then((res: AxiosResponse) => UnitsService.toUnit(res.data));
+	}
+
+	async createUnit(options: {
+		name: string;
+		blueprintId: string;
+		image: string;
+		network: {
+			host: string | null;
+			port: number | null;
+		};
+		options: { [key: string]: string };
+	}): Promise<Unit> {
+		return httpService
+			.post("units", options)
+			.then((res: AxiosResponse) => UnitsService.toUnit(res.data));
 	}
 
 	async getAuditLogs(unitId: string): Promise<AuditLog> {
-		return unitsGateway
-			.getAuditLog(unitId)
-			.then((response: AuditLogResponse) => {
-				return UnitsService.toAuditLogDomain(response);
-			});
+		return httpService
+			.get(`units/${unitId}/audit-logs`)
+			.then((res: AxiosResponse) => res.data as AuditLog);
 	}
 
-	private static toUnitDomain(response: UnitResponse): Unit {
+	private static toUnit(data: any): Unit {
 		return {
-			id: response.id,
-			name: response.name,
-			instanceId: response["instance-id"],
-			createdAt: new Date(response["created-at"]),
-			updatedAt: new Date(response["updated-at"]),
-			nodeId: response["node-id"]
-		};
-	}
-
-	private static toAuditLogDomain(response: AuditLogResponse): AuditLog {
-		return {
-			actors: response.actors,
-			entries: response.entries.map((entry) =>
-				UnitsService.toAuditLogEntryDomain(entry)
-			)
-		};
-	}
-
-	private static toAuditLogEntryDomain(
-		response: AuditLogEntryResponse
-	): AuditLogEntry {
-		return {
-			id: response.id,
-			targetId: response["target-id"],
-			actorId: response["actor-id"],
-			event: response.event,
-			createdAt: new Date(response["created-at"]),
-			changes: response.changes.map((change) =>
-				UnitsService.toAuditLogEntryChangeDomain(change)
-			)
-		};
-	}
-
-	private static toAuditLogEntryChangeDomain(
-		response: AuditLogEntryChangeResponse
-	): AuditLogEntryChange {
-		return {
-			key: response.key,
-			oldValue: response["old-value"],
-			newValue: response["new-value"]
-		};
+			id: data.id,
+			name: data.name,
+			instanceId: data["instance-id"],
+			createdAt: data["created-at"],
+			updatedAt: data["updated-at"],
+			nodeId: data["node-id"],
+			icon: data["icon"]
+		} as Unit;
 	}
 }
 

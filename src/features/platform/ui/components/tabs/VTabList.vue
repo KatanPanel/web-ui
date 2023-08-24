@@ -2,12 +2,12 @@
 	<ul :class="$style.root" :aria-label="accessibilityLabel" role="tablist">
 		<li v-for="(tab, idx) in tabs" :key="idx" role="presentation">
 			<a
-				@click="selectTab(tab.hash, $event)"
 				:aria-controls="tab.hash"
 				:aria-selected="tab.isActive"
 				:href="tab.hash"
 				:class="[$style.tab, { [$style['tab--active']]: tab.isActive }]"
 				role="tab"
+				@click="selectTab(tab.hash, $event)"
 			>
 				<VIcon v-if="tab.icon" :name="tab.icon" />
 				<span v-text="tab.label" />

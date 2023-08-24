@@ -6,9 +6,9 @@
 				<span :class="$style.name">{{ fileName }}</span>
 			</router-link>
 		</VCol>
-		<VCol :size="2" v-text="toHumanReadableSize()"/>
+		<VCol :size="2" v-text="toHumanReadableSize()" />
 		<VCol :size="3" v-text="formatDateTime(lastModified)" />
-		<VCol :size="3" v-text="formatDateTime(createdAt)"/>
+		<VCol :size="3" v-text="formatDateTime(createdAt)" />
 	</VRow>
 </template>
 <script lang="ts">
@@ -33,7 +33,9 @@ export default class InstanceFsBucketFileListItem extends Vue {
 	@Prop({ type: Number, required: true }) readonly size!: number;
 	@Prop({ type: Boolean, required: true }) readonly isHidden!: boolean;
 	@Prop({ type: Boolean, required: true }) readonly isDirectory!: boolean;
-	@Prop({ type: Date, required: true }) readonly lastModified!: Date | undefined;
+	@Prop({ type: Date, required: true }) readonly lastModified!:
+		| Date
+		| undefined;
 	@Prop({ type: Date, required: true }) readonly createdAt!: Date | undefined;
 
 	getRoute(): RouteLocationRaw {
@@ -79,9 +81,8 @@ export default class InstanceFsBucketFileListItem extends Vue {
 	}
 
 	formatDateTime(date: Date | undefined): string {
-		return isUndefined(date) ? "" : dayjs(date).format("LLLL")
+		return isUndefined(date) ? "" : dayjs(date).format("LLLL");
 	}
-
 }
 </script>
 <style lang="scss" module>

@@ -32,9 +32,7 @@ class ConfigService {
 		const envKey = key.indexOf("$") === -1 ? key : key.substring(1);
 		const value = process.env[envKey] || envKey;
 
-		if (process.env.NODE_ENV === "development")
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			return value!;
+		if (process.env.NODE_ENV === "development") return value!;
 
 		if (isUndefined(value))
 			throw Error(`Environment var not found: ${envKey}`);

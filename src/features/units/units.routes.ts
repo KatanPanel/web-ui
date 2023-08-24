@@ -32,10 +32,7 @@ export const UnitsRoute: Array<RouteRecordRaw> = [
 			{
 				path: "auditlog",
 				name: UNIT_AUDIT_LOG_ROUTE,
-				component: importView(
-					FEATURE_NAME,
-					"audit-log/UnitAuditLog"
-				)
+				component: importView(FEATURE_NAME, "audit-log/UnitAuditLog")
 			},
 			{
 				path: "settings",

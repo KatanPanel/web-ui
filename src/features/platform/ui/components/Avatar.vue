@@ -8,9 +8,9 @@
 	/>
 	<ProgressiveImage
 		v-else
-		@error="onLoadError"
 		:class="$style.root"
 		:src="source"
+		@error="onLoadError"
 	/>
 </template>
 

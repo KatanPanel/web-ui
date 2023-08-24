@@ -34,8 +34,13 @@ export function setI18nLanguage(i18n, locale) {
 function updateTime(locale: string) {
 	if (isUndefined(locale) || locale.length === 0) return;
 
-	require.context(`dayjs/locale/${locale}`, undefined, undefined, "lazy-once")
-	dayjs.locale(locale)
+	require.context(
+		`dayjs/locale/${locale}`,
+		undefined,
+		undefined,
+		"lazy-once"
+	);
+	dayjs.locale(locale);
 }
 
 export async function loadLocaleMessages(i18n, locale) {

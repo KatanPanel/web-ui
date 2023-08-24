@@ -2,9 +2,7 @@
 	<VSection>
 		<VRow>
 			<VCol :size="8">
-				<h5 :class="$style.title">
-					<b v-t="'units.create.instance.title'" />
-				</h5>
+				<h4 v-t="'units.create.instance.title'" :class="$style.title" />
 				<VBody2 v-t="'units.create.instance.subtitle'" />
 			</VCol>
 		</VRow>

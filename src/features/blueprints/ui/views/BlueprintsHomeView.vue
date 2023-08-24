@@ -35,9 +35,8 @@ import { useModal } from "vue-final-modal";
 	components: { VButton, VContainer, PageHeader, BlueprintsList }
 })
 export default class BlueprintsHomeView extends Vue {
-
 	onImportClick() {
-		useModal({ component: ImportBlueprintModal }).open()
+		useModal({ component: ImportBlueprintModal }).open();
 	}
 }
 </script>

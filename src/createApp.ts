@@ -13,12 +13,13 @@ import { color } from "@uiw/codemirror-extensions-color";
 import { createApp } from "vue";
 import VueHead from "vue-head";
 import VueLoading from "vue-loading-overlay";
-import { createVfm } from "vue-final-modal"
+import { createVfm } from "vue-final-modal";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { LineChart } from "echarts/charts";
 import {
-	GridComponent, LegendComponent,
+	GridComponent,
+	LegendComponent,
 	TitleComponent,
 	TooltipComponent
 } from "echarts/components";
@@ -38,15 +39,17 @@ use([
 	LegendComponent
 ]);
 
-dayjs.extend(localizedFormat)
-dayjs.extend(weekday)
-dayjs.extend(isToday)
+dayjs.extend(localizedFormat);
+dayjs.extend(weekday);
+dayjs.extend(isToday);
 
 const I18N = setupI18n({
 	legacy: true,
 	allowComposition: true,
 	messages: {
-		"en-US": require(/* webpackChunkName: "locale-[request]" */"@/lang/en-US.json").default
+		"en-US":
+			require(/* webpackChunkName: "locale-[request]" */ "@/lang/en-US.json")
+				.default
 	},
 	fallbackLocale: "en-US"
 });
@@ -74,6 +77,6 @@ const App = createApp(AppRoot)
 			hyperLink,
 			color
 		]
-	})
+	});
 
-export default App
+export default App;

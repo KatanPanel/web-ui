@@ -1,5 +1,4 @@
 import Axios, {
-	AxiosDefaults,
 	AxiosError,
 	AxiosInstance,
 	AxiosPromise,
@@ -26,7 +25,6 @@ class HttpService {
 		this.axios.interceptors.response.use(
 			(response: AxiosResponse) => response,
 			(error: AxiosError) => {
-				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				const data: any = error.response?.data;
 				if (isUndefined(data?.code)) {
 					logService.error("Unhandled HTTP error", error);

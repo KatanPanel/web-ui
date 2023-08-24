@@ -1,8 +1,8 @@
 <template>
 	<VCard :flat="true" :class="$style.root">
 		<VLabel
-			:required="true"
 			v-t="'units.create.instance.blueprint.title'"
+			:required="true"
 		/>
 		<VBody2
 			v-t="'units.create.instance.blueprint.description'"

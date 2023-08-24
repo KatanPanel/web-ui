@@ -29,7 +29,6 @@ export default class VIcon extends Vue {
 	}
 
 	requireIcon(name: string): unknown {
-		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		return require(/* webpackChunkName: "icon-[request]" */
 		"vue-material-design-icons/" + name + ".vue").default;
 	}

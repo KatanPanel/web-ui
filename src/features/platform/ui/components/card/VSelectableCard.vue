@@ -4,8 +4,8 @@
 		:active="isSelected"
 		:disabled="disabled"
 		:aria-disabled="disabled"
-		@click="onSelect"
 		class="root"
+		@click="onSelect"
 	>
 		<div class="radio" @click="onSelect" />
 		<div class="content">
@@ -39,7 +39,6 @@ export default class VSelectableCard extends Vue {
 	}
 
 	onSelect() {
-		console.log("selected", this._selected);
 		this._selected = !this._selected;
 	}
 }

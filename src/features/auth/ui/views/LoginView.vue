@@ -2,37 +2,41 @@
 	<AuthLayout>
 		<h4 v-t="'auth.login.title'" />
 		<VBody2 v-t="'auth.login.subtitle'" :class="$style.description" />
-		<VAlert :class="$style.alert" variant="error" v-if="errorTranslationText">
+		<VAlert
+			v-if="errorTranslationText"
+			:class="$style.alert"
+			variant="error"
+		>
 			<template #description>
 				<span v-t="errorTranslationText" />
 			</template>
 		</VAlert>
-		<VForm @submit.prevent="performLogin">
+		<VForm autocomplete="off" @submit.prevent="performLogin">
 			<VFieldSet>
 				<VLabel>
 					<span v-t="'auth.login.username-label'" />
 					<VInput
+						v-model="credentials.username"
 						type="text"
 						required="true"
-						v-model="credentials.username"
 					/>
 				</VLabel>
 				<VLabel>
 					<span v-t="'auth.login.password-label'" />
 					<VInput
+						v-model="credentials.password"
 						type="password"
 						required="true"
-						v-model="credentials.password"
 					/>
 				</VLabel>
 			</VFieldSet>
 			<VButton
+				v-t="'auth.login.submit-button'"
 				type="submit"
 				variant="primary"
 				block="true"
 				:disabled="loginBeingPerformed"
 				:class="$style.loginButton"
-				v-t="'auth.login.submit-button'"
 			/>
 		</VForm>
 	</AuthLayout>
@@ -63,9 +67,8 @@ import authService from "@/features/auth/api/services/auth.service";
 	}
 })
 export default class AuthLoginView extends Vue {
-
 	credentials = { username: "", password: "" };
-	errorTranslationText: string | null = null
+	errorTranslationText: string | null = null;
 
 	/**
 	 * Becomes true when the client clicks on "Log In" button.
@@ -74,21 +77,25 @@ export default class AuthLoginView extends Vue {
 	loginBeingPerformed = false;
 
 	performLogin() {
-		if (this.loginBeingPerformed)
-			return;
+		if (this.loginBeingPerformed) return;
 
-		this.loginBeingPerformed = true
+		this.loginBeingPerformed = true;
 		this.errorTranslationText = null;
 
 		authService
 			.login(this.credentials.username, this.credentials.password)
-			.then(() => { this.$router.push({ path: "/" }) })
-			.catch((error: HttpError) => {
-				this.errorTranslationText = error.code === "ERR_NETWORK"
-					? "auth.login.network-error"
-					: `error.${error.code}`
+			.then(() => {
+				this.$router.push({ path: "/" });
 			})
-			.finally(() => { this.loginBeingPerformed = false });
+			.catch((error: HttpError) => {
+				this.errorTranslationText =
+					error.code === "ERR_NETWORK"
+						? "auth.login.network-error"
+						: `error.${error.code}`;
+			})
+			.finally(() => {
+				this.loginBeingPerformed = false;
+			});
 	}
 }
 </script>

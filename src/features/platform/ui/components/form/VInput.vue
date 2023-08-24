@@ -7,12 +7,7 @@
 			'aria-readonly': disabled,
 			placeholder: placeholder
 		}"
-		:class="[
-			$style.root,
-			{
-				[$style.root__onSurface]: onSurface
-			}
-		]"
+		:class="[$style.root, { [$style.root__onSurface]: onSurface }]"
 		@input="onInputChange($event.target.value)"
 	/>
 </template>
@@ -28,6 +23,13 @@ export default class VInput extends Vue {
 	@Prop({ type: String }) readonly placeholder!: string;
 	@Prop({ type: String }) readonly modelValue!: string;
 	@Prop({ type: Boolean, default: false }) readonly onSurface!: boolean;
+	@Prop({ type: Boolean, default: false }) readonly autoFocus!: boolean;
+
+	mounted() {
+		if (this.autoFocus) {
+			(this.$el as HTMLInputElement).focus();
+		}
+	}
 
 	onInputChange(value: string) {
 		this.$emit("update:modelValue", value);

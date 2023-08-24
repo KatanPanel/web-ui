@@ -53,7 +53,6 @@
 import { Component, Vue } from "vue-facing-decorator";
 import TheLogo from "@/features/platform/ui/components/TheLogo.vue";
 import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
-import configService from "@/features/platform/api/config.service";
 import { RouteLocationRaw } from "vue-router";
 import { ABOUT_ROUTE } from "@/features/home/home.routes";
 import { BLUEPRINTS_ROUTES } from "@/features/blueprints/blueprints.routes";
@@ -65,8 +64,6 @@ import { USERS_ROUTE } from "@/features/users/users.routes";
 	components: { TheLogo, Avatar, VIcon }
 })
 export default class TheSidebar extends Vue {
-	private readonly appWebsite = configService.appWebsite;
-
 	linkToAbout(): RouteLocationRaw {
 		return { name: ABOUT_ROUTE };
 	}
@@ -91,6 +88,7 @@ export default class TheSidebar extends Vue {
 	display: flex;
 	flex-direction: column;
 	background-color: var(--kt-background-surface);
+	border-right: 1px solid var(--kt-border-low);
 }
 
 .logo {

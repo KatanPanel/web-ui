@@ -1,10 +1,10 @@
 <template>
 	<Resource
-		@loaded="onLoad"
 		:resource="getResource"
 		empty-state-title="blueprints.empty-state.title"
 		empty-state-description="blueprints.empty-state.description"
 		empty-state-icon="ScriptOutline"
+		@loaded="onLoad"
 	>
 		<div v-for="blueprint in blueprints" :key="blueprint.id">
 			<BlueprintsListItem

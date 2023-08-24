@@ -16,9 +16,9 @@
 		v-bind="{ disabled }"
 		:class="getClasses()"
 		:tabindex="disabled ? -1 : 0"
+		type="button"
 		@click="$emit('click', $event)"
 		@keydown.enter="$emit('keydown', $event)"
-		type="button"
 	>
 		<slot />
 	</button>

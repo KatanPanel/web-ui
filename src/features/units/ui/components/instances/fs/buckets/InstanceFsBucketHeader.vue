@@ -1,9 +1,7 @@
-<template>
-    $END$
-</template>
+<template>$END$</template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-facing-decorator"
+import { Component, Vue } from "vue-facing-decorator";
 
 @Component
 export default class InstanceFsBucketHeader extends Vue {}

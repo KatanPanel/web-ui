@@ -9,9 +9,9 @@
 	>
 		<template #empty>
 			<VButton
+				v-t="'home.units-list.empty.create-unit'"
 				variant="primary"
 				:to="createUnitLink()"
-				v-t="'home.units-list.empty.create-unit'"
 			/>
 		</template>
 		<ul>

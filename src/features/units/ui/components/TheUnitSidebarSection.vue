@@ -1,11 +1,11 @@
 <template>
 	<div
+		v-if="!disabled"
 		:class="[$style.root, { [$style.root__disabled]: disabled }]"
 		:aria-disabled="disabled"
 		:aria-labelledby="label"
-		v-if="!disabled"
 	>
-		<VLabel :class="$style.label" v-text="label" :aria-label="label" />
+		<VLabel :class="$style.label" :aria-label="label" v-text="label" />
 		<slot />
 	</div>
 </template>

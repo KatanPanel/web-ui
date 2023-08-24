@@ -22,11 +22,13 @@ export default class RootLayout extends Vue {}
 .root {
 	display: flex;
 	height: 100%;
+	overflow: hidden;
 }
 
 .body {
 	display: flex;
 	flex-grow: 1;
 	flex-direction: column;
+	overflow: auto;
 }
 </style>

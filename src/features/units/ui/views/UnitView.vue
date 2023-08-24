@@ -16,15 +16,15 @@
 	</Resource>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-facing-decorator";
+import { Component, Prop, Vue } from "vue-facing-decorator";
 import { Unit } from "@/features/units/api/models/unit.model";
 import { computed } from "vue";
-import unitsPresenter from "@/features/units/ui/units.presenter";
 import Resource from "@/features/platform/ui/components/Resource.vue";
 import logService from "@/features/platform/api/log.service";
 import TheUnitSidebar from "@/features/units/ui/components/TheUnitSidebar.vue";
 import { InstanceStatusUpdateCode } from "@/features/units/api/models/instance.model";
 import instancesService from "@/features/units/api/instances.service";
+import unitsService from "@/features/units/api/units.service";
 
 @Component({
 	components: { Resource, TheUnitSidebar },
@@ -35,14 +35,13 @@ import instancesService from "@/features/units/api/instances.service";
 	}
 })
 export default class UnitView extends Vue {
+	@Prop({ type: String, required: true })
+	private readonly unitId!: string;
+
 	unit!: Unit;
 
-	private getUnitId(): string {
-		return this.$route.params.unitId as string;
-	}
-
 	getResource(): Promise<Unit> {
-		return unitsPresenter.getUnit(this.getUnitId());
+		return unitsService.getUnit(this.unitId);
 	}
 
 	onLoad(unit: Unit): void {
@@ -50,7 +49,7 @@ export default class UnitView extends Vue {
 	}
 
 	onLoadError(error: Error): void {
-		logService.error(`failed to load instance ${this.getUnitId()}`, error);
+		logService.error(`failed to load instance ${this.unitId}`, error);
 	}
 
 	onStatusUpdate(status: InstanceStatusUpdateCode): void {

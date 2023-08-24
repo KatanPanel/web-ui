@@ -1,17 +1,17 @@
 <template>
 	<Resource
-		@loaded="onLoad"
 		:resource="getResource"
 		empty-state-title="units.audit-log.empty-state.title"
 		empty-state-description="units.audit-log.empty-state.description"
 		empty-state-icon="ClipboardTextOffOutline"
+		@loaded="onLoad"
 	>
 		<ul role="list">
 			<UnitAuditLogEntryListItem
 				v-for="entry in auditLog.entries"
+				:key="entry.id"
 				:entry="entry"
 				:actor="getMatchingActor(entry)"
-				:key="entry.id"
 				:title="entry.id"
 			/>
 		</ul>
@@ -26,7 +26,7 @@ import {
 } from "@/features/units/api/models/audit-log.model";
 import UnitAuditLogEntryListItem from "@/features/units/ui/components/audit-log/UnitAuditLogEntryListItem.vue";
 import Resource from "@/features/platform/ui/components/Resource.vue";
-import unitsPresenter from "@/features/units/ui/units.presenter";
+import unitsService from "@/features/units/api/units.service";
 
 @Component({
 	components: {
@@ -41,7 +41,7 @@ export default class UnitAuditLogEntryList extends Vue {
 	auditLog!: AuditLog;
 
 	getResource(): Promise<AuditLog> {
-		return unitsPresenter.getAuditLog(this.unitId);
+		return unitsService.getAuditLogs(this.unitId);
 	}
 
 	onLoad(auditLog: AuditLog) {

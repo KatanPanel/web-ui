@@ -20,7 +20,7 @@ class AccountService {
 	}
 
 	async updateAccount(account: Account): Promise<void> {
-		this.logger.debug("Account updated", account)
+		this.logger.debug("Account updated", account);
 		this.dataStore().updateAccount({ account });
 	}
 }

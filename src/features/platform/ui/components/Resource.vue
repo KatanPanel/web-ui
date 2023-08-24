@@ -2,20 +2,20 @@
 	<LoadingState v-if="isLoading" key="loading" />
 	<EmptyState
 		v-else-if="isEmpty"
+		key="empty"
 		:icon="emptyStateIcon"
 		:align-y="emptyStateAlignY"
-		key="empty"
 	>
 		<h5 v-if="emptyStateTitle" v-t="emptyStateTitle" />
 		<p v-if="emptyStateDescription" v-t="emptyStateDescription" />
 		<div
-			:class="$style.empty__body"
 			v-if="$slots.empty || includeRefreshButton"
+			:class="$style.empty__body"
 		>
 			<VButton
+				v-t="'empty-state.refresh'"
 				:class="$style.button"
 				@click="refresh()"
-				v-t="'empty-state.refresh'"
 			/>
 			<slot name="empty" />
 		</div>

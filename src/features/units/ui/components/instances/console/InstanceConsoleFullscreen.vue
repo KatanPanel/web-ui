@@ -16,9 +16,9 @@
 				<VFieldSet :class="$style.fieldset">
 					<div :class="$style.dollar">$</div>
 					<VInput
-						:class="$style.input"
-						v-model="input"
 						ref="inputEl"
+						v-model="input"
+						:class="$style.input"
 						placeholder="Meu saco é uma alavanca"
 					/>
 				</VFieldSet>

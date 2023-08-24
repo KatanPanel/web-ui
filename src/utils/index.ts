@@ -1,6 +1,6 @@
 export function undefinedOr<T, R = unknown>(
 	value: T | undefined,
-	fallback: (value: T) => unknown
+	fallback: (arg0: T) => unknown
 ): R | undefined {
 	if (!isUndefined(value)) return fallback(value) as R;
 

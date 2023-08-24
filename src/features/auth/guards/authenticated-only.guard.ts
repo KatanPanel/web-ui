@@ -5,11 +5,7 @@ import {
 } from "vue-router";
 import { AUTH_LOGIN_ROUTE } from "@/features/auth/auth.routes";
 import accountService from "@/features/account/api/services/account.service";
-import localStorageService from "@/features/platform/api/local-storage.service";
-import { AccessToken } from "@/features/auth/api/models/access-token.model";
-import authService, {
-	AUTHORIZATION_TOKEN_KEY
-} from "@/features/auth/api/services/auth.service";
+import authService from "@/features/auth/api/services/auth.service";
 import { isNull } from "@/utils";
 import { Account } from "@/features/account/api/models/account.model";
 import logService from "@/features/platform/api/log.service";
@@ -21,7 +17,7 @@ export const AuthenticatedOnlyGuard: NavigationGuard = (
 ) => {
 	if (accountService.isLoggedIn) return next();
 
-	const localToken = authService.getLocalAccessToken()
+	const localToken = authService.getLocalAccessToken();
 	if (isNull(localToken)) return next({ name: AUTH_LOGIN_ROUTE });
 
 	authService

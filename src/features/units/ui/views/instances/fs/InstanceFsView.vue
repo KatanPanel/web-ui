@@ -30,7 +30,6 @@ import VInput from "@/features/platform/ui/components/form/VInput.vue";
 import VForm from "@/features/platform/ui/components/form/VForm.vue";
 import VContainer from "@/features/platform/ui/components/grid/VContainer.vue";
 import VIcon from "@/features/platform/ui/components/icon/VIcon.vue";
-import PageHeader from "@/features/platform/ui/components/PageHeader.vue";
 import VButton from "@/features/platform/ui/components/button/VButton.vue";
 
 @Component({

@@ -4,8 +4,6 @@ import localStorageService from "@/features/platform/api/local-storage.service";
 import { AccessToken } from "@/features/auth/api/models/access-token.model";
 import { AxiosError, AxiosResponse } from "axios";
 import logService from "@/features/platform/api/log.service";
-import accountService from "@/features/account/api/services/account.service";
-import * as http from "http";
 import { Consola } from "consola";
 import { isNull } from "@/utils";
 
