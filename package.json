@@ -20,7 +20,7 @@
 		"@uiw/codemirror-extensions-hyper-link": "^4.12.3",
 		"axios": "^0.27.2",
 		"codemirror": "^6.0.1",
-		"consola": "^2.15.3",
+		"consola": "^3.2.3",
 		"core-js": "^3.25.1",
 		"dayjs": "^1.11.5",
 		"echarts": "^5.3.3",
