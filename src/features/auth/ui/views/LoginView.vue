@@ -77,12 +77,17 @@ export default class AuthLoginView extends Vue {
 		if (this.loginBeingPerformed)
 			return;
 
+		this.loginBeingPerformed = true
 		this.errorTranslationText = null;
 
 		authService
 			.login(this.credentials.username, this.credentials.password)
 			.then(() => { this.$router.push({ path: "/" }) })
-			.catch((error: HttpError) => { this.errorTranslationText = `error.${error.code}` })
+			.catch((error: HttpError) => {
+				this.errorTranslationText = error.code === "ERR_NETWORK"
+					? "auth.login.network-error"
+					: `error.${error.code}`
+			})
 			.finally(() => { this.loginBeingPerformed = false });
 	}
 }

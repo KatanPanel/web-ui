@@ -12,13 +12,13 @@
 		<slot />
 	</router-link>
 	<button
-		type="button"
 		v-else
+		v-bind="{ disabled }"
 		:class="getClasses()"
-		:disabled="disabled"
 		:tabindex="disabled ? -1 : 0"
 		@click="$emit('click', $event)"
 		@keydown.enter="$emit('keydown', $event)"
+		type="button"
 	>
 		<slot />
 	</button>
@@ -32,8 +32,8 @@ import { RouteLocationRaw } from "vue-router";
 	emits: ["click", "keydown"]
 })
 export default class VButton extends Vue {
-	@Prop({ type: Boolean }) readonly disabled!: boolean;
-	@Prop({ type: Boolean }) readonly flat!: boolean;
+	@Prop({ type: Boolean, default: false }) readonly disabled!: boolean;
+	@Prop({ type: Boolean, default: false }) readonly flat!: boolean;
 	@Prop({
 		type: String,
 		validator(value: string): boolean {
@@ -41,7 +41,7 @@ export default class VButton extends Vue {
 		}
 	})
 	readonly variant!: "primary";
-	@Prop({ type: Boolean }) readonly block!: boolean;
+	@Prop({ type: Boolean, default: false }) readonly block!: boolean;
 	@Prop({ type: Object }) readonly to!: RouteLocationRaw;
 
 	getClasses(): unknown {
@@ -79,21 +79,16 @@ export default class VButton extends Vue {
 	background-color: var(--kt-background-surface-high);
 	color: var(--kt-content-neutral);
 
-	&:hover,
-	&:focus {
-		text-decoration: none !important;
-		background-color: var(--kt-background-surface-hover);
-		color: var(--kt-content-neutral-high);
-	}
-
-	&[disabled="true"] {
+	&[disabled] {
 		opacity: 0.38;
 	}
 
-	&:not([disabled="true"]):hover,
-	&:not([disabled="true"]):focus {
+	&:not([disabled]):hover,
+	&:not([disabled]):focus {
+		text-decoration: none !important;
+		background-color: var(--kt-background-surface-hover);
+		color: var(--kt-content-neutral-high);
 		cursor: pointer;
-		text-decoration: underline;
 	}
 }
 
@@ -101,7 +96,7 @@ export default class VButton extends Vue {
 	background-color: transparent;
 	color: var(--kt-content-primary);
 
-	&:hover:not([disabled="true"]) {
+	&:hover:not([disabled]) {
 		background-color: var(--kt-content-primary-hover);
 	}
 }
@@ -115,8 +110,8 @@ export default class VButton extends Vue {
 	border-color: var(--kt-content-primary);
 	color: var(--kt-content-primary-oncolor);
 
-	&:not([disabled="true"]):hover,
-	&:not([disabled="true"]):focus {
+	&:not([disabled]):hover,
+	&:not([disabled]):focus {
 		background-color: var(--kt-content-primary-hover);
 		border-color: var(--kt-content-primary-hover);
 		color: var(--kt-content-primary-oncolor);
@@ -134,8 +129,8 @@ export default class VButton extends Vue {
 		text-decoration: underline;
 	}
 
-	&:not([disabled="true"]):hover,
-	&:not([disabled="true"]):focus {
+	&:not([disabled]):hover,
+	&:not([disabled]):focus {
 		background-color: transparent;
 		border-color: var(--kt-primary-darker-color);
 	}

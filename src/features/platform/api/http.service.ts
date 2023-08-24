@@ -28,9 +28,9 @@ class HttpService {
 			(error: AxiosError) => {
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				const data: any = error.response?.data;
-				if (isUndefined(data.code)) {
+				if (isUndefined(data?.code)) {
 					logService.error("Unhandled HTTP error", error);
-					return;
+					throw error;
 				}
 
 				throw new HttpError(data as KatanError);
