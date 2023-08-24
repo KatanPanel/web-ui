@@ -26,10 +26,24 @@ Also is needed to configure environment variables, create a `.env.local` file
 containing the environment variables needed to run the project locally. See
 [environment variables example file](https://github.com/KatanPanel/web-ui/blob/main/.env.example) to get started.
 
-**Build for production**
+**Building for production**
 
 ```
 yarn build
+```
+
+**Format and lint codebase**
+
+We use ESLint as linter and Prettier as code formatter.
+
+```
+yarn lint
+```
+
+Lint issues? Run format command on CLI.
+
+```
+yarn format
 ```
 
 **Run unit and E2E tests**
