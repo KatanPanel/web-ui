@@ -1,7 +1,7 @@
 name: 🚀 Feature Request
 description: I have a suggestion (and may want to implement it 🙂)!
-title: "[FR] "
-labels: ["type: feature"]
+title: ""
+labels: ["feature"]
 body:
     - type: checkboxes
       attributes:
@@ -34,22 +34,11 @@ body:
           description: If this feature is a breaking change or what drawbacks does it have?
       validations:
           required: false
-    - type: checkboxes
-      attributes:
-          label: 💻 Platform
-          description: On which platforms do you want this feature to be applied?
-          options:
-              - label: Windows
-              - label: macOS
-              - label: Linux
-              - label: Any
-      validations:
-          required: true
     - type: input
       id: environment
       attributes:
           label: ⭐ Environment
-          description: What is your current Katan UI version? Maybe this feature already exists and you don't know
+          description: What is your current Katan Web UI version? Maybe this feature already exists and you don't know
           placeholder: "e.g. 1.0-beta"
       validations:
           required: true
