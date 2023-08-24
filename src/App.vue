@@ -4,8 +4,11 @@
 </template>
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { ModalsContainer } from "vue-final-modal";
 
-@Options({})
+@Options({
+	components: { ModalsContainer }
+})
 export default class App extends Vue {}
 </script>
 
