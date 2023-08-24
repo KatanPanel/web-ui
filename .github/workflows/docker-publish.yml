@@ -2,11 +2,8 @@ name: Docker Publish
 
 on:
     workflow_dispatch:
-    push:
-        branches: [main]
-        tags: ["v*.*.*"]
-    pull_request:
-        branches: [main]
+    release:
+        types: [published]
 
 env:
     # Use docker.io for Docker Hub if empty
