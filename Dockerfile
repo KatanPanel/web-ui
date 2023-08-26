@@ -6,7 +6,7 @@ LABEL MAINTAINER="Natan Vieira Do Nascimento <natan@katan.org>"
 WORKDIR /app
 COPY package*.json ./
 ENV NODE_OPTIONS "--max_old_space_size=4096"
-RUN yarn install --immutable --immutable-cache --check-cache
+RUN yarn ci
 COPY . .
 RUN yarn build-only
 
