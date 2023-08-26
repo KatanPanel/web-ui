@@ -4,6 +4,10 @@ on:
     workflow_dispatch:
     release:
         types: [published]
+    push:
+      branches: [ "main" ]
+      # Publish semver tags as releases.
+      tags: [ 'v*.*.*' ]
 
 env:
     # Use docker.io for Docker Hub if empty
