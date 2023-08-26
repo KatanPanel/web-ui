@@ -25,6 +25,10 @@ class AuthService {
         return localStorageService.get(AUTHORIZATION_TOKEN_KEY)
     }
 
+    resetLocalAccessToken(): void {
+        localStorageService.remove(AUTHORIZATION_TOKEN_KEY);
+    }
+
     async login(username: string, password: string): Promise<void> {
         return httpService
             .post("auth/login", { username, password })
