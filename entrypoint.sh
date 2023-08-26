@@ -11,7 +11,7 @@ vars=$(env | grep VUE_APP_ | awk -F = '{print "$"$1}')
 vars=$(join_by ',' "$vars")
 echo "Replacing Vue environment variables: $vars"
 
-for file in /app/js/app.*;
+for file in /app/assets/*.js;
 do
   echo "Processing $file...";
 
