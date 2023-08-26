@@ -14,7 +14,7 @@ RUN yarn build-only
 FROM nginx:stable-alpine as production-stage
 RUN mkdir /app
 COPY --from=build-stage /app/dist /app
-COPY config/nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY entrypoint.sh entrypoint.sh
 
 # Git info. Must be set in --build-arg (see bin/build)
