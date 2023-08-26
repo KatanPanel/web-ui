@@ -17,7 +17,7 @@
 				"./src/*"
 			]
 		},
-		"types": ["./types/shims-vue-material-design-icons.d.ts", "./types/shims-vue-progressive-image.d.ts"],
+		"types": ["./types"],
 		"experimentalDecorators": true,
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
