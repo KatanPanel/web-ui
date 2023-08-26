@@ -19,7 +19,7 @@ git clone https://github.com/KatanPanel/web-ui.git
 TypeScript, Node and Yarn are needed to run this project.
 
 ```
-yarn serve
+yarn dev
 ```
 
 Also is needed to configure environment variables, create a `.env.local` file
@@ -38,18 +38,6 @@ We use ESLint as linter and Prettier as code formatter.
 
 ```
 yarn lint
-```
-
-Lint issues? Run format command on CLI.
-
-```
-yarn format
-```
-
-**Run unit and E2E tests**
-
-```
-yarn test:unit test:e2e
 ```
 
 ## License

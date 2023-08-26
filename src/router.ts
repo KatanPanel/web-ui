@@ -1,39 +1,46 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { AuthRoutes } from "@/features/auth/auth.routes";
-import { HomeRoutes } from "@/features/home/home.routes";
-import { UnitsRoute } from "@/features/units/units.routes";
-import { AuthenticatedOnlyGuard } from "@/features/auth/guards/authenticated-only.guard";
-import { AccountsRoute } from "@/features/account/accounts.routes";
-import { BlueprintsRoutes } from "@/features/blueprints/blueprints.routes";
-import { UsersRoutes } from "@/features/users/users.routes";
+import { createRouter, createWebHistory } from "vue-router"
+import i18n, { loadLocaleMessages, setI18nLanguage, SUPPORTED_LOCALES } from "@/i18n"
+import { AuthRoutes } from "@/modules/auth/auth.routes"
+import { AccountsRoute } from "@/modules/accounts/accounts.routes"
+import { AuthenticatedOnlyGuard } from "@/modules/auth/guards/authenticated-only.guard"
+import { HomeRoutes } from "@/modules/home/home.routes"
+import { BlueprintsRoutes } from "@/modules/blueprints/blueprints.routes"
 
-export function importView(
-	feature: string,
-	path: string
-): () => Promise<unknown> {
-	return () =>
-		import(
-			/* webpackChunkName: "view-[request]" */ `@/features/${feature}/ui/views/${path}View.vue`
-		);
+export function importPage(module: string, path: string): () => Promise<unknown> {
+    const comps = import.meta.glob(`./modules/**/ui/pages/**/*.vue`)
+    return comps[`./modules/${module}/ui/pages/${path}Page.vue`]
 }
 
-const Router = createRouter({
-	history: createWebHistory(process.env.BASE_URL),
-	routes: [
-		{
-			path: "/",
-			component: importView("platform", "Root"),
-			beforeEnter: AuthenticatedOnlyGuard,
-			children: [
-				...HomeRoutes,
-				...UnitsRoute,
-				...AccountsRoute,
-				...BlueprintsRoutes,
-				...UsersRoutes
-			]
-		},
-		...AuthRoutes
-	] as Array<RouteRecordRaw>
-});
+const router = createRouter({
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes: [
+        {
+            path: "/",
+            component: importPage("platform", "Root"),
+            beforeEnter: AuthenticatedOnlyGuard,
+            children: [
+                ...HomeRoutes,
+                ...AccountsRoute,
+                ...BlueprintsRoutes
+            ]
+        },
+        ...AuthRoutes
+    ]
+})
 
-export default Router;
+router.beforeEach(async (to, _from, next) => {
+    const paramsLocale = to.query.lang
+    if (SUPPORTED_LOCALES.includes(paramsLocale as string)) {
+        // load locale messages
+        if (!i18n.global.availableLocales.includes(paramsLocale)) {
+            await loadLocaleMessages(i18n, paramsLocale)
+        }
+
+        // set i18n language
+        setI18nLanguage(i18n, paramsLocale)
+    }
+
+    return next()
+})
+
+export default router

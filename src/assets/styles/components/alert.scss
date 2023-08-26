@@ -45,7 +45,7 @@ $shadow: 1.5px;
 	padding: 0.8rem 0 $base-padding;
 }
 
-.alert--variant-error {
+.alert--error {
 	background-color: var(--kt-content-negative-overlay);
 	border-color: var(--kt-content-negative-overlay);
 
@@ -54,7 +54,7 @@ $shadow: 1.5px;
 	}
 }
 
-.alert--variant-warn {
+.alert--warn {
 	background-color: var(--kt-content-warn-overlay);
 	border-color: var(--kt-content-warn-overlay);
 
@@ -63,7 +63,7 @@ $shadow: 1.5px;
 	}
 }
 
-.alert--variant-info {
+.alert--info {
 	background-color: var(--kt-content-primary-overlay);
 	border-color: var(--kt-content-primary-overlay);
 

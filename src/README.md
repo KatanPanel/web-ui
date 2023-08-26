@@ -10,7 +10,7 @@
 │   └── ...
 ├── plugins
 ├── types
-├── features/
+├── modules/
 │   └── .../
 │       ├── api/
 │       │   ├── services

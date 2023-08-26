@@ -1,41 +1,14 @@
 {
-	"compilerOptions": {
-		"target": "esnext",
-		"module": "esnext",
-		"strict": true,
-		"jsx": "preserve",
-		"moduleResolution": "node",
-		"importHelpers": true,
-		"experimentalDecorators": true,
-		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
-		"forceConsistentCasingInFileNames": true,
-		"emitDecoratorMetadata": true,
-		"useDefineForClassFields": false,
-		"sourceMap": true,
-		"noImplicitAny": false,
-		"resolveJsonModule": true,
-		"baseUrl": ".",
-		"types": [
-			"webpack-env",
-			"@wdio/mocha-framework",
-			"expect-webdriverio",
-			"webdriverio/sync",
-			"jest",
-			"node_modules/vue/macros-global.d.ts"
-		],
-		"paths": {
-			"@/*": ["src/*"]
-		},
-		"lib": ["esnext", "dom", "dom.iterable", "scripthost"]
-	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.tsx",
-		"src/**/*.vue",
-		"tests/**/*.ts",
-		"tests/**/*.tsx"
-	],
-	"exclude": ["node_modules"]
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ]
 }

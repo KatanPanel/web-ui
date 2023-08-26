@@ -1,17 +1,11 @@
 <template>
-	<router-view />
-	<modals-container />
+  <router-view />
+  <ModalsContainer />
 </template>
-<script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import { ModalsContainer } from "vue-final-modal";
 
-@Options({
-	components: { ModalsContainer }
-})
-export default class App extends Vue {}
+<script setup lang="ts">
+import { ModalsContainer } from "vue-final-modal"
 </script>
-
 <style lang="scss">
 #app {
 	display: flex;
