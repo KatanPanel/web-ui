@@ -1,6 +1,6 @@
 {
-  "name": "katan-web-ui-vite-2",
-  "version": "0.0.0",
+  "name": "katan-web-ui",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "vite",
