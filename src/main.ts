@@ -8,6 +8,8 @@ import router from "@/router"
 import i18n, { DEFAULT_LOCALE, loadLocaleMessages } from "@/i18n"
 import {createPinia} from "pinia";
 import VueProgressiveImage from "vue-progressive-image"
+import logService from "@/modules/platform/api/services/log.service"
+import configService from "@/modules/platform/api/services/config.service"
 
 const app = createApp(App)
     .component("v-chart", ECharts)
@@ -18,3 +20,4 @@ const app = createApp(App)
     .use(router)
 
 loadLocaleMessages(i18n, DEFAULT_LOCALE).then(() => app.mount("#app"))
+logService.info(configService.toVersionInfoString())

@@ -15,7 +15,7 @@ class ConfigService {
 	 * version, the SHA of the build commit and the branch of the current build.
 	 */
     public toVersionInfoString(): string {
-        return `v${this.appVersion} (build ${this.gitCommit} @ ${this.gitBranch})`
+        return `${this.appName} v${this.appVersion} (build ${this.gitCommit} @ ${this.gitBranch})`
     }
 
     /**
