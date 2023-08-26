@@ -7,7 +7,7 @@ join_by() {
 }
 
 # Find Vue environment vars
-vars=$(env | grep VUE_APP_ | awk -F = '{print "$"$1}')
+vars=$(env | grep VITE_ | awk -F = '{print "$"$1}')
 vars=$(join_by ',' "$vars")
 echo "Replacing Vue environment variables: $vars"
 
