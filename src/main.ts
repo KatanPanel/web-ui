@@ -5,7 +5,7 @@ import App from "@/App.vue"
 import { createVfm } from "vue-final-modal"
 import ECharts from "vue-echarts"
 import router from "@/router"
-import i18n, { loadLocaleMessages } from "@/i18n"
+import i18n, { DEFAULT_LOCALE, loadLocaleMessages } from "@/i18n"
 import {createPinia} from "pinia";
 import VueProgressiveImage from "vue-progressive-image"
 
@@ -17,4 +17,4 @@ const app = createApp(App)
     .use(i18n)
     .use(router)
 
-loadLocaleMessages(i18n, import.meta.env.VITE_DEFAULT_LOCALE).then(() => app.mount("#app"))
+loadLocaleMessages(i18n, DEFAULT_LOCALE).then(() => app.mount("#app"))

@@ -15,8 +15,12 @@ export async function loadLocaleMessages(i18n: I18n, locale: Locale) {
     return nextTick()
 }
 
+export const DEFAULT_LOCALE = import.meta.env.VITE_DEFAULT_LOCALE
+    ?? import.meta.env.VITE_FALLBACK_LOCALE
+    ?? SUPPORTED_LOCALES[0];
+
 export default createI18n({
-    locale: import.meta.env.VITE_DEFAULT_LOCALE,
+    locale: DEFAULT_LOCALE,
     fallbackLocale: import.meta.env.VITE_FALLBACK_LOCALE,
     legacy: true
 })
