@@ -4013,10 +4013,10 @@ vue-loading-overlay@^6.0.3:
   resolved "https://registry.yarnpkg.com/vue-loading-overlay/-/vue-loading-overlay-6.0.3.tgz#37b2e45d5a5e207fda69c01dac0dba059cc05173"
   integrity sha512-Ab0hqnVKasVS2mNUo8Wkm95mSbk5fXp/karZmMou5yP0hTUOox/kZuBLNwgzJ4kFP829wFJl7O7FN1Dr0kRaVQ==
 
-vue-progressive-image@^4.0.0-beta.10:
-  version "4.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/vue-progressive-image/-/vue-progressive-image-4.0.0-beta.10.tgz#6e1b674d04559d6e96c0f8f95307c76337ff3de9"
-  integrity sha512-AQdz0cU75TUH37UOigCDmIzo42RO0x7o1bhKO5tWn5WEHrshW0A2P10jMzHlEmxcMJBfb2phssxC0K8e9e/JsA==
+vue-progressive-image@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/vue-progressive-image/-/vue-progressive-image-4.0.0.tgz#dc74add192ee82a0238e67a17b85a2336aadcba5"
+  integrity sha512-ieLNX0q28Y8Oo4vsyi7vAtH9PzzpThiqk/IqO+jRbFE4xdM9ZYirhmRFfNnaxGSAhYWnQzY7z/BRTqupmpyKRQ==
 
 vue-router@^4.2.4:
   version "4.2.4"
