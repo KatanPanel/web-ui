@@ -79,5 +79,8 @@
 	"blueprints.home.title": "Blueprints",
 	"blueprints.home.subtitle": "Blueprints are definition files, design patterns used to determine how a game server instance will be built, each game server can only have one blueprint defined for it throughout its lifetime. Internally, blueprints are files in .conf format and have their own semantics.",
 	"blueprints.empty-state.title": "Blueprints have... gone?",
-	"blueprints.empty-state.description": "Import or create new blueprints and they will appear here."
+	"blueprints.empty-state.description": "Import or create new blueprints and they will appear here.",
+	"setup.title": "Let's get started",
+	"setup.header.label.docs": "Need help?",
+	"setup.header.label.login": "Log in"
 }

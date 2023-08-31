@@ -1,5 +1,5 @@
 import type { NavigationGuard, NavigationGuardNext, RouteLocationNormalized } from "vue-router"
-import accountService from "@/modules/accounts/api/services/account.service"
+import accountService from "@/modules/accounts/api/services/accounts.service"
 import authService from "@/modules/auth/api/services/auth.service"
 import { isNull } from "@/utils"
 import type { Account } from "@/modules/accounts/api/models/account.model"
@@ -22,7 +22,7 @@ export const AuthenticatedOnlyGuard: NavigationGuard = (
         .verify(localToken!)
         .then(async (account: Account) => {
             await accountService.updateAccount(account)
-            next();
+            next()
         })
         .catch((error: Error) => {
             logService.debug("Unable to verify local token", error)

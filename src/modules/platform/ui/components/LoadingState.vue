@@ -10,7 +10,7 @@ import { useLoading } from "vue-loading-overlay"
 
 const root = ref(null)
 const loading = useLoading({
-    isFullPage: false,
+    isFullPage: true,
     lockScroll: true
 })
 

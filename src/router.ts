@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router"
+import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router"
 import i18n, { loadLocaleMessages, setI18nLanguage, SUPPORTED_LOCALES } from "@/i18n"
 import { AuthRoutes } from "@/modules/auth/auth.routes"
 import { AccountsRoute } from "@/modules/accounts/accounts.routes"
@@ -14,6 +14,7 @@ export function importPage(module: string, path: string): () => Promise<unknown>
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
+        ...AuthRoutes,
         {
             path: "/",
             component: importPage("platform", "Root"),
@@ -21,10 +22,14 @@ const router = createRouter({
             children: [
                 ...HomeRoutes,
                 ...AccountsRoute,
-                ...BlueprintsRoutes
+                ...BlueprintsRoutes,
             ]
         },
-        ...AuthRoutes
+        {
+            path: "/setup",
+            name: "setup",
+            component: importPage("platform", "Setup")
+        },
     ]
 })
 

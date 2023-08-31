@@ -9,7 +9,7 @@ export function setI18nLanguage(i18n: I18n, locale: Locale) {
     document.querySelector("html")?.setAttribute("lang", locale)
 }
 
-export async function loadLocaleMessages(i18n: I18n, locale: Locale) {
+export async function loadLocaleMessages(i18n: I18n, locale: Locale): Promise<void> {
     const messages = await import(`./lang/${locale}.json`)
     i18n.global.setLocaleMessage(locale, messages.default)
     return nextTick()

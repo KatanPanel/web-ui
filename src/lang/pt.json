@@ -1,1 +1,5 @@
-{}
+{
+  "setup.title": "Configurar credenciais",
+  "setup.header.label.docs": "Precisa de ajuda?",
+  "setup.header.label.login": "Fazer login"
+}
