@@ -951,10 +951,10 @@
     "@typescript-eslint/types" "5.62.0"
     eslint-visitor-keys "^3.3.0"
 
-"@uiw/codemirror-extensions-color@^4.21.9":
-  version "4.21.9"
-  resolved "https://registry.yarnpkg.com/@uiw/codemirror-extensions-color/-/codemirror-extensions-color-4.21.9.tgz#37680edad54fab32d2d6da637780da434c3346cc"
-  integrity sha512-qOS6UGBIzpDOdO5k/vgb438GUL/C2Eqif2DKDKqM38dgkY6kKDg4ApyHvPy1PhzxvySG2veLpose0hhS9WSfhg==
+"@uiw/codemirror-extensions-color@^4.21.13":
+  version "4.21.13"
+  resolved "https://registry.yarnpkg.com/@uiw/codemirror-extensions-color/-/codemirror-extensions-color-4.21.13.tgz#39513e25001036a5b37d7e515172ebd6526efab5"
+  integrity sha512-4aAHszGapVkpByTdKN7tdbji4dBtaz69XdbKBPh/E/SITe8e54Y5rGObDSyJSrS15VoKOeNkRnDfMneGL58xWg==
   dependencies:
     colors-named "^1.0.0"
     colors-named-hex "^1.0.0"
