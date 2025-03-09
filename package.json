@@ -16,7 +16,7 @@
   "dependencies": {
     "@codemirror/lang-json": "^6.0.1",
     "@codemirror/lang-markdown": "^6.3.2",
-    "@codemirror/lint": "^6.4.1",
+    "@codemirror/lint": "^6.8.4",
     "@intlify/unplugin-vue-i18n": "^0.12.3",
     "@uiw/codemirror-extensions-color": "^4.23.10",
     "@uiw/codemirror-extensions-hyper-link": "^4.23.10",
