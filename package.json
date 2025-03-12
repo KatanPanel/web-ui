@@ -34,7 +34,7 @@
     "vue-echarts": "^7.0.3",
     "vue-final-modal": "^4.5.5",
     "vue-i18n": "^9.2.2",
-    "vue-loading-overlay": "^6.0.3",
+    "vue-loading-overlay": "^6.0.6",
     "vue-progressive-image": "^4.0.0",
     "vue-router": "^4.5.0",
     "vue3-icon": "^2.1.0"
