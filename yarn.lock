@@ -4504,10 +4504,10 @@ vue-tsc@^2.2.8:
     "@volar/typescript" "~2.4.11"
     "@vue/language-core" "2.2.8"
 
-vue3-icon@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/vue3-icon/-/vue3-icon-2.1.0.tgz#9b217204eaeed20e428ec7615fac5579b66d396f"
-  integrity sha512-cnFiGAEwzp/KQKody2Yj8cBDP4Kez0AUp5mDnp052FA1fECl8a9uYUKLaeRdH0JakmZ7Jfp3tdHbpBEWF9sgBA==
+vue3-icon@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/vue3-icon/-/vue3-icon-3.0.3.tgz#08ae47faf08097be1d033049412d0b9de66fab52"
+  integrity sha512-B9/f/nwbVBUsBQVSNp7nFIsD/uM/M9MbK38FQFXs8IMSClrEG0gXWtyViQN28na25zpsoKH8Blrzcn/LbUV76Q==
 
 vue@^3.3.4, vue@^3.4, vue@^3.5.13:
   version "3.5.13"
